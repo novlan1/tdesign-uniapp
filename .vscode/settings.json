@@ -1,0 +1,81 @@
+{
+  "[scss]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "always"
+    }
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "cSpell.words": [
+    "wecom",
+    "backtop",
+    "cascader",
+    "codesandbox",
+    "miniprogram",
+    "nuxt",
+    "popconfirm",
+    "popperjs",
+    "precaching",
+    "tdesign",
+    "tdoc",
+    "tnode",
+    "wechat",
+    "weixin",
+    "toutiao",
+    "quickapp",
+    "msdk",
+    "wzyd",
+    "ebus"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.fixAll.stylelint": "always"
+  },
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "eslint.autofixOnSave": false,
+  "eslint.nodePath": "./node_modules",
+  "eslint.validate": [
+    "vue",
+    "html",
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact"
+  ],
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .prettier*, prettier*, .editorconfig,.stylelint*,.gitignore,.npmrc.versionrc*",
+    "tsconfig.json": "tsconfig.*.json, env.d.ts",
+    "vite.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*",
+    "jest.config.*": "jest.*"
+  },
+  "files.autoSave": "off",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": false,
+  "javascript.format.enable": false,
+  "stylelint.packageManager": "pnpm",
+  "stylelint.configFile": ".stylelintrc.js",
+  "stylelint.customSyntax": "postcss-scss",
+  "stylelint.validate": [
+    "css",
+    "less",
+    "postcss",
+    "scss",
+    "sass"
+  ],
+  "typescript.format.enable": false,
+  "vetur.format.defaultFormatter.css": "none",
+  "vetur.format.defaultFormatter.html": "none",
+  "vetur.format.defaultFormatter.js": "none",
+  "vetur.format.defaultFormatter.scss": "none",
+  "vetur.format.defaultFormatter.ts": "none",
+  "vue.codeActions.askNewComponentName": true,
+  "vue.codeActions.enabled": true,
+  "vue.codeLens.enabled": true,
+  "vue.format.script.initialIndent": true,
+  "vue.format.style.initialIndent": true,
+  "vue.format.template.initialIndent": true,
+  "vue.format.wrapAttributes": "auto"
+}

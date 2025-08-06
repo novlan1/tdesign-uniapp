@@ -1,0 +1,96 @@
+!(function (_, t) {
+    if ('object' == typeof exports && 'undefined' != typeof module) {
+        module.exports = t(require('@/miniprogram_npm/dayjs'));
+    } else {
+        if ('function' == typeof define && define.amd) {
+            define(['dayjs'], t);
+        } else {
+            (_ = 'undefined' != typeof globalThis ? globalThis : _ || self).dayjs_locale_ru = t(_.dayjs);
+        }
+    }
+})(this, function (_) {
+    'use strict';
+
+    var t = (function (_) {
+        return _ && 'object' == typeof _ && 'default' in _
+            ? _
+            : {
+                  default: _
+              };
+    })(_);
+    var e = 'января_февраля_марта_апреля_мая_июня_июля_августа_сентября_октября_ноября_декабря'.split('_');
+    var n = 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split('_');
+    var s = 'янв._февр._мар._апр._мая_июня_июля_авг._сент._окт._нояб._дек.'.split('_');
+    var r = 'янв._февр._март_апр._май_июнь_июль_авг._сент._окт._нояб._дек.'.split('_');
+    var o = /D[oD]?(\[[^[\]]*\]|\s)+MMMM?/;
+    function i(_, t, e) {
+        var n;
+        var s;
+        return 'm' === e
+            ? t
+                ? 'минута'
+                : 'минуту'
+            : _ +
+                  ' ' +
+                  ((n = +_),
+                  (s = {
+                      mm: t ? 'минута_минуты_минут' : 'минуту_минуты_минут',
+                      hh: 'час_часа_часов',
+                      dd: 'день_дня_дней',
+                      MM: 'месяц_месяца_месяцев',
+                      yy: 'год_года_лет'
+                  }[e].split('_')),
+                  n % 10 == 1 && n % 100 != 11 ? s[0] : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? s[1] : s[2]);
+    }
+    var d = function (_, t) {
+        return o.test(t) ? e[_.month()] : n[_.month()];
+    };
+    d.s = n;
+    d.f = e;
+    var u = function (_, t) {
+        return o.test(t) ? s[_.month()] : r[_.month()];
+    };
+    u.s = r;
+    u.f = s;
+    var a = {
+        name: 'ru',
+        weekdays: 'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split('_'),
+        weekdaysShort: 'вск_пнд_втр_срд_чтв_птн_сбт'.split('_'),
+        weekdaysMin: 'вс_пн_вт_ср_чт_пт_сб'.split('_'),
+        months: d,
+        monthsShort: u,
+        weekStart: 1,
+        yearStart: 4,
+        formats: {
+            LT: 'H:mm',
+            LTS: 'H:mm:ss',
+            L: 'DD.MM.YYYY',
+            LL: 'D MMMM YYYY г.',
+            LLL: 'D MMMM YYYY г., H:mm',
+            LLLL: 'dddd, D MMMM YYYY г., H:mm'
+        },
+        relativeTime: {
+            future: 'через %s',
+            past: '%s назад',
+            s: 'несколько секунд',
+            m: i,
+            mm: i,
+            h: 'час',
+            hh: i,
+            d: 'день',
+            dd: i,
+            M: 'месяц',
+            MM: i,
+            y: 'год',
+            yy: i
+        },
+        ordinal: function (_) {
+            return _;
+        },
+        meridiem: function (_) {
+            return _ < 4 ? 'ночи' : _ < 12 ? 'утра' : _ < 17 ? 'дня' : 'вечера';
+        }
+    };
+    t.default.locale(a, null, true);
+    return a;
+});

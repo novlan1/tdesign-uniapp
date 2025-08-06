@@ -1,0 +1,40 @@
+export const getDateRect = (e) => {
+    const t = new Date(e);
+    return {
+        year: t.getFullYear(),
+        month: t.getMonth(),
+        date: t.getDate(),
+        day: t.getDay(),
+        time: t.getTime()
+    };
+};
+export const isSameDate = (e, t) => {
+    if (e instanceof Date || 'number' == typeof e) {
+        e = getDateRect(e);
+    }
+    if (t instanceof Date || 'number' == typeof t) {
+        t = getDateRect(t);
+    }
+    return ['year', 'month', 'date'].every((a) => e[a] === t[a]);
+};
+export const getMonthDateRect = (e) => {
+    const { year: t, month: a } = getDateRect(e);
+    return {
+        year: t,
+        month: a,
+        weekdayOfFirstDay: new Date(t, a, 1).getDay(),
+        lastDate: new Date(+new Date(t, a + 1, 1) - 86400000).getDate()
+    };
+};
+export const isValidDate = (e) => 'number' == typeof e || e instanceof Date;
+export const getDate = (...e) => {
+    const t = new Date();
+    if (0 === e.length) {
+        return t;
+    }
+    if (1 === e.length && e[0] <= 1000) {
+        const { year: a, month: n, date: r } = getDateRect(t);
+        return new Date(a, n + e[0], r);
+    }
+    return Date.apply(null, e);
+};

@@ -1,0 +1,6 @@
+@import '../common/style/index.css';
+.t-collapse--card {
+    margin: 0 32rpx;
+    border-radius: var(--td-radius-large, 18rpx);
+    overflow: hidden;
+}

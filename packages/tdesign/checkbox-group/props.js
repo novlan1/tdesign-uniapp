@@ -1,0 +1,34 @@
+const props = {
+    borderless: {
+        type: Boolean,
+        value: false
+    },
+    disabled: {
+        type: null,
+        value: void 0
+    },
+    keys: {
+        type: Object
+    },
+    max: {
+        type: Number,
+        value: void 0
+    },
+    name: {
+        type: String,
+        value: ''
+    },
+    options: {
+        type: Array,
+        value: []
+    },
+    value: {
+        type: Array,
+        value: null
+    },
+    defaultValue: {
+        type: Array,
+        value: []
+    }
+};
+export default props;
