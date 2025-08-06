@@ -1,0 +1,70 @@
+<template>
+    <view>
+        <t-navbar title="Slider" leftArrow />
+        <view class="demo">
+            <t-demo-header title="Slider 滑动选择器" desc="用于选择横轴上的数值、区间、档位。" notice="渲染框架支持情况：WebView" />
+            <t-demo title="01 组件类型" desc="单游标滑块">
+                <base />
+            </t-demo>
+
+            <t-demo desc="双游标滑块">
+                <range />
+            </t-demo>
+
+            <t-demo desc="带数值滑动选择器">
+                <label />
+            </t-demo>
+
+            <t-demo desc="起始非零滑动选择器">
+                <max />
+            </t-demo>
+
+            <t-demo desc="带刻度滑动选择器">
+                <step />
+            </t-demo>
+
+            <t-demo title="02 组件状态" desc="滑块禁用状态">
+                <disabled />
+            </t-demo>
+
+            <t-demo title="03 特殊样式" desc="胶囊型滑块">
+                <capsule />
+            </t-demo>
+
+            <t-demo title="04 垂直状态">
+                <vertical />
+            </t-demo>
+        </view>
+    </view>
+</template>
+
+<script lang="ts">
+import zpMixins from '@/uni_modules/zp-mixins/index';
+import base from './base';
+import label from './label';
+import max from './max';
+import step from './step';
+import range from './range';
+import disabled from './disabled';
+import capsule from './capsule';
+import vertical from './vertical';
+export default zpMixins.extend({
+    components: {
+        base,
+        label,
+        max,
+        step,
+        range,
+        disabled,
+        capsule,
+        vertical
+    },
+    data() {
+        return {};
+    },
+    methods: {}
+});
+</script>
+<style lang="less">
+@import './slider.less';
+</style>

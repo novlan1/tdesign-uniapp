@@ -1,0 +1,40 @@
+<template>
+    <view>
+        <t-divider />
+
+        <view class="divider-demo__title">带文字水平分割线</view>
+
+        <t-divider content="文字信息" align="left" />
+        <t-divider content="文字信息" />
+        <t-divider content="文字信息" align="right" />
+
+        <view class="divider-demo__title">垂直分割线</view>
+
+        <view class="divider-wrapper">
+            <text class="demo-6__text-color">文字信息</text>
+            <t-divider layout="vertical" />
+            <text class="demo-6__text-color">文字信息</text>
+            <t-divider layout="vertical" />
+            <text class="demo-6__text-color">文字信息</text>
+        </view>
+    </view>
+</template>
+
+<script>
+import tDivider from './tdesign-miniprogram/divider/divider';
+import SkylineBehavior from '@behaviors/skyline.js';
+export default {
+    components: {
+        tDivider
+    },
+    data() {
+        return {};
+    },
+    mixins: [SkylineBehavior],
+    methods: {},
+    created: function () {}
+};
+</script>
+<style>
+@import './index.css';
+</style>

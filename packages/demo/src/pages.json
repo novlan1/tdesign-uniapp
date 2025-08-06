@@ -5,6 +5,12 @@
 			"style": {
 				"navigationBarTitleText": "TDesign Uni"
 			}
+		},
+		{
+			"path": "pages-more/loading/loading",
+			"style": {
+				"navigationBarTitleText": "Loading"
+			}
 		}
 	],
 	"globalStyle": {

@@ -1,0 +1,73 @@
+<template>
+    <view>
+        <t-navbar class="demo-navbar" title="NoticeBar" leftArrow />
+        <view class="demo">
+            <t-demo-header title="NoticeBar 公告栏" desc="在导航栏下方，用于给用户显示提示消息。" notice="渲染框架支持情况：WebView" />
+            <t-demo title="01 组件类型" desc="纯文字的公告栏">
+                <base />
+            </t-demo>
+            <t-demo desc="带图标的公告栏">
+                <iconDemo />
+            </t-demo>
+            <t-demo desc="带关闭的公告栏">
+                <suffixIcon />
+            </t-demo>
+            <t-demo desc="带入口的公告栏">
+                <event />
+            </t-demo>
+            <t-demo desc="自定义样式的公告栏">
+                <custom />
+            </t-demo>
+            <t-demo desc="自定义内容的公告栏">
+                <customization />
+            </t-demo>
+
+            <t-demo title="02 组件状态" desc="公告栏类型有普通（info）、警示（warning）、成功（success）、错误（error）">
+                <theme />
+            </t-demo>
+
+            <t-demo title="03 可滚动公告栏" desc="可滚动公告栏有水平（horizontal）和垂直（vertical）">
+                <scrolling />
+            </t-demo>
+        </view>
+    </view>
+</template>
+
+<script lang="ts">
+import zpMixins from '@/uni_modules/zp-mixins/index';
+import tNoticeBar from './tdesign-miniprogram/notice-bar/notice-bar';
+import base from './base';
+import iconDemo from './iconDemo';
+import suffixIcon from './suffixIcon';
+import event from './event';
+import custom from './custom';
+import theme from './theme';
+import scrolling from './scrolling';
+import customization from './customization';
+export default zpMixins.extend({
+    components: {
+        tNoticeBar,
+        base,
+        iconDemo,
+        suffixIcon,
+        event,
+        custom,
+        theme,
+        scrolling,
+        customization
+    },
+    data() {
+        return {};
+    },
+    onReady() {
+        /**
+         * notice-bar组件的滚动动画依赖自身样式数据。
+         * 页面中有多个滚动notice-bar时，建议用wx:if手动控制，需要显示时渲染组件，保证组件能够成功初始化。
+         * */
+    },
+    methods: {}
+});
+</script>
+<style lang="less">
+@import './notice-bar.less';
+</style>

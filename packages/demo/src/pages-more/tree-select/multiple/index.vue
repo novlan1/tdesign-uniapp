@@ -1,0 +1,47 @@
+<template>
+    <view>
+        <t-tree-select :options="options" :value="value" multiple @change="onChange" />
+    </view>
+</template>
+
+<script>
+import tTreeSelect from './tdesign-miniprogram/tree-select/tree-select';
+const chineseNumber = '一二三四五六七八九十'.split('');
+const generateTree = function (deep = 0, count = 10, prefix) {
+    const ans = [];
+    for (let i = 0; i < count; i += 1) {
+        const value = prefix ? `${prefix}-${i}` : `${i}`;
+        const rect = {
+            label: `选项${chineseNumber[i]}`,
+            value
+        };
+        if (deep > 0) {
+            rect.children = generateTree(deep - 1, 10, value);
+        }
+        ans.push(rect);
+    }
+    return ans;
+};
+export default {
+    components: {
+        tTreeSelect
+    },
+    data() {
+        return {
+            options: generateTree(1),
+            value: ['5', ['5-0', '5-1']]
+        };
+    },
+    methods: {
+        onChange(e) {
+            this.setData({
+                value: e.detail.value
+            });
+        }
+    },
+    created: function () {}
+};
+</script>
+<style>
+@import './index.css';
+</style>

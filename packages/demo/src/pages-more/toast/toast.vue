@@ -1,0 +1,43 @@
+<template>
+    <view>
+        <t-navbar class="demo-navbar" title="Toast" leftArrow />
+        <view class="demo">
+            <t-demo-header title="Toast 轻提示" desc="用于轻量级反馈或提示，不会打断用户操作。" notice="渲染框架支持情况：Skyline、WebView" />
+            <t-demo title="01 组件类型" desc="基础提示" padding>
+                <base />
+            </t-demo>
+            <t-demo title="02 组件状态" desc="内置主题" padding>
+                <theme />
+            </t-demo>
+            <t-demo title="03 显示遮罩" desc="弹窗可显示遮罩，禁止滑动和点击" padding>
+                <cover />
+            </t-demo>
+            <t-demo title="04 手动关闭" desc="手动关闭轻提示" padding>
+                <close />
+            </t-demo>
+        </view>
+    </view>
+</template>
+
+<script lang="ts">
+import zpMixins from '@/uni_modules/zp-mixins/index';
+import base from './base';
+import theme from './theme';
+import cover from './cover';
+import close from './close';
+export default zpMixins.extend({
+    components: {
+        base,
+        theme,
+        cover,
+        close
+    },
+    data() {
+        return {};
+    },
+    methods: {}
+});
+</script>
+<style lang="less">
+@import './toast.less';
+</style>

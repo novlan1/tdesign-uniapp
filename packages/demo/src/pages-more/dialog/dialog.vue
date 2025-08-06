@@ -1,0 +1,64 @@
+<template>
+    <view>
+        <t-navbar class="demo-navbar" title="Dialog" leftArrow />
+        <view class="demo">
+            <t-demo-header title="Dialog 对话框" desc="用于显示重要提示或请求用户进行重要操作，一种打断当前操作的模态视图。" notice="渲染框架支持情况：WebView" />
+            <t-demo title="01 组件类型" desc="反馈类对话框" padding>
+                <base />
+            </t-demo>
+
+            <t-demo desc="确认类对话框" padding>
+                <confirm />
+            </t-demo>
+
+            <t-demo desc="输入类对话框" padding>
+                <with-input />
+            </t-demo>
+
+            <t-demo desc="带图片的对话框" padding>
+                <with-image />
+            </t-demo>
+
+            <t-demo title="02 组件类型" padding>
+                <status />
+            </t-demo>
+
+            <t-demo title="03 组件用法" desc="命令调用" padding>
+                <command />
+            </t-demo>
+
+            <t-demo desc="自定义按钮" padding>
+                <buttonDemo />
+            </t-demo>
+        </view>
+    </view>
+</template>
+
+<script lang="ts">
+import zpMixins from '@/uni_modules/zp-mixins/index';
+import base from './base';
+import confirm from './confirm';
+import withInput from './with-input';
+import withImage from './with-image';
+import command from './command';
+import status from './status';
+import buttonDemo from './button';
+export default zpMixins.extend({
+    components: {
+        base,
+        confirm,
+        withInput,
+        withImage,
+        command,
+        status,
+        buttonDemo
+    },
+    data() {
+        return {};
+    },
+    methods: {}
+});
+</script>
+<style lang="less">
+@import './dialog.less';
+</style>

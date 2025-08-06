@@ -1,0 +1,58 @@
+<template>
+    <view>
+        <t-navbar class="demo-navbar" title="Skeleton" leftArrow />
+        <view class="demo">
+            <t-demo-header
+                title="Skeleton 骨架屏"
+                desc="用于等待加载内容所展示的占位图形组合，有动态效果加载效果，减少用户等待焦虑。"
+                notice="渲染框架支持情况：Skyline、WebView"
+            />
+            <t-demo title="01 骨架屏类型" padding>
+                <theme />
+            </t-demo>
+
+            <t-demo desc="单元格骨架屏" padding>
+                <cell-group />
+            </t-demo>
+
+            <t-demo desc="宫格骨架屏" padding>
+                <grid />
+            </t-demo>
+
+            <t-demo desc="图文组合骨架屏" padding>
+                <image-group />
+            </t-demo>
+
+            <t-demo title="02 组件动效" padding>
+                <animation />
+            </t-demo>
+        </view>
+    </view>
+</template>
+
+<script lang="ts">
+import zpMixins from '@/uni_modules/zp-mixins/index';
+import tSkeleton from './tdesign-miniprogram/skeleton/skeleton';
+import theme from './theme';
+import grid from './grid';
+import cellGroup from './cell-group';
+import imageGroup from './image-group';
+import animation from './animation';
+export default zpMixins.extend({
+    components: {
+        tSkeleton,
+        theme,
+        grid,
+        cellGroup,
+        imageGroup,
+        animation
+    },
+    data() {
+        return {};
+    },
+    methods: {}
+});
+</script>
+<style lang="less">
+@import './skeleton.less';
+</style>

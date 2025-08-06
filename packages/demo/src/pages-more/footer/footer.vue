@@ -1,0 +1,36 @@
+<template>
+    <view>
+        <t-navbar class="demo-navbar" title="Footer" leftArrow />
+        <t-demo-header title="Footer 页脚" desc="用于基础列表展示，可附带文字、品牌logo、操作，常用商详、个人中心、设置等页面。" notice="渲染框架支持情况：Skyline、WebView" />
+        <t-demo title="01 类型" desc="基础页脚">
+            <base />
+        </t-demo>
+        <t-demo desc="基础加链接页脚">
+            <link />
+        </t-demo>
+        <t-demo desc="品牌页脚">
+            <logo />
+        </t-demo>
+    </view>
+</template>
+
+<script lang="ts">
+import zpMixins from '@/uni_modules/zp-mixins/index';
+import base from './base';
+import link from './link';
+import logo from './logo';
+export default zpMixins.extend({
+    components: {
+        base,
+        link,
+        logo
+    },
+    data() {
+        return {};
+    },
+    methods: {}
+});
+</script>
+<style lang="less">
+@import './footer.less';
+</style>

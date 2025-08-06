@@ -1,0 +1,160 @@
+<template>
+    <view>
+        <view>
+            <view class="main-title">
+                <view class="title-major">用户引导标题</view>
+                <view class="title-sub">按钮用于开启一个闭环的操作任务，如“删除”对象、“购买”商品等。</view>
+            </view>
+            <view class="field label-field">
+                <t-input label="标签文字" layout="vertical" placeholder="请输入文字"></t-input>
+            </view>
+            <view class="field">
+                <t-input label="标签文字" layout="vertical" placeholder="请输入文字"></t-input>
+            </view>
+            <view class="action">
+                <t-button block theme="light" size="large">重置</t-button>
+                <t-button block theme="primary" size="large">确定</t-button>
+            </view>
+        </view>
+
+        <t-guide :current="current" :steps="steps" @skip="close" @finish="close">
+            <view slot="content-0" class="content">
+                <t-icon name="arrow-up" size="64rpx" color="#fff" class="icon" />
+                <p class="text">1、自定义的图形或说明文案，用来解释或指导该功能使用。</p>
+                <view class="footer">
+                    <t-button v-if="current < steps.length - 1" theme="light" content="跳过" size="extra-small" @tap.native="skip" class="guide-demo-button"></t-button>
+                    <t-button v-else class="guide-demo-button" theme="light" content="返回" size="extra-small" @tap.native="back"></t-button>
+                    <t-button v-if="current < steps.length - 1" theme="primary" content="下一步" size="extra-small" @tap.native="next" class="guide-demo-button"></t-button>
+                    <t-button v-else class="guide-demo-button" theme="primary" content="完成" size="extra-small" @tap.native="finish"></t-button>
+                </view>
+            </view>
+            <view slot="content-1" class="content">
+                <t-icon name="arrow-up" size="64rpx" color="#fff" class="icon" />
+                <p class="text">2、自定义的图形或说明文案，用来解释或指导该功能使用。</p>
+                <view class="footer">
+                    <t-button v-if="current < steps.length - 1" theme="light" content="跳过" size="extra-small" @tap.native="skip" class="guide-demo-button"></t-button>
+                    <t-button v-else class="guide-demo-button" theme="light" content="返回" size="extra-small" @tap.native="back"></t-button>
+                    <t-button v-if="current < steps.length - 1" theme="primary" content="下一步" size="extra-small" @tap.native="next" class="guide-demo-button"></t-button>
+                    <t-button v-else class="guide-demo-button" theme="primary" content="完成" size="extra-small" @tap.native="finish"></t-button>
+                </view>
+            </view>
+            <view slot="content-2" class="content">
+                <t-icon name="arrow-up" size="64rpx" color="#fff" class="icon" />
+                <p class="text">3、自定义的图形或说明文案，用来解释或指导该功能使用。</p>
+                <view class="footer">
+                    <t-button v-if="current < steps.length - 1" theme="light" content="跳过" size="extra-small" @tap.native="skip" class="guide-demo-button"></t-button>
+                    <t-button v-else class="guide-demo-button" theme="light" content="返回" size="extra-small" @tap.native="back"></t-button>
+                    <t-button v-if="current < steps.length - 1" theme="primary" content="下一步" size="extra-small" @tap.native="next" class="guide-demo-button"></t-button>
+                    <t-button v-else class="guide-demo-button" theme="primary" content="完成" size="extra-small" @tap.native="finish"></t-button>
+                </view>
+            </view>
+        </t-guide>
+    </view>
+</template>
+
+<script>
+import tGuide from './tdesign-miniprogram/guide/guide';
+import tInput from './tdesign-miniprogram/input/input';
+import tButton from './tdesign-miniprogram/button/button';
+export default {
+    components: {
+        tGuide,
+        tInput,
+        tButton
+    },
+    data() {
+        return {
+            current: -1,
+            steps: []
+        };
+    },
+    mounted() {
+        // 处理小程序 attached 生命周期
+        this.attached();
+    },
+    methods: {
+        attached() {
+            this.setData({
+                current: 0,
+
+                steps: [
+                    {
+                        element: () =>
+                            new Promise((resolve) =>
+                                uni
+                                    .createSelectorQuery()
+                                    .in(this)
+                                    .select('.main-title')
+                                    .boundingClientRect((rect) => resolve(rect))
+                                    .exec()
+                            ),
+
+                        placement: 'center'
+                    },
+                    {
+                        element: () =>
+                            new Promise((resolve) =>
+                                uni
+                                    .createSelectorQuery()
+                                    .in(this)
+                                    .select('.label-field')
+                                    .boundingClientRect((rect) => resolve(rect))
+                                    .exec()
+                            ),
+
+                        placement: 'bottom',
+                        highlightPadding: 0
+                    },
+                    {
+                        element: () =>
+                            new Promise((resolve) =>
+                                uni
+                                    .createSelectorQuery()
+                                    .in(this)
+                                    .select('.action')
+                                    .boundingClientRect((rect) => resolve(rect))
+                                    .exec()
+                            ),
+
+                        placement: 'bottom-right'
+                    }
+                ]
+            });
+        },
+
+        close() {
+            this.$emit('close');
+        },
+
+        skip() {
+            this.setData({
+                current: -1
+            });
+            this.close();
+        },
+
+        back() {
+            this.setData({
+                current: 0
+            });
+        },
+
+        next() {
+            this.setData({
+                current: this.current + 1
+            });
+        },
+
+        finish() {
+            this.setData({
+                current: -1
+            });
+            this.close();
+        }
+    },
+    created: function () {}
+};
+</script>
+<style>
+@import './index.css';
+</style>

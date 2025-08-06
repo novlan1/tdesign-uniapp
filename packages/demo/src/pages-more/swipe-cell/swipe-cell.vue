@@ -1,0 +1,47 @@
+<template>
+    <view>
+        <t-navbar title="SwipeCell" leftArrow />
+        <view class="demo">
+            <t-demo-header
+                title="SwipeCell 滑动操作"
+                desc="用于承载列表中的更多操作，通过左右滑动来展示，按钮的宽度固定高度根据列表高度而变化。"
+                notice="渲染框架支持情况：WebView"
+            />
+            <t-demo title="01 组件类型" desc="左滑单操作">
+                <left />
+            </t-demo>
+            <t-demo desc="右滑单操作">
+                <right />
+            </t-demo>
+            <t-demo desc="左右滑操作">
+                <double />
+            </t-demo>
+            <t-demo desc="带图标的滑动操作">
+                <iconDemo />
+            </t-demo>
+        </view>
+    </view>
+</template>
+
+<script lang="ts">
+import zpMixins from '@/uni_modules/zp-mixins/index';
+import left from './left';
+import right from './right';
+import double from './double';
+import iconDemo from './icon';
+export default zpMixins.extend({
+    components: {
+        left,
+        right,
+        double,
+        iconDemo
+    },
+    data() {
+        return {};
+    },
+    methods: {}
+});
+</script>
+<style lang="less">
+@import './swipe-cell.less';
+</style>
