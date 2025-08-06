@@ -4,6 +4,7 @@
   "private": "true",
   "scripts": {
     "dev": "pnpm --filter=\"./packages/demo\" dev:h5",
+    "build": "pnpm --filter=\"./packages/demo\" build:h5",
     "type-check": "vue-tsc --noEmit"
   },
   "devDependencies": {

@@ -45,7 +45,7 @@ import TLoading from 'tdesign-uniapp/loading/loading';
 
 ## 预览
 
-TODO: 地址、二维码
+https://novlan1.github.io/tdesign-uniapp/
 
 ## 注意
 
