@@ -47,6 +47,8 @@ import TLoading from 'tdesign-uniapp/loading/loading';
 
 https://novlan1.github.io/tdesign-uniapp/
 
+<img src="./packages/demo/docs/img/github-pages.png" width="400" />
+
 ## 注意
 
 1. 提供的是源码，Vue2 下需配置 transpileDependencies
