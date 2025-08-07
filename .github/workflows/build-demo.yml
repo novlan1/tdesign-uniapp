@@ -33,11 +33,11 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm --filter="./packages/demo" build:h5
+        run: pnpm --filter="./packages/site" build:h5
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: docs
-          FOLDER: packages/demo/dist/build/h5
+          FOLDER: packages/site/dist/build/h5
