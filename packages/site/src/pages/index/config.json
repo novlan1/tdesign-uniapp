@@ -10,13 +10,16 @@
       "name": "button"
     },
     {
-      "name": "badge"
-    },
-    {
       "name": "image"
     },
     {
+      "name": "cell"
+    },
+    {
       "name": "list"
+    },
+    {
+      "name": "badge"
     }
   ]
 }

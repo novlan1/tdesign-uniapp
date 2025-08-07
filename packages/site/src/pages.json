@@ -29,6 +29,12 @@
       "style": {
         "navigationBarTitleText": "Image"
       }
+    },
+    {
+      "path": "pages-more/cell/cell",
+      "style": {
+        "navigationBarTitleText": "Cell"
+      }
     }
   ],
   "globalStyle": {

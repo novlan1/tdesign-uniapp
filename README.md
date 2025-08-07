@@ -35,6 +35,7 @@ import TLoading from 'tdesign-uniapp/loading/loading';
 编译时处理：
 
 1. wxml/js/wxss/json 等文件合成 vue 文件
+2. 处理小程序与 uni-app 语法差异部分
 
 运行时处理：
 
@@ -58,10 +59,10 @@ https://novlan1.github.io/tdesign-uniapp/
 
 ### 为什么不提供转换工具
 
-这里只提供转换后的产物，而非转换工具。原因在于业务方真正使用的是组件库，真正在意的是应该是组件库。也正因为如此，`tdesign-uniapp` 会将转换产物纳入 `git`，每次发布都会对比 `diff`，保证每次发布可控、可靠，也会单元测试等保证质量。
+这里只提供转换后的产物，而非转换工具。原因在于业务方真正使用的是组件库，真正在意的应该是组件库。也正因为如此，`tdesign-uniapp` 会将转换产物纳入 `git`，每次发布都会对比 `diff`，保证每次发布可控、可靠，后面也会通过单元测试等保证质量。
 
 ### 与 tdesign-miniprogram 版本关系
 
 `tdesign-uniapp` 有独立的版本，并不与 `tdesign-miniprogram` 的版本相同。这是因为转换后的产物很有可能有自己的 `feature/bug`，处理需要发版，必然导致版本分叉。
 
-多个 `tdesign-uniapp` 版本会对应一个 `tdesign-miniprogram` 版本，我们会尽量提供 LTS 的版本。
+多个 `tdesign-uniapp` 版本会对应一个 `tdesign-miniprogram` 版本，我们会尽量提供对应 `miniprogram`  最新版本的转换产物。

@@ -1,37 +1,49 @@
 <template>
-    <view>
-        <t-navbar title="Cell" leftArrow />
-        <view class="demo">
-            <t-demo-header title="Cell 单元格" desc="用于各个类别行的信息展示。" notice="渲染框架支持情况：Skyline、WebView" />
-            <t-demo title="01 组件类型" desc="单行单元格">
-                <base />
-            </t-demo>
-            <t-demo desc="多行单元格">
-                <multiple />
-            </t-demo>
-            <t-demo title="02 组件样式" desc="卡片单元格">
-                <theme />
-            </t-demo>
-        </view>
+  <view>
+    <t-navbar
+      title="Cell"
+      left-arrow
+    />
+    <view class="demo">
+      <t-demo-header
+        title="Cell 单元格"
+        desc="用于各个类别行的信息展示。"
+        notice="渲染框架支持情况：Skyline、WebView"
+      />
+      <t-demo
+        title="01 组件类型"
+        desc="单行单元格"
+      >
+        <baseComp />
+      </t-demo>
+      <t-demo desc="多行单元格">
+        <multiple />
+      </t-demo>
+      <t-demo
+        title="02 组件样式"
+        desc="卡片单元格"
+      >
+        <theme />
+      </t-demo>
     </view>
+  </view>
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
-import base from './base';
-import multiple from './multiple';
-import theme from './theme';
-export default zpMixins.extend({
-    components: {
-        base,
-        multiple,
-        theme
-    },
-    data() {
-        return {};
-    },
-    methods: {}
-});
+import baseComp from './base';
+// import multiple from './multiple';
+// import theme from './theme';
+export default {
+  components: {
+    baseComp,
+    // multiple,
+    // theme,
+  },
+  data() {
+    return {};
+  },
+  methods: {},
+};
 </script>
 <style lang="less">
 @import './cell.less';

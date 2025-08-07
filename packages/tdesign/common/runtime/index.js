@@ -1,3 +1,5 @@
+import { toCamel } from '../utils'
+
 export const WILL_SET_DATA_KEY = 'WILL_SET_DATA_KEY';
 export const COMMON_UTILS_WXS_NAME = '_';
 
@@ -46,10 +48,33 @@ export function initTDesign(info) {
         console.log('doing attached')
         info.lifetimes.attached.call(this)
       }
+
+      executeWatchers.call(this, info)
     },
     watch: getComponentWatch(info),
     ...parseProps(info),
   }
+}
+
+
+
+function executeWatchers(info) {
+  if (!info.observers) return;
+  const that = this;
+  const { observers, properties } = info;
+  Object.keys(observers).forEach(key => {
+    const list = key.split(',').map(item => item.trim())
+    const isDiff = list.find(item => {
+      return that[item] !== properties[key]?.value
+    })
+    console.log('isDiff', isDiff,key, list.map(item => that[item]))
+
+    if (isDiff) {
+      const handler = observers[key]
+      handler.apply(that, list.map(item => that[item]))
+    }
+  })
+
 }
 
 
@@ -73,7 +98,10 @@ function parseProps(info, vm) {
 
   return {
     ...info,
-    props: result,
+    props: {
+      ...result,
+      ...getExternalClasses(info)
+    },
     methods: {
       ...(info.methods || {}),
       ...(info[COMMON_UTILS_WXS_NAME] || {}),
@@ -84,7 +112,8 @@ function parseProps(info, vm) {
           this[key] = obj[key]
         })
         console.log('className', this.className, this)
-      }
+      },
+      parseExternalClass
     }
   }
 }
@@ -111,4 +140,32 @@ function getComponentWatch(info) {
       [key]: observers[item]
     }
   }, {})
+}
+
+
+function getExternalClasses(info) {
+  if (!info.externalClasses) {
+    return {}
+  }
+  const { externalClasses } = info
+  const list = Array.isArray(externalClasses) ? externalClasses : [externalClasses]
+
+  return list.reduce((acc, item) => {
+    return {
+      ...acc,
+      [toCamel(item)]: {
+        type: String,
+        default: ''
+      }
+    }
+  }, {})
+}
+
+
+function parseExternalClass(value) {
+  console.log('getWrap.tClass', this['t-class'], this.tClass)
+  const list = value.split(/\s+/).map(item => item.trim())
+  return list.map(item => {
+    return this.$options.externalClasses.includes(item) ? this[toCamel(item)] : item
+  }).join(' ')
 }

@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="(prefix ? prefix : classPrefix) + ' class ' + componentPrefix + '-class'"
+    :class="parseExternalClass((prefix ? prefix : classPrefix) + ' class ' + componentPrefix + '-class')"
     :style="_._style([iconStyle, style, customStyle])"
     :aria-hidden="ariaHidden"
     :aria-label="ariaLabel"
@@ -28,9 +28,11 @@ import { __awaiter, __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
-import { styles, addUnit, getRect } from "../common/utils";
+import { styles, addUnit, getRect, toCamel } from "../common/utils";
 import _ from '../common/utils.wxs';
 import { initTDesign } from '../common/runtime';
+
+
 const {
   prefix: prefix
 } = config;

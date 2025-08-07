@@ -4,7 +4,7 @@ const props = {
         value: 'middle'
     },
     arrow: {
-        type: null,
+        type: [Boolean, Object],
         value: false
     },
     bordered: {

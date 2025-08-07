@@ -10,11 +10,10 @@
     >
         <view :class="classPrefix + '__left ' + prefix + '-class-left'">
             <!-- parse <template v-if="_leftIcon" is="icon" :data="tClass: classPrefix + '__left-icon ' + prefix + '-class-left-icon', ..._leftIcon"/> -->
-            <block name="icon" v-if="false" v-if="_leftIcon">
+            <block name="icon" v-if="_leftIcon">
                 <t-icon
                     :style="style || ''"
-                    :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-                    :prefix="prefix || ''"
+                    :t-class="classPrefix + '__left-icon ' + prefix + '-class-left-icon'"
                     :name="'close' || ''"
                     :size="22 || ''"
                     :color="color || ''"
@@ -30,7 +29,7 @@
         </view>
         <view :class="classPrefix + '__title ' + prefix + '-class-center'">
             <view :class="classPrefix + '__title-text ' + prefix + '-class-title'">
-                <block v-if="_this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle)">{{ title }}</block>
+                <block v-if="title">{{ title }}</block>
                 <slot name="title" />
                 <block v-if="required"><text decode :class="classPrefix + '--required'">&nbsp;*</text></block>
             </view>
@@ -45,12 +44,11 @@
         </view>
         <view :class="_.cls(classPrefix + '__right', [align]) + ' ' + prefix + '-class-right'">
             <!-- parse <template v-if="_arrow" is="icon" :data="tClass: classPrefix + '__right-icon ' + prefix + '-class-right-icon', ..._arrow"/> -->
-            <block name="icon"v-if="_arrow">
                 <t-icon
+                 v-if="true"
                     :style="style || ''"
-                    :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-                    :prefix="prefix || ''"
-                    :name="'close' || ''"
+                    :t-class=" classPrefix + '__right-icon ' + prefix + '-class-right-icon'"
+                    :name="_arrow.name || ''"
                     :size="22 || ''"
                     :color="color || ''"
                     :aria-hidden="true || ''"
@@ -58,14 +56,12 @@
                     :aria-role="'button' || ''"
                     @click="'handleClose' || ''"
                 />
-            </block>
             <block v-else>
                 <!-- parse <template v-if="_rightIcon" is="icon" :data="tClass: classPrefix + '__right-icon ' + prefix + '-class-right-icon', ..._rightIcon"/> -->
-                <block name="icon" v-if="false" v-if="_rightIcon">
+                <block name="icon"  v-if="_rightIcon">
                     <t-icon
                         :style="style || ''"
-                        :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-                        :prefix="prefix || ''"
+                        :t-class=" classPrefix + '__right-icon ' + prefix + '-class-right-icon'"
                         :name="'close' || ''"
                         :size="22 || ''"
                         :color="color || ''"
@@ -80,15 +76,17 @@
         </view>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
 import tImage from "../image/image";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
 import { calcIcon } from "../common/utils";
+import { initTDesign } from '../common/runtime';
+import _ from '../common/utils.wxs';
+
 const {
   prefix: prefix
 } = config;
@@ -97,18 +95,24 @@ let Cell = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-title`, `${prefix}-class-description`, `${prefix}-class-note`, `${prefix}-class-hover`, `${prefix}-class-image`, `${prefix}-class-left`, `${prefix}-class-left-icon`, `${prefix}-class-center`, `${prefix}-class-right`, `${prefix}-class-right-icon`];
-    this.relations = {
-      "../cell-group/cell-group": {
-        type: "parent"
-      }
-    };
+    // this.relations = {
+    //   "../cell-group/cell-group": {
+    //     type: "parent"
+    //   }
+    // };
+    this.components = {
+      tIcon,
+      tImage
+    }
     this.options = {
       multipleSlots: true
     };
-    this = props;
+    this.properties = props;
+    this._ = _;
     this.setData({
       prefix: prefix,
       classPrefix: name,
+      _arrow: {},
       isLastChild: false
     });
     this.observers = {
@@ -122,18 +126,20 @@ let Cell = class extends SuperComponent {
         this.setIcon("_arrow", e, "chevron-right");
       }
     };
-  }
-  setIcon(e, t, s) {
+    this.methods = {
+        setIcon(e, t, s) {
+          console.log('this.arrow', this.arrow)
+          console.log('setIcon', e, t, s, calcIcon(t, s))
     this.setData({
       [e]: calcIcon(t, s)
     });
-  }
+  },
   onClick(e) {
     this.$emit("click", {
       detail: e.detail
     });
     this.jumpLink();
-  }
+  },
   jumpLink(e = "url", t = "jumpType") {
     const s = this[e];
     const i = this[t];
@@ -143,11 +149,13 @@ let Cell = class extends SuperComponent {
       });
     }
   }
+    }
+  }
+
 };
-Cell = __decorate([wxComponent()], Cell);
+Cell = initTDesign(__decorate([wxComponent()], Cell));
 export default Cell;
 </script>
 <style>
 @import './cell.css';
-@import 'undefined';
 </style>
