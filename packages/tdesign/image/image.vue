@@ -136,6 +136,7 @@ let Image = class extends SuperComponent {
           tId: s
         } = this;
         console.log('version', i)
+        const r = compareVersion(i, "2.10.3") < 0;
         if ("heightFix" === t && r ) {
           console.log('onLoaded',e)
           // const {

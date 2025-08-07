@@ -42,7 +42,7 @@
         <t-image
           id="loading-img"
           shape="round"
-          src=""
+          src="a"
           width="72"
           height="72"
         />
@@ -52,7 +52,7 @@
           失败自定义提示
         </view>
         <t-image
-          src=""
+          src="a"
           shape="round"
           error="slot"
           width="72"
