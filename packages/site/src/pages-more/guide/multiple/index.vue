@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import tGuide from './tdesign-miniprogram/guide/guide';
-import tInput from './tdesign-miniprogram/input/input';
-import tButton from './tdesign-miniprogram/button/button';
-import tImage from './tdesign-miniprogram/image/image';
+import tGuide from 'tdesign-uniapp/guide/guide';
+import tInput from 'tdesign-uniapp/input/input';
+import tButton from 'tdesign-uniapp/button/button';
+import tImage from 'tdesign-uniapp/image/image';
 export default {
     components: {
         tGuide,

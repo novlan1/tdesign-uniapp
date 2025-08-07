@@ -31,8 +31,8 @@
 
 <script lang="ts">
 import zpMixins from '@/uni_modules/zp-mixins/index';
-import tNavbar from './tdesign-miniprogram/navbar/navbar';
-import tSkeleton from './tdesign-miniprogram/skeleton/skeleton';
+import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tSkeleton from 'tdesign-uniapp/skeleton/skeleton';
 import theme from '../theme';
 import grid from '../grid';
 import cellGroup from '../cell-group';

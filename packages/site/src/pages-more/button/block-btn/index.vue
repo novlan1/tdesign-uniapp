@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import tButton from './tdesign-miniprogram/button/button';
+import tButton from 'tdesign-uniapp/button/button';
 export default {
     components: {
         tButton

@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import tCell from './tdesign-miniprogram/cell/cell';
-import tIcon from './tdesign-miniprogram/icon/icon';
-import tSwitch from './tdesign-miniprogram/switch/switch';
+import tCell from 'tdesign-uniapp/cell/cell';
+import tIcon from 'tdesign-uniapp/icon/icon';
+import tSwitch from 'tdesign-uniapp/switch/switch';
 export default {
     components: {
         tCell,

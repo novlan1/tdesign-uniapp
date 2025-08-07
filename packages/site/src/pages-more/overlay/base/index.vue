@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import tOverlay from './tdesign-miniprogram/overlay/overlay';
-import tButton from './tdesign-miniprogram/button/button';
+import tOverlay from 'tdesign-uniapp/overlay/overlay';
+import tButton from 'tdesign-uniapp/button/button';
 export default {
     components: {
         tOverlay,

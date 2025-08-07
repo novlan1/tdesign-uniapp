@@ -35,7 +35,7 @@
 
 <script lang="ts">
 import zpMixins from '@/uni_modules/zp-mixins/index';
-import tNoticeBar from './tdesign-miniprogram/notice-bar/notice-bar';
+import tNoticeBar from 'tdesign-uniapp/notice-bar/notice-bar';
 import base from './base';
 import iconDemo from './iconDemo';
 import suffixIcon from './suffixIcon';

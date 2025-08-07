@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import tEmpty from './tdesign-miniprogram/empty/empty';
-import tButton from './tdesign-miniprogram/button/button';
+import tEmpty from 'tdesign-uniapp/empty/empty';
+import tButton from 'tdesign-uniapp/button/button';
 export default {
     components: {
         tEmpty,

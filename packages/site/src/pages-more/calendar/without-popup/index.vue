@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import tCalendar from './tdesign-miniprogram/calendar/calendar';
+import tCalendar from 'tdesign-uniapp/calendar/calendar';
 export default {
     components: {
         tCalendar

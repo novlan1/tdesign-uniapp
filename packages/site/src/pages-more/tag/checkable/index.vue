@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import tCheckTag from './tdesign-miniprogram/check-tag/check-tag';
+import tCheckTag from 'tdesign-uniapp/check-tag/check-tag';
 export default {
     components: {
         tCheckTag

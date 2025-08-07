@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import tCell from './tdesign-miniprogram/cell/cell';
-import tDateTimePicker from './tdesign-miniprogram/date-time-picker/date-time-picker';
+import tCell from 'tdesign-uniapp/cell/cell';
+import tDateTimePicker from 'tdesign-uniapp/date-time-picker/date-time-picker';
 export default {
     components: {
         tCell,

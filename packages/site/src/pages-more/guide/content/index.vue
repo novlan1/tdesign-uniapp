@@ -53,9 +53,9 @@
 </template>
 
 <script>
-import tGuide from './tdesign-miniprogram/guide/guide';
-import tInput from './tdesign-miniprogram/input/input';
-import tButton from './tdesign-miniprogram/button/button';
+import tGuide from 'tdesign-uniapp/guide/guide';
+import tInput from 'tdesign-uniapp/input/input';
+import tButton from 'tdesign-uniapp/button/button';
 export default {
     components: {
         tGuide,

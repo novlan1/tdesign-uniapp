@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import tCol from './tdesign-miniprogram/col/col';
-import tRow from './tdesign-miniprogram/row/row';
+import tCol from 'tdesign-uniapp/col/col';
+import tRow from 'tdesign-uniapp/row/row';
 export default {
     components: {
         tCol,

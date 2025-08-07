@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import tRadioGroup from './tdesign-miniprogram/radio-group/radio-group';
-import tRadio from './tdesign-miniprogram/radio/radio';
+import tRadioGroup from 'tdesign-uniapp/radio-group/radio-group';
+import tRadio from 'tdesign-uniapp/radio/radio';
 export default {
     components: {
         tRadioGroup,

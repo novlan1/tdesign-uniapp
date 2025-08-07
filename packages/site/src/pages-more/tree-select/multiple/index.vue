@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import tTreeSelect from './tdesign-miniprogram/tree-select/tree-select';
+import tTreeSelect from 'tdesign-uniapp/tree-select/tree-select';
 const chineseNumber = '一二三四五六七八九十'.split('');
 const generateTree = function (deep = 0, count = 10, prefix) {
     const ans = [];

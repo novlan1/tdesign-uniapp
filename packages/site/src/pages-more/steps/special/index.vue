@@ -26,9 +26,9 @@ module.exports.getText = function(value, curr) { if (value > curr) return '已�
 return'当前步骤'; return '未完成步骤'; }
 </script>
 <script>
-import tSteps from './tdesign-miniprogram/steps/steps';
-import tStepItem from './tdesign-miniprogram/step-item/step-item';
-import tIcon from './tdesign-miniprogram/icon/icon';
+import tSteps from 'tdesign-uniapp/steps/steps';
+import tStepItem from 'tdesign-uniapp/step-item/step-item';
+import tIcon from 'tdesign-uniapp/icon/icon';
 export default {
     components: {
         tSteps,

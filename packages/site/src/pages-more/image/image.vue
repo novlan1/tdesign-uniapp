@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import zpMixins from '@/uni_modules/zp-mixins/index';
-import tImage from './tdesign-miniprogram/image/image';
+import tImage from 'tdesign-uniapp/image/image';
 import base from './base';
 import status from './status';
 export default zpMixins.extend({

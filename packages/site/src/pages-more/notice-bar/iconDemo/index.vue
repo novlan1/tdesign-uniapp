@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import tNoticeBar from './tdesign-miniprogram/notice-bar/notice-bar';
-import tIcon from './tdesign-miniprogram/icon/icon';
+import tNoticeBar from 'tdesign-uniapp/notice-bar/notice-bar';
+import tIcon from 'tdesign-uniapp/icon/icon';
 export default {
     components: {
         tNoticeBar,

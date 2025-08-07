@@ -33,9 +33,9 @@
 </template>
 
 <script>
-import tButton from './tdesign-miniprogram/button/button';
-import tInput from './tdesign-miniprogram/input/input';
-import tDialog from './tdesign-miniprogram/dialog/dialog';
+import tButton from 'tdesign-uniapp/button/button';
+import tInput from 'tdesign-uniapp/input/input';
+import tDialog from 'tdesign-uniapp/dialog/dialog';
 export default {
     components: {
         tButton,

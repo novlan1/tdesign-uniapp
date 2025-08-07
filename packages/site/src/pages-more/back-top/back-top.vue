@@ -32,8 +32,8 @@
 
 <script lang="ts">
 import zpMixins from '@/uni_modules/zp-mixins/index';
-import tButton from './tdesign-miniprogram/button/button';
-import tSkeleton from './tdesign-miniprogram/skeleton/skeleton';
+import tButton from 'tdesign-uniapp/button/button';
+import tSkeleton from 'tdesign-uniapp/skeleton/skeleton';
 import base from './base';
 import halfRound from './half-round';
 export default zpMixins.extend({

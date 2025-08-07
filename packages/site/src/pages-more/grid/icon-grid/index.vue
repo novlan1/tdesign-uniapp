@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import tGrid from './tdesign-miniprogram/grid/grid';
-import tGridItem from './tdesign-miniprogram/grid-item/grid-item';
-import tButton from './tdesign-miniprogram/button/button';
+import tGrid from 'tdesign-uniapp/grid/grid';
+import tGridItem from 'tdesign-uniapp/grid-item/grid-item';
+import tButton from 'tdesign-uniapp/button/button';
 export default {
     components: {
         tGrid,

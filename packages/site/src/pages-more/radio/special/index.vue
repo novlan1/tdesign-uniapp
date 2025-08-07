@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import tRadioGroup from './tdesign-miniprogram/radio-group/radio-group';
-import tRadio from './tdesign-miniprogram/radio/radio';
-import tIcon from './tdesign-miniprogram/icon/icon';
+import tRadioGroup from 'tdesign-uniapp/radio-group/radio-group';
+import tRadio from 'tdesign-uniapp/radio/radio';
+import tIcon from 'tdesign-uniapp/icon/icon';
 export default {
     components: {
         tRadioGroup,

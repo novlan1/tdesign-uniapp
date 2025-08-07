@@ -23,9 +23,9 @@
 <script lang="ts">
 import zpMixins from '@/uni_modules/zp-mixins/index';
 import pullDownList from '../../components/pull-down-list';
-import tFooter from './tdesign-miniprogram/footer/footer';
+import tFooter from 'tdesign-uniapp/footer/footer';
 import trdPrivacy from '@/components/trd-privacy/privacy';
-import themeChangeBehavior from './tdesign-miniprogram/mixins/theme-change';
+import themeChangeBehavior from 'tdesign-uniapp/mixins/theme-change';
 import { list, skylineList } from './data/index';
 export default zpMixins.extend({
     components: {

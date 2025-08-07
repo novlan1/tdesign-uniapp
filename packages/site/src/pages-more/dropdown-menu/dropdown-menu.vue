@@ -29,8 +29,8 @@
 
 <script lang="ts">
 import zpMixins from '@/uni_modules/zp-mixins/index';
-import tDropdownMenu from './tdesign-miniprogram/dropdown-menu/dropdown-menu';
-import tDropdownItem from './tdesign-miniprogram/dropdown-item/dropdown-item';
+import tDropdownMenu from 'tdesign-uniapp/dropdown-menu/dropdown-menu';
+import tDropdownItem from 'tdesign-uniapp/dropdown-item/dropdown-item';
 import single from './single';
 import multi from './multi';
 export default zpMixins.extend({

@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import tDropdownMenu from './tdesign-miniprogram/dropdown-menu/dropdown-menu';
-import tDropdownItem from './tdesign-miniprogram/dropdown-item/dropdown-item';
+import tDropdownMenu from 'tdesign-uniapp/dropdown-menu/dropdown-menu';
+import tDropdownItem from 'tdesign-uniapp/dropdown-item/dropdown-item';
 export default {
     components: {
         tDropdownMenu,

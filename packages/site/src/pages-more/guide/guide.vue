@@ -62,8 +62,8 @@
 
 <script lang="ts">
 import zpMixins from '@/uni_modules/zp-mixins/index';
-import tButton from './tdesign-miniprogram/button/button';
-import tPopup from './tdesign-miniprogram/popup/popup';
+import tButton from 'tdesign-uniapp/button/button';
+import tPopup from 'tdesign-uniapp/popup/popup';
 import base from './base';
 import noMask from './no-mask';
 import dialog from './dialog';

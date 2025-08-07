@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import tBadge from './tdesign-miniprogram/badge/badge';
-import tIcon from './tdesign-miniprogram/icon/icon';
-import tButton from './tdesign-miniprogram/button/button';
+import tBadge from 'tdesign-uniapp/badge/badge';
+import tIcon from 'tdesign-uniapp/icon/icon';
+import tButton from 'tdesign-uniapp/button/button';
 export default {
     components: {
         tBadge,

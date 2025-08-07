@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import tButton from './tdesign-miniprogram/button/button';
-import tDrawer from './tdesign-miniprogram/drawer/drawer';
+import tButton from 'tdesign-uniapp/button/button';
+import tDrawer from 'tdesign-uniapp/drawer/drawer';
 import SkylineBehavior from '@behaviors/skyline.js';
 export default {
     components: {

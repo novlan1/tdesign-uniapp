@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import tNavbar from './tdesign-miniprogram/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar';
 export default {
     components: {
         tNavbar

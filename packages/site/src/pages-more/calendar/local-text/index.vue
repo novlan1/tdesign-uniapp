@@ -6,8 +6,8 @@
 </template>
 <script module="_this" lang="wxs" src="@/calendar/calendar.wxs"></script>
 <script>
-import tCalendar from './tdesign-miniprogram/calendar/calendar';
-import tCell from './tdesign-miniprogram/cell/cell';
+import tCalendar from 'tdesign-uniapp/calendar/calendar';
+import tCell from 'tdesign-uniapp/cell/cell';
 export default {
     components: {
         tCalendar,

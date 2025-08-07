@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import zpMixins from '@/uni_modules/zp-mixins/index';
-import tNavbar from './tdesign-miniprogram/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import yearMonthDate from '../year-month-date';
 import yearMonth from '../year-month';
 import time from '../time';

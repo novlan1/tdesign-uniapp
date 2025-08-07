@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import tRadio from './tdesign-miniprogram/radio/radio';
+import tRadio from 'tdesign-uniapp/radio/radio';
 export default {
     components: {
         tRadio

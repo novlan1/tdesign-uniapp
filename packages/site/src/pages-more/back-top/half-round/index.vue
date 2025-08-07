@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import tBackTop from './tdesign-miniprogram/back-top/back-top';
+import tBackTop from 'tdesign-uniapp/back-top/back-top';
 export default {
     components: {
         tBackTop

@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import tNoticeBar from './tdesign-miniprogram/notice-bar/notice-bar';
-import tLink from './tdesign-miniprogram/link/link';
-import tIcon from './tdesign-miniprogram/icon/icon';
+import tNoticeBar from 'tdesign-uniapp/notice-bar/notice-bar';
+import tLink from 'tdesign-uniapp/link/link';
+import tIcon from 'tdesign-uniapp/icon/icon';
 export default {
     components: {
         tNoticeBar,

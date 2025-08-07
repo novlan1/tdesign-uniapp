@@ -26,8 +26,8 @@
 
 <script lang="ts">
 import zpMixins from '@/uni_modules/zp-mixins/index';
-import tNavbar from './tdesign-miniprogram/navbar/navbar';
-import tButton from './tdesign-miniprogram/button/button';
+import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tButton from 'tdesign-uniapp/button/button';
 import theme from '../theme';
 import description from '../description';
 import custom from '../custom';

@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import tToast from './tdesign-miniprogram/toast/toast';
-import Toast from './tdesign-miniprogram/toast/index';
+import tToast from 'tdesign-uniapp/toast/toast';
+import Toast from 'tdesign-uniapp/toast/index';
 export default {
     components: {
         tToast

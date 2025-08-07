@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import tDateTimePicker from './tdesign-miniprogram/date-time-picker/date-time-picker';
+import tDateTimePicker from 'tdesign-uniapp/date-time-picker/date-time-picker';
 export default {
     components: {
         tDateTimePicker

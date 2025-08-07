@@ -23,9 +23,9 @@
 module.exports.contain = function(arr, key) { return arr.indexOf(key) > -1 }
 </script>
 <script>
-import tCheckboxGroup from './tdesign-miniprogram/checkbox-group/checkbox-group';
-import tCheckbox from './tdesign-miniprogram/checkbox/checkbox';
-import tIcon from './tdesign-miniprogram/icon/icon';
+import tCheckboxGroup from 'tdesign-uniapp/checkbox-group/checkbox-group';
+import tCheckbox from 'tdesign-uniapp/checkbox/checkbox';
+import tIcon from 'tdesign-uniapp/icon/icon';
 export default {
     components: {
         tCheckboxGroup,

@@ -11,8 +11,8 @@
 module.exports.contains = function(arr, target) { return arr.indexOf(target) > -1; }
 </script>
 <script>
-import tCollapse from './tdesign-miniprogram/collapse/collapse';
-import tCollapsePanel from './tdesign-miniprogram/collapse-panel/collapse-panel';
+import tCollapse from 'tdesign-uniapp/collapse/collapse';
+import tCollapsePanel from 'tdesign-uniapp/collapse-panel/collapse-panel';
 export default {
     components: {
         tCollapse,

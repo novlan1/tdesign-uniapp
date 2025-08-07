@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import tUpload from './tdesign-miniprogram/upload/upload';
+import tUpload from 'tdesign-uniapp/upload/upload';
 export default {
     components: {
         tUpload

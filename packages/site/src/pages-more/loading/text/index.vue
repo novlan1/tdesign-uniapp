@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import tLoading from './tdesign-miniprogram/loading/loading';
+import tLoading from 'tdesign-uniapp/loading/loading';
 export default {
     components: {
         tLoading

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import tQrcode from './tdesign-miniprogram/qrcode/qrcode';
+import tQrcode from 'tdesign-uniapp/qrcode/qrcode';
 export default {
     components: {
         tQrcode

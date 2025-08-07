@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import tGrid from './tdesign-miniprogram/grid/grid';
-import tGridItem from './tdesign-miniprogram/grid-item/grid-item';
+import tGrid from 'tdesign-uniapp/grid/grid';
+import tGridItem from 'tdesign-uniapp/grid-item/grid-item';
 export default {
     components: {
         tGrid,

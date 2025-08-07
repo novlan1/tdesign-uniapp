@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import tLoading from './tdesign-miniprogram/loading/loading';
-import tSlider from './tdesign-miniprogram/slider/slider';
+import tLoading from 'tdesign-uniapp/loading/loading';
+import tSlider from 'tdesign-uniapp/slider/slider';
 import SkylineBehavior from '@behaviors/skyline.js';
 export default {
     components: {

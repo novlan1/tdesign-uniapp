@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import tCheckboxGroup from './tdesign-miniprogram/checkbox-group/checkbox-group';
+import tCheckboxGroup from 'tdesign-uniapp/checkbox-group/checkbox-group';
 export default {
     components: {
         tCheckboxGroup

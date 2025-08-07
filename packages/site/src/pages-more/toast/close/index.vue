@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import tToast from './tdesign-miniprogram/toast/toast';
-import Toast, { hideToast } from './tdesign-miniprogram/toast/index';
+import tToast from 'tdesign-uniapp/toast/toast';
+import Toast, { hideToast } from 'tdesign-uniapp/toast/index';
 export default {
     components: {
         tToast

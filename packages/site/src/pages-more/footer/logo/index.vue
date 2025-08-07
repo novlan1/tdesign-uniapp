@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import tFooter from './tdesign-miniprogram/footer/footer';
-import themeChangeBehavior from './tdesign-miniprogram/mixins/theme-change';
+import tFooter from 'tdesign-uniapp/footer/footer';
+import themeChangeBehavior from 'tdesign-uniapp/mixins/theme-change';
 export default {
     components: {
         tFooter

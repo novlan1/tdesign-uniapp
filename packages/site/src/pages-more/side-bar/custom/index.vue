@@ -24,10 +24,10 @@
 </template>
 
 <script>
-import tSideBar from './tdesign-miniprogram/side-bar/side-bar';
-import tSideBarItem from './tdesign-miniprogram/side-bar-item/side-bar-item';
-import tGrid from './tdesign-miniprogram/grid/grid';
-import tGridItem from './tdesign-miniprogram/grid-item/grid-item';
+import tSideBar from 'tdesign-uniapp/side-bar/side-bar';
+import tSideBarItem from 'tdesign-uniapp/side-bar-item/side-bar-item';
+import tGrid from 'tdesign-uniapp/grid/grid';
+import tGridItem from 'tdesign-uniapp/grid-item/grid-item';
 const image = 'https://tdesign.gtimg.com/mobile/demos/example1.png';
 const items = new Array(12).fill().map((_, index) => ({
     label: index % 3 === 2 ? '最多六个文字' : '标题文字',

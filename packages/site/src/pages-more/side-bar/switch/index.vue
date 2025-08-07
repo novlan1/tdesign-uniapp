@@ -33,11 +33,11 @@
 </template>
 
 <script>
-import tSideBar from './tdesign-miniprogram/side-bar/side-bar';
-import tSideBarItem from './tdesign-miniprogram/side-bar-item/side-bar-item';
-import tCellGroup from './tdesign-miniprogram/cell-group/cell-group';
-import tCell from './tdesign-miniprogram/cell/cell';
-import tImage from './tdesign-miniprogram/image/image';
+import tSideBar from 'tdesign-uniapp/side-bar/side-bar';
+import tSideBarItem from 'tdesign-uniapp/side-bar-item/side-bar-item';
+import tCellGroup from 'tdesign-uniapp/cell-group/cell-group';
+import tCell from 'tdesign-uniapp/cell/cell';
+import tImage from 'tdesign-uniapp/image/image';
 const image = 'https://tdesign.gtimg.com/mobile/demos/example2.png';
 const items = new Array(12).fill(
     {

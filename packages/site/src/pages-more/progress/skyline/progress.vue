@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import zpMixins from '@/uni_modules/zp-mixins/index';
-import tNavbar from './tdesign-miniprogram/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import demoProgress from '../progress';
 export default zpMixins.extend({
     components: {

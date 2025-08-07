@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import tAvatar from './tdesign-miniprogram/avatar/avatar';
+import tAvatar from 'tdesign-uniapp/avatar/avatar';
 export default {
     components: {
         tAvatar

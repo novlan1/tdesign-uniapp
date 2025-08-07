@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import tCell from './tdesign-miniprogram/cell/cell';
-import tCascader from './tdesign-miniprogram/cascader/cascader';
+import tCell from 'tdesign-uniapp/cell/cell';
+import tCascader from 'tdesign-uniapp/cascader/cascader';
 const data = {
     areaList: [
         {

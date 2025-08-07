@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import tQrcode from './tdesign-miniprogram/qrcode/qrcode';
-import tSlider from './tdesign-miniprogram/slider/slider';
+import tQrcode from 'tdesign-uniapp/qrcode/qrcode';
+import tSlider from 'tdesign-uniapp/slider/slider';
 export default {
     components: {
         tQrcode,

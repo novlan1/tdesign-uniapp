@@ -13,7 +13,7 @@
 </template>
 
 <script >
-import tFooter from "./tdesign-miniprogram/footer/footer";
+import tFooter from "tdesign-uniapp/footer/footer";
 export default {
                     components: {
                                         tFooter

@@ -17,19 +17,20 @@
         :class="classPrefix + '__image'"
       />
     </view>
-    <label
+    <div
       v-if="_.isValidIconName(name) && !isImage"
       :class="(prefix ? prefix : classPrefix) + '-' + name + ' ' + classPrefix + '-base'"
     />
   </view>
 </template>
-<script module="_" lang="wxs" src="../common/utils.wxs"></script>
 <script>
 import { __awaiter, __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
 import { styles, addUnit, getRect } from "../common/utils";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
 const {
   prefix: prefix
 } = config;
@@ -39,6 +40,8 @@ let Icon = class extends SuperComponent {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`];
     // this = props;
+    this.properties = props;
+    this._ = _;
     this.setData({
       componentPrefix: prefix,
       classPrefix: name,
@@ -94,7 +97,7 @@ let Icon = class extends SuperComponent {
   setData() {};
 
 };
-Icon = __decorate([wxComponent()], Icon);
+Icon = initTDesign(__decorate([wxComponent()], Icon));
 export default Icon;
 </script>
 <style>

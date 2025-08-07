@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import tImage from './tdesign-miniprogram/image/image';
+import tImage from 'tdesign-uniapp/image/image';
 export default {
     components: {
         tImage

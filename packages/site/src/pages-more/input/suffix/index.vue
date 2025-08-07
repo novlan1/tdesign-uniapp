@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import tButton from './tdesign-miniprogram/button/button';
-import tInput from './tdesign-miniprogram/input/input';
+import tButton from 'tdesign-uniapp/button/button';
+import tInput from 'tdesign-uniapp/input/input';
 export default {
     components: {
         tButton,

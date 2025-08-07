@@ -24,8 +24,8 @@ module.exports.getText = function(value, curr) { if (value > curr) return '已�
 return'错误步骤'; return '未完成'; }
 </script>
 <script>
-import tSteps from './tdesign-miniprogram/steps/steps';
-import tStepItem from './tdesign-miniprogram/step-item/step-item';
+import tSteps from 'tdesign-uniapp/steps/steps';
+import tStepItem from 'tdesign-uniapp/step-item/step-item';
 export default {
     components: {
         tSteps,

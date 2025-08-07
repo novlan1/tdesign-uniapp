@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import tTabs from './tdesign-miniprogram/tabs/tabs';
-import tTabPanel from './tdesign-miniprogram/tab-panel/tab-panel';
+import tTabs from 'tdesign-uniapp/tabs/tabs';
+import tTabPanel from 'tdesign-uniapp/tab-panel/tab-panel';
 export default {
     components: {
         tTabs,

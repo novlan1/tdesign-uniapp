@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import tButton from './tdesign-miniprogram/button/button';
-import tActionSheet from './tdesign-miniprogram/action-sheet/action-sheet';
-import ActionSheet, { ActionSheetTheme } from './tdesign-miniprogram/action-sheet/index';
+import tButton from 'tdesign-uniapp/button/button';
+import tActionSheet from 'tdesign-uniapp/action-sheet/action-sheet';
+import ActionSheet, { ActionSheetTheme } from 'tdesign-uniapp/action-sheet/index';
 export default {
     components: {
         tButton,

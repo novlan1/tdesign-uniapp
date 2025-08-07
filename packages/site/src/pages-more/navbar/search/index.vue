@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import tNavbar from './tdesign-miniprogram/navbar/navbar';
-import tSearch from './tdesign-miniprogram/search/search';
+import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tSearch from 'tdesign-uniapp/search/search';
 export default {
     components: {
         tNavbar,

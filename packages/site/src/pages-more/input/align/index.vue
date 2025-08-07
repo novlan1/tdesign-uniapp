@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import tInput from './tdesign-miniprogram/input/input';
+import tInput from 'tdesign-uniapp/input/input';
 export default {
     components: {
         tInput

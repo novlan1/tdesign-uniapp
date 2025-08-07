@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import tPopup from './tdesign-miniprogram/popup/popup';
-import tIcon from './tdesign-miniprogram/icon/icon';
-import tButton from './tdesign-miniprogram/button/button';
+import tPopup from 'tdesign-uniapp/popup/popup';
+import tIcon from 'tdesign-uniapp/icon/icon';
+import tButton from 'tdesign-uniapp/button/button';
 export default {
     components: {
         tPopup,

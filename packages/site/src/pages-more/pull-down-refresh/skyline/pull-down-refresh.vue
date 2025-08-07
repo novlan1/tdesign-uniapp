@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import tNavbar from './tdesign-miniprogram/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import base from '../base';
 export default {
     components: {

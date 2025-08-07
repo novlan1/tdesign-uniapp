@@ -31,9 +31,9 @@
 </template>
 
 <script>
-import tSwipeCell from './tdesign-miniprogram/swipe-cell/swipe-cell';
-import tCell from './tdesign-miniprogram/cell/cell';
-import tIcon from './tdesign-miniprogram/icon/icon';
+import tSwipeCell from 'tdesign-uniapp/swipe-cell/swipe-cell';
+import tCell from 'tdesign-uniapp/cell/cell';
+import tIcon from 'tdesign-uniapp/icon/icon';
 export default {
     components: {
         tSwipeCell,

@@ -36,9 +36,9 @@
 </template>
 
 <script>
-import tBadge from './tdesign-miniprogram/badge/badge';
-import tCell from './tdesign-miniprogram/cell/cell';
-import tIcon from './tdesign-miniprogram/icon/icon';
+import tBadge from 'tdesign-uniapp/badge/badge';
+import tCell from 'tdesign-uniapp/cell/cell';
+import tIcon from 'tdesign-uniapp/icon/icon';
 import SkylineBehavior from '@behaviors/skyline.js';
 export default {
     components: {

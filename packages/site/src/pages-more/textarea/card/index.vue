@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import tTextarea from './tdesign-miniprogram/textarea/textarea';
+import tTextarea from 'tdesign-uniapp/textarea/textarea';
 export default {
     components: {
         tTextarea

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import tStepper from './tdesign-miniprogram/stepper/stepper';
+import tStepper from 'tdesign-uniapp/stepper/stepper';
 export default {
     components: {
         tStepper

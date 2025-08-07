@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import tSwipeCell from './tdesign-miniprogram/swipe-cell/swipe-cell';
-import tCell from './tdesign-miniprogram/cell/cell';
+import tSwipeCell from 'tdesign-uniapp/swipe-cell/swipe-cell';
+import tCell from 'tdesign-uniapp/cell/cell';
 export default {
     components: {
         tSwipeCell,

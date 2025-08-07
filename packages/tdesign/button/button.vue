@@ -30,7 +30,7 @@
             :aria-label="ariaLabel"
         >
             <!-- parse <template v-if="_icon" is="icon" :data="tClass: classPrefix + '__icon ' + prefix + '-class-icon', ariaHidden: true, name: iconName, ..._icon"/> -->
-            <block name="icon" v-if="false" v-if="_icon">
+            <block name="icon" v-if="_icon">
                 <t-icon
                     :style="style || ''"
                     :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -70,16 +70,18 @@
         </button>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
 import tLoading from "../loading/loading";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
 import { canIUseFormFieldButton } from "../common/version";
 import { calcIcon } from "../common/utils";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
 const {
   prefix: prefix
 } = config;
@@ -89,10 +91,15 @@ let Button = class extends SuperComponent {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-icon`, `${prefix}-class-loading`];
     this.behaviors = canIUseFormFieldButton() ? ["wx://form-field-button"] : [];
-    this = props;
+    this.properties = props;
+    this._ = _;
     this.options = {
       multipleSlots: true
     };
+    this.components = {
+      tIcon,
+      tLoading
+    }
     this.setData({
       prefix: prefix,
       className: "",
@@ -125,6 +132,7 @@ let Button = class extends SuperComponent {
         if (this.ghost) {
           t.push(`${name}--ghost`);
         }
+        console.log('setClass.t', t)
         this.setData({
           className: t.join(" ")
         });
@@ -177,10 +185,11 @@ let Button = class extends SuperComponent {
     };
   }
 };
-Button = __decorate([wxComponent()], Button);
+Button = initTDesign(__decorate([wxComponent()], Button));
+
+console.log('[Button]', Button)
 export default Button;
 </script>
 <style>
 @import './button.css';
-@import 'undefined';
 </style>

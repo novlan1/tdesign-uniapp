@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import tSkeleton from './tdesign-miniprogram/skeleton/skeleton';
+import tSkeleton from 'tdesign-uniapp/skeleton/skeleton';
 export default {
     components: {
         tSkeleton

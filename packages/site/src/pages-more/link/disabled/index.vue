@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import tLink from './tdesign-miniprogram/link/link';
+import tLink from 'tdesign-uniapp/link/link';
 export default {
     components: {
         tLink

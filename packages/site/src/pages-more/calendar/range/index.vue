@@ -11,8 +11,8 @@
 </template>
 <script module="_this" lang="wxs" src="@/calendar/calendar.wxs"></script>
 <script>
-import tIcon from './tdesign-miniprogram/icon/icon';
-import tCalendar from './tdesign-miniprogram/calendar/calendar';
+import tIcon from 'tdesign-uniapp/icon/icon';
+import tCalendar from 'tdesign-uniapp/calendar/calendar';
 export default {
     components: {
         tIcon,

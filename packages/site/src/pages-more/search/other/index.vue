@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import tSearch from './tdesign-miniprogram/search/search';
+import tSearch from 'tdesign-uniapp/search/search';
 export default {
     components: {
         tSearch

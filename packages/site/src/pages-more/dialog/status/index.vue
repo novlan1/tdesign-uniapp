@@ -81,8 +81,8 @@
 </template>
 
 <script>
-import tButton from './tdesign-miniprogram/button/button';
-import tDialog from './tdesign-miniprogram/dialog/dialog';
+import tButton from 'tdesign-uniapp/button/button';
+import tDialog from 'tdesign-uniapp/dialog/dialog';
 export default {
     components: {
         tButton,

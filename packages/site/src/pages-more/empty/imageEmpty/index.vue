@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import tEmpty from './tdesign-miniprogram/empty/empty';
+import tEmpty from 'tdesign-uniapp/empty/empty';
 export default {
     components: {
         tEmpty

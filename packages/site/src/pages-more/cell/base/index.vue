@@ -14,10 +14,10 @@
 </template>
 
 <script>
-import tCell from './tdesign-miniprogram/cell/cell';
-import tBadge from './tdesign-miniprogram/badge/badge';
-import tSwitch from './tdesign-miniprogram/switch/switch';
-import tIcon from './tdesign-miniprogram/icon/icon';
+import tCell from 'tdesign-uniapp/cell/cell';
+import tBadge from 'tdesign-uniapp/badge/badge';
+import tSwitch from 'tdesign-uniapp/switch/switch';
+import tIcon from 'tdesign-uniapp/icon/icon';
 export default {
     components: {
         tCell,

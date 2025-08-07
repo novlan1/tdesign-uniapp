@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import tProgress from './tdesign-miniprogram/progress/progress';
+import tProgress from 'tdesign-uniapp/progress/progress';
 import SkylineBehavior from '@behaviors/skyline.js';
 export default {
     components: {

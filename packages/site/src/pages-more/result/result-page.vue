@@ -14,8 +14,8 @@
 
 <script lang="ts">
 import zpMixins from '@/uni_modules/zp-mixins/index';
-import tButton from './tdesign-miniprogram/button/button';
-import tResult from './tdesign-miniprogram/result/result';
+import tButton from 'tdesign-uniapp/button/button';
+import tResult from 'tdesign-uniapp/result/result';
 export default zpMixins.extend({
     components: {
         tButton,

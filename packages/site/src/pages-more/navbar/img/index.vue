@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import tNavbar from './tdesign-miniprogram/navbar/navbar';
-import tImage from './tdesign-miniprogram/image/image';
-import themeChangeBehavior from './tdesign-miniprogram/mixins/theme-change';
+import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tImage from 'tdesign-uniapp/image/image';
+import themeChangeBehavior from 'tdesign-uniapp/mixins/theme-change';
 export default {
     components: {
         tNavbar,

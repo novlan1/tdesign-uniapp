@@ -20,10 +20,10 @@
 </template>
 
 <script>
-import tIndexes from './tdesign-miniprogram/indexes/indexes';
-import tIndexesAnchor from './tdesign-miniprogram/indexes-anchor/indexes-anchor';
-import tCellGroup from './tdesign-miniprogram/cell-group/cell-group';
-import tCell from './tdesign-miniprogram/cell/cell';
+import tIndexes from 'tdesign-uniapp/indexes/indexes';
+import tIndexesAnchor from 'tdesign-uniapp/indexes-anchor/indexes-anchor';
+import tCellGroup from 'tdesign-uniapp/cell-group/cell-group';
+import tCell from 'tdesign-uniapp/cell/cell';
 const children = new Array(5).fill('列表内容');
 const list = [
     {

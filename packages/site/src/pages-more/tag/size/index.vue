@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import tTag from './tdesign-miniprogram/tag/tag';
+import tTag from 'tdesign-uniapp/tag/tag';
 export default {
     components: {
         tTag

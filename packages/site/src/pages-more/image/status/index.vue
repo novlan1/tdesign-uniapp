@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import tImage from './tdesign-miniprogram/image/image';
-import tLoading from './tdesign-miniprogram/loading/loading';
+import tImage from 'tdesign-uniapp/image/image';
+import tLoading from 'tdesign-uniapp/loading/loading';
 export default {
     components: {
         tImage,

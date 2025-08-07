@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import tSwiper from './tdesign-miniprogram/swiper/swiper';
+import tSwiper from 'tdesign-uniapp/swiper/swiper';
 const imageCdn = 'https://tdesign.gtimg.com/mobile/demos';
 const swiperList = [
     {

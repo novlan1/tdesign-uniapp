@@ -23,9 +23,9 @@
 </template>
 
 <script>
-import tFab from './tdesign-miniprogram/fab/fab';
-import tIcon from './tdesign-miniprogram/icon/icon';
-import pageScrollMixin from './tdesign-miniprogram/mixins/page-scroll';
+import tFab from 'tdesign-uniapp/fab/fab';
+import tIcon from 'tdesign-uniapp/icon/icon';
+import pageScrollMixin from 'tdesign-uniapp/mixins/page-scroll';
 export default {
     components: {
         tFab,

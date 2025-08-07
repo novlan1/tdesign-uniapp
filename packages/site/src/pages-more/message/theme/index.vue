@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import tButton from './tdesign-miniprogram/button/button';
-import tMessage from './tdesign-miniprogram/message/message';
-import Message from './tdesign-miniprogram/message/index';
+import tButton from 'tdesign-uniapp/button/button';
+import tMessage from 'tdesign-uniapp/message/message';
+import Message from 'tdesign-uniapp/message/index';
 export default {
     components: {
         tButton,

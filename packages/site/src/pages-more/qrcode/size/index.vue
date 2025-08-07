@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import tQrcode from './tdesign-miniprogram/qrcode/qrcode';
-import tButton from './tdesign-miniprogram/button/button';
+import tQrcode from 'tdesign-uniapp/qrcode/qrcode';
+import tButton from 'tdesign-uniapp/button/button';
 export default {
     components: {
         tQrcode,

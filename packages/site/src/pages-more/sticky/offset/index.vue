@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import tSticky from './tdesign-miniprogram/sticky/sticky';
-import tButton from './tdesign-miniprogram/button/button';
+import tSticky from 'tdesign-uniapp/sticky/sticky';
+import tButton from 'tdesign-uniapp/button/button';
 export default {
     components: {
         tSticky,

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import tResult from './tdesign-miniprogram/result/result';
+import tResult from 'tdesign-uniapp/result/result';
 export default {
     components: {
         tResult

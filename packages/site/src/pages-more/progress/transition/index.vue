@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import tProgress from './tdesign-miniprogram/progress/progress';
-import tButton from './tdesign-miniprogram/button/button';
+import tProgress from 'tdesign-uniapp/progress/progress';
+import tButton from 'tdesign-uniapp/button/button';
 export default {
     components: {
         tProgress,

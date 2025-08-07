@@ -6,9 +6,9 @@
 </template>
 
 <script>
-import tButton from './tdesign-miniprogram/button/button';
-import tDialog from './tdesign-miniprogram/dialog/dialog';
-import Dialog from './tdesign-miniprogram/dialog/index';
+import tButton from 'tdesign-uniapp/button/button';
+import tDialog from 'tdesign-uniapp/dialog/dialog';
+import Dialog from 'tdesign-uniapp/dialog/index';
 export default {
     components: {
         tButton,

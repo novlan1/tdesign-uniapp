@@ -47,7 +47,7 @@
 
 <script lang="ts">
 import zpMixins from '@/uni_modules/zp-mixins/index';
-import tInput from './tdesign-miniprogram/input/input';
+import tInput from 'tdesign-uniapp/input/input';
 import base from './base';
 import suffix from './suffix';
 import prefix from './prefix';

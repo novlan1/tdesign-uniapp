@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import tToast from './tdesign-miniprogram/toast/toast';
-import tButton from './tdesign-miniprogram/button/button';
-import Toast from './tdesign-miniprogram/toast/index';
+import tToast from 'tdesign-uniapp/toast/toast';
+import tButton from 'tdesign-uniapp/button/button';
+import Toast from 'tdesign-uniapp/toast/index';
 export default {
     components: {
         tToast,

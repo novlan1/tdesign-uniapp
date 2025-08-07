@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import zpMixins from '@/uni_modules/zp-mixins/index';
-import tNavbar from './tdesign-miniprogram/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import base from '../base';
 import link from '../link';
 import logo from '../logo';

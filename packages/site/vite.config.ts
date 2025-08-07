@@ -7,5 +7,6 @@ export default defineConfig({
   base: process.env.VITE_DEMO_BASE || 'tdesign-uniapp',
   server: {
     port: 11111,
+    hmr: true,
   },
 });

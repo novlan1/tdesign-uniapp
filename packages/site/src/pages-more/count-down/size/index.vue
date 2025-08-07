@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import tCountDown from './tdesign-miniprogram/count-down/count-down';
+import tCountDown from 'tdesign-uniapp/count-down/count-down';
 export default {
     components: {
         tCountDown

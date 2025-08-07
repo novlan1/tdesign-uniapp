@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import tColorPicker from './tdesign-miniprogram/color-picker/color-picker';
-import tIcon from './tdesign-miniprogram/icon/icon';
+import tColorPicker from 'tdesign-uniapp/color-picker/color-picker';
+import tIcon from 'tdesign-uniapp/icon/icon';
 export default {
     components: {
         tColorPicker,

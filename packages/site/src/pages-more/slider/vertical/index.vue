@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import tSlider from './tdesign-miniprogram/slider/slider';
+import tSlider from 'tdesign-uniapp/slider/slider';
 export default {
     components: {
         tSlider

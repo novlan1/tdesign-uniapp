@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import tProgress from './tdesign-miniprogram/progress/progress';
+import tProgress from 'tdesign-uniapp/progress/progress';
 export default {
     components: {
         tProgress

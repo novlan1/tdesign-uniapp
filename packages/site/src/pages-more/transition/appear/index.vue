@@ -12,8 +12,8 @@
 
 <script lang="ts">
 import zpMixins from '@/uni_modules/zp-mixins/index';
-import tButton from './tdesign-miniprogram/button/button';
-import tTransition from './tdesign-miniprogram/transition/transition';
+import tButton from 'tdesign-uniapp/button/button';
+import tTransition from 'tdesign-uniapp/transition/transition';
 export default zpMixins.extend({
     components: {
         tButton,

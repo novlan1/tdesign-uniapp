@@ -37,10 +37,10 @@
 </template>
 
 <script>
-import tCellGroup from './tdesign-miniprogram/cell-group/cell-group';
-import tCell from './tdesign-miniprogram/cell/cell';
-import tPicker from './tdesign-miniprogram/picker/picker';
-import tPickerItem from './tdesign-miniprogram/picker-item/picker-item';
+import tCellGroup from 'tdesign-uniapp/cell-group/cell-group';
+import tCell from 'tdesign-uniapp/cell/cell';
+import tPicker from 'tdesign-uniapp/picker/picker';
+import tPickerItem from 'tdesign-uniapp/picker-item/picker-item';
 export default {
     components: {
         tCellGroup,

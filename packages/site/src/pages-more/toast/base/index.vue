@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import tToast from './tdesign-miniprogram/toast/toast';
-import tButton from './tdesign-miniprogram/button/button';
+import tToast from 'tdesign-uniapp/toast/toast';
+import tButton from 'tdesign-uniapp/button/button';
 import SkylineBehavior from '@behaviors/skyline.js';
 import { Toast } from 'tdesign-miniprogram';
 export default {

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import tRate from './tdesign-miniprogram/rate/rate';
+import tRate from 'tdesign-uniapp/rate/rate';
 export default {
     components: {
         tRate

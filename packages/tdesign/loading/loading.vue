@@ -100,7 +100,7 @@ let Loading = class extends SuperComponent {
     this.options = {
       multipleSlots: true
     };
-    this.props = props;
+    this.properties = props;
     this._ = _;
     // this = Object.assign({}, props);
     this.timer = null;

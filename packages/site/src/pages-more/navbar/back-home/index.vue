@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import tNavbar from './tdesign-miniprogram/navbar/navbar';
-import tIcon from './tdesign-miniprogram/icon/icon';
+import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tIcon from 'tdesign-uniapp/icon/icon';
 export default {
     components: {
         tNavbar,

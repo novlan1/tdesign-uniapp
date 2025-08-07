@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import tLoading from './tdesign-miniprogram/loading/loading';
+import tLoading from 'tdesign-uniapp/loading/loading';
 import SkylineBehavior from '@behaviors/skyline.js';
 export default {
     components: {

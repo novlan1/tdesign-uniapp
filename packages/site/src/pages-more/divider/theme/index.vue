@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import tDivider from './tdesign-miniprogram/divider/divider';
+import tDivider from 'tdesign-uniapp/divider/divider';
 import SkylineBehavior from '@behaviors/skyline.js';
 export default {
     components: {

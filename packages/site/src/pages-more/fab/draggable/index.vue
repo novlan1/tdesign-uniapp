@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import tFab from './tdesign-miniprogram/fab/fab';
+import tFab from 'tdesign-uniapp/fab/fab';
 export default {
     components: {
         tFab

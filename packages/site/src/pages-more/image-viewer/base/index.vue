@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import tButton from './tdesign-miniprogram/button/button';
-import tToast from './tdesign-miniprogram/toast/toast';
-import tImageViewer from './tdesign-miniprogram/image-viewer/image-viewer';
-import Toast from './tdesign-miniprogram/toast/index';
+import tButton from 'tdesign-uniapp/button/button';
+import tToast from 'tdesign-uniapp/toast/toast';
+import tImageViewer from 'tdesign-uniapp/image-viewer/image-viewer';
+import Toast from 'tdesign-uniapp/toast/index';
 export default {
     components: {
         tButton,

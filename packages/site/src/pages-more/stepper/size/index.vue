@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import tCell from './tdesign-miniprogram/cell/cell';
-import tStepper from './tdesign-miniprogram/stepper/stepper';
+import tCell from 'tdesign-uniapp/cell/cell';
+import tStepper from 'tdesign-uniapp/stepper/stepper';
 export default {
     components: {
         tCell,

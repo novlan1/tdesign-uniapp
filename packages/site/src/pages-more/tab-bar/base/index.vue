@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import tTabBar from './tdesign-miniprogram/tab-bar/tab-bar';
-import tTabBarItem from './tdesign-miniprogram/tab-bar-item/tab-bar-item';
+import tTabBar from 'tdesign-uniapp/tab-bar/tab-bar';
+import tTabBarItem from 'tdesign-uniapp/tab-bar-item/tab-bar-item';
 export default {
     components: {
         tTabBar,

@@ -12,11 +12,12 @@ export function initTDesign(info) {
         originCreated.call(this)
       }
       
-      this.setData = function(obj) {
-        Object.keys(obj).forEach(key => {
-          this.$set(this, key, willSetData[key])
-        })
-      }
+      // this.setData = function(obj) {
+      //   Object.keys(obj).forEach(key => {
+      //     this.$set(this, key, obj[key])
+      //     this[key] = obj[key]
+      //   })
+      // }
       if (willSetData) {
          Object.keys(willSetData).forEach(key => {
           this[key] = willSetData[key]
@@ -29,27 +30,38 @@ export function initTDesign(info) {
         })
       }
     },
-    mounted() {
-
+    data() {
+      const willSetData = this.$options[WILL_SET_DATA_KEY]
+      return {
+        ...(willSetData || {}),
+      }
     },
+    mounted() {
+      console.log('doing mounted', this, info)
+      if (info.lifetimes?.attached) {
+        console.log('doing attached')
+        info.lifetimes.attached.call(this)
+      }
+    },
+    watch: getComponentWatch(info),
     ...parseProps(info),
   }
 }
 
 
 function parseProps(info, vm) {
-  if (!info.props) {
+  if (!info.properties) {
     return info;
   }
-  const { props } = info;
+  const { properties } = info;
   const result = {}
-  console.log('info.props', info.props)
-  Object.keys(props).forEach(key => {
+  console.log('info.properties', info.properties)
+  Object.keys(properties).forEach(key => {
     result[key] = {
-      type: props[key].type
+      type: properties[key].type
     }
-    if (props[key].value) {
-      result[key].default = props[key].value
+    if (properties[key].value) {
+      result[key].default = properties[key].value
     }
   })
   
@@ -61,6 +73,14 @@ function parseProps(info, vm) {
     methods: {
       ...(info.methods || {}),
       ...(info[COMMON_UTILS_WXS_NAME] || {}),
+      setData (obj) {
+        console.log('[doing setData]', obj)
+        Object.keys(obj).forEach(key => {
+          // this.$set(this, key, obj[key])
+          this[key] = obj[key]
+        })
+        console.log('className', this.className, this)
+      }
     }
   }
 }
@@ -71,4 +91,20 @@ export function setData(obj) {
   // Object.keys(obj).forEach(key => {
   //   this[key] = obj[key]
   // })
+}
+
+
+
+function getComponentWatch(info) {
+  if (!info.observers) {
+    return {};
+  }
+  const { observers } = info;
+  Object.keys(observers).reduce((acc, item) => {
+    const key = item.split(',').map(item => item.trim())
+    return {
+      ...acc,
+      [key]: observers[item]
+    }
+  }, {})
 }

@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import tColorPicker from './tdesign-miniprogram/color-picker/color-picker';
-import tPopup from './tdesign-miniprogram/popup/popup';
+import tColorPicker from 'tdesign-uniapp/color-picker/color-picker';
+import tPopup from 'tdesign-uniapp/popup/popup';
 export default {
     components: {
         tColorPicker,

@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import tBadge from './tdesign-miniprogram/badge/badge';
-import tAvatar from './tdesign-miniprogram/avatar/avatar';
+import tBadge from 'tdesign-uniapp/badge/badge';
+import tAvatar from 'tdesign-uniapp/avatar/avatar';
 export default {
     components: {
         tBadge,
