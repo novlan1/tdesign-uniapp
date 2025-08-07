@@ -4,6 +4,7 @@
 
 .col {
     margin: 0 32rpx;
+    flex: 1;
 }
 
 .tr + .tr {

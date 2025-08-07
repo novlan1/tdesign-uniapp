@@ -45,7 +45,7 @@
         </view>
         <view :class="_.cls(classPrefix + '__right', [align]) + ' ' + prefix + '-class-right'">
             <!-- parse <template v-if="_arrow" is="icon" :data="tClass: classPrefix + '__right-icon ' + prefix + '-class-right-icon', ..._arrow"/> -->
-            <block name="icon" v-if="false" v-if="_arrow">
+            <block name="icon"v-if="_arrow">
                 <t-icon
                     :style="style || ''"
                     :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"

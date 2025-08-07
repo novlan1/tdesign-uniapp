@@ -75,7 +75,7 @@ export const getAnimationFrame = function (e, t) {
 };
 export const getRect = function (e, t, n = false) {
     return new Promise((o, r) => {
-        (uni.createSelectorQuery().in(e).n ? 'selectAll' : 'select'(t))
+        uni.createSelectorQuery().in(e)[n ? 'selectAll' : 'select'](t)
             .boundingClientRect((e) => {
                 e ? o(e) : r(e);
             })

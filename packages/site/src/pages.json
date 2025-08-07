@@ -23,6 +23,12 @@
       "style": {
         "navigationBarTitleText": "Button"
       }
+    },
+    {
+      "path": "pages-more/image/image",
+      "style": {
+        "navigationBarTitleText": "Image"
+      }
     }
   ],
   "globalStyle": {

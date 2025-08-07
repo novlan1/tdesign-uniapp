@@ -23,14 +23,16 @@
         <slot name="count" />
     </view>
 </template>
-<script module="_this" lang="wxs" src="@/badge/badge.wxs"></script>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
+<script module="_this" lang="wxs" src="./badge.wxs"></script>
 <script>
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
 import { uniqueFactory } from "../common/utils";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
 const {
   prefix: prefix
 } = config;
@@ -43,7 +45,8 @@ let Badge = class extends SuperComponent {
       multipleSlots: true
     };
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-count`, `${prefix}-class-content`];
-    this = props;
+    this.properties = props;
+    this._ = _;
     this.setData({
       prefix: prefix,
       classPrefix: name,
@@ -62,7 +65,7 @@ let Badge = class extends SuperComponent {
     };
   }
 };
-Badge = __decorate([wxComponent()], Badge);
+Badge = initTDesign(__decorate([wxComponent()], Badge));
 export default Badge;
 </script>
 <style>

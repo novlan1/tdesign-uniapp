@@ -74,9 +74,8 @@
     />
   </view>
 </template>
-<script module="_" lang="wxs" src="../common/utils.wxs"></script>
 <script>
-// import tLoading from "../loading/loading";
+import tLoading from "../loading/loading";
 import tIcon from "../icon/icon";
 import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
@@ -84,6 +83,9 @@ import ImageProps from "./props";
 import config from "../common/config";
 import { addUnit, getRect, appBaseInfo } from "../common/utils";
 import { compareVersion } from "../common/version";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
 const {
   prefix: prefix
 } = config;
@@ -96,6 +98,13 @@ let Image = class extends SuperComponent {
       multipleSlots: true
     };
     // this = ImageProps;
+    this.properties = ImageProps;
+    this._ = _;
+    this.components = {
+      tLoading,
+      tIcon,
+    }
+
     this.setData({
       prefix: prefix,
       isLoading: true,
@@ -114,6 +123,11 @@ let Image = class extends SuperComponent {
         this.calcSize(e, i);
       }
     };
+    this.lifetimes = {
+      ready() {
+        this.calcSize(this.width, this.height);
+      }
+    };
     this.methods = {
       onLoaded(e) {
         const i = appBaseInfo.SDKVersion;
@@ -121,21 +135,27 @@ let Image = class extends SuperComponent {
           mode: t,
           tId: s
         } = this;
-        const r = compareVersion(i, "2.10.3") < 0;
-        if ("heightFix" === t && r) {
-          const {
-            height: i,
-            width: t
-          } = e.detail;
+        console.log('version', i)
+        if ("heightFix" === t && r ) {
+          console.log('onLoaded',e)
+          // const {
+          //   height: i,
+          //   width: t
+          // } = e.detail;
+          console.log('onLoaded',e)
           getRect(this, `#${s || "image"}`).then(e => {
             const {
-              height: s
+              height: s,
+              width: r,
             } = e;
-            const r = (s / i * t).toFixed(2);
+            console.log('getRect', e)
+            // const r = (s / i * t).toFixed(2);
             this.setData({
               innerStyle: `height: ${addUnit(s)}; width: ${r}px;`
             });
-          });
+          }).catch(err => {
+            console.log('err', err)
+          })
         }
         this.setData({
           isLoading: false,
@@ -155,6 +175,7 @@ let Image = class extends SuperComponent {
         });
       },
       calcSize(e, i) {
+        console.log('calcSizing', e, i)
         let t = "";
         if (e) {
           t += `width: ${addUnit(e)};`;
@@ -186,7 +207,7 @@ let Image = class extends SuperComponent {
   }
   setData(){}
 };
-Image = __decorate([wxComponent()], Image);
+Image = initTDesign(__decorate([wxComponent()], Image));
 export default Image;
 </script>
 <style>

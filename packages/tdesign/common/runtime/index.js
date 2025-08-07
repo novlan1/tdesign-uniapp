@@ -29,6 +29,10 @@ export function initTDesign(info) {
           this[COMMON_UTILS_WXS_NAME][key] = commonWxs[key]
         })
       }
+        if (info.lifetimes?.ready) {
+        console.log('doing attached')
+        info.lifetimes.ready.call(this)
+      }
     },
     data() {
       const willSetData = this.$options[WILL_SET_DATA_KEY]

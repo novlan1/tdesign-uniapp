@@ -4,6 +4,7 @@
   "private": "true",
   "scripts": {
     "dev": "pnpm --filter=\"./packages/site\" dev:h5",
+    "dev:mp": "pnpm --filter=\"./packages/site\" dev:mp-weixin",
     "build": "pnpm --filter=\"./packages/site\" build:h5",
     "type-check": "vue-tsc --noEmit"
   },
