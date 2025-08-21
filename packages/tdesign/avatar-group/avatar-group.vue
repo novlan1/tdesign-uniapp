@@ -19,7 +19,7 @@
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tAvatar from "../avatar/avatar";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import avatarGroupProps from "./props";

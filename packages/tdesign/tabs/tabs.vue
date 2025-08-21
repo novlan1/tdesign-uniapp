@@ -121,7 +121,7 @@
 import tSticky from "../sticky/sticky";
 import tBadge from "../badge/badge";
 import tIcon from "../icon/icon";
-import { __awaiter, __decorate } from "@/miniprogram_npm/tslib";
+import { __awaiter, __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import props from "./props";
 import config from "../common/config";
@@ -157,7 +157,7 @@ let Tabs = class extends SuperComponent {
         }
       }
     };
-    this = props;
+    this.properties = props;;
     this.controlledProps = [{
       key: "value",
       event: "change"

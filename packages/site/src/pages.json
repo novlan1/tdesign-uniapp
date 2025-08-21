@@ -41,6 +41,12 @@
       "style": {
         "navigationBarTitleText": "Collapse"
       }
+    },
+    {
+      "path": "pages-more/popup/popup",
+      "style": {
+        "navigationBarTitleText": "Popup"
+      }
     }
   ],
   "globalStyle": {

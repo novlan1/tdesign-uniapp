@@ -76,7 +76,7 @@
 <script>
 import tSwiperNav from "../swiper-nav/swiper-nav";
 import tImage from "../image/image";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -91,7 +91,7 @@ let Swiper = class extends SuperComponent {
     this.options = {
       multipleSlots: true
     };
-    this = props;
+    this.properties = props;;
     this.observers = {
       navCurrent(t) {
         this.updateNav(t);

@@ -44,7 +44,7 @@
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script module="_this" lang="wxs" src="@/textarea/textarea.wxs"></script>
 <script>
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -61,7 +61,7 @@ let Textarea = class extends SuperComponent {
     };
     this.behaviors = ["wx://form-field"];
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-textarea`, `${prefix}-class-label`, `${prefix}-class-indicator`];
-    this = props;
+    this.properties = props;;
     this.setData({
       prefix: prefix,
       classPrefix: name,

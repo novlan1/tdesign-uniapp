@@ -9,7 +9,7 @@
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script module="utils" lang="wxs" src="@/col/col.wxs"></script>
 <script>
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -21,7 +21,7 @@ let Col = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`];
-    this = props;
+    this.properties = props;;
     this.setData({
       prefix: prefix,
       classPrefix: name

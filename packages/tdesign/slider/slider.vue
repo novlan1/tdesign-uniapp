@@ -165,7 +165,7 @@
 <script module="t" lang="wxs" src="@/slider/slider.wxs"></script>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import { __awaiter, __decorate } from "@/miniprogram_npm/tslib";
+import { __awaiter, __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import { trimSingleValue, trimValue } from "./tool";
@@ -183,7 +183,7 @@ let Slider = class extends SuperComponent {
     this.options = {
       pureDataPattern: /^__/
     };
-    this = props;
+    this.properties = props;;
     this.controlledProps = [{
       key: "value",
       event: "change"

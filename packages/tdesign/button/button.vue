@@ -18,7 +18,7 @@
             :send-message-img="sendMessageImg"
             :app-parameter="appParameter"
             :show-message-card="showMessageCard"
-            @tap.stop.prevent="handleTap"
+            @click.stop.prevent="handleTap"
             @getuserinfo="getuserinfo"
             @contact="contact"
             @getphonenumber="getphonenumber"
@@ -178,9 +178,9 @@ let Button = class extends SuperComponent {
         });
       },
       handleTap(t) {
-        this.disabled || this.loading || this.$emit("tap", {
-          detail: t
-        });
+        console.log('handleTap', t)
+        // this.disabled || this.loading || 
+        this.$emit("click", t)
       }
     };
   }

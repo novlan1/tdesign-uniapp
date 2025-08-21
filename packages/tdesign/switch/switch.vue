@@ -30,7 +30,7 @@
 <script>
 import tIcon from "../icon/icon";
 import tLoading from "../loading/loading";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { wxComponent, SuperComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -43,7 +43,7 @@ let Switch = class extends SuperComponent {
     super(...arguments);
     this.externalClasses = ["t-class", "t-class-label", "t-class-body", "t-class-dot"];
     this.behaviors = ["wx://form-field"];
-    this = props;
+    this.properties = props;;
     this.setData({
       prefix: prefix,
       classPrefix: name,

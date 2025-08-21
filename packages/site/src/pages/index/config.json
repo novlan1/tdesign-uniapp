@@ -23,6 +23,9 @@
     },
     {
       "name": "badge"
+    },
+    {
+      "name": "popup"
     }
   ]
 }

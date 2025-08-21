@@ -45,7 +45,7 @@
 import tIcon from "../icon/icon";
 import tLoading from "../loading/loading";
 import tOverlay from "../overlay/overlay";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -70,7 +70,7 @@ let Toast = class extends SuperComponent {
       classPrefix: name,
       typeMapIcon: ""
     });
-    this = props;
+    this.properties = props;;
     this.lifetimes = {
       detached() {
         this.destroyed();

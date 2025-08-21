@@ -1,4 +1,4 @@
-import { __rest } from '@/miniprogram_npm/tslib';
+import { __rest } from '../miniprogram_npm/tslib';
 import { getInstance } from '../common/utils';
 function Toast(t) {
     var o;

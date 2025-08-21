@@ -25,7 +25,7 @@
 <script module="_this" lang="wxs" src="@/count-down/count-down.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -38,7 +38,7 @@ let CountDown = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-count`, `${prefix}-class-split`];
-    this = props;
+    this.properties = props;;
     this.observers = {
       time() {
         this.reset();

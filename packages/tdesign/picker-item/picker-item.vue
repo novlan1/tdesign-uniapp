@@ -28,7 +28,7 @@
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -69,7 +69,7 @@ let PickerItem = class extends SuperComponent {
       multipleSlots: true
     };
     this.externalClasses = [`${prefix}-class`];
-    this = props;
+    this.properties = props;;
     this.observers = {
       "options, pickerKeys"() {
         this.update();

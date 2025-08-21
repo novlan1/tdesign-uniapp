@@ -7,7 +7,7 @@
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tSideBarItem from "../side-bar-item/side-bar-item";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -37,7 +37,7 @@ let SideBar = class extends SuperComponent {
       key: "value",
       event: "change"
     }];
-    this = props;
+    this.properties = props;;
     this.observers = {
       value(e) {
         this.$children.forEach(i => {

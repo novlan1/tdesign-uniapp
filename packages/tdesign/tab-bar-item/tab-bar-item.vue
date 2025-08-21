@@ -85,7 +85,7 @@
 <script>
 import tIcon from "../icon/icon";
 import tBadge from "../badge/badge";
-import { __awaiter, __decorate } from "@/miniprogram_npm/tslib";
+import { __awaiter, __decorate } from "../miniprogram_npm/tslib";
 import { wxComponent, SuperComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -134,7 +134,7 @@ let TabBarItem = class extends SuperComponent {
       crowded: false,
       shape: "normal"
     });
-    this = props;
+    this.properties = props;;
     this.observers = {
       subTabBar(t) {
         this.setData({

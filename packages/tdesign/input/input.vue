@@ -118,7 +118,7 @@
 <script module="_this" lang="wxs" src="@/input/input.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -136,7 +136,7 @@ let Input = class extends SuperComponent {
     };
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-prefix-icon`, `${prefix}-class-label`, `${prefix}-class-input`, `${prefix}-class-clearable`, `${prefix}-class-suffix`, `${prefix}-class-suffix-icon`, `${prefix}-class-tips`];
     this.behaviors = ["wx://form-field"];
-    this = props;
+    this.properties = props;;
     this.setData({
       prefix: prefix,
       classPrefix: name,

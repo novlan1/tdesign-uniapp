@@ -4,7 +4,7 @@
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tStep from "../step-item/step-item";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { wxComponent, SuperComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -33,7 +33,7 @@ let Steps = class extends SuperComponent {
       }
     };
     this.externalClasses = [`${prefix}-class`];
-    this = props;
+    this.properties = props;;
     this.controlledProps = [{
       key: "current",
       event: "change"

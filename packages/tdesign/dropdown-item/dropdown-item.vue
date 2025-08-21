@@ -98,7 +98,7 @@ import tRadioGroup from "../radio-group/radio-group";
 import tCheckbox from "../checkbox/checkbox";
 import tCheckboxGroup from "../checkbox-group/checkbox-group";
 import tPopup from "../popup/popup";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -115,7 +115,7 @@ let DropdownMenuItem = class extends SuperComponent {
       multipleSlots: true
     };
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-column`, `${prefix}-class-column-item`, `${prefix}-class-column-item-label`, `${prefix}-class-footer`];
-    this = props;
+    this.properties = props;;
     this.setData({
       prefix: prefix,
       classPrefix: name,

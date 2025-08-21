@@ -117,7 +117,7 @@
 <script module="_this" lang="wxs" src="@/progress/progress.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -134,7 +134,7 @@ let Progress = class extends SuperComponent {
     this.options = {
       multipleSlots: true
     };
-    this = props;
+    this.properties = props;;
     this.setData({
       prefix: prefix,
       classPrefix: name,

@@ -12,7 +12,7 @@ function onContentTouchMove(e) {
   }
 }
 
-module.exports = {
+export default {
   getPopupStyles: getPopupStyles,
   onContentTouchMove: onContentTouchMove,
 };

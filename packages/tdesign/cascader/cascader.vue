@@ -77,7 +77,7 @@ import tPopup from "../popup/popup";
 import tTabs from "../tabs/tabs";
 import tTabPanel from "../tab-panel/tab-panel";
 import tRadioGroup from "../radio-group/radio-group";
-import { __awaiter, __decorate } from "@/miniprogram_npm/tslib";
+import { __awaiter, __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -111,7 +111,7 @@ let Cascader = class extends SuperComponent {
       multipleSlots: true,
       pureDataPattern: /^options$/
     };
-    this = props;
+    this.properties = props;;
     this.controlledProps = [{
       key: "value",
       event: "change"

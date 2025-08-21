@@ -94,7 +94,7 @@ module.exports.getImageSize = function(column) { if (column >= 5) return 'small'
 import tImage from "../image/image";
 import tIcon from "../icon/icon";
 import tBadge from "../badge/badge";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -131,7 +131,7 @@ let GridItem = class extends SuperComponent {
         }
       }
     };
-    this = props;
+    this.properties = props;;
     this.setData({
       prefix: prefix,
       classPrefix: name,

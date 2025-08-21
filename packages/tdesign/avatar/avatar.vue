@@ -61,7 +61,7 @@
 import tIcon from "../icon/icon";
 import tBadge from "../badge/badge";
 import tImage from "../image/image";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import avatarProps from "./props";

@@ -19,7 +19,7 @@
 
 <script>
 import tMessageItem from "../message-item/message-item";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import { MessageType } from "./message.interface";

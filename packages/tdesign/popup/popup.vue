@@ -33,17 +33,19 @@
         />
     </view>
 </template>
-<script module="popup" lang="wxs" src="@/popup/popup.wxs"></script>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tOverlay from "../overlay/overlay";
 import tIcon from "../icon/icon";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
-import transition from "../mixins/transition";
+import transition, { transitionMixins} from "../mixins/transition";
 import useCustomNavbar from "../mixins/using-custom-navbar";
+import { initTDesign } from '../common/runtime';
+import _ from '../common/utils.wxs';
+import popup from './popup.wxs';
+
 delete props.visible;
 const {
   prefix: prefix
@@ -53,11 +55,21 @@ let Popup = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`];
-    this.behaviors = [transition(), useCustomNavbar];
+    this.mixins = [transition(), useCustomNavbar];
     this.options = {
       multipleSlots: true
     };
-    this = props;
+    this.components = {
+      tOverlay,
+      tIcon,
+    }
+    this.properties = props;
+    // this._ = _;
+    // this._wxs = {
+    //   _,
+    //   popup
+    // }
+    this.rawData = {popup,_}
     this.setData({
       prefix: prefix,
       classPrefix: name
@@ -87,7 +99,12 @@ let Popup = class extends SuperComponent {
     };
   }
 };
-Popup = __decorate([wxComponent()], Popup);
+Popup = initTDesign(__decorate([wxComponent()], Popup));
+Popup = {
+  ...Popup,
+  mixins: [transitionMixins, useCustomNavbar]
+}
+
 export default Popup;
 </script>
 <style>

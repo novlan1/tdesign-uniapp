@@ -103,7 +103,7 @@ import tCheckboxGroup from "../checkbox-group/checkbox-group";
 import tSideBar from "../side-bar/side-bar";
 import tSideBarItem from "../side-bar-item/side-bar-item";
 import tScrollView from "../scroll-view/scroll-view";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import { isDef } from "../common/validator";
 import config from "../common/config";
@@ -125,7 +125,7 @@ let TreeSelect = class extends SuperComponent {
       classPrefix: name,
       scrollIntoView: null
     });
-    this = props;
+    this.properties = props;;
     this.controlledProps = [{
       key: "value",
       event: "change"

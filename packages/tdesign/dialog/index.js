@@ -1,4 +1,4 @@
-import { __rest } from '@/miniprogram_npm/tslib';
+import { __rest } from '../miniprogram_npm/tslib';
 import props from './props';
 import { getInstance } from '../common/utils';
 const defaultOptions = {

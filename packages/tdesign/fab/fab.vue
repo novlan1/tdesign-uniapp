@@ -6,7 +6,7 @@
 <script>
 import tButton from "../button/button";
 import tDraggable from "./draggable/draggable";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -26,7 +26,7 @@ let Fab = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.behaviors = [useCustomNavbar];
-    this = props;
+    this.properties = props;;
     this.externalClasses = ["class", `${prefix}-class`, `${prefix}-class-button`];
     this.setData({
       prefix: prefix,

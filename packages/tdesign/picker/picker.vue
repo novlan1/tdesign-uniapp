@@ -56,7 +56,7 @@
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tPopup from "../popup/popup";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import { rpx2px } from "../common/utils";
 import config from "../common/config";
@@ -70,7 +70,7 @@ let Picker = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.behaviors = [useCustomNavbar];
-    this = props;
+    this.properties = props;;
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-confirm`, `${prefix}-class-cancel`, `${prefix}-class-title`];
     this.options = {
       multipleSlots: true

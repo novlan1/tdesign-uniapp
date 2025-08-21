@@ -39,7 +39,7 @@
 <script module="t" lang="wxs" src="@/step-item/step-item.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { wxComponent, SuperComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -59,7 +59,7 @@ let StepItem = class extends SuperComponent {
       }
     };
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-title`, `${prefix}-class-description`, `${prefix}-class-extra`];
-    this = props;
+    this.properties = props;;
     this.setData({
       classPrefix: name,
       prefix: prefix,

@@ -38,7 +38,7 @@
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { wxComponent, SuperComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -55,7 +55,7 @@ let CheckTag = class extends SuperComponent {
       classPrefix: name,
       className: ""
     });
-    this = props;
+    this.properties = props;;
     this.externalClasses = [`${prefix}-class`];
     this.controlledProps = [{
       key: "checked",

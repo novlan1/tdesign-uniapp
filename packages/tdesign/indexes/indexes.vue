@@ -28,7 +28,7 @@
 import tIcon from "../icon/icon";
 import tCell from "../cell/cell";
 import tCellGroup from "../cell-group/cell-group";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -42,7 +42,7 @@ let Indexes = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-sidebar`, `${prefix}-class-sidebar-item`];
-    this = props;
+    this.properties = props;;
     this.setData({
       prefix: prefix,
       classPrefix: name,

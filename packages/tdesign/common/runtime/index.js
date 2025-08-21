@@ -3,6 +3,7 @@ import { parseRelation } from './relation';
 
 export const WILL_SET_DATA_KEY = 'WILL_SET_DATA_KEY';
 export const COMMON_UTILS_WXS_NAME = '_';
+export const WXS_MAP_KEY = '_wxs'
 
 export function initTDesign(info) {
   const originCreated = info.created
@@ -34,6 +35,14 @@ export function initTDesign(info) {
           this[COMMON_UTILS_WXS_NAME][key] = commonWxs[key]
         })
       }
+      if (info.WXS_MAP_KEY) {
+        Object.keys(info.WXS_MAP_KEY).forEach(oneWxs => {
+          this[oneWxs] = {}
+          Object.keys(info.WXS_MAP_KEY[oneWxs]).forEach(key => {
+            this[oneWxs][key] = info.WXS_MAP_KEY[oneWxs][key]
+          })
+        })
+      }
         if (info.lifetimes?.ready) {
         console.log('doing attached')
         info.lifetimes.ready.call(this)
@@ -43,6 +52,7 @@ export function initTDesign(info) {
       const willSetData = this.$options[WILL_SET_DATA_KEY]
       return {
         ...(willSetData || {}),
+        ...(info.rawData || {})
       }
     },
     mounted() {
@@ -59,6 +69,7 @@ export function initTDesign(info) {
       ...(info.watch || {}),
     },
     ...parseProps(info),
+    mixins: [...(info.mixins || [])]
   }
 }
 

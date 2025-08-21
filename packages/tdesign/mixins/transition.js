@@ -3,27 +3,35 @@ const { prefix: prefix } = config;
 export default function transition() {
     return {
         data() {
-            return {
+          return {
+
                 transitionClass: '',
                 transitionDurations: 300,
                 className: '',
                 realVisible: false
-            };
+          }
         },
         props: {
             visible: {
                 type: Boolean,
-                value: null,
+                default: null,
                 observer: 'watchVisible'
             },
             appear: Boolean,
             name: {
                 type: String,
-                value: 'fade'
+                default: 'fade'
             },
             durations: {
                 type: Number,
                 optionalTypes: [Array]
+            }
+        },
+        watch: {
+            visible: {
+                handler(val, oldVal) {
+                    this.watchVisible(val, oldVal);
+                }
             }
         },
         created() {
@@ -31,7 +39,7 @@ export default function transition() {
             this.transitionT = 0;
         },
         beforeMount() {
-            this.durations = this.getDurations();
+            this.dataDurations = this.getDurations();
             if (this.visible) {
                 this.enter();
             }
@@ -42,6 +50,7 @@ export default function transition() {
         },
         methods: {
             watchVisible(t, i) {
+                console.log('[watchVisible]', t, i, this.inited)
                 if (this.inited && t !== i) {
                     if (t) {
                         this.enter();
@@ -55,8 +64,9 @@ export default function transition() {
                 return Array.isArray(t) ? t.map((t) => Number(t)) : [Number(t), Number(t)];
             },
             enter() {
+                console.log('[entering]')
                 const { name: t } = this;
-                const [i] = this.durations;
+                const [i] = this.dataDurations;
                 this.status = 'entering';
                 this.setData({
                     realVisible: true,
@@ -81,7 +91,7 @@ export default function transition() {
             },
             leave() {
                 const { name: t } = this;
-                const [, i] = this.durations;
+                const [, i] = this.dataDurations;
                 this.status = 'leaving';
                 this.setData({
                     transitionClass: `${prefix}-${t}-leave  ${prefix}-${t}-leave-active`
@@ -121,3 +131,4 @@ export default function transition() {
         }
     };
 }
+export const transitionMixins = transition();

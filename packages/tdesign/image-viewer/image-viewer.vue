@@ -82,7 +82,7 @@
 <script>
 import tImage from "../image/image";
 import tIcon from "../icon/icon";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import { styles, calcIcon, systemInfo } from "../common/utils";
 import config from "../common/config";

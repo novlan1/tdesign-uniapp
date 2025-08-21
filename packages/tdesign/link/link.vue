@@ -68,7 +68,7 @@
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -81,7 +81,7 @@ let Link = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-hover`, `${prefix}-class-prefix-icon`, `${prefix}-class-content`, `${prefix}-class-suffix-icon`];
-    this = props;
+    this.properties = props;;
     this.options = {
       multipleSlots: true
     };

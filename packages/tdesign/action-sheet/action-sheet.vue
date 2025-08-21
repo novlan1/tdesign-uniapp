@@ -112,7 +112,7 @@ import tIcon from "../icon/icon";
 import tPopup from "../popup/popup";
 import tGrid from "../grid/grid";
 import tGridItem from "../grid-item/grid-item";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { chunk } from "../common/utils";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";

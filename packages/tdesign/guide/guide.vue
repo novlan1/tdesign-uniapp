@@ -416,7 +416,7 @@
 import tOverlay from "../overlay/overlay";
 import tButton from "../button/button";
 import tPopup from "../popup/popup";
-import { __awaiter, __decorate } from "@/miniprogram_npm/tslib";
+import { __awaiter, __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import props from "./props";
 import config from "../common/config";
@@ -430,7 +430,7 @@ let Guide = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-reference`, `${prefix}-class-popover`, `${prefix}-class-tooltip`, `${prefix}-class-title`, `${prefix}-class-body`, `${prefix}-class-footer`, `${prefix}-class-skip`, `${prefix}-class-next`, `${prefix}-class-back`, `${prefix}-class-finish`];
-    this = props;
+    this.properties = props;;
     this.options = {
       pureDataPattern: /^_/,
       multipleSlots: true

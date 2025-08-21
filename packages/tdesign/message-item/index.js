@@ -1,4 +1,4 @@
-import { __rest } from '@/miniprogram_npm/tslib';
+import { __rest } from '../miniprogram_npm/tslib';
 import { MessageType } from '../message/message.interface';
 import { getInstance } from '../common/utils';
 const showMessage = function (e, s = MessageType.info) {

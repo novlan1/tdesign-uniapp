@@ -189,7 +189,7 @@ import tGrid from "../grid/grid";
 import tGridItem from "../grid-item/grid-item";
 import tIcon from "../icon/icon";
 import tImage from "../image/image";
-import { __decorate, __rest } from "@/miniprogram_npm/tslib";
+import { __decorate, __rest } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import props from "./props";
 import config from "../common/config";
@@ -221,7 +221,7 @@ let Upload = class extends SuperComponent {
       dragging: true,
       dragLayout: false
     });
-    this = props;
+    this.properties = props;;
     this.controlledProps = [{
       key: "files",
       event: "success"

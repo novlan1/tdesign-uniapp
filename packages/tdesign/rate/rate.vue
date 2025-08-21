@@ -91,7 +91,7 @@
 <script module="utils" lang="wxs" src="@/rate/rate.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -104,7 +104,7 @@ let Rate = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-icon`, `${prefix}-class-text`];
-    this = props;
+    this.properties = props;;
     this.controlledProps = [{
       key: "value",
       event: "change"

@@ -30,7 +30,7 @@
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tRadio from "../radio/radio";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import config from "../common/config";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import props from "./props";
@@ -65,7 +65,7 @@ let RadioGroup = class extends SuperComponent {
         }
       }
     };
-    this = props;
+    this.properties = props;;
     this.controlledProps = [{
       key: "value",
       event: "change"

@@ -31,7 +31,7 @@
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -47,7 +47,7 @@ let BackTop = class extends SuperComponent {
     this.options = {
       multipleSlots: true
     };
-    this = props;
+    this.properties = props;;
     this.relations = {
       "../pull-down-refresh/pull-down-refresh": {
         type: "ancestor"

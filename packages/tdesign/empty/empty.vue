@@ -30,7 +30,7 @@
 <script>
 import tIcon from "../icon/icon";
 import tImage from "../image/image";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import props from "./props";
 import config from "../common/config";
@@ -46,7 +46,7 @@ let default_1 = class extends SuperComponent {
       multipleSlots: true
     };
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-description`, `${prefix}-class-image`];
-    this = props;
+    this.properties = props;;
     this.setData({
       prefix: prefix,
       classPrefix: name

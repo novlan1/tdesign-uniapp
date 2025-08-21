@@ -212,7 +212,7 @@
 import tPopup from "../popup/popup";
 import tIcon from "../icon/icon";
 import tButton from "../button/button";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
@@ -231,7 +231,7 @@ let Dialog = class extends SuperComponent {
       multipleSlots: true
     };
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-confirm`, `${prefix}-class-cancel`, `${prefix}-class-action`];
-    this = props;
+    this.properties = props;;
     this.setData({
       prefix: prefix,
       classPrefix: name,

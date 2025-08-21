@@ -37,7 +37,7 @@ import tPicker from "../picker/picker";
 import tPickerItem from "../picker-item/picker-item";
 var _a;
 var _b;
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import config from "../common/config";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import props from "./props";
@@ -66,7 +66,7 @@ const FULL_MODES = [...DATE_MODES, ...TIME_MODES];
 let DateTimePicker = class extends SuperComponent {
   constructor() {
     super(...arguments);
-    this = props;
+    this.properties = props;;
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-confirm`, `${prefix}-class-cancel`, `${prefix}-class-title`];
     this.options = {
       multipleSlots: true

@@ -1,4 +1,4 @@
-import { __rest } from '@/miniprogram_npm/tslib';
+import { __rest } from '../miniprogram_npm/tslib';
 export function getBackgroundColor(r) {
     if ('string' == typeof r) {
         return r;
