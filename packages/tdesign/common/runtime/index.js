@@ -1,10 +1,13 @@
 import { toCamel } from '../utils'
+import { parseRelation } from './relation';
 
 export const WILL_SET_DATA_KEY = 'WILL_SET_DATA_KEY';
 export const COMMON_UTILS_WXS_NAME = '_';
 
 export function initTDesign(info) {
   const originCreated = info.created
+  parseRelation(info);
+
   return {
     created() {
       const willSetData = this.$options[WILL_SET_DATA_KEY]
@@ -51,7 +54,10 @@ export function initTDesign(info) {
 
       executeWatchers.call(this, info)
     },
-    watch: getComponentWatch(info),
+    watch: {
+      ...getComponentWatch(info),
+      ...(info.watch || {}),
+    },
     ...parseProps(info),
   }
 }
@@ -133,12 +139,12 @@ function getComponentWatch(info) {
     return {};
   }
   const { observers } = info;
-  Object.keys(observers).reduce((acc, item) => {
+  return Object.keys(observers).reduce((acc, item) => {
     const key = item.split(',').map(item => item.trim())
-    return {
-      ...acc,
-      [key]: observers[item]
-    }
+    key.forEach(it => {
+      acc[it] = observers[item]
+    })
+    return acc;
   }, {})
 }
 

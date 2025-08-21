@@ -32,12 +32,12 @@
 <script lang="ts">
 import baseComp from './base';
 // import multiple from './multiple';
-// import theme from './theme';
+import theme from './theme';
 export default {
   components: {
     baseComp,
     // multiple,
-    // theme,
+    theme,
   },
   data() {
     return {};

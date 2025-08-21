@@ -35,6 +35,12 @@
       "style": {
         "navigationBarTitleText": "Cell"
       }
+    },
+    {
+      "path": "pages-more/collapse/collapse",
+      "style": {
+        "navigationBarTitleText": "Collapse"
+      }
     }
   ],
   "globalStyle": {

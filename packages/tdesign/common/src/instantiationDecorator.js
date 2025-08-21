@@ -83,15 +83,15 @@ export const toComponent = function (e) {
       },
     });
     const i = {};
-    Object.keys(t).forEach((o) => {
-      const s = t[o];
-      const r = ['parent', 'ancestor'].includes(s.type) ? 'parent' : 'children';
-      const n = e(r, o);
-      i[r] = n;
-    });
-    o.push(...Object.keys(i).map(e => i[e]));
+    // Object.keys(t).forEach((o) => {
+    //   const s = t[o];
+    //   const r = ['parent', 'ancestor'].includes(s.type) ? 'parent' : 'children';
+    //   const n = e(r, o);
+    //   i[r] = n;
+    // });
+    // o.push(...Object.keys(i).map(e => i[e]));
   }
-  e.behaviors = [...o];
+  // e.behaviors = [...o];
   e.externalClasses = ['class', ...i];
   Object.getOwnPropertyNames(e).forEach((t) => {
     const o = Object.getOwnPropertyDescriptor(e, t);

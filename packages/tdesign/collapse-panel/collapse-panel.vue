@@ -28,14 +28,16 @@
         </view>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tCell from "../cell/cell";
-import { __decorate } from "@/miniprogram_npm/tslib";
+import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
 import { getRect } from "../common/utils";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
 const {
   prefix: prefix
 } = config;
@@ -47,24 +49,43 @@ let CollapsePanel = class extends SuperComponent {
     this.options = {
       multipleSlots: true
     };
-    this.relations = {
-      "../collapse/collapse": {
-        type: "ancestor",
-        linked(e) {
-          const {
+    this.components = {
+      tCell
+    }
+    this.relationCallbacks = {
+      mounted() {
+        const {
             value: t,
             expandIcon: a,
             disabled: s
-          } = e.properties;
+          } = this[this.relationParentName]
           this.setData({
             ultimateExpandIcon: null == this.expandIcon ? a : this.expandIcon,
             ultimateDisabled: null == this.disabled ? s : this.disabled
           });
           this.updateExpanded(t);
-        }
+      }
+    }
+    this.relations = {
+      "../collapse/collapse": {
+        type: "ancestor",
+        // linked(e) {
+        //   const {
+        //     value: t,
+        //     expandIcon: a,
+        //     disabled: s
+        //   } = e.properties;
+        //   this.setData({
+        //     ultimateExpandIcon: null == this.expandIcon ? a : this.expandIcon,
+        //     ultimateDisabled: null == this.disabled ? s : this.disabled
+        //   });
+        //   this.updateExpanded(t);
+        // }
       }
     };
-    this = props;
+    this.name = 'TCollapsePanel';
+    this.properties = props;
+    this._ = _;
     this.setData({
       prefix: prefix,
       expanded: false,
@@ -82,7 +103,7 @@ let CollapsePanel = class extends SuperComponent {
     };
     this.methods = {
       updateExpanded(e = []) {
-        if (!this.$parent) {
+        if (!this[this.relationParentName]) {
           return;
         }
         const {
@@ -90,8 +111,9 @@ let CollapsePanel = class extends SuperComponent {
         } = this;
         const {
           defaultExpandAll: a
-        } = this.$parent.data;
+        } = this[this.relationParentName];
         const s = a ? !this.expanded : e.includes(t);
+        
         if (s !== this.expanded) {
           this.setData({
             expanded: s
@@ -124,12 +146,18 @@ let CollapsePanel = class extends SuperComponent {
         const {
           value: t
         } = this;
-        e || (this.$parent.data.defaultExpandAll ? this.updateExpanded() : this.$parent.switch(t));
+        
+        e || (this[this.relationParentName].defaultExpandAll 
+          ? this.updateExpanded() 
+          : this[this.relationParentName].switch(t)
+        );
       }
     };
   }
 };
-CollapsePanel = __decorate([wxComponent()], CollapsePanel);
+CollapsePanel = initTDesign(__decorate([wxComponent()], CollapsePanel));
+
+
 export default CollapsePanel;
 </script>
 <style>

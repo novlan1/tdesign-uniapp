@@ -50,7 +50,7 @@ let Icon = class extends SuperComponent {
       isImage: false,
       iconStyle: void 0
     });
-
+    this.name = 'TIcon';
     this.observers = {
       "name, color, size, style"() {
         this.setIconStyle();
