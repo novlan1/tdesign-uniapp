@@ -146,5 +146,5 @@ export default DropdownMenu;
 </script>
 <style>
 @import './dropdown-menu.css';
-@import 'undefined';
+
 </style>

@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import demoProgress from '../progress';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         demoProgress
@@ -17,7 +17,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './progress.less';

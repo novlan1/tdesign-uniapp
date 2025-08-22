@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import yearMonthDate from '../year-month-date';
 import yearMonth from '../year-month';
@@ -36,7 +36,7 @@ import time from '../time';
 import dateAll from '../date-all';
 import steps from '../steps';
 import withoutPopup from '../without-popup';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         yearMonthDate,
@@ -50,7 +50,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './date-time-picker.less';

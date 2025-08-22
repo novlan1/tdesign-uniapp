@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import checkboxDemo from '../checkbox';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         checkboxDemo
@@ -17,7 +17,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './checkbox.less';

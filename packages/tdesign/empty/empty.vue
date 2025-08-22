@@ -64,5 +64,5 @@ export default default_1;
 </script>
 <style>
 @import './empty.css';
-@import 'undefined';
+
 </style>

@@ -13,10 +13,10 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tButton from 'tdesign-uniapp/button/button';
 import tResult from 'tdesign-uniapp/result/result';
-export default zpMixins.extend({
+export default {
     components: {
         tButton,
         tResult
@@ -31,7 +31,7 @@ export default zpMixins.extend({
             });
         }
     }
-});
+};
 </script>
 <style lang="less">
 @import './result-page.less';

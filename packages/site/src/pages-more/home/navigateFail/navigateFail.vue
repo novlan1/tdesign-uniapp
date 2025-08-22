@@ -9,8 +9,8 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
-export default zpMixins.extend({
+
+export default {
     data() {
         return {
             failImage: 'error-circle-filled'
@@ -23,7 +23,7 @@ export default zpMixins.extend({
             });
         }
     }
-});
+};
 </script>
 <style lang="less">
 @import './navigateFail.less';

@@ -11,7 +11,7 @@
                 <view :class="classPrefix + '__icon--left'">
                     <slot name="icon" />
                     <!-- parse <template v-if="_icon" is="icon" :data="tClass: prefix + '-class-icon', ariaHidden: true, ..._icon"/> -->
-                    <block name="icon" v-if="false" v-if="_icon">
+                    <block name="icon" v-if="_icon">
                         <t-icon
                             :style="style || ''"
                             :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -52,7 +52,7 @@
                 <view :class="classPrefix + '__icon--right'" @tap="handleClose">
                     <slot name="close-btn" />
                     <!-- parse <template v-if="_closeBtn" is="icon" :data="tClass: prefix + '-class-close-btn', ariaRole: 'button', ariaLabel: '关闭', ..._closeBtn"/> -->
-                    <block name="icon" v-if="false" v-if="_closeBtn">
+                    <block name="icon" v-if="_closeBtn">
                         <t-icon
                             :style="style || ''"
                             :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -268,5 +268,5 @@ export default Message;
 </script>
 <style>
 @import './message-item.css';
-@import 'undefined';
+
 </style>

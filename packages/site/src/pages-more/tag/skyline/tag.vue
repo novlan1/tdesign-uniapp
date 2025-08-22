@@ -26,14 +26,14 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import theme from '../theme';
 import size from '../size';
 import type from '../type';
 import closable from '../closable';
 import checkable from '../checkable';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         theme,
@@ -46,7 +46,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './tag.less';

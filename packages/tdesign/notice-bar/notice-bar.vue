@@ -3,7 +3,7 @@
         <view :class="classPrefix + '__prefix-icon'" @tap="clickPrefixIcon">
             <slot name="prefix-icon" />
             <!-- parse <template v-if="_prefixIcon" is="icon" :data="tClass: prefix + '-class-prefix-icon', ..._prefixIcon"></template> -->
-            <block name="icon" v-if="false" v-if="_prefixIcon">
+            <block name="icon" v-if="_prefixIcon">
                 <t-icon
                     :style="style || ''"
                     :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -48,7 +48,7 @@
         <view :class="classPrefix + '__suffix-icon'" @tap="clickSuffixIcon">
             <slot name="suffix-icon" />
             <!-- parse <template v-if="_suffixIcon" is="icon" :data="tClass: prefix + '-class-suffix-icon', ..._suffixIcon"></template> -->
-            <block name="icon" v-if="false" v-if="_suffixIcon">
+            <block name="icon" v-if="_suffixIcon">
                 <t-icon
                     :style="style || ''"
                     :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -274,5 +274,5 @@ export default NoticeBar;
 </script>
 <style>
 @import './notice-bar.css';
-@import 'undefined';
+
 </style>

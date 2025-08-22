@@ -23,13 +23,13 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tToast from 'tdesign-uniapp/toast/toast';
 import list from './list';
 import status from './status';
 import grid from './grid';
 import align from './align';
-export default zpMixins.extend({
+export default {
     components: {
         tToast,
         list,
@@ -41,7 +41,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './action-sheet.less';

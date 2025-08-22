@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import base from '../base';
 import search from '../search';
@@ -39,7 +39,7 @@ import backHome from '../back-home';
 import img from '../img';
 import leftTitle from '../left-title';
 import customColor from '../custom-color';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         base,
@@ -53,7 +53,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './navbar.less';

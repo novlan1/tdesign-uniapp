@@ -25,7 +25,7 @@
             <view :class="classPrefix + '__suffix'"></view>
         </block>
         <!-- parse <template v-if="_icon" is="icon" :data="tClass: classPrefix + '__icon', ..._icon"/> -->
-        <block name="icon" v-if="false" v-if="_icon">
+        <block name="icon" v-if="_icon">
             <t-icon
                 :style="style || ''"
                 :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -136,5 +136,5 @@ export default SideBarItem;
 </script>
 <style>
 @import './side-bar-item.css';
-@import 'undefined';
+
 </style>

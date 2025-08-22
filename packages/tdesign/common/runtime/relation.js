@@ -153,6 +153,7 @@ function getChildMixin(parent, options = {}) {
         this[parent] = getParent.call(this, parentComponentName);
         // #endif
         
+        
         if (!this[parent] || (this[parent].children && this[parent].children.indexOf(this) !== -1)) {
           return;
         }
@@ -161,6 +162,7 @@ function getChildMixin(parent, options = {}) {
 
         
         this[parent].children = children;
+        
       },
       onBeforeMount() {
         const that = this;

@@ -17,11 +17,11 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import base from '../base';
 import theme from '../theme';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         base,
@@ -31,7 +31,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './divider.less';

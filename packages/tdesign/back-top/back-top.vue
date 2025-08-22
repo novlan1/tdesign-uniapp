@@ -9,7 +9,7 @@
         <view :class="classPrefix + '__icon'" aria-hidden>
             <slot name="icon" />
             <!-- parse <template v-if="_icon" is="icon" :data="tClass: prefix + '-class-icon', ..._icon"/> -->
-            <block name="icon" v-if="false" v-if="_icon">
+            <block name="icon" v-if="_icon">
                 <t-icon
                     :style="style || ''"
                     :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -109,5 +109,5 @@ export default BackTop;
 </script>
 <style>
 @import './back-top.css';
-@import 'undefined';
+
 </style>

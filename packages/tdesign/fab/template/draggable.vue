@@ -64,5 +64,5 @@
 
 <style>
 @import './draggable.css';
-@import 'undefined';
+
 </style>

@@ -60,7 +60,7 @@
         <scroll-view :class="classPrefix + '__months'" :scroll-into-view="scrollIntoView" scroll-y enhanced :show-scrollbar="false" @scroll="onScroll">
             <block v-for="(item, index) in switchMode === 'none' ? months : currentMonth" :key="index">
                 <!-- parse <template v-if="switchMode === 'none'" is="calendar-header" :data="class: classPrefix + '__month', classPrefix: classPrefix + '-header', tId: 'year_' + item.year + '_month_' + item.month, switchMode, ...actionButtons, title: _this.getMonthTitle(item.year, realLocalText.months[item.month], realLocalText.monthTitle)"/> -->
-                <block name="calendar-header" v-if="false" v-if="switchMode === 'none'">
+                <block name="calendar-header" v-if="switchMode === 'none'">
                     <view :class="(class)+' '+(classPrefix)+' '+(switchMode !== 'none' ? classPrefix + '__with-action' : '')" :id="'year_' + item.year + '_month_' + item.month">
                         <view :class="classPrefix + '-header' + '-header' + '__action'" v-if="switchMode !== 'none'">
                             <view
@@ -187,5 +187,5 @@
 
 <style>
 @import './template.css';
-@import 'undefined';
+
 </style>

@@ -57,5 +57,5 @@
 
 <style>
 @import './view.css';
-@import 'undefined';
+
 </style>

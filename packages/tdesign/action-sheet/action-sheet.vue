@@ -256,5 +256,5 @@ export default ActionSheet;
 </script>
 <style>
 @import './action-sheet.css';
-@import 'undefined';
+
 </style>

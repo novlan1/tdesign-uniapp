@@ -3,7 +3,7 @@
         <t-popup
             v-if="usePopup"
             class="class"
-            :visible="visible"
+            :visible="visible && dataVisible"
             placement="bottom"
             :using-custom-navbar="usingCustomNavbar || popupProps.usingCustomNavbar"
             :z-index="popupProps.zIndex || defaultPopUpzIndex"
@@ -11,7 +11,6 @@
             @visible-change="onPopupChange"
         >
             <!-- parse <include src="./template.wxml"/> -->
-            <block>
                 <view slot="content" :style="_._style([style, customStyle])" :class="classPrefix + ' ' + prefix + '-class'">
                     <view :class="classPrefix + '__toolbar'" v-if="header">
                         <view :class="classPrefix + '__cancel ' + prefix + '-class-cancel'" v-if="cancelBtn" @tap="onCancel">{{ cancelBtn }}</view>
@@ -28,7 +27,6 @@
                     </view>
                     <slot name="footer" />
                 </view>
-            </block>
         </t-popup>
         <block v-else>
             <!-- parse <include src="./template.wxml"/> -->
@@ -53,7 +51,6 @@
         </block>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tPopup from "../popup/popup";
 import { __decorate } from "../miniprogram_npm/tslib";
@@ -62,6 +59,10 @@ import { rpx2px } from "../common/utils";
 import config from "../common/config";
 import props from "./props";
 import useCustomNavbar from "../mixins/using-custom-navbar";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
+
 const {
   prefix: prefix
 } = config;
@@ -69,8 +70,13 @@ const name = `${prefix}-picker`;
 let Picker = class extends SuperComponent {
   constructor() {
     super(...arguments);
-    this.behaviors = [useCustomNavbar];
+    this.components = {
+      tPopup
+    }
+    this.name = 'TPicker';
+    this.mixins = [useCustomNavbar];
     this.properties = props;;
+    this._ = _;
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-confirm`, `${prefix}-class-cancel`, `${prefix}-class-title`];
     this.options = {
       multipleSlots: true
@@ -79,15 +85,25 @@ let Picker = class extends SuperComponent {
       "../picker-item/picker-item": {
         type: "child",
         linked() {
-          this.updateChildren();
+          // this.updateChildren();
         }
       }
     };
     this.observers = {
-      "value, visible"() {
+      "value"() {
         this.updateChildren();
       }
     };
+    this.watch = {
+      visible: {
+        handler(value) {
+           this.dataVisible = value;
+          setTimeout(() => {
+           this.updateChildren();
+        }, 30)
+        }
+      }
+    }
     this.lifetimes = {
       attached() {
         this.setData({
@@ -111,7 +127,8 @@ let Picker = class extends SuperComponent {
           value: t,
           defaultValue: i
         } = this;
-        this.$children.forEach((s, r) => {
+        
+        this.children?.forEach((s, r) => {
           var l;
           var n;
           s.setData({
@@ -123,10 +140,10 @@ let Picker = class extends SuperComponent {
         });
       },
       getSelectedValue() {
-        return [this.$children.map(e => e._selectedValue), this.$children.map(e => e._selectedLabel)];
+        return [this.children.map(e => e._selectedValue), this.children.map(e => e._selectedLabel)];
       },
       getColumnIndexes() {
-        return this.$children.map((e, t) => ({
+        return this.children.map((e, t) => ({
           column: t,
           index: e._selectedIndex
         }));
@@ -184,7 +201,7 @@ let Picker = class extends SuperComponent {
       close(e) {
         if (this.autoClose) {
           this.setData({
-            visible: false
+            dataVisible: false
           });
         }
         this.$emit("close", {
@@ -196,10 +213,11 @@ let Picker = class extends SuperComponent {
     };
   }
   ready() {
-    this.$children.map((e, t) => e.columnIndex = t);
+    this.children.map((e, t) => e.columnIndex = t);
   }
 };
-Picker = __decorate([wxComponent()], Picker);
+Picker = initTDesign(__decorate([wxComponent()], Picker));
+
 export default Picker;
 </script>
 <style>

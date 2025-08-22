@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import tSkeleton from 'tdesign-uniapp/skeleton/skeleton';
 import theme from '../theme';
@@ -38,7 +38,7 @@ import grid from '../grid';
 import cellGroup from '../cell-group';
 import imageGroup from '../image-group';
 import animation from '../animation';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         tSkeleton,
@@ -52,7 +52,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './skeleton.less';

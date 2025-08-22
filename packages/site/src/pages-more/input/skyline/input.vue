@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import tInput from 'tdesign-uniapp/input/input';
 import base from '../base';
@@ -64,7 +64,7 @@ import status from '../status';
 import custom from '../custom';
 import labelDemo from '../label';
 import banner from '../banner';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         tInput,
@@ -112,7 +112,7 @@ export default zpMixins.extend({
             }
         }
     }
-});
+};
 </script>
 <style lang="less">
 @import './input.less';

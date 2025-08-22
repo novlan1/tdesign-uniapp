@@ -24,7 +24,7 @@
             <view :class="classPrefix + '__prefix-icon ' + prefix + '-class-prefix-icon'">
                 <slot name="prefix-icon" />
                 <!-- parse <template v-if="_prefixIcon" is="icon" :data="tClass: prefix + '-class-prefix-icon', ariaHidden: true, ..._prefixIcon"/> -->
-                <block name="icon" v-if="false" v-if="_prefixIcon">
+                <block name="icon" v-if="_prefixIcon">
                     <t-icon
                         :style="style || ''"
                         :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -47,7 +47,7 @@
             <view :class="classPrefix + '__suffix-icon ' + prefix + '-class-suffix-icon'">
                 <slot name="suffix-icon" />
                 <!-- parse <template v-if="_suffixIcon" is="icon" :data="tClass: prefix + '-class-suffix-icon', ariaHidden: true, ..._suffixIcon"/> -->
-                <block name="icon" v-if="false" v-if="_suffixIcon">
+                <block name="icon" v-if="_suffixIcon">
                     <t-icon
                         :style="style || ''"
                         :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -160,5 +160,5 @@ export default Link;
 </script>
 <style>
 @import './link.css';
-@import 'undefined';
+
 </style>

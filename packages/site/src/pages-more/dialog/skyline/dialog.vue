@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import base from '../base';
 import confirm from '../confirm';
@@ -47,7 +47,7 @@ import withImage from '../with-image';
 import command from '../command';
 import status from '../status';
 import buttonDemo from '../button';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         base,
@@ -62,7 +62,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './dialog.less';

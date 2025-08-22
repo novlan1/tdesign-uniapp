@@ -2,7 +2,7 @@
     <view :class="className + ' class ' + prefix + '-class'" :style="_._style([tagStyle, style, customStyle])" @tap="handleClick">
         <view :aria-hidden="true" :class="classPrefix + '__icon'">
             <!-- parse <template v-if="_icon" is="icon" :data="tClass: prefix + '-icon', ..._icon"/> -->
-            <block name="icon" v-if="false" v-if="_icon">
+            <block name="icon" v-if="_icon">
                 <t-icon
                     :style="style || ''"
                     :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -20,7 +20,7 @@
         </view>
         <view :class="classPrefix + '__text'"><slot /></view>
         <!-- parse <template v-if="_closable" is="icon" :data="tClass: classPrefix + '__icon-close ' + prefix + '-icon', bindclick: 'handleClose',  ariaRole: 'button', ariaLabel: '关闭',  ..._closable" @tap.native.stop.prevent="handleClose"/> -->
-        <block name="icon" v-if="false" v-if="_closable" @tap.native.stop.prevent="handleClose">
+        <block name="icon" v-if="_closable" @tap.native.stop.prevent="handleClose">
             <t-icon
                 :style="style || ''"
                 :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -37,7 +37,6 @@
         <slot v-else name="closable" />
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tIcon from ".././icon/icon";
 import { __decorate } from "../miniprogram_npm/tslib";
@@ -46,6 +45,9 @@ import config from "../common/config";
 import props from "./props";
 import { classNames, calcIcon } from "../common/utils";
 import { isNumber } from "../common/validator";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
 const {
   prefix: prefix
 } = config;
@@ -60,6 +62,7 @@ let Tag = class extends SuperComponent {
       tagStyle: ""
     });
     this.properties = props;;
+    this._ = _;
     this.externalClasses = [`${prefix}-class`];
     this.options = {
       multipleSlots: true
@@ -132,10 +135,10 @@ let Tag = class extends SuperComponent {
     };
   }
 };
-Tag = __decorate([wxComponent()], Tag);
+Tag = initTDesign(__decorate([wxComponent()], Tag));
 export default Tag;
 </script>
 <style>
 @import './tag.css';
-@import 'undefined';
+
 </style>

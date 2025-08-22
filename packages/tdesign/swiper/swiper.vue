@@ -207,5 +207,5 @@ export default Swiper;
 </script>
 <style>
 @import './swiper.css';
-@import 'undefined';
+
 </style>

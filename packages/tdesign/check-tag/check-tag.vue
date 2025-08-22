@@ -2,7 +2,7 @@
     <view :style="_._style([style, customStyle])" :class="className + ' class ' + prefix + '-class'" @tap="onClick">
         <view :aria-hidden="true" :class="classPrefix + '__icon'">
             <!-- parse <template v-if="_icon" is="icon" :data="tClass: prefix + '-icon', ..._icon"/> -->
-            <block name="icon" v-if="false" v-if="_icon">
+            <block name="icon" v-if="_icon">
                 <t-icon
                     :style="style || ''"
                     :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -119,5 +119,5 @@ export default CheckTag;
 </script>
 <style>
 @import './check-tag.css';
-@import 'undefined';
+
 </style>

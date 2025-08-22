@@ -23,12 +23,12 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import horizontal from './horizontal';
 import vertical from './vertical';
 import special from './special';
 import status from './status';
-export default zpMixins.extend({
+export default {
     components: {
         horizontal,
         vertical,
@@ -39,7 +39,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './steps.less';

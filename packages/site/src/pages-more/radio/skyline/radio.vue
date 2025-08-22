@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import radioDemo from '../radio';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         radioDemo
@@ -17,7 +17,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './radio.less';

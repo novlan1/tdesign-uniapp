@@ -26,12 +26,15 @@
         </view>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
+
 const {
   prefix: prefix
 } = config;
@@ -47,27 +50,32 @@ const momentum = (t, e) => {
 let PickerItem = class extends SuperComponent {
   constructor() {
     super(...arguments);
+    this._ = _;
+    this.name = 'TPickerItem';
     this.relations = {
       "../picker/picker": {
         type: "parent",
-        linked(t) {
-          if ("keys" in t.data) {
-            const {
-              keys: e
-            } = t.data;
-            if (null === e || JSON.stringify(this.pickerKeys) === JSON.stringify(e)) {
-              return;
-            }
-            this.setData({
-              pickerKeys: e
-            });
-          }
-        }
+        // linked(t) {
+        //   if ("keys" in t.data) {
+        //     const {
+        //       keys: e
+        //     } = t.data;
+        //     if (null === e || JSON.stringify(this.pickerKeys) === JSON.stringify(e)) {
+        //       return;
+        //     }
+        //     this.setData({
+        //       pickerKeys: e
+        //     });
+        //   }
+        // }
       }
     };
     this.options = {
       multipleSlots: true
     };
+    this.rawData = {
+      pickItemHeight: 44
+    }
     this.externalClasses = [`${prefix}-class`];
     this.properties = props;;
     this.observers = {
@@ -178,7 +186,7 @@ let PickerItem = class extends SuperComponent {
         this._selectedValue = null === (i = r[t]) || void 0 === i ? void 0 : i[null == a ? void 0 : a.value];
         this._selectedLabel = null === (s = r[t]) || void 0 === s ? void 0 : s[null == a ? void 0 : a.label];
         if (e) {
-          null === (o = this.$parent) || void 0 === o || o.triggerColumnChange({
+          null === (o = this[this.relationParentName]) || void 0 === o || o.triggerColumnChange({
             index: t,
             column: n
           });
@@ -211,7 +219,8 @@ let PickerItem = class extends SuperComponent {
     };
   }
 };
-PickerItem = __decorate([wxComponent()], PickerItem);
+PickerItem = initTDesign(__decorate([wxComponent()], PickerItem));
+
 export default PickerItem;
 </script>
 <style>

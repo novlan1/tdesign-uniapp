@@ -15,7 +15,7 @@
             </view>
             <view v-if="label" :class="classPrefix + '__info ' + prefix + '-class-label'" :aria-hidden="true">
                 <!-- parse <template v-if="_.includes(_this.STATUS, status)" is="icon" :data="tClass: classPrefix + '__icon', size:'44rpx', name: _this.LINE_STATUS_ICON[status]"></template> -->
-                <block name="icon" v-if="false" v-if="_.includes(_this.STATUS, status)">
+                <block name="icon" v-if="_.includes(_this.STATUS, status)">
                     <t-icon
                         :style="style || ''"
                         :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -91,7 +91,7 @@
                 <view :class="classPrefix + '__canvas--inner ' + prefix + '-class-bar'">
                     <view v-if="label" :class="classPrefix + '__info ' + prefix + '-class-label'" :aria-hidden="true">
                         <!-- parse <template v-if="_.includes(_this.STATUS, status)" is="icon" :data="tClass: classPrefix + '__icon', size:'96rpx', name: _this.CIRCLE_STATUS_ICON[status]"></template> -->
-                        <block name="icon" v-if="false" v-if="_.includes(_this.STATUS, status)">
+                        <block name="icon" v-if="_.includes(_this.STATUS, status)">
                             <t-icon
                                 :style="style || ''"
                                 :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -185,5 +185,5 @@ export default Progress;
 </script>
 <style>
 @import './progress.css';
-@import 'undefined';
+
 </style>

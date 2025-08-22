@@ -8,7 +8,7 @@
             <view :class="classPrefix + '__icon--prefix'">
                 <slot name="prefix-icon" />
                 <!-- parse <template v-if="_prefixIcon" is="icon" :data="tClass: prefix + '-class-prefix-icon', ariaHidden: true, ..._prefixIcon"/> -->
-                <block name="icon" v-if="false" v-if="_prefixIcon">
+                <block name="icon" v-if="_prefixIcon">
                     <t-icon
                         :style="style || ''"
                         :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -92,7 +92,7 @@
                 <view :class="classPrefix + '__wrap--suffix-icon'" @tap="onSuffixIconClick">
                     <slot name="suffix-icon" />
                     <!-- parse <template v-if="_suffixIcon" is="icon" :data="tClass: prefix + '-class-suffix-icon', ariaRole: 'button', ..._suffixIcon"/> -->
-                    <block name="icon" v-if="false" v-if="_suffixIcon">
+                    <block name="icon" v-if="_suffixIcon">
                         <t-icon
                             :style="style || ''"
                             :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -299,5 +299,5 @@ export default Input;
 </script>
 <style>
 @import './input.css';
-@import 'undefined';
+
 </style>

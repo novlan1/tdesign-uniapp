@@ -26,14 +26,14 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import base from '../base';
 import minMax from '../min-max';
 import status from '../status';
 import theme from '../theme';
 import size from '../size';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         base,
@@ -46,7 +46,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './stepper.less';

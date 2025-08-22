@@ -128,5 +128,5 @@ export default Avatar;
 </script>
 <style>
 @import './avatar.css';
-@import 'undefined';
+
 </style>

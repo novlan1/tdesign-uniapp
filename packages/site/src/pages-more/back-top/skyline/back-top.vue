@@ -35,13 +35,13 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import tButton from 'tdesign-uniapp/button/button';
 import tSkeleton from 'tdesign-uniapp/skeleton/skeleton';
 import base from '../base';
 import halfRound from '../half-round';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         tButton,
@@ -93,7 +93,7 @@ export default zpMixins.extend({
             });
         }
     }
-});
+};
 </script>
 <style lang="less">
 @import './back-top.less';

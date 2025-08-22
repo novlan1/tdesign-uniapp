@@ -24,12 +24,12 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import left from './left';
 import right from './right';
 import double from './double';
 import iconDemo from './icon';
-export default zpMixins.extend({
+export default {
     components: {
         left,
         right,
@@ -40,7 +40,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './swipe-cell.less';

@@ -39,7 +39,7 @@
                 <view :class="classPrefix + '__nav-close'" @tap.stop.prevent="onClose" aria-role="button" aria-label="关闭">
                     <slot name="close-btn" />
                     <!-- parse <template v-if="_closeBtn" is="icon" :data="..._closeBtn"/> -->
-                    <block name="icon" v-if="false" v-if="_closeBtn">
+                    <block name="icon" v-if="_closeBtn">
                         <t-icon
                             :style="style || ''"
                             :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -272,5 +272,5 @@ export default ImageViewer;
 </script>
 <style>
 @import './image-viewer.css';
-@import 'undefined';
+
 </style>

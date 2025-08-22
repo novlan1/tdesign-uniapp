@@ -20,7 +20,7 @@
                 <slot name="left" />
                 <view :class="classPrefix + '__content ' + item.className" :style="item.style" :data-action="item" @tap="onActionTap" v-for="(item, index) in left" :key="index">
                     <!-- parse <template v-if="item.icon" is="icon" :data="tClass: classPrefix + '__icon', name: item.icon, ...item.icon"></template> -->
-                    <block name="icon" v-if="false" v-if="item.icon">
+                    <block name="icon" v-if="item.icon">
                         <t-icon
                             :style="style || ''"
                             :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -43,7 +43,7 @@
                 <slot name="right" />
                 <view :class="classPrefix + '__content ' + item.className" :style="item.style" :data-action="item" @tap="onActionTap" v-for="(item, index) in right" :key="index">
                     <!-- parse <template v-if="item.icon" is="icon" :data="tClass: classPrefix + '__icon', name: item.icon, ...item.icon"></template> -->
-                    <block name="icon" v-if="false" v-if="item.icon">
+                    <block name="icon" v-if="item.icon">
                         <t-icon
                             :style="style || ''"
                             :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -169,5 +169,5 @@ export default SwiperCell;
 </script>
 <style>
 @import './swipe-cell.css';
-@import 'undefined';
+
 </style>

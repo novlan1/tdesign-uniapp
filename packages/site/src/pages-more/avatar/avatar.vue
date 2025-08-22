@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import imageAvatar from './image-avatar';
 import characterAvatar from './character-avatar';
 import iconAvatar from './icon-avatar';
@@ -42,7 +42,7 @@ import badgeAvatar from './badge-avatar';
 import size from './size';
 import exhibition from './exhibition';
 import action from './action';
-export default zpMixins.extend({
+export default {
     components: {
         imageAvatar,
         characterAvatar,
@@ -56,7 +56,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './avatar.less';

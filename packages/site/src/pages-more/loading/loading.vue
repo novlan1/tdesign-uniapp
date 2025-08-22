@@ -63,7 +63,7 @@
 </template>
 
 <script lang="ts">
-// import zpMixins from '@/uni_modules/zp-mixins/index';
+// 
 import BaseComp from './base/index.vue';
 // import horizontal from './horizontal/index.vue';
 // import vertical from './vertical/index.vue';

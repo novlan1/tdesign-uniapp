@@ -6,8 +6,8 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
-export default zpMixins.extend({
+
+export default {
     data() {
         return {
             gulpError: ''
@@ -19,7 +19,7 @@ export default zpMixins.extend({
         });
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './index.less';

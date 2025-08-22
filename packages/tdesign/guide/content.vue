@@ -12,7 +12,7 @@
                 </view>
                 <view v-if="current !== -1" :class="prefix + '-class-footer ' + classPrefix + '__footer ' + classPrefix + '__footer--' + modeType">
                     <!-- parse <template is="button" v-if="current < steps.length - 1 && !hideSkip" :data="...skipButton"/> -->
-                    <block name="button" v-if="false" v-if="current < steps.length - 1 && !hideSkip">
+                    <block name="button" v-if="current < steps.length - 1 && !hideSkip">
                         <t-button
                             :t-id="tId || ''"
                             :style="style || ''"
@@ -104,7 +104,7 @@
                         </t-button>
                     </block>
                     <!-- parse <template is="button" v-if="current < steps.length - 1" :data="...nextButton"/> -->
-                    <block name="button" v-if="false" v-if="current < steps.length - 1">
+                    <block name="button" v-if="current < steps.length - 1">
                         <t-button
                             :t-id="tId || ''"
                             :style="style || ''"
@@ -203,5 +203,5 @@
 
 <style>
 @import './content.css';
-@import 'undefined';
+
 </style>

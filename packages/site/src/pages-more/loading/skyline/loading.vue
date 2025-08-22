@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import demoLoading from '../loading';
-export default zpMixins.extend({
+export default {
     components: {
         demoLoading
     },
@@ -15,7 +15,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './loading.less';

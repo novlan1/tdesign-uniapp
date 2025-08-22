@@ -393,5 +393,5 @@ export default Dialog;
 </script>
 <style>
 @import './dialog.css';
-@import 'undefined';
+
 </style>

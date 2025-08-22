@@ -209,5 +209,5 @@ export default TabBarItem;
 </script>
 <style>
 @import './tab-bar-item.css';
-@import 'undefined';
+
 </style>

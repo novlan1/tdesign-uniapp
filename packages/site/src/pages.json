@@ -47,6 +47,12 @@
       "style": {
         "navigationBarTitleText": "Popup"
       }
+    },
+    {
+      "path": "pages-more/picker/picker",
+      "style": {
+        "navigationBarTitleText": "Picker"
+      }
     }
   ],
   "globalStyle": {

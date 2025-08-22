@@ -24,13 +24,13 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import base from '../base';
 import maxlength from '../maxlength';
 import action from '../action';
 import shape from '../shape';
 import other from '../other';
-export default zpMixins.extend({
+export default {
     components: {
         base,
         maxlength,
@@ -42,7 +42,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './search.less';

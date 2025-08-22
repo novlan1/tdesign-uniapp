@@ -143,5 +143,5 @@ export default Toast;
 </script>
 <style>
 @import './toast.css';
-@import 'undefined';
+
 </style>

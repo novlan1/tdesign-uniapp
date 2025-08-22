@@ -21,13 +21,13 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import base from '../base';
 import withTitle from '../with-title';
 import area from '../area';
 import withoutPopup from '../without-popup';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         base,
@@ -39,7 +39,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './picker.less';

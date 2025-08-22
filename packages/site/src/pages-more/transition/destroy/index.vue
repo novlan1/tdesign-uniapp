@@ -9,10 +9,10 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tButton from 'tdesign-uniapp/button/button';
 import tTransition from 'tdesign-uniapp/transition/transition';
-export default zpMixins.extend({
+export default {
     components: {
         tButton,
         tTransition
@@ -35,7 +35,7 @@ export default zpMixins.extend({
         }
     },
     created: function () {}
-});
+};
 </script>
 <style>
 @import './index.css';

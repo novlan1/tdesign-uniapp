@@ -28,12 +28,12 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tDropdownMenu from 'tdesign-uniapp/dropdown-menu/dropdown-menu';
 import tDropdownItem from 'tdesign-uniapp/dropdown-item/dropdown-item';
 import single from './single';
 import multi from './multi';
-export default zpMixins.extend({
+export default {
     components: {
         tDropdownMenu,
         tDropdownItem,
@@ -44,7 +44,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './dropdown-menu.less';

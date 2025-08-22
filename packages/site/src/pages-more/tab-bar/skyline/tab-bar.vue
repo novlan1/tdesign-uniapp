@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import textOnly from '../text-only';
 import iconOnly from '../icon-only';
@@ -47,7 +47,7 @@ import sub from '../sub';
 import badge from '../badge';
 import round from '../round';
 import custom from '../custom';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         textOnly,
@@ -73,7 +73,7 @@ export default zpMixins.extend({
             console.log('占位：函数 onScroll 未声明');
         }
     }
-});
+};
 </script>
 <style lang="less">
 @import './tab-bar.less';

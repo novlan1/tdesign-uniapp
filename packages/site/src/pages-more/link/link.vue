@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import content from './content';
 import underline from './underline';
 import prefix from './prefix';
@@ -39,7 +39,7 @@ import suffix from './suffix';
 import theme from './theme';
 import disabled from './disabled';
 import size from './size';
-export default zpMixins.extend({
+export default {
     components: {
         content,
         underline,
@@ -53,7 +53,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './link.less';

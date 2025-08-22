@@ -29,14 +29,14 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tDemo from '../../../components/demo-block';
 import base from '../base';
 import label from '../label';
 import color from '../color';
 import status from '../status';
 import size from '../size';
-export default zpMixins.extend({
+export default {
     components: {
         tDemo,
         base,
@@ -49,7 +49,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './switch.less';

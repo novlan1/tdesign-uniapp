@@ -18,12 +18,12 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import tImage from 'tdesign-uniapp/image/image';
 import base from '../base';
 import status from '../status';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         tImage,
@@ -34,7 +34,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './image.less';

@@ -54,7 +54,7 @@
                         </block>
                         <slot name="image" />
                         <!-- parse <template v-if="iconName || _.isNoEmptyObj(iconData)" is="icon" :data="tClass: classPrefix + '__icon', name: iconName, ...iconData"/> -->
-                        <block name="icon" v-if="false" v-if="iconName || _.isNoEmptyObj(iconData)">
+                        <block name="icon" v-if="iconName || _.isNoEmptyObj(iconData)">
                             <t-icon
                                 :style="style || ''"
                                 :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -241,5 +241,5 @@ export default GridItem;
 </script>
 <style>
 @import './grid-item.css';
-@import 'undefined';
+
 </style>

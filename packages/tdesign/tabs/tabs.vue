@@ -47,7 +47,7 @@
                                 :aria-hidden="item.badgeProps.dot || item.badgeProps.count"
                             >
                                 <!-- parse <template v-if="item.icon" is="icon" :data="tClass: classPrefix + '__icon', ...item.icon"/> -->
-                                <block name="icon" v-if="false" v-if="item.icon">
+                                <block name="icon" v-if="item.icon">
                                     <t-icon
                                         :style="style || ''"
                                         :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -433,5 +433,5 @@ export default Tabs;
 </script>
 <style>
 @import './tabs.css';
-@import 'undefined';
+
 </style>

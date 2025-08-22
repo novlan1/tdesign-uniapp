@@ -38,13 +38,13 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import tButton from 'tdesign-uniapp/button/button';
 import base from '../base';
 import advance from '../advance';
 import draggable from '../draggable';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         tButton,
@@ -67,7 +67,7 @@ export default zpMixins.extend({
             });
         }
     }
-});
+};
 </script>
 <style lang="less">
 @import './fab.less';

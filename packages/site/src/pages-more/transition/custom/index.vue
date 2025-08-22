@@ -1,27 +1,32 @@
 <template>
-    <view>
-        <t-button size="large" variant="outline" @tap.native="onTriggerClick" block theme="primary">Toggle</t-button>
+  <view>
+    <t-button size="large"
+variant="outline" block @tap.native="onTriggerClick" theme="primary">
+Toggle
+</t-button>
 
-        <t-transition name="translate" :visible="visible">
-            <view class="block"></view>
-        </t-transition>
-    </view>
+    <t-transition name="translate"
+:visible="visible">
+      <view class="block"/>
+    </t-transition>
+  </view>
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tButton from 'tdesign-uniapp/button/button';
 import tTransition from 'tdesign-uniapp/transition/transition';
-export default zpMixins.extend({
-    components: {
-        tButton,
-        tTransition
+export default {
+  components: {
+    tButton,
+    tTransition,
     },
-    data() {
-        return {
-            visible: false
+  data() {
+    return {
+      visible: false,
         };
-    },
+  },
+    created: function () {},
     methods: {
         onTriggerClick() {
             this.setData({
@@ -33,9 +38,8 @@ export default zpMixins.extend({
                 visible: false
             });
         }
-    },
-    created: function () {}
-});
+    }
+};
 </script>
 <style lang="less">
 @import './index.less';

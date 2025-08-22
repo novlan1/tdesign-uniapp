@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import base from '../base';
 import fraction from '../fraction';
@@ -45,7 +45,7 @@ import navBtn from '../nav-btn';
 import custom from '../custom';
 import cards from '../cards';
 import vertical from '../vertical';
-export default zpMixins.extend({
+export default {
     components: {
         tNavbar,
         base,
@@ -59,7 +59,7 @@ export default zpMixins.extend({
         return {};
     },
     methods: {}
-});
+};
 </script>
 <style lang="less">
 @import './swiper.less';
