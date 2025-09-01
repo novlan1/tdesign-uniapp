@@ -19,11 +19,11 @@
           title="01 组件类型"
           desc="纵向多选框"
         >
-          <BaseDemo />
+          <!-- <BaseDemo /> -->
         </t-demo>
 
         <t-demo desc="横向多选框">
-          <horizontal />
+          <HorizontalDemo />
         </t-demo>
 
         <t-demo desc="带全选多选框">
@@ -65,24 +65,24 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import right from './right';
-import all from './all';
-import horizontal from './horizontal';
-import status from './status';
-import type from './type';
-import special from './special';
-import card from './card';
+import BaseDemo from './base/index.vue';
+// import right from './right';
+// import all from './all';
+import HorizontalDemo from './horizontal/index.vue';
+// import status from './status';
+// import type from './type';
+// import special from './special';
+// import card from './card';
 export default {
   components: {
     BaseDemo,
-    right,
-    all,
-    horizontal,
-    status,
-    type,
-    special,
-    card,
+    // right,
+    // all,
+    HorizontalDemo,
+    // status,
+    // type,
+    // special,
+    // card,
   },
   data() {
     return {};

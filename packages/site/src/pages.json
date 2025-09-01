@@ -59,6 +59,12 @@
       "style": {
         "navigationBarTitleText": "Radio"
       }
+    },
+    {
+      "path": "pages-more/checkbox/checkbox",
+      "style": {
+        "navigationBarTitleText": "Checkbox"
+      }
     }
   ],
   "globalStyle": {

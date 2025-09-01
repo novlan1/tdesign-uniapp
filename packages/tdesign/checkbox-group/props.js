@@ -24,11 +24,11 @@ const props = {
     },
     value: {
         type: Array,
-        value: null
+        value: [],
     },
     defaultValue: {
         type: Array,
-        value: []
+        value: [],
     }
 };
 export default props;

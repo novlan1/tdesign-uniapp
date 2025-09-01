@@ -124,9 +124,10 @@ export const toComponent = function (e) {
           this._selfControlled = true;
         }
         if (null == o[e] && null != o[t]) {
-          this.setData({
-            [e]: o[t],
-          });
+          // TODO: to double check
+          // this.setData({
+          //   [e]: o[t],
+          // });
         }
       });
     };
@@ -135,9 +136,10 @@ export const toComponent = function (e) {
       if (s) {
         const { key: e } = s;
         if (this._selfControlled) {
-          this.setData({
-            [e]: t[e],
-          });
+          // TODO: to double check
+          // this.setData({
+          //   [e]: t[e],
+          // });
         }
       }
       this.$emit(

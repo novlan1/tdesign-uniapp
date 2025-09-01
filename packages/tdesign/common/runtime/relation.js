@@ -154,11 +154,13 @@ function getChildMixin(parent, options = {}) {
         // #endif
         
         
+        console.log('[bindRelation] parent', this[parent]);
         if (!this[parent] || (this[parent].children && this[parent].children.indexOf(this) !== -1)) {
           return;
         }
         
         const children = [...(this[parent].children || []), this];
+        console.log('[bindRelation] children', children);
 
         
         this[parent].children = children;

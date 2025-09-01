@@ -2,35 +2,35 @@
     <view
         :id="tId"
         :style="_._style([style, customStyle])"
-        :class="_.cls(classPrefix, [placement, theme, ['checked', checked], ['block', block]]) + ' class ' + prefix + '-class'"
+        :class="_.cls(classPrefix, [placement, theme, ['checked', dataChecked], ['block', block]]) + ' class ' + prefix + '-class'"
         aria-role="checkbox"
-        :aria-checked="checked ? (indeterminate ? 'mixed' : true) : false"
+        :aria-checked="dataChecked ? (indeterminate ? 'mixed' : true) : false"
         :aria-disabled="_disabled ? true : false"
-        mut-bind:tap="handleTap"
+        @click.stop="handleTap"
         :tabindex="tabindex"
     >
-        <view v-if="theme == 'default'" :class="_.cls(classPrefix + '__icon', [placement, ['checked', checked], ['disabled', _disabled]]) + ' ' + prefix + '-class-icon'">
+        <view v-if="theme == 'default'" :class="_.cls(classPrefix + '__icon', [placement, ['checked', dataChecked], ['disabled', _disabled]]) + ' ' + prefix + '-class-icon'">
             <slot name="icon" v-if="icon === 'slot'" />
             <view v-else-if="_.isArray(icon)" :class="classPrefix + '__icon'">
-                <image :src="checked ? (indeterminate && icon[2] ? icon[2] : icon[0]) : icon[1]" :class="classPrefix + '__icon-image'" webp />
+                <image :src="dataChecked ? (indeterminate && icon[2] ? icon[2] : icon[0]) : icon[1]" :class="classPrefix + '__icon-image'" webp />
             </view>
             <block v-else>
                 <t-icon
-                    v-if="checked && (icon == 'circle' || icon == 'rectangle')"
+                    v-if="dataChecked && (icon == 'circle' || icon == 'rectangle')"
                     :name="indeterminate ? 'minus-' + icon + '-filled' : 'check-' + icon + '-filled'"
                     :class="_.cls(classPrefix + '__icon-wrapper', [])"
                 />
-                <t-icon v-if="checked && icon == 'line'" :name="indeterminate ? 'minus-' + icon + '-filled' : 'check'" :class="_.cls(classPrefix + '__icon-wrapper', [])" />
-                <view v-else-if="!checked && (icon == 'circle' || icon == 'rectangle')" :class="_.cls(classPrefix + '__icon-' + icon, [['disabled', _disabled]])" />
-                <view v-if="!checked && icon == 'line'" class="placeholder"></view>
+                <t-icon v-if="dataChecked && icon == 'line'" :name="indeterminate ? 'minus-' + icon + '-filled' : 'check'" :class="_.cls(classPrefix + '__icon-wrapper', [])" />
+                <view v-else-if="!dataChecked && (icon == 'circle' || icon == 'rectangle')" :class="_.cls(classPrefix + '__icon-' + icon, [['disabled', _disabled]])" />
+                <view v-if="!dataChecked && icon == 'line'" class="placeholder"></view>
             </block>
         </view>
-        <view :class="classPrefix + '__content'" data-target="text" mut-bind:tap="handleTap">
+        <view :class="classPrefix + '__content'" data-target="text" @click.stop="handleTap">
             <view
                 :class="
                     _.cls(classPrefix + '__title', [
                         ['disabled', _disabled],
-                        ['checked', checked]
+                        ['checked', dataChecked]
                     ]) +
                     ' ' +
                     prefix +
@@ -50,13 +50,15 @@
         <view v-if="theme == 'default' && !borderless" :class="_.cls(classPrefix + '__border', [placement]) + ' ' + prefix + '-class-border'" />
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
 import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import Props from "./props";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
 const {
   prefix: prefix
 } = config;
@@ -65,7 +67,12 @@ let CheckBox = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-label`, `${prefix}-class-icon`, `${prefix}-class-content`, `${prefix}-class-border`];
-    this.behaviors = ["wx://form-field"];
+    // this.behaviors = ["wx://form-field"];
+    this.name = 'TCheckbox'
+    this.components = {
+      tIcon
+    }
+    this._ = _;
     this.relations = {
       "../checkbox-group/checkbox-group": {
         type: "ancestor",
@@ -97,7 +104,7 @@ let CheckBox = class extends SuperComponent {
     this.options = {
       multipleSlots: true
     };
-    this = Object.assign(Object.assign({}, Props), {
+    this.properties = Object.assign(Object.assign({}, Props), {
       theme: {
         type: String,
         value: "default"
@@ -106,12 +113,21 @@ let CheckBox = class extends SuperComponent {
         type: String
       }
     });
-    this.setData({
+    this.rawData = {
+      dataChecked: false,
+      _disabled: false,
       prefix: prefix,
       classPrefix: name,
-      _disabled: false
-    });
-    this.observers = {
+    }
+
+  
+    this.watch = {
+      checked: {
+        handler(val) {
+          this.dataChecked = val;
+        },
+        immediate: true,
+      },
       disabled(e) {
         this.setData({
           _disabled: e
@@ -139,8 +155,8 @@ let CheckBox = class extends SuperComponent {
           value: o,
           label: c
         } = this;
-        const d = !this.checked;
-        const r = this.$parent;
+        const d = !this.dataChecked;
+        const r = this[this.relationParentName];
         r ? r.updateValue(Object.assign(Object.assign({}, this), {
           checked: d,
           item: {
@@ -164,7 +180,9 @@ let CheckBox = class extends SuperComponent {
     };
   }
 };
-CheckBox = __decorate([wxComponent()], CheckBox);
+CheckBox = initTDesign(__decorate([wxComponent()], CheckBox));
+
+console.log('[CheckBox Comp]', CheckBox)
 export default CheckBox;
 </script>
 <style>
