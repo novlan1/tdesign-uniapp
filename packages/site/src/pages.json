@@ -53,6 +53,12 @@
       "style": {
         "navigationBarTitleText": "Picker"
       }
+    },
+    {
+      "path": "pages-more/radio/radio",
+      "style": {
+        "navigationBarTitleText": "Radio"
+      }
     }
   ],
   "globalStyle": {

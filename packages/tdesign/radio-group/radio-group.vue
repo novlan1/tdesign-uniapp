@@ -1,8 +1,8 @@
 <template>
     <view :style="_._style([style, customStyle])" :class="classPrefix + ' class ' + prefix + '-class'" aria-role="radiogroup">
         <slot />
-        <block v-for="(item, index) in radioOptions" :key="index">
             <t-radio
+            v-for="(item, index) in radioOptions" :key="index"
                 :class="prefix + '-radio-option'"
                 :data-index="index"
                 :data-value="item.value"
@@ -24,16 +24,17 @@
                 :borderless="borderless"
                 @change="handleRadioChange($event, { index, value: item.value, allowUncheck: item.allowUncheck || allowUncheck })"
             />
-        </block>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tRadio from "../radio/radio";
 import { __decorate } from "../miniprogram_npm/tslib";
 import config from "../common/config";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import props from "./props";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
 const {
   prefix: prefix
 } = config;
@@ -43,11 +44,20 @@ let RadioGroup = class extends SuperComponent {
     super(...arguments);
     this.behaviors = ["wx://form-field"];
     this.externalClasses = [`${prefix}-class`];
-    this.setData({
+    this.prefix = prefix;
+    this.prefix = prefix;
+    this.prefix = prefix;
+    this.name = 'TRadioGroup'
+    this.components = {
+      tRadio,
+    }
+    this.rawData = {
+      dataChecked: false,
       prefix: prefix,
       classPrefix: name,
       radioOptions: []
-    });
+    }
+    this._ = _;
     this.relations = {
       "../radio/radio": {
         type: "descendant",
@@ -58,7 +68,7 @@ let RadioGroup = class extends SuperComponent {
             readonly: o
           } = this;
           e.setData({
-            checked: t === e.data.value
+            dataChecked: t === e.value
           });
           e.setDisabled(i);
           e.setReadonly(o);
@@ -70,17 +80,40 @@ let RadioGroup = class extends SuperComponent {
       key: "value",
       event: "change"
     }];
-    this.observers = {
-      value(e) {
-        this.getChildren().forEach(t => {
+    this.watch = {
+      options: {
+        handler() {
+          console.log('[initWithOptions]')
+          this.initWithOptions();
+        },
+        immediate: true,
+      },
+       value: {
+        handler(e) {
+        console.log('watch.value')
+        if (this.options?.length) {
+          console.log('radioOptions change by watch value', this.radioOptions)
+          this.radioOptions = this.radioOptions.map(item => ({
+            ...item,
+            checked: item.value === e
+          }))
+          return;
+        }
+        this.getChildren()?.forEach(t => {
           t.setData({
-            checked: e === t.data.value
+            dataChecked: e === t.value
           });
         });
       },
-      options() {
-        this.initWithOptions();
+      immediate: true,
       },
+    }
+    this.observers = {
+     
+      // options() {
+      //   console.log('ooooo')
+      //   this.initWithOptions();
+      // },
       disabled(e) {
         var t;
         if (null === (t = this.options) || void 0 === t ? void 0 : t.length) {
@@ -94,8 +127,13 @@ let RadioGroup = class extends SuperComponent {
     };
     this.methods = {
       getChildren() {
-        let e = this.$children;
-        (null == e ? void 0 : e.length) || (e = this.zpSelectAllComponents(`.${prefix}-radio-option`));
+        let e = this.children;
+        if (!e) {
+          const result= this.selectAllComponents(`.${prefix}-radio-option`);
+          return result;
+        }
+        console.log('[getChildren]', e)
+        // (null == e ? void 0 : e.length) || (e = this.zpSelectAllComponents(`.${prefix}-radio-option`));
         return e;
       },
       updateValue(e) {
@@ -143,7 +181,7 @@ let RadioGroup = class extends SuperComponent {
             "number" === d || "string" === d ? s.push({
               label: `${e}`,
               value: e,
-              checked: t === e,
+              dataChecked: t === e,
               disabled: o,
               readonly: a
             }) : "object" === d && s.push(Object.assign(Object.assign({}, e), {
@@ -166,7 +204,7 @@ let RadioGroup = class extends SuperComponent {
     };
   }
 };
-RadioGroup = __decorate([wxComponent()], RadioGroup);
+RadioGroup = initTDesign(__decorate([wxComponent()], RadioGroup));
 export default RadioGroup;
 </script>
 <style>

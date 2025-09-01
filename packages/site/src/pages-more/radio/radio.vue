@@ -70,20 +70,20 @@
 
 import horizontal from './horizontal';
 import BaseDemo from './base';
-import align from './align';
-import card from './card';
-import status from './status';
-import theme from './theme';
-import special from './special';
+// import align from './align';
+// import card from './card';
+// import status from './status';
+// import theme from './theme';
+// import special from './special';
 export default {
   components: {
     horizontal,
     BaseDemo,
-    align,
-    card,
-    status,
-    theme,
-    special,
+    // align,
+    // card,
+    // status,
+    // theme,
+    // special,
   },
   data() {
     return {};

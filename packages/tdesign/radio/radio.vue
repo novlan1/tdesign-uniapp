@@ -5,28 +5,28 @@
         :class="_.cls(classPrefix, [_placement, ['block', block]]) + ' class ' + prefix + '-class'"
         :disabled="_disabled"
         aria-role="radio"
-        :aria-checked="checked"
+        :aria-checked="dataChecked"
         :aria-label="label + content"
         :aria-disabled="_disabled"
         :tabindex="tabindex"
-        mut-bind:tap="handleTap"
+        @click.stop="handleTap"
     >
-        <view :class="_.cls(classPrefix + '__icon', [_placement, ['checked', checked], ['disabled', _disabled]]) + ' ' + prefix + '-class-icon'">
+        <view :class="_.cls(classPrefix + '__icon', [_placement, ['checked', dataChecked], ['disabled', _disabled]]) + ' ' + prefix + '-class-icon'">
             <slot name="icon" v-if="slotIcon" />
-            <view v-else-if="customIcon" :class="classPrefix + '__image'"><image :src="checked ? iconVal[0] : iconVal[1]" :class="classPrefix + '-icon__image'" webp /></view>
+            <view v-else-if="customIcon" :class="classPrefix + '__image'"><image :src="dataChecked ? iconVal[0] : iconVal[1]" :class="classPrefix + '-icon__image'" webp /></view>
             <block v-else>
-                <t-icon v-if="checked && (icon == 'circle' || icon == 'line')" :name="icon == 'circle' ? 'check-circle-filled' : 'check'" :class="classPrefix + '__icon-wrap'" />
-                <view v-if="checked && icon == 'dot'" :class="_.cls(classPrefix + '__icon-' + icon, [['disabled', _disabled]])" />
-                <view v-if="!checked && (icon == 'circle' || icon == 'dot')" :class="_.cls(classPrefix + '__icon-circle', [['disabled', _disabled]])" />
-                <view v-if="!checked && icon == 'line'" class="placeholder"></view>
+                <t-icon v-if="dataChecked && (icon == 'circle' || icon == 'line')" :name="icon == 'circle' ? 'check-circle-filled' : 'check'" :class="classPrefix + '__icon-wrap'" />
+                <view v-if="dataChecked && icon == 'dot'" :class="_.cls(classPrefix + '__icon-' + icon, [['disabled', _disabled]])" />
+                <view v-if="!dataChecked && (icon == 'circle' || icon == 'dot')" :class="_.cls(classPrefix + '__icon-circle', [['disabled', _disabled]])" />
+                <view v-if="!dataChecked && icon == 'line'" class="placeholder"></view>
             </block>
         </view>
-        <view :class="classPrefix + '__content'" data-target="text" mut-bind:tap="handleTap">
+        <view :class="classPrefix + '__content'" data-target="text" @click.stop="handleTap">
             <view
                 :class="
                     _.cls(classPrefix + '__title', [
                         ['disabled', _disabled],
-                        ['checked', checked]
+                        ['checked', dataChecked]
                     ]) +
                     ' ' +
                     prefix +
@@ -42,7 +42,7 @@
                 :class="
                     _.cls(classPrefix + '__description', [
                         ['disabled', _disabled],
-                        ['checked', checked]
+                        ['checked', dataChecked]
                     ]) +
                     ' ' +
                     prefix +
@@ -57,13 +57,16 @@
         <view v-if="!borderless" :class="_.cls(classPrefix + '__border', [_placement]) + ' ' + prefix + '-class-border'" />
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
 import { __decorate } from "../miniprogram_npm/tslib";
 import config from "../common/config";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import Props from "./props";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
+
 const {
   prefix: prefix
 } = config;
@@ -71,20 +74,43 @@ const name = `${prefix}-radio`;
 let Radio = class extends SuperComponent {
   constructor() {
     super(...arguments);
+    this.components = {
+      tIcon,
+    }
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-label`, `${prefix}-class-icon`, `${prefix}-class-content`, `${prefix}-class-border`];
     this.behaviors = ["wx://form-field"];
+    this._ = _;
+    this.name = 'TRadio';
     this.relations = {
       "../radio-group/radio-group": {
         type: "ancestor",
         linked(e) {
-          if (e.data.borderless) {
-            this.setData({
-              borderless: true
-            });
-          }
+          // if (e.data.borderless) {
+          //   this.setData({
+          //     borderless: true
+          //   });
+          // }
         }
       }
     };
+    this.rawData = {
+      dataChecked: undefined,
+      dataValue: undefined,
+    }
+    this.watch = {
+      checked: {
+        handler(val) {
+          this.dataChecked = val;
+        },
+        immediate: true,
+      },
+      value: {
+        handler(val) {
+          this.dataValue= val;
+        },
+        immediate: true,
+      },
+    }
     this.options = {
       multipleSlots: true
     };
@@ -93,7 +119,7 @@ let Radio = class extends SuperComponent {
         this.init();
       }
     };
-    this = Object.assign(Object.assign({}, Props), {
+    this.properties = Object.assign(Object.assign({}, Props), {
       borderless: {
         type: Boolean,
         value: false
@@ -144,12 +170,14 @@ let Radio = class extends SuperComponent {
       doChange() {
         var e;
         const {
-          value: t,
-          checked: a,
+          dataValue: t,
+          dataChecked: a,
           allowUncheck: o
         } = this;
-        const s = Boolean(o || (null === (e = this.$parent) || void 0 === e ? void 0 : e.data.allowUncheck));
-        this.$parent ? this.$parent.updateValue(a && s ? null : t) : this._trigger("change", {
+        const s = Boolean(o || (null === (e = this[this.relationParentName]) || void 0 === e ? void 0 : e.allowUncheck));
+        this[this.relationParentName] 
+         ? this[this.relationParentName].updateValue(a && s ? null : t) 
+         : this._trigger("change", {
           checked: !s || !a
         });
       },
@@ -161,12 +189,12 @@ let Radio = class extends SuperComponent {
         const {
           icon: s
         } = this;
-        const i = Array.isArray((null === (e = this.$parent) || void 0 === e ? void 0 : e.icon) || s);
+        const i = Array.isArray((null === (e = this[this.relationParentName]) || void 0 === e ? void 0 : e.icon) || s);
         this.setData({
           customIcon: i,
           slotIcon: "slot" === s,
-          iconVal: i ? (null === (t = this.$parent) || void 0 === t ? void 0 : t.icon) || s : [],
-          _placement: this.placement || (null === (o = null === (a = this.$parent) || void 0 === a ? void 0 : a.data) || void 0 === o ? void 0 : o.placement) || "left"
+          iconVal: i ? (null === (t = this[this.relationParentName]) || void 0 === t ? void 0 : t.icon) || s : [],
+          _placement: this.placement || (null === (o = null === (a = this[this.relationParentName]) || void 0 === a ? void 0 : a.data) || void 0 === o ? void 0 : o.placement) || "left"
         });
       },
       setDisabled(e) {
@@ -182,7 +210,7 @@ let Radio = class extends SuperComponent {
     };
   }
 };
-Radio = __decorate([wxComponent()], Radio);
+Radio = initTDesign(__decorate([wxComponent()], Radio));
 export default Radio;
 </script>
 <style>
