@@ -35,7 +35,6 @@
         />
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
 import { __decorate } from "../miniprogram_npm/tslib";
@@ -43,6 +42,9 @@ import { wxComponent, SuperComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
 import { classNames, calcIcon } from "../common/utils";
+import _ from '../common/utils.wxs';
+
+
 const {
   prefix: prefix
 } = config;
@@ -55,6 +57,10 @@ let CheckTag = class extends SuperComponent {
       classPrefix: name,
       className: ""
     });
+    this.components = {
+      tIcon
+    }
+    this._ = _;
     this.properties = props;;
     this.externalClasses = [`${prefix}-class`];
     this.controlledProps = [{

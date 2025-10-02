@@ -55,6 +55,9 @@ const name = `${prefix}-tag`;
 let Tag = class extends SuperComponent {
   constructor() {
     super(...arguments);
+    this.components = {
+      tIcon,
+    }
     this.setData({
       prefix: prefix,
       classPrefix: name,

@@ -65,6 +65,12 @@
       "style": {
         "navigationBarTitleText": "Checkbox"
       }
+    },
+    {
+      "path": "pages-more/tag/tag",
+      "style": {
+        "navigationBarTitleText": "Tag"
+      }
     }
   ],
   "globalStyle": {
