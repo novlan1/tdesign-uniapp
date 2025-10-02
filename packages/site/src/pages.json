@@ -71,6 +71,12 @@
       "style": {
         "navigationBarTitleText": "Tag"
       }
+    },
+    {
+      "path": "pages-more/divider/divider",
+      "style": {
+        "navigationBarTitleText": "Divider"
+      }
     }
   ],
   "globalStyle": {

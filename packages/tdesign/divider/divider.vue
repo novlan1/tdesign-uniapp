@@ -11,12 +11,15 @@
         </view>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
+
 const {
   prefix: prefix
 } = config;
@@ -28,6 +31,7 @@ let Divider = class extends SuperComponent {
     this.options = {
       multipleSlots: true
     };
+    this._ = _;
     this.properties = props;;
     this.setData({
       prefix: prefix,
@@ -51,7 +55,7 @@ let Divider = class extends SuperComponent {
     };
   }
 };
-Divider = __decorate([wxComponent()], Divider);
+Divider = initTDesign(__decorate([wxComponent()], Divider));
 export default Divider;
 </script>
 <style>
