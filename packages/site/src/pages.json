@@ -83,6 +83,18 @@
       "style": {
         "navigationBarTitleText": "Fab"
       }
+    },
+    {
+      "path": "pages-more/link/link",
+      "style": {
+        "navigationBarTitleText": "Link"
+      }
+    },
+    {
+      "path": "pages-more/col/col",
+      "style": {
+        "navigationBarTitleText": "Layout"
+      }
     }
   ],
   "globalStyle": {

@@ -1,12 +1,15 @@
 <template>
-    <view :class="'class ' + prefix + '-row'" :style="utils.getRowStyles(gutter, style, customStyle)"><slot /></view>
+    <view :class="'class ' + prefix + '-row'" :style="getRowStyles(gutter, style, customStyle)"><slot /></view>
 </template>
-<script module="utils" lang="wxs" src="@/row/row.wxs"></script>
 <script>
 import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
+import _ from '../common/utils.wxs';
+import {getRowStyles} from './row.wxs';
+import { initTDesign } from '../common/runtime';
+
 const {
   prefix: prefix
 } = config;
@@ -18,6 +21,16 @@ let Row = class extends SuperComponent {
     this.setData({
       prefix: prefix
     });
+    this._ = _;
+    this.getRowStyles = getRowStyles;
+    this.watch = {
+      gutter: {
+        handler() {
+          this.setGutter();
+        },
+        immediate: true,
+      }
+    }
     this.relations = {
       "../col/col": {
         type: "child",
@@ -43,7 +56,8 @@ let Row = class extends SuperComponent {
         const {
           gutter: t
         } = this;
-        this.$children.forEach(o => {
+        // TODO: children undefined check
+        this.children?.forEach(o => {
           o.setData({
             gutter: t
           });
@@ -52,7 +66,7 @@ let Row = class extends SuperComponent {
     };
   }
 };
-Row = __decorate([wxComponent()], Row);
+Row = initTDesign(__decorate([wxComponent()], Row));
 export default Row;
 </script>
 <style>

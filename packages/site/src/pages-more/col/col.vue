@@ -18,7 +18,7 @@
       </t-demo>
 
       <t-demo desc="在列元素之间增加间距">
-        <offset />
+        <OffsetDemo />
       </t-demo>
     </view>
   </view>
@@ -26,12 +26,12 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import offset from './offset';
+import BaseDemo from './base/index.vue';
+import OffsetDemo from './offset/index.vue';
 export default {
   components: {
     BaseDemo,
-    offset,
+    OffsetDemo,
   },
   data() {
     return {};

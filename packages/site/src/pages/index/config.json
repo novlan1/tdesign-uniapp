@@ -44,6 +44,12 @@
     },
     {
       "name": "fab"
+    },
+    {
+      "name": "link"
+    },
+    {
+      "name": "col"
     }
   ]
 }

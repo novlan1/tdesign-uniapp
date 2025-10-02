@@ -1,20 +1,25 @@
 <template>
-    <view>
-        <t-input label="标签文字" layout="vertical" placeholder="请输入文字" :suffixIcon=""></t-input>
-    </view>
+  <view>
+    <t-input
+      label="标签文字"
+      layout="vertical"
+      placeholder="请输入文字"
+      :suffix-icon=""
+    />
+  </view>
 </template>
 
 <script>
 import tInput from 'tdesign-uniapp/input/input';
 export default {
-    components: {
-        tInput
-    },
-    data() {
-        return {};
-    },
-    methods: {},
-    created: function () {}
+  components: {
+    tInput,
+  },
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {},
 };
 </script>
 <style>

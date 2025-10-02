@@ -1,6 +1,6 @@
-var utils = require('../common/utils.wxs');
+import utils from '../common/utils.wxs';
 
-function getRowStyles(gutter, style, customStyle) {
+export function getRowStyles(gutter, style, customStyle) {
   var _style = '';
   if (gutter) {
     _style = utils._style({
@@ -12,6 +12,3 @@ function getRowStyles(gutter, style, customStyle) {
   return utils._style([style, customStyle]) + _style;
 }
 
-module.exports = {
-  getRowStyles: getRowStyles,
-};

@@ -1,6 +1,6 @@
 <template>
     <view>
-        <navigator
+        <view
             :class="className + ' class ' + prefix + '-class'"
             :style="_._style([style, customStyle])"
             :target="navigatorProps.target"
@@ -62,10 +62,9 @@
                     />
                 </block>
             </view>
-        </navigator>
+          </view>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
 import { __decorate } from "../miniprogram_npm/tslib";
@@ -73,6 +72,9 @@ import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
 import { calcIcon } from "../common/utils";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
 const {
   prefix: prefix
 } = config;
@@ -85,6 +87,10 @@ let Link = class extends SuperComponent {
     this.options = {
       multipleSlots: true
     };
+    this.components = {
+      tIcon,
+    }
+    this._ = _;
     this.setData({
       prefix: prefix,
       classPrefix: name
@@ -155,7 +161,7 @@ let Link = class extends SuperComponent {
     };
   }
 };
-Link = __decorate([wxComponent()], Link);
+Link = initTDesign(__decorate([wxComponent()], Link));
 export default Link;
 </script>
 <style>
