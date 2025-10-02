@@ -1,26 +1,27 @@
 <template>
-    <view>
-        <t-fab icon="add" @click="handleClick" aria-label="增加"></t-fab>
-    </view>
+  <view>
+    <t-fab
+      icon="add"
+      aria-label="增加"
+      @click="handleClick"
+    />
+  </view>
 </template>
 
 <script>
 import tFab from 'tdesign-uniapp/fab/fab';
 export default {
-    components: {
-        tFab
+  components: {
+    tFab,
+  },
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {
+    handleClick(e) {
+      console.log(e);
     },
-    data() {
-        return {};
-    },
-    methods: {
-        handleClick(e) {
-            console.log(e);
-        }
-    },
-    created: function () {}
+  },
 };
 </script>
-<style>
-@import './index.css';
-</style>

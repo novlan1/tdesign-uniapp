@@ -178,7 +178,7 @@ let Button = class extends SuperComponent {
         });
       },
       handleTap(t) {
-        console.log('handleTap', t)
+        console.log('[Button Comp]handleTap: ', t)
         // this.disabled || this.loading || 
         this.$emit("click", t)
       }

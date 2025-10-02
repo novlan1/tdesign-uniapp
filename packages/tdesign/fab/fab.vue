@@ -1,5 +1,51 @@
 <template>
     <!-- template没有找到这个wxml，已注释 -->
+  <DraggableTemplate v-if="draggable"
+    :prefix="prefix"
+    :classPrefix="classPrefix"
+    :style="style"
+    :customStyle="customStyle"
+    :moveStyle="moveStyle"
+    :draggable="draggable"
+    :buttonData="buttonData"
+    @start="onStart"
+    @move="onMove"
+    @end="onEnd"
+    @tap="onTplButtonTap"
+  />
+  <ViewTemplate 
+  v-else
+    :prefix="prefix"
+    :classPrefix="classPrefix"
+    :style="style"
+    :customStyle="customStyle"
+    :buttonData="buttonData"
+    :buttonLayout="buttonLayout"
+    :disabled="disabled"
+    :loading="loading"
+    :loadingProps="loadingProps"
+    :ghost="ghost"
+    :shape="shape"
+    :size="size"
+    :variant="variant"
+    :icon="icon"
+    :content="content"
+    :ariaLabel="ariaLabel"
+    :index="index"
+    :customDataset="customDataset"
+    :openType="openType"
+    :hoverClass="hoverClass"
+    :hoverStopPropagation="hoverStopPropagation"
+    :hoverStartTime="hoverStartTime"
+    :hoverStayTime="hoverStayTime"
+    :lang="lang"
+    :sessionFrom="sessionFrom"
+    :sendMessageTitle="sendMessageTitle"
+    :sendMessagePath="sendMessagePath"
+    :sendMessageImg="sendMessageImg"
+    :appParameter="appParameter"
+    :showMessageCard="showMessageCard"
+  />
     <!-- <template :is="draggable ? 'draggable' : 'view'" :data="prefix, classPrefix, style, customStyle, moveStyle, draggable, buttonData"/> -->
 </template>
 
@@ -12,6 +58,11 @@ import config from "../common/config";
 import props from "./props";
 import useCustomNavbar from "../mixins/using-custom-navbar";
 import { unitConvert, systemInfo } from "../common/utils";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+import DraggableTemplate from './template/draggable.vue';
+import ViewTemplate from './template/view.vue';
+
 const {
   prefix: prefix
 } = config;
@@ -34,6 +85,21 @@ let Fab = class extends SuperComponent {
       buttonData: baseButtonProps,
       moveStyle: null
     });
+    this.components = {
+      DraggableTemplate,
+      ViewTemplate,
+      tButton,
+      tDraggable
+    }
+    this._ = _;
+    this.watch = {
+      text: {
+        handler(val) {
+          this.content = val;
+        },
+        immediate: true,
+      }
+    }
     this.observers = {
       "buttonProps.**, icon, text, ariaLabel, yBounds"() {
         var t;
@@ -98,7 +164,7 @@ let Fab = class extends SuperComponent {
     };
   }
 };
-Fab = __decorate([wxComponent()], Fab);
+Fab = initTDesign(__decorate([wxComponent()], Fab));
 export default Fab;
 </script>
 <style>

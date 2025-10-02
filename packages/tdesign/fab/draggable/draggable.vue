@@ -9,13 +9,16 @@
         <slot></slot>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import { __awaiter, __decorate } from "../miniprogram_npm/tslib";
+import { __awaiter, __decorate } from "../../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../../common/src/index";
 import config from "../../common/config";
 import props from "./props";
 import { getRect, systemInfo } from "../../common/utils";
+import _ from '../../common/utils.wxs';
+import { initTDesign } from '../../common/runtime';
+
+
 const {
   prefix: prefix
 } = config;
@@ -29,6 +32,7 @@ let Draggable = class extends SuperComponent {
       prefix: prefix,
       classPrefix: name
     });
+    this._ = _;
     this.lifetimes = {
       ready() {
         this.computedRect();
@@ -102,7 +106,7 @@ let Draggable = class extends SuperComponent {
     };
   }
 };
-Draggable = __decorate([wxComponent()], Draggable);
+Draggable = initTDesign(__decorate([wxComponent()], Draggable));
 export default Draggable;
 </script>
 <style>

@@ -21,7 +21,7 @@
           block
           variant="outline"
           data-type="base"
-          @tap.native="handleChange($event, { type: 'base' })"
+          @click="handleChange($event, { type: 'base' })"
         >
           纯图标悬浮按钮
         </t-button>
@@ -35,7 +35,7 @@
           block
           variant="outline"
           data-type="advance"
-          @tap.native="handleChange($event, { type: 'advance' })"
+          @click="handleChange($event, { type: 'advance' })"
         >
           图标加文字悬浮按钮
         </t-button>
@@ -52,7 +52,7 @@
           block
           variant="outline"
           data-type="draggable"
-          @tap.native="handleChange($event, { type: 'draggable' })"
+          @click="handleChange($event, { type: 'draggable' })"
         >
           可移动悬浮按钮
         </t-button>
@@ -66,7 +66,7 @@
           block
           variant="outline"
           data-type="collapsible"
-          @tap.native="handleChange($event, { type: 'collapsible' })"
+          @click="handleChange($event, { type: 'collapsible' })"
         >
           带自动收缩功能
         </t-button>
@@ -106,18 +106,18 @@
 
 import tButton from 'tdesign-uniapp/button/button';
 import tSkeleton from 'tdesign-uniapp/skeleton/skeleton';
-import BaseDemo from './base';
-import advance from './advance';
-import draggable from './draggable';
-import collapsible from './collapsible';
+import BaseDemo from './base/index.vue';
+import advance from './advance/index.vue';
+// import draggable from './draggable/index.vue';
+// import collapsible from './collapsible/index.vue';
 export default {
   components: {
     tButton,
     tSkeleton,
     BaseDemo,
     advance,
-    draggable,
-    collapsible,
+    // draggable,
+    // collapsible,
   },
   data() {
     return {
@@ -137,12 +137,7 @@ export default {
   onPageScroll() {},
   methods: {
     handleChange(e: any, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      this.setData({
-        type: e.target.dataset.type,
-      });
+      this.type = _dataset.type;
     },
   },
 };

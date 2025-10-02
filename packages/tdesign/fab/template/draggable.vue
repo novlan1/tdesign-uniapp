@@ -11,12 +11,12 @@
             >
                 <slot v-if="!buttonData.content && !buttonData.icon" />
                 <!-- parse <template v-else is="button" :data="useDefaultSlot: true, ...buttonData"/> -->
-                <block name="button" v-if="false" v-else>
+                <block name="button" v-else>
                     <t-button
                         :t-id="tId || ''"
                         :style="style || ''"
                         :block="true || false"
-                        :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
+                        :class="getActionClass(classPrefix, buttonLayout) || ''"
                         :t-class="prefix + '-class-action'"
                         :disabled="disabled || false"
                         :data-type="'action'"
@@ -60,9 +60,44 @@
         </template>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
+<script>
+import tDraggable from "../draggable/draggable";
 
+
+export default {
+    name: "DraggableTemplate",
+    components: {
+        tDraggable
+    },
+    props: {
+        prefix: String,
+        classPrefix: String,
+        style: String,
+        customStyle: String,
+        moveStyle: String,
+        draggable: [Boolean, String],
+        buttonData: Object,
+    },
+    methods: {
+        onStart(event) {
+          this.$emit("start", event);
+        },
+        onMove(event) {
+          this.$emit("move", event);
+        },
+        onEnd(event) {
+          this.$emit("end", event);
+        },
+        onTplButtonTap(event) {
+          this.$emit("tap", event);
+        },
+        getActionClass(a,b) {
+            return `${a}-${b}`
+        }
+    },
+}
+</script>
 <style>
-@import './draggable.css';
+/* @import './draggable.css'; */
 
 </style>

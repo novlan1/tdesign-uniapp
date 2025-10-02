@@ -60,15 +60,15 @@
 </template>
 
 <script lang="ts">
-import baseComp from './base';
-import size from './size';
+import baseComp from './base/index.vue';
+import size from './size/index.vue';
 // import iconBtn from './icon-btn';
-import groupBtn from './group-btn';
-import blockBtn from './block-btn';
-import ghostBtn from './ghost-btn';
-import shape from './shape';
-import theme from './theme';
-import disabled from './disabled';
+import groupBtn from './group-btn/index.vue';
+import blockBtn from './block-btn/index.vue';
+import ghostBtn from './ghost-btn/index.vue';
+import shape from './shape/index.vue';
+import theme from './theme/index.vue';
+import disabled from './disabled/index.vue';
 export default {
   components: {
     baseComp,

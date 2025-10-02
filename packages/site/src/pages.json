@@ -77,6 +77,12 @@
       "style": {
         "navigationBarTitleText": "Divider"
       }
+    },
+    {
+      "path": "pages-more/fab/fab",
+      "style": {
+        "navigationBarTitleText": "Fab"
+      }
     }
   ],
   "globalStyle": {

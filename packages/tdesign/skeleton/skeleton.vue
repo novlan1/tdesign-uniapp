@@ -10,7 +10,6 @@
         <view v-else :class="'class ' + classPrefix + '__content'"><slot /></view>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
@@ -18,6 +17,10 @@ import config from "../common/config";
 import props from "./props";
 import { classNames } from "../common/utils";
 import { isNumber } from "../common/validator";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
+
 const {
   prefix: prefix
 } = config;
@@ -53,6 +56,7 @@ let Skeleton = class extends SuperComponent {
       classPrefix: name,
       parsedRowcols: []
     });
+    this._ = _;
     this.observers = {
       rowCol() {
         this.init();
@@ -133,7 +137,7 @@ let Skeleton = class extends SuperComponent {
     };
   }
 };
-Skeleton = __decorate([wxComponent()], Skeleton);
+Skeleton = initTDesign(__decorate([wxComponent()], Skeleton));
 export default Skeleton;
 </script>
 <style>
