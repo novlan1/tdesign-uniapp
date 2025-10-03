@@ -1,39 +1,47 @@
 <template>
-    <view>
-        <t-overlay :visible="visible" :duration="500" @click="handleOverlayClick" />
+  <view>
+    <t-overlay
+      :visible="visible"
+      :duration="500"
+      @click="handleOverlayClick"
+    />
 
-        <t-button block size="large" theme="primary" variant="outline" @tap.native="handleClick">基础用法</t-button>
-    </view>
+    <t-button
+      block
+      size="large"
+      theme="primary"
+      variant="outline"
+      @click="handleClick"
+    >
+      基础用法
+    </t-button>
+  </view>
 </template>
 
 <script>
 import tOverlay from 'tdesign-uniapp/overlay/overlay';
 import tButton from 'tdesign-uniapp/button/button';
 export default {
-    components: {
-        tOverlay,
-        tButton
+  components: {
+    tOverlay,
+    tButton,
+  },
+  data() {
+    return {
+      visible: false,
+    };
+  },
+  created() {},
+  methods: {
+    handleClick() {
+      this.visible = true;
     },
-    data() {
-        return {
-            visible: false
-        };
+    handleOverlayClick(e) {
+      this.visible = e.detail.visible;
     },
-    methods: {
-        handleClick() {
-            this.setData({
-                visible: true
-            });
-        },
-        handleOverlayClick(e) {
-            this.setData({
-                visible: e.detail.visible
-            });
-        }
-    },
-    created: function () {}
+  },
 };
 </script>
 <style>
-@import './index.css';
+/* @import './index.css'; */
 </style>

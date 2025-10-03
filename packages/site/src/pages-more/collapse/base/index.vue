@@ -37,5 +37,5 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+/* @import './index.css'; */
 </style>

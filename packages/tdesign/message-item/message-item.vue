@@ -1,9 +1,9 @@
 <template>
     <view>
-        <block v-if="visible">
             <view
+            v-if="visible"
                 :class="classPrefix + ' class ' + prefix + '-class ' + classPrefix + '--' + theme + ' ' + fadeClass"
-                :style="_._style([_this.getMessageStyles(zIndex, offset, wrapTop), style, customStyle])"
+                :style="_._style([getMessageStyles(zIndex, offset, wrapTop), style, customStyle])"
                 :animation="showAnimation"
                 :id="id || classPrefix"
                 aria-role="alert"
@@ -68,11 +68,8 @@
                     </block>
                 </view>
             </view>
-        </block>
     </view>
 </template>
-<script module="_this" lang="wxs" src="@/message-item/message-item.wxs"></script>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
 import tLink from "../link/link";
@@ -82,6 +79,10 @@ import config from "../common/config";
 import props from "../message/props";
 import { getRect, unitConvert, calcIcon } from "../common/utils";
 import { isObject } from "../common/validator";
+import { initTDesign } from '../common/runtime';
+import _ from '../common/utils.wxs';
+import { getMessageStyles } from '../message-item/message-item.wxs';
+
 const {
   prefix: prefix
 } = config;
@@ -99,7 +100,15 @@ let Message = class extends SuperComponent {
     this.options = {
       multipleSlots: true
     };
-    this = Object.assign({}, props);
+    // this = Object.assign({}, props);
+    this.properties = props;
+    this._ = _;
+    // this._this = _this;
+    this.components = {
+      tIcon,
+      tLink,
+    }
+
     this.setData({
       prefix: prefix,
       classPrefix: name,
@@ -107,7 +116,26 @@ let Message = class extends SuperComponent {
       animation: [],
       showAnimation: [],
       wrapTop: -999,
-      fadeClass: ""
+      fadeClass: "",
+      align: '',
+      closeBtn: '',
+      content: '',
+      duration: 3000,
+      height: 0,
+      id: '',
+      gap:0,
+      icon: null,
+      link: null,
+      marquee: null,
+      offset: [16, 16],
+      style: '',
+      customStyle: '',
+      theme: 'info',
+      visible: false,
+      zIndex: 1000,
+      single: true,
+      defaultVisible: false,
+      ariaHidden: true
     });
     this.closeTimeoutContext = 0;
     this.nextAnimationContext = 0;
@@ -144,6 +172,130 @@ let Message = class extends SuperComponent {
         });
       }
     };
+    this.methods = {
+      getMessageStyles,
+        memoInitialData() {
+          this.initialData = Object.assign(Object.assign({}, this), this);
+        },
+        resetData(t) {
+          console.log('resetData', t, this.initialData)
+          Object.keys(this.initialData).forEach(e => {
+            if (e in this &&  this[e] !== this.initialData[e]) {
+              this[e] = this.initialData[e];
+            }
+          });
+          setTimeout(() => {
+            t && t();
+          }, 0);
+          console.log('this.visible', this.visible)
+          // this.setData(Object.assign({}, this.initialData), t);
+        },
+        checkAnimation() {
+          const {
+            marquee: t
+          } = this;
+          if (!t || 0 === t.loop) {
+            return;
+          }
+          const e = t.speed;
+          if (this.loop > 0) this.loop -= 1;else if (0 === this.loop) {
+            return void this.setData({
+              animation: this.resetAnimation.translateX(0).step().export()
+            });
+          }
+          if (this.nextAnimationContext) {
+            this.clearMessageAnimation();
+          }
+          const i = `#${name}__text-wrap`;
+          const s = `#${name}__text`;
+          Promise.all([getRect(this, s), getRect(this, i)]).then(([t, i]) => {
+            this.setData({
+              animation: this.resetAnimation.translateX(i.width).step().export()
+            }, () => {
+              const s = (t.width + i.width) / e * 1000;
+              const a = uni.createAnimation({
+                duration: s
+              }).translateX(-t.width).step().export();
+              setTimeout(() => {
+                this.nextAnimationContext = setTimeout(this.checkAnimation.bind(this), s);
+                this.setData({
+                  animation: a
+                });
+              }, 20);
+            });
+          });
+        },
+        clearMessageAnimation() {
+          clearTimeout(this.nextAnimationContext);
+          this.nextAnimationContext = 0;
+        },
+        show(t = 0) {
+          const {
+            duration: e,
+            marquee: i,
+            offset: s,
+            id: a
+          } = this;
+          console.log('showing', {duration: e})
+          this.setData({
+            visible: true,
+            loop: i?.loop || this.loop,
+            fadeClass: `${name}__fade`,
+            wrapTop: unitConvert(s[0]) + t
+          });
+          this.reset();
+          this.checkAnimation();
+          if (e && e > 0) {
+            this.closeTimeoutContext = setTimeout(() => {
+              this.hide();
+              this.$emit("duration-end", {
+                detail: {
+                  self: this
+                }
+              });
+            }, e);
+          }
+          getRect(this, a ? `#${a}` : `#${name}`).then(t => {
+            this.setData({
+              height: t.height
+            }, () => {
+            });
+
+            setTimeout(() => {
+              this.fadeClass = '';
+            })
+          });
+        },
+        hide() {
+          this.reset();
+          this.setData({
+            fadeClass: `${name}__fade`
+          });
+          setTimeout(() => {
+            this.setData({
+              visible: false,
+              animation: []
+            });
+          }, 500);
+          if ("function" == typeof this.onHide) {
+            this.onHide();
+          }
+        },
+        reset() {
+          if (this.nextAnimationContext) {
+            this.clearMessageAnimation();
+          }
+          clearTimeout(this.closeTimeoutContext);
+          this.closeTimeoutContext = 0;
+        },
+        handleClose() {
+          this.hide();
+          this.$emit("close-btn-click");
+        },
+        handleLinkClick() {
+          this.$emit("link-click");
+        },
+    }
     this.lifetimes = {
       ready() {
         this.memoInitialData();
@@ -153,117 +305,8 @@ let Message = class extends SuperComponent {
       }
     };
   }
-  memoInitialData() {
-    this.initialData = Object.assign(Object.assign({}, this), this);
-  }
-  resetData(t) {
-    this.setData(Object.assign({}, this.initialData), t);
-  }
-  checkAnimation() {
-    const {
-      marquee: t
-    } = this;
-    if (!t || 0 === t.loop) {
-      return;
-    }
-    const e = t.speed;
-    if (this.loop > 0) this.loop -= 1;else if (0 === this.loop) {
-      return void this.setData({
-        animation: this.resetAnimation.translateX(0).step().export()
-      });
-    }
-    if (this.nextAnimationContext) {
-      this.clearMessageAnimation();
-    }
-    const i = `#${name}__text-wrap`;
-    const s = `#${name}__text`;
-    Promise.all([getRect(this, s), getRect(this, i)]).then(([t, i]) => {
-      this.setData({
-        animation: this.resetAnimation.translateX(i.width).step().export()
-      }, () => {
-        const s = (t.width + i.width) / e * 1000;
-        const a = uni.createAnimation({
-          duration: s
-        }).translateX(-t.width).step().export();
-        setTimeout(() => {
-          this.nextAnimationContext = setTimeout(this.checkAnimation.bind(this), s);
-          this.setData({
-            animation: a
-          });
-        }, 20);
-      });
-    });
-  }
-  clearMessageAnimation() {
-    clearTimeout(this.nextAnimationContext);
-    this.nextAnimationContext = 0;
-  }
-  show(t = 0) {
-    const {
-      duration: e,
-      marquee: i,
-      offset: s,
-      id: a
-    } = this;
-    this.setData({
-      visible: true,
-      loop: i.loop || this.loop,
-      fadeClass: `${name}__fade`,
-      wrapTop: unitConvert(s[0]) + t
-    });
-    this.reset();
-    this.checkAnimation();
-    if (e && e > 0) {
-      this.closeTimeoutContext = setTimeout(() => {
-        this.hide();
-        this.$emit("duration-end", {
-          detail: {
-            self: this
-          }
-        });
-      }, e);
-    }
-    getRect(this, a ? `#${a}` : `#${name}`).then(t => {
-      this.setData({
-        height: t.height
-      }, () => {
-        this.setData({
-          fadeClass: ""
-        });
-      });
-    });
-  }
-  hide() {
-    this.reset();
-    this.setData({
-      fadeClass: `${name}__fade`
-    });
-    setTimeout(() => {
-      this.setData({
-        visible: false,
-        animation: []
-      });
-    }, 500);
-    if ("function" == typeof this.onHide) {
-      this.onHide();
-    }
-  }
-  reset() {
-    if (this.nextAnimationContext) {
-      this.clearMessageAnimation();
-    }
-    clearTimeout(this.closeTimeoutContext);
-    this.closeTimeoutContext = 0;
-  }
-  handleClose() {
-    this.hide();
-    this.$emit("close-btn-click");
-  }
-  handleLinkClick() {
-    this.$emit("link-click");
-  }
 };
-Message = __decorate([wxComponent()], Message);
+Message = initTDesign(__decorate([wxComponent()], Message));
 export default Message;
 </script>
 <style>

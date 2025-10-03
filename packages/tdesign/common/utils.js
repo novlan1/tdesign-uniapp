@@ -148,7 +148,8 @@ export const getInstance = function (e, t) {
         const n = t[t.length - 1];
         e = n.$$basePage || n;
     }
-    const n = e ? e.zpSelectComponent(t) : null;
+    console.log('getInstance.e',{e,t})
+    const n = e ? e.$refs[t.slice(1)] : null;
     return n || (console.warn('未找到组件,请检查selector是否正确'), null);
 };
 export const unitConvert = (e) => {

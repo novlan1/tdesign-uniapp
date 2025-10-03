@@ -50,6 +50,12 @@
     },
     {
       "name": "col"
+    },
+    {
+      "name": "overlay"
+    },
+    {
+      "name": "message"
     }
   ]
 }

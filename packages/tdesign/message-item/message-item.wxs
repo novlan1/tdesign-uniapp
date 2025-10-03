@@ -1,4 +1,4 @@
-var isEmptyObj = function (obj) {
+export var isEmptyObj = function (obj) {
   return JSON.stringify(obj) === '{}';
 };
 
@@ -8,7 +8,7 @@ var changeNumToStr = function (arr) {
   });
 };
 
-var getMessageStyles = function (zIndex, offset, wrapTop) {
+export var getMessageStyles = function (zIndex, offset, wrapTop) {
   var arr = changeNumToStr(offset || [0, 0]);
   var left = arr[1] || 0;
   var right = arr[1] || 0;
@@ -23,7 +23,3 @@ var getMessageStyles = function (zIndex, offset, wrapTop) {
   return zIndexStyle + styleOffset;
 };
 
-module.exports = {
-  getMessageStyles: getMessageStyles,
-  isEmptyObj: isEmptyObj,
-};

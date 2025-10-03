@@ -4,12 +4,13 @@ import { getInstance } from '../common/utils';
 const showMessage = function (e, s = MessageType.info) {
     const { context: t, selector: o = '#t-message' } = e;
     const n = __rest(e, ['context', 'selector']);
+    console.log('showMessage.t',t, t.selectComponent)
     const r = getInstance(t, o);
     if ('boolean' != typeof n.single) {
         n.single = true;
     }
     if (r) {
-        r.setMessage(n, s);
+        r.setMessage(n, s, t);
         return r;
     }
     console.error('未找到组件,请确认 selector && context 是否正确');

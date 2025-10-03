@@ -95,6 +95,18 @@
       "style": {
         "navigationBarTitleText": "Layout"
       }
+    },
+    {
+      "path": "pages-more/overlay/overlay",
+      "style": {
+        "navigationBarTitleText": "Overlay"
+      }
+    },
+    {
+      "path": "pages-more/message/message",
+      "style": {
+        "navigationBarTitleText": "Message"
+      }
     }
   ],
   "globalStyle": {
