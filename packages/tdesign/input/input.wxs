@@ -1,4 +1,4 @@
-function getInputClass(classPrefix, suffix, align, disabled) {
+export function getInputClass(classPrefix, suffix, align, disabled) {
   var className = [classPrefix + '__control'];
 
   if (align) {
@@ -11,6 +11,3 @@ function getInputClass(classPrefix, suffix, align, disabled) {
   return className.join(' ');
 }
 
-module.exports = {
-  getInputClass: getInputClass,
-};

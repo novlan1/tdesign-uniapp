@@ -113,6 +113,12 @@
       "style": {
         "navigationBarTitleText": "Toast"
       }
+    },
+    {
+      "path": "pages-more/dialog/dialog",
+      "style": {
+        "navigationBarTitleText": "Dialog"
+      }
     }
   ],
   "globalStyle": {

@@ -52,7 +52,7 @@
         desc="命令调用"
         padding
       >
-        <command />
+        <commandDemo />
       </t-demo>
 
       <t-demo
@@ -67,22 +67,22 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import confirm from './confirm';
-import withInput from './with-input';
-import withImage from './with-image';
-import command from './command';
-import status from './status';
-import buttonDemo from './button';
+import BaseDemo from './base/index.vue';
+// import confirm from './confirm/index.vue';
+// import withInput from './with-input/index.vue';
+// import withImage from './with-image/index.vue';
+// import commandDemo from './command/index.vue';
+// import status from './status/index.vue';
+// import buttonDemo from './button/index.vue';
 export default {
   components: {
     BaseDemo,
-    confirm,
-    withInput,
-    withImage,
-    command,
-    status,
-    buttonDemo,
+    // confirm,
+    // withInput,
+    // withImage,
+    // commandDemo,
+    // status,
+    // buttonDemo,
   },
   data() {
     return {};

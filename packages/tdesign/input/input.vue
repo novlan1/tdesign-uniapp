@@ -31,7 +31,7 @@
         <view :class="classPrefix + '__wrap'">
             <view :class="classPrefix + '__content ' + classPrefix + '--' + status">
                 <input
-                    :class="_this.getInputClass(classPrefix, suffix, align, disabled) + ' ' + prefix + '-class-input'"
+                    :class="getInputClass(classPrefix, suffix, align, disabled) + ' ' + prefix + '-class-input'"
                     :maxlength="allowInputOverMax ? -1 : maxlength"
                     :disabled="disabled || readonly"
                     :placeholder="placeholder"
@@ -114,8 +114,6 @@
         <slot name="extra" />
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
-<script module="_this" lang="wxs" src="@/input/input.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
 import { __decorate } from "../miniprogram_npm/tslib";
@@ -124,6 +122,10 @@ import config from "../common/config";
 import props from "./props";
 import { getCharacterLength, calcIcon } from "../common/utils";
 import { isDef } from "../common/validator";
+import { getInputClass }from './input.wxs';
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
 const {
   prefix: prefix
 } = config;
@@ -134,6 +136,10 @@ let Input = class extends SuperComponent {
     this.options = {
       multipleSlots: true
     };
+    this.components = {
+      tIcon
+    }
+    this._ = _;
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-prefix-icon`, `${prefix}-class-label`, `${prefix}-class-input`, `${prefix}-class-clearable`, `${prefix}-class-suffix`, `${prefix}-class-suffix-icon`, `${prefix}-class-tips`];
     this.behaviors = ["wx://form-field"];
     this.properties = props;;
@@ -294,7 +300,7 @@ let Input = class extends SuperComponent {
     };
   }
 };
-Input = __decorate([wxComponent()], Input);
+Input = initTDesign(__decorate([wxComponent()], Input));
 export default Input;
 </script>
 <style>

@@ -19,7 +19,7 @@
                 <slot name="top" />
                 <view v-if="closeBtn" :class="classPrefix + '__close-btn'" @tap="onClose">
                     <!-- parse <template v-if="_.isObject(closeBtn)" is="icon" :data="name: 'close', size: 22, ...closeBtn"/> -->
-                    <block name="icon" v-if="_.isObject(closeBtn)">
+                    <template name="icon" v-if="_.isObject(closeBtn)">
                         <t-icon
                             :style="style || ''"
                             :t-class="tClass"
@@ -32,7 +32,7 @@
                             :aria-role="ariaRole || ''"
                             @click="bindclick || ''"
                         />
-                    </block>
+                    </template>
                     <t-icon v-else name="close" size="44rpx" />
                 </view>
                 <view :class="classPrefix + '__content ' + prefix + '-class-content'">
@@ -52,15 +52,15 @@
                         ])
                     "
                 >
-                    <block v-if="actions">
-                        <block v-for="(item, index) in actions" :key="index">
-                            <!-- parse <template is="button" :data="block: true, type: 'action', extra: index, tClass: prefix + '-class-action', rootClass: _this.getActionClass(classPrefix, buttonLayout), ...item"/> -->
-                            <block name="button">
+                    <template v-if="actions">
+                        <template v-for="(item, index) in actions" :key="index">
+                            <!-- parse <template is="button" :data="block: true, type: 'action', extra: index, tClass: prefix + '-class-action', rootClass: getActionClass(classPrefix, buttonLayout), ...item"/> -->
+                            <template name="button">
                                 <t-button
                                     :t-id="tId || ''"
                                     :style="style || ''"
                                     :block="true || false"
-                                    :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
+                                    :class="getActionClass(classPrefix, buttonLayout) || ''"
                                     :t-class="prefix + '-class-action'"
                                     :disabled="disabled || false"
                                     :data-type="'action'"
@@ -99,18 +99,18 @@
                                 >
                                     <slot v-if="useDefaultSlot || false" />
                                 </t-button>
-                            </block>
-                        </block>
-                    </block>
+                            </template>
+                        </template>
+                    </template>
                     <slot name="actions" />
-                    <block v-if="_cancel">
+                    <template v-if="_cancel">
                         <!-- parse <template is="button" :data="type: 'cancel', ..._cancel"/> -->
-                        <block name="button" v-if="false">
+                        <template name="button" v-if="false">
                             <t-button
                                 :t-id="tId || ''"
                                 :style="style || ''"
                                 :block="true || false"
-                                :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
+                                :class="getActionClass(classPrefix, buttonLayout) || ''"
                                 :t-class="prefix + '-class-action'"
                                 :disabled="disabled || false"
                                 :data-type="'action'"
@@ -149,23 +149,24 @@
                             >
                                 <slot v-if="useDefaultSlot || false" />
                             </t-button>
-                        </block>
-                    </block>
+                        </template>
+                    </template>
                     <slot name="cancel-btn" />
-                    <block v-if="_confirm">
+                    <template v-if="_confirm">
+                      <!-- TODO: 改成 v-bind？ -->
                         <!-- parse <template is="button" :data="type: 'confirm', theme: 'primary', ..._confirm"/> -->
-                        <block name="button" v-if="false">
+                        <!-- <template name="button"> -->
                             <t-button
                                 :t-id="tId || ''"
                                 :style="style || ''"
-                                :block="true || false"
-                                :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
+                                :block="!!_confirm.block"
+                                :class="getActionClass(classPrefix, buttonLayout) || ''"
                                 :t-class="prefix + '-class-action'"
                                 :disabled="disabled || false"
                                 :data-type="'action'"
                                 :data-extra="index"
                                 :custom-dataset="customDataset"
-                                :content="content || ''"
+                                :content="_confirm.content || ''"
                                 :icon="icon || ''"
                                 :loading="loading || false"
                                 :loading-props="loadingProps || null"
@@ -186,28 +187,26 @@
                                 :send-message-img="sendMessageImg || ''"
                                 :app-parameter="appParameter || ''"
                                 :show-message-card="showMessageCard || false"
-                                @tap.native="onTplButtonTap($event, { type: 'action', extra: index })"
-                                @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                                @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                                @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                                @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                                @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                                @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                                @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
+                                @tap.native="onConfirm($event, { type: 'action', extra: index })"
+                                @getuserinfo="onConfirm($event, { type: 'action', extra: index })"
+                                @contact="onConfirm($event, { type: 'action', extra: index })"
+                                @getphonenumber="onConfirm($event, { type: 'action', extra: index })"
+                                @error="onTplButtonConfirmonTap($event, { type: 'action', extra: index })"
+                                @opensetting="onConfirm($event, { type: 'action', extra: index })"
+                                @launchapp="onConfirm($event, { type: 'action', extra: index })"
+                                @agreeprivacyauthorization="onConfirm($event, { type: 'action', extra: index })"
                                 :aria-label="ariaLabel || ''"
                             >
                                 <slot v-if="useDefaultSlot || false" />
                             </t-button>
-                        </block>
-                    </block>
+                        <!-- </template> -->
+                    </template>
                     <slot name="confirm-btn" />
                 </view>
             </view>
         </t-popup>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
-<script module="_this" lang="wxs" src="@/dialog/dialog.wxs"></script>
 <script>
 import tPopup from "../popup/popup";
 import tIcon from "../icon/icon";
@@ -219,6 +218,10 @@ import props from "./props";
 import { toCamel } from "../common/utils";
 import { isObject } from "../common/validator";
 import useCustomNavbar from "../mixins/using-custom-navbar";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+import { getActionClass } from './dialog.wxs';
+
 const {
   prefix: prefix
 } = config;
@@ -230,6 +233,12 @@ let Dialog = class extends SuperComponent {
     this.options = {
       multipleSlots: true
     };
+    this._ = _;
+    this.components = {
+      tPopup,
+      tIcon,
+      tButton,
+    }
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-confirm`, `${prefix}-class-cancel`, `${prefix}-class-action`];
     this.properties = props;;
     this.setData({
@@ -281,6 +290,7 @@ let Dialog = class extends SuperComponent {
       }
     };
     this.methods = {
+      getActionClass,
       onTplButtonTap(t) {
         var e;
         var o;
@@ -384,11 +394,11 @@ let Dialog = class extends SuperComponent {
         this.$emit("open-type-error-event", {
           detail: t.detail
         });
-      }
+      },
     };
   }
 };
-Dialog = __decorate([wxComponent()], Dialog);
+Dialog = initTDesign(__decorate([wxComponent()], Dialog));
 export default Dialog;
 </script>
 <style>
