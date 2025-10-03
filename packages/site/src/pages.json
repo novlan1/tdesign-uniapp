@@ -107,6 +107,12 @@
       "style": {
         "navigationBarTitleText": "Message"
       }
+    },
+    {
+      "path": "pages-more/toast/toast",
+      "style": {
+        "navigationBarTitleText": "Toast"
+      }
     }
   ],
   "globalStyle": {

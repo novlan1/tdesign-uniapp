@@ -10,7 +10,7 @@
             <view :class="classPrefix + '__content ' + classPrefix + '__content--' + direction">
                 <t-loading v-if="isLoading" theme="circular" :size="direction === 'row' ? '48rpx' : '64rpx'" loading inherit-color layout="vertical" />
                 <!-- parse <template v-else-if="_icon" is="icon" :data="ariaHidden: true, tClass: classPrefix + '__icon ' + classPrefix + '__icon--' + direction, ..._icon"/> -->
-                <block name="icon" v-if="false" v-else-if="_icon">
+                <block name="icon" v-else-if="_icon">
                     <t-icon
                         :style="style || ''"
                         :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -40,7 +40,6 @@
         />
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
 import tLoading from "../loading/loading";
@@ -49,9 +48,13 @@ import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
-import transition from "../mixins/transition";
+import transition, { transitionMixins } from "../mixins/transition";
 import { calcIcon } from "../common/utils";
 import useCustomNavbar from "../mixins/using-custom-navbar";
+import { initTDesign } from '../common/runtime';
+import _ from '../common/utils.wxs';
+
+
 const {
   prefix: prefix
 } = config;
@@ -65,10 +68,25 @@ let Toast = class extends SuperComponent {
     };
     this.behaviors = [transition(), useCustomNavbar];
     this.hideTimer = null;
+    this._ = _;
+    this.components = {
+      tIcon,
+      tLoading,
+      tOverlay,
+    }
     this.setData({
       prefix: prefix,
       classPrefix: name,
-      typeMapIcon: ""
+      typeMapIcon: "",
+      direction: null,
+      message: "",
+      icon: "",
+      placement: "center",
+      preventScrollThrough: false,
+      theme: "info",
+      duration: 3000,
+      visible: false,
+      isLoading: false,
     });
     this.properties = props;;
     this.lifetimes = {
@@ -109,6 +127,7 @@ let Toast = class extends SuperComponent {
         const {
           duration: s
         } = o;
+        console.log('toast show', {o});
         this.setData(o);
         if (s > 0) {
           this.hideTimer = setTimeout(() => {
@@ -138,7 +157,12 @@ let Toast = class extends SuperComponent {
     };
   }
 };
-Toast = __decorate([wxComponent()], Toast);
+Toast = initTDesign(__decorate([wxComponent()], Toast));
+Toast = {
+  ...Toast,
+  mixins: [transitionMixins]
+}
+
 export default Toast;
 </script>
 <style>
