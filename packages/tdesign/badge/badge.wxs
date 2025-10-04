@@ -1,4 +1,4 @@
-var getBadgeValue = function (props) {
+export const getBadgeValue = function (props) {
   if (props.dot) {
     return '';
   }
@@ -8,7 +8,7 @@ var getBadgeValue = function (props) {
   return parseInt(props.count) > props.maxCount ? props.maxCount + '+' : props.count;
 };
 
-var hasUnit = function (unit) {
+export const hasUnit = function (unit) {
   return (
     unit.indexOf('px') > 0 ||
     unit.indexOf('rpx') > 0 ||
@@ -20,7 +20,7 @@ var hasUnit = function (unit) {
   );
 };
 
-var getBadgeStyles = function (props) {
+export const getBadgeStyles = function (props) {
   var styleStr = '';
   if (props.color) {
     styleStr += 'background:' + props.color + ';';
@@ -35,13 +35,13 @@ var getBadgeStyles = function (props) {
   return styleStr;
 };
 
-var getBadgeOuterClass = function (props) {
+export const getBadgeOuterClass = function (props) {
   var baseClass = 't-badge';
   var classNames = [baseClass, props.shape === 'ribbon' ? baseClass + '__ribbon-outer' : ''];
   return classNames.join(' ');
 };
 
-var getBadgeInnerClass = function (props) {
+export const getBadgeInnerClass = function (props) {
   var baseClass = 't-badge';
   var classNames = [
     baseClass + '--basic',
@@ -53,7 +53,7 @@ var getBadgeInnerClass = function (props) {
   return classNames.join(' ');
 };
 
-var isShowBadge = function (props) {
+export const isShowBadge = function (props) {
   if (props.dot) {
     return true;
   }
@@ -64,8 +64,3 @@ var isShowBadge = function (props) {
   return true;
 };
 
-module.exports.getBadgeValue = getBadgeValue;
-module.exports.getBadgeStyles = getBadgeStyles;
-module.exports.getBadgeOuterClass = getBadgeOuterClass;
-module.exports.getBadgeInnerClass = getBadgeInnerClass;
-module.exports.isShowBadge = isShowBadge;

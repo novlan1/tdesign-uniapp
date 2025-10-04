@@ -77,7 +77,7 @@ let Fab = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.behaviors = [useCustomNavbar];
-    this.properties = props;;
+    this.properties = props;
     this.externalClasses = ["class", `${prefix}-class`, `${prefix}-class-button`];
     this.setData({
       prefix: prefix,

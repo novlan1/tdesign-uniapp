@@ -1,10 +1,10 @@
 <template>
     <view>
         <t-grid class="t-grid badge">
-            <t-grid-item t-class-image="image" text="标题文字" :image="img1" :badge-props="" />
-            <t-grid-item t-class-image="image" text="标题文字" :image="img2" :badge-props="" />
-            <t-grid-item t-class-image="image" text="标题文字" :image="img3" :badge-props="" />
-            <t-grid-item t-class-image="image" text="标题文字" :image="img3" :badge-props="" />
+            <t-grid-item t-class-image="image" text="标题文字" :image="img1" badge-props="" />
+            <t-grid-item t-class-image="image" text="标题文字" :image="img2" badge-props="" />
+            <t-grid-item t-class-image="image" text="标题文字" :image="img3" badge-props="" />
+            <t-grid-item t-class-image="image" text="标题文字" :image="img3" badge-props="" />
         </t-grid>
     </view>
 </template>

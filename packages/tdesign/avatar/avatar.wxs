@@ -1,4 +1,6 @@
-module.exports = {
+import { getRegExp } from '../common/runtime/wxs-polyfill';
+
+export const utils = {
   getClass: function (classPrefix, size, shape, bordered) {
     var hasPx = (size || '').indexOf('px') > -1;
     var borderSize = hasPx ? 'medium' : size;

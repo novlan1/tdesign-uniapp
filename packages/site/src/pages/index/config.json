@@ -65,6 +65,9 @@
     },
     {
       "name": "notice-bar"
+    },
+    {
+      "name": "avatar"
     }
   ]
 }

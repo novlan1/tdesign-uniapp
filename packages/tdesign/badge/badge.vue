@@ -1,7 +1,7 @@
 <template>
     <view
         :style="_._style([style, customStyle])"
-        :class="_this.getBadgeOuterClass({ shape }) + ' class ' + prefix + '-class'"
+        :class="getBadgeOuterClass({ shape }) + ' class ' + prefix + '-class'"
         :aria-labelledby="labelID"
         :aria-describedby="descriptionID"
         :aria-role="ariaRole || 'option'"
@@ -13,17 +13,16 @@
         <view
             :aria-hidden="true"
             :aria-label="ariaLabel || _.getBadgeAriaLabel({ dot, count, maxCount })"
-            v-if="_this.isShowBadge({ dot, count, showZero })"
+            v-if="isShowBadge({ dot, count, showZero })"
             :id="descriptionID"
-            :class="_this.getBadgeInnerClass({ dot, size, shape, count }) + ' ' + prefix + '-has-count ' + prefix + '-class-count'"
-            :style="_._style([_this.getBadgeStyles({ color, offset })])"
+            :class="getBadgeInnerClass({ dot, size, shape, count }) + ' ' + prefix + '-has-count ' + prefix + '-class-count'"
+            :style="_._style([getBadgeStyles({ color, offset })])"
         >
-            {{ _this.getBadgeValue({ dot, count, maxCount }) }}
+            {{ getBadgeValue({ dot, count, maxCount }) }}
         </view>
         <slot name="count" />
     </view>
 </template>
-<script module="_this" lang="wxs" src="./badge.wxs"></script>
 <script>
 import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
@@ -32,6 +31,13 @@ import props from "./props";
 import { uniqueFactory } from "../common/utils";
 import _ from '../common/utils.wxs';
 import { initTDesign } from '../common/runtime';
+import {
+  getBadgeValue,
+  getBadgeStyles,
+  getBadgeOuterClass,
+  getBadgeInnerClass,
+  isShowBadge,
+ } from './badge.wxs';
 
 const {
   prefix: prefix
@@ -63,6 +69,13 @@ let Badge = class extends SuperComponent {
         });
       }
     };
+    this.methods = {
+      getBadgeValue,
+      getBadgeStyles,
+      getBadgeOuterClass,
+      getBadgeInnerClass,
+      isShowBadge,
+    }
   }
 };
 Badge = initTDesign(__decorate([wxComponent()], Badge));

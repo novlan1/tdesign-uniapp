@@ -16,13 +16,17 @@
         </view>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tAvatar from "../avatar/avatar";
 import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import avatarGroupProps from "./props";
+
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
+
 const {
   prefix: prefix
 } = config;
@@ -31,13 +35,20 @@ let AvatarGroup = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-image`];
-    this = avatarGroupProps;
+    // this = avatarGroupProps;
+    this.properties = avatarGroupProps;
+    this._ = _;
+    this.components = {
+      tAvatar
+    }
+
     this.setData({
       prefix: prefix,
       classPrefix: name,
       hasChild: true,
       length: 0,
-      className: ""
+      className: "",
+      size: 'medium',
     });
     this.options = {
       multipleSlots: true
@@ -95,7 +106,7 @@ let AvatarGroup = class extends SuperComponent {
     };
   }
 };
-AvatarGroup = __decorate([wxComponent()], AvatarGroup);
+AvatarGroup = initTDesign(__decorate([wxComponent()], AvatarGroup));
 export default AvatarGroup;
 </script>
 <style>

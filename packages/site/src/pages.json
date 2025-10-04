@@ -125,6 +125,12 @@
       "style": {
         "navigationBarTitleText": "NoticeBar"
       }
+    },
+    {
+      "path": "pages-more/avatar/avatar",
+      "style": {
+        "navigationBarTitleText": "Avatar"
+      }
     }
   ],
   "globalStyle": {

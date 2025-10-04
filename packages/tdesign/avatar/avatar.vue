@@ -1,5 +1,5 @@
 <template>
-    <view :class="classPrefix + '__wrapper class ' + prefix + '-class'" :style="_._style([_this.getStyles(isShow), style, customStyle])">
+    <view :class="classPrefix + '__wrapper class ' + prefix + '-class'" :style="_._style([utils.getStyles(isShow), style, customStyle])">
         <t-badge
             :color="badgeProps.color || ''"
             :content="badgeProps.content || ''"
@@ -15,8 +15,8 @@
             :t-class-count="badgeProps.tClassCount"
         >
             <view
-                :class="_this.getClass(classPrefix, size || 'medium', shape, bordered) + ' ' + prefix + '-class-image'"
-                :style="_this.getSize(size, systemInfo)"
+                :class="utils.getClass(classPrefix, size || 'medium', shape, bordered) + ' ' + prefix + '-class-image'"
+                :style="utils.getSize(size, systemInfo)"
                 :aria-label="ariaLabel || alt || '头像'"
                 :aria-role="ariaRole || 'img'"
                 :aria-hidden="ariaHidden"
@@ -36,7 +36,7 @@
                     @error="onLoadError"
                 />
                 <!-- parse <template v-else-if="iconName || _.isNoEmptyObj(iconData)" is="icon" :data="tClass: classPrefix + '__icon ' + prefix + '-class-icon', name: iconName, ...iconData"/> -->
-                <block name="icon" v-if="false" v-else-if="iconName || _.isNoEmptyObj(iconData)">
+                <block name="icon" v-else-if="iconName || _.isNoEmptyObj(iconData)">
                     <t-icon
                         :style="style || ''"
                         :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -55,8 +55,6 @@
         </t-badge>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
-<script module="_this" lang="wxs" src="@/avatar/avatar.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
 import tBadge from "../badge/badge";
@@ -66,6 +64,11 @@ import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import avatarProps from "./props";
 import { setIcon, systemInfo } from "../common/utils";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+import { utils } from './avatar.wxs';
+
+
 const {
   prefix: prefix
 } = config;
@@ -77,13 +80,22 @@ let Avatar = class extends SuperComponent {
       multipleSlots: true
     };
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-image`, `${prefix}-class-icon`, `${prefix}-class-alt`, `${prefix}-class-content`];
-    this = avatarProps;
+    this.properties = avatarProps;
+
+    this._ = _;
+    this.components = {
+      tIcon,
+      tBadge,
+      tImage
+    }
     this.setData({
       prefix: prefix,
       classPrefix: name,
       isShow: true,
       zIndex: 0,
-      systemInfo: systemInfo
+      systemInfo: systemInfo,
+      utils,
+      badgeProps: {}
     });
     this.relations = {
       "../avatar-group/avatar-group": {
@@ -123,7 +135,7 @@ let Avatar = class extends SuperComponent {
     };
   }
 };
-Avatar = __decorate([wxComponent()], Avatar);
+Avatar = initTDesign(__decorate([wxComponent()], Avatar));
 export default Avatar;
 </script>
 <style>
