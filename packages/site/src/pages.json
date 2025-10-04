@@ -131,6 +131,12 @@
       "style": {
         "navigationBarTitleText": "Avatar"
       }
+    },
+    {
+      "path": "pages-more/badge/badge",
+      "style": {
+        "navigationBarTitleText": "Badge"
+      }
     }
   ],
   "globalStyle": {
