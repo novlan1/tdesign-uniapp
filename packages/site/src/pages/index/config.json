@@ -89,6 +89,9 @@
     },
     {
       "name": "result"
+    },
+    {
+      "name": "skeleton"
     }
   ]
 }

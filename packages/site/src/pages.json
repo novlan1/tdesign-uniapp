@@ -179,6 +179,12 @@
       "style": {
         "navigationBarTitleText": "Result"
       }
+    },
+    {
+      "path": "pages-more/skeleton/skeleton",
+      "style": {
+        "navigationBarTitleText": "Skeleton"
+      }
     }
   ],
   "globalStyle": {

@@ -5,14 +5,17 @@ const props = {
     },
     delay: {
         type: Number,
-        value: 0
+        value: 0,
+        default: 0
     },
     loading: {
         type: Boolean,
         value: true
     },
     rowCol: {
-        type: Array
+        type: Array,
+        default: () => ([]),
+        value: () => ([])
     },
     theme: {
         type: String,

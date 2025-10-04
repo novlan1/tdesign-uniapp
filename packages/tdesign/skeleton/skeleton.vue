@@ -54,7 +54,8 @@ let Skeleton = class extends SuperComponent {
     this.setData({
       prefix: prefix,
       classPrefix: name,
-      parsedRowcols: []
+      parsedRowcols: [],
+      isShow: false,
     });
     this._ = _;
     this.observers = {
@@ -104,6 +105,7 @@ let Skeleton = class extends SuperComponent {
             style: this.getColItemStyle(e)
           })];
         });
+        
         this.setData({
           parsedRowcols: i
         });
@@ -124,15 +126,23 @@ let Skeleton = class extends SuperComponent {
       isShowSkeleton() {
         const {
           loading: t,
-          delay: e
+          delay: e = 0
         } = this;
-        t && 0 !== e ? setTimeout(() => {
-          this.setData({
-            isShow: t
-          });
-        }, e) : this.setData({
+        
+        if (t && e !==0) {
+          setTimeout(() => {
+            
+            this.setData({
+              isShow: t
+            });
+          }, e) 
+          return;
+        }
+        
+        this.setData({
           isShow: t
         });
+        this.isShow = t;
       }
     };
   }
