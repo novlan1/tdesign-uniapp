@@ -1,7 +1,7 @@
 <template>
   <view
     :style="_._style([style, customStyle, show ? '' : 'display: none', inheritColor ? 'color: inherit' : ''])"
-    :class="'class ' + prefix + '-class ' + classPrefix + ' ' + (classPrefix + '--' + layout) + ' ' + (fullscreen ? classPrefix + '--fullscreen' : '')"
+    :class="extraClass + ' ' + prefix + '-class ' + classPrefix + ' ' + (classPrefix + '--' + layout) + ' ' + (fullscreen ? classPrefix + '--fullscreen' : '')"
   >
     <view
       v-if="indicator"

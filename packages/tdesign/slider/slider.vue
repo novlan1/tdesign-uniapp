@@ -14,7 +14,7 @@
         "
     >
         <block v-if="!range">
-            <text v-if="showExtremeValue" :class="classPrefix + '__value ' + classPrefix + '__value--min'">{{ label ? t.getValue(label, min) : min }}</text>
+            <text v-if="showExtremeValue" :class="classPrefix + '__value ' + classPrefix + '__value--min'">{{ label ? getValue(label, min) : min }}</text>
             <view
                 id="sliderLine"
                 :class="_.cls(classPrefix + '__bar', [['disabled', disabled], theme, ['marks', isScale && theme == 'capsule']]) + ' ' + prefix + '-class-bar'"
@@ -57,7 +57,7 @@
                             aria-live="assertive"
                             :aria-hidden="!isVisibleToScreenReader"
                         >
-                            {{ t.getValue(label, _value) || _value }}
+                            {{ getValue(label, _value) || _value }}
                         </view>
                         <view
                             :class="classPrefix + '__dot-slider'"
@@ -66,12 +66,12 @@
                             :aria-valuemax="max"
                             :aria-valuemin="min"
                             :aria-valuenow="_value"
-                            :aria-valuetext="t.getValue(label, _value) || _value"
+                            :aria-valuetext="getValue(label, _value) || _value"
                         ></view>
                     </view>
                 </view>
             </view>
-            <text v-if="showExtremeValue" :class="classPrefix + '__value ' + classPrefix + '__value--max'">{{ label ? t.getValue(label, max) : max }}</text>
+            <text v-if="showExtremeValue" :class="classPrefix + '__value ' + classPrefix + '__value--max'">{{ label ? getValue(label, max) : max }}</text>
         </block>
         <block v-if="range">
             <view v-if="showExtremeValue" :class="classPrefix + '__range-extreme ' + classPrefix + '__range-extreme--min'">{{ min }}</view>
@@ -117,7 +117,7 @@
                             aria-live="assertive"
                             :aria-hidden="!isVisibleToScreenReader"
                         >
-                            {{ t.getValue(label, dotTopValue[0]) || dotTopValue[0] }}
+                            {{ getValue(label, dotTopValue[0]) || dotTopValue[0] }}
                         </view>
                         <view
                             :class="classPrefix + '__dot-slider'"
@@ -126,7 +126,7 @@
                             :aria-valuemax="max"
                             :aria-valuemin="min"
                             :aria-valuenow="dotTopValue[0]"
-                            :aria-valuetext="t.getValue(label, dotTopValue[0]) || dotTopValue[0]"
+                            :aria-valuetext="getValue(label, dotTopValue[0]) || dotTopValue[0]"
                         ></view>
                     </view>
                     <view
@@ -144,7 +144,7 @@
                             aria-live="assertive"
                             :aria-hidden="!isVisibleToScreenReader"
                         >
-                            {{ t.getValue(label, dotTopValue[1]) || dotTopValue[1] }}
+                            {{ getValue(label, dotTopValue[1]) || dotTopValue[1] }}
                         </view>
                         <view
                             :class="classPrefix + '__dot-slider'"
@@ -153,7 +153,7 @@
                             :aria-valuemax="max"
                             :aria-valuemin="min"
                             :aria-valuenow="dotTopValue[1]"
-                            :aria-valuetext="t.getValue(label, dotTopValue[1]) || dotTopValue[1]"
+                            :aria-valuetext="getValue(label, dotTopValue[1]) || dotTopValue[1]"
                         ></view>
                     </view>
                 </view>
@@ -162,8 +162,6 @@
         </block>
     </view>
 </template>
-<script module="t" lang="wxs" src="@/slider/slider.wxs"></script>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import { __awaiter, __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
@@ -172,6 +170,10 @@ import { trimSingleValue, trimValue } from "./tool";
 import props from "./props";
 import { getRect } from "../common/utils";
 import Bus from "../common/bus";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+import { getValue } from './slider.wxs';
+
 const {
   prefix: prefix
 } = config;
@@ -183,6 +185,7 @@ let Slider = class extends SuperComponent {
     this.options = {
       pureDataPattern: /^__/
     };
+    this._ = _;
     this.properties = props;;
     this.controlledProps = [{
       key: "value",
@@ -234,6 +237,9 @@ let Slider = class extends SuperComponent {
         this.injectPageScroll();
       }
     };
+    this.methods = {
+      getValue,
+    }
   }
   injectPageScroll() {
     const {
@@ -582,7 +588,7 @@ let Slider = class extends SuperComponent {
     return s ? i : t;
   }
 };
-Slider = __decorate([wxComponent()], Slider);
+Slider = initTDesign(__decorate([wxComponent()], Slider));
 export default Slider;
 </script>
 <style>

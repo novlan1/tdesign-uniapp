@@ -47,6 +47,11 @@ const props = {
     theme: {
         type: String,
         value: 'circular'
+    },
+    extraClass: {
+        type: String,
+        default: '',
+        value: '',
     }
 };
 export default props;

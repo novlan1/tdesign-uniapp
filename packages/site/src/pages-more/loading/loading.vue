@@ -27,13 +27,13 @@
           desc="图标加文字横向"
           padding
         >
-          <horizontal />
+          <HorizontalDemo />
         </t-demo>
         <t-demo
           desc="图标加文字竖向"
           padding
         >
-          <vertical />
+          <VerticalDemo />
         </t-demo>
         <t-demo
           desc="纯文字"
@@ -47,7 +47,7 @@
           desc="大尺寸"
           padding
         >
-          <size />
+          <SizeDemo />
         </t-demo>
 
         <t-demo
@@ -55,7 +55,7 @@
           desc="加载速度调整"
           padding
         >
-          <duration />
+          <DurationDemo />
         </t-demo>
       </view>
     </scroll-view>
@@ -63,21 +63,21 @@
 </template>
 
 <script lang="ts">
-// 
+//
 import BaseComp from './base/index.vue';
-// import horizontal from './horizontal/index.vue';
-// import vertical from './vertical/index.vue';
-// import TextComp from './text/index.vue';
-// import duration from './duration/index.css';
-// import size from './size/index.vue';
+import HorizontalDemo from './horizontal/index.vue';
+import VerticalDemo from './vertical/index.vue';
+import TextComp from './text/index.vue';
+import DurationDemo from './duration/index.vue';
+import SizeDemo from './size/index.vue';
 export default {
   components: {
     BaseComp,
-    // horizontal,
-    // vertical,
-    // TextComp,
-    // duration,
-    // size,
+    HorizontalDemo,
+    VerticalDemo,
+    TextComp,
+    DurationDemo,
+    SizeDemo,
   },
   data() {
     return {};

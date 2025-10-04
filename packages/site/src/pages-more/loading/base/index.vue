@@ -4,21 +4,21 @@
       v-if="!skylineRender"
       theme="circular"
       size="40rpx"
-      class="wrapper"
+      extra-class="wrapper"
     />
     <t-loading
       theme="spinner"
       size="40rpx"
-      class="wrapper"
+      extra-class="wrapper"
     />
     <t-loading
       theme="dots"
       size="80rpx"
-      class="wrapper"
+      extra-class="wrapper"
     />
     <t-loading
       theme="custom"
-      class="wrapper"
+      extra-class="wrapper"
     >
       <template
         #indicator

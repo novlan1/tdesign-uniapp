@@ -78,6 +78,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    padding: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
