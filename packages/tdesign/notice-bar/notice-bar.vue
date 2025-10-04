@@ -65,7 +65,6 @@
         </view>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
 import { __decorate } from "../miniprogram_npm/tslib";
@@ -73,6 +72,10 @@ import { SuperComponent, wxComponent } from "../common/src/index";
 import { getRect, getAnimationFrame, calcIcon } from "../common/utils";
 import props from "./props";
 import config from "../common/config";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
+
 const {
   prefix: prefix
 } = config;
@@ -91,6 +94,10 @@ let NoticeBar = class extends SuperComponent {
       multipleSlots: true,
       pureDataPattern: /^__/
     };
+    this._ = _;
+    this.components = {
+      tIcon
+    }
     this.properties = props;;
     this.setData({
       prefix: prefix,
@@ -269,7 +276,7 @@ let NoticeBar = class extends SuperComponent {
     };
   }
 };
-NoticeBar = __decorate([wxComponent()], NoticeBar);
+NoticeBar = initTDesign(__decorate([wxComponent()], NoticeBar));
 export default NoticeBar;
 </script>
 <style>

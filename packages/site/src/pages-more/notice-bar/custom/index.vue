@@ -1,27 +1,27 @@
 <template>
-    <view>
-        <t-notice-bar
-            :visible="true"
-            prefixIcon="sound"
-            suffixIcon="chevron-right"
-            content="提示文字描述提示文字描述提示文字描述"
-            t-class="external-class"
-            t-class-prefix-icon="external-class-prefix-icon"
-        ></t-notice-bar>
-    </view>
+  <view>
+    <t-notice-bar
+      :visible="true"
+      prefix-icon="sound"
+      suffix-icon="chevron-right"
+      content="提示文字描述提示文字描述提示文字描述"
+      t-class="external-class"
+      t-class-prefix-icon="external-class-prefix-icon"
+    />
+  </view>
 </template>
 
 <script>
 import tNoticeBar from 'tdesign-uniapp/notice-bar/notice-bar';
 export default {
-    components: {
-        tNoticeBar
-    },
-    data() {
-        return {};
-    },
-    methods: {},
-    created: function () {}
+  components: {
+    tNoticeBar,
+  },
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {},
 };
 </script>
 <style>

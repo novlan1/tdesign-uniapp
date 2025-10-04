@@ -62,6 +62,9 @@
     },
     {
       "name": "dialog"
+    },
+    {
+      "name": "notice-bar"
     }
   ]
 }

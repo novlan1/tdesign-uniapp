@@ -65,8 +65,10 @@ export const styles = function (e) {
         .join('; ');
 };
 export const getAnimationFrame = function (e, t) {
-    return e
+    console.log('getAnimationFrame', {e, t});
+    return uni
         .createSelectorQuery()
+        .in(e)
         .selectViewport()
         .boundingClientRect()
         .exec(() => {

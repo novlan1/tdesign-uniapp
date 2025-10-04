@@ -119,6 +119,12 @@
       "style": {
         "navigationBarTitleText": "Dialog"
       }
+    },
+    {
+      "path": "pages-more/notice-bar/notice-bar",
+      "style": {
+        "navigationBarTitleText": "NoticeBar"
+      }
     }
   ],
   "globalStyle": {
