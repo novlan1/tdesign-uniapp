@@ -185,6 +185,12 @@
       "style": {
         "navigationBarTitleText": "Skeleton"
       }
+    },
+    {
+      "path": "pages-more/action-sheet/action-sheet",
+      "style": {
+        "navigationBarTitleText": "ActionSheet"
+      }
     }
   ],
   "globalStyle": {

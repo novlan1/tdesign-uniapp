@@ -13,7 +13,7 @@
                 <view v-if="description" tabindex="0" :class="_.cls(classPrefix + '__description', [align])">{{ description }}</view>
                 <block v-if="gridThemeItems.length">
                     <!-- parse <template is="grid" :data="classPrefix, prefix, gridThemeItems, count, currentSwiperIndex"/> -->
-                    <block name="grid">
+                    <!-- <block name="grid"> -->
                         <block v-if="gridThemeItems.length === 1">
                             <t-grid align="center" :t-class="classPrefix + '__grid'" :column="count / 2" :class="classPrefix + '__single-wrap'">
                                 <t-grid-item
@@ -61,12 +61,12 @@
                                 </view>
                             </view>
                         </block>
-                    </block>
+                    <!-- </block> -->
                 </block>
                 <view v-else-if="items && items.length" :class="classPrefix + '__list'">
                     <block v-for="(item, index) in items" :key="index">
                         <!-- parse <template is="list" :data="index, classPrefix, listThemeItemClass: _.cls(classPrefix + '__list-item', [align, [disabled, item.disabled]]), item"/> -->
-                        <block name="list">
+                        <!-- <block name="list"> -->
                             <view
                                 :data-index="index"
                                 :style="item.color ? 'color: ' + item.color : ''"
@@ -86,7 +86,7 @@
                                 ></t-icon>
                             </view>
                         </block>
-                    </block>
+                    <!-- </block> -->
                 </view>
             </view>
             <slot />
@@ -146,7 +146,11 @@ let ActionSheet = class extends SuperComponent {
       gridThemeItems: [],
       currentSwiperIndex: 0,
       defaultPopUpProps: {},
-      defaultPopUpzIndex: 11500
+      defaultPopUpzIndex: 11500,
+      theme:'',
+      items: [],
+      visible: false,
+      description: '',
     });
     this.controlledProps = [{
       key: "visible",
@@ -175,9 +179,14 @@ let ActionSheet = class extends SuperComponent {
         }
       },
       show(e) {
-        this.setData(Object.assign(Object.assign(Object.assign({}, this.initialData), e), {
+        const newData = {
+          ...this.initialData,
+          ...e,
           visible: true
-        }));
+        }
+        Object.keys(newData).forEach(key=> {
+          this[key] = newData[key];
+        })
         this.splitGridThemeActions();
         this.autoClose = true;
         this._trigger("visible-change", {

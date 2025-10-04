@@ -92,6 +92,9 @@
     },
     {
       "name": "skeleton"
+    },
+    {
+      "name": "action-sheet"
     }
   ]
 }
