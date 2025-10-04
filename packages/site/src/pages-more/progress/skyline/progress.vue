@@ -1,7 +1,7 @@
 <template>
-    <view>
-        <demo-progress />
-    </view>
+  <view>
+    <demo-progress />
+  </view>
 </template>
 
 <script lang="ts">
@@ -9,14 +9,14 @@
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import demoProgress from '../progress';
 export default {
-    components: {
-        tNavbar,
-        demoProgress
-    },
-    data() {
-        return {};
-    },
-    methods: {}
+  components: {
+    tNavbar,
+    demoProgress,
+  },
+  data() {
+    return {};
+  },
+  methods: {},
 };
 </script>
 <style lang="less">

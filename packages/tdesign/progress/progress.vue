@@ -1,12 +1,12 @@
 <template>
     <view :style="_._style([style, customStyle])" :class="classPrefix + ' class'">
-        <view v-if="theme === _this.PRO_THEME.LINE" :class="classPrefix + '--thin ' + classPrefix + '--status--' + (status || computedStatus) + ' ' + prefix + '-class'">
+        <view v-if="theme === PRO_THEME.LINE" :class="classPrefix + '--thin ' + classPrefix + '--status--' + (status || computedStatus) + ' ' + prefix + '-class'">
             <view
                 aria-role="progressbar"
                 aria-valuemin="0"
                 aria-valuemax="100"
                 :aria-valuenow="computedProgress"
-                :aria-label="ariaLabel || (isIOS ? _this.getIOSAriaLabel(status) : _this.getAndroidAriaLabel(status))"
+                :aria-label="ariaLabel || (isIOS ? getIOSAriaLabel(status) : getAndroidAriaLabel(status))"
                 aria-live="polite"
                 :class="classPrefix + '__bar'"
                 :style="'height: ' + heightBar + 'px;border-radius: ' + heightBar + 'px;background-color: ' + bgColorBar"
@@ -14,8 +14,8 @@
                 <view :class="classPrefix + '__inner ' + prefix + '-class-bar'" :style="'background: ' + colorBar + '; width: ' + (computedProgress + '%')"></view>
             </view>
             <view v-if="label" :class="classPrefix + '__info ' + prefix + '-class-label'" :aria-hidden="true">
-                <!-- parse <template v-if="_.includes(_this.STATUS, status)" is="icon" :data="tClass: classPrefix + '__icon', size:'44rpx', name: _this.LINE_STATUS_ICON[status]"></template> -->
-                <block name="icon" v-if="_.includes(_this.STATUS, status)">
+                <!-- parse <template v-if="_.includes(STATUS, status)" is="icon" :data="tClass: classPrefix + '__icon', size:'44rpx', name: LINE_STATUS_ICON[status]"></template> -->
+                <block name="icon" v-if="_.includes(STATUS, status)">
                     <t-icon
                         :style="style || ''"
                         :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -38,9 +38,9 @@
             aria-valuemin="0"
             aria-valuemax="100"
             :aria-valuenow="computedProgress"
-            :aria-label="ariaLabel || (isIOS ? _this.getIOSAriaLabel(status) : _this.getAndroidAriaLabel(status))"
+            :aria-label="ariaLabel || (isIOS ? getIOSAriaLabel(status) : getAndroidAriaLabel(status))"
             aria-live="polite"
-            v-if="theme === _this.PRO_THEME.PLUMP"
+            v-if="theme === PRO_THEME.PLUMP"
             :class="
                 classPrefix +
                 '__bar ' +
@@ -68,19 +68,19 @@
             </view>
             <slot v-if="computedProgress <= 10" name="label" />
         </view>
-        <view v-if="theme === _this.PRO_THEME.CIRCLE" :class="classPrefix + '--status--' + (status || computedStatus) + ' ' + prefix + '-class'">
+        <view v-if="theme === PRO_THEME.CIRCLE" :class="classPrefix + '--status--' + (status || computedStatus) + ' ' + prefix + '-class'">
             <view
                 aria-role="progressbar"
                 aria-valuemin="0"
                 aria-valuemax="100"
                 :aria-valuenow="computedProgress"
-                :aria-label="ariaLabel || (isIOS ? _this.getIOSAriaLabel(status) : _this.getAndroidAriaLabel(status))"
+                :aria-label="ariaLabel || (isIOS ? getIOSAriaLabel(status) : getAndroidAriaLabel(status))"
                 aria-live="polite"
                 :class="_.cls(classPrefix + '__canvas--circle', [[size, true]])"
                 :style="
-                    _this.getCircleStyle(size, heightBar) +
+                    getCircleStyle(size, heightBar) +
                     '; background-image: conic-gradient(from var(--td-progress-circle-from), ' +
-                    (colorCircle || _this.STATUS_COLOR[status] || 'var(--td-progress-inner-bg-color)') +
+                    (colorCircle || STATUS_COLOR[status] || 'var(--td-progress-inner-bg-color)') +
                     ' ' +
                     computedProgress +
                     '%, ' +
@@ -90,8 +90,8 @@
             >
                 <view :class="classPrefix + '__canvas--inner ' + prefix + '-class-bar'">
                     <view v-if="label" :class="classPrefix + '__info ' + prefix + '-class-label'" :aria-hidden="true">
-                        <!-- parse <template v-if="_.includes(_this.STATUS, status)" is="icon" :data="tClass: classPrefix + '__icon', size:'96rpx', name: _this.CIRCLE_STATUS_ICON[status]"></template> -->
-                        <block name="icon" v-if="_.includes(_this.STATUS, status)">
+                        <!-- parse <template v-if="_.includes(STATUS, status)" is="icon" :data="tClass: classPrefix + '__icon', size:'96rpx', name: CIRCLE_STATUS_ICON[status]"></template> -->
+                        <block name="icon" v-if="_.includes(STATUS, status)">
                             <t-icon
                                 :style="style || ''"
                                 :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -113,8 +113,6 @@
         </view>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
-<script module="_this" lang="wxs" src="@/progress/progress.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
 import { __decorate } from "../miniprogram_npm/tslib";
@@ -123,6 +121,22 @@ import config from "../common/config";
 import props from "./props";
 import { getBackgroundColor } from "./utils";
 import { unitConvert, isIOS as isIOSValidator } from "../common/utils";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+import { 
+  STATUS,
+  STATUS_TEXT,
+  PRO_THEME,
+
+  STATUS_COLOR,
+  LINE_STATUS_ICON,
+  CIRCLE_STATUS_ICON,
+  
+  getCircleStyle,
+  getIOSAriaLabel,
+  getAndroidAriaLabel,
+} from './progress.wxs';
+
 const {
   prefix: prefix
 } = config;
@@ -135,6 +149,10 @@ let Progress = class extends SuperComponent {
       multipleSlots: true
     };
     this.properties = props;;
+    this._ = _;
+    this.components = {
+      tIcon
+    };
     this.setData({
       prefix: prefix,
       classPrefix: name,
@@ -142,7 +160,18 @@ let Progress = class extends SuperComponent {
       heightBar: "",
       computedStatus: "",
       computedProgress: 0,
-      isIOS: false
+      isIOS: false,
+      STATUS,
+      STATUS_TEXT,
+      PRO_THEME,
+
+      STATUS_COLOR,
+      LINE_STATUS_ICON,
+      CIRCLE_STATUS_ICON,
+      
+      getCircleStyle,
+      getIOSAriaLabel,
+      getAndroidAriaLabel,
     });
     this.observers = {
       percentage(o) {
@@ -180,7 +209,7 @@ let Progress = class extends SuperComponent {
     });
   }
 };
-Progress = __decorate([wxComponent()], Progress);
+Progress = initTDesign(__decorate([wxComponent()], Progress));
 export default Progress;
 </script>
 <style>

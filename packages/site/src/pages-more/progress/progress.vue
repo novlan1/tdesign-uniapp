@@ -52,12 +52,12 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import transition from './transition';
-import custom from './custom';
-import line from './line';
-import plump from './plump';
-import circle from './circle';
+import BaseDemo from './base/index.vue';
+import transition from './transition/index.vue';
+import custom from './custom/index.vue';
+import line from './line/index.vue';
+import plump from './plump/index.vue';
+import circle from './circle/index.vue';
 export default {
   components: {
     BaseDemo,

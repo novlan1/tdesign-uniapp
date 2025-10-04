@@ -1,24 +1,44 @@
 <template>
-    <view>
-        <t-progress theme="plump" percentage="80" />
-        <t-progress theme="plump" percentage="88" status="warning" />
-        <t-progress theme="plump" percentage="88" status="error" />
-        <t-progress theme="plump" percentage="88" status="success" />
-        <t-progress theme="plump" :color="" percentage="88" status="active" />
-    </view>
+  <view>
+    <t-progress
+      theme="plump"
+      percentage="80"
+    />
+    <t-progress
+      theme="plump"
+      percentage="88"
+      status="warning"
+    />
+    <t-progress
+      theme="plump"
+      percentage="88"
+      status="error"
+    />
+    <t-progress
+      theme="plump"
+      percentage="88"
+      status="success"
+    />
+    <t-progress
+      theme="plump"
+      color=""
+      percentage="88"
+      status="active"
+    />
+  </view>
 </template>
 
 <script>
 import tProgress from 'tdesign-uniapp/progress/progress';
 export default {
-    components: {
-        tProgress
-    },
-    data() {
-        return {};
-    },
-    methods: {},
-    created: function () {}
+  components: {
+    tProgress,
+  },
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {},
 };
 </script>
 <style>

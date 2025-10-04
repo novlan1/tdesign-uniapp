@@ -167,6 +167,12 @@
       "style": {
         "navigationBarTitleText": "Grid"
       }
+    },
+    {
+      "path": "pages-more/progress/progress",
+      "style": {
+        "navigationBarTitleText": "Progress"
+      }
     }
   ],
   "globalStyle": {

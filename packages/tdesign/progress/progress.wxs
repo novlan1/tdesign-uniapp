@@ -1,4 +1,4 @@
-var utils = require('../common/utils.wxs');
+import utils from '../common/utils.wxs';
 
 var STATUS = ['success', 'error', 'warning'];
 var STATUS_TEXT = ['success', 'error', 'warning', 'active'];
@@ -67,14 +67,15 @@ function getCircleStyle(size, strokeWidth) {
   return utils._style(styles);
 }
 
-module.exports = {
-  STATUS: STATUS,
-  STATUS_TEXT: STATUS_TEXT,
-  PRO_THEME: PRO_THEME,
-  STATUS_COLOR: STATUS_COLOR,
-  LINE_STATUS_ICON: LINE_STATUS_ICON,
-  CIRCLE_STATUS_ICON: CIRCLE_STATUS_ICON,
-  getAndroidAriaLabel: getAndroidAriaLabel,
-  getIOSAriaLabel: getIOSAriaLabel,
-  getCircleStyle: getCircleStyle,
+export {
+  STATUS,
+  STATUS_TEXT,
+  PRO_THEME,
+
+  STATUS_COLOR,
+  LINE_STATUS_ICON,
+  CIRCLE_STATUS_ICON,
+  getAndroidAriaLabel,
+  getIOSAriaLabel,
+  getCircleStyle,
 };
