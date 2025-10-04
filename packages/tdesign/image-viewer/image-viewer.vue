@@ -1,96 +1,128 @@
 <template>
+  <view
+    v-if="visible"
+    :id="classPrefix"
+    :class="classPrefix + ' class ' + prefix + '-class'"
+    :style="_._style([style, customStyle, '--td-image-viewer-top: ' + maskTop + 'px'])"
+    :aria-modal="true"
+    aria-role="dialog"
+    aria-label="图片查看器"
+    @touchmove.stop.prevent="true"
+  >
     <view
-        v-if="visible"
-        :id="classPrefix"
-        :class="classPrefix + ' class ' + prefix + '-class'"
-        :style="_._style([style, customStyle, '--td-image-viewer-top: ' + maskTop + 'px'])"
-        :aria-modal="true"
-        aria-role="dialog"
-        aria-label="图片查看器"
-        @touchmove.stop.prevent="true"
-    >
-        <view :class="classPrefix + '__mask'" data-source="overlay" @tap="onClose" :style="'background-color: ' + backgroundColor" aria-role="button" aria-label="关闭" />
-        <block v-if="images && images.length">
-            <view :class="classPrefix + '__content'">
-                <swiper
-                    class="swiper"
-                    :style="swiperStyle[currentSwiperIndex]?.style"
-                    :autoplay="false"
-                    :current="currentSwiperIndex"
-                    @change="onSwiperChange"
-                    @tap="onClose"
-                    tabindex="0"
-                >
-                    <swiper-item :class="classPrefix + '__preview-image'" v-for="(item, index) in images" :key="index">
-                        <t-image
-                            v-if="!lazy || shouldLoadImage(index, currentSwiperIndex, loadedImageIndexes)"
-                            t-class="t-image--external"
-                            :style="imagesStyle[index]?.style || ''"
-                            mode="aspectFit"
-                            :src="item"
-                            :data-index="index"
-                            :class="classPrefix + '__image'"
-                            @load="onImageLoadSuccess($event, { index })"
-                        ></t-image>
-                    </swiper-item>
-                </swiper>
-            </view>
-            <view :class="classPrefix + '__nav'">
-                <view :class="classPrefix + '__nav-close'" @tap.stop.prevent="onClose" aria-role="button" aria-label="关闭">
-                    <slot name="close-btn" />
-                    <!-- parse <template v-if="_closeBtn" is="icon" :data="..._closeBtn"/> -->
-                    <block name="icon" v-if="_closeBtn">
-                        <t-icon
-                            :style="style || ''"
-                            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-                            :prefix="prefix || ''"
-                            :name="'close' || ''"
-                            :size="22 || ''"
-                            :color="color || ''"
-                            :aria-hidden="true || ''"
-                            :aria-label="ariaLabel || ''"
-                            :aria-role="ariaRole || ''"
-                            @click="bindclick || ''"
-                        />
-                    </block>
-                </view>
-                <view v-if="showIndex" :class="classPrefix + '__nav-index'">{{ currentSwiperIndex + 1 }}/{{ images.length }}</view>
-                <view :class="classPrefix + '__nav-delete'" @tap="onDelete" aria-role="button" aria-label="删除">
-                    <slot name="delete-btn" />
-                    <!-- parse <template is="icon" :data="..._deleteBtn"/> -->
-                    <block name="icon" v-if="false">
-                        <t-icon
-                            :style="style || ''"
-                            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-                            :prefix="prefix || ''"
-                            :name="'close' || ''"
-                            :size="22 || ''"
-                            :color="color || ''"
-                            :aria-hidden="true || ''"
-                            :aria-label="ariaLabel || ''"
-                            :aria-role="ariaRole || ''"
-                            @click="bindclick || ''"
-                        />
-                    </block>
-                </view>
-            </view>
-        </block>
-    </view>
+      :class="classPrefix + '__mask'"
+      data-source="overlay"
+      :style="'background-color: ' + backgroundColor"
+      aria-role="button"
+      aria-label="关闭"
+      @tap="onClose"
+    />
+    <block v-if="images && images.length">
+      <view :class="classPrefix + '__content'">
+        <swiper
+          class="swiper"
+          :style="swiperStyle[currentSwiperIndex]?.style"
+          :autoplay="false"
+          :current="currentSwiperIndex"
+          tabindex="0"
+          @change="onSwiperChange"
+          @tap="onClose"
+        >
+          <swiper-item
+            v-for="(item, index) in images"
+            :key="index"
+            :class="classPrefix + '__preview-image'"
+          >
+            <t-image
+              v-if="!lazy || shouldLoadImage(index, currentSwiperIndex, loadedImageIndexes)"
+              t-class="t-image--external"
+              :style="imagesStyle[index]?.style || ''"
+              mode="aspectFit"
+              :src="item"
+              :data-index="index"
+              :class="classPrefix + '__image'"
+              @load="onImageLoadSuccess($event, { index })"
+            />
+          </swiper-item>
+        </swiper>
+      </view>
+      <view :class="classPrefix + '__nav'">
+        <view
+          :class="classPrefix + '__nav-close'"
+          aria-role="button"
+          aria-label="关闭"
+          @tap.stop.prevent="onClose"
+        >
+          <slot name="close-btn" />
+          <!-- parse <template v-if="_closeBtn" is="icon" :data="..._closeBtn"/> -->
+          <block
+            v-if="_closeBtn"
+            name="icon"
+          >
+            <t-icon
+              :style="style || ''"
+              :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
+              :prefix="prefix || ''"
+              :name="'close' || ''"
+              :size="22 || ''"
+              :color="color || ''"
+              :aria-hidden="true || ''"
+              :aria-label="ariaLabel || ''"
+              :aria-role="ariaRole || ''"
+              @click="bindclick || ''"
+            />
+          </block>
+        </view>
+        <view
+          v-if="showIndex"
+          :class="classPrefix + '__nav-index'"
+        >
+          {{ currentSwiperIndex + 1 }}/{{ images.length }}
+        </view>
+        <view
+          :class="classPrefix + '__nav-delete'"
+          aria-role="button"
+          aria-label="删除"
+          @tap="onDelete"
+        >
+          <slot name="delete-btn" />
+          <!-- parse <template is="icon" :data="..._deleteBtn"/> -->
+          <block
+            v-if="false"
+            name="icon"
+          >
+            <t-icon
+              :style="style || ''"
+              :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
+              :prefix="prefix || ''"
+              :name="'close' || ''"
+              :size="22 || ''"
+              :color="color || ''"
+              :aria-hidden="true || ''"
+              :aria-label="ariaLabel || ''"
+              :aria-role="ariaRole || ''"
+              @click="bindclick || ''"
+            />
+          </block>
+        </view>
+      </view>
+    </block>
+  </view>
 </template>
 <script>
-import tImage from "../image/image";
-import tIcon from "../icon/icon";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import { styles, calcIcon, systemInfo } from "../common/utils";
-import config from "../common/config";
-import props from "./props";
+import tImage from '../image/image';
+import tIcon from '../icon/icon';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import { styles, calcIcon, systemInfo } from '../common/utils';
+import config from '../common/config';
+import props from './props';
 import _ from '../common/utils.wxs';
 import { initTDesign } from '../common/runtime';
 import { shouldLoadImage } from './image-viewer.wxs';
 
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-image-viewer`;
 let ImageViewer = class extends SuperComponent {
@@ -101,10 +133,10 @@ let ImageViewer = class extends SuperComponent {
     this._ = _;
     this.components = {
       tImage,
-      tIcon
+      tIcon,
     };
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
       currentSwiperIndex: 0,
       loadedImageIndexes: [],
@@ -112,34 +144,34 @@ let ImageViewer = class extends SuperComponent {
       windowWidth: 0,
       swiperStyle: {},
       imagesStyle: {},
-      maskTop: 0
+      maskTop: 0,
     });
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
     this.controlledProps = [{
-      key: "visible",
-      event: "close"
+      key: 'visible',
+      event: 'close',
     }];
     this.observers = {
-      "visible,initialIndex,images"(e, t, s) {
+      'visible,initialIndex,images'(e, t, s) {
         if (e && (null == s ? void 0 : s.length)) {
           this.setData({
             loadedImageIndexes: [],
-            currentSwiperIndex: t >= s.length ? s.length - 1 : t
+            currentSwiperIndex: t >= s.length ? s.length - 1 : t,
           });
         }
       },
       closeBtn(e) {
         this.setData({
-          _closeBtn: calcIcon(e, "close")
+          _closeBtn: calcIcon(e, 'close'),
         });
       },
       deleteBtn(e) {
         this.setData({
-          _deleteBtn: calcIcon(e, "delete")
+          _deleteBtn: calcIcon(e, 'delete'),
         });
-      }
+      },
     };
     this.methods = {
       shouldLoadImage,
@@ -147,11 +179,11 @@ let ImageViewer = class extends SuperComponent {
         if (this.usingCustomNavbar) {
           const e = (null === wx || void 0 === wx ? void 0 : uni.getMenuButtonBoundingClientRect()) || null;
           const {
-            statusBarHeight: t
+            statusBarHeight: t,
           } = systemInfo;
           if (e && t) {
             this.setData({
-              maskTop: e.top - t + e.bottom
+              maskTop: e.top - t + e.bottom,
             });
           }
         }
@@ -159,119 +191,119 @@ let ImageViewer = class extends SuperComponent {
       saveScreenSize() {
         const {
           windowHeight: e,
-          windowWidth: t
+          windowWidth: t,
         } = systemInfo;
         this.setData({
           windowHeight: e,
-          windowWidth: t
+          windowWidth: t,
         });
       },
       calcImageDisplayStyle(e, t) {
-        console.log('calcImageDisplayStyle', {e,t})
+        console.log('calcImageDisplayStyle', { e, t });
         const {
           windowWidth: s,
-          windowHeight: i
+          windowHeight: i,
         } = uni.getWindowInfo();
-        console.log('window', {s,i})
+        console.log('window', { s, i });
         const a = e / t;
         if (e < s && t < i) {
           return {
             styleObj: {
-              width:  e + "px",
-              height:  t + "px",
-              left: "50%",
-              transform: "translate(-50%, -50%)"
-            }
+              width: `${e}px`,
+              height: `${t}px`,
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            },
           };
         }
         if (a >= 1) {
           return {
             styleObj: {
-              width: "100vw",
-              height: s / a  + "px"
-            }
+              width: '100vw',
+              height: `${s / a}px`,
+            },
           };
         }
         const n = a * i ;
         return n < s ? {
           styleObj: {
             width: `${n}px`,
-            height: "100vh",
-            left: "50%",
-            transform: "translate(-50%, -50%)"
-          }
+            height: '100vh',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+          },
         } : {
           styleObj: {
-            width: "100vw",
-            height: s / e * t  + "px"
-          }
+            width: '100vw',
+            height: `${s / e * t}px`,
+          },
         };
       },
-      onImageLoadSuccess(e, {index: i}) {
-        console.log('onImageLoadSuccess', {e,i})
+      onImageLoadSuccess(e, { index: i }) {
+        console.log('onImageLoadSuccess', { e, i });
         const {
           detail: {
             width: t,
-            height: s
+            height: s,
           },
           // currentTarget: {
-            // dataset: {
-              // index: i
-            // }
+          // dataset: {
+          // index: i
+          // }
           // }
         } = e;
         const {
           mode: a,
-          styleObj: n
+          styleObj: n,
         } = this.calcImageDisplayStyle(t, s);
         const o = this.imagesStyle;
         const r = this.swiperStyle;
         this.loadedImageIndexes.includes(i) || this.setData({
-          loadedImageIndexes: [...this.loadedImageIndexes, i]
+          loadedImageIndexes: [...this.loadedImageIndexes, i],
         });
-        console.log('imagesStyle', {n})
+        console.log('imagesStyle', { n });
         this.setData({
           swiperStyle: Object.assign(Object.assign({}, r), {
             [i]: {
-              style: `height: ${n.height}`
-            }
+              style: `height: ${n.height}`,
+            },
           }),
           imagesStyle: Object.assign(Object.assign({}, o), {
             [i]: {
               mode: a,
-              style: styles(Object.assign({}, n))
-            }
-          })
+              style: styles(Object.assign({}, n)),
+            },
+          }),
         });
       },
       onSwiperChange(e) {
         const {
           detail: {
-            current: t
-          }
+            current: t,
+          },
         } = e;
         this.setData({
-          currentSwiperIndex: t
+          currentSwiperIndex: t,
         });
-        this._trigger("change", {
-          index: t
+        this._trigger('change', {
+          index: t,
         });
       },
       onClose(e) {
         const {
-          source: t
+          source: t,
         } = e.currentTarget.dataset;
-        this._trigger("close", {
+        this._trigger('close', {
           visible: false,
-          trigger: t || "button",
-          index: this.currentSwiperIndex
+          trigger: t || 'button',
+          index: this.currentSwiperIndex,
         });
       },
       onDelete() {
-        this._trigger("delete", {
-          index: this.currentSwiperIndex
+        this._trigger('delete', {
+          index: this.currentSwiperIndex,
         });
-      }
+      },
     };
   }
   ready() {

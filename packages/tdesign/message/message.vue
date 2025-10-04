@@ -1,34 +1,47 @@
 <template>
-    <view>
-            <t-message-item
-         v-for="(item, index) in messageList" :key="index"
-                :id="item.id"
-                :ref="item.id"
-                @close-btn-click="handleClose($event, { tagId: item.id })"
-                @link-click="handleLinkClick($event, { tagId: item.id })"
-                @duration-end="handleDurationEnd($event, { tagId: item.id })"
-            >
-                <slot name="icon" slot="icon" />
-                <slot name="content" slot="content" />
-                <slot />
-                <slot name="link" slot="link" />
-                <slot name="close-btn" slot="close-btn" />
-            </t-message-item>
-    </view>
+  <view>
+    <t-message-item
+      v-for="(item, index) in messageList"
+      :id="item.id"
+      :key="index"
+      :ref="item.id"
+      @close-btn-click="handleClose($event, { tagId: item.id })"
+      @link-click="handleLinkClick($event, { tagId: item.id })"
+      @duration-end="handleDurationEnd($event, { tagId: item.id })"
+    >
+      <slot
+        slot="icon"
+        name="icon"
+      />
+      <slot
+        slot="content"
+        name="content"
+      />
+      <slot />
+      <slot
+        slot="link"
+        name="link"
+      />
+      <slot
+        slot="close-btn"
+        name="close-btn"
+      />
+    </t-message-item>
+  </view>
 </template>
 
 <script>
-import tMessageItem from "../message-item/message-item";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import { MessageType } from "./message.interface";
-import props from "./props";
-import { unitConvert } from "../common/utils";
+import tMessageItem from '../message-item/message-item';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import { MessageType } from './message.interface';
+import props from './props';
+import { unitConvert } from '../common/utils';
 import { initTDesign } from '../common/runtime';
 
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-message`;
 
@@ -36,18 +49,18 @@ let Message = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
     this.properties = props;
     // this = Object.assign({}, props);
     this.components = {
       tMessageItem,
-    }
+    };
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
       messageList: [],
-      instances: []
+      instances: [],
     });
     this.index = 0;
     // this.instances = [];
@@ -58,15 +71,15 @@ let Message = class extends SuperComponent {
           this.setMessage(this, this.theme);
         } else {
           this.setData({
-            messageList: []
+            messageList: [],
           });
         }
-      }
+      },
     };
     this.pageLifetimes = {
       show() {
         this.hideAll();
-      }
+      },
     };
     this.methods = {
       setMessage(s, e = MessageType.info, context) {
@@ -79,9 +92,9 @@ let Message = class extends SuperComponent {
         const i = Object.assign(Object.assign({}, s), {
           theme: e,
           id: t,
-          gap: this.gap
+          gap: this.gap,
         });
-        console.log('instances', this.instances)
+        console.log('instances', this.instances);
         const n = this.instances.findIndex(s => s.id === t);
         if (n < 0) {
           this.addMessage(i, context);
@@ -101,12 +114,12 @@ let Message = class extends SuperComponent {
       },
       addMessage(s, context) {
         const e = [...this.messageList, {
-          id: s.id
+          id: s.id,
         }];
         this.setData({
-          messageList: e
-        // }, () => {
-          
+          messageList: e,
+          // }, () => {
+
         });
         setTimeout(() => {
           const e = this.getOffsetHeight();
@@ -115,7 +128,7 @@ let Message = class extends SuperComponent {
             this.instances.push(t);
             this.index += 1;
           }
-        })
+        });
       },
       getOffsetHeight(s = -1) {
         let e = 0;
@@ -130,29 +143,29 @@ let Message = class extends SuperComponent {
         return e;
       },
       showMessageItem(s, e, t, context) {
-        console.log('showMessageItem', { s, e, t })
-        console.log('this', this, this.$refs)
+        console.log('showMessageItem', { s, e, t });
+        console.log('this', this, this.$refs);
         // const i = context ? context.$refs[`${e}`] : this.$refs[`${e}`];
         let i = this.$refs[`${e}`];
         if (Array.isArray(i)) {
           i = i[0];
         }
-        console.log('i', i)
+        console.log('i', i);
         if (i) {
           i.resetData(() => {
-            console.log('resetData callback')
+            console.log('resetData callback');
             i.setData(s);
-            console.log('sss', s)
+            console.log('sss', s);
             setTimeout(() => {
-              i.show.call(i, t)
-            })
+              i.show.call(i, t);
+            });
             i.onHide = () => {
               this.close(e);
             };
           });
           return i;
         }
-        console.error("未找到组件,请确认 selector && context 是否正确");
+        console.error('未找到组件,请确认 selector && context 是否正确');
       },
       close(s) {
         setTimeout(() => {
@@ -182,7 +195,7 @@ let Message = class extends SuperComponent {
         for (let s = e; s < this.instances.length; s += 1) {
           const e = this.instances[s];
           e.setData({
-            wrapTop: e.wrapTop - t - e.gap
+            wrapTop: e.wrapTop - t - e.gap,
           });
         }
       },
@@ -191,27 +204,26 @@ let Message = class extends SuperComponent {
         if (e > -1) {
           this.messageList.splice(e, 1);
           this.setData({
-            messageList: this.messageList
+            messageList: this.messageList,
           });
         }
       },
       handleClose() {
-        this.$emit("close-btn-click");
+        this.$emit('close-btn-click');
       },
       handleLinkClick() {
-        this.$emit("link-click");
+        this.$emit('link-click');
       },
       handleDurationEnd() {
-        this.$emit("duration-end");
+        this.$emit('duration-end');
       },
-    }
+    };
     this.lifetimes = {
       ready() {
         this.memoInitialData();
-      }
+      },
     };
   }
-
 };
 Message = initTDesign(__decorate([wxComponent()], Message));
 export default Message;

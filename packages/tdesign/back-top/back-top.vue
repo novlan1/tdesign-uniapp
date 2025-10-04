@@ -1,32 +1,43 @@
 <template>
+  <view
+    v-if="!hidden"
+    :style="_._style([style, customStyle])"
+    :class="'class ' + prefix + '-class ' + _.cls(classPrefix, [['fixed', fixed], theme])"
+    aria-role="button"
+    @tap="toTop"
+  >
     <view
-        :style="_._style([style, customStyle])"
-        :class="'class ' + prefix + '-class ' + _.cls(classPrefix, [['fixed', fixed], theme])"
-        @tap="toTop"
-        aria-role="button"
-        v-if="!hidden"
+      :class="classPrefix + '__icon'"
+      aria-hidden
     >
-        <view :class="classPrefix + '__icon'" aria-hidden>
-            <slot name="icon" />
-            <!-- parse <template v-if="_icon" is="icon" :data="tClass: prefix + '-class-icon', ..._icon"/> -->
-            <block name="icon" v-if="_icon">
-                <t-icon
-                    :style="style || ''"
-                    :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-                    :prefix="prefix || ''"
-                    :name="'close' || ''"
-                    :size="22 || ''"
-                    :color="color || ''"
-                    :aria-hidden="true || ''"
-                    :aria-label="'清除' || ''"
-                    :aria-role="'button' || ''"
-                    @click="'handleClose' || ''"
-                />
-            </block>
-        </view>
-        <view v-if="!!text" :class="classPrefix + '__text--' + theme + ' ' + prefix + '-class-text'">{{ text }}</view>
-        <slot />
+      <slot name="icon" />
+      <!-- parse <template v-if="_icon" is="icon" :data="tClass: prefix + '-class-icon', ..._icon"/> -->
+      <block
+        v-if="_icon"
+        name="icon"
+      >
+        <t-icon
+          :style="style || ''"
+          :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
+          :prefix="prefix || ''"
+          :name="'close' || ''"
+          :size="22 || ''"
+          :color="color || ''"
+          :aria-hidden="true || ''"
+          :aria-label="'清除' || ''"
+          :aria-role="'button' || ''"
+          @click="'handleClose' || ''"
+        />
+      </block>
     </view>
+    <view
+      v-if="!!text"
+      :class="classPrefix + '__text--' + theme + ' ' + prefix + '-class-text'"
+    >
+      {{ text }}
+    </view>
+    <slot />
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

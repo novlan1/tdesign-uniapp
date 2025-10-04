@@ -1,7 +1,15 @@
 <template>
-    <view :class="classPrefix + ' class ' + prefix + '-class'" :style="_._style(['z-index:' + zIndex, containerStyle, style, customStyle])">
-        <view :class="classPrefix + '__content ' + prefix + '-class-content'" :style="_._style(['z-index:' + zIndex, contentStyle])"><slot /></view>
+  <view
+    :class="classPrefix + ' class ' + prefix + '-class'"
+    :style="_._style(['z-index:' + zIndex, containerStyle, style, customStyle])"
+  >
+    <view
+      :class="classPrefix + '__content ' + prefix + '-class-content'"
+      :style="_._style(['z-index:' + zIndex, contentStyle])"
+    >
+      <slot />
     </view>
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

@@ -87,8 +87,8 @@ let default_1 = class extends SuperComponent {
     this.properties = props;
     this.components = {
       tIcon,
-      tImage
-    }
+      tImage,
+    };
     this.setData({
       prefix,
       classPrefix: name,

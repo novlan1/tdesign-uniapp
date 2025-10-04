@@ -1,80 +1,112 @@
 <template>
-    <view>
-        <view :style="_._style([style, customStyle])" :class="'class ' + classPrefix + ' ' + prefix + '-class'">
-            <view
-                :class="
-                    classPrefix +
-                    '__input-box ' +
-                    prefix +
-                    '-' +
-                    (focus ? 'is-focused' : 'not-focused') +
-                    ' ' +
-                    classPrefix +
-                    '__input-box--' +
-                    (center ? 'center' : '') +
-                    ' ' +
-                    classPrefix +
-                    '__input-box--' +
-                    shape +
-                    ' ' +
-                    prefix +
-                    '-class-input-container'
-                "
-            >
-                <t-icon v-if="leftIcon" :name="leftIcon" :class="prefix + '-icon ' + prefix + '-class-left'" :aria-hidden="true" />
-                <slot v-else name="left-icon" />
-                <input
-                    :type="type"
-                    name="input"
-                    :maxlength="maxlength"
-                    :disabled="disabled || readonly"
-                    :class="prefix + '-input__keyword ' + prefix + '-class-input ' + (disabled ? prefix + '-input--disabled' : '')"
-                    :focus="focus"
-                    :value="value"
-                    :confirm-type="confirmType"
-                    :confirm-hold="confirmHold"
-                    :cursor="cursor"
-                    :adjust-position="adjustPosition"
-                    :always-embed="alwaysEmbed"
-                    :selection-start="selectionStart"
-                    :selection-end="selectionEnd"
-                    :hold-keyboard="holdKeyboard"
-                    :cursor-spacing="cursorSpacing"
-                    :placeholder="placeholder"
-                    :placeholder-style="placeholderStyle"
-                    :placeholder-class="placeholderClass + ' ' + classPrefix + '__placeholder ' + classPrefix + '__placeholder--' + (center ? 'center' : 'normal')"
-                    @input="onInput"
-                    @focus="onFocus"
-                    @blur="onBlur"
-                    @confirm="onConfirm"
-                />
-                <view
-                    v-if="value !== '' && clearable && showClearIcon"
-                    :class="classPrefix + '__clear hotspot-expanded ' + prefix + '-class-clear'"
-                    @tap.stop.prevent="handleClear"
-                    aria-role="button"
-                    aria-label="清除"
-                >
-                    <t-icon name="close-circle-filled" size="inherit" color="inherit" />
-                </view>
-            </view>
-            <view v-if="action" :class="classPrefix + '__search-action ' + prefix + '-class-action'" @tap.stop.prevent="onActionClick" aria-role="button">{{ action }}</view>
-            <slot v-else name="action" />
+  <view>
+    <view
+      :style="_._style([style, customStyle])"
+      :class="'class ' + classPrefix + ' ' + prefix + '-class'"
+    >
+      <view
+        :class="
+          classPrefix +
+            '__input-box ' +
+            prefix +
+            '-' +
+            (focus ? 'is-focused' : 'not-focused') +
+            ' ' +
+            classPrefix +
+            '__input-box--' +
+            (center ? 'center' : '') +
+            ' ' +
+            classPrefix +
+            '__input-box--' +
+            shape +
+            ' ' +
+            prefix +
+            '-class-input-container'
+        "
+      >
+        <t-icon
+          v-if="leftIcon"
+          :name="leftIcon"
+          :class="prefix + '-icon ' + prefix + '-class-left'"
+          :aria-hidden="true"
+        />
+        <slot
+          v-else
+          name="left-icon"
+        />
+        <input
+          :type="type"
+          name="input"
+          :maxlength="maxlength"
+          :disabled="disabled || readonly"
+          :class="prefix + '-input__keyword ' + prefix + '-class-input ' + (disabled ? prefix + '-input--disabled' : '')"
+          :focus="focus"
+          :value="value"
+          :confirm-type="confirmType"
+          :confirm-hold="confirmHold"
+          :cursor="cursor"
+          :adjust-position="adjustPosition"
+          :always-embed="alwaysEmbed"
+          :selection-start="selectionStart"
+          :selection-end="selectionEnd"
+          :hold-keyboard="holdKeyboard"
+          :cursor-spacing="cursorSpacing"
+          :placeholder="placeholder"
+          :placeholder-style="placeholderStyle"
+          :placeholder-class="placeholderClass + ' ' + classPrefix + '__placeholder ' + classPrefix + '__placeholder--' + (center ? 'center' : 'normal')"
+          @input="onInput"
+          @focus="onFocus"
+          @blur="onBlur"
+          @confirm="onConfirm"
+        >
+        <view
+          v-if="value !== '' && clearable && showClearIcon"
+          :class="classPrefix + '__clear hotspot-expanded ' + prefix + '-class-clear'"
+          aria-role="button"
+          aria-label="清除"
+          @tap.stop.prevent="handleClear"
+        >
+          <t-icon
+            name="close-circle-filled"
+            size="inherit"
+            color="inherit"
+          />
         </view>
-        <view v-if="isShowResultList && !isSelected" :class="classPrefix + '__result-list'" aria-role="listbox">
-            <t-cell
-                :data-index="index"
-                :class="classPrefix + '__result-item'"
-                hover
-                @tap.native="onSelectResultItem($event, { index })"
-                aria-role="option"
-                v-for="(item, index) in resultList"
-                :key="index"
-            >
-                <rich-text slot="title" :nodes="_this.highLight(item, value)"></rich-text>
-            </t-cell>
-        </view>
+      </view>
+      <view
+        v-if="action"
+        :class="classPrefix + '__search-action ' + prefix + '-class-action'"
+        aria-role="button"
+        @tap.stop.prevent="onActionClick"
+      >
+        {{ action }}
+      </view>
+      <slot
+        v-else
+        name="action"
+      />
     </view>
+    <view
+      v-if="isShowResultList && !isSelected"
+      :class="classPrefix + '__result-list'"
+      aria-role="listbox"
+    >
+      <t-cell
+        v-for="(item, index) in resultList"
+        :key="index"
+        :data-index="index"
+        :class="classPrefix + '__result-item'"
+        hover
+        aria-role="option"
+        @tap.native="onSelectResultItem($event, { index })"
+      >
+        <rich-text
+          slot="title"
+          :nodes="_this.highLight(item, value)"
+        />
+      </t-cell>
+    </view>
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script module="_this" lang="wxs" src="@/search/search.wxs"></script>

@@ -1,68 +1,104 @@
 <template>
-    <view
-        :class="'class ' + prefix + '-class ' + classPrefix"
-        :style="_._style([style, customStyle])"
-        data-key="cell"
-        @tap="onTap"
-        @touchstart="parseEventDynamicCode($event, disabled || swipe.startDrag)"
-        @touchmove="parseEventDynamicCode($event, skipMove ? '' : disabled || swipe.onDrag)"
-        @touchend="parseEventDynamicCode($event, skipMove ? '' : disabled || swipe.endDrag)"
-        @touchcancel="parseEventDynamicCode($event, disabled || swipe.endDrag)"
-        :opened="opened"
-        :change:opened="swipe.onOpenedChange"
-        :leftWidth="leftWidth"
-        :rightWidth="rightWidth"
-        :change:leftWidth="swipe.initLeftWidth"
-        :change:rightWidth="swipe.initRightWidth"
-    >
-        <view id="wrapper">
-            <view :class="classPrefix + '__left'" data-key="left">
-                <slot name="left" />
-                <view :class="classPrefix + '__content ' + item.className" :style="item.style" :data-action="item" @tap="onActionTap" v-for="(item, index) in left" :key="index">
-                    <!-- parse <template v-if="item.icon" is="icon" :data="tClass: classPrefix + '__icon', name: item.icon, ...item.icon"></template> -->
-                    <block name="icon" v-if="item.icon">
-                        <t-icon
-                            :style="style || ''"
-                            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-                            :prefix="prefix || ''"
-                            :name="'close' || ''"
-                            :size="22 || ''"
-                            :color="color || ''"
-                            :aria-hidden="true || ''"
-                            :aria-label="'清除' || ''"
-                            :aria-role="'button' || ''"
-                            @click="bindclick || ''"
-                        />
-                    </block>
+  <view
+    :class="'class ' + prefix + '-class ' + classPrefix"
+    :style="_._style([style, customStyle])"
+    data-key="cell"
+    :opened="opened"
+    :change:opened="swipe.onOpenedChange"
+    :left-width="leftWidth"
+    :right-width="rightWidth"
+    :change:leftWidth="swipe.initLeftWidth"
+    :change:rightWidth="swipe.initRightWidth"
+    @tap="onTap"
+    @touchstart="parseEventDynamicCode($event, disabled || swipe.startDrag)"
+    @touchmove="parseEventDynamicCode($event, skipMove ? '' : disabled || swipe.onDrag)"
+    @touchend="parseEventDynamicCode($event, skipMove ? '' : disabled || swipe.endDrag)"
+    @touchcancel="parseEventDynamicCode($event, disabled || swipe.endDrag)"
+  >
+    <view id="wrapper">
+      <view
+        :class="classPrefix + '__left'"
+        data-key="left"
+      >
+        <slot name="left" />
+        <view
+          v-for="(item, index) in left"
+          :key="index"
+          :class="classPrefix + '__content ' + item.className"
+          :style="item.style"
+          :data-action="item"
+          @tap="onActionTap"
+        >
+          <!-- parse <template v-if="item.icon" is="icon" :data="tClass: classPrefix + '__icon', name: item.icon, ...item.icon"></template> -->
+          <block
+            v-if="item.icon"
+            name="icon"
+          >
+            <t-icon
+              :style="style || ''"
+              :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
+              :prefix="prefix || ''"
+              :name="'close' || ''"
+              :size="22 || ''"
+              :color="color || ''"
+              :aria-hidden="true || ''"
+              :aria-label="'清除' || ''"
+              :aria-role="'button' || ''"
+              @click="bindclick || ''"
+            />
+          </block>
 
-                    <text v-if="item.text" :class="classPrefix + '__text'">{{ item.text }}</text>
-                </view>
-            </view>
-            <slot />
-            <view :class="classPrefix + '__right'" data-key="right">
-                <slot name="right" />
-                <view :class="classPrefix + '__content ' + item.className" :style="item.style" :data-action="item" @tap="onActionTap" v-for="(item, index) in right" :key="index">
-                    <!-- parse <template v-if="item.icon" is="icon" :data="tClass: classPrefix + '__icon', name: item.icon, ...item.icon"></template> -->
-                    <block name="icon" v-if="item.icon">
-                        <t-icon
-                            :style="style || ''"
-                            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-                            :prefix="prefix || ''"
-                            :name="'close' || ''"
-                            :size="22 || ''"
-                            :color="color || ''"
-                            :aria-hidden="true || ''"
-                            :aria-label="'清除' || ''"
-                            :aria-role="'button' || ''"
-                            @click="bindclick || ''"
-                        />
-                    </block>
-
-                    <text v-if="item.text" :class="classPrefix + '__text'">{{ item.text }}</text>
-                </view>
-            </view>
+          <text
+            v-if="item.text"
+            :class="classPrefix + '__text'"
+          >
+            {{ item.text }}
+          </text>
         </view>
+      </view>
+      <slot />
+      <view
+        :class="classPrefix + '__right'"
+        data-key="right"
+      >
+        <slot name="right" />
+        <view
+          v-for="(item, index) in right"
+          :key="index"
+          :class="classPrefix + '__content ' + item.className"
+          :style="item.style"
+          :data-action="item"
+          @tap="onActionTap"
+        >
+          <!-- parse <template v-if="item.icon" is="icon" :data="tClass: classPrefix + '__icon', name: item.icon, ...item.icon"></template> -->
+          <block
+            v-if="item.icon"
+            name="icon"
+          >
+            <t-icon
+              :style="style || ''"
+              :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
+              :prefix="prefix || ''"
+              :name="'close' || ''"
+              :size="22 || ''"
+              :color="color || ''"
+              :aria-hidden="true || ''"
+              :aria-label="'清除' || ''"
+              :aria-role="'button' || ''"
+              @click="bindclick || ''"
+            />
+          </block>
+
+          <text
+            v-if="item.text"
+            :class="classPrefix + '__text'"
+          >
+            {{ item.text }}
+          </text>
+        </view>
+      </view>
     </view>
+  </view>
 </template>
 <script module="swipe" lang="wxs" src="@/swipe-cell/swipe-cell.wxs"></script>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>

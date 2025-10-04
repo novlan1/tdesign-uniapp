@@ -1,74 +1,122 @@
 <template>
-    <view>
-        <t-popup class="class" :visible="visible" placement="bottom" @visible-change="onVisibleChange">
-            <view :style="_._style([style, customStyle])" :class="name">
-                <view :class="name + '__title'">
-                    <slot name="title" />
-                    {{ title }}
-                </view>
-                <view :class="name + '__close-btn'" @tap="onClose">
-                    <slot name="close-btn" />
-                    <t-icon v-if="closeBtn" size="48rpx" name="close" />
-                </view>
-                <slot name="header" />
-                <view :class="name + '__content'">
-                    <block v-if="steps && steps.length">
-                        <view v-if="theme == 'step'" :class="name + '__steps'">
-                            <view :class="name + '__step'" @tap="onStepClick" :data-index="index" v-for="(item, index) in steps" :key="index">
-                                <view
-                                    :class="
-                                        name +
-                                        '__step-dot ' +
-                                        name +
-                                        '__step-dot--' +
-                                        (item !== placeholder ? 'active' : '') +
-                                        ' ' +
-                                        name +
-                                        '__step-dot--' +
-                                        (index === steps.length - 1 ? 'last' : '')
-                                    "
-                                ></view>
+  <view>
+    <t-popup
+      class="class"
+      :visible="visible"
+      placement="bottom"
+      @visible-change="onVisibleChange"
+    >
+      <view
+        :style="_._style([style, customStyle])"
+        :class="name"
+      >
+        <view :class="name + '__title'">
+          <slot name="title" />
+          {{ title }}
+        </view>
+        <view
+          :class="name + '__close-btn'"
+          @tap="onClose"
+        >
+          <slot name="close-btn" />
+          <t-icon
+            v-if="closeBtn"
+            size="48rpx"
+            name="close"
+          />
+        </view>
+        <slot name="header" />
+        <view :class="name + '__content'">
+          <block v-if="steps && steps.length">
+            <view
+              v-if="theme == 'step'"
+              :class="name + '__steps'"
+            >
+              <view
+                v-for="(item, index) in steps"
+                :key="index"
+                :class="name + '__step'"
+                :data-index="index"
+                @tap="onStepClick"
+              >
+                <view
+                  :class="
+                    name +
+                      '__step-dot ' +
+                      name +
+                      '__step-dot--' +
+                      (item !== placeholder ? 'active' : '') +
+                      ' ' +
+                      name +
+                      '__step-dot--' +
+                      (index === steps.length - 1 ? 'last' : '')
+                  "
+                />
 
-                                <view :class="name + '__step-label ' + name + '__step-label--' + (index === stepIndex ? 'active' : '')">{{ item }}</view>
-
-                                <t-icon name="chevron-right" size="44rpx" :t-class="name + '__step-arrow'" />
-                            </view>
-                        </view>
-                        <block v-if="theme == 'tab'">
-                            <t-tabs id="tabs" :value="stepIndex" @change="onTabChange($event, { tagId: 'tabs' })" :space-evenly="false">
-                                <t-tab-panel :value="index" :label="item" v-for="(item, index) in steps" :key="index"></t-tab-panel>
-                            </t-tabs>
-                        </block>
-                    </block>
-                    <view v-if="subTitles && subTitles[stepIndex]" :class="name + '__options-title'">{{ subTitles[stepIndex] }}</view>
-                    <view :class="name + '__options-container'" :style="'width: ' + (items.length + 1) + '00vw; transform: translateX(-' + stepIndex + '00vw)'">
-                        <scroll-view
-                            :class="name + '__options'"
-                            scroll-y
-                            :scroll-top="scrollTopList[index]"
-                            type="list"
-                            :style="'height: ' + _optionsHeight + 'px'"
-                            v-for="(options, index) in items"
-                            :key="index"
-                        >
-                            <view :class="'cascader-radio-group-' + index">
-                                <t-radio-group
-                                    :value="selectedValue[index]"
-                                    :keys="keys"
-                                    :options="options"
-                                    @change="handleSelect($event, { level: index })"
-                                    :data-level="index"
-                                    placement="right"
-                                    icon="line"
-                                    borderless
-                                ></t-radio-group>
-                            </view>
-                        </scroll-view>
-                    </view>
+                <view :class="name + '__step-label ' + name + '__step-label--' + (index === stepIndex ? 'active' : '')">
+                  {{ item }}
                 </view>
+
+                <t-icon
+                  name="chevron-right"
+                  size="44rpx"
+                  :t-class="name + '__step-arrow'"
+                />
+              </view>
             </view>
-        </t-popup>
-    </view>
+            <block v-if="theme == 'tab'">
+              <t-tabs
+                id="tabs"
+                :value="stepIndex"
+                :space-evenly="false"
+                @change="onTabChange($event, { tagId: 'tabs' })"
+              >
+                <t-tab-panel
+                  v-for="(item, index) in steps"
+                  :key="index"
+                  :value="index"
+                  :label="item"
+                />
+              </t-tabs>
+            </block>
+          </block>
+          <view
+            v-if="subTitles && subTitles[stepIndex]"
+            :class="name + '__options-title'"
+          >
+            {{ subTitles[stepIndex] }}
+          </view>
+          <view
+            :class="name + '__options-container'"
+            :style="'width: ' + (items.length + 1) + '00vw; transform: translateX(-' + stepIndex + '00vw)'"
+          >
+            <scroll-view
+              v-for="(options, index) in items"
+              :key="index"
+              :class="name + '__options'"
+              scroll-y
+              :scroll-top="scrollTopList[index]"
+              type="list"
+              :style="'height: ' + _optionsHeight + 'px'"
+            >
+              <view :class="'cascader-radio-group-' + index">
+                <t-radio-group
+                  :value="selectedValue[index]"
+                  :keys="keys"
+                  :options="options"
+                  :data-level="index"
+                  placement="right"
+                  icon="line"
+                  borderless
+                  @change="handleSelect($event, { level: index })"
+                />
+              </view>
+            </scroll-view>
+          </view>
+        </view>
+      </view>
+    </t-popup>
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

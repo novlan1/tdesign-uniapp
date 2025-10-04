@@ -1,18 +1,25 @@
 <template>
-    <view :class="classPrefix + ' class ' + prefix + '-class'" :style="_._style([style, customStyle])">
-        <view
-            :class="
-                _.cls(classPrefix + '__wrapper', [
-                    ['sticky', sticky],
-                    ['active', active]
-                ])
-            "
-            :style="anchorStyle"
-        >
-            <view :class="classPrefix + '__slot'"><slot /></view>
-            <view :class="_.cls(classPrefix + '__header', [['active', active]])">{{ index }}</view>
-        </view>
+  <view
+    :class="classPrefix + ' class ' + prefix + '-class'"
+    :style="_._style([style, customStyle])"
+  >
+    <view
+      :class="
+        _.cls(classPrefix + '__wrapper', [
+          ['sticky', sticky],
+          ['active', active]
+        ])
+      "
+      :style="anchorStyle"
+    >
+      <view :class="classPrefix + '__slot'">
+        <slot />
+      </view>
+      <view :class="_.cls(classPrefix + '__header', [['active', active]])">
+        {{ index }}
+      </view>
     </view>
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

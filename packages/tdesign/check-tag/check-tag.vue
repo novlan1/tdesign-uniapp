@@ -1,105 +1,119 @@
 <template>
-    <view :style="_._style([style, customStyle])" :class="className + ' class ' + prefix + '-class'" @tap="onClick">
-        <view :aria-hidden="true" :class="classPrefix + '__icon'">
-            <!-- parse <template v-if="_icon" is="icon" :data="tClass: prefix + '-icon', ..._icon"/> -->
-            <block name="icon" v-if="_icon">
-                <t-icon
-                    :style="style || ''"
-                    :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-                    :prefix="prefix || ''"
-                    :name="'close' || ''"
-                    :size="22 || ''"
-                    :color="color || ''"
-                    :aria-hidden="true || ''"
-                    :aria-label="'清除' || ''"
-                    :aria-role="'button' || ''"
-                    @click="'handleClose' || ''"
-                />
-            </block>
-            <slot name="icon" />
-        </view>
-        <view :class="classPrefix + '__text'">
-            <slot />
-            <slot name="content" />
-            <block v-if="_.isArray(content) && content.length == 2">{{ checked ? content[0] : content[1] }}</block>
-            <block v-else>{{ content }}</block>
-        </view>
+  <view
+    :style="_._style([style, customStyle])"
+    :class="className + ' class ' + prefix + '-class'"
+    @tap="onClick"
+  >
+    <view
+      :aria-hidden="true"
+      :class="classPrefix + '__icon'"
+    >
+      <!-- parse <template v-if="_icon" is="icon" :data="tClass: prefix + '-icon', ..._icon"/> -->
+      <block
+        v-if="_icon"
+        name="icon"
+      >
         <t-icon
-            v-if="closable"
-            :class="classPrefix + '__icon-close'"
-            :t-class="prefix + '-icon'"
-            @tap.native.stop.prevent="onClose"
-            name="close"
-            aria-role="button"
-            aria-label="关闭"
+          :style="style || ''"
+          :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
+          :prefix="prefix || ''"
+          :name="'close' || ''"
+          :size="22 || ''"
+          :color="color || ''"
+          :aria-hidden="true || ''"
+          :aria-label="'清除' || ''"
+          :aria-role="'button' || ''"
+          @click="'handleClose' || ''"
         />
+      </block>
+      <slot name="icon" />
     </view>
+    <view :class="classPrefix + '__text'">
+      <slot />
+      <slot name="content" />
+      <block v-if="_.isArray(content) && content.length == 2">
+        {{ checked ? content[0] : content[1] }}
+      </block>
+      <block v-else>
+        {{ content }}
+      </block>
+    </view>
+    <t-icon
+      v-if="closable"
+      :class="classPrefix + '__icon-close'"
+      :t-class="prefix + '-icon'"
+      name="close"
+      aria-role="button"
+      aria-label="关闭"
+      @tap.native.stop.prevent="onClose"
+    />
+  </view>
 </template>
 <script>
-import tIcon from "../icon/icon";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { wxComponent, SuperComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
-import { classNames, calcIcon } from "../common/utils";
+import tIcon from '../icon/icon';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { wxComponent, SuperComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import { classNames, calcIcon } from '../common/utils';
 import _ from '../common/utils.wxs';
 
 
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-tag`;
 let CheckTag = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
-      className: ""
+      className: '',
     });
     this.components = {
-      tIcon
-    }
+      tIcon,
+    };
     this._ = _;
-    this.properties = props;;
+    this.properties = props;
     this.externalClasses = [`${prefix}-class`];
     this.controlledProps = [{
-      key: "checked",
-      event: "change"
+      key: 'checked',
+      event: 'change',
     }];
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
     this.lifetimes = {
       attached() {
         this.setClass();
-      }
+      },
     };
     this.observers = {
-      "size, disabled, checked"() {
+      'size, disabled, checked'() {
         this.setClass();
       },
       icon(e) {
         this.setData({
-          _icon: calcIcon(e)
+          _icon: calcIcon(e),
         });
-      }
+      },
     };
     this.methods = {
       setClass() {
         const {
-          classPrefix: e
+          classPrefix: e,
         } = this;
         const {
           size: s,
           variant: t,
           disabled: i,
           checked: a,
-          shape: c
+          shape: c,
         } = this;
-        const o = classNames([e, `${e}--checkable`, i ? `${e}--disabled` : "", a ? `${e}--checked` : "", `${e}--${a ? "primary" : "default"}`, `${e}--${s}`, `${e}--${t}`, `${e}--${c}`]);
+        const o = classNames([e, `${e}--checkable`, i ? `${e}--disabled` : '', a ? `${e}--checked` : '', `${e}--${a ? 'primary' : 'default'}`, `${e}--${s}`, `${e}--${t}`, `${e}--${c}`]);
         this.setData({
-          className: o
+          className: o,
         });
       },
       onClick() {
@@ -107,16 +121,16 @@ let CheckTag = class extends SuperComponent {
           return;
         }
         const {
-          checked: e
+          checked: e,
         } = this;
-        this._trigger("click");
-        this._trigger("change", {
-          checked: !e
+        this._trigger('click');
+        this._trigger('change', {
+          checked: !e,
         });
       },
       onClose(e) {
-        this.disabled || this._trigger("close", e);
-      }
+        this.disabled || this._trigger('close', e);
+      },
     };
   }
 };

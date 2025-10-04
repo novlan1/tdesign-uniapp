@@ -1,93 +1,115 @@
 <template>
-    <view v-if="wrapperVisible" :class="classPrefix + ' class ' + prefix + '-class'" :style="_._style([_this.getStyles(top, zIndex), style, customStyle])">
-        <view
-            :class="classPrefix + '__mask'"
-            v-if="show"
-            :style="_._style(['height:' + maskHeight + 'px', style, customStyle])"
-            @tap="handleMaskClick"
-            @touchmove.stop.prevent="closeDropdown"
-        ></view>
-        <t-popup
-            :visible="show"
-            :z-index="zIndex + 1"
-            :duration="duration"
-            :show-overlay="showOverlay"
-            custom-style="position: absolute"
-            :overlay-props=""
-            @leaved="onLeaved"
-            @visible-change="handleMaskClick"
-            :t-class="classPrefix + '__popup-host'"
-            :t-class-content="classPrefix + '__content ' + prefix + '-class-content'"
+  <view
+    v-if="wrapperVisible"
+    :class="classPrefix + ' class ' + prefix + '-class'"
+    :style="_._style([_this.getStyles(top, zIndex), style, customStyle])"
+  >
+    <view
+      v-if="show"
+      :class="classPrefix + '__mask'"
+      :style="_._style(['height:' + maskHeight + 'px', style, customStyle])"
+      @tap="handleMaskClick"
+      @touchmove.stop.prevent="closeDropdown"
+    />
+    <t-popup
+      :visible="show"
+      :z-index="zIndex + 1"
+      :duration="duration"
+      :show-overlay="showOverlay"
+      custom-style="position: absolute"
+      :overlay-props=""
+      :t-class="classPrefix + '__popup-host'"
+      :t-class-content="classPrefix + '__content ' + prefix + '-class-content'"
+      @leaved="onLeaved"
+      @visible-change="handleMaskClick"
+    >
+      <view :class="classPrefix + '__body'">
+        <scroll-view
+          v-if="!multiple && options && options.length > 0"
+          :class="classPrefix + '__scroll'"
+          scroll-y
+          :scroll-into-view="'id_' + value"
         >
-            <view :class="classPrefix + '__body'">
-                <scroll-view v-if="!multiple && options && options.length > 0" :class="classPrefix + '__scroll'" scroll-y :scroll-into-view="'id_' + value">
-                    <t-radio-group
-                        :class="classPrefix + '__radio ' + prefix + '-class-column'"
-                        :t-class="classPrefix + '__radio-group'"
-                        :style="'grid-template-columns: repeat(' + optionsColumns + ', 1fr)'"
-                        :value="value"
-                        @change="handleRadioChange"
-                    >
-                        <view :id="'id_' + item[valueAlias]" v-for="(item, index) in options" :key="index">
-                            <t-radio
-                                :placement="placement"
-                                tabindex="0"
-                                icon="line"
-                                :class="classPrefix + '__radio-item ' + prefix + '-class-column-item'"
-                                t-class="radio"
-                                :t-class-label="prefix + '-class-column-item-label'"
-                                :value="item[valueAlias]"
-                                :label="item[labelAlias]"
-                                :disabled="item.disabled"
-                            />
-                        </view>
-                    </t-radio-group>
-                </scroll-view>
-                <scroll-view v-if="multiple && options && options.length > 0" :class="classPrefix + '__scroll'" scroll-y :scroll-into-view="'id_' + firstCheckedValue">
-                    <t-checkbox-group
-                        :class="classPrefix + '__checkbox ' + prefix + '-class-column'"
-                        :t-class="classPrefix + '__checkbox-group'"
-                        :style="'grid-template-columns: repeat(' + optionsColumns + ', 1fr)'"
-                        :value="value ? value : []"
-                        @change="handleRadioChange"
-                    >
-                        <view :id="'id_' + item[valueAlias]" v-for="(item, index) in options" :key="index">
-                            <t-checkbox
-                                tabindex="0"
-                                :class="classPrefix + '__checkbox-item ' + prefix + '-class-column-item'"
-                                theme="tag"
-                                :value="item[valueAlias]"
-                                :label="item[labelAlias]"
-                                :disabled="item.disabled"
-                            ></t-checkbox>
-                        </view>
-                    </t-checkbox-group>
-                </scroll-view>
-                <slot />
+          <t-radio-group
+            :class="classPrefix + '__radio ' + prefix + '-class-column'"
+            :t-class="classPrefix + '__radio-group'"
+            :style="'grid-template-columns: repeat(' + optionsColumns + ', 1fr)'"
+            :value="value"
+            @change="handleRadioChange"
+          >
+            <view
+              v-for="(item, index) in options"
+              :id="'id_' + item[valueAlias]"
+              :key="index"
+            >
+              <t-radio
+                :placement="placement"
+                tabindex="0"
+                icon="line"
+                :class="classPrefix + '__radio-item ' + prefix + '-class-column-item'"
+                t-class="radio"
+                :t-class-label="prefix + '-class-column-item-label'"
+                :value="item[valueAlias]"
+                :label="item[labelAlias]"
+                :disabled="item.disabled"
+              />
             </view>
-            <view :class="classPrefix + '__footer ' + prefix + '-class-footer'">
-                <slot name="footer" />
-                <block v-if="multiple">
-                    <t-button
-                        block
-                        :class="classPrefix + '__footer-btn ' + classPrefix + '__reset-btn'"
-                        theme="light"
-                        content="重置"
-                        :disabled="value.length == 0"
-                        @tap.native="handleReset"
-                    />
-                    <t-button
-                        block
-                        :class="classPrefix + '__footer-btn ' + classPrefix + '__confirm-btn'"
-                        theme="primary"
-                        content="确定"
-                        :disabled="value.length == 0"
-                        @tap.native="handleConfirm"
-                    />
-                </block>
+          </t-radio-group>
+        </scroll-view>
+        <scroll-view
+          v-if="multiple && options && options.length > 0"
+          :class="classPrefix + '__scroll'"
+          scroll-y
+          :scroll-into-view="'id_' + firstCheckedValue"
+        >
+          <t-checkbox-group
+            :class="classPrefix + '__checkbox ' + prefix + '-class-column'"
+            :t-class="classPrefix + '__checkbox-group'"
+            :style="'grid-template-columns: repeat(' + optionsColumns + ', 1fr)'"
+            :value="value ? value : []"
+            @change="handleRadioChange"
+          >
+            <view
+              v-for="(item, index) in options"
+              :id="'id_' + item[valueAlias]"
+              :key="index"
+            >
+              <t-checkbox
+                tabindex="0"
+                :class="classPrefix + '__checkbox-item ' + prefix + '-class-column-item'"
+                theme="tag"
+                :value="item[valueAlias]"
+                :label="item[labelAlias]"
+                :disabled="item.disabled"
+              />
             </view>
-        </t-popup>
-    </view>
+          </t-checkbox-group>
+        </scroll-view>
+        <slot />
+      </view>
+      <view :class="classPrefix + '__footer ' + prefix + '-class-footer'">
+        <slot name="footer" />
+        <block v-if="multiple">
+          <t-button
+            block
+            :class="classPrefix + '__footer-btn ' + classPrefix + '__reset-btn'"
+            theme="light"
+            content="重置"
+            :disabled="value.length == 0"
+            @tap.native="handleReset"
+          />
+          <t-button
+            block
+            :class="classPrefix + '__footer-btn ' + classPrefix + '__confirm-btn'"
+            theme="primary"
+            content="确定"
+            :disabled="value.length == 0"
+            @tap.native="handleConfirm"
+          />
+        </block>
+      </view>
+    </t-popup>
+  </view>
 </template>
 <script module="_this" lang="wxs" src="@/dropdown-item/index.wxs"></script>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>

@@ -1,50 +1,55 @@
 <template>
+  <view
+    id="t-bar"
+    :style="_._style([style, customStyle])"
+    :class="classPrefix + ' class ' + prefix + '-class'"
+    @touchmove.stop.prevent="parseEventDynamicCode($event, activeIdx === -1 ? '' : 'noop')"
+  >
     <view
-        :style="_._style([style, customStyle])"
-        :class="classPrefix + ' class ' + prefix + '-class'"
-        id="t-bar"
-        @touchmove.stop.prevent="parseEventDynamicCode($event, activeIdx === -1 ? '' : 'noop')"
+      :data-index="index"
+      :class="
+        _.cls(classPrefix + '__item', [
+          ['active', activeIdx == index],
+          ['disabled', item.disabled],
+          [index, true]
+        ]) +
+          ' ' +
+          prefix +
+          '-class-item'
+      "
+      :aria-disabled="item.disabled"
+      aria-role="button"
+      v-for="(item, index) in menus"
+      :aria-expanded="activeIdx === index"
+      :key="index"
+      aria-haspopup="menu"
+      @tap="handleToggle"
     >
-        <view
-            @tap="handleToggle"
-            :data-index="index"
-            :class="
-                _.cls(classPrefix + '__item', [
-                    ['active', activeIdx == index],
-                    ['disabled', item.disabled],
-                    [index, true]
-                ]) +
-                ' ' +
-                prefix +
-                '-class-item'
-            "
-            :aria-disabled="item.disabled"
-            aria-role="button"
-            :aria-expanded="activeIdx === index"
-            aria-haspopup="menu"
-            v-for="(item, index) in menus"
-            :key="index"
-        >
-            <view :class="classPrefix + '__title ' + prefix + '-class-label'">{{ item.label }}</view>
+      <view :class="classPrefix + '__title ' + prefix + '-class-label'">
+        {{ item.label }}
+      </view>
 
-            <!-- parse <template is="icon" :data="..._arrowIcon, ariaHidden: true, tClass: classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"/> -->
-            <block name="icon" v-if="false">
-                <t-icon
-                    :style="style || ''"
-                    :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-                    :prefix="prefix || ''"
-                    :name="'close' || ''"
-                    :size="22 || ''"
-                    :color="color || ''"
-                    :aria-hidden="true || ''"
-                    :aria-label="ariaLabel || ''"
-                    :aria-role="ariaRole || ''"
-                    @click="bindclick || ''"
-                />
-            </block>
-        </view>
-        <slot />
+      <!-- parse <template is="icon" :data="..._arrowIcon, ariaHidden: true, tClass: classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"/> -->
+      <block
+        v-if="false"
+        name="icon"
+      >
+        <t-icon
+          :style="style || ''"
+          :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
+          :prefix="prefix || ''"
+          :name="'close' || ''"
+          :size="22 || ''"
+          :color="color || ''"
+          :aria-hidden="true || ''"
+          :aria-label="ariaLabel || ''"
+          :aria-role="ariaRole || ''"
+          @click="bindclick || ''"
+        />
+      </block>
     </view>
+    <slot />
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

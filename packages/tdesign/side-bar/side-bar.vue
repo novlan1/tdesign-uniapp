@@ -1,8 +1,11 @@
 <template>
-    <view :class="classPrefix + ' class ' + prefix + '-class'" :style="_._style([style, customStyle])">
-        <slot />
-        <view :class="classPrefix + '__padding'"></view>
-    </view>
+  <view
+    :class="classPrefix + ' class ' + prefix + '-class'"
+    :style="_._style([style, customStyle])"
+  >
+    <slot />
+    <view :class="classPrefix + '__padding'" />
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

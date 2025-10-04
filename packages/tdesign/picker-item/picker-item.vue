@@ -1,42 +1,44 @@
 <template>
+  <view
+    :style="_._style([style, customStyle])"
+    :class="_.cls(classPrefix + '__group', []) + ' class ' + prefix + '-class'"
+    @touchstart="onTouchStart"
+    @touchmove.stop.prevent="onTouchMove"
+    @touchend="onTouchEnd"
+    @touchcancel="onTouchEnd"
+  >
     <view
-        :style="_._style([style, customStyle])"
-        :class="_.cls(classPrefix + '__group', []) + ' class ' + prefix + '-class'"
-        @touchstart="onTouchStart"
-        @touchmove.stop.prevent="onTouchMove"
-        @touchend="onTouchEnd"
-        @touchcancel="onTouchEnd"
+      :class="classPrefix + '__wrapper'"
+      :style="'transition: transform ' + duration + 'ms cubic-bezier(0.215, 0.61, 0.355, 1); transform: translate3d(0, ' + offset + 'px, 0)'"
     >
-        <view
-            :class="classPrefix + '__wrapper'"
-            :style="'transition: transform ' + duration + 'ms cubic-bezier(0.215, 0.61, 0.355, 1); transform: translate3d(0, ' + offset + 'px, 0)'"
-        >
-            <view
-                :class="_.cls(classPrefix + '__item', [['active', curIndex == index]])"
-                :style="'height: ' + pickItemHeight + 'px'"
-                :data-index="index"
-                @tap="onClickItem"
-                v-for="(option, index) in formatOptions"
-                :key="index"
-            >
-                <text :class="classPrefix + '__item-label'">{{ option[pickerKeys.label] }}</text>
+      <view
+        v-for="(option, index) in formatOptions"
+        :key="index"
+        :class="_.cls(classPrefix + '__item', [['active', curIndex == index]])"
+        :style="'height: ' + pickItemHeight + 'px'"
+        :data-index="index"
+        @tap="onClickItem"
+      >
+        <text :class="classPrefix + '__item-label'">
+          {{ option[pickerKeys.label] }}
+        </text>
 
-                <slot :name="'label-suffix--' + index"></slot>
-            </view>
-        </view>
+        <slot :name="'label-suffix--' + index" />
+      </view>
     </view>
+  </view>
 </template>
 <script>
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
 import _ from '../common/utils.wxs';
 import { initTDesign } from '../common/runtime';
 
 
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-picker-item`;
 const range = function (t, e, i) {
@@ -53,8 +55,8 @@ let PickerItem = class extends SuperComponent {
     this._ = _;
     this.name = 'TPickerItem';
     this.relations = {
-      "../picker/picker": {
-        type: "parent",
+      '../picker/picker': {
+        type: 'parent',
         // linked(t) {
         //   if ("keys" in t.data) {
         //     const {
@@ -68,56 +70,56 @@ let PickerItem = class extends SuperComponent {
         //     });
         //   }
         // }
-      }
+      },
     };
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
     this.rawData = {
-      pickItemHeight: 44
-    }
+      pickItemHeight: 44,
+    };
     this.externalClasses = [`${prefix}-class`];
-    this.properties = props;;
+    this.properties = props;
     this.observers = {
-      "options, pickerKeys"() {
+      'options, pickerKeys'() {
         this.update();
-      }
+      },
     };
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
       offset: 0,
       duration: 0,
-      value: "",
+      value: '',
       curIndex: 0,
       columnIndex: 0,
       pickerKeys: {
-        value: "value",
-        label: "label"
+        value: 'value',
+        label: 'label',
       },
-      formatOptions: props.options.value
+      formatOptions: props.options.value,
     });
     this.lifetimes = {
       created() {
         this.StartY = 0;
         this.StartOffset = 0;
         this.startTime = 0;
-      }
+      },
     };
     this.methods = {
       onClickItem(t) {
         const {
-          index: e
+          index: e,
         } = t.currentTarget.dataset;
         const {
-          pickItemHeight: i
+          pickItemHeight: i,
         } = this;
         const s = range(e, 0, this.getCount() - 1);
         if (s !== this._selectedIndex) {
           this.setData({
             offset: -s * i,
             curIndex: s,
-            duration: 200
+            duration: 200,
           });
         }
         this.updateSelected(s, true);
@@ -127,30 +129,30 @@ let PickerItem = class extends SuperComponent {
         this.StartOffset = this.offset;
         this.startTime = Date.now();
         this.setData({
-          duration: 0
+          duration: 0,
         });
       },
       onTouchMove(t) {
         const {
           StartY: e,
-          StartOffset: i
+          StartOffset: i,
         } = this;
         const {
-          pickItemHeight: s
+          pickItemHeight: s,
         } = this;
         const o = t.touches[0].clientY - e;
         const n = range(i + o, -this.getCount() * s, 0);
         this.setData({
-          offset: n
+          offset: n,
         });
       },
       onTouchEnd(t) {
         const {
           offset: e,
-          pickItemHeight: i
+          pickItemHeight: i,
         } = this;
         const {
-          startTime: s
+          startTime: s,
         } = this;
         if (e === this.StartOffset) {
           return;
@@ -166,21 +168,21 @@ let PickerItem = class extends SuperComponent {
         this.setData({
           offset: -c * i,
           duration: 1000,
-          curIndex: c
+          curIndex: c,
         });
         if (c !== this._selectedIndex) {
           this.updateSelected(c, true);
         }
       },
-      formatOption: (t, e, i) => "function" != typeof i ? t : t.map(t => i(t, e)),
+      formatOption: (t, e, i) => ('function' !== typeof i ? t : t.map(t => i(t, e))),
       updateSelected(t, e) {
-        var i;
-        var s;
-        var o;
+        let i;
+        let s;
+        let o;
         const {
           columnIndex: n,
           pickerKeys: a,
-          formatOptions: r
+          formatOptions: r,
         } = this;
         this._selectedIndex = t;
         this._selectedValue = null === (i = r[t]) || void 0 === i ? void 0 : i[null == a ? void 0 : a.value];
@@ -188,7 +190,7 @@ let PickerItem = class extends SuperComponent {
         if (e) {
           null === (o = this[this.relationParentName]) || void 0 === o || o.triggerColumnChange({
             index: t,
-            column: n
+            column: n,
           });
         }
       },
@@ -199,7 +201,7 @@ let PickerItem = class extends SuperComponent {
           pickerKeys: i,
           pickItemHeight: s,
           format: o,
-          columnIndex: n
+          columnIndex: n,
         } = this;
         const a = this.formatOption(t, n, o);
         const r = a.findIndex(t => t[null == i ? void 0 : i.value] === e);
@@ -208,14 +210,14 @@ let PickerItem = class extends SuperComponent {
         this.setData({
           formatOptions: a,
           offset: -c * s,
-          curIndex: c
+          curIndex: c,
         });
       },
       getCount() {
-        var t;
-        var e;
+        let t;
+        let e;
         return null === (e = null === (t = this) || void 0 === t ? void 0 : t.options) || void 0 === e ? void 0 : e.length;
-      }
+      },
     };
   }
 };

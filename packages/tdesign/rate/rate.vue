@@ -1,91 +1,118 @@
 <template>
-    <view :class="classPrefix + ' class'" :style="_._style([style, customStyle])">
-        <view
-            :class="classPrefix + '__wrapper ' + prefix + '-class'"
-            :style="'font-size:' + utils.regSize(size)"
-            @touchstart="parseEventDynamicCode($event, !disabled ? 'onTouchStart' : '')"
-            @touchmove="parseEventDynamicCode($event, !disabled ? 'onTouchMove' : '')"
-            @tap="onTap"
-            @touchend="parseEventDynamicCode($event, !disabled ? 'onTouchEnd' : '')"
-            @touchcancel="parseEventDynamicCode($event, !disabled ? 'onTouchEnd' : '')"
-            aria-role="slider"
-            :aria-valuemax="count"
-            :aria-valuemin="0"
-            :aria-valuenow="value"
-            :aria-valuetext="utils.getText(texts, value, defaultTexts)"
-        >
-            <t-icon
-                :class="classPrefix + '__icon ' + utils.getIconClass(classPrefix + '__icon', defaultValue, value, index, allowHalf, disabled, scaleIndex)"
-                :style="'margin-right: ' + (count - index > 1 ? _.addUnit(gap) : 0) + '; ' + utils.getColor(color)"
-                :t-class="prefix + '-class-icon'"
-                :name="utils.getIconName(defaultValue, value, index, icon)"
-                :size="size"
-                :prefix="iconPrefix"
-                v-for="(item, index) in count"
-                :key="index"
-            ></t-icon>
-        </view>
-        <text v-if="showText" :class="_.cls(classPrefix + '__text', [['active', value > 0]]) + ' ' + prefix + '-class-text'" :aria-hidden="true">
-            {{ utils.getText(texts, value, defaultTexts) }}
-        </text>
-        <text
-            v-if="isVisibleToScreenReader"
-            :class="
-                _.cls(classPrefix + '__text', [
-                    ['active', value > 0],
-                    ['sr-only', isVisibleToScreenReader]
-                ]) +
-                ' ' +
-                prefix +
-                '-class-text'
-            "
-            aria-role="alert"
-            aria-live="assertive"
-        >
-            {{ value + '星' }} {{ utils.getText(texts, value, defaultTexts) }}
-        </text>
-        <view v-if="tipsVisible && placement" :class="_.cls(classPrefix + '__tips', [placement])" :style="'left: ' + tipsLeft + 'px'" :aria-hidden="true">
-            <block v-if="actionType == 'tap'">
-                <view
-                    v-if="allowHalf"
-                    :class="_.cls(classPrefix + '__tips-item', [['active', utils.ceil(value) - 0.5 == value]])"
-                    @tap="onSelect"
-                    :data-value="utils.ceil(value) - 0.5"
-                >
-                    <t-icon
-                        :class="classPrefix + '__icon ' + classPrefix + '__icon--selected-half'"
-                        :name="utils.getIconName(defaultValue, value, index, icon)"
-                        :size="size"
-                        :style="utils.getColor(color)"
-                    />
-                    <view :class="classPrefix + '__tips-text'">{{ utils.ceil(value) - 0.5 }}</view>
-                </view>
-                <view :class="_.cls(classPrefix + '__tips-item', [['active', utils.ceil(value) == value]])" @tap="onSelect" :data-value="utils.ceil(value)">
-                    <t-icon :class="_.cls(classPrefix + '__icon', ['selected'])" :name="utils.getIconName(defaultValue, 0, 0, icon)" :size="size" :style="utils.getColor(color)" />
-                    <view :class="classPrefix + '__tips-text'">{{ utils.ceil(value) }}</view>
-                </view>
-            </block>
-            <view
-                v-else
-                :class="_.cls(classPrefix + '__tips-item', [['active', utils.ceil(value) == value && actionType == 'tap']])"
-                @tap="onSelect"
-                :data-value="utils.ceil(value)"
-            >
-                <t-icon
-                    :class="
-                        _.cls(classPrefix + '__icon', [
-                            ['selected', utils.ceil(value) == value],
-                            ['selected-half', utils.ceil(value) != value]
-                        ])
-                    "
-                    :name="utils.getIconName(defaultValue, 0, 0, icon)"
-                    :size="size"
-                    :style="utils.getColor(color)"
-                />
-                <view :class="classPrefix + '__tips-text'">{{ value }}</view>
-            </view>
-        </view>
+  <view
+    :class="classPrefix + ' class'"
+    :style="_._style([style, customStyle])"
+  >
+    <view
+      :class="classPrefix + '__wrapper ' + prefix + '-class'"
+      :style="'font-size:' + utils.regSize(size)"
+      aria-role="slider"
+      :aria-valuemax="count"
+      :aria-valuemin="0"
+      :aria-valuenow="value"
+      :aria-valuetext="utils.getText(texts, value, defaultTexts)"
+      @touchstart="parseEventDynamicCode($event, !disabled ? 'onTouchStart' : '')"
+      @touchmove="parseEventDynamicCode($event, !disabled ? 'onTouchMove' : '')"
+      @tap="onTap"
+      @touchend="parseEventDynamicCode($event, !disabled ? 'onTouchEnd' : '')"
+      @touchcancel="parseEventDynamicCode($event, !disabled ? 'onTouchEnd' : '')"
+    >
+      <t-icon
+        v-for="(item, index) in count"
+        :key="index"
+        :class="classPrefix + '__icon ' + utils.getIconClass(classPrefix + '__icon', defaultValue, value, index, allowHalf, disabled, scaleIndex)"
+        :style="'margin-right: ' + (count - index > 1 ? _.addUnit(gap) : 0) + '; ' + utils.getColor(color)"
+        :t-class="prefix + '-class-icon'"
+        :name="utils.getIconName(defaultValue, value, index, icon)"
+        :size="size"
+        :prefix="iconPrefix"
+      />
     </view>
+    <text
+      v-if="showText"
+      :class="_.cls(classPrefix + '__text', [['active', value > 0]]) + ' ' + prefix + '-class-text'"
+      :aria-hidden="true"
+    >
+      {{ utils.getText(texts, value, defaultTexts) }}
+    </text>
+    <text
+      v-if="isVisibleToScreenReader"
+      :class="
+        _.cls(classPrefix + '__text', [
+          ['active', value > 0],
+          ['sr-only', isVisibleToScreenReader]
+        ]) +
+          ' ' +
+          prefix +
+          '-class-text'
+      "
+      aria-role="alert"
+      aria-live="assertive"
+    >
+      {{ value + '星' }} {{ utils.getText(texts, value, defaultTexts) }}
+    </text>
+    <view
+      v-if="tipsVisible && placement"
+      :class="_.cls(classPrefix + '__tips', [placement])"
+      :style="'left: ' + tipsLeft + 'px'"
+      :aria-hidden="true"
+    >
+      <block v-if="actionType == 'tap'">
+        <view
+          v-if="allowHalf"
+          :class="_.cls(classPrefix + '__tips-item', [['active', utils.ceil(value) - 0.5 == value]])"
+          :data-value="utils.ceil(value) - 0.5"
+          @tap="onSelect"
+        >
+          <t-icon
+            :class="classPrefix + '__icon ' + classPrefix + '__icon--selected-half'"
+            :name="utils.getIconName(defaultValue, value, index, icon)"
+            :size="size"
+            :style="utils.getColor(color)"
+          />
+          <view :class="classPrefix + '__tips-text'">
+            {{ utils.ceil(value) - 0.5 }}
+          </view>
+        </view>
+        <view
+          :class="_.cls(classPrefix + '__tips-item', [['active', utils.ceil(value) == value]])"
+          :data-value="utils.ceil(value)"
+          @tap="onSelect"
+        >
+          <t-icon
+            :class="_.cls(classPrefix + '__icon', ['selected'])"
+            :name="utils.getIconName(defaultValue, 0, 0, icon)"
+            :size="size"
+            :style="utils.getColor(color)"
+          />
+          <view :class="classPrefix + '__tips-text'">
+            {{ utils.ceil(value) }}
+          </view>
+        </view>
+      </block>
+      <view
+        v-else
+        :class="_.cls(classPrefix + '__tips-item', [['active', utils.ceil(value) == value && actionType == 'tap']])"
+        :data-value="utils.ceil(value)"
+        @tap="onSelect"
+      >
+        <t-icon
+          :class="
+            _.cls(classPrefix + '__icon', [
+              ['selected', utils.ceil(value) == value],
+              ['selected-half', utils.ceil(value) != value]
+            ])
+          "
+          :name="utils.getIconName(defaultValue, 0, 0, icon)"
+          :size="size"
+          :style="utils.getColor(color)"
+        />
+        <view :class="classPrefix + '__tips-text'">
+          {{ value }}
+        </view>
+      </view>
+    </view>
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script module="utils" lang="wxs" src="@/rate/rate.wxs"></script>

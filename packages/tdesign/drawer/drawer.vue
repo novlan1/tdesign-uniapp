@@ -1,47 +1,64 @@
 <template>
-    <view>
-        <t-popup
-            v-if="!destroyOnClose || visible"
-            :style="_._style([style, customStyle])"
-            class="class"
-            @visible-change="visibleChange"
-            :visible="visible"
-            :zIndex="zIndex"
-            :usingCustomNavbar="usingCustomNavbar"
-            :placement="placement == 'right' ? 'right' : 'left'"
-            :showOverlay="showOverlay"
-            :closeOnOverlayClick="closeOnOverlayClick"
+  <view>
+    <t-popup
+      v-if="!destroyOnClose || visible"
+      :style="_._style([style, customStyle])"
+      class="class"
+      :visible="visible"
+      :z-index="zIndex"
+      :using-custom-navbar="usingCustomNavbar"
+      :placement="placement == 'right' ? 'right' : 'left'"
+      :show-overlay="showOverlay"
+      :close-on-overlay-click="closeOnOverlayClick"
+      @visible-change="visibleChange"
+    >
+      <view :class="classPrefix">
+        <slot name="title" />
+        <view
+          v-if="title"
+          :class="classPrefix + '__title'"
         >
-            <view :class="classPrefix">
-                <slot name="title" />
-                <view v-if="title" :class="classPrefix + '__title'">{{ title }}</view>
-                <scroll-view :class="classPrefix + '__sidebar'" scroll-y type="list">
-                    <view
-                        :class="classPrefix + '__sidebar-item'"
-                        :hover-class="classPrefix + '--hover'"
-                        :hover-start-time="0"
-                        :hover-stay-time="100"
-                        wx:item="item"
-                        :data-item="item"
-                        :data-index="index"
-                        @tap="itemClick"
-                        :aria-role="ariaRole || 'button'"
-                        :aria-label="item.title"
-                        v-for="(item, index) in items"
-                        :key="index"
-                    >
-                        <view :aria-hidden="true" v-if="item.icon" :class="classPrefix + '__sidebar-item-icon'"><t-icon :name="item.icon" /></view>
-
-                        <view :class="classPrefix + '__sidebar-item-title'">{{ item.title }}</view>
-                    </view>
-                </scroll-view>
-                <view :class="classPrefix + '__footer'">
-                    <slot />
-                    <slot name="footer" />
-                </view>
+          {{ title }}
+        </view>
+        <scroll-view
+          :class="classPrefix + '__sidebar'"
+          scroll-y
+          type="list"
+        >
+          <view
+            :class="classPrefix + '__sidebar-item'"
+            :hover-class="classPrefix + '--hover'"
+            :hover-start-time="0"
+            v-for="(item, index) in items"
+            :hover-stay-time="100"
+            :key="index"
+            wx:item="item"
+            :data-item="item"
+            :data-index="index"
+            :aria-role="ariaRole || 'button'"
+            :aria-label="item.title"
+            @tap="itemClick"
+          >
+            <view
+              v-if="item.icon"
+              :aria-hidden="true"
+              :class="classPrefix + '__sidebar-item-icon'"
+            >
+              <t-icon :name="item.icon" />
             </view>
-        </t-popup>
-    </view>
+
+            <view :class="classPrefix + '__sidebar-item-title'">
+              {{ item.title }}
+            </view>
+          </view>
+        </scroll-view>
+        <view :class="classPrefix + '__footer'">
+          <slot />
+          <slot name="footer" />
+        </view>
+      </view>
+    </t-popup>
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

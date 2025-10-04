@@ -24,17 +24,17 @@
   </view>
 </template>
 <script>
-import { __awaiter, __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
-import { styles, addUnit, getRect, toCamel } from "../common/utils";
+import { __awaiter, __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import { styles, addUnit, getRect, toCamel } from '../common/utils';
 import _ from '../common/utils.wxs';
 import { initTDesign } from '../common/runtime';
 
 
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-icon`;
 let Icon = class extends SuperComponent {
@@ -48,18 +48,18 @@ let Icon = class extends SuperComponent {
       componentPrefix: prefix,
       classPrefix: name,
       isImage: false,
-      iconStyle: void 0
+      iconStyle: void 0,
     });
     this.name = 'TIcon';
     this.observers = {
-      "name, color, size, style"() {
+      'name, color, size, style'() {
         this.setIconStyle();
-      }
+      },
     };
     this.methods = {
       onTap(t) {
-        this.$emit("click", {
-          detail: t.detail
+        this.$emit('click', {
+          detail: t.detail,
         });
       },
       setIconStyle() {
@@ -67,37 +67,37 @@ let Icon = class extends SuperComponent {
           name: t,
           color: e,
           size: o,
-          classPrefix: i
+          classPrefix: i,
         } = this;
-        const s = -1 !== t.indexOf("/");
+        const s = -1 !== t.indexOf('/');
         const n = addUnit(o);
         const r = e ? {
-          color: e
+          color: e,
         } : {};
         const c = o ? {
-          "font-size": n
+          'font-size': n,
         } : {};
         const a = Object.assign(Object.assign({}, r), c);
         this.setData({
-          isImage: s
+          isImage: s,
         }, () => __awaiter(this, void 0, void 0, function* () {
           if (s) {
             let t = n;
-            t || (yield getRect(this, `.${i}`).then(e => {
+            t || (yield getRect(this, `.${i}`).then((e) => {
               t = addUnit(null == e ? void 0 : e.height);
-            }).catch(() => {}));
+            })
+              .catch(() => {}));
             a.width = t;
             a.height = t;
           }
           this.setData({
-            iconStyle: `${styles(a)}`
+            iconStyle: `${styles(a)}`,
           });
         }));
-      }
+      },
     };
   }
-  setData() {};
-
+  setData() {}
 };
 Icon = initTDesign(__decorate([wxComponent()], Icon));
 export default Icon;

@@ -1,5 +1,10 @@
 <template>
-    <view :style="_._style([style, customStyle])" :class="_.cls(classPrefix, [layout, ['readonly', readonly], sequence]) + ' class ' + prefix + '-class'"><slot /></view>
+  <view
+    :style="_._style([style, customStyle])"
+    :class="_.cls(classPrefix, [layout, ['readonly', readonly], sequence]) + ' class ' + prefix + '-class'"
+  >
+    <slot />
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

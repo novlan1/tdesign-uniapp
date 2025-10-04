@@ -1,11 +1,11 @@
 <template>
-    <view
-        :class="'class ' + prefix + '-class ' + classPrefix + ' ' + transitionClass"
-        :style="_._style([visible ? '' : 'display: none', style, customStyle])"
-        @transitionend="onTransitionEnd"
-    >
-        <slot />
-    </view>
+  <view
+    :class="'class ' + prefix + '-class ' + classPrefix + ' ' + transitionClass"
+    :style="_._style([visible ? '' : 'display: none', style, customStyle])"
+    @transitionend="onTransitionEnd"
+  >
+    <slot />
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

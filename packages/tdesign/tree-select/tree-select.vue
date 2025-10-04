@@ -1,97 +1,107 @@
 <template>
-    <view :class="classPrefix + ' class'" :style="_._style(['height:' + _.addUnit(height), style, customStyle])">
-        <t-scroll-view
-            :class="_.cls(classPrefix + '__column', [_this.getTreeClass(leafLevel - level, treeOptions.length)]) + ' ' + prefix + '-class'"
-            :scrollIntoView="scrollIntoView && scrollIntoView[level] ? '.scroll-into-view >>> #scroll-to-' + scrollIntoView[level] : ''"
-            v-for="(item, level) in treeOptions"
-            :key="level"
+  <view
+    :class="classPrefix + ' class'"
+    :style="_._style(['height:' + _.addUnit(height), style, customStyle])"
+  >
+    <t-scroll-view
+      v-for="(item, level) in treeOptions"
+      :key="level"
+      :class="_.cls(classPrefix + '__column', [_this.getTreeClass(leafLevel - level, treeOptions.length)]) + ' ' + prefix + '-class'"
+      :scroll-into-view="scrollIntoView && scrollIntoView[level] ? '.scroll-into-view >>> #scroll-to-' + scrollIntoView[level] : ''"
+    >
+      <t-side-bar
+        v-if="level == 0"
+        :value="innerValue[level]"
+        :t-class="classPrefix + '-column ' + prefix + '-class-left-column'"
+        @change="onRootChange"
+      >
+        <t-side-bar-item
+          v-for="(item, index) in treeOptions[level]"
+          :key="index"
+          :label="item.label"
+          :value="item.value"
+          :disabled="item.disabled"
+          :t-id="'scroll-to-' + item.value"
+          class="scroll-into-view"
+          :t-class="prefix + '-class-left-item'"
+        />
+      </t-side-bar>
+
+      <block v-else-if="level != leafLevel">
+        <view
+          v-for="(item, index) in treeOptions[level]"
+          :key="index"
+          :data-level="level"
+          :data-value="item.value"
+          :class="
+            _.cls(classPrefix + '__item', [
+              ['active', item.value === innerValue[level]],
+              ['disabled', item.disabled]
+            ]) +
+              ' ' +
+              prefix +
+              '-class-middle-item scroll-into-view'
+          "
+          @tap="handleTreeClick"
         >
-            <t-side-bar v-if="level == 0" :value="innerValue[level]" @change="onRootChange" :t-class="classPrefix + '-column ' + prefix + '-class-left-column'">
-                <t-side-bar-item
-                    :label="item.label"
-                    :value="item.value"
-                    :disabled="item.disabled"
-                    :tId="'scroll-to-' + item.value"
-                    class="scroll-into-view"
-                    :t-class="prefix + '-class-left-item'"
-                    v-for="(item, index) in treeOptions[level]"
-                    :key="index"
-                ></t-side-bar-item>
-            </t-side-bar>
+          <view :id="'scroll-to-' + item.value">
+            {{ item.label }}
+          </view>
+        </view>
+      </block>
 
-            <block v-else-if="level != leafLevel">
-                <view
-                    @tap="handleTreeClick"
-                    :data-level="level"
-                    :data-value="item.value"
-                    :class="
-                        _.cls(classPrefix + '__item', [
-                            ['active', item.value === innerValue[level]],
-                            ['disabled', item.disabled]
-                        ]) +
-                        ' ' +
-                        prefix +
-                        '-class-middle-item scroll-into-view'
-                    "
-                    v-for="(item, index) in treeOptions[level]"
-                    :key="index"
-                >
-                    <view :id="'scroll-to-' + item.value">{{ item.label }}</view>
-                </view>
-            </block>
+      <t-radio-group
+        v-else-if="!multiple"
+        :class="classPrefix + '__radio ' + prefix + '-class-right-column'"
+        :data-level="level"
+        data-type="single"
+        :value="innerValue[level]"
+        @change="handleChange($event, { level, type: 'single' })"
+      >
+        <t-radio
+          v-for="(item, index) in treeOptions[level]"
+          :t-id="'scroll-to-' + item.value"
+          :key="index"
+          :class="'scroll-into-view ' + classPrefix + '__radio-item ' + prefix + '-class-right-item'"
+          :t-class-label="prefix + '-class-right-item-label'"
+          icon="line"
+          :value="item.value"
+          :disabled="item.disabled"
+          :max-label-row="1"
+          borderless
+          placement="right"
+        >
+          {{ item.label }}
+        </t-radio>
+      </t-radio-group>
 
-            <t-radio-group
-                v-else-if="!multiple"
-                :class="classPrefix + '__radio ' + prefix + '-class-right-column'"
-                :data-level="level"
-                data-type="single"
-                :value="innerValue[level]"
-                @change="handleChange($event, { level, type: 'single' })"
-            >
-                <t-radio
-                    :tId="'scroll-to-' + item.value"
-                    :class="'scroll-into-view ' + classPrefix + '__radio-item ' + prefix + '-class-right-item'"
-                    :t-class-label="prefix + '-class-right-item-label'"
-                    icon="line"
-                    :value="item.value"
-                    :disabled="item.disabled"
-                    :maxLabelRow="1"
-                    borderless
-                    placement="right"
-                    v-for="(item, index) in treeOptions[level]"
-                    :key="index"
-                >
-                    {{ item.label }}
-                </t-radio>
-            </t-radio-group>
-
-            <t-checkbox-group
-                v-else
-                :class="classPrefix + '__checkbox ' + prefix + '-class-right-column'"
-                :value="innerValue[level] || []"
-                :data-level="level"
-                data-type="multiple"
-                @change="handleChange($event, { level, type: 'multiple' })"
-            >
-                <t-checkbox
-                    :tId="'scroll-to-' + item.value"
-                    :class="'scroll-into-view ' + prefix + '-class-right-item'"
-                    :t-class-label="prefix + '-class-right-item-label'"
-                    placement="right"
-                    icon="line"
-                    :maxLabelRow="1"
-                    :value="item.value"
-                    :disabled="item.disabled"
-                    borderless
-                    v-for="(item, index) in treeOptions[level]"
-                    :key="index"
-                >
-                    {{ item.label }}
-                </t-checkbox>
-            </t-checkbox-group>
-        </t-scroll-view>
-        <slot name="content" />
-    </view>
+      <t-checkbox-group
+        v-else
+        :class="classPrefix + '__checkbox ' + prefix + '-class-right-column'"
+        :value="innerValue[level] || []"
+        :data-level="level"
+        data-type="multiple"
+        @change="handleChange($event, { level, type: 'multiple' })"
+      >
+        <t-checkbox
+          v-for="(item, index) in treeOptions[level]"
+          :t-id="'scroll-to-' + item.value"
+          :key="index"
+          :class="'scroll-into-view ' + prefix + '-class-right-item'"
+          :t-class-label="prefix + '-class-right-item-label'"
+          placement="right"
+          icon="line"
+          :max-label-row="1"
+          :value="item.value"
+          :disabled="item.disabled"
+          borderless
+        >
+          {{ item.label }}
+        </t-checkbox>
+      </t-checkbox-group>
+    </t-scroll-view>
+    <slot name="content" />
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script module="_this" lang="wxs" src="@/tree-select/index.wxs"></script>

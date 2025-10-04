@@ -1,79 +1,79 @@
 <template>
-    <view>
-        <view
-            v-if="realVisible && preventScrollThrough"
-            :class="prefix + '-overlay ' + transitionClass + ' class'"
-            :style="_._style(['--td-overlay-transition-duration:' + duration + 'ms', 'z-index:' + _zIndex, 'top:' + distanceTop + 'px', computedStyle, style, customStyle])"
-            @click="handleClick"
-            @touchmove.stop.prevent="noop"
-            @transitionend="onTransitionEnd"
-            :aria-role="ariaRole || 'button'"
-            :aria-label="ariaLabel || '关闭'"
-        >
-            <slot />
-        </view>
-        <view
-            v-else-if="realVisible"
-            :class="prefix + '-overlay ' + transitionClass + ' class'"
-            :style="_._style(['z-index:' + _zIndex, 'top:' + distanceTop + 'px', computedStyle, style, customStyle])"
-            @click="handleClick"
-            @transitionend="onTransitionEnd"
-            :aria-role="ariaRole || 'button'"
-            :aria-label="ariaLabel || '关闭'"
-        >
-            <slot />
-        </view>
+  <view>
+    <view
+      v-if="realVisible && preventScrollThrough"
+      :class="prefix + '-overlay ' + transitionClass + ' class'"
+      :style="_._style(['--td-overlay-transition-duration:' + duration + 'ms', 'z-index:' + _zIndex, 'top:' + distanceTop + 'px', computedStyle, style, customStyle])"
+      :aria-role="ariaRole || 'button'"
+      :aria-label="ariaLabel || '关闭'"
+      @click="handleClick"
+      @touchmove.stop.prevent="noop"
+      @transitionend="onTransitionEnd"
+    >
+      <slot />
     </view>
+    <view
+      v-else-if="realVisible"
+      :class="prefix + '-overlay ' + transitionClass + ' class'"
+      :style="_._style(['z-index:' + _zIndex, 'top:' + distanceTop + 'px', computedStyle, style, customStyle])"
+      :aria-role="ariaRole || 'button'"
+      :aria-label="ariaLabel || '关闭'"
+      @click="handleClick"
+      @transitionend="onTransitionEnd"
+    >
+      <slot />
+    </view>
+  </view>
 </template>
 <script>
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
-import transition from "../mixins/transition";
-import useCustomNavbar from "../mixins/using-custom-navbar";
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import transition from '../mixins/transition';
+import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
 import { initTDesign } from '../common/runtime';
 
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-overlay`;
 let Overlay = class extends SuperComponent {
   constructor() {
     super(...arguments);
-    this.properties = props;;
+    this.properties = props;
     this._ = _;
     this.mixins = [transition(), useCustomNavbar];
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
-      computedStyle: "",
-      _zIndex: 11000
+      computedStyle: '',
+      _zIndex: 11000,
     });
     this.observers = {
       backgroundColor(o) {
         this.setData({
-          computedStyle: o ? `background-color: ${o};` : ""
+          computedStyle: o ? `background-color: ${o};` : '',
         });
       },
       zIndex(o) {
         if (0 !== o) {
           this.setData({
-            _zIndex: o
+            _zIndex: o,
           });
         }
-      }
+      },
     };
     this.methods = {
       handleClick() {
-        this.$emit("click", {
+        this.$emit('click', {
           detail: {
-            visible: !this.visible
-          }
+            visible: !this.visible,
+          },
         });
       },
-      noop() {}
+      noop() {},
     };
   }
 };

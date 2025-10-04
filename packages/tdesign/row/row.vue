@@ -1,25 +1,30 @@
 <template>
-    <view :class="'class ' + prefix + '-row'" :style="getRowStyles(gutter, style, customStyle)"><slot /></view>
+  <view
+    :class="'class ' + prefix + '-row'"
+    :style="getRowStyles(gutter, style, customStyle)"
+  >
+    <slot />
+  </view>
 </template>
 <script>
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
 import _ from '../common/utils.wxs';
-import {getRowStyles} from './row.wxs';
+import { getRowStyles } from './row.wxs';
 import { initTDesign } from '../common/runtime';
 
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 let Row = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [];
-    this.properties = props;;
+    this.properties = props;
     this.setData({
-      prefix: prefix
+      prefix,
     });
     this._ = _;
     this.getRowStyles = getRowStyles;
@@ -29,40 +34,40 @@ let Row = class extends SuperComponent {
           this.setGutter();
         },
         immediate: true,
-      }
-    }
+      },
+    };
     this.relations = {
-      "../col/col": {
-        type: "child",
+      '../col/col': {
+        type: 'child',
         linked(t) {
           const {
-            gutter: o
+            gutter: o,
           } = this;
           if (o) {
             t.setData({
-              gutter: o
+              gutter: o,
             });
           }
-        }
-      }
+        },
+      },
     };
     this.observers = {
       gutter() {
         this.setGutter();
-      }
+      },
     };
     this.methods = {
       setGutter() {
         const {
-          gutter: t
+          gutter: t,
         } = this;
         // TODO: children undefined check
-        this.children?.forEach(o => {
+        this.children?.forEach((o) => {
           o.setData({
-            gutter: t
+            gutter: t,
           });
         });
-      }
+      },
     };
   }
 };

@@ -1,74 +1,110 @@
 <template>
-    <view
-        :id="tId"
-        :style="_._style([style, customStyle])"
-        :class="_.cls(classPrefix, [_placement, ['block', block]]) + ' class ' + prefix + '-class'"
-        :disabled="_disabled"
-        aria-role="radio"
-        :aria-checked="dataChecked"
-        :aria-label="label + content"
-        :aria-disabled="_disabled"
-        :tabindex="tabindex"
-        @click.stop="handleTap"
-    >
-        <view :class="_.cls(classPrefix + '__icon', [_placement, ['checked', dataChecked], ['disabled', _disabled]]) + ' ' + prefix + '-class-icon'">
-            <slot name="icon" v-if="slotIcon" />
-            <view v-else-if="customIcon" :class="classPrefix + '__image'"><image :src="dataChecked ? iconVal[0] : iconVal[1]" :class="classPrefix + '-icon__image'" webp /></view>
-            <block v-else>
-                <t-icon v-if="dataChecked && (icon == 'circle' || icon == 'line')" :name="icon == 'circle' ? 'check-circle-filled' : 'check'" :class="classPrefix + '__icon-wrap'" />
-                <view v-if="dataChecked && icon == 'dot'" :class="_.cls(classPrefix + '__icon-' + icon, [['disabled', _disabled]])" />
-                <view v-if="!dataChecked && (icon == 'circle' || icon == 'dot')" :class="_.cls(classPrefix + '__icon-circle', [['disabled', _disabled]])" />
-                <view v-if="!dataChecked && icon == 'line'" class="placeholder"></view>
-            </block>
-        </view>
-        <view :class="classPrefix + '__content'" data-target="text" @click.stop="handleTap">
-            <view
-                :class="
-                    _.cls(classPrefix + '__title', [
-                        ['disabled', _disabled],
-                        ['checked', dataChecked]
-                    ]) +
-                    ' ' +
-                    prefix +
-                    '-class-label'
-                "
-                :style="'-webkit-line-clamp:' + maxLabelRow"
-            >
-                <block v-if="label">{{ label }}</block>
-                <slot />
-                <slot name="label" />
-            </view>
-            <view
-                :class="
-                    _.cls(classPrefix + '__description', [
-                        ['disabled', _disabled],
-                        ['checked', dataChecked]
-                    ]) +
-                    ' ' +
-                    prefix +
-                    '-class-content'
-                "
-                :style="'-webkit-line-clamp:' + maxContentRow"
-            >
-                <block v-if="content">{{ content }}</block>
-                <slot name="content" />
-            </view>
-        </view>
-        <view v-if="!borderless" :class="_.cls(classPrefix + '__border', [_placement]) + ' ' + prefix + '-class-border'" />
+  <view
+    :id="tId"
+    :style="_._style([style, customStyle])"
+    :class="_.cls(classPrefix, [_placement, ['block', block]]) + ' class ' + prefix + '-class'"
+    :disabled="_disabled"
+    aria-role="radio"
+    :aria-checked="dataChecked"
+    :aria-label="label + content"
+    :aria-disabled="_disabled"
+    :tabindex="tabindex"
+    @click.stop="handleTap"
+  >
+    <view :class="_.cls(classPrefix + '__icon', [_placement, ['checked', dataChecked], ['disabled', _disabled]]) + ' ' + prefix + '-class-icon'">
+      <slot
+        v-if="slotIcon"
+        name="icon"
+      />
+      <view
+        v-else-if="customIcon"
+        :class="classPrefix + '__image'"
+      >
+        <image
+          :src="dataChecked ? iconVal[0] : iconVal[1]"
+          :class="classPrefix + '-icon__image'"
+          webp
+        />
+      </view>
+      <block v-else>
+        <t-icon
+          v-if="dataChecked && (icon == 'circle' || icon == 'line')"
+          :name="icon == 'circle' ? 'check-circle-filled' : 'check'"
+          :class="classPrefix + '__icon-wrap'"
+        />
+        <view
+          v-if="dataChecked && icon == 'dot'"
+          :class="_.cls(classPrefix + '__icon-' + icon, [['disabled', _disabled]])"
+        />
+        <view
+          v-if="!dataChecked && (icon == 'circle' || icon == 'dot')"
+          :class="_.cls(classPrefix + '__icon-circle', [['disabled', _disabled]])"
+        />
+        <view
+          v-if="!dataChecked && icon == 'line'"
+          class="placeholder"
+        />
+      </block>
     </view>
+    <view
+      :class="classPrefix + '__content'"
+      data-target="text"
+      @click.stop="handleTap"
+    >
+      <view
+        :class="
+          _.cls(classPrefix + '__title', [
+            ['disabled', _disabled],
+            ['checked', dataChecked]
+          ]) +
+            ' ' +
+            prefix +
+            '-class-label'
+        "
+        :style="'-webkit-line-clamp:' + maxLabelRow"
+      >
+        <block v-if="label">
+          {{ label }}
+        </block>
+        <slot />
+        <slot name="label" />
+      </view>
+      <view
+        :class="
+          _.cls(classPrefix + '__description', [
+            ['disabled', _disabled],
+            ['checked', dataChecked]
+          ]) +
+            ' ' +
+            prefix +
+            '-class-content'
+        "
+        :style="'-webkit-line-clamp:' + maxContentRow"
+      >
+        <block v-if="content">
+          {{ content }}
+        </block>
+        <slot name="content" />
+      </view>
+    </view>
+    <view
+      v-if="!borderless"
+      :class="_.cls(classPrefix + '__border', [_placement]) + ' ' + prefix + '-class-border'"
+    />
+  </view>
 </template>
 <script>
-import tIcon from "../icon/icon";
-import { __decorate } from "../miniprogram_npm/tslib";
-import config from "../common/config";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import Props from "./props";
+import tIcon from '../icon/icon';
+import { __decorate } from '../miniprogram_npm/tslib';
+import config from '../common/config';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import Props from './props';
 import _ from '../common/utils.wxs';
 import { initTDesign } from '../common/runtime';
 
 
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-radio`;
 let Radio = class extends SuperComponent {
@@ -76,27 +112,27 @@ let Radio = class extends SuperComponent {
     super(...arguments);
     this.components = {
       tIcon,
-    }
+    };
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-label`, `${prefix}-class-icon`, `${prefix}-class-content`, `${prefix}-class-border`];
-    this.behaviors = ["wx://form-field"];
+    this.behaviors = ['wx://form-field'];
     this._ = _;
     this.name = 'TRadio';
     this.relations = {
-      "../radio-group/radio-group": {
-        type: "ancestor",
+      '../radio-group/radio-group': {
+        type: 'ancestor',
         linked(e) {
           // if (e.data.borderless) {
           //   this.setData({
           //     borderless: true
           //   });
           // }
-        }
-      }
+        },
+      },
     };
     this.rawData = {
       dataChecked: undefined,
       dataValue: undefined,
-    }
+    };
     this.watch = {
       checked: {
         handler(val) {
@@ -106,107 +142,107 @@ let Radio = class extends SuperComponent {
       },
       value: {
         handler(val) {
-          this.dataValue= val;
+          this.dataValue = val;
         },
         immediate: true,
       },
-    }
+    };
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
     this.lifetimes = {
       attached() {
         this.init();
-      }
+      },
     };
     this.properties = Object.assign(Object.assign({}, Props), {
       borderless: {
         type: Boolean,
-        value: false
+        value: false,
       },
       tId: {
-        type: String
-      }
+        type: String,
+      },
     });
     this.controlledProps = [{
-      key: "checked",
-      event: "change"
+      key: 'checked',
+      event: 'change',
     }];
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
       customIcon: false,
       slotIcon: false,
       optionLinked: false,
       iconVal: [],
-      _placement: "",
+      _placement: '',
       _disabled: false,
-      _readonly: false
+      _readonly: false,
     });
     this.observers = {
       disabled(e) {
         this.setData({
-          _disabled: e
+          _disabled: e,
         });
       },
       readonly(e) {
         this.setData({
-          _readonly: e
+          _readonly: e,
         });
-      }
+      },
     };
     this.methods = {
       handleTap(e) {
         const {
           _disabled: t,
           _readonly: a,
-          contentDisabled: o
+          contentDisabled: o,
         } = this;
         const {
-          target: s
+          target: s,
         } = e.currentTarget.dataset;
-        t || a || "text" === s && o || this.doChange();
+        t || a || 'text' === s && o || this.doChange();
       },
       doChange() {
-        var e;
+        let e;
         const {
           dataValue: t,
           dataChecked: a,
-          allowUncheck: o
+          allowUncheck: o,
         } = this;
         const s = Boolean(o || (null === (e = this[this.relationParentName]) || void 0 === e ? void 0 : e.allowUncheck));
-        this[this.relationParentName] 
-         ? this[this.relationParentName].updateValue(a && s ? null : t) 
-         : this._trigger("change", {
-          checked: !s || !a
-        });
+        this[this.relationParentName]
+          ? this[this.relationParentName].updateValue(a && s ? null : t)
+          : this._trigger('change', {
+            checked: !s || !a,
+          });
       },
       init() {
-        var e;
-        var t;
-        var a;
-        var o;
+        let e;
+        let t;
+        let a;
+        let o;
         const {
-          icon: s
+          icon: s,
         } = this;
         const i = Array.isArray((null === (e = this[this.relationParentName]) || void 0 === e ? void 0 : e.icon) || s);
         this.setData({
           customIcon: i,
-          slotIcon: "slot" === s,
+          slotIcon: 'slot' === s,
           iconVal: i ? (null === (t = this[this.relationParentName]) || void 0 === t ? void 0 : t.icon) || s : [],
-          _placement: this.placement || (null === (o = null === (a = this[this.relationParentName]) || void 0 === a ? void 0 : a.data) || void 0 === o ? void 0 : o.placement) || "left"
+          _placement: this.placement || (null === (o = null === (a = this[this.relationParentName]) || void 0 === a ? void 0 : a.data) || void 0 === o ? void 0 : o.placement) || 'left',
         });
       },
       setDisabled(e) {
         this.setData({
-          _disabled: this.disabled || e
+          _disabled: this.disabled || e,
         });
       },
       setReadonly(e) {
         this.setData({
-          _readonly: this.readonly || e
+          _readonly: this.readonly || e,
         });
-      }
+      },
     };
   }
 };

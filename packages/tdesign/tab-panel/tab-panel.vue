@@ -1,15 +1,17 @@
 <template>
-    <view
-        v-if="!lazy || hasActivated"
-        :class="'class ' + prefix + '-class ' + classPrefix + ' ' + (active ? classPrefix + '--active' : classPrefix + '--inactive')"
-        :style="_._style([style, customStyle, hide ? 'display: none' : ''])"
-        :id="id"
-        aria-role="tabpanel"
-    >
-        <view v-if="panel">{{ panel }}</view>
-        <slot />
-        <slot name="panel" />
+  <view
+    v-if="!lazy || hasActivated"
+    :id="id"
+    :class="'class ' + prefix + '-class ' + classPrefix + ' ' + (active ? classPrefix + '--active' : classPrefix + '--inactive')"
+    :style="_._style([style, customStyle, hide ? 'display: none' : ''])"
+    aria-role="tabpanel"
+  >
+    <view v-if="panel">
+      {{ panel }}
     </view>
+    <slot />
+    <slot name="panel" />
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

@@ -1,11 +1,11 @@
 <template>
-    <view
-        :style="_._style([style, customStyle])"
-        :class="_.cls(classPrefix, [['border', bordered], ['fixed', fixed], ['safe', safeAreaInsetBottom], shape]) + ' class ' + prefix + '-class'"
-        aria-role="tablist"
-    >
-        <slot />
-    </view>
+  <view
+    :style="_._style([style, customStyle])"
+    :class="_.cls(classPrefix, [['border', bordered], ['fixed', fixed], ['safe', safeAreaInsetBottom], shape]) + ' class ' + prefix + '-class'"
+    aria-role="tablist"
+  >
+    <slot />
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

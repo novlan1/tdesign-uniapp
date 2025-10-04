@@ -1,66 +1,69 @@
 <template>
-    <view :style="_._style([style, customStyle])" :class="classPrefix + ' ' + classPrefix + '--' + size + ' class ' + prefix + '-class'">
-        <view
-            :class="
-                classPrefix +
-                '__minus ' +
-                classPrefix +
-                '__minus--' +
-                theme +
-                ' ' +
-                classPrefix +
-                '__icon--' +
-                size +
-                ' ' +
-                (disabled || disableMinus || currentValue <= min ? classPrefix + '--' + theme + '-disabled' : '') +
-                ' ' +
-                prefix +
-                '-class-minus'
-            "
-            @tap.stop.prevent="minusValue"
-            :aria-label="'减少' + step"
-            aria-role="button"
-            :aria-disabled="disabled || disableMinus || currentValue <= min"
-        >
-            <t-icon name="remove" />
-        </view>
-        <view :class="classPrefix + '__input--' + theme + ' ' + (disabled || disableInput ? classPrefix + '--' + theme + '-disabled' : '')">
-            <input
-                :style="inputWidth ? 'width:' + inputWidth + 'px;' : ''"
-                :class="classPrefix + '__input ' + classPrefix + '__input--' + size + ' ' + prefix + '-class-input'"
-                :disabled="disabled || disableInput"
-                :type="integer ? 'number' : 'digit'"
-                :value="currentValue"
-                @input.stop.prevent="handleInput"
-                @focus.stop.prevent="handleFocus"
-                @blur.stop.prevent="handleBlur"
-            />
-        </view>
-        <view
-            :class="
-                classPrefix +
-                '__plus ' +
-                classPrefix +
-                '__plus--' +
-                theme +
-                ' ' +
-                classPrefix +
-                '__icon--' +
-                size +
-                ' ' +
-                (disabled || disablePlus || currentValue >= max ? classPrefix + '--' + theme + '-disabled' : '') +
-                ' ' +
-                prefix +
-                '-class-plus'
-            "
-            @tap.stop.prevent="plusValue"
-            :aria-label="'增加' + step"
-            aria-role="button"
-            :aria-disabled="disabled || disablePlus || currentValue >= max"
-        >
-            <t-icon name="add" />
-        </view>
+  <view
+    :style="_._style([style, customStyle])"
+    :class="classPrefix + ' ' + classPrefix + '--' + size + ' class ' + prefix + '-class'"
+  >
+    <view
+      :class="
+        classPrefix +
+          '__minus ' +
+          classPrefix +
+          '__minus--' +
+          theme +
+          ' ' +
+          classPrefix +
+          '__icon--' +
+          size +
+          ' ' +
+          (disabled || disableMinus || currentValue <= min ? classPrefix + '--' + theme + '-disabled' : '') +
+          ' ' +
+          prefix +
+          '-class-minus'
+      "
+      :aria-label="'减少' + step"
+      aria-role="button"
+      :aria-disabled="disabled || disableMinus || currentValue <= min"
+      @tap.stop.prevent="minusValue"
+    >
+      <t-icon name="remove" />
     </view>
+    <view :class="classPrefix + '__input--' + theme + ' ' + (disabled || disableInput ? classPrefix + '--' + theme + '-disabled' : '')">
+      <input
+        :style="inputWidth ? 'width:' + inputWidth + 'px;' : ''"
+        :class="classPrefix + '__input ' + classPrefix + '__input--' + size + ' ' + prefix + '-class-input'"
+        :disabled="disabled || disableInput"
+        :type="integer ? 'number' : 'digit'"
+        :value="currentValue"
+        @input.stop.prevent="handleInput"
+        @focus.stop.prevent="handleFocus"
+        @blur.stop.prevent="handleBlur"
+      >
+    </view>
+    <view
+      :class="
+        classPrefix +
+          '__plus ' +
+          classPrefix +
+          '__plus--' +
+          theme +
+          ' ' +
+          classPrefix +
+          '__icon--' +
+          size +
+          ' ' +
+          (disabled || disablePlus || currentValue >= max ? classPrefix + '--' + theme + '-disabled' : '') +
+          ' ' +
+          prefix +
+          '-class-plus'
+      "
+      :aria-label="'增加' + step"
+      aria-role="button"
+      :aria-disabled="disabled || disablePlus || currentValue >= max"
+      @tap.stop.prevent="plusValue"
+    >
+      <t-icon name="add" />
+    </view>
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

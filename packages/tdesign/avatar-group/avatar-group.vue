@@ -1,34 +1,43 @@
 <template>
-    <view :style="_._style([style, customStyle])" :class="className + ' class'">
-        <slot />
-        <view :class="classPrefix + '__collapse--slot'"><slot name="collapse-avatar" /></view>
-        <view :class="classPrefix + '__collapse--default'" v-if="max && max < length" @tap="onCollapsedItemClick">
-            <t-avatar
-                :t-class-image="prefix + '-avatar--border ' + prefix + '-avatar--border-' + size + ' ' + prefix + '-class-image'"
-                :t-class-content="prefix + '-class-content'"
-                :size="size"
-                :shape="shape"
-                :icon="collapseAvatar ? '' : 'user-add'"
-                aria-role="none"
-            >
-                {{ collapseAvatar }}
-            </t-avatar>
-        </view>
+  <view
+    :style="_._style([style, customStyle])"
+    :class="className + ' class'"
+  >
+    <slot />
+    <view :class="classPrefix + '__collapse--slot'">
+      <slot name="collapse-avatar" />
     </view>
+    <view
+      v-if="max && max < length"
+      :class="classPrefix + '__collapse--default'"
+      @tap="onCollapsedItemClick"
+    >
+      <t-avatar
+        :t-class-image="prefix + '-avatar--border ' + prefix + '-avatar--border-' + size + ' ' + prefix + '-class-image'"
+        :t-class-content="prefix + '-class-content'"
+        :size="size"
+        :shape="shape"
+        :icon="collapseAvatar ? '' : 'user-add'"
+        aria-role="none"
+      >
+        {{ collapseAvatar }}
+      </t-avatar>
+    </view>
+  </view>
 </template>
 <script>
-import tAvatar from "../avatar/avatar";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import avatarGroupProps from "./props";
+import tAvatar from '../avatar/avatar';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import avatarGroupProps from './props';
 
 import _ from '../common/utils.wxs';
 import { initTDesign } from '../common/runtime';
 
 
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-avatar-group`;
 let AvatarGroup = class extends SuperComponent {
@@ -39,24 +48,24 @@ let AvatarGroup = class extends SuperComponent {
     this.properties = avatarGroupProps;
     this._ = _;
     this.components = {
-      tAvatar
-    }
+      tAvatar,
+    };
 
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
       hasChild: true,
       length: 0,
-      className: "",
+      className: '',
       size: 'medium',
     });
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
     this.relations = {
-      "../avatar/avatar": {
-        type: "descendant"
-      }
+      '../avatar/avatar': {
+        type: 'descendant',
+      },
     };
     this.lifetimes = {
       attached() {
@@ -64,45 +73,45 @@ let AvatarGroup = class extends SuperComponent {
       },
       ready() {
         this.setData({
-          length: this.$children.length
+          length: this.$children.length,
         });
         this.handleMax();
-      }
+      },
     };
     this.observers = {
-      "cascading, size"() {
+      'cascading, size'() {
         this.setClass();
-      }
+      },
     };
     this.methods = {
       setClass() {
         const {
           cascading: e,
-          size: t
+          size: t,
         } = this;
-        const s = e.split("-")[0];
-        const a = [name, `${prefix}-class`, `${name}-offset-${s}`, `${name}-offset-${s}-${t.indexOf("px") > -1 ? "medium" : t || "medium"}`];
+        const s = e.split('-')[0];
+        const a = [name, `${prefix}-class`, `${name}-offset-${s}`, `${name}-offset-${s}-${t.indexOf('px') > -1 ? 'medium' : t || 'medium'}`];
         this.setData({
-          className: a.join(" ")
+          className: a.join(' '),
         });
       },
       handleMax() {
         const {
-          max: e
+          max: e,
         } = this;
         const t = this.$children.length;
         if (!e || e > t) {
           return;
         }
-        this.$children.splice(e, t - e).forEach(e => {
+        this.$children.splice(e, t - e).forEach((e) => {
           e.hide();
         });
       },
       onCollapsedItemClick(e) {
-        this.$emit("collapsed-item-click", {
-          detail: e.detail
+        this.$emit('collapsed-item-click', {
+          detail: e.detail,
         });
-      }
+      },
     };
   }
 };

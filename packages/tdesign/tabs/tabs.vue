@@ -1,119 +1,142 @@
 <template>
-    <view :style="_._style([style, customStyle])" :class="_.cls(classPrefix, [placement]) + ' class ' + prefix + '-class'">
-        <t-sticky
-            :t-class="_.cls(classPrefix + '__sticky', [placement])"
-            :disabled="!sticky"
-            :z-index="stickyProps.zIndex || '1'"
-            :offset-top="stickyProps.offsetTop || 0"
-            :container="stickyProps.container"
-            @scroll="onTouchScroll"
+  <view
+    :style="_._style([style, customStyle])"
+    :class="_.cls(classPrefix, [placement]) + ' class ' + prefix + '-class'"
+  >
+    <t-sticky
+      :t-class="_.cls(classPrefix + '__sticky', [placement])"
+      :disabled="!sticky"
+      :z-index="stickyProps.zIndex || '1'"
+      :offset-top="stickyProps.offsetTop || 0"
+      :container="stickyProps.container"
+      @scroll="onTouchScroll"
+    >
+      <view :class="_.cls(classPrefix + '__wrapper', [theme])">
+        <scroll-view
+          :class="_.cls(classPrefix + '__scroll', [placement, ['split', split]])"
+          enhanced
+          enable-flex
+          :scroll-left="offset"
+          :scroll-x="true"
+          scroll-anchoring
+          scroll-with-animation
+          enable-passive
+          :show-scrollbar="false"
+          type="list"
+          @scroll="onScroll"
         >
-            <view :class="_.cls(classPrefix + '__wrapper', [theme])">
-                <scroll-view
-                    :class="_.cls(classPrefix + '__scroll', [placement, ['split', split]])"
-                    enhanced
-                    enable-flex
-                    :scroll-left="offset"
-                    :scroll-x="true"
-                    scroll-anchoring
-                    scroll-with-animation
-                    enable-passive
-                    :show-scrollbar="false"
-                    type="list"
-                    @scroll="onScroll"
+          <view
+            :class="_.cls(classPrefix + '__nav', [placement, ['evenly', spaceEvenly]])"
+            aria-role="tablist"
+          >
+            <view
+              v-for="(item, index) in tabs"
+              :key="index"
+              :data-index="index"
+              :class="
+                _.cls(classPrefix + '__item', [theme, ['evenly', spaceEvenly], placement, ['disabled', item.disabled], ['active', currentIndex === index]]) +
+                  ' ' +
+                  (currentIndex === index ? prefix + '-class-active' : '') +
+                  ' ' +
+                  prefix +
+                  '-class-item'
+              "
+              aria-role="tab"
+              :aria-controls="tabID + '_panel_' + index"
+              :aria-selected="currentIndex === index"
+              :aria-disabled="item.disabled"
+              :aria-label="ariaLabel || (item.badgeProps.dot || item.badgeProps.count ? item.label + _.getBadgeAriaLabel({ ...item.badgeProps }) : '')"
+              @tap="onTabTap"
+            >
+              <view
+                :class="_.cls(classPrefix + '__item-inner', [theme, ['active', currentIndex === index]])"
+                :aria-hidden="item.badgeProps.dot || item.badgeProps.count"
+              >
+                <!-- parse <template v-if="item.icon" is="icon" :data="tClass: classPrefix + '__icon', ...item.icon"/> -->
+                <block
+                  v-if="item.icon"
+                  name="icon"
                 >
-                    <view :class="_.cls(classPrefix + '__nav', [placement, ['evenly', spaceEvenly]])" aria-role="tablist">
-                        <view
-                            :data-index="index"
-                            :class="
-                                _.cls(classPrefix + '__item', [theme, ['evenly', spaceEvenly], placement, ['disabled', item.disabled], ['active', currentIndex === index]]) +
-                                ' ' +
-                                (currentIndex === index ? prefix + '-class-active' : '') +
-                                ' ' +
-                                prefix +
-                                '-class-item'
-                            "
-                            @tap="onTabTap"
-                            aria-role="tab"
-                            :aria-controls="tabID + '_panel_' + index"
-                            :aria-selected="currentIndex === index"
-                            :aria-disabled="item.disabled"
-                            :aria-label="ariaLabel || (item.badgeProps.dot || item.badgeProps.count ? item.label + _.getBadgeAriaLabel({ ...item.badgeProps }) : '')"
-                            v-for="(item, index) in tabs"
-                            :key="index"
-                        >
-                            <view
-                                :class="_.cls(classPrefix + '__item-inner', [theme, ['active', currentIndex === index]])"
-                                :aria-hidden="item.badgeProps.dot || item.badgeProps.count"
-                            >
-                                <!-- parse <template v-if="item.icon" is="icon" :data="tClass: classPrefix + '__icon', ...item.icon"/> -->
-                                <block name="icon" v-if="item.icon">
-                                    <t-icon
-                                        :style="style || ''"
-                                        :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-                                        :prefix="prefix || ''"
-                                        :name="'close' || ''"
-                                        :size="22 || ''"
-                                        :color="color || ''"
-                                        :aria-hidden="true || ''"
-                                        :aria-label="'清除' || ''"
-                                        :aria-role="'button' || ''"
-                                        @click="bindclick || ''"
-                                    />
-                                </block>
-                                <block v-if="item.badgeProps">
-                                    <!-- parse <template is="badge" :data="...item.badgeProps, content: item.label, tClass: _.cls(classPrefix + '__badge', [ ['disabled', item.disabled], ['active', currentIndex === index]])"/> -->
-                                    <block name="badge" v-if="false">
-                                        <t-badge
-                                            :color="color || ''"
-                                            :content="label || ''"
-                                            :count="count || 0"
-                                            :dot="dot || false"
-                                            :max-count="maxCount || 99"
-                                            :offset="offset || []"
-                                            :shape="shape || 'circle'"
-                                            :show-zero="showZero || false"
-                                            :size="size || 'medium'"
-                                            :t-class="
-                                                _.cls(classPrefix + '__badge', [
-                                                    ['disabled', item.disabled],
-                                                    ['active', currentIndex === index]
-                                                ])
-                                            "
-                                            :t-class-content="tClassContent"
-                                            :t-class-count="tClassCount"
-                                        />
-                                    </block>
-                                </block>
-                                <block v-else>{{ item.label }}</block>
-                            </view>
+                  <t-icon
+                    :style="style || ''"
+                    :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
+                    :prefix="prefix || ''"
+                    :name="'close' || ''"
+                    :size="22 || ''"
+                    :color="color || ''"
+                    :aria-hidden="true || ''"
+                    :aria-label="'清除' || ''"
+                    :aria-role="'button' || ''"
+                    @click="bindclick || ''"
+                  />
+                </block>
+                <block v-if="item.badgeProps">
+                  <!-- parse <template is="badge" :data="...item.badgeProps, content: item.label, tClass: _.cls(classPrefix + '__badge', [ ['disabled', item.disabled], ['active', currentIndex === index]])"/> -->
+                  <block
+                    v-if="false"
+                    name="badge"
+                  >
+                    <t-badge
+                      :color="color || ''"
+                      :content="label || ''"
+                      :count="count || 0"
+                      :dot="dot || false"
+                      :max-count="maxCount || 99"
+                      :offset="offset || []"
+                      :shape="shape || 'circle'"
+                      :show-zero="showZero || false"
+                      :size="size || 'medium'"
+                      :t-class="
+                        _.cls(classPrefix + '__badge', [
+                          ['disabled', item.disabled],
+                          ['active', currentIndex === index]
+                        ])
+                      "
+                      :t-class-content="tClassContent"
+                      :t-class-count="tClassCount"
+                    />
+                  </block>
+                </block>
+                <block v-else>
+                  {{ item.label }}
+                </block>
+              </view>
 
-                            <view v-if="theme == 'card' && currentIndex - 1 == index" :class="classPrefix + '__item-prefix'" />
+              <view
+                v-if="theme == 'card' && currentIndex - 1 == index"
+                :class="classPrefix + '__item-prefix'"
+              />
 
-                            <view v-if="theme == 'card' && currentIndex + 1 == index" :class="classPrefix + '__item-suffix'" />
-                        </view>
-                        <view
-                            v-if="theme == 'line' && showBottomLine"
-                            :class="_.cls(classPrefix + '__track', [placement]) + ' ' + prefix + '-class-track'"
-                            :style="_tabs.trackStyle(trackOption)"
-                        />
-                    </view>
-                </scroll-view>
+              <view
+                v-if="theme == 'card' && currentIndex + 1 == index"
+                :class="classPrefix + '__item-suffix'"
+              />
             </view>
-        </t-sticky>
-        <slot name="middle" />
-        <view
-            :class="_.cls(classPrefix + '__content', [['animated', animation]])"
-            @touchstart="onTouchStart"
-            @touchmove="onTouchMove"
-            @touchend="onTouchEnd"
-            @touchcancel="onTouchEnd"
-        >
-            <view :class="classPrefix + '__content-inner ' + prefix + '-class-content'" :style="_tabs.animate({ duration: animation.duration, currentIndex: currentIndex })">
-                <slot />
-            </view>
-        </view>
+            <view
+              v-if="theme == 'line' && showBottomLine"
+              :class="_.cls(classPrefix + '__track', [placement]) + ' ' + prefix + '-class-track'"
+              :style="_tabs.trackStyle(trackOption)"
+            />
+          </view>
+        </scroll-view>
+      </view>
+    </t-sticky>
+    <slot name="middle" />
+    <view
+      :class="_.cls(classPrefix + '__content', [['animated', animation]])"
+      @touchstart="onTouchStart"
+      @touchmove="onTouchMove"
+      @touchend="onTouchEnd"
+      @touchcancel="onTouchEnd"
+    >
+      <view
+        :class="classPrefix + '__content-inner ' + prefix + '-class-content'"
+        :style="_tabs.animate({ duration: animation.duration, currentIndex: currentIndex })"
+      >
+        <slot />
+      </view>
     </view>
+  </view>
 </template>
 <script module="_tabs" lang="wxs" src="@/tabs/tabs.wxs"></script>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>

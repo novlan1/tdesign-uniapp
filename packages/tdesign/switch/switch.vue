@@ -1,30 +1,43 @@
 <template>
-    <view
-        :style="_._style([style, customStyle])"
-        :class="'class ' + prefix + '-class ' + classPrefix"
-        @tap="handleSwitch"
-        :aria-checked="checked"
-        :aria-disabled="disabled"
-        aria-role="switch"
-    >
-        <view :class="_.cls(classPrefix + '__body', [['checked', checked], ['disabled', disabled || loading], size]) + ' ' + prefix + '-class-body'">
-            <view
-                :class="
-                    _.cls(classPrefix + '__dot', [['checked', checked], ['disabled', disabled], ['plain', label.length != 2 && icon.length != 2 && !loading], size]) +
-                    ' ' +
-                    prefix +
-                    '-class-dot'
-                "
-                :aria-hidden="true"
-            >
-                <view v-if="label" :class="_.cls(classPrefix + '__label', [['checked', checked], ['disabled', disabled], size]) + ' ' + prefix + '-class-label'">
-                    <t-loading v-if="loading" inherit-color size="32rpx" />
-                    <text v-else-if="label.length == 2">{{ checked ? label[0] : label[1] }}</text>
-                    <t-icon v-else-if="icon.length == 2" :name="checked ? icon[0] : icon[1]" :t-class="_.cls(classPrefix + '__icon', [['checked', checked], size])" />
-                </view>
-            </view>
+  <view
+    :style="_._style([style, customStyle])"
+    :class="'class ' + prefix + '-class ' + classPrefix"
+    :aria-checked="checked"
+    :aria-disabled="disabled"
+    aria-role="switch"
+    @tap="handleSwitch"
+  >
+    <view :class="_.cls(classPrefix + '__body', [['checked', checked], ['disabled', disabled || loading], size]) + ' ' + prefix + '-class-body'">
+      <view
+        :class="
+          _.cls(classPrefix + '__dot', [['checked', checked], ['disabled', disabled], ['plain', label.length != 2 && icon.length != 2 && !loading], size]) +
+            ' ' +
+            prefix +
+            '-class-dot'
+        "
+        :aria-hidden="true"
+      >
+        <view
+          v-if="label"
+          :class="_.cls(classPrefix + '__label', [['checked', checked], ['disabled', disabled], size]) + ' ' + prefix + '-class-label'"
+        >
+          <t-loading
+            v-if="loading"
+            inherit-color
+            size="32rpx"
+          />
+          <text v-else-if="label.length == 2">
+            {{ checked ? label[0] : label[1] }}
+          </text>
+          <t-icon
+            v-else-if="icon.length == 2"
+            :name="checked ? icon[0] : icon[1]"
+            :t-class="_.cls(classPrefix + '__icon', [['checked', checked], size])"
+          />
         </view>
+      </view>
     </view>
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

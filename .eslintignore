@@ -6,4 +6,5 @@ static/common/*
 dist/
 /log/
 !.vuepress
-packages/tdesign/
+packages/tdesign/uni_modules/
+# packages/tdesign

@@ -1,24 +1,29 @@
 <template>
-    <view>
-        <view
-            v-if="title"
-            :class="'class ' + classPrefix + '__title ' + prefix + '-class-title'"
-        >
-            {{ title }}
-        </view>
-        <view :style="_._style([style, customStyle])" :class="_.cls(classPrefix, [['bordered', bordered], theme]) + ' class ' + prefix + '-class'"><slot /></view>
+  <view>
+    <view
+      v-if="title"
+      :class="'class ' + classPrefix + '__title ' + prefix + '-class-title'"
+    >
+      {{ title }}
     </view>
+    <view
+      :style="_._style([style, customStyle])"
+      :class="_.cls(classPrefix, [['bordered', bordered], theme]) + ' class ' + prefix + '-class'"
+    >
+      <slot />
+    </view>
+  </view>
 </template>
 <script>
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
 import { initTDesign } from '../common/runtime';
 import _ from '../common/utils.wxs';
 
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-cell-group`;
 let CellGroup = class extends SuperComponent {
@@ -39,16 +44,16 @@ let CellGroup = class extends SuperComponent {
     this.properties = props;
     this._ = _;
     this.setData({
-      prefix: prefix,
-      classPrefix: name
+      prefix,
+      classPrefix: name,
     });
     this.methods = {
       updateLastChid() {
         const e = this.$children;
         e.forEach((t, o) => t.setData({
-          isLastChild: o === e.length - 1
+          isLastChild: o === e.length - 1,
         }));
-      }
+      },
     };
   }
 };

@@ -1,85 +1,110 @@
 <template>
+  <view
+    :style="_._style([style, customStyle])"
+    :class="_.cls(classPrefix, [['split', split], ['text-only', !icon], ['crowded', crowded], shape]) + ' class ' + prefix + '-class'"
+  >
     <view
-        :style="_._style([style, customStyle])"
-        :class="_.cls(classPrefix, [['split', split], ['text-only', !icon], ['crowded', crowded], shape]) + ' class ' + prefix + '-class'"
+      :class="_.cls(classPrefix + '__content', [['checked', isChecked], theme])"
+      :hover-class="classPrefix + '__content--active'"
+      :hover-stay-time="200"
+      :aria-selected="(!hasChildren || !isSpread) && isChecked ? true : false"
+      :aria-expanded="hasChildren && isSpread ? true : ''"
+      :aria-role="hasChildren ? 'button' : 'tab'"
+      :aria-label="ariaLabel || (badgeProps.dot || badgeProps.count ? _.getBadgeAriaLabel({ ...badgeProps }) : '')"
+      @tap="toggle"
     >
-        <view
-            :class="_.cls(classPrefix + '__content', [['checked', isChecked], theme])"
-            :hover-class="classPrefix + '__content--active'"
-            :hover-stay-time="200"
-            @tap="toggle"
-            :aria-selected="(!hasChildren || !isSpread) && isChecked ? true : false"
-            :aria-expanded="hasChildren && isSpread ? true : ''"
-            :aria-role="hasChildren ? 'button' : 'tab'"
-            :aria-label="ariaLabel || (badgeProps.dot || badgeProps.count ? _.getBadgeAriaLabel({ ...badgeProps }) : '')"
+      <view
+        :class="classPrefix + '__icon'"
+        :style="'height: ' + (iconOnly ? 24 : 20) + 'px'"
+        :aria-hidden="badgeProps.dot || badgeProps.count"
+      >
+        <t-badge
+          v-if="badgeProps.dot || badgeProps.count"
+          :count="badgeProps.count || 0"
+          :max-count="badgeProps.maxCount || 99"
+          :dot="badgeProps.dot || false"
+          :content="badgeProps.content || ''"
+          :size="badgeProps.size || 'medium'"
+          :visible="badgeProps.visible"
+          :offset="badgeProps.offset || [0, 0]"
+          :t-class-count="prefix + '-badge-class'"
         >
-            <view :class="classPrefix + '__icon'" :style="'height: ' + (iconOnly ? 24 : 20) + 'px'" :aria-hidden="badgeProps.dot || badgeProps.count">
-                <t-badge
-                    v-if="badgeProps.dot || badgeProps.count"
-                    :count="badgeProps.count || 0"
-                    :max-count="badgeProps.maxCount || 99"
-                    :dot="badgeProps.dot || false"
-                    :content="badgeProps.content || ''"
-                    :size="badgeProps.size || 'medium'"
-                    :visible="badgeProps.visible"
-                    :offset="badgeProps.offset || [0, 0]"
-                    :t-class-count="prefix + '-badge-class'"
-                >
-                    <!-- parse <template is="icon" :data="size: iconOnly ? 24 : 20, ..._icon"/> -->
-                    <block name="icon" v-if="false">
-                        <t-icon
-                            :style="style || ''"
-                            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-                            :prefix="prefix || ''"
-                            :name="'close' || ''"
-                            :size="22 || ''"
-                            :color="color || ''"
-                            :aria-hidden="true || ''"
-                            :aria-label="'清除' || ''"
-                            :aria-role="'button' || ''"
-                            @click="bindclick || ''"
-                        />
-                    </block>
-                </t-badge>
-                <!-- parse <template v-else-if="(!!icon)" is="icon" :data="ariaHidden: !iconOnly, size: iconOnly ? 24 : 20, ..._icon"/> -->
-                <block name="icon" v-if="false" v-else-if="!!icon">
-                    <t-icon
-                        :style="style || ''"
-                        :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-                        :prefix="prefix || ''"
-                        :name="'close' || ''"
-                        :size="22 || ''"
-                        :color="color || ''"
-                        :aria-hidden="true || ''"
-                        :aria-label="'清除' || ''"
-                        :aria-role="'button' || ''"
-                        @click="bindclick || ''"
-                    />
-                </block>
-                <slot name="icon" />
-            </view>
-            <view :class="_.cls(classPrefix + '__text', [['small', !!icon]])">
-                <t-icon v-if="hasChildren" name="view-list" size="32rpx" :t-class="classPrefix + '__icon-menu'" />
-                <slot />
-            </view>
-        </view>
-        <view :class="classPrefix + '__spread'" v-if="hasChildren && isSpread">
-            <view
-                :class="classPrefix + '__spread-item'"
-                :hover-class="classPrefix + '__spread-item--active'"
-                :hover-stay-time="200"
-                @tap="selectChild"
-                :data-value="child.value || index"
-                aria-role="tab"
-                v-for="(child, index) in subTabBar"
-                :key="index"
-            >
-                <view :class="classPrefix + '__spread-item-split'" v-if="index !== 0" />
-
-                <view :class="classPrefix + '__spread-item-text'" :data-value="child.value || index">{{ child.label }}</view>
-            </view>
-        </view>
+          <!-- parse <template is="icon" :data="size: iconOnly ? 24 : 20, ..._icon"/> -->
+          <block
+            name="icon"
+          >
+            <t-icon
+              :style="style || ''"
+              :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
+              :prefix="prefix || ''"
+              :name="'close' || ''"
+              :size="22 || ''"
+              :color="color || ''"
+              :aria-hidden="true || ''"
+              :aria-label="'清除' || ''"
+              :aria-role="'button' || ''"
+              @click="bindclick || ''"
+            />
+          </block>
+        </t-badge>
+        <!-- parse <template v-else-if="(!!icon)" is="icon" :data="ariaHidden: !iconOnly, size: iconOnly ? 24 : 20, ..._icon"/> -->
+        <block
+          v-else-if="!!icon"
+          name="icon"
+        >
+          <t-icon
+            :style="style || ''"
+            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
+            :prefix="prefix || ''"
+            :name="'close' || ''"
+            :size="22 || ''"
+            :color="color || ''"
+            :aria-hidden="true || ''"
+            :aria-label="'清除' || ''"
+            :aria-role="'button' || ''"
+            @click="bindclick || ''"
+          />
+        </block>
+        <slot name="icon" />
+      </view>
+      <view :class="_.cls(classPrefix + '__text', [['small', !!icon]])">
+        <t-icon
+          v-if="hasChildren"
+          name="view-list"
+          size="32rpx"
+          :t-class="classPrefix + '__icon-menu'"
+        />
+        <slot />
+      </view>
     </view>
+    <view
+      v-if="hasChildren && isSpread"
+      :class="classPrefix + '__spread'"
+    >
+      <view
+        v-for="(child, index) in subTabBar"
+        :key="index"
+        :class="classPrefix + '__spread-item'"
+        :hover-class="classPrefix + '__spread-item--active'"
+        :hover-stay-time="200"
+        :data-value="child.value || index"
+        aria-role="tab"
+        @tap="selectChild"
+      >
+        <view
+          v-if="index !== 0"
+          :class="classPrefix + '__spread-item-split'"
+        />
+
+        <view
+          :class="classPrefix + '__spread-item-text'"
+          :data-value="child.value || index"
+        >
+          {{ child.label }}
+        </view>
+      </view>
+    </view>
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

@@ -1,45 +1,53 @@
 <template>
-    <view :style="_._style([style, customStyle])" :class="classPrefix + ' ' + (bordered ? classPrefix + '--border' : '') + ' class ' + prefix + '-class'">
-        <view :class="classPrefix + '__label ' + prefix + '-class-label'">
-            <block v-if="label">{{ label }}</block>
-            <slot name="label" />
-        </view>
-        <view :class="classPrefix + '__wrapper'">
-            <textarea
-                :class="classPrefix + '__wrapper-inner ' + (disabled ? prefix + '-is-disabled' : '') + ' ' + prefix + '-class-textarea'"
-                :style="_this.textareaStyle(autosize)"
-                :maxlength="allowInputOverMax ? -1 : maxlength"
-                :disabled="disabled || readonly"
-                :placeholder="placeholder"
-                :placeholder-class="classPrefix + '__placeholder ' + placeholderClass"
-                :placeholder-style="placeholderStyle"
-                :value="value"
-                :auto-height="!!autosize"
-                :auto-focus="autofocus"
-                :fixed="fixed"
-                :focus="focus"
-                :cursor="cursor"
-                :cursor-spacing="cursorSpacing"
-                :adjust-position="adjustPosition"
-                :confirm-type="confirmType"
-                :confirm-hold="confirmHold"
-                :disable-default-padding="disableDefaultPadding"
-                :show-confirm-bar="showConfirmBar"
-                :selection-start="selectionStart"
-                :selection-end="selectionEnd"
-                :hold-keyboard="holdKeyboard"
-                @input="onInput"
-                @focus="onFocus"
-                @blur="onBlur"
-                @confirm="onConfirm"
-                @linechange="onLineChange"
-                @keyboardheightchange="onKeyboardHeightChange"
-            />
-            <view v-if="indicator && (maxcharacter > 0 || maxlength > 0)" :class="classPrefix + '__indicator ' + prefix + '-class-indicator'">
-                {{ count }} / {{ maxcharacter || maxlength }}
-            </view>
-        </view>
+  <view
+    :style="_._style([style, customStyle])"
+    :class="classPrefix + ' ' + (bordered ? classPrefix + '--border' : '') + ' class ' + prefix + '-class'"
+  >
+    <view :class="classPrefix + '__label ' + prefix + '-class-label'">
+      <block v-if="label">
+        {{ label }}
+      </block>
+      <slot name="label" />
     </view>
+    <view :class="classPrefix + '__wrapper'">
+      <textarea
+        :class="classPrefix + '__wrapper-inner ' + (disabled ? prefix + '-is-disabled' : '') + ' ' + prefix + '-class-textarea'"
+        :style="_this.textareaStyle(autosize)"
+        :maxlength="allowInputOverMax ? -1 : maxlength"
+        :disabled="disabled || readonly"
+        :placeholder="placeholder"
+        :placeholder-class="classPrefix + '__placeholder ' + placeholderClass"
+        :placeholder-style="placeholderStyle"
+        :value="value"
+        :auto-height="!!autosize"
+        :auto-focus="autofocus"
+        :fixed="fixed"
+        :focus="focus"
+        :cursor="cursor"
+        :cursor-spacing="cursorSpacing"
+        :adjust-position="adjustPosition"
+        :confirm-type="confirmType"
+        :confirm-hold="confirmHold"
+        :disable-default-padding="disableDefaultPadding"
+        :show-confirm-bar="showConfirmBar"
+        :selection-start="selectionStart"
+        :selection-end="selectionEnd"
+        :hold-keyboard="holdKeyboard"
+        @input="onInput"
+        @focus="onFocus"
+        @blur="onBlur"
+        @confirm="onConfirm"
+        @linechange="onLineChange"
+        @keyboardheightchange="onKeyboardHeightChange"
+      />
+      <view
+        v-if="indicator && (maxcharacter > 0 || maxlength > 0)"
+        :class="classPrefix + '__indicator ' + prefix + '-class-indicator'"
+      >
+        {{ count }} / {{ maxcharacter || maxlength }}
+      </view>
+    </view>
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script module="_this" lang="wxs" src="@/textarea/textarea.wxs"></script>

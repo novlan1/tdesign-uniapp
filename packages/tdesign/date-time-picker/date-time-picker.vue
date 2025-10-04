@@ -1,35 +1,41 @@
 <template>
-    <view>
-        <t-picker
-            :style="_._style([style, customStyle])"
-            :class="'class ' + prefix + '-class ' + classPrefix"
-            :visible="visible"
-            :value="columnsValue"
-            :header="header"
-            :title="title"
-            :auto-close="autoClose"
-            :confirm-btn="confirmBtn || locale.confirm"
-            :cancel-btn="cancelBtn || locale.cancel"
-            :use-popup="usePopup"
-            :popup-props="popupProps"
-            @pick="onColumnChange"
-            @confirm="onConfirm"
-            @cancel="onCancel"
-            @visible-change="onVisibleChange"
-            @close="onClose"
-        >
-            <slot slot="header" name="header" />
-            <t-picker-item
-                :class="_.cls(classPrefix + '__item', [['roomly', columns.length >= 5 && index == 0]])"
-                :options="item"
-                index="index"
-                :format="formatter"
-                v-for="(item, index) in columns"
-                :key="index"
-            ></t-picker-item>
-            <slot slot="footer" name="footer" />
-        </t-picker>
-    </view>
+  <view>
+    <t-picker
+      :style="_._style([style, customStyle])"
+      :class="'class ' + prefix + '-class ' + classPrefix"
+      :visible="visible"
+      :value="columnsValue"
+      :header="header"
+      :title="title"
+      :auto-close="autoClose"
+      :confirm-btn="confirmBtn || locale.confirm"
+      :cancel-btn="cancelBtn || locale.cancel"
+      :use-popup="usePopup"
+      :popup-props="popupProps"
+      @pick="onColumnChange"
+      @confirm="onConfirm"
+      @cancel="onCancel"
+      @visible-change="onVisibleChange"
+      @close="onClose"
+    >
+      <slot
+        slot="header"
+        name="header"
+      />
+      <t-picker-item
+        v-for="(item, index) in columns"
+        :key="index"
+        :class="_.cls(classPrefix + '__item', [['roomly', columns.length >= 5 && index == 0]])"
+        :options="item"
+        index="index"
+        :format="formatter"
+      />
+      <slot
+        slot="footer"
+        name="footer"
+      />
+    </t-picker>
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

@@ -1,39 +1,82 @@
 <template>
+  <view
+    :style="_._style([style, customStyle])"
+    :class="_.cls(classPrefix, [layout, ['readonly', readonly]]) + ' class ' + prefix + '-class'"
+    :aria-role="ariaRole || readonly ? 'option' : 'button'"
+    :aria-label="ariaLabel || t.getAriaLabel(index, title, content)"
+    :aria-current="curStatus == 'process' ? 'step' : ''"
+    @tap="onTap"
+  >
     <view
-        :style="_._style([style, customStyle])"
-        :class="_.cls(classPrefix, [layout, ['readonly', readonly]]) + ' class ' + prefix + '-class'"
-        @tap="onTap"
-        :aria-role="ariaRole || readonly ? 'option' : 'button'"
-        :aria-label="ariaLabel || t.getAriaLabel(index, title, content)"
-        :aria-current="curStatus == 'process' ? 'step' : ''"
+      :class="_.cls(classPrefix + '__anchor', [layout])"
+      :aria-hidden="true"
     >
-        <view :class="_.cls(classPrefix + '__anchor', [layout])" :aria-hidden="true">
-            <view v-if="isDot" :class="_.cls(classPrefix + '__dot', [curStatus])" />
-            <view v-else-if="icon" :class="_.cls(classPrefix + '__icon', [curStatus])">
-                <slot v-if="icon == 'slot'" name="icon" />
-                <t-icon v-else :name="icon" size="44rpx" />
-            </view>
-            <view v-else :class="_.cls(classPrefix + '__circle', [curStatus])">
-                <t-icon v-if="curStatus == 'finish'" name="check" />
-                <t-icon v-else-if="curStatus == 'error'" name="close" />
-                <block v-else>{{ index + 1 }}</block>
-            </view>
-        </view>
-        <view :class="_.cls(classPrefix + '__content', [layout, ['last', isLastChild]]) + ' ' + prefix + '-class-content'" :aria-hidden="true">
-            <slot />
-            <view :class="_.cls(classPrefix + '__title', [curStatus, layout]) + ' ' + prefix + '-class-title'">
-                <block v-if="title">{{ _this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle) }}</block>
-                <slot name="title" />
-                <slot v-if="layout === 'vertical'" name="title-right" />
-            </view>
-            <view :class="_.cls(classPrefix + '__description', [layout]) + ' ' + prefix + '-class-description'">
-                <block v-if="content">{{ content }}</block>
-                <slot name="content" />
-            </view>
-            <view :class="_.cls(classPrefix + '__extra', [layout]) + ' ' + prefix + '-class-extra'"><slot name="extra" /></view>
-        </view>
-        <view v-if="!isLastChild" :class="_.cls(classPrefix + '__line', [curStatus, layout, theme, sequence])" :aria-hidden="true" />
+      <view
+        v-if="isDot"
+        :class="_.cls(classPrefix + '__dot', [curStatus])"
+      />
+      <view
+        v-else-if="icon"
+        :class="_.cls(classPrefix + '__icon', [curStatus])"
+      >
+        <slot
+          v-if="icon == 'slot'"
+          name="icon"
+        />
+        <t-icon
+          v-else
+          :name="icon"
+          size="44rpx"
+        />
+      </view>
+      <view
+        v-else
+        :class="_.cls(classPrefix + '__circle', [curStatus])"
+      >
+        <t-icon
+          v-if="curStatus == 'finish'"
+          name="check"
+        />
+        <t-icon
+          v-else-if="curStatus == 'error'"
+          name="close"
+        />
+        <block v-else>
+          {{ index + 1 }}
+        </block>
+      </view>
     </view>
+    <view
+      :class="_.cls(classPrefix + '__content', [layout, ['last', isLastChild]]) + ' ' + prefix + '-class-content'"
+      :aria-hidden="true"
+    >
+      <slot />
+      <view :class="_.cls(classPrefix + '__title', [curStatus, layout]) + ' ' + prefix + '-class-title'">
+        <block v-if="title">
+          {{ _this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle) }}
+        </block>
+        <slot name="title" />
+        <slot
+          v-if="layout === 'vertical'"
+          name="title-right"
+        />
+      </view>
+      <view :class="_.cls(classPrefix + '__description', [layout]) + ' ' + prefix + '-class-description'">
+        <block v-if="content">
+          {{ content }}
+        </block>
+        <slot name="content" />
+      </view>
+      <view :class="_.cls(classPrefix + '__extra', [layout]) + ' ' + prefix + '-class-extra'">
+        <slot name="extra" />
+      </view>
+    </view>
+    <view
+      v-if="!isLastChild"
+      :class="_.cls(classPrefix + '__line', [curStatus, layout, theme, sequence])"
+      :aria-hidden="true"
+    />
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script module="t" lang="wxs" src="@/step-item/step-item.wxs"></script>

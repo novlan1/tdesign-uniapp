@@ -1,26 +1,39 @@
 <template>
-    <view :style="_._style([style, customStyle])" :class="classPrefix + ' class ' + prefix + '-class'">
+  <view
+    :style="_._style([style, customStyle])"
+    :class="classPrefix + ' class ' + prefix + '-class'"
+  >
+    <view
+      :id="'id-' + classPrefix + '__bar'"
+      :class="classPrefix + '__sidebar ' + prefix + '-class-sidebar'"
+      @touchmove.stop.prevent="onTouchMove"
+      @touchcancel.stop.prevent="onTouchCancel"
+      @touchend.stop.prevent="onTouchEnd"
+    >
+      <view
+        v-for="(item, index) in _indexList"
+        :key="index"
+        :class="_.cls(classPrefix + '__sidebar-item', [['active', activeAnchor === item]]) + ' ' + prefix + '-class-sidebar-item'"
+        :data-index="index"
+        @tap="onClick"
+      >
         <view
-            :class="classPrefix + '__sidebar ' + prefix + '-class-sidebar'"
-            :id="'id-' + classPrefix + '__bar'"
-            @touchmove.stop.prevent="onTouchMove"
-            @touchcancel.stop.prevent="onTouchCancel"
-            @touchend.stop.prevent="onTouchEnd"
+          aria-role="button"
+          :aria-label="activeAnchor === item ? '已选中' + item : ''"
         >
-            <view
-                :class="_.cls(classPrefix + '__sidebar-item', [['active', activeAnchor === item]]) + ' ' + prefix + '-class-sidebar-item'"
-                @tap="onClick"
-                :data-index="index"
-                v-for="(item, index) in _indexList"
-                :key="index"
-            >
-                <view aria-role="button" :aria-label="activeAnchor === item ? '已选中' + item : ''">{{ _this.getFirstCharacter(item) }}</view>
-
-                <view :class="classPrefix + '__sidebar-tips'" v-if="showTips && activeAnchor === item">{{ activeAnchor }}</view>
-            </view>
+          {{ _this.getFirstCharacter(item) }}
         </view>
-        <slot />
+
+        <view
+          v-if="showTips && activeAnchor === item"
+          :class="classPrefix + '__sidebar-tips'"
+        >
+          {{ activeAnchor }}
+        </view>
+      </view>
     </view>
+    <slot />
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script module="_this" lang="wxs" src="@/indexes/indexes.wxs"></script>

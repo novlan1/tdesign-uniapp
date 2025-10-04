@@ -1,20 +1,42 @@
 <template>
-    <view :class="_.cls(classPrefix, [['fixed', fixed]]) + ' ' + visibleClass + ' class ' + prefix + '-class'" :style="_._style([boxStyle, style, customStyle])">
-        <view v-if="fixed" :class="classPrefix + '__placeholder ' + prefix + '-class-placeholder'" />
-        <view :class="classPrefix + '__content ' + prefix + '-class-content'">
-            <view :class="classPrefix + '__left ' + (hideLeft ? classPrefix + '__left--hide' : '') + ' ' + prefix + '-class-left'">
-                <view v-if="leftArrow" :class="classPrefix + '__btn'" @tap="goBack" aria-role="button" aria-label="返回">
-                    <t-icon name="chevron-left" :class="classPrefix + '__left-arrow'" />
-                </view>
-                <slot name="left" />
-                <view :class="classPrefix + '__capsule ' + prefix + '-class-capsule'"><slot name="capsule" /></view>
-            </view>
-            <view :class="classPrefix + '__center ' + (hideCenter ? classPrefix + '__center--hide' : '') + ' ' + prefix + '-class-center'">
-                <slot name="title" />
-                <text v-if="title" :class="classPrefix + '__center-title ' + prefix + '-class-title'">{{ showTitle }}</text>
-            </view>
+  <view
+    :class="_.cls(classPrefix, [['fixed', fixed]]) + ' ' + visibleClass + ' class ' + prefix + '-class'"
+    :style="_._style([boxStyle, style, customStyle])"
+  >
+    <view
+      v-if="fixed"
+      :class="classPrefix + '__placeholder ' + prefix + '-class-placeholder'"
+    />
+    <view :class="classPrefix + '__content ' + prefix + '-class-content'">
+      <view :class="classPrefix + '__left ' + (hideLeft ? classPrefix + '__left--hide' : '') + ' ' + prefix + '-class-left'">
+        <view
+          v-if="leftArrow"
+          :class="classPrefix + '__btn'"
+          aria-role="button"
+          aria-label="返回"
+          @tap="goBack"
+        >
+          <t-icon
+            name="chevron-left"
+            :class="classPrefix + '__left-arrow'"
+          />
         </view>
+        <slot name="left" />
+        <view :class="classPrefix + '__capsule ' + prefix + '-class-capsule'">
+          <slot name="capsule" />
+        </view>
+      </view>
+      <view :class="classPrefix + '__center ' + (hideCenter ? classPrefix + '__center--hide' : '') + ' ' + prefix + '-class-center'">
+        <slot name="title" />
+        <text
+          v-if="title"
+          :class="classPrefix + '__center-title ' + prefix + '-class-title'"
+        >
+          {{ showTitle }}
+        </text>
+      </view>
     </view>
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>

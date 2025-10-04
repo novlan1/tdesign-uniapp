@@ -1,140 +1,188 @@
 <template>
-    <view>
-        <t-popup
-            v-if="usePopup"
-            class="class"
-            :visible="visible && dataVisible"
-            placement="bottom"
-            :using-custom-navbar="usingCustomNavbar || popupProps.usingCustomNavbar"
-            :z-index="popupProps.zIndex || defaultPopUpzIndex"
-            :overlay-props="popupProps.overlayProps || defaultPopUpProps"
-            @visible-change="onPopupChange"
+  <view>
+    <t-popup
+      v-if="usePopup"
+      class="class"
+      :visible="visible && dataVisible"
+      placement="bottom"
+      :using-custom-navbar="usingCustomNavbar || popupProps.usingCustomNavbar"
+      :z-index="popupProps.zIndex || defaultPopUpzIndex"
+      :overlay-props="popupProps.overlayProps || defaultPopUpProps"
+      @visible-change="onPopupChange"
+    >
+      <!-- parse <include src="./template.wxml"/> -->
+      <view
+        slot="content"
+        :style="_._style([style, customStyle])"
+        :class="classPrefix + ' ' + prefix + '-class'"
+      >
+        <view
+          v-if="header"
+          :class="classPrefix + '__toolbar'"
         >
-            <!-- parse <include src="./template.wxml"/> -->
-                <view slot="content" :style="_._style([style, customStyle])" :class="classPrefix + ' ' + prefix + '-class'">
-                    <view :class="classPrefix + '__toolbar'" v-if="header">
-                        <view :class="classPrefix + '__cancel ' + prefix + '-class-cancel'" v-if="cancelBtn" @tap="onCancel">{{ cancelBtn }}</view>
-                        <view :class="classPrefix + '__title ' + prefix + '-class-title'">{{ title }}</view>
-                        <view :class="classPrefix + '__confirm ' + prefix + '-class-confirm'" v-if="confirmBtn" @tap="onConfirm">{{ confirmBtn }}</view>
-                    </view>
-                    <slot name="header" />
-                    <slot name="content" />
-                    <view :class="_.cls(classPrefix + '__main', [])">
-                        <slot />
-                        <view :class="classPrefix + '__mask ' + classPrefix + '__mask--top'" />
-                        <view :class="classPrefix + '__mask ' + classPrefix + '__mask--bottom'" />
-                        <view :class="classPrefix + '__indicator'" :style="'height: ' + pickItemHeight + 'px'"></view>
-                    </view>
-                    <slot name="footer" />
-                </view>
-        </t-popup>
-        <block v-else>
-            <!-- parse <include src="./template.wxml"/> -->
-            <block>
-                <view slot="content" :style="_._style([style, customStyle])" :class="classPrefix + ' ' + prefix + '-class'">
-                    <view :class="classPrefix + '__toolbar'" v-if="header">
-                        <view :class="classPrefix + '__cancel ' + prefix + '-class-cancel'" v-if="cancelBtn" @tap="onCancel">{{ cancelBtn }}</view>
-                        <view :class="classPrefix + '__title ' + prefix + '-class-title'">{{ title }}</view>
-                        <view :class="classPrefix + '__confirm ' + prefix + '-class-confirm'" v-if="confirmBtn" @tap="onConfirm">{{ confirmBtn }}</view>
-                    </view>
-                    <slot name="header" />
-                    <slot name="content" />
-                    <view :class="_.cls(classPrefix + '__main', [])">
-                        <slot />
-                        <view :class="classPrefix + '__mask ' + classPrefix + '__mask--top'" />
-                        <view :class="classPrefix + '__mask ' + classPrefix + '__mask--bottom'" />
-                        <view :class="classPrefix + '__indicator'" :style="'height: ' + pickItemHeight + 'px'"></view>
-                    </view>
-                    <slot name="footer" />
-                </view>
-            </block>
-        </block>
-    </view>
+          <view
+            v-if="cancelBtn"
+            :class="classPrefix + '__cancel ' + prefix + '-class-cancel'"
+            @tap="onCancel"
+          >
+            {{ cancelBtn }}
+          </view>
+          <view :class="classPrefix + '__title ' + prefix + '-class-title'">
+            {{ title }}
+          </view>
+          <view
+            v-if="confirmBtn"
+            :class="classPrefix + '__confirm ' + prefix + '-class-confirm'"
+            @tap="onConfirm"
+          >
+            {{ confirmBtn }}
+          </view>
+        </view>
+        <slot name="header" />
+        <slot name="content" />
+        <view :class="_.cls(classPrefix + '__main', [])">
+          <slot />
+          <view :class="classPrefix + '__mask ' + classPrefix + '__mask--top'" />
+          <view :class="classPrefix + '__mask ' + classPrefix + '__mask--bottom'" />
+          <view
+            :class="classPrefix + '__indicator'"
+            :style="'height: ' + pickItemHeight + 'px'"
+          />
+        </view>
+        <slot name="footer" />
+      </view>
+    </t-popup>
+    <block v-else>
+      <!-- parse <include src="./template.wxml"/> -->
+      <block>
+        <view
+          slot="content"
+          :style="_._style([style, customStyle])"
+          :class="classPrefix + ' ' + prefix + '-class'"
+        >
+          <view
+            v-if="header"
+            :class="classPrefix + '__toolbar'"
+          >
+            <view
+              v-if="cancelBtn"
+              :class="classPrefix + '__cancel ' + prefix + '-class-cancel'"
+              @tap="onCancel"
+            >
+              {{ cancelBtn }}
+            </view>
+            <view :class="classPrefix + '__title ' + prefix + '-class-title'">
+              {{ title }}
+            </view>
+            <view
+              v-if="confirmBtn"
+              :class="classPrefix + '__confirm ' + prefix + '-class-confirm'"
+              @tap="onConfirm"
+            >
+              {{ confirmBtn }}
+            </view>
+          </view>
+          <slot name="header" />
+          <slot name="content" />
+          <view :class="_.cls(classPrefix + '__main', [])">
+            <slot />
+            <view :class="classPrefix + '__mask ' + classPrefix + '__mask--top'" />
+            <view :class="classPrefix + '__mask ' + classPrefix + '__mask--bottom'" />
+            <view
+              :class="classPrefix + '__indicator'"
+              :style="'height: ' + pickItemHeight + 'px'"
+            />
+          </view>
+          <slot name="footer" />
+        </view>
+      </block>
+    </block>
+  </view>
 </template>
 <script>
-import tPopup from "../popup/popup";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import { rpx2px } from "../common/utils";
-import config from "../common/config";
-import props from "./props";
-import useCustomNavbar from "../mixins/using-custom-navbar";
+import tPopup from '../popup/popup';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import { rpx2px } from '../common/utils';
+import config from '../common/config';
+import props from './props';
+import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
 import { initTDesign } from '../common/runtime';
 
 
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-picker`;
 let Picker = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.components = {
-      tPopup
-    }
+      tPopup,
+    };
     this.name = 'TPicker';
     this.mixins = [useCustomNavbar];
-    this.properties = props;;
+    this.properties = props;
     this._ = _;
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-confirm`, `${prefix}-class-cancel`, `${prefix}-class-title`];
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
     this.relations = {
-      "../picker-item/picker-item": {
-        type: "child",
+      '../picker-item/picker-item': {
+        type: 'child',
         linked() {
           // this.updateChildren();
-        }
-      }
+        },
+      },
     };
     this.observers = {
-      "value"() {
+      'value'() {
         this.updateChildren();
-      }
+      },
     };
     this.watch = {
       visible: {
         handler(value) {
-           this.dataVisible = value;
+          this.dataVisible = value;
           setTimeout(() => {
-           this.updateChildren();
-        }, 30)
-        }
-      }
-    }
+            this.updateChildren();
+          }, 30);
+        },
+      },
+    };
     this.lifetimes = {
       attached() {
         this.setData({
-          pickItemHeight: rpx2px(this.itemHeight)
+          pickItemHeight: rpx2px(this.itemHeight),
         });
-      }
+      },
     };
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
       defaultPopUpProps: {},
       defaultPopUpzIndex: 11500,
-      pickItemHeight: 0
+      pickItemHeight: 0,
     });
     this.methods = {
       updateChildren() {
         const {
-          pickItemHeight: e
+          pickItemHeight: e,
         } = this;
         const {
           value: t,
-          defaultValue: i
+          defaultValue: i,
         } = this;
-        
+
         this.children?.forEach((s, r) => {
-          var l;
-          var n;
+          let l;
+          let n;
           s.setData({
-            value: null !== (n = null !== (l = null == t ? void 0 : t[r]) && void 0 !== l ? l : null == i ? void 0 : i[r]) && void 0 !== n ? n : "",
+            value: null !== (n = null !== (l = null == t ? void 0 : t[r]) && void 0 !== l ? l : null == i ? void 0 : i[r]) && void 0 !== n ? n : '',
             columnIndex: r,
-            pickItemHeight: e
+            pickItemHeight: e,
           });
           s.update();
         });
@@ -145,71 +193,71 @@ let Picker = class extends SuperComponent {
       getColumnIndexes() {
         return this.children.map((e, t) => ({
           column: t,
-          index: e._selectedIndex
+          index: e._selectedIndex,
         }));
       },
       onConfirm() {
         const [e, t] = this.getSelectedValue();
         const i = this.getColumnIndexes();
-        this.close("confirm-btn");
-        this.$emit("confirm", {
+        this.close('confirm-btn');
+        this.$emit('confirm', {
           detail: {
             value: e,
             label: t,
-            columns: i
-          }
+            columns: i,
+          },
         });
         if (JSON.stringify(this.value) !== JSON.stringify(e)) {
-          this.$emit("change", {
+          this.$emit('change', {
             detail: {
               value: e,
               label: t,
-              columns: i
-            }
+              columns: i,
+            },
           });
         }
       },
       triggerColumnChange({
         column: e,
-        index: t
+        index: t,
       }) {
         const [i, s] = this.getSelectedValue();
-        this.$emit("pick", {
+        this.$emit('pick', {
           detail: {
             value: i,
             label: s,
             column: e,
-            index: t
-          }
+            index: t,
+          },
         });
       },
       onCancel() {
-        this.close("cancel-btn");
-        this.$emit("cancel");
+        this.close('cancel-btn');
+        this.$emit('cancel');
       },
       onPopupChange(e) {
         const {
-          visible: t
+          visible: t,
         } = e.detail;
-        this.close("overlay");
-        this.$emit("visible-change", {
+        this.close('overlay');
+        this.$emit('visible-change', {
           detail: {
-            visible: t
-          }
+            visible: t,
+          },
         });
       },
       close(e) {
         if (this.autoClose) {
           this.setData({
-            dataVisible: false
+            dataVisible: false,
           });
         }
-        this.$emit("close", {
+        this.$emit('close', {
           detail: {
-            trigger: e
-          }
+            trigger: e,
+          },
         });
-      }
+      },
     };
   }
   ready() {

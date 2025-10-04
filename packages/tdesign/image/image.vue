@@ -75,19 +75,19 @@
   </view>
 </template>
 <script>
-import tLoading from "../loading/loading";
-import tIcon from "../icon/icon";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import ImageProps from "./props";
-import config from "../common/config";
-import { addUnit, getRect, appBaseInfo } from "../common/utils";
-import { compareVersion } from "../common/version";
+import tLoading from '../loading/loading';
+import tIcon from '../icon/icon';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import ImageProps from './props';
+import config from '../common/config';
+import { addUnit, getRect, appBaseInfo } from '../common/utils';
+import { compareVersion } from '../common/version';
 import _ from '../common/utils.wxs';
 import { initTDesign } from '../common/runtime';
 
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-image`;
 let Image = class extends SuperComponent {
@@ -95,7 +95,7 @@ let Image = class extends SuperComponent {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-load`, `${prefix}-class-image`, `${prefix}-class-error`];
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
     // this = ImageProps;
     this.properties = ImageProps;
@@ -103,14 +103,14 @@ let Image = class extends SuperComponent {
     this.components = {
       tLoading,
       tIcon,
-    }
+    };
 
     this.setData({
-      prefix: prefix,
+      prefix,
       isLoading: true,
       isFailed: false,
-      innerStyle: "",
-      classPrefix: name
+      innerStyle: '',
+      classPrefix: name,
     });
     this.preSrc = void 0;
     this.observers = {
@@ -119,65 +119,66 @@ let Image = class extends SuperComponent {
           this.update();
         }
       },
-      "width, height"(e, i) {
+      'width, height'(e, i) {
         this.calcSize(e, i);
-      }
+      },
     };
     this.lifetimes = {
       ready() {
         this.calcSize(this.width, this.height);
-      }
+      },
     };
     this.methods = {
       onLoaded(e) {
         const i = appBaseInfo.SDKVersion;
         const {
           mode: t,
-          tId: s
+          tId: s,
         } = this;
-        console.log('version', i)
-        const r = compareVersion(i, "2.10.3") < 0;
-        if ("heightFix" === t && r ) {
-          console.log('onLoaded',e)
+        console.log('version', i);
+        const r = compareVersion(i, '2.10.3') < 0;
+        if ('heightFix' === t && r) {
+          console.log('onLoaded', e);
           // const {
           //   height: i,
           //   width: t
           // } = e.detail;
-          console.log('onLoaded',e)
-          getRect(this, `#${s || "image"}`).then(e => {
+          console.log('onLoaded', e);
+          getRect(this, `#${s || 'image'}`).then((e) => {
             const {
               height: s,
               width: r,
             } = e;
-            console.log('getRect', e)
+            console.log('getRect', e);
             // const r = (s / i * t).toFixed(2);
             this.setData({
-              innerStyle: `height: ${addUnit(s)}; width: ${r}px;`
+              innerStyle: `height: ${addUnit(s)}; width: ${r}px;`,
             });
-          }).catch(err => {
-            console.log('err', err)
           })
+            .catch((err) => {
+              console.log('err', err);
+            });
         }
         this.setData({
           isLoading: false,
-          isFailed: false
+          isFailed: false,
         });
-        this.$emit("load", {
-          detail: e.detail
+        this.$emit('load', {
+          detail: e.detail,
         });
       },
       onLoadError(e) {
         this.setData({
           isLoading: false,
-          isFailed: true
+          isFailed: true,
         });
-        this.$emit("error", {
-          detail: e.detail
+        this.$emit('error', {
+          detail: e.detail,
         });
       },
       calcSize(e, i) {
-        console.log('calcSizing', e, i)
-        let t = "";
+        console.log('calcSizing', e, i);
+        let t = '';
         if (e) {
           t += `width: ${addUnit(e)};`;
         }
@@ -185,28 +186,28 @@ let Image = class extends SuperComponent {
           t += `height: ${addUnit(i)};`;
         }
         this.setData({
-          innerStyle: t
+          innerStyle: t,
         });
       },
       update() {
         const {
-          src: e
+          src: e,
         } = this;
         this.preSrc = e;
         if (e) {
           this.setData({
             isLoading: true,
-            isFailed: false
+            isFailed: false,
           });
         } else {
           this.onLoadError({
-            errMsg: "图片链接为空"
+            errMsg: '图片链接为空',
           });
         }
-      }
+      },
     };
   }
-  setData(){}
+  setData() {}
 };
 Image = initTDesign(__decorate([wxComponent()], Image));
 export default Image;

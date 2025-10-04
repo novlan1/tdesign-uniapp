@@ -1,39 +1,49 @@
 <template>
-    <view
-        :style="_._style([style, customStyle])"
-        :class="classPrefix + ' ' + classPrefix + '--' + theme + ' ' + classPrefix + '--' + size + ' class ' + prefix + '-class'"
-        aria-role="option"
-    >
-        <slot v-if="content !== 'default'" name="content" />
-        <slot v-if="content !== 'default'" />
-        <block v-else-if="theme == 'default' && !splitWithUnit">{{ formattedTime }}</block>
-        <block v-else>
-            <block v-for="(item, index) in timeRange" :key="index">
-                <text :class="classPrefix + '__item ' + prefix + '-class-count'">{{ format(timeData[timeRange[index]]) }}</text>
+  <view
+    :style="_._style([style, customStyle])"
+    :class="classPrefix + ' ' + classPrefix + '--' + theme + ' ' + classPrefix + '--' + size + ' class ' + prefix + '-class'"
+    aria-role="option"
+  >
+    <slot
+      v-if="content !== 'default'"
+      name="content"
+    />
+    <slot v-if="content !== 'default'" />
+    <block v-else-if="theme == 'default' && !splitWithUnit">
+      {{ formattedTime }}
+    </block>
+    <block v-else>
+      <block
+        v-for="(item, index) in timeRange"
+        :key="index"
+      >
+        <text :class="classPrefix + '__item ' + prefix + '-class-count'">
+          {{ format(timeData[timeRange[index]]) }}
+        </text>
 
-                <text
-                    v-if="splitWithUnit || timeRange.length - 1 !== index"
-                    :class="classPrefix + '__split ' + classPrefix + '__split--' + (splitWithUnit ? 'text' : 'dot') + ' ' + prefix + '-class-split'"
-                >
-                    {{ splitWithUnit ? timeDataUnit[timeRange[index]] : ':' }}
-                </text>
-            </block>
-        </block>
-    </view>
+        <text
+          v-if="splitWithUnit || timeRange.length - 1 !== index"
+          :class="classPrefix + '__split ' + classPrefix + '__split--' + (splitWithUnit ? 'text' : 'dot') + ' ' + prefix + '-class-split'"
+        >
+          {{ splitWithUnit ? timeDataUnit[timeRange[index]] : ':' }}
+        </text>
+      </block>
+    </block>
+  </view>
 </template>
 <script>
-import tIcon from "../icon/icon";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
-import { isSameSecond, parseFormat, parseTimeData, TimeDataUnit } from "./utils";
+import tIcon from '../icon/icon';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import { isSameSecond, parseFormat, parseTimeData, TimeDataUnit } from './utils';
 import _ from '../common/utils.wxs';
 import { initTDesign } from '../common/runtime';
 import { format } from './count-down.wxs';
 
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-count-down`;
 let CountDown = class extends SuperComponent {
@@ -43,19 +53,19 @@ let CountDown = class extends SuperComponent {
     this.properties = props;
     this._ = _;
     this.components = {
-      tIcon
-    }
+      tIcon,
+    };
     this.observers = {
       time() {
         this.reset();
-      }
+      },
     };
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
       timeDataUnit: TimeDataUnit,
       timeData: parseTimeData(0),
-      formattedTime: "0"
+      formattedTime: '0',
     });
     this.timeoutId = null;
     this.isInitialTime = false;
@@ -65,7 +75,7 @@ let CountDown = class extends SuperComponent {
           clearTimeout(this.timeoutId);
           this.timeoutId = null;
         }
-      }
+      },
     };
     this.methods = {
       format,
@@ -92,25 +102,25 @@ let CountDown = class extends SuperComponent {
       },
       updateTime(t) {
         const {
-          format: i
+          format: i,
         } = this;
         this.remain = t;
         const e = parseTimeData(t);
-        this.$emit("change", {
-          detail: e
+        this.$emit('change', {
+          detail: e,
         });
         const {
-          timeText: s
+          timeText: s,
         } = parseFormat(t, i);
-        const o = i.split(":");
+        const o = i.split(':');
         this.setData({
           timeRange: o,
           timeData: e,
-          formattedTime: s.replace(/:/g, " : ")
+          formattedTime: s.replace(/:/g, ' : '),
         });
         if (0 === t && (this.counting || this.isInitialTime)) {
           this.pause();
-          this.$emit("finish");
+          this.$emit('finish');
           this.counting = false;
         }
       },
@@ -126,7 +136,7 @@ let CountDown = class extends SuperComponent {
             this.doCount();
           }
         }, 33);
-      }
+      },
     };
   }
 };
