@@ -162,90 +162,91 @@ let GridItem = class extends SuperComponent {
       }
     };
     this.methods = {
+      bindload(){},
       getImageSize(column) {
           if (column >= 5) return 'small'; 
           if (column == 4) return 'middle'; 
           return 'large'; 
+      },
+      updateStyle() {
+        const {
+          hover: t,
+          align: e
+        } = this[this.relationParentName].properties || {};
+        const r = [];
+        const i = [];
+        const o = [];
+        const s = this.getWidthStyle();
+        const n = this.getPaddingStyle();
+        const p = this.getBorderStyle();
+        if (s) {
+          r.push(s);
+        }
+        if (n) {
+          i.push(n);
+        }
+        if (p) {
+          o.push(p);
+        }
+        this.setData({
+          gridItemStyle: `${r.join(";")}`,
+          gridItemWrapperStyle: i.join(";"),
+          gridItemContentStyle: o.join(";"),
+          hover: t,
+          // layout: this.layout,
+          align: e
+        });
+        },
+        getWidthStyle() {
+          const {
+            column: t
+          } = this[this.relationParentName].properties || {};
+          return t > 0 ? `width:${1 / t * 100}%` : "";
+        },
+        getPaddingStyle() {
+          const {
+            gutter: t
+          } = this[this.relationParentName].properties || {};
+          return t ? `padding-left:${t}rpx;padding-top:${t}rpx` : "";
+        },
+        getBorderStyle() {
+          const {
+            gutter: t
+          } = this[this.relationParentName].properties || {};
+          let {
+            border: e
+          } = this[this.relationParentName].properties || {};
+          if (!e) {
+            return "";
+          }
+          isObject(e) || (e = {});
+          const {
+            color: r = "#266FE8",
+            width: i = 2,
+            style: o = "solid"
+          } = e;
+          return t ? `border:${i}rpx ${o} ${r}` : `border-top:${i}rpx ${o} ${r};border-left:${i}rpx ${o} ${r}`;
+        },
+        onClick(t) {
+          const {
+            item: e
+          } = t.currentTarget.dataset;
+          this.$emit("click", {
+            detail: e
+          });
+          this.jumpLink();
+        },
+        jumpLink() {
+          const {
+            url: t,
+            jumpType: e
+          } = this;
+          if (t && e && LinkTypes[e]) {
+            uni[LinkTypes[e]]({
+              url: t
+            });
+          }
       }
-    }
-  }
-  updateStyle() {
-    const {
-      hover: t,
-      align: e
-    } = this.parent.properties;
-    const r = [];
-    const i = [];
-    const o = [];
-    const s = this.getWidthStyle();
-    const n = this.getPaddingStyle();
-    const p = this.getBorderStyle();
-    if (s) {
-      r.push(s);
-    }
-    if (n) {
-      i.push(n);
-    }
-    if (p) {
-      o.push(p);
-    }
-    this.setData({
-      gridItemStyle: `${r.join(";")}`,
-      gridItemWrapperStyle: i.join(";"),
-      gridItemContentStyle: o.join(";"),
-      hover: t,
-      layout: this.layout,
-      align: e
-    });
-  }
-  getWidthStyle() {
-    const {
-      column: t
-    } = this.parent.properties;
-    return t > 0 ? `width:${1 / t * 100}%` : "";
-  }
-  getPaddingStyle() {
-    const {
-      gutter: t
-    } = this.parent.properties;
-    return t ? `padding-left:${t}rpx;padding-top:${t}rpx` : "";
-  }
-  getBorderStyle() {
-    const {
-      gutter: t
-    } = this.parent.properties;
-    let {
-      border: e
-    } = this.parent.properties;
-    if (!e) {
-      return "";
-    }
-    isObject(e) || (e = {});
-    const {
-      color: r = "#266FE8",
-      width: i = 2,
-      style: o = "solid"
-    } = e;
-    return t ? `border:${i}rpx ${o} ${r}` : `border-top:${i}rpx ${o} ${r};border-left:${i}rpx ${o} ${r}`;
-  }
-  onClick(t) {
-    const {
-      item: e
-    } = t.currentTarget.dataset;
-    this.$emit("click", {
-      detail: e
-    });
-    this.jumpLink();
-  }
-  jumpLink() {
-    const {
-      url: t,
-      jumpType: e
-    } = this;
-    if (t && e && LinkTypes[e]) {
-      uni[LinkTypes[e]]({
-        url: t
-      });
     }
   }
 };

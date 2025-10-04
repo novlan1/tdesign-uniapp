@@ -14,7 +14,7 @@
             <view :class="classPrefix + '__content'">
                 <swiper
                     class="swiper"
-                    :style="swiperStyle[currentSwiperIndex].style"
+                    :style="swiperStyle[currentSwiperIndex]?.style"
                     :autoplay="false"
                     :current="currentSwiperIndex"
                     @change="onSwiperChange"
@@ -25,7 +25,7 @@
                         <t-image
                             v-if="!lazy || shouldLoadImage(index, currentSwiperIndex, loadedImageIndexes)"
                             t-class="t-image--external"
-                            :style="imagesStyle[index].style || ''"
+                            :style="imagesStyle[index]?.style || ''"
                             mode="aspectFit"
                             :src="item"
                             :data-index="index"
@@ -167,16 +167,18 @@ let ImageViewer = class extends SuperComponent {
         });
       },
       calcImageDisplayStyle(e, t) {
+        console.log('calcImageDisplayStyle', {e,t})
         const {
           windowWidth: s,
           windowHeight: i
-        } = this;
+        } = uni.getWindowInfo();
+        console.log('window', {s,i})
         const a = e / t;
         if (e < s && t < i) {
           return {
             styleObj: {
-              width: 2 * e + "rpx",
-              height: 2 * t + "rpx",
+              width:  e + "px",
+              height:  t + "px",
               left: "50%",
               transform: "translate(-50%, -50%)"
             }
@@ -186,14 +188,14 @@ let ImageViewer = class extends SuperComponent {
           return {
             styleObj: {
               width: "100vw",
-              height: s / a * 2 + "rpx"
+              height: s / a  + "px"
             }
           };
         }
-        const n = a * i * 2;
+        const n = a * i ;
         return n < s ? {
           styleObj: {
-            width: `${n}rpx`,
+            width: `${n}px`,
             height: "100vh",
             left: "50%",
             transform: "translate(-50%, -50%)"
@@ -201,21 +203,22 @@ let ImageViewer = class extends SuperComponent {
         } : {
           styleObj: {
             width: "100vw",
-            height: s / e * t * 2 + "rpx"
+            height: s / e * t  + "px"
           }
         };
       },
-      onImageLoadSuccess(e) {
+      onImageLoadSuccess(e, {index: i}) {
+        console.log('onImageLoadSuccess', {e,i})
         const {
           detail: {
             width: t,
             height: s
           },
-          currentTarget: {
-            dataset: {
-              index: i
-            }
-          }
+          // currentTarget: {
+            // dataset: {
+              // index: i
+            // }
+          // }
         } = e;
         const {
           mode: a,
@@ -226,6 +229,7 @@ let ImageViewer = class extends SuperComponent {
         this.loadedImageIndexes.includes(i) || this.setData({
           loadedImageIndexes: [...this.loadedImageIndexes, i]
         });
+        console.log('imagesStyle', {n})
         this.setData({
           swiperStyle: Object.assign(Object.assign({}, r), {
             [i]: {
