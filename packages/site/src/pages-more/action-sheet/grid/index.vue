@@ -95,9 +95,9 @@ export default {
         })),
       });
     },
-    handleSelected(e, _dataset) {
+    handleSelected(e) {
       /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
+      // this.handleDataset(e, _dataset);
       /* ---处理dataset end--- */
       console.log(e.detail);
     },
