@@ -52,26 +52,26 @@
 
 <script lang="ts">
 
-import tNoticeBar from 'tdesign-uniapp/notice-bar/notice-bar';
+// import tNoticeBar from 'tdesign-uniapp/notice-bar/notice-bar';
 import BaseDemo from './base/index.vue';
-// import iconDemo from './iconDemo/index.vue';
-// import suffixIcon from './suffixIcon/index.vue';
-// import event from './event/index.vue';
-// import custom from './custom/index.vue';
-// import theme from './theme/index.vue';
-// import scrolling from './scrolling/index.vue';
-// import customization from './customization/index.vue';
+import iconDemo from './iconDemo/index.vue';
+import suffixIcon from './suffixIcon/index.vue';
+import event from './event/index.vue';
+import custom from './custom/index.vue';
+import theme from './theme/index.vue';
+import scrolling from './scrolling/index.vue';
+import customization from './customization/index.vue';
 export default {
   components: {
-    tNoticeBar,
+    // tNoticeBar,
     BaseDemo,
-    // iconDemo,
-    // suffixIcon,
-    // event,
-    // custom,
-    // theme,
-    // scrolling,
-    // customization,
+    iconDemo,
+    suffixIcon,
+    event,
+    custom,
+    theme,
+    scrolling,
+    customization,
   },
   data() {
     return {};
