@@ -155,6 +155,18 @@
       "style": {
         "navigationBarTitleText": "Footer"
       }
+    },
+    {
+      "path": "pages-more/image-viewer/image-viewer",
+      "style": {
+        "navigationBarTitleText": "ImageViewer"
+      }
+    },
+    {
+      "path": "pages-more/grid/grid",
+      "style": {
+        "navigationBarTitleText": "Grid"
+      }
     }
   ],
   "globalStyle": {

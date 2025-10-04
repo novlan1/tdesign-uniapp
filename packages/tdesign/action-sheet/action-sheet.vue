@@ -21,7 +21,7 @@
                                     :class="classPrefix + '__square'"
                                     @tap.native="onSelect($event, { index })"
                                     :data-index="index"
-                                    :icon=""
+                                    icon=""
                                     :text="item.label || ''"
                                     :image="item.image || ''"
                                     :style="'--td-grid-item-text-color: ' + item.color"
@@ -40,7 +40,7 @@
                                                 :class="classPrefix + '__square'"
                                                 :data-index="index"
                                                 @tap.native="onSelect($event, { index })"
-                                                :icon=""
+                                                icon=""
                                                 :text="item.label || ''"
                                                 :image="item.image || ''"
                                                 :style="'--td-grid-item-text-color: ' + item.color"
@@ -105,8 +105,6 @@
         </t-popup>
     </view>
 </template>
-<script module="_this" lang="wxs" src="@/action-sheet/action-sheet.wxs"></script>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
 import tPopup from "../popup/popup";
@@ -119,6 +117,10 @@ import config from "../common/config";
 import { ActionSheetTheme, show } from "./show";
 import props from "./props";
 import useCustomNavbar from "../mixins/using-custom-navbar";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+// import { } from './action-sheet.wxs';
+
 const {
   prefix: prefix
 } = config;
@@ -128,7 +130,16 @@ let ActionSheet = class extends SuperComponent {
     super(...arguments);
     this.behaviors = [useCustomNavbar];
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-cancel`];
-    this = Object.assign({}, props);
+    this.properties = props;
+    this._ = _;
+    this.components = {
+      tIcon,
+      tPopup,   
+      tGrid,
+      tGridItem
+    };
+
+
     this.setData({
       prefix: prefix,
       classPrefix: name,
@@ -251,7 +262,7 @@ let ActionSheet = class extends SuperComponent {
   }
 };
 ActionSheet.show = show;
-ActionSheet = __decorate([wxComponent()], ActionSheet);
+ActionSheet = initTDesign(__decorate([wxComponent()], ActionSheet));
 export default ActionSheet;
 </script>
 <style>

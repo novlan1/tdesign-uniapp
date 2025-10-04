@@ -1,4 +1,4 @@
-var getListThemeItemClass = function (props) {
+export var getListThemeItemClass = function (props) {
   var classPrefix = props.classPrefix;
   var item = props.item;
   var prefix = props.prefix;
@@ -9,11 +9,7 @@ var getListThemeItemClass = function (props) {
   return classList.join(' ');
 };
 
-var isImage = function (name) {
+export var isImage = function (name) {
   return name.indexOf('/') !== -1;
 };
 
-module.exports = {
-  getListThemeItemClass: getListThemeItemClass,
-  isImage: isImage,
-};

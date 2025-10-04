@@ -13,6 +13,9 @@
       "name": "image"
     },
     {
+      "name": "image-viewer"
+    },
+    {
       "name": "cell"
     },
     {
@@ -77,6 +80,9 @@
     },
     {
       "name": "footer"
+    },
+    {
+      "name": "grid"
     }
   ]
 }

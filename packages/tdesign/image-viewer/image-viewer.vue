@@ -23,7 +23,7 @@
                 >
                     <swiper-item :class="classPrefix + '__preview-image'" v-for="(item, index) in images" :key="index">
                         <t-image
-                            v-if="!lazy || utils.shouldLoadImage(index, currentSwiperIndex, loadedImageIndexes)"
+                            v-if="!lazy || shouldLoadImage(index, currentSwiperIndex, loadedImageIndexes)"
                             t-class="t-image--external"
                             :style="imagesStyle[index].style || ''"
                             mode="aspectFit"
@@ -77,8 +77,6 @@
         </block>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
-<script module="utils" lang="wxs" src="@/image-viewer/image-viewer.wxs"></script>
 <script>
 import tImage from "../image/image";
 import tIcon from "../icon/icon";
@@ -87,6 +85,10 @@ import { SuperComponent, wxComponent } from "../common/src/index";
 import { styles, calcIcon, systemInfo } from "../common/utils";
 import config from "../common/config";
 import props from "./props";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+import { shouldLoadImage } from './image-viewer.wxs';
+
 const {
   prefix: prefix
 } = config;
@@ -95,7 +97,12 @@ let ImageViewer = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`];
-    this = Object.assign({}, props);
+    this.properties = props;
+    this._ = _;
+    this.components = {
+      tImage,
+      tIcon
+    };
     this.setData({
       prefix: prefix,
       classPrefix: name,
@@ -135,6 +142,7 @@ let ImageViewer = class extends SuperComponent {
       }
     };
     this.methods = {
+      shouldLoadImage,
       calcMaskTop() {
         if (this.usingCustomNavbar) {
           const e = (null === wx || void 0 === wx ? void 0 : uni.getMenuButtonBoundingClientRect()) || null;
@@ -267,7 +275,7 @@ let ImageViewer = class extends SuperComponent {
     this.calcMaskTop();
   }
 };
-ImageViewer = __decorate([wxComponent()], ImageViewer);
+ImageViewer = initTDesign(__decorate([wxComponent()], ImageViewer));
 export default ImageViewer;
 </script>
 <style>

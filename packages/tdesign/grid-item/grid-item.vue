@@ -27,12 +27,12 @@
                     :t-class-content="badgeProps.tClassContent"
                     :t-class-count="badgeProps.tClassCount"
                 >
-                    <view :class="_.cls(classPrefix + '__image', [util.getImageSize(column), ['icon', icon]]) + ' ' + prefix + '-class-image'">
+                    <view :class="_.cls(classPrefix + '__image', [getImageSize(column), ['icon', icon]]) + ' ' + prefix + '-class-image'">
                         <block v-if="image && image != 'slot'">
-                            <!-- parse <template is="image" :data="src: image, shape: 'round', mode: 'widthFix', tClass: _.cls(classPrefix + '__image', [util.getImageSize(column)]) + ' ' + prefix + '-class-image', ...imageProps"/> -->
+                            <!-- parse <template is="image" :data="src: image, shape: 'round', mode: 'widthFix', tClass: _.cls(classPrefix + '__image', [getImageSize(column)]) + ' ' + prefix + '-class-image', ...imageProps"/> -->
                             <block name="image">
                                 <t-image
-                                    :t-class="_.cls(classPrefix + '__image', [util.getImageSize(column)]) + ' ' + prefix + '-class-image'"
+                                    :t-class="_.cls(classPrefix + '__image', [getImageSize(column)]) + ' ' + prefix + '-class-image'"
                                     :t-class-load="tClassLoad"
                                     :style="style || ''"
                                     :customStyle="customStyle || ''"
@@ -75,9 +75,9 @@
                     :id="describedbyID"
                     :aria-label="ariaLabel || (badgeProps.dot || badgeProps.count ? text + ',' + description + ',' + _.getBadgeAriaLabel({ ...badgeProps }) : '')"
                 >
-                    <view v-if="text" :class="_.cls(classPrefix + '__text', [util.getImageSize(column), layout]) + ' ' + prefix + '-class-text'">{{ text }}</view>
+                    <view v-if="text" :class="_.cls(classPrefix + '__text', [getImageSize(column), layout]) + ' ' + prefix + '-class-text'">{{ text }}</view>
                     <slot name="text" />
-                    <view v-if="description" :class="_.cls(classPrefix + '__description', [util.getImageSize(column), layout]) + ' ' + prefix + '-class-description'">
+                    <view v-if="description" :class="_.cls(classPrefix + '__description', [getImageSize(column), layout]) + ' ' + prefix + '-class-description'">
                         {{ description }}
                     </view>
                     <slot name="description" />
@@ -86,10 +86,6 @@
         </view>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
-<script module="util" lang="wxs">
-module.exports.getImageSize = function(column) { if (column >= 5) return 'small'; if (column == 4) return 'middle'; return 'large'; }
-</script>
 <script>
 import tImage from "../image/image";
 import tIcon from "../icon/icon";
@@ -100,6 +96,9 @@ import config from "../common/config";
 import props from "./props";
 import { uniqueFactory, setIcon } from "../common/utils";
 import { isObject } from "../common/validator";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
 const {
   prefix: prefix
 } = config;
@@ -131,7 +130,13 @@ let GridItem = class extends SuperComponent {
         }
       }
     };
-    this.properties = props;;
+    this.properties = props;
+    this._ = _;
+    this.components = {
+      tImage,
+      tIcon,
+      tBadge
+    }
     this.setData({
       prefix: prefix,
       classPrefix: name,
@@ -140,7 +145,8 @@ let GridItem = class extends SuperComponent {
       gridItemContentStyle: "",
       align: "center",
       column: 0,
-      describedbyID: ""
+      describedbyID: "",
+      // badgeProps: {},
     });
     this.observers = {
       icon(t) {
@@ -155,6 +161,13 @@ let GridItem = class extends SuperComponent {
         });
       }
     };
+    this.methods = {
+      getImageSize(column) {
+          if (column >= 5) return 'small'; 
+          if (column == 4) return 'middle'; 
+          return 'large'; 
+      }
+    }
   }
   updateStyle() {
     const {
@@ -236,7 +249,7 @@ let GridItem = class extends SuperComponent {
     }
   }
 };
-GridItem = __decorate([wxComponent()], GridItem);
+GridItem = initTDesign(__decorate([wxComponent()], GridItem));
 export default GridItem;
 </script>
 <style>

@@ -1,7 +1,8 @@
 const props = {
     badgeProps: {
         type: Object,
-        value: null
+        default:() => ({}),
+        value:() => ({}),
     },
     description: {
         type: String

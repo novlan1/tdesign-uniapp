@@ -4,13 +4,16 @@
         <scroll-view v-else scroll-x scroll-with-animation :class="classPrefix + '__content'" :style="'white-space: nowrap;' + contentStyle"><slot /></scroll-view>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import { isObject } from "../common/validator";
 import props from "./props";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
+
 const {
   prefix: prefix
 } = config;
@@ -24,7 +27,8 @@ let Grid = class extends SuperComponent {
         type: "descendant"
       }
     };
-    this.properties = props;;
+    this.properties = props;
+    this._ = _;
     this.setData({
       prefix: prefix,
       classPrefix: name,
@@ -33,7 +37,7 @@ let Grid = class extends SuperComponent {
     this.observers = {
       "column,hover,align,gutter,border"() {
         this.updateContentStyle();
-        this.doForChild(t => t.updateStyle());
+        this.doForChild(t => t.updateStyle?.());
       }
     };
     this.lifetimes = {
@@ -43,7 +47,7 @@ let Grid = class extends SuperComponent {
     };
     this.methods = {
       doForChild(t) {
-        this.$children.forEach(t);
+        this.children?.forEach(t);
       },
       updateContentStyle() {
         const t = [];
@@ -74,7 +78,7 @@ let Grid = class extends SuperComponent {
     };
   }
 };
-Grid = __decorate([wxComponent()], Grid);
+Grid = initTDesign(__decorate([wxComponent()], Grid));
 export default Grid;
 </script>
 <style>
