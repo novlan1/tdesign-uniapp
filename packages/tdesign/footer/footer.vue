@@ -19,13 +19,15 @@
         </block>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tImage from "../image/image";
 import { __decorate } from "../miniprogram_npm/tslib";
 import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
 const {
   prefix: prefix
 } = config;
@@ -34,14 +36,16 @@ let Footer = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`];
-    this.properties = props;;
+    this.properties = props;
+    this._ = _;
+    this.components = { tImage }
     this.setData({
       prefix: prefix,
       classPrefix: name
     });
   }
 };
-Footer = __decorate([wxComponent()], Footer);
+Footer = initTDesign(__decorate([wxComponent()], Footer));
 export default Footer;
 </script>
 <style>

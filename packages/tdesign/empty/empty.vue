@@ -3,7 +3,7 @@
         <view :aria-hidden="true" :class="classPrefix + '__thumb'">
             <t-image v-if="image" :t-class="prefix + '-class-image'" :src="image" mode="aspectFit" />
             <!-- parse <template v-else-if="iconName || _.isNoEmptyObj(iconData)" is="icon" :data="tClass: classPrefix + '__icon', name: iconName, ...iconData"/> -->
-            <block name="icon" v-if="false" v-else-if="iconName || _.isNoEmptyObj(iconData)">
+            <block name="icon" v-else-if="iconName || _.isNoEmptyObj(iconData)">
                 <t-icon
                     :style="style || ''"
                     :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
@@ -26,7 +26,6 @@
         <view :class="classPrefix + '__actions ' + prefix + '-class-actions'"><slot name="action" /></view>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
 import tImage from "../image/image";
@@ -35,6 +34,10 @@ import { SuperComponent, wxComponent } from "../common/src/index";
 import props from "./props";
 import config from "../common/config";
 import { setIcon } from "../common/utils";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+
+
 const {
   prefix: prefix
 } = config;
@@ -47,6 +50,8 @@ let default_1 = class extends SuperComponent {
     };
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-description`, `${prefix}-class-image`];
     this.properties = props;;
+    this._ = _;
+    this.components = { tIcon, tImage }
     this.setData({
       prefix: prefix,
       classPrefix: name
@@ -59,7 +64,7 @@ let default_1 = class extends SuperComponent {
     };
   }
 };
-default_1 = __decorate([wxComponent()], default_1);
+default_1 = initTDesign(__decorate([wxComponent()], default_1));
 export default default_1;
 </script>
 <style>

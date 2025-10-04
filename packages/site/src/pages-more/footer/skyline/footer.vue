@@ -1,39 +1,54 @@
 <template>
-    <view class="skyline">
-        <t-navbar class="block demo-navbar" title="Footer" left-arrow />
-        <scroll-view scroll-y type="list" class="scroll-view">
-            <view class="demo-title">Footer 页脚</view>
-            <view class="demo-desc">用于基础列表展示，可附带文字、品牌logo、操作，常用商详、个人中心、设置等页面。</view>
-            <t-demo title="01 类型" desc="基础页脚">
-                <base />
-            </t-demo>
-            <t-demo desc="基础加链接页脚">
-                <link />
-            </t-demo>
-            <t-demo desc="品牌页脚">
-                <logo />
-            </t-demo>
-        </scroll-view>
-    </view>
+  <view class="skyline">
+    <t-navbar
+      class="block demo-navbar"
+      title="Footer"
+      left-arrow
+    />
+    <scroll-view
+      scroll-y
+      type="list"
+      class="scroll-view"
+    >
+      <view class="demo-title">
+        Footer 页脚
+      </view>
+      <view class="demo-desc">
+        用于基础列表展示，可附带文字、品牌logo、操作，常用商详、个人中心、设置等页面。
+      </view>
+      <t-demo
+        title="01 类型"
+        desc="基础页脚"
+      >
+        <BaseDemo />
+      </t-demo>
+      <t-demo desc="基础加链接页脚">
+        <LinkDemo />
+      </t-demo>
+      <t-demo desc="品牌页脚">
+        <LogoDemo />
+      </t-demo>
+    </scroll-view>
+  </view>
 </template>
 
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
-import base from '../base';
-import link from '../link';
-import logo from '../logo';
+import BaseDemo from '../base/index.vue';
+import LinkDemo from '../link/index.vue';
+import LogoDemo from '../logo/index.vue';
 export default {
-    components: {
-        tNavbar,
-        base,
-        link,
-        logo
-    },
-    data() {
-        return {};
-    },
-    methods: {}
+  components: {
+    tNavbar,
+    BaseDemo,
+    LinkDemo,
+    LogoDemo,
+  },
+  data() {
+    return {};
+  },
+  methods: {},
 };
 </script>
 <style lang="less">

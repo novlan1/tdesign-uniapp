@@ -143,6 +143,18 @@
       "style": {
         "navigationBarTitleText": "CountDown"
       }
+    },
+    {
+      "path": "pages-more/empty/empty",
+      "style": {
+        "navigationBarTitleText": "Empty"
+      }
+    },
+    {
+      "path": "pages-more/footer/footer",
+      "style": {
+        "navigationBarTitleText": "Footer"
+      }
     }
   ],
   "globalStyle": {

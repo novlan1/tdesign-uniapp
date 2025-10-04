@@ -71,6 +71,12 @@
     },
     {
       "name": "count-down"
+    },
+    {
+      "name": "empty"
+    },
+    {
+      "name": "footer"
     }
   ]
 }
