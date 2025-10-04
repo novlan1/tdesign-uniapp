@@ -29,8 +29,8 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import size from './size';
+import BaseDemo from './base/index.vue';
+import size from './size/index.vue';
 export default {
   components: {
     BaseDemo,

@@ -9,7 +9,7 @@
         <block v-else-if="theme == 'default' && !splitWithUnit">{{ formattedTime }}</block>
         <block v-else>
             <block v-for="(item, index) in timeRange" :key="index">
-                <text :class="classPrefix + '__item ' + prefix + '-class-count'">{{ _this.format(timeData[timeRange[index]]) }}</text>
+                <text :class="classPrefix + '__item ' + prefix + '-class-count'">{{ format(timeData[timeRange[index]]) }}</text>
 
                 <text
                     v-if="splitWithUnit || timeRange.length - 1 !== index"
@@ -21,8 +21,6 @@
         </block>
     </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
-<script module="_this" lang="wxs" src="@/count-down/count-down.wxs"></script>
 <script>
 import tIcon from "../icon/icon";
 import { __decorate } from "../miniprogram_npm/tslib";
@@ -30,6 +28,10 @@ import { SuperComponent, wxComponent } from "../common/src/index";
 import config from "../common/config";
 import props from "./props";
 import { isSameSecond, parseFormat, parseTimeData, TimeDataUnit } from "./utils";
+import _ from '../common/utils.wxs';
+import { initTDesign } from '../common/runtime';
+import { format } from './count-down.wxs';
+
 const {
   prefix: prefix
 } = config;
@@ -38,7 +40,11 @@ let CountDown = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-count`, `${prefix}-class-split`];
-    this.properties = props;;
+    this.properties = props;
+    this._ = _;
+    this.components = {
+      tIcon
+    }
     this.observers = {
       time() {
         this.reset();
@@ -62,6 +68,7 @@ let CountDown = class extends SuperComponent {
       }
     };
     this.methods = {
+      format,
       start() {
         this.counting || (this.counting = true, this.endTime = Date.now() + this.remain, this.doCount());
       },
@@ -123,7 +130,7 @@ let CountDown = class extends SuperComponent {
     };
   }
 };
-CountDown = __decorate([wxComponent()], CountDown);
+CountDown = initTDesign(__decorate([wxComponent()], CountDown));
 export default CountDown;
 </script>
 <style>

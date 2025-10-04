@@ -68,6 +68,9 @@
     },
     {
       "name": "avatar"
+    },
+    {
+      "name": "count-down"
     }
   ]
 }

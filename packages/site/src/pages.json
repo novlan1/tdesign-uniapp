@@ -137,6 +137,12 @@
       "style": {
         "navigationBarTitleText": "Badge"
       }
+    },
+    {
+      "path": "pages-more/count-down/count-down",
+      "style": {
+        "navigationBarTitleText": "CountDown"
+      }
     }
   ],
   "globalStyle": {
