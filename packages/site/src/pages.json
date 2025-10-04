@@ -173,6 +173,12 @@
       "style": {
         "navigationBarTitleText": "Progress"
       }
+    },
+    {
+      "path": "pages-more/result/result",
+      "style": {
+        "navigationBarTitleText": "Result"
+      }
     }
   ],
   "globalStyle": {

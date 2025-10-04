@@ -56,7 +56,11 @@ import { SuperComponent, wxComponent } from '../common/src/index';
 import props from './props';
 import config from '../common/config';
 import { calcIcon } from '../common/utils';
-import { setData } from 'src/miniprogram_dist_uni/uni_modules/zp-mixins/methods/setData.js';
+// import { setData } from 'src/miniprogram_dist_uni/uni_modules/zp-mixins/methods/setData.js';
+import { initTDesign } from '../common/runtime';
+import _ from '../common/utils.wxs';
+
+
 const {
   prefix: prefix,
 } = config;
@@ -73,13 +77,18 @@ let default_1 = class extends SuperComponent {
     this.options = {
       multipleSlots: true,
     };
-    console.log('this', this, this.setData);
+    // console.log('this', this, this.setData);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-image`, `${prefix}-class-title`, `${prefix}-class-description`];
-    this.setData = setData.bind(this);
+    // this.setData = setData.bind(this);
     this.classPrefix = name;
+    this._ = _;
 
     this.prefix = prefix;
-    // this = props;
+    this.properties = props;
+    this.components = {
+      tIcon,
+      tImage
+    }
     this.setData({
       prefix,
       classPrefix: name,
@@ -100,7 +109,7 @@ let default_1 = class extends SuperComponent {
       },
     };
     this.methods = {
-      setData,
+      // setData,
       initIcon() {
         const {
           icon: e,
@@ -113,7 +122,7 @@ let default_1 = class extends SuperComponent {
     };
   }
 };
-default_1 = __decorate([wxComponent()], default_1);
+default_1 = initTDesign(__decorate([wxComponent()], default_1));
 default_1.data = function () {
   return {};
 };

@@ -86,6 +86,9 @@
     },
     {
       "name": "progress"
+    },
+    {
+      "name": "result"
     }
   ]
 }
