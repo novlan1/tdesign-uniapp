@@ -1,29 +1,44 @@
 const props = {
-    buttonProps: {
-        type: Object
-    },
-    draggable: {
-        type: null,
-        value: false
-    },
-    icon: {
-        type: String,
-        value: ''
-    },
-    style: {
-        type: String,
-        value: 'right: 16px; bottom: 32px;'
-    },
-    text: {
-        type: String,
-        value: ''
-    },
-    usingCustomNavbar: {
-        type: Boolean,
-        value: false
-    },
-    yBounds: {
-        type: Array
-    }
+  buttonProps: {
+    type: Object,
+    default: () => ({}),
+  },
+  draggable: {
+    type: [Boolean, String],
+    default: false,
+  },
+  icon: {
+    type: String,
+    default: '',
+  },
+  style: {
+    type: String,
+    default: 'right: 16px; bottom: 32px;',
+  },
+  text: {
+    type: String,
+    default: '',
+  },
+  usingCustomNavbar: {
+    type: Boolean,
+    default: false,
+  },
+  yBounds: {
+    type: Array,
+    default: () => ([]),
+  },
+
+  tClass: {
+    type: String,
+    default: '',
+  },
+  tClassButton: {
+    type: String,
+    default: '',
+  },
+  customStyle: {
+    type: String,
+    default: '',
+  },
 };
 export default props;

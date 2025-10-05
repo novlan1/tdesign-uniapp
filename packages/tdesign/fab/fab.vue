@@ -1,172 +1,153 @@
 <template>
-  <!-- template没有找到这个wxml，已注释 -->
   <DraggableTemplate
     v-if="draggable"
+    ref="draggableTemplate"
     :prefix="prefix"
     :class-prefix="classPrefix"
-    :style="style"
-    :custom-style="customStyle"
+    :custom-style="_._style([style, customStyle])"
     :move-style="moveStyle"
     :draggable="draggable"
     :button-data="buttonData"
     @start="onStart"
     @move="onMove"
     @end="onEnd"
-    @tap="onTplButtonTap"
-  />
+    @click="onTplButtonTap"
+  >
+    <template #default>
+      <slot />
+    </template>
+  </DraggableTemplate>
   <ViewTemplate
     v-else
     :prefix="prefix"
     :class-prefix="classPrefix"
-    :style="style"
-    :custom-style="customStyle"
+    :custom-style="_._style([style, customStyle])"
     :button-data="buttonData"
-    :button-layout="buttonLayout"
-    :disabled="disabled"
-    :loading="loading"
-    :loading-props="loadingProps"
-    :ghost="ghost"
-    :shape="shape"
-    :size="size"
-    :variant="variant"
-    :icon="icon"
-    :content="content"
-    :aria-label="ariaLabel"
-    :index="index"
-    :custom-dataset="customDataset"
-    :open-type="openType"
-    :hover-class="hoverClass"
-    :hover-stop-propagation="hoverStopPropagation"
-    :hover-start-time="hoverStartTime"
-    :hover-stay-time="hoverStayTime"
-    :lang="lang"
-    :session-from="sessionFrom"
-    :send-message-title="sendMessageTitle"
-    :send-message-path="sendMessagePath"
-    :send-message-img="sendMessageImg"
-    :app-parameter="appParameter"
-    :show-message-card="showMessageCard"
-  />
-  <!-- <template :is="draggable ? 'draggable' : 'view'" :data="prefix, classPrefix, style, customStyle, moveStyle, draggable, buttonData"/> -->
+    @click="onTplButtonTap"
+  >
+    <template #default>
+      <slot />
+    </template>
+  </ViewTemplate>
 </template>
 
 <script>
 import tButton from '../button/button';
 import tDraggable from './draggable/draggable';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import useCustomNavbar from '../mixins/using-custom-navbar';
-import { unitConvert, systemInfo } from '../common/utils';
+import { unitConvert, getWindowInfo } from '../common/utils';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
 import DraggableTemplate from './template/draggable.vue';
 import ViewTemplate from './template/view.vue';
 
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-fab`;
+
 const baseButtonProps = {
   size: 'large',
   shape: 'circle',
   theme: 'primary',
   tClass: `${prefix}-fab__button`,
 };
-let Fab = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.behaviors = [useCustomNavbar];
-    this.properties = props;
-    this.externalClasses = ['class', `${prefix}-class`, `${prefix}-class-button`];
-    this.setData({
+
+export default uniComponent({
+  name,
+  mixins: [useCustomNavbar],
+  components: {
+    DraggableTemplate,
+    ViewTemplate,
+    tButton,
+    tDraggable,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
-      buttonData: baseButtonProps,
       moveStyle: null,
-    });
-    this.components = {
-      DraggableTemplate,
-      ViewTemplate,
-      tButton,
-      tDraggable,
+      _,
+      systemInfo: getWindowInfo(),
     };
-    this._ = _;
-    this.watch = {
-      text: {
-        handler(val) {
-          this.content = val;
-        },
-        immediate: true,
+  },
+  computed: {
+    buttonData() {
+      return {
+        ...baseButtonProps,
+        shape: this.text ? 'round' : 'circle',
+        ...this.buttonProps,
+        icon: this.icon,
+        content: this.text,
+        ariaLabel: this.ariaLabel,
+      };
+    },
+  },
+  watch: {
+    icon: 'computedSize',
+    ariaLabel: 'computedSize',
+    yBounds: 'computedSize',
+    buttonProps: 'computedSize',
+    text: {
+      handler(val) {
+        this.content = val;
+        this.computedSize();
       },
-    };
-    this.observers = {
-      'buttonProps.**, icon, text, ariaLabel, yBounds'() {
-        let t;
-        this.setData({
-          buttonData: Object.assign(Object.assign(Object.assign(Object.assign({}, baseButtonProps), {
-            shape: this.text ? 'round' : 'circle',
-          }), this.buttonProps), {
-            icon: this.icon,
-            content: this.text,
-            ariaLabel: this.ariaLabel,
-          }),
-        }, null === (t = this.computedSize) || void 0 === t ? void 0 : t.bind(this));
-      },
-    };
-    this.methods = {
-      onTplButtonTap(t) {
-        this.$emit('click', {
-          detail: t,
-        });
-      },
-      onStart(t) {
-        this.$emit('dragstart', {
-          detail: t.detail.e,
-        });
-      },
-      onMove(t) {
-        const {
-          yBounds: e,
-        } = this;
-        const {
-          distanceTop: o,
-        } = this;
-        const {
-          x: s,
-          y: i,
-          rect: r,
-        } = t.detail;
-        const a = systemInfo.windowWidth - r.width;
-        const n = systemInfo.windowHeight - Math.max(o, unitConvert(e[0])) - r.height;
-        const p = Math.max(0, Math.min(s, a));
-        const m = Math.max(0, unitConvert(e[1]), Math.min(i, n));
-        this.setData({
-          moveStyle: `right: ${p}px; bottom: ${m}px;`,
-        });
-      },
-      onEnd(t) {
-        this.$emit('dragend', {
-          detail: t.detail.e,
-        });
-      },
-      computedSize() {
-        let t;
-        let e;
-        if (!this.draggable) {
-          return;
+      immediate: true,
+    },
+  },
+  methods: {
+    onTplButtonTap(t) {
+      this.$emit('click', {
+        detail: t,
+      });
+    },
+    onStart(t) {
+      this.$emit('dragstart', {
+        detail: t,
+      });
+    },
+    onMove(e) {
+      const {
+        yBounds,
+        distanceTop,
+        systemInfo,
+      } = this;
+
+      const { x, y, rect } = e;
+      const maxX = systemInfo.windowWidth - rect.width; // 父容器宽度 - 拖动元素宽度
+      const maxY = systemInfo.windowHeight - Math.max(distanceTop, unitConvert(yBounds[0])) - rect.height; // 父容器高度 - 拖动元素高度
+      const right = Math.max(0, Math.min(x, maxX));
+      const bottom = Math.max(0, unitConvert(yBounds[1]), Math.min(y, maxY));
+
+      console.log('maxX', { maxX, maxY, yBounds, right, bottom });
+      this.moveStyle = `right: ${right}px; bottom: ${bottom}px;`;
+    },
+    onEnd(t) {
+      this.$emit('dragend', {
+        detail: t,
+      });
+    },
+    computedSize() {
+      if (!this.draggable) return;
+
+      setTimeout(() => {
+        const insChild = this.$refs.draggableTemplate?.$refs?.draggable;
+        console.log('insChild', insChild, this.$refs);
+
+        // button 更新时，重新获取其尺寸
+        if (this?.yBounds?.[1]) {
+          this.moveStyle = `bottom: ${unitConvert(this.yBounds[1])}px`;
+          insChild?.computedRect();
+        } else {
+          insChild?.computedRect();
         }
-        const o = this.zpSelectComponent('#draggable');
-        (null === (e = null === (t = this) || void 0 === t ? void 0 : t.yBounds) || void 0 === e ? void 0 : e[1]) ? this.setData({
-          moveStyle: `bottom: ${unitConvert(this.yBounds[1])}px`,
-        }, o.computedRect) : o.computedRect();
-      },
-    };
-  }
-};
-Fab = initTDesign(__decorate([wxComponent()], Fab));
-export default Fab;
+      });
+    },
+  },
+});
 </script>
 <style>
 @import './fab.css';

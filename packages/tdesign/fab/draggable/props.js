@@ -1,7 +1,19 @@
 const props = {
-    direction: {
-        type: String,
-        value: 'all'
-    }
+  direction: {
+    type: String,
+    value: 'all',
+  },
+  tClass: {
+    type: String,
+    default: '',
+  },
+  tClassButton: {
+    type: String,
+    default: '',
+  },
+  customStyle: {
+    type: String,
+    default: '',
+  }
 };
 export default props;

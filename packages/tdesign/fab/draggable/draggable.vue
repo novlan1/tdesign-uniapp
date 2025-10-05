@@ -1,113 +1,84 @@
 <template>
-    <view
-        :class="classPrefix + ' class ' + prefix + '-class'"
-        :style="_._style([style, customStyle])"
-        @touchstart="onTouchStart"
-        @touchmove.stop.prevent="onTouchMove"
-        @touchend="onTouchEnd"
-    >
-        <slot></slot>
-    </view>
+  <view
+    :class="[classPrefix + ' class ', tClass]"
+    :style="_._style([style, customStyle])"
+    @touchstart="onTouchStart"
+    @touchmove.stop.prevent="onTouchMove"
+    @touchend="onTouchEnd"
+  >
+    <slot />
+  </view>
 </template>
 <script>
-import { __awaiter, __decorate } from "../../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../../common/src/index";
-import config from "../../common/config";
-import props from "./props";
-import { getRect, systemInfo } from "../../common/utils";
+import { uniComponent } from '../../common/src/index';
+import { prefix } from '../../common/config';
+import props from './props';
+import { getRect, getWindowInfo } from '../../common/utils';
 import _ from '../../common/utils.wxs';
-import { initTDesign } from '../../common/runtime';
 
 
-const {
-  prefix: prefix
-} = config;
 const name = `${prefix}-draggable`;
-let Draggable = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.properties = props;;
-    this.externalClasses = [`${prefix}-class`];
-    this.setData({
-      prefix: prefix,
-      classPrefix: name
-    });
-    this._ = _;
-    this.lifetimes = {
-      ready() {
-        this.computedRect();
-      }
+
+export default uniComponent({
+  name,
+  props: {
+    ...props,
+  },
+  data() {
+    return {
+      prefix,
+      classPrefix: name,
+      _,
+      systemInfo: getWindowInfo(),
     };
-    this.methods = {
-      onTouchStart(t) {
-        if ("none" !== this.direction) {
-          this.startX = t.touches[0].clientX + systemInfo.windowWidth - this.rect.right;
-          this.startY = t.touches[0].clientY + systemInfo.windowHeight - this.rect.bottom;
-          this.$emit("start", {
-            detail: {
-              startX: this.startX,
-              startY: this.startY,
-              rect: this.rect,
-              e: t
-            }
-          });
-        }
-      },
-      onTouchMove(t) {
-        if ("none" === this.direction) {
-          return;
-        }
-        let e = this.startX - t.touches[0].clientX;
-        let i = this.startY - t.touches[0].clientY;
-        if ("vertical" === this.direction) {
-          e = systemInfo.windowWidth - this.rect.right;
-        }
-        if ("horizontal" === this.direction) {
-          i = systemInfo.windowHeight - this.rect.bottom;
-        }
-        this.$emit("move", {
-          detail: {
-            x: e,
-            y: i,
-            rect: this.rect,
-            e: t
-          }
-        });
-      },
-      onTouchEnd(t) {
-        return __awaiter(this, void 0, void 0, function* () {
-          if ("none" !== this.direction) {
-            yield this.computedRect();
-            this.$emit("end", {
-              detail: {
-                rect: this.rect,
-                e: t
-              }
-            });
-          }
-        });
-      },
-      computedRect() {
-        return __awaiter(this, void 0, void 0, function* () {
-          this.rect = {
-            right: 0,
-            bottom: 0,
-            width: 0,
-            height: 0
-          };
-          try {
-            this.rect = yield getRect(this, `.${this.classPrefix}`);
-          } catch (t) {
-            console.log("CatchClause", t);
-            console.log("CatchClause", t);
-          }
-        });
+  },
+  mounted() {
+    this.computedRect();
+  },
+  methods: {
+    onTouchStart(e) {
+      console.log('direction', this.direction);
+      const { systemInfo } = this;
+      if (this.direction === 'none') return;
+      this.startX = e.touches[0].clientX + systemInfo.windowWidth - this.rect.right;
+      this.startY = e.touches[0].clientY + systemInfo.windowHeight - this.rect.bottom;
+      this.$emit('start', { startX: this.startX, startY: this.startY, rect: this.rect, e });
+    },
+
+    onTouchMove(e) {
+      const { systemInfo } = this;
+      console.log('direction', this.direction, { systemInfo });
+      if (this.direction === 'none') return;
+      let x = this.startX - e.touches[0].clientX; // x轴移动偏移量
+      let y = this.startY - e.touches[0].clientY; // y轴移动偏移量
+
+      console.log('onTouchMove.x', { x, y });
+      if (this.direction === 'vertical') {
+        x = systemInfo.windowWidth - this.rect.right;
       }
-    };
-  }
-};
-Draggable = initTDesign(__decorate([wxComponent()], Draggable));
-export default Draggable;
+      if (this.direction === 'horizontal') {
+        y = systemInfo.windowHeight - this.rect.bottom;
+      }
+
+      this.$emit('move', { x, y, rect: this.rect, e });
+    },
+
+    async onTouchEnd(e) {
+      if (this.direction === 'none') return;
+      await this.computedRect();
+      this.$emit('end', { rect: this.rect, e });
+    },
+
+    async computedRect() {
+      this.rect = { right: 0, bottom: 0, width: 0, height: 0 };
+      try {
+        this.rect = await getRect(this, `.${this.classPrefix}`);
+      } catch (e) {
+        // ignore reject
+      }
+    },
+  },
+});
 </script>
 <style>
 @import './draggable.css';

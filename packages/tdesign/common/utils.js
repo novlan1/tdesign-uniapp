@@ -1,6 +1,7 @@
 import { prefix } from './config';
 import { isString, isNumber, isDef, isBoolean, isObject } from './validator';
 import { getWindowInfo, getAppBaseInfo, getDeviceInfo } from './wechat';
+export { getWindowInfo };
 export const systemInfo = getWindowInfo();
 export const appBaseInfo = getAppBaseInfo();
 export const deviceInfo = getDeviceInfo();

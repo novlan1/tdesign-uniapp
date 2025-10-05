@@ -12,21 +12,21 @@ export declare const styles: (styleObj: any) => string;
 export declare const getAnimationFrame: (context: any, cb: Function) => any;
 export declare const getRect: (context: any, selector: string, needAll?: boolean) => Promise<any>;
 interface TreeNode {
-    children?: TreeNode[];
-    [key: string]: any;
+  children?: TreeNode[];
+  [key: string]: any;
 }
 export declare const getTreeDepth: (tree: TreeNode[], key?: string) => any;
 export declare const isIOS: () => boolean;
 export declare const addUnit: (value?: string | number) => string | undefined;
 export declare const getCharacterLength: (type: string, char: string | number, max?: number) => {
-    length: number;
-    characters: string;
+  length: number;
+  characters: string;
 };
 export declare const chunk: (arr: any[], size: number) => any[][];
 export declare const getInstance: (context?: Context, selector?: string) => WechatMiniprogram.Component.TrivialInstance;
 export declare const unitConvert: (value: number | string | null | undefined) => number;
 export declare const setIcon: (iconName: any, icon: any, defaultIcon: any) => {
-    [x: string]: any;
+  [x: string]: any;
 };
 export declare const toCamel: (str: any) => any;
 export declare const getCurrentPage: <T>() => T & WechatMiniprogram.OptionalInterface<WechatMiniprogram.Page.ILifetime> & WechatMiniprogram.Page.InstanceProperties & WechatMiniprogram.Page.InstanceMethods<WechatMiniprogram.IAnyObject> & WechatMiniprogram.Page.Data<WechatMiniprogram.IAnyObject> & WechatMiniprogram.IAnyObject;

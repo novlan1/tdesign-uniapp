@@ -8,7 +8,6 @@
     <t-demo-header
       title="Fab 悬浮按钮"
       desc="当功能使用图标即可表意清楚时，可使用纯图标悬浮按钮，例如：添加、发布。"
-      notice="渲染框架支持情况：Skyline、WebView"
     />
     <t-demo
       title="01 组件类型"
@@ -108,16 +107,17 @@ import tButton from 'tdesign-uniapp/button/button';
 import tSkeleton from 'tdesign-uniapp/skeleton/skeleton';
 import BaseDemo from './base/index.vue';
 import advance from './advance/index.vue';
-// import draggable from './draggable/index.vue';
-// import collapsible from './collapsible/index.vue';
+import draggable from './draggable/index.vue';
+import collapsible from './collapsible/index.vue';
+
 export default {
   components: {
     tButton,
     tSkeleton,
     BaseDemo,
     advance,
-    // draggable,
-    // collapsible,
+    draggable,
+    collapsible,
   },
   data() {
     return {
