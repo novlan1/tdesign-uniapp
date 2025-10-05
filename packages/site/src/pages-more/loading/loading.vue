@@ -14,7 +14,6 @@
         <t-demo-header
           title="Loading 加载"
           desc="文用于表示页面或操作的加载状态，给予用户反馈的同时减缓等待的焦虑感，由一个或一组反馈动效组成。"
-          notice="渲染框架支持情况：Skyline、WebView"
         />
         <t-demo
           title="01 组件类型"
