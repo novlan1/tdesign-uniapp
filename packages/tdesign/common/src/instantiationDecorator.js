@@ -96,7 +96,7 @@ export const toComponent = function (e) {
   Object.getOwnPropertyNames(e).forEach((t) => {
     const o = Object.getOwnPropertyDescriptor(e, t);
     if (o) {
-      NativeLifeCycles.indexOf(t) < 0 && 'function' === typeof o.value
+      NativeLifeCycles.indexOf(t) < 0 && 'function' === typeof o.value && false
         ? (Object.defineProperty(e.methods, t, o), delete e[t])
         : ComponentNativeProps.indexOf(t) < 0
           ? (s[t] = o)
@@ -166,4 +166,13 @@ export const wxComponent = function () {
     // export default o;
     return o;
   };
+};
+
+export const uniComponent = function (info) {
+  info.options = info.options || {};
+  if (canUseVirtualHost()) {
+    info.options.virtualHost = true;
+  }
+  const o = toComponent(info);
+  return o;
 };

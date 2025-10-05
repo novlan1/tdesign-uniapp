@@ -91,7 +91,7 @@ const {
   prefix: prefix,
 } = config;
 const name = `${prefix}-button`;
-let Button = class extends SuperComponent {
+class Button extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-icon`, `${prefix}-class-loading`];
@@ -184,12 +184,13 @@ let Button = class extends SuperComponent {
       },
       handleTap(t) {
         console.log('[Button Comp]handleTap: ', t);
-        // this.disabled || this.loading ||
+        if (this.disabled || this.loading) return;
         this.$emit('click', t);
       },
     };
   }
-};
+}
+// eslint-disable-next-line no-class-assign
 Button = initTDesign(__decorate([wxComponent()], Button));
 
 console.log('[Button]', Button);

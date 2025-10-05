@@ -1,6 +1,11 @@
 <template>
   <view
-    :style="_._style([style, customStyle, show ? '' : 'display: none', inheritColor ? 'color: inherit' : ''])"
+    :style="_._style([
+      style,
+      customStyle,
+      show ? '' : 'display: none',
+      inheritColor ? 'color: inherit' : ''
+    ])"
     :class="extraClass + ' ' + prefix + '-class ' + classPrefix + ' ' + (classPrefix + '--' + layout) + ' ' + (fullscreen ? classPrefix + '--fullscreen' : '')"
   >
     <view
@@ -83,71 +88,66 @@
   </view>
 </template>
 <script>
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
+import { uniComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
-import { initTDesign } from '../common/runtime';
 import _ from '../common/utils.wxs';
 
 
 const {
-  prefix: prefix,
+  prefix,
 } = config;
+
 const name = `${prefix}-loading`;
 
-class Loading extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-text`, `${prefix}-class-indicator`];
-    this.setData({
+
+export default uniComponent({
+  name,
+  options: {
+    multipleSlots: true,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       show: true,
-    });
-    this.options = {
-      multipleSlots: true,
+      _,
     };
-    this.properties = props;
-    this._ = _;
-    this.timer = null;
-    this.observers = {
-      loading(e) {
+  },
+  watch: {
+    loading: {
+      handler(value) {
         const {
-          delay: t,
+          delay,
         } = this;
         if (this.timer) {
           clearTimeout(this.timer);
         }
-        if (e && t) {
+        if (value && delay) {
           this.timer = setTimeout(() => {
-            this.setData({
-              show: e,
-            });
+            this.show = value;
             this.timer = null;
-          }, t);
+          }, delay);
         } else {
-          this.setData({
-            show: e,
-          });
+          this.show = value;
         }
       },
-    };
-    this.lifetimes = {
-      detached() {
-        clearTimeout(this.timer);
-      },
-    };
-  }
-  refreshPage() {
-    this.$emit('reload');
-  }
-}
+      immediate: true,
+    },
+  },
+  beforeUnMount() {
+    clearTimeout(this.timer);
+  },
+  methods: {
+    refreshPage() {
+      this.$emit('reload');
+    },
+  },
+});
 
-Loading = initTDesign(__decorate([wxComponent()], Loading));
-console.log('loading', Loading);
-export default Loading;
 </script>
-<style>
-@import './loading.css';
+<style src="./loading.css" lang="less" scoped>
 </style>

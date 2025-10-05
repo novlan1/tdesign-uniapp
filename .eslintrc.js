@@ -8,6 +8,7 @@ module.exports = {
     qq: true,
     weex: true,
     plus: true,
+    getApp: true,
   },
   parserOptions: {
     project: 'tsconfig.eslint.json',
