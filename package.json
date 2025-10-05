@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "pnpm --filter=\"./packages/site\" dev:h5",
     "dev:mp": "pnpm --filter=\"./packages/site\" dev:mp-weixin",
+    "dev:mp-weixin": "npm run dev:mp",
     "build": "pnpm --filter=\"./packages/site\" build:h5",
+    "build:mp": "pnpm --filter=\"./packages/site\" build:mp-weixin",
+    "build:mp-weixin": "npm run build:mp",
     "type-check": "vue-tsc --noEmit"
   },
   "devDependencies": {

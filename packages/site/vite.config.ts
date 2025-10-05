@@ -3,6 +3,7 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import uni from '@dcloudio/vite-plugin-uni';
 
+const isH5 = process.env.UNI_PLATFORM === 'h5';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [uni(),
@@ -17,10 +18,10 @@ export default defineConfig({
     // },
   ],
   resolve: {
-    alias: {
+    alias: isH5 ? {
       // 不使用 workspace，而使用 alias，解决修改组件后必须重启才能生效
       'tdesign-uniapp': path.resolve(__dirname, '../tdesign'),       // 根目录别名
-    },
+    } : {},
   },
   base: process.env.VITE_DEMO_BASE || 'tdesign-uniapp',
   server: {
