@@ -109,7 +109,6 @@ export default uniComponent({
     icon: {
       handler(value) {
         this._icon = calcIcon(value, '');
-        console.log('this._icon.style', this._icon?.style);
       },
       immediate: true,
     },
@@ -187,57 +186,11 @@ export default uniComponent({
       });
     },
     handleTap(t) {
-      console.log('[Button Comp]handleTap: ', t);
       if (this.disabled || this.loading) return;
       this.$emit('click', t);
     },
   },
 });
-
-// class Button extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-icon`, `${prefix}-class-loading`];
-//     this.behaviors = canIUseFormFieldButton() ? ['wx://form-field-button'] : [];
-//     this.properties = props;
-//     this._ = _;
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     this.components = {
-//       tIcon,
-//       tLoading,
-//     };
-//     this.setData({
-//       prefix,
-//       className: '',
-//       classPrefix: name,
-//     });
-//     this.observers = {
-//       'theme, size, plain, block, shape, disabled, loading, variant'() {
-//         this.setClass();
-//       },
-//       icon(t) {
-//         this.setData({
-//           _icon: calcIcon(t, ''),
-//         });
-//       },
-//     };
-//     this.lifetimes = {
-//       attached() {
-//         this.setClass();
-//       },
-//     };
-//     this.methods = {
-
-//     };
-//   }
-// }
-// // eslint-disable-next-line no-class-assign
-// Button = initTDesign(__decorate([wxComponent()], Button));
-
-// console.log('[Button]', Button);
-// export default Button;
 </script>
 <style>
 @import './button.css';
