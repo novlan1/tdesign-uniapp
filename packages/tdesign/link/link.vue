@@ -13,7 +13,7 @@
       :version="navigatorProps.version"
       :short-link="navigatorProps.shortLink"
       :hover-class="(hover && !disabled && classPrefix + '--hover') + ' ' + prefix + '-class-hover ' + navigatorProps.hoverClass"
-      hover-stop-propagation="navigatorProps.hoverStopPropagation"
+      :hover-stop-propagation="!!navigatorProps.hoverStopPropagation"
       :hover-start-time="navigatorProps.hoverStartTime"
       :hover-stay-time="navigatorProps.hoverStayTime"
       :aria-disabled="disabled"
@@ -29,15 +29,15 @@
           name="icon"
         >
           <t-icon
-            :style="style || ''"
-            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-            :prefix="prefix || ''"
-            :name="'close' || ''"
-            :size="22 || ''"
-            :color="color || ''"
-            :aria-hidden="true || ''"
-            :aria-label="'清除' || ''"
-            :aria-role="'button' || ''"
+            :custom-style="_prefixIcon.style || ''"
+            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (_prefixIcon.activeIdx == _prefixIcon.index ? 'active ' : ' ') + prefix + '-class-icon'"
+            :prefix="_prefixIcon.prefix"
+            :name="_prefixIcon.name"
+            :size="_prefixIcon.size"
+            :color="_prefixIcon.color"
+            :aria-hidden="true"
+            :aria-label="_prefixIcon.ariaLabel"
+            :aria-role="_prefixIcon.arialRole"
             @click="bindclick || ''"
           />
         </block>
@@ -57,15 +57,15 @@
           name="icon"
         >
           <t-icon
-            :style="style || ''"
-            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-            :prefix="prefix || ''"
-            :name="'close' || ''"
-            :size="22 || ''"
-            :color="color || ''"
-            :aria-hidden="true || ''"
-            :aria-label="'清除' || ''"
-            :aria-role="'button' || ''"
+            :custom-style="_suffixIcon.style || ''"
+            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (_suffixIcon.activeIdx == _suffixIcon.index ? 'active ' : ' ') + prefix + '-class-icon'"
+            :prefix="_suffixIcon.prefix || ''"
+            :name="_suffixIcon.name"
+            :size="_suffixIcon.size"
+            :color="_suffixIcon.color"
+            :aria-hidden="true"
+            :aria-label="_suffixIcon.ariaLabel"
+            :aria-role="_suffixIcon.arialRole"
             @click="bindclick || ''"
           />
         </block>
@@ -75,102 +75,91 @@
 </template>
 <script>
 import tIcon from '../icon/icon';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import { calcIcon } from '../common/utils';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-link`;
-let Link = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-hover`, `${prefix}-class-prefix-icon`, `${prefix}-class-content`, `${prefix}-class-suffix-icon`];
-    this.properties = props;
-    this.options = {
-      multipleSlots: true,
-    };
-    this.components = {
-      tIcon,
-    };
-    this._ = _;
-    this.setData({
+
+export default uniComponent({
+  name,
+  components: {
+    tIcon,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
-    });
-    this.observers = {
-      'theme, disabled, size, underline, navigatorProps'() {
-        this.setClass();
-      },
-      prefixIcon(e) {
-        this.setData({
-          _prefixIcon: calcIcon(e),
-        });
-      },
-      suffixIcon(e) {
-        this.setData({
-          _suffixIcon: calcIcon(e),
-        });
-      },
+      _,
+      _prefixIcon: null,
+      _suffixIcon: null,
+      className: '',
     };
-    this.lifetimes = {
-      attached() {
-        this.setClass();
+  },
+  watch: {
+    prefixIcon: {
+      handler(value) {
+        this._prefixIcon = calcIcon(value);
       },
-    };
-    this.methods = {
-      setClass() {
-        const {
-          theme: e,
-          size: s,
-          underline: i,
-          navigatorProps: t,
-          disabled: o,
-        } = this;
-        const n = [name, `${name}--${e}`, `${name}--${s}`];
-        const {
-          url: r,
-          appId: a,
-          shortLink: p,
-          target: c,
-          openType: l,
-        } = null != t ? t : {};
-        const m = !(r || 'miniProgram' === c && (a || p));
-        if (i) {
-          n.push(`${name}--underline`);
-        }
-        if (t && m && !['navigateBack', 'exit'].includes(l) || o) {
-          n.push(`${name}--disabled`);
-        }
-        this.setData({
-          className: n.join(' '),
-        });
+      immediate: true,
+    },
+    suffixIcon: {
+      handler(value) {
+        this._suffixIcon = calcIcon(value);
       },
-      onSuccess(e) {
-        this.$emit('success', {
-          detail: e,
-        });
-      },
-      onFail(e) {
-        this.$emit('fail', {
-          detail: e,
-        });
-      },
-      onComplete(e) {
-        this.$emit('complete', {
-          detail: e,
-        });
-      },
-    };
-  }
-};
-Link = initTDesign(__decorate([wxComponent()], Link));
-export default Link;
+      immediate: true,
+    },
+    theme: 'setClass',
+    disabled: 'setClass',
+    size: 'setClass',
+    underline: 'setClass',
+    navigatorProps: 'setClass',
+  },
+  mounted() {
+    this.setClass();
+  },
+  methods: {
+    setClass() {
+      const { theme, size, underline, navigatorProps, disabled } = this;
+      const classList = [name, `${name}--${theme}`, `${name}--${size}`];
+      const { url, appId, shortLink, target, openType } = navigatorProps ?? {};
+      const condition = !(url || (target === 'miniProgram' && (appId || shortLink)));
+
+      if (underline) {
+        classList.push(`${name}--underline`);
+      }
+      if (
+        (Object.keys(navigatorProps).length && condition && !['navigateBack', 'exit'].includes(openType))
+        || disabled
+      ) {
+        classList.push(`${name}--disabled`);
+      }
+
+      this.className = classList.join(' ');
+    },
+    onSuccess(e) {
+      this.$emit('success', {
+        detail: e,
+      });
+    },
+    onFail(e) {
+      this.$emit('fail', {
+        detail: e,
+      });
+    },
+    onComplete(e) {
+      this.$emit('complete', {
+        detail: e,
+      });
+    },
+  },
+});
 </script>
 <style>
 @import './link.css';

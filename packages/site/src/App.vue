@@ -10,8 +10,5 @@ onHide(() => {
   console.log('App Hide');
 });
 </script>
-<style lang="less">
-.demo {
-  padding-bottom: 28px;
-}
+<style lang="less" src="./style/app.less">
 </style>
