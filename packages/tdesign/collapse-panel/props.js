@@ -1,33 +1,39 @@
 const props = {
-    content: {
-        type: String
-    },
-    disabled: {
-        type: null,
-        value: void 0
-    },
-    expandIcon: {
-        type: null,
-        value: void 0
-    },
-    externalClasses: {
-        type: Array
-    },
-    header: {
-        type: String
-    },
-    headerLeftIcon: {
-        type: String
-    },
-    headerRightContent: {
-        type: String
-    },
-    placement: {
-        type: String,
-        value: 'bottom'
-    },
-    value: {
-        type: null
-    }
+  content: {
+    type: String,
+    default: '',
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  expandIcon: {
+    type: Boolean,
+    default: false,
+  },
+  externalClasses: {
+    type: Array,
+    default: () => ([]),
+  },
+  header: {
+    type: String,
+    default: '',
+  },
+  headerLeftIcon: {
+    type: String,
+    default: '',
+  },
+  headerRightContent: {
+    type: String,
+    default: '',
+  },
+  placement: {
+    type: String,
+    default: 'bottom',
+  },
+  value: {
+    type: [String, Number],
+    default: '',
+  },
 };
 export default props;

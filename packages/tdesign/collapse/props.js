@@ -1,30 +1,31 @@
 const props = {
-    defaultExpandAll: {
-        type: Boolean,
-        value: false
-    },
-    disabled: {
-        type: Boolean
-    },
-    expandIcon: {
-        type: Boolean,
-        value: true
-    },
-    expandMutex: {
-        type: Boolean,
-        value: false
-    },
-    theme: {
-        type: String,
-        value: 'default'
-    },
-    value: {
-        type: Array,
-        value: null
-    },
-    defaultValue: {
-        type: Array,
-        value: []
-    }
+  defaultExpandAll: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  expandIcon: {
+    type: Boolean,
+    default: true,
+  },
+  expandMutex: {
+    type: Boolean,
+    default: false,
+  },
+  theme: {
+    type: String,
+    default: 'default',
+  },
+  value: {
+    type: [Array, null],
+    default: null,
+  },
+  defaultValue: {
+    type: Array,
+    default: () => ([]),
+  },
 };
 export default props;

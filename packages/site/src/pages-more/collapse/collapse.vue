@@ -8,7 +8,6 @@
       <t-demo-header
         title="Collapse 折叠面板"
         desc="可以折叠/展开的内容区域。"
-        notice="渲染框架支持情况：WebView"
       />
       <t-demo
         title="01 组件类型"
@@ -40,18 +39,20 @@
 </template>
 
 <script lang="ts">
-import baseComp from './base';
-// import placement from './placement';
-// import action from './action';
-// import accordion from './accordion';
-// import theme from './theme';
+import baseComp from './base/index.vue';
+import placement from './placement/index.vue';
+import action from './action/index.vue';
+import accordion from './accordion/index.vue';
+import theme from './theme/index.vue';
+
+
 export default {
   components: {
     baseComp,
-    // placement,
-    // action,
-    // accordion,
-    // theme,
+    placement,
+    action,
+    accordion,
+    theme,
   },
   data() {
     return {

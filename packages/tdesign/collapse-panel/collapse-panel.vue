@@ -1,7 +1,10 @@
 <template>
   <view
     :style="_._style([style, customStyle])"
-    :class="'class ' + classPrefix + ' ' + classPrefix + '--' + placement + ' ' + prefix + '-class'"
+    :class="[
+      'class ' + classPrefix + ' ' + classPrefix + '--' + placement,
+      tClass
+    ]"
   >
     <view
       :class="classPrefix + '__title'"
@@ -16,28 +19,40 @@
         bordered
         :left-icon="headerLeftIcon"
         :right-icon="ultimateExpandIcon ? (expanded ? 'chevron-up' : 'chevron-down') : ''"
-        :t-class="_.cls(classPrefix + '__header', [placement, ['expanded', expanded]]) + ' ' + prefix + '-class-header'"
+        :t-class="_.cls(classPrefix + '__header', [placement, ['expanded', expanded]]) + ' ' + tClassHeader"
         :t-class-title="'class-title ' + (ultimateDisabled ? 'class-title--disabled' : '')"
         :t-class-note="'class-note ' + (ultimateDisabled ? 'class-note--disabled' : '')"
         :t-class-right-icon="'class-right-icon ' + classPrefix + '__arrow--' + placement + ' ' + (ultimateDisabled ? 'class-right-icon--disabled' : '')"
         t-class-hover="class-header-hover"
       >
-        <slot
-          slot="left-icon"
-          name="header-left-icon"
-        />
-        <slot
-          slot="title"
-          name="header"
-        />
-        <slot
-          slot="note"
-          name="header-right-content"
-        />
-        <slot
-          slot="right-icon"
-          name="expand-icon"
-        />
+        <template
+          #left-icon
+        >
+          <slot
+            name="header-left-icon"
+          />
+        </template>
+        <template
+          #title
+        >
+          <slot
+            name="header"
+          />
+        </template>
+        <template
+          #note
+        >
+          <slot
+            name="header-right-content"
+          />
+        </template>
+        <template
+          #right-icon
+        >
+          <slot
+            name="expand-icon"
+          />
+        </template>
       </t-cell>
     </view>
     <view
@@ -45,7 +60,7 @@
       :animation="animation"
       :aria-hidden="expanded ? '' : true"
     >
-      <view :class="_.cls(classPrefix + '__content', [['disabled', ultimateDisabled], ['expanded', expanded], placement]) + ' ' + prefix + '-class-content'">
+      <view :class="_.cls(classPrefix + '__content', [['disabled', ultimateDisabled], ['expanded', expanded], placement]) + ' ' + tClassContent">
         {{ content }}
         <slot />
         <slot name="content" />
@@ -55,142 +70,185 @@
 </template>
 <script>
 import tCell from '../cell/cell';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import { getRect } from '../common/utils';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
+import { ChildrenMixin, RELATION_MAP } from '../common/relation';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-collapse-panel`;
-let CollapsePanel = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-header`];
-    this.options = {
-      multipleSlots: true,
-    };
-    this.components = {
-      tCell,
-    };
-    this.relationCallbacks = {
-      mounted() {
-        const {
-          value: t,
-          expandIcon: a,
-          disabled: s,
-        } = this[this.relationParentName];
-        this.setData({
-          ultimateExpandIcon: null == this.expandIcon ? a : this.expandIcon,
-          ultimateDisabled: null == this.disabled ? s : this.disabled,
-        });
-        this.updateExpanded(t);
-      },
-    };
-    this.relations = {
-      '../collapse/collapse': {
-        type: 'ancestor',
-        // linked(e) {
-        //   const {
-        //     value: t,
-        //     expandIcon: a,
-        //     disabled: s
-        //   } = e.properties;
-        //   this.setData({
-        //     ultimateExpandIcon: null == this.expandIcon ? a : this.expandIcon,
-        //     ultimateDisabled: null == this.disabled ? s : this.disabled
-        //   });
-        //   this.updateExpanded(t);
-        // }
-      },
-    };
-    this.name = 'TCollapsePanel';
-    this.properties = props;
-    this._ = _;
-    this.setData({
+
+
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-content`,
+    `${prefix}-class-header`,
+  ],
+  mixins: [ChildrenMixin(RELATION_MAP.CollapsePanel)],
+  components: {
+    tCell,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       expanded: false,
       classPrefix: name,
       classBasePrefix: prefix,
       ultimateExpandIcon: false,
       ultimateDisabled: false,
-    });
-    this.observers = {
-      disabled(e) {
-        this.setData({
-          ultimateDisabled: !!e,
-        });
-      },
+      _,
+      animation: null,
     };
-    this.methods = {
-      updateExpanded(e = []) {
-        if (!this[this.relationParentName]) {
-          return;
-        }
-        const {
-          value: t,
-        } = this;
-        const {
-          defaultExpandAll: a,
-        } = this[this.relationParentName];
-        const s = a ? !this.expanded : e.includes(t);
-
-        if (s !== this.expanded) {
-          this.setData({
-            expanded: s,
-          });
-          this.updateStyle(s);
-        }
+  },
+  watch: {
+    disabled: {
+      handler(e) {
+        this.ultimateDisabled = !!e;
       },
-      updateStyle(e) {
-        return getRect(this, `.${name}__content`).then(e => e.height)
-          .then((t) => {
-            const a = uni.createAnimation({
-              duration: 0,
-              timingFunction: 'ease-in-out',
-            });
-            e ? a.height(t).top(0)
-              .step({
-                duration: 300,
-              })
+      immediate: true,
+    },
+  },
+  methods: {
+    updateExpanded(activeValues = []) {
+      if (!this[RELATION_MAP.CollapsePanel]) {
+        return;
+      }
+
+      const { value } = this;
+      const { defaultExpandAll } = this[RELATION_MAP.CollapsePanel];
+      const expanded = defaultExpandAll ? !this.expanded : activeValues.includes(value);
+
+      if (expanded === this.expanded) return;
+
+      this.expanded = expanded;
+      this.updateStyle(expanded);
+    },
+
+    updateStyle(expanded) {
+      return getRect(this, `.${name}__content`)
+        .then(rect => rect.height)
+        .then((height) => {
+          const animation = wx.createAnimation({
+            duration: 0,
+            timingFunction: 'ease-in-out',
+          });
+
+          if (expanded) {
+            animation.height(height).top(0)
+              .step({ duration: 300 })
               .height('auto')
-              .step() : a.height(t).top(1)
-              .step({
-                duration: 1,
-              })
+              .step();
+          } else {
+            animation.height(height).top(1)
+              .step({ duration: 1 })
               .height(0)
-              .step({
-                duration: 300,
-              });
-            this.setData({
-              animation: a.export(),
-            });
-          });
-      },
-      onClick() {
-        const {
-          ultimateDisabled: e,
-        } = this;
-        const {
-          value: t,
-        } = this;
+              .step({ duration: 300 });
+          }
 
-        e || (this[this.relationParentName].defaultExpandAll
-          ? this.updateExpanded()
-          : this[this.relationParentName].switch(t)
-        );
-      },
-    };
-  }
-};
-CollapsePanel = initTDesign(__decorate([wxComponent()], CollapsePanel));
+          this.animation =  animation.export();
+        });
+    },
+
+    onClick() {
+      const { ultimateDisabled } = this;
+      const { value } = this;
+
+      if (ultimateDisabled) return;
+
+      if (this[RELATION_MAP.CollapsePanel].defaultExpandAll) {
+        this.updateExpanded();
+      } else {
+        this[RELATION_MAP.CollapsePanel].switch(value);
+      }
+    },
+
+    innerAfterLinked() {
+      const { value, expandIcon, disabled } =  this[RELATION_MAP.CollapsePanel];
+
+      this.ultimateExpandIcon = this.expandIcon == null ? expandIcon : this.expandIcon;
+      this.ultimateDisabled = this.disabled == null ? disabled : this.disabled;
+
+      this.updateExpanded(value);
+    },
+  },
+});
 
 
-export default CollapsePanel;
+// let CollapsePanel = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-header`];
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     this.components = {
+//       tCell,
+//     };
+//     this.relationCallbacks = {
+//       mounted() {
+//         const {
+//           value: t,
+//           expandIcon: a,
+//           disabled: s,
+//         } = this[this.relationParentName];
+//         this.setData({
+//           ultimateExpandIcon: null == this.expandIcon ? a : this.expandIcon,
+//           ultimateDisabled: null == this.disabled ? s : this.disabled,
+//         });
+//         this.updateExpanded(t);
+//       },
+//     };
+//     this.relations = {
+//       '../collapse/collapse': {
+//         type: 'ancestor',
+//         // linked(e) {
+//         //   const {
+//         //     value: t,
+//         //     expandIcon: a,
+//         //     disabled: s
+//         //   } = e.properties;
+//         //   this.setData({
+//         //     ultimateExpandIcon: null == this.expandIcon ? a : this.expandIcon,
+//         //     ultimateDisabled: null == this.disabled ? s : this.disabled
+//         //   });
+//         //   this.updateExpanded(t);
+//         // }
+//       },
+//     };
+//     this.name = 'TCollapsePanel';
+//     this.properties = props;
+//     this._ = _;
+//     this.setData({
+//       prefix,
+//       expanded: false,
+//       classPrefix: name,
+//       classBasePrefix: prefix,
+//       ultimateExpandIcon: false,
+//       ultimateDisabled: false,
+//     });
+//     this.observers = {
+//       disabled(e) {
+//         this.setData({
+//           ultimateDisabled: !!e,
+//         });
+//       },
+//     };
+//     this.methods = {
+
+//     };
+//   }
+// };
+// CollapsePanel = initTDesign(__decorate([wxComponent()], CollapsePanel));
+
+
+// export default CollapsePanel;
 </script>
 <style>
 @import './collapse-panel.css';
