@@ -9,7 +9,6 @@
       <t-demo-header
         title="Image 图片"
         desc="用于展示效果，主要为上下左右居中裁切、拉伸、平铺等方式。"
-        notice="渲染框架支持情况：Skyline、WebView"
       />
       <t-demo title="01 组件类型">
         <baseComp />
@@ -23,12 +22,10 @@
 </template>
 
 <script lang="ts">
-import tImage from 'tdesign-uniapp/image/image';
-import baseComp from './base';
-import status from './status';
+import baseComp from './base/index.vue';
+import status from './status/index.vue';
 export default {
   components: {
-    tImage,
     baseComp,
     status,
   },
