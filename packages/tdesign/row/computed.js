@@ -1,7 +1,7 @@
 import utils from '../common/utils.wxs';
 
 export function getRowStyles(gutter, style, customStyle) {
-  var _style = '';
+  let _style = '';
   if (gutter) {
     _style = utils._style({
       'margin-right': utils.addUnit(-gutter / 2),
@@ -9,6 +9,6 @@ export function getRowStyles(gutter, style, customStyle) {
     });
   }
 
-  return utils._style([style, customStyle]) + _style;
+  return utils._style([style, customStyle, _style]);
 }
 

@@ -8,7 +8,6 @@
       <t-demo-header
         title="Layout 布局"
         desc="以规则的网格阵列来指导和规范页面中的版面布局以及信息分布，提高界面内布局的一致性，节约成本。"
-        notice="渲染框架支持情况：Skyline、WebView"
       />
       <t-demo
         title="01 组件类型"

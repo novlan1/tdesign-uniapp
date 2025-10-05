@@ -1,50 +1,46 @@
 <template>
   <view
-    :class="'class ' + tClass + ' ' + _.cls(classPrefix, [span]) + ' ' + (offset ? classPrefix + '--offset-' + offset : '')"
+    :class="[
+      'class',
+      tClass,
+      _.cls(classPrefix, [span]),
+      (offset ? classPrefix + '--offset-' + offset : '')
+    ]"
     :style="getColStyles(gutter, style, customStyle)"
   >
     <slot />
   </view>
 </template>
 <script>
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import _ from '../common/utils.wxs';
-import { getColStyles } from './col.wxs';
-import { initTDesign } from '../common/runtime';
+import { getColStyles } from './computed.js';
+import { ChildrenMixin, RELATION_MAP } from '../common/relation';
 
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-col`;
-let Col = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`];
-    this.properties = {
-      ...props,
-      tClass: {
-        type: String,
-        value: '',
-      },
-    };
-    this.setData({
+
+
+export default uniComponent({
+  name,
+  mixins: [ChildrenMixin(RELATION_MAP.Col)],
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
-    });
-    this._ = _;
-    this.getColStyles = getColStyles;
-    this.relations = {
-      '../row/row': {
-        type: 'parent',
-      },
+      _,
+      gutter: '',
     };
-  }
-};
-Col = initTDesign(__decorate([wxComponent()], Col));
-export default Col;
+  },
+  methods: {
+    getColStyles,
+  },
+});
+
 </script>
 <style>
 @import './col.css';

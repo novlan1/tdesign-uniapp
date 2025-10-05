@@ -1,9 +1,15 @@
 const props = {
-    offset: {
-        type: null
-    },
-    span: {
-        type: null
-    }
+  offset: {
+    type: [String, Number],
+    default: '',
+  },
+  span: {
+    type: [String, Number],
+    default: '',
+  },
+  tClass: {
+    type: String,
+    default: '',
+  },
 };
 export default props;

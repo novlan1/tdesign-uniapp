@@ -1,6 +1,7 @@
 const props = {
-    gutter: {
-        type: null
-    }
+  gutter: {
+    type: [String, Number],
+    default: '',
+  },
 };
 export default props;

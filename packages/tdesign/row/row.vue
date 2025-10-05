@@ -7,72 +7,52 @@
   </view>
 </template>
 <script>
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import _ from '../common/utils.wxs';
-import { getRowStyles } from './row.wxs';
-import { initTDesign } from '../common/runtime';
+import { getRowStyles } from './computed.js';
+import { ParentMixin, RELATION_MAP } from '../common/relation';
 
-const {
-  prefix: prefix,
-} = config;
-let Row = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [];
-    this.properties = props;
-    this.setData({
+const name = `${prefix}-row`;
+
+
+export default uniComponent({
+  name,
+  mixins: [ParentMixin(RELATION_MAP.Col, this)],
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
-    });
-    this._ = _;
-    this.getRowStyles = getRowStyles;
-    this.watch = {
-      gutter: {
-        handler() {
-          this.setGutter();
-        },
-        immediate: true,
-      },
+      _,
     };
-    this.relations = {
-      '../col/col': {
-        type: 'child',
-        linked(t) {
-          const {
-            gutter: o,
-          } = this;
-          if (o) {
-            t.setData({
-              gutter: o,
-            });
-          }
-        },
-      },
-    };
-    this.observers = {
-      gutter() {
+  },
+  watch: {
+    gutter: {
+      handler() {
         this.setGutter();
       },
-    };
-    this.methods = {
-      setGutter() {
-        const {
-          gutter: t,
-        } = this;
-        // TODO: children undefined check
-        this.children?.forEach((o) => {
-          o.setData({
-            gutter: t,
-          });
-        });
-      },
-    };
-  }
-};
-Row = initTDesign(__decorate([wxComponent()], Row));
-export default Row;
+      immediate: true,
+    },
+  },
+  methods: {
+    getRowStyles,
+    innerAfterLinked() {
+      this.setGutter();
+    },
+    setGutter() {
+      const {
+        gutter,
+      } = this;
+      this.children?.forEach((o) => {
+        o.gutter = gutter;
+      });
+    },
+  },
+});
+
 </script>
 <style>
 @import './row.css';

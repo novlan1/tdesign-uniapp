@@ -1,4 +1,4 @@
-import { toCamel } from '../utils'
+import { toCamel } from '../utils';
 
 const RELATION_MAP = {
   CollapsePanel: 'Collapse',
@@ -15,13 +15,13 @@ const RELATION_MAP = {
   Cell: 'CellGroup',
   Avatar: 'AvatarGroup',
   PickerItem: 'Picker',
-  
+
   IndexesAnchor: 'Indexes',
   SwiperNav: 'Swiper',
 
   Col: 'Row',
   BackTop: 'PullDownRefresh',
-}
+};
 
 
 export function capitalize(str) {
@@ -31,35 +31,35 @@ export function capitalize(str) {
 
 export function parseRelation(info, options) {
   if (!info.relations) {
-    return {}
+    return {};
   }
   const { relations } = info;
-  const key = Object.keys(relations)[0]
+  const key = Object.keys(relations)[0];
   if (!key) {
-    return {}
+    return {};
   }
   const isChild = [
     'descendant',
-    'child'
-  ].includes(relations[key].type)
+    'child',
+  ].includes(relations[key].type);
 
   const parentName = key.split('/')[key.split('/').length - 1];
-  const parsedParentName = capitalize(toCamel(parentName))
+  const parsedParentName = capitalize(toCamel(parentName));
 
-  
-  let mixins = []
+
+  const mixins = [];
   if (isChild) {
     mixins.push(getParentMixin(RELATION_MAP[parsedParentName]));
   } else {
     mixins.push(getChildMixin(parsedParentName, {
       ...(options || {}),
       relationCallbacks: info.relationCallbacks,
-    },))
+    }));
   }
 
 
   if (info.mixins) {
-    info.mixins.push(...mixins)
+    info.mixins.push(...mixins);
   } else {
     info.mixins = mixins;
   }
@@ -70,7 +70,7 @@ export function parseRelation(info, options) {
 function getChildMixin(parent, options = {}) {
   const { indexKey = 'index', relationCallbacks } = options.indexKey || 'index';
 
-  
+
   return {
     inject: {
       // #ifndef MP-TOUTIAO
@@ -126,9 +126,9 @@ function getChildMixin(parent, options = {}) {
       // #endif
       this.relationParentName = parent;
 
-      
+
       if (typeof relationCallbacks?.mounted === 'function') {
-        relationCallbacks?.mounted.call(this)
+        relationCallbacks?.mounted.call(this);
       }
     },
 
@@ -152,19 +152,18 @@ function getChildMixin(parent, options = {}) {
         const parentComponentName = `Press${parent.replace(/^\w/, a => a.toUpperCase())}`;
         this[parent] = getParent.call(this, parentComponentName);
         // #endif
-        
-        
+
+
         console.log('[bindRelation] parent', this[parent]);
         if (!this[parent] || (this[parent].children && this[parent].children.indexOf(this) !== -1)) {
           return;
         }
-        
+
         const children = [...(this[parent].children || []), this];
         console.log('[bindRelation] children', children);
 
-        
+
         this[parent].children = children;
-        
       },
       onBeforeMount() {
         const that = this;
@@ -180,12 +179,11 @@ function getChildMixin(parent, options = {}) {
 
 
 function getParentMixin(parentName) {
-  
   return {
     provide() {
       return {
         [parentName]: this,
-      }
-    }
-  }
+      };
+    },
+  };
 }
