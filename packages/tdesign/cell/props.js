@@ -1,48 +1,50 @@
 const props = {
-    align: {
-        type: String,
-        value: 'middle'
-    },
-    arrow: {
-        type: [Boolean, Object],
-        value: false
-    },
-    bordered: {
-        type: Boolean,
-        value: true
-    },
-    description: {
-        type: String
-    },
-    hover: {
-        type: Boolean
-    },
-    image: {
-        type: String
-    },
-    jumpType: {
-        type: String,
-        value: 'navigateTo'
-    },
-    leftIcon: {
-        type: null
-    },
-    note: {
-        type: String
-    },
-    required: {
-        type: Boolean,
-        value: false
-    },
-    rightIcon: {
-        type: null
-    },
-    title: {
-        type: String
-    },
-    url: {
-        type: String,
-        value: ''
-    }
+  align: {
+    type: String,
+    default: 'middle',
+  },
+  arrow: {
+    type: [Boolean, Object],
+    default: false,
+  },
+  bordered: {
+    type: Boolean,
+    default: true,
+  },
+  description: {
+    type: String,
+  },
+  hover: {
+    type: Boolean,
+  },
+  image: {
+    type: String,
+  },
+  jumpType: {
+    type: String,
+    default: 'navigateTo',
+  },
+  leftIcon: {
+    type: [String, Object],
+    default: '',
+  },
+  note: {
+    type: String,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  rightIcon: {
+    type: [String, Object],
+    default: '',
+  },
+  title: {
+    type: String,
+  },
+  url: {
+    type: String,
+    default: '',
+  },
 };
 export default props;

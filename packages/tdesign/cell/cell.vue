@@ -1,28 +1,32 @@
 <template>
   <view
     :style="_._style([style, customStyle])"
-    :class="'class ' + prefix + '-class ' + _.cls(classPrefix, [['borderless', !bordered || isLastChild]])"
+    :class="[
+      'class ' ,
+      tClass,
+      _.cls(classPrefix, [['borderless', !bordered || isLastChild]])
+    ]"
     :hover-class="hover ? classPrefix + '--hover' : ''"
     hover-stay-time="70"
     :aria-role="ariaRole || (arrow ? 'button' : '')"
     :aria-label="ariaLabel"
     @tap="onClick"
   >
-    <view :class="classPrefix + '__left ' + prefix + '-class-left'">
+    <view :class="classPrefix + '__left ' + tClassLeft">
       <!-- parse <template v-if="_leftIcon" is="icon" :data="tClass: classPrefix + '__left-icon ' + prefix + '-class-left-icon', ..._leftIcon"/> -->
       <block
         v-if="_leftIcon"
         name="icon"
       >
         <t-icon
-          :style="style || ''"
-          :t-class="classPrefix + '__left-icon ' + prefix + '-class-left-icon'"
-          :name="'close' || ''"
-          :size="22 || ''"
-          :color="color || ''"
-          :aria-hidden="true || ''"
-          :aria-label="'清除' || ''"
-          :aria-role="'button' || ''"
+          :custom-style="_leftIcon.style || ''"
+          :t-class="classPrefix + '__left-icon ' + tClassLeftIcon"
+          :name="_leftIcon.name"
+          :size="_leftIcon.size"
+          :color="_leftIcon.color"
+          :aria-hidden="true"
+          :aria-label="_leftIcon.ariaLabel"
+          :aria-role="_leftIcon.ariaRole"
           @click="'handleClose' || ''"
         />
       </block>
@@ -30,13 +34,18 @@
       <t-image
         v-if="image"
         shape="round"
-        :t-class="classPrefix + '__left-image ' + prefix + '-class-image'"
+        :t-class="classPrefix + '__left-image ' + tClassImage"
         :src="image"
       />
       <slot name="image" />
     </view>
-    <view :class="classPrefix + '__title ' + prefix + '-class-center'">
-      <view :class="classPrefix + '__title-text ' + prefix + '-class-title'">
+    <view :class="classPrefix + '__title ' + tClassCenter">
+      <view
+        :class="[
+          classPrefix + '__title-text ',
+          tClassTitle
+        ]"
+      >
         <block v-if="title">
           {{ title }}
         </block>
@@ -50,7 +59,12 @@
           </text>
         </block>
       </view>
-      <view :class="classPrefix + '__description ' + prefix + '-class-description'">
+      <view
+        :class="[
+          classPrefix + '__description ',
+          tClassDescription
+        ]"
+      >
         <view
           v-if="description"
           :class="classPrefix + '__description-text'"
@@ -60,24 +74,34 @@
         <slot name="description" />
       </view>
     </view>
-    <view :class="classPrefix + '__note ' + prefix + '-class-note'">
+    <view
+      :class="[
+        classPrefix + '__note ',
+        tClassNote
+      ]"
+    >
       <text v-if="note">
         {{ note }}
       </text>
       <slot name="note" />
     </view>
-    <view :class="_.cls(classPrefix + '__right', [align]) + ' ' + prefix + '-class-right'">
+    <view
+      :class="[
+        _.cls(classPrefix + '__right', [align]),
+        tClassRight
+      ]"
+    >
       <!-- parse <template v-if="_arrow" is="icon" :data="tClass: classPrefix + '__right-icon ' + prefix + '-class-right-icon', ..._arrow"/> -->
       <t-icon
-        v-if="true"
-        :style="style || ''"
-        :t-class=" classPrefix + '__right-icon ' + prefix + '-class-right-icon'"
+        v-if="_arrow"
+        :custom-style="_arrow.style || ''"
+        :t-class=" classPrefix + '__right-icon ' + tClassRightIcon"
         :name="_arrow.name || ''"
-        :size="22 || ''"
-        :color="color || ''"
-        :aria-hidden="true || ''"
-        :aria-label="'清除' || ''"
-        :aria-role="'button' || ''"
+        :size="_arrow.size"
+        :color="_arrow.color"
+        :aria-hidden="true"
+        :aria-label="_arrow.ariaLabel"
+        :aria-role="_arrow.ariaRole"
         @click="'handleClose' || ''"
       />
       <block v-else>
@@ -87,14 +111,14 @@
           name="icon"
         >
           <t-icon
-            :style="style || ''"
-            :t-class=" classPrefix + '__right-icon ' + prefix + '-class-right-icon'"
-            :name="'close' || ''"
-            :size="22 || ''"
-            :color="color || ''"
-            :aria-hidden="true || ''"
-            :aria-label="'清除' || ''"
-            :aria-role="'button' || ''"
+            :custom-style="_rightIcon.style || ''"
+            :t-class=" classPrefix + '__right-icon ' + tClassRightIcon"
+            :name="_rightIcon.name"
+            :size="_rightIcon.size"
+            :color="_rightIcon.color || ''"
+            :aria-hidden="true"
+            :aria-label="_rightIcon.ariaLabel"
+            :aria-role="_rightIcon.ariaRole"
             @click="'handleClose' || ''"
           />
         </block>
@@ -106,81 +130,136 @@
 <script>
 import tIcon from '../icon/icon';
 import tImage from '../image/image';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import { calcIcon } from '../common/utils';
-import { initTDesign } from '../common/runtime';
 import _ from '../common/utils.wxs';
 
-const {
-  prefix: prefix,
-} = config;
+import { ChildrenMixin, RELATION_MAP } from '../common/relation';
+
 const name = `${prefix}-cell`;
-let Cell = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-title`, `${prefix}-class-description`, `${prefix}-class-note`, `${prefix}-class-hover`, `${prefix}-class-image`, `${prefix}-class-left`, `${prefix}-class-left-icon`, `${prefix}-class-center`, `${prefix}-class-right`, `${prefix}-class-right-icon`];
-    // this.relations = {
-    //   "../cell-group/cell-group": {
-    //     type: "parent"
-    //   }
-    // };
-    this.components = {
-      tIcon,
-      tImage,
-    };
-    this.options = {
-      multipleSlots: true,
-    };
-    this.properties = props;
-    this._ = _;
-    this.setData({
+
+
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-title`,
+    `${prefix}-class-description`,
+    `${prefix}-class-note`,
+    `${prefix}-class-hover`,
+    `${prefix}-class-image`,
+    `${prefix}-class-left`,
+    `${prefix}-class-left-icon`,
+    `${prefix}-class-center`,
+    `${prefix}-class-right`,
+    `${prefix}-class-right-icon`,
+  ],
+  mixins: [ChildrenMixin(RELATION_MAP.Cell)],
+  components: {
+    tIcon,
+    tImage,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       _arrow: {},
       isLastChild: false,
-    });
-    this.observers = {
-      leftIcon(e) {
+      _,
+    };
+  },
+  watch: {
+    leftIcon: {
+      handler(e) {
         this.setIcon('_leftIcon', e, '');
       },
-      rightIcon(e) {
+      immediate: true,
+    },
+    rightIcon: {
+      handler(e) {
         this.setIcon('_rightIcon', e, '');
       },
-      arrow(e) {
+      immediate: true,
+    },
+    arrow: {
+      handler(e) {
         this.setIcon('_arrow', e, 'chevron-right');
       },
-    };
-    this.methods = {
-      setIcon(e, t, s) {
-        console.log('this.arrow', this.arrow);
-        console.log('setIcon', e, t, s, calcIcon(t, s));
-        this.setData({
-          [e]: calcIcon(t, s),
+      immediate: true,
+    },
+  },
+  methods: {
+    setIcon(e, t, s) {
+      console.log('this.arrow', this.arrow);
+      console.log('setIcon', e, t, s, calcIcon(t, s));
+      this[e] = calcIcon(t, s);
+    },
+    onClick(e) {
+      this.$emit('click', {
+        detail: e.detail,
+      });
+      this.jumpLink();
+    },
+    jumpLink(e = 'url', t = 'jumpType') {
+      const s = this[e];
+      const i = this[t];
+      if (s) {
+        uni[i]({
+          url: s,
         });
-      },
-      onClick(e) {
-        this.$emit('click', {
-          detail: e.detail,
-        });
-        this.jumpLink();
-      },
-      jumpLink(e = 'url', t = 'jumpType') {
-        const s = this[e];
-        const i = this[t];
-        if (s) {
-          uni[i]({
-            url: s,
-          });
-        }
-      },
-    };
-  }
-};
-Cell = initTDesign(__decorate([wxComponent()], Cell));
-export default Cell;
+      }
+    },
+  },
+});
+
+
+// let Cell = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-title`, `${prefix}-class-description`, `${prefix}-class-note`, `${prefix}-class-hover`, `${prefix}-class-image`, `${prefix}-class-left`, `${prefix}-class-left-icon`, `${prefix}-class-center`, `${prefix}-class-right`, `${prefix}-class-right-icon`];
+//     // this.relations = {
+//     //   "../cell-group/cell-group": {
+//     //     type: "parent"
+//     //   }
+//     // };
+//     this.components = {
+//       tIcon,
+//       tImage,
+//     };
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     this.properties = props;
+//     this._ = _;
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//       _arrow: {},
+//       isLastChild: false,
+//     });
+//     this.observers = {
+//       leftIcon(e) {
+//         this.setIcon('_leftIcon', e, '');
+//       },
+//       rightIcon(e) {
+//         this.setIcon('_rightIcon', e, '');
+//       },
+//       arrow(e) {
+//         this.setIcon('_arrow', e, 'chevron-right');
+//       },
+//     };
+//     this.methods = {
+
+//     };
+//   }
+// };
+// Cell = initTDesign(__decorate([wxComponent()], Cell));
+// export default Cell;
 </script>
 <style>
 @import './cell.css';

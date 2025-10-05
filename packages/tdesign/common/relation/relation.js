@@ -188,6 +188,7 @@ export function ChildrenMixin(parent, options = {}) {
         const that = this;
         if (that[parent]) {
           that[parent].children = that[parent].children.filter(item => item !== that);
+          this[parent]?.innerAfterUnLinked?.(this);
 
           that?.destroyCallback?.();
         }

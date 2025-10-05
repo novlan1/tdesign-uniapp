@@ -8,7 +8,6 @@
       <t-demo-header
         title="Cell 单元格"
         desc="用于各个类别行的信息展示。"
-        notice="渲染框架支持情况：Skyline、WebView"
       />
       <t-demo
         title="01 组件类型"
@@ -30,13 +29,13 @@
 </template>
 
 <script lang="ts">
-import baseComp from './base';
-// import multiple from './multiple';
-import theme from './theme';
+import baseComp from './base/index.vue';
+import multiple from './multiple/index.vue';
+import theme from './theme/index.vue';
 export default {
   components: {
     baseComp,
-    // multiple,
+    multiple,
     theme,
   },
   data() {

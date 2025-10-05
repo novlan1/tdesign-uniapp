@@ -1,40 +1,111 @@
 <template>
-    <view>
-        <t-cell title="单行标题" description="一段很长很长的内容文字" hover arrow />
-        <t-cell title="单行标题" description="一段很长很长的内容文字" hover arrow required />
-        <t-cell title="单行标题" description="一段很长很长的内容文字" hover arrow>
-            <t-badge :count="16" slot="note" />
-        </t-cell>
-        <t-cell title="单行标题" description="一段很长很长的内容文字" hover>
-            <t-switch :defaultValue="true" slot="note" />
-        </t-cell>
-        <t-cell title="单行标题" description="一段很长很长的内容文字" note="辅助信息" hover arrow />
-        <t-cell title="单行标题" description="一段很长很长的内容文字" leftIcon="app" hover arrow />
-        <t-cell title="单行标题" description="一段很长很长的内容文字，长文本自动换行，该选项的描述是一段很长的内容" hover />
-        <t-cell title="单行标题" description="一段很长很长很长的内容文字" hover arrow>
-            <view class="avatar" slot="left-icon">
-                <open-data type="userAvatarUrl" />
-            </view>
-        </t-cell>
-        <t-cell title="单行标题" description="一段很长很长的内容文字" align="top" image="https://tdesign.gtimg.com/mobile/demos/avatar1.png" hover :bordered="false" />
-    </view>
+  <view>
+    <t-cell
+      title="单行标题"
+      description="一段很长很长的内容文字"
+      hover
+      arrow
+    />
+    <t-cell
+      title="单行标题"
+      description="一段很长很长的内容文字"
+      hover
+      arrow
+      required
+    />
+    <t-cell
+      title="单行标题"
+      description="一段很长很长的内容文字"
+      hover
+      arrow
+    >
+      <template
+        #note
+      >
+        <t-badge
+          :count="16"
+        />
+      </template>
+    </t-cell>
+    <t-cell
+      title="单行标题"
+      description="一段很长很长的内容文字"
+      hover
+    >
+      <template
+        #note
+      >
+        <t-switch
+          :default-value="true"
+        />
+      </template>
+    </t-cell>
+    <t-cell
+      title="单行标题"
+      description="一段很长很长的内容文字"
+      note="辅助信息"
+      hover
+      arrow
+    />
+    <t-cell
+      title="单行标题"
+      description="一段很长很长的内容文字"
+      left-icon="app"
+      hover
+      arrow
+    />
+    <t-cell
+      title="单行标题"
+      description="一段很长很长的内容文字，长文本自动换行，该选项的描述是一段很长的内容"
+      hover
+    />
+    <t-cell
+      title="单行标题"
+      description="一段很长很长很长的内容文字"
+      hover
+      arrow
+    >
+      <template
+        #left-icon
+      >
+        <view
+          class="avatar"
+        >
+          <!-- #ifndef H5 -->
+          <open-data type="userAvatarUrl" />
+        <!-- #endif -->
+        </view>
+      </template>
+    </t-cell>
+    <t-cell
+      title="单行标题"
+      description="一段很长很长的内容文字"
+      align="top"
+      image="https://tdesign.gtimg.com/mobile/demos/avatar1.png"
+      hover
+      :bordered="false"
+    />
+  </view>
 </template>
 
 <script>
 import tCell from 'tdesign-uniapp/cell/cell';
-import tIcon from 'tdesign-uniapp/icon/icon';
-import tSwitch from 'tdesign-uniapp/switch/switch';
+import tBadge from 'tdesign-uniapp/badge/badge';
+// import tIcon from 'tdesign-uniapp/icon/icon';
+// TODO: after add switch
+// import tSwitch from 'tdesign-uniapp/switch/switch';
 export default {
-    components: {
-        tCell,
-        tIcon,
-        tSwitch
-    },
-    data() {
-        return {};
-    },
-    methods: {},
-    created: function () {}
+  components: {
+    tCell,
+    tBadge,
+    // tIcon,
+    // tSwitch,
+  },
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {},
 };
 </script>
 <style>

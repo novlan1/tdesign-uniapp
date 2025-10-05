@@ -1,15 +1,15 @@
 const props = {
-    bordered: {
-        type: Boolean,
-        value: false
-    },
-    theme: {
-        type: String,
-        value: 'default'
-    },
-    title: {
-        type: String,
-        value: ''
-    }
+  bordered: {
+    type: Boolean,
+    default: false,
+  },
+  theme: {
+    type: String,
+    default: 'default',
+  },
+  title: {
+    type: String,
+    default: '',
+  },
 };
 export default props;

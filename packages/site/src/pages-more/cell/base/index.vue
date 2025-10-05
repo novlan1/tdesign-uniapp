@@ -17,19 +17,25 @@
       arrow
       aria-label="单行标题，有16条消息"
     >
-      <t-badge
-        slot="note"
-        :count="16"
-      />
+      <template
+        #note
+      >
+        <t-badge
+          :count="16"
+        />
+      </template>
     </t-cell>
     <t-cell
       title="单行标题"
       hover
     >
-      <t-switch
-        slot="note"
-        :default-value="true"
-      />
+      <template
+        #note
+      >
+        <t-switch
+          :default-value="true"
+        />
+      </template>
     </t-cell>
     <t-cell
       title="单行标题"
@@ -49,15 +55,15 @@
 
 <script>
 import tCell from 'tdesign-uniapp/cell/cell';
-// import tBadge from 'tdesign-uniapp/badge/badge';
+import tBadge from 'tdesign-uniapp/badge/badge';
 // import tSwitch from 'tdesign-uniapp/switch/switch';
-import tIcon from 'tdesign-uniapp/icon/icon';
+// import tIcon from 'tdesign-uniapp/icon/icon';
 export default {
   components: {
     tCell,
-    // tBadge,
+    tBadge,
     // tSwitch,
-    tIcon,
+    // tIcon,
   },
   data() {
     return {};

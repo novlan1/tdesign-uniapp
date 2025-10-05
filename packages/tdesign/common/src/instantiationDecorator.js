@@ -1,6 +1,7 @@
 // import { toObject } from './flatTool';
 import { isPlainObject } from '../validator';
 import { canUseVirtualHost } from '../version';
+import { toCamel } from '../utils';
 
 const RawLifeCycles = ['Created', 'Attached', 'Ready', 'Moved', 'Detached', 'Error'];
 const NativeLifeCycles = RawLifeCycles.map(e => e.toLowerCase());
@@ -174,9 +175,32 @@ export const wxComponent = function () {
 
 export const uniComponent = function (info) {
   info.options = info.options || {};
+
+  info.props = {
+    ...getExternalClasses(info),
+    ...(info.props || {}),
+  };
+
   if (canUseVirtualHost()) {
     info.options.virtualHost = true;
   }
   const o = toComponent(info);
   return o;
 };
+
+
+function getExternalClasses(info) {
+  if (!info.externalClasses) {
+    return {};
+  }
+  const { externalClasses } = info;
+  const list = Array.isArray(externalClasses) ? externalClasses : [externalClasses];
+
+  return list.reduce((acc, item) => ({
+    ...acc,
+    [toCamel(item)]: {
+      type: String,
+      default: '',
+    },
+  }), {});
+}
