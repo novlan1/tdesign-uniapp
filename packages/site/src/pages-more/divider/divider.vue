@@ -9,7 +9,6 @@
       <t-demo-header
         title="Divider 分割线"
         desc="用于分割、组织、细化有一定逻辑的组织元素内容和页面结构。"
-        notice="渲染框架支持情况：Skyline、WebView"
       />
       <t-demo
         title="01 组件类型"
@@ -31,6 +30,7 @@
 
 import BaseDemo from './base/index.vue';
 import theme from './theme/index.vue';
+
 export default {
   components: {
     BaseDemo,

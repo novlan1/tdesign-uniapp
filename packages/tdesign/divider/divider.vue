@@ -1,10 +1,19 @@
 <template>
   <view :class="layout === 'vertical' ? classPrefix + '--vertical-center' : ''">
     <view
-      :class="classPrefix + ' class ' + prefix + '-class ' + classPrefix + '--' + layout + ' ' + classPrefix + '--' + align + ' ' + (dashed ? classPrefix + '--dashed' : '')"
+      :class="[
+        classPrefix + ' class ',
+        tClass,
+        classPrefix + '--' + layout + ' ' + classPrefix + '--' + align + ' ' + (dashed ? classPrefix + '--dashed' : '')
+      ]"
       :style="_._style([dividerStyle, style, customStyle])"
     >
-      <view :class="prefix + '-class-content ' + classPrefix + '__content'">
+      <view
+        :class="[
+          tClassContent,
+          classPrefix + '__content'
+        ]"
+      >
         <view v-if="content">
           {{ content }}
         </view>
@@ -17,51 +26,46 @@
   </view>
 </template>
 <script>
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
 
 
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-divider`;
-let Divider = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`];
-    this.options = {
-      multipleSlots: true,
-    };
-    this._ = _;
-    this.properties = props;
-    this.setData({
+
+
+export default uniComponent({
+  name,
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
-    });
-    this.observers = {
-      lineColor() {
+      _,
+      dividerStyle: '',
+    };
+  },
+  watch: {
+    lineColor: {
+      handler() {
         this.setStyle();
       },
-    };
-    this.methods = {
-      setStyle() {
-        const {
-          lineColor: e,
-        } = this;
-        const o = `${e ? `border-color: ${e};` : ''}`;
-        this.setData({
-          dividerStyle: o,
-        });
-      },
-    };
-  }
-};
-Divider = initTDesign(__decorate([wxComponent()], Divider));
-export default Divider;
+      immediateU: true,
+    },
+  },
+  methods: {
+    setStyle() {
+      const {
+        lineColor,
+      } = this;
+      const dividerStyle = `${lineColor ? `border-color: ${lineColor};` : ''}`;
+      this.dividerStyle = dividerStyle;
+    },
+  },
+});
 </script>
 <style>
 @import './divider.css';
