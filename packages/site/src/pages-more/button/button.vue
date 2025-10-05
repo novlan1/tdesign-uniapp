@@ -9,7 +9,6 @@
       <t-demo-header
         title="Button 按钮"
         desc="用于开启一个闭环的操作任务，如“删除”对象、“购买”商品等。"
-        notice="渲染框架支持情况：Skyline、WebView"
       />
       <t-demo
         title="01 组件类型"
@@ -62,7 +61,7 @@
 <script lang="ts">
 import baseComp from './base/index.vue';
 import size from './size/index.vue';
-// import iconBtn from './icon-btn';
+import iconBtn from './icon-btn/index.vue';
 import groupBtn from './group-btn/index.vue';
 import blockBtn from './block-btn/index.vue';
 import ghostBtn from './ghost-btn/index.vue';
@@ -73,7 +72,7 @@ export default {
   components: {
     baseComp,
     size,
-    // iconBtn,
+    iconBtn,
     groupBtn,
     blockBtn,
     ghostBtn,

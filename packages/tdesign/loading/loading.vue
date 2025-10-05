@@ -6,11 +6,18 @@
       show ? '' : 'display: none',
       inheritColor ? 'color: inherit' : ''
     ])"
-    :class="extraClass + ' ' + prefix + '-class ' + classPrefix + ' ' + (classPrefix + '--' + layout) + ' ' + (fullscreen ? classPrefix + '--fullscreen' : '')"
+    :class="[
+      extraClass,
+      tClass,
+      classPrefix + ' ' + (classPrefix + '--' + layout) + ' ' + (fullscreen ? classPrefix + '--fullscreen' : '')
+    ]"
   >
     <view
       v-if="indicator"
-      :class="prefix + '-class-indicator ' + classPrefix + '__spinner ' + classPrefix + '__spinner--' + theme + ' ' + (reverse ? 'reverse' : '')"
+      :class="[
+        tClassIndicator,
+        classPrefix + '__spinner ' + classPrefix + '__spinner--' + theme + ' ' + (reverse ? 'reverse' : '')
+      ]"
       :style="
         'width: ' +
           _.addUnit(size) +
@@ -75,7 +82,7 @@
       <slot name="indicator" />
     </view>
     <view
-      :class="_.cls(classPrefix + '__text', [layout]) + ' ' + prefix + '-class-text'"
+      :class="[_.cls(classPrefix + '__text', [layout]), tClassText]"
       :aria-hidden="indicator"
       :aria-label="ariaLabel || text"
     >

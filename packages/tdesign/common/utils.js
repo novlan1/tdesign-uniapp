@@ -5,224 +5,221 @@ export const systemInfo = getWindowInfo();
 export const appBaseInfo = getAppBaseInfo();
 export const deviceInfo = getDeviceInfo();
 export const debounce = function (e, t = 500) {
-    let n;
-    return function (...o) {
-        if (n) {
-            clearTimeout(n);
-        }
-        n = setTimeout(() => {
-            e.apply(this, o);
-        }, t);
-    };
+  let n;
+  return function (...o) {
+    if (n) {
+      clearTimeout(n);
+    }
+    n = setTimeout(() => {
+      e.apply(this, o);
+    }, t);
+  };
 };
 export const throttle = (e, t = 100, n = null) => {
-    let o = 0;
-    let r = null;
-    n ||
-        (n = {
-            leading: true
+  let o = 0;
+  let r = null;
+  n
+        || (n = {
+          leading: true,
         });
-    return function (...c) {
-        const s = Date.now();
-        o || n.leading || (o = s);
-        const that = this;
-        if (t - (s - o) <= 0) {
-            if (r) {
-                clearTimeout(r), (r = null);
-            }
-            o = s;
-            e.apply(that, c);
-        }
-    };
+  return function (...c) {
+    const s = Date.now();
+    o || n.leading || (o = s);
+    const that = this;
+    if (t - (s - o) <= 0) {
+      if (r) {
+        clearTimeout(r), (r = null);
+      }
+      o = s;
+      e.apply(that, c);
+    }
+  };
 };
 export const classNames = function (...e) {
-    const t = {}.hasOwnProperty;
-    const n = [];
-    e.forEach((e) => {
-        if (!e) {
-            return;
+  const t = {}.hasOwnProperty;
+  const n = [];
+  e.forEach((e) => {
+    if (!e) {
+      return;
+    }
+    const o = typeof e;
+    if ('string' === o || 'number' === o) n.push(e);
+    else if (Array.isArray(e) && e.length) {
+      const t = classNames(...e);
+      if (t) {
+        n.push(t);
+      }
+    } else if ('object' === o) {
+      for (const o in e) {
+        if (t.call(e, o) && e[o]) {
+          n.push(o);
         }
-        const o = typeof e;
-        if ('string' === o || 'number' === o) n.push(e);
-        else if (Array.isArray(e) && e.length) {
-            const t = classNames(...e);
-            if (t) {
-                n.push(t);
-            }
-        } else if ('object' === o) {
-            for (const o in e) {
-                if (t.call(e, o) && e[o]) {
-                    n.push(o);
-                }
-            }
-        }
-    });
-    return n.join(' ');
+      }
+    }
+  });
+  return n.join(' ');
 };
 export const styles = function (e) {
-    return Object.keys(e)
-        .map((t) => `${t}: ${e[t]}`)
-        .join('; ');
+  return Object.keys(e)
+    .map(t => `${t}: ${e[t]}`)
+    .join('; ');
 };
 export const getAnimationFrame = function (e, t) {
-    console.log('getAnimationFrame', {e, t});
-    return uni
-        .createSelectorQuery()
-        .in(e)
-        .selectViewport()
-        .boundingClientRect()
-        .exec(() => {
-            t();
-        });
+  console.log('getAnimationFrame', { e, t });
+  return uni
+    .createSelectorQuery()
+    .in(e)
+    .selectViewport()
+    .boundingClientRect()
+    .exec(() => {
+      t();
+    });
 };
 export const getRect = function (e, t, n = false) {
-    return new Promise((o, r) => {
-        uni.createSelectorQuery().in(e)[n ? 'selectAll' : 'select'](t)
-            .boundingClientRect((e) => {
-                e ? o(e) : r(e);
-            })
-            .exec();
-    });
+  return new Promise((o, r) => {
+    uni.createSelectorQuery().in(e)
+      [n ? 'selectAll' : 'select'](t)
+      .boundingClientRect((e) => {
+        e ? o(e) : r(e);
+      })
+      .exec();
+  });
 };
-export const getTreeDepth = (e, t) =>
-    e.reduce(
-        (e, n) => (n[null != t ? t : 'children'] && n[null != t ? t : 'children'].length > 0 ? Math.max(e, getTreeDepth(n[null != t ? t : 'children'], t) + 1) : Math.max(e, 1)),
-        0
-    );
+export const getTreeDepth = (e, t) => e.reduce(
+  (e, n) => (n[null != t ? t : 'children'] && n[null != t ? t : 'children'].length > 0 ? Math.max(e, getTreeDepth(n[null != t ? t : 'children'], t) + 1) : Math.max(e, 1)),
+  0,
+);
 export const isIOS = function () {
-    var e;
-    return !!((null === (e = null == deviceInfo ? void 0 : deviceInfo.system) || void 0 === e ? void 0 : e.toLowerCase().search('ios')) + 1);
+  let e;
+  return !!((null === (e = null == deviceInfo ? void 0 : deviceInfo.system) || void 0 === e ? void 0 : e.toLowerCase().search('ios')) + 1);
 };
 export const addUnit = function (e) {
-    if (isDef(e)) {
-        e = String(e);
-        return isNumber(e) ? `${e}px` : e;
-    }
+  if (isDef(e)) {
+    e = String(e);
+    return isNumber(e) ? `${e}px` : e;
+  }
 };
 export const getCharacterLength = (e, t, n) => {
-    const o = String(null != t ? t : '');
-    if (0 === o.length) {
+  const o = String(null != t ? t : '');
+  if (0 === o.length) {
+    return {
+      length: 0,
+      characters: '',
+    };
+  }
+  if ('maxcharacter' === e) {
+    let e = 0;
+    for (let t = 0; t < o.length; t += 1) {
+      let r = 0;
+      r = o.charCodeAt(t) > 127 || 94 === o.charCodeAt(t) ? 2 : 1;
+      if (e + r > n) {
         return {
-            length: 0,
-            characters: ''
+          length: e,
+          characters: o.slice(0, t),
         };
-    }
-    if ('maxcharacter' === e) {
-        let e = 0;
-        for (let t = 0; t < o.length; t += 1) {
-            let r = 0;
-            r = o.charCodeAt(t) > 127 || 94 === o.charCodeAt(t) ? 2 : 1;
-            if (e + r > n) {
-                return {
-                    length: e,
-                    characters: o.slice(0, t)
-                };
-            }
-            e += r;
-        }
-        return {
-            length: e,
-            characters: o
-        };
-    }
-    if ('maxlength' === e) {
-        const e = o.length > n ? n : o.length;
-        return {
-            length: e,
-            characters: o.slice(0, e)
-        };
+      }
+      e += r;
     }
     return {
-        length: o.length,
-        characters: o
+      length: e,
+      characters: o,
     };
+  }
+  if ('maxlength' === e) {
+    const e = o.length > n ? n : o.length;
+    return {
+      length: e,
+      characters: o.slice(0, e),
+    };
+  }
+  return {
+    length: o.length,
+    characters: o,
+  };
 };
-export const chunk = (e, t) =>
-    Array.from(
-        {
-            length: Math.ceil(e.length / t)
-        },
-        (n, o) => e.slice(o * t, o * t + t)
-    );
+export const chunk = (e, t) => Array.from(
+  {
+    length: Math.ceil(e.length / t),
+  },
+  (n, o) => e.slice(o * t, o * t + t),
+);
 export const getInstance = function (e, t) {
-    if (!e) {
-        const t = getCurrentPages();
-        const n = t[t.length - 1];
-        e = n.$$basePage || n;
-    }
-    console.log('getInstance.e',{e,t})
-    const n = e ? e.$refs[t.slice(1)] : null;
-    return n || (console.warn('未找到组件,请检查selector是否正确'), null);
+  if (!e) {
+    const t = getCurrentPages();
+    const n = t[t.length - 1];
+    e = n.$$basePage || n;
+  }
+  console.log('getInstance.e', { e, t });
+  const n = e ? e.$refs[t.slice(1)] : null;
+  return n || (console.warn('未找到组件,请检查selector是否正确'), null);
 };
 export const unitConvert = (e) => {
-    var t;
-    return 'string' == typeof e
-        ? e.includes('rpx')
-            ? (parseInt(e, 10) * (null !== (t = null == systemInfo ? void 0 : systemInfo.screenWidth) && void 0 !== t ? t : 750)) / 750
-            : parseInt(e, 10)
-        : null != e
-        ? e
-        : 0;
+  let t;
+  return 'string' === typeof e
+    ? e.includes('rpx')
+      ? (parseInt(e, 10) * (null !== (t = null == systemInfo ? void 0 : systemInfo.screenWidth) && void 0 !== t ? t : 750)) / 750
+      : parseInt(e, 10)
+    : null != e
+      ? e
+      : 0;
 };
-export const setIcon = (e, t, n) =>
-    t
-        ? 'string' == typeof t
-            ? {
-                  [`${e}Name`]: t,
-                  [`${e}Data`]: {}
-              }
-            : 'object' == typeof t
-            ? {
-                  [`${e}Name`]: '',
-                  [`${e}Data`]: t
-              }
-            : {
-                  [`${e}Name`]: n,
-                  [`${e}Data`]: {}
-              }
-        : {
-              [`${e}Name`]: '',
-              [`${e}Data`]: {}
-          };
-export const toCamel = (e) => e.replace(/-(\w)/g, (e, t) => t.toUpperCase());
+export const setIcon = (e, t, n) => (t
+  ? 'string' === typeof t
+    ? {
+      [`${e}Name`]: t,
+      [`${e}Data`]: {},
+    }
+    : 'object' === typeof t
+      ? {
+        [`${e}Name`]: '',
+        [`${e}Data`]: t,
+      }
+      : {
+        [`${e}Name`]: n,
+        [`${e}Data`]: {},
+      }
+  : {
+    [`${e}Name`]: '',
+    [`${e}Data`]: {},
+  });
+export const toCamel = e => e.replace(/-(\w)/g, (e, t) => t.toUpperCase());
 export const getCurrentPage = function () {
-    const e = getCurrentPages();
-    return e[e.length - 1];
+  const e = getCurrentPages();
+  return e[e.length - 1];
 };
 export const uniqueFactory = (e) => {
-    let t = 0;
-    return () => {
-        const n = `${prefix}_${e}_${t}`;
-        t += 1;
-        return n;
-    };
+  let t = 0;
+  return () => {
+    const n = `${prefix}_${e}_${t}`;
+    t += 1;
+    return n;
+  };
 };
-export const calcIcon = (e, t) =>
-    e && ((isBoolean(e) && t) || isString(e))
-        ? {
-              name: isBoolean(e) ? t : e
-          }
-        : isObject(e)
-        ? e
-        : null;
+export const calcIcon = (e, t) => (e && ((isBoolean(e) && t) || isString(e))
+  ? {
+    name: isBoolean(e) ? t : e,
+  }
+  : isObject(e)
+    ? e
+    : 'null');
+
 export const isOverSize = (e, t) => {
-    var n;
-    if (!t) {
-        return false;
-    }
-    const o = 1000;
-    const r = {
-        B: 1,
-        KB: o,
-        MB: 1000000,
-        GB: 1000000000
-    };
-    return e > ('number' == typeof t ? t * o : (null == t ? void 0 : t.size) * r[null !== (n = null == t ? void 0 : t.unit) && void 0 !== n ? n : 'KB']);
+  let n;
+  if (!t) {
+    return false;
+  }
+  const o = 1000;
+  const r = {
+    B: 1,
+    KB: o,
+    MB: 1000000,
+    GB: 1000000000,
+  };
+  return e > ('number' === typeof t ? t * o : (null == t ? void 0 : t.size) * r[null !== (n = null == t ? void 0 : t.unit) && void 0 !== n ? n : 'KB']);
 };
-export const rpx2px = (e) => Math.floor((systemInfo.windowWidth * e) / 750);
-export const nextTick = () =>
-    new Promise((e) => {
-        this.$nextTick(() => {
-            e();
-        });
-    });
+export const rpx2px = e => Math.floor((systemInfo.windowWidth * e) / 750);
+export const nextTick = () => new Promise((e) => {
+  this.$nextTick(() => {
+    e();
+  });
+});

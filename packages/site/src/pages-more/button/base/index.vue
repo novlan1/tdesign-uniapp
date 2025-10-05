@@ -29,6 +29,13 @@
       <t-button
         theme="primary"
         size="large"
+        variant="dashed"
+      >
+        虚框按钮
+      </t-button>
+      <t-button
+        theme="primary"
+        size="large"
         variant="text"
       >
         文字按钮
@@ -39,6 +46,7 @@
 
 <script>
 import tButton from 'tdesign-uniapp/button/button';
+
 export default {
   components: {
     tButton,

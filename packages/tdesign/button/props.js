@@ -1,108 +1,124 @@
 const props = {
-    appParameter: {
-        type: String,
-        value: ''
-    },
-    block: {
-        type: Boolean,
-        value: false
-    },
-    content: {
-        type: String
-    },
-    customDataset: {
-        type: null
-    },
-    disabled: {
-        type: null,
-        value: void 0
-    },
-    ghost: {
-        type: Boolean,
-        value: false
-    },
-    hoverClass: {
-        type: String,
-        value: ''
-    },
-    hoverStartTime: {
-        type: Number,
-        value: 20
-    },
-    hoverStayTime: {
-        type: Number,
-        value: 70
-    },
-    hoverStopPropagation: {
-        type: Boolean,
-        value: false
-    },
-    icon: {
-        type: null
-    },
-    lang: {
-        type: String
-    },
-    loading: {
-        type: Boolean,
-        value: false
-    },
-    loadingProps: {
-        type: Object
-    },
-    openType: {
-        type: String
-    },
-    phoneNumberNoQuotaToast: {
-        type: Boolean,
-        value: true
-    },
-    sendMessageImg: {
-        type: String,
-        value: '截图'
-    },
-    sendMessagePath: {
-        type: String,
-        value: '当前分享路径'
-    },
-    sendMessageTitle: {
-        type: String,
-        value: '当前标题'
-    },
-    sessionFrom: {
-        type: String,
-        value: ''
-    },
-    shape: {
-        type: String,
-        value: 'rectangle'
-    },
-    showMessageCard: {
-        type: Boolean,
-        value: false
-    },
-    size: {
-        type: String,
-        value: 'medium'
-    },
-    style: {
-        type: String,
-        value: ''
-    },
-    tId: {
-        type: String,
-        value: ''
-    },
-    theme: {
-        type: String,
-        value: 'default'
-    },
-    type: {
-        type: String
-    },
-    variant: {
-        type: String,
-        value: 'base'
-    }
+  appParameter: {
+    type: String,
+    default: '',
+  },
+  block: {
+    type: Boolean,
+    default: false,
+  },
+  content: {
+    type: String,
+  },
+  customDataset: {
+    type: [Object, Array, String, Number, Boolean, null, undefined],
+    default: () => ({}),
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  ghost: {
+    type: Boolean,
+    default: false,
+  },
+  hoverClass: {
+    type: String,
+    default: '',
+  },
+  hoverStartTime: {
+    type: Number,
+    default: 20,
+  },
+  hoverStayTime: {
+    type: Number,
+    default: 70,
+  },
+  hoverStopPropagation: {
+    type: Boolean,
+    default: false,
+  },
+  icon: {
+    type: [String, Object],
+    default: '',
+  },
+  lang: {
+    type: String,
+  },
+  loading: {
+    type: Boolean,
+    default: false,
+  },
+  loadingProps: {
+    type: Object,
+    default: () => ({}),
+  },
+  openType: {
+    type: String,
+  },
+  phoneNumberNoQuotaToast: {
+    type: Boolean,
+    default: true,
+  },
+  sendMessageImg: {
+    type: String,
+    default: '截图',
+  },
+  sendMessagePath: {
+    type: String,
+    default: '当前分享路径',
+  },
+  sendMessageTitle: {
+    type: String,
+    default: '当前标题',
+  },
+  sessionFrom: {
+    type: String,
+    default: '',
+  },
+  shape: {
+    type: String,
+    default: 'rectangle',
+  },
+  showMessageCard: {
+    type: Boolean,
+    default: false,
+  },
+  size: {
+    type: String,
+    default: 'medium',
+  },
+  style: {
+    type: String,
+    default: '',
+  },
+  tId: {
+    type: String,
+    default: '',
+  },
+  theme: {
+    type: String,
+    default: 'default',
+  },
+  type: {
+    type: String,
+  },
+  variant: {
+    type: String,
+    default: 'base',
+  },
+
+  tClass: {
+    type: String,
+    default: '',
+  },
+  tClassIcon: {
+    type: String,
+    default: '',
+  },
+  tClassLoading: {
+    type: String,
+    default: '',
+  },
 };
 export default props;
