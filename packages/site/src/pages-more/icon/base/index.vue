@@ -22,6 +22,7 @@
 <script>
 import tIcon from 'tdesign-uniapp/icon/icon';
 import icons from '../data';
+
 export default {
   components: {
     tIcon,
@@ -33,14 +34,11 @@ export default {
   },
   created() {},
   methods: {
-    onIconTap(event, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(event, _dataset);
-      /* ---处理dataset end--- */
-      const { name, type } = event.currentTarget.dataset;
+    onIconTap(event, { name, type }) {
       if (type === 'prefix') {
         return;
       }
+
       uni.showToast({
         title: name,
         icon: 'none',

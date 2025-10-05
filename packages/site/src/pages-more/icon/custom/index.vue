@@ -34,11 +34,7 @@ export default {
   },
   created() {},
   methods: {
-    onIconTap(event, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(event, _dataset);
-      /* ---处理dataset end--- */
-      const { name, type } = event.currentTarget.dataset;
+    onIconTap(event, { name, type }) {
       if (type === 'prefix') {
         return;
       }

@@ -1,6 +1,7 @@
-import { toObject } from './flatTool';
+// import { toObject } from './flatTool';
 import { isPlainObject } from '../validator';
 import { canUseVirtualHost } from '../version';
+
 const RawLifeCycles = ['Created', 'Attached', 'Ready', 'Moved', 'Detached', 'Error'];
 const NativeLifeCycles = RawLifeCycles.map(e => e.toLowerCase());
 const ComponentNativeProps = [
@@ -19,6 +20,9 @@ const ComponentNativeProps = [
 ];
 export const toComponent = function (e) {
   console.log('toComponent.e', e);
+  if (!e.properties && e.props) {
+    e.properties = e.props;
+  }
   const { relations: t, behaviors: o = [], externalClasses: i = [] } = e;
   if (e.properties) {
     Object.keys(e.properties).forEach((t) => {

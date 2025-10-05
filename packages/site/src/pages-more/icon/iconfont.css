@@ -4,7 +4,7 @@
         format('woff2');
 }
 
-.icon {
+:deep(.icon) {
     font-family: 'icon' !important;
     font-size: 16px;
     font-style: normal;
@@ -12,18 +12,18 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-a-0:before {
+:deep(.icon-a-0:before) {
     content: '\e64d';
 }
 
-.icon-a-1h:before {
+:deep(.icon-a-1h:before) {
     content: '\e64e';
 }
 
-.icon-a-2h:before {
+:deep(.icon-a-2h:before) {
     content: '\e64f';
 }
 
-.icon-a-3h:before {
+:deep(.icon-a-3h:before) {
     content: '\e650';
 }
