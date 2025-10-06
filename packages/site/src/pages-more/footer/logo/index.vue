@@ -6,30 +6,28 @@
     </view>
 
     <view class="footer-example">
-      <t-footer logo="" />
+      <t-footer
+        :logo="{url:
+          theme === 'dark'
+            ? 'https://tdesign.gtimg.com/mobile/demos/footer-logo-dark.png'
+            : 'https://tdesign.gtimg.com/mobile/demos/logo1.png'
+        } "
+      />
     </view>
   </view>
 </template>
 
-<script>
+<script lang="ts" setup>
 import tFooter from 'tdesign-uniapp/footer/footer';
-// import themeChangeBehavior from 'tdesign-uniapp/mixins/theme-change';
-export default {
-  components: {
-    tFooter,
-  },
-  // mixins: [themeChangeBehavior],
-  data() {
-    return {
-      logo: {
-        icon: 'https://tdesign.gtimg.com/mobile/demos/logo2.png',
-        title: '品牌名称',
-      },
-    };
-  },
-  created() {},
-  methods: {},
-};
+import { ref } from 'vue';
+import { useTheme } from 'tdesign-uniapp/mixins/theme-change';
+
+const logo = ref({
+  icon: 'https://tdesign.gtimg.com/mobile/demos/logo2.png',
+  title: '品牌名称',
+});
+const { theme } = useTheme();
+
 </script>
 <style>
 @import './index.css';

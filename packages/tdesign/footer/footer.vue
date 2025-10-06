@@ -1,9 +1,12 @@
 <template>
   <view
     :style="_._style([style, customStyle])"
-    :class="classPrefix + ' class ' + prefix + '-class'"
+    :class="[
+      classPrefix + ' class ',
+      tClass
+    ]"
   >
-    <block v-if="logo">
+    <block v-if="logo && Object.keys(logo).length">
       <view :class="classPrefix + '__logo'">
         <t-image
           v-if="logo.icon"
@@ -59,32 +62,53 @@
 </template>
 <script>
 import tImage from '../image/image';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-footer`;
-let Footer = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`];
-    this.properties = props;
-    this.components = { tImage };
-    this.setData({
+
+
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+  ],
+  components: {
+    tImage,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       _,
-    });
-  }
-};
-Footer = initTDesign(__decorate([wxComponent()], Footer));
-export default Footer;
+    };
+  },
+  methods: {
+  },
+});
+
+
+// let Footer = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.externalClasses = [`${prefix}-class`];
+//     this.properties = props;
+//     this.components = { tImage };
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//       _,
+//     });
+//   }
+// };
+// Footer = initTDesign(__decorate([wxComponent()], Footer));
+// export default Footer;
 </script>
 <style>
 @import './footer.css';
