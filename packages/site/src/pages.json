@@ -1,6 +1,12 @@
 {
   "pages": [
     {
+      "path": "pages/home/home",
+      "style": {
+        "navigationBarTitleText": "TDesign UniApp"
+      }
+    },
+    {
       "path": "pages/index/index",
       "style": {
         "navigationBarTitleText": "TDesign Uni"

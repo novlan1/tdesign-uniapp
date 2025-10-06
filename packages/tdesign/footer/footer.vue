@@ -75,11 +75,11 @@ let Footer = class extends SuperComponent {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`];
     this.properties = props;
-    this._ = _;
     this.components = { tImage };
     this.setData({
       prefix,
       classPrefix: name,
+      _,
     });
   }
 };
