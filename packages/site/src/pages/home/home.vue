@@ -38,8 +38,8 @@
     <TFooter text="该小程序仅演示示例，不收集个人信息。" />
     <TFooter :text="`Copyright © 1998 - ${currentYear} All Rights Reserved`" />
   </view>
-  <trd-privacy
-    id="trdPrivacy"
+  <TrdPrivacy
+    ref="trdPrivacy"
     name="TDesign组件库"
     date="2023年11月14日"
     :win-style="winStyle"
@@ -53,6 +53,7 @@ import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
 import { list as dataList, skylineList } from './data/index';
 import PullDownList from '../../components/pull-down-list/index.vue';
+import TrdPrivacy from '../../components/trd-privacy/index.vue';
 
 interface PageItem {
   name: string;
@@ -74,7 +75,7 @@ const showTrySkyline = ref(false);
 
 const trdPrivacy = ref<any>(null);
 const theme = ref(''); // TODO:
-const winStyle = ref('');
+const winStyle = ref(false);
 
 onLoad((options) => {
   const { q, skyline: querySkyline } = options || {};

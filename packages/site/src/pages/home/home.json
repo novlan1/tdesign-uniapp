@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "pull-down-list": "../../components/pull-down-list",
-    "t-footer": "tdesign-miniprogram/footer/footer",
-    "trd-privacy": "/components/trd-privacy/privacy"
-  },
-  "navigationBarTitleText": "TDesign UI"
-}
