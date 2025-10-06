@@ -1,35 +1,39 @@
 const props = {
-    alt: {
-        type: String,
-        value: ''
-    },
-    badgeProps: {
-        type: Object
-    },
-    bordered: {
-        type: Boolean,
-        value: false
-    },
-    hideOnLoadFailed: {
-        type: Boolean,
-        value: false
-    },
-    icon: {
-        type: null
-    },
-    image: {
-        type: String,
-        value: ''
-    },
-    imageProps: {
-        type: Object
-    },
-    shape: {
-        type: String
-    },
-    size: {
-        type: String,
-        value: ''
-    }
+  alt: {
+    type: String,
+    default: '',
+  },
+  badgeProps: {
+    type: Object,
+    default: () => ({}),
+  },
+  bordered: {
+    type: Boolean,
+    default: false,
+  },
+  hideOnLoadFailed: {
+    type: Boolean,
+    default: false,
+  },
+  icon: {
+    type: [null, String, Object, Function],
+    default: null,
+  },
+  image: {
+    type: String,
+    default: '',
+  },
+  imageProps: {
+    type: Object,
+    default: () => ({}),
+  },
+  shape: {
+    type: String,
+    default: '',
+  },
+  size: {
+    type: String,
+    default: '',
+  },
 };
 export default props;

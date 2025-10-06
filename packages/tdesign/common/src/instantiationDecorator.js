@@ -196,6 +196,7 @@ export const uniComponent = function (info) {
   if (canUseVirtualHost()) {
     info.options.virtualHost = true;
   }
+  info.options.styleIsolation = 'shared';
   const o = toComponent(info);
   return o;
 };

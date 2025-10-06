@@ -77,6 +77,7 @@ let Skeleton = class extends SuperComponent {
       classPrefix: name,
       parsedRowcols: [],
       isShow: false,
+      _,
     });
     this._ = _;
     this.observers = {

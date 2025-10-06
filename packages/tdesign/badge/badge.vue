@@ -71,6 +71,7 @@ let Badge = class extends SuperComponent {
       value: '',
       labelID: '',
       descriptionID: '',
+      _,
     });
     this.lifetimes = {
       ready() {

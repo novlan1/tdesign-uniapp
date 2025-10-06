@@ -164,25 +164,33 @@ export const unitConvert = (e) => {
       ? e
       : 0;
 };
-export const setIcon = (e, t, n) => (t
-  ? 'string' === typeof t
-    ? {
-      [`${e}Name`]: t,
-      [`${e}Data`]: {},
+
+export const setIcon = (iconName, icon, defaultIcon) => {
+  if (icon) {
+    if (typeof icon === 'string') {
+      return {
+        [`${iconName}Name`]: icon,
+        [`${iconName}Data`]: {},
+      };
     }
-    : 'object' === typeof t
-      ? {
-        [`${e}Name`]: '',
-        [`${e}Data`]: t,
-      }
-      : {
-        [`${e}Name`]: n,
-        [`${e}Data`]: {},
-      }
-  : {
-    [`${e}Name`]: '',
-    [`${e}Data`]: {},
-  });
+    if (typeof icon === 'object') {
+      return {
+        [`${iconName}Name`]: '',
+        [`${iconName}Data`]: icon,
+      };
+    }
+    return {
+      [`${iconName}Name`]: defaultIcon,
+      [`${iconName}Data`]: {},
+    };
+  }
+  return {
+    [`${iconName}Name`]: '',
+    [`${iconName}Data`]: {},
+  };
+};
+
+
 export const toCamel = e => e.replace(/-(\w)/g, (e, t) => t.toUpperCase());
 export const getCurrentPage = function () {
   const e = getCurrentPages();

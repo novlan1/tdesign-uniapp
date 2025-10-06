@@ -3,7 +3,7 @@
     margin-bottom: 32rpx;
 }
 
-.external-class-content {
+:deep(.external-class-content) {
     color: #fff;
     background-color: var(--td-brand-color, #0052d9);
     font-weight: 400;

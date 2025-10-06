@@ -3,19 +3,19 @@
     <t-avatar
       class="avatar-example"
       :image="image"
-      badge-props=""
+      :badge-props="{dot: true, offset: [0, 4] }"
     />
     <t-avatar
       class="avatar-example"
       t-class-content="external-class-content"
-      badge-props=""
+      :badge-props="{count: 8, offset: [-6, 6] }"
     >
       A
     </t-avatar>
     <t-avatar
       class="avatar-example"
       icon="user"
-      badge-props=""
+      :badge-props="{count: 12, offset: [-6, 6] }"
     />
   </view>
 </template>

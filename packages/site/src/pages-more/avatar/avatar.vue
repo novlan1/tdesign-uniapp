@@ -14,7 +14,6 @@
         <t-demo-header
           title="Avatar 头像"
           desc="用于展示用户头像信息，除了纯展示也可点击进入个人详情等操作。"
-          notice="渲染框架支持情况：Skyline、WebView"
         />
         <t-demo
           title="01 组件类型"

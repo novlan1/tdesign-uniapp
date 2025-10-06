@@ -1,6 +1,9 @@
 <template>
   <view
-    :class="classPrefix + '__wrapper class ' + prefix + '-class'"
+    :class="[
+      classPrefix + '__wrapper class ',
+      tClass
+    ]"
     :style="_._style([utils.getStyles(isShow), style, customStyle])"
   >
     <t-badge
@@ -18,8 +21,11 @@
       :t-class-count="badgeProps.tClassCount"
     >
       <view
-        :class="utils.getClass(classPrefix, size || 'medium', shape, bordered) + ' ' + prefix + '-class-image'"
-        :style="utils.getSize(size, systemInfo)"
+        :class="[
+          utils.getClass(classPrefix, dataSize || 'medium', dataShape, dataBordered),
+          tClassImage
+        ]"
+        :style="utils.getSize(dataSize, systemInfo)"
         :aria-label="ariaLabel || alt || '头像'"
         :aria-role="ariaRole || 'img'"
         :aria-hidden="ariaHidden"
@@ -27,8 +33,8 @@
         <t-image
           v-if="image"
           :t-class="prefix + '-image ' + classPrefix + '__image'"
-          :t-class-load="prefix + '-class-alt'"
-          :style="(imageProps && imageProps.style) || ''"
+          :t-class-load="tClassAlt"
+          :custom-style="(imageProps && imageProps.style) || ''"
           :src="image"
           :mode="(imageProps && imageProps.mode) || 'aspectFill'"
           :lazy="(imageProps && imageProps.lazy) || false"
@@ -44,21 +50,24 @@
           name="icon"
         >
           <t-icon
-            :style="style || ''"
-            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-            :prefix="prefix || ''"
-            :name="'close' || ''"
-            :size="22 || ''"
-            :color="color || ''"
-            :aria-hidden="true || ''"
-            :aria-label="'清除' || ''"
-            :aria-role="'button' || ''"
+            :custom-style="iconData.style || ''"
+            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (iconData.activeIdx == iconData.index ? 'active ' : ' ') + tClassIcon"
+            :prefix="iconData.prefix"
+            :name="iconName || iconData.name"
+            :size="iconData.size"
+            :color="iconData.color"
+            :aria-hidden="!!iconData.ariaHidden"
+            :aria-label="iconData.ariaLabel"
+            :aria-role="iconData.ariaRole"
             @click="'handleClose' || ''"
           />
         </block>
         <view
           v-else
-          :class="classPrefix + '__text ' + prefix + '-class-content'"
+          :class="[
+            classPrefix + '__text ',
+            tClassContent
+          ]"
         >
           <slot />
         </view>
@@ -70,84 +79,141 @@
 import tIcon from '../icon/icon';
 import tBadge from '../badge/badge';
 import tImage from '../image/image';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
+import { uniComponent } from '../common/src/index';
 import config from '../common/config';
 import avatarProps from './props';
 import { setIcon, systemInfo } from '../common/utils';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
 import { utils } from './avatar.wxs';
+import { ChildrenMixin, RELATION_MAP } from '../common/relation';
 
 
 const {
   prefix: prefix,
 } = config;
 const name = `${prefix}-avatar`;
-let Avatar = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.options = {
-      multipleSlots: true,
-    };
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-image`, `${prefix}-class-icon`, `${prefix}-class-alt`, `${prefix}-class-content`];
-    this.properties = avatarProps;
-
-    this._ = _;
-    this.components = {
-      tIcon,
-      tBadge,
-      tImage,
-    };
-    this.setData({
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-image`,
+    `${prefix}-class-icon`,
+    `${prefix}-class-alt`,
+    `${prefix}-class-content`,
+  ],
+  mixins: [ChildrenMixin(RELATION_MAP.Avatar)],
+  components: {
+    tIcon,
+    tBadge,
+    tImage,
+  },
+  props: {
+    ...avatarProps,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       isShow: true,
       zIndex: 0,
       systemInfo,
       utils,
-      badgeProps: {},
-    });
-    this.relations = {
-      '../avatar-group/avatar-group': {
-        type: 'ancestor',
-        linked(t) {
-          this.parent = t;
-          this.setData({
-            shape: this.shape || t.data.shape || 'circle',
-            size: this.size || t.data.size,
-            bordered: true,
-          });
-        },
-      },
+      _,
+
+      iconName: '',
+      iconData: {},
+
+      dataShape: this.shape,
+      dataSize: this.size,
+      dataBordered: this.bordered,
     };
-    this.observers = {
-      icon(t) {
-        const s = setIcon('icon', t, '');
-        this.setData(Object.assign({}, s));
-      },
-    };
-    this.methods = {
-      hide() {
-        this.setData({
-          isShow: false,
+  },
+  watch: {
+    icon: {
+      handler(t) {
+        const obj = setIcon('icon', t, '');
+
+        Object.keys(obj).forEach((key) => {
+          this[key] = obj[key];
         });
       },
-      onLoadError(t) {
-        if (this.hideOnLoadFailed) {
-          this.setData({
-            isShow: false,
-          });
-        }
-        this.$emit('error', {
-          detail: t.detail,
-        });
-      },
-    };
-  }
-};
-Avatar = initTDesign(__decorate([wxComponent()], Avatar));
-export default Avatar;
+      immediate: true,
+    },
+
+  },
+  mounted() {
+
+  },
+  methods: {
+    innerAfterLinked() {
+      this.dataShape = this.shape || this[RELATION_MAP.Avatar]?.shape || 'circle';
+      this.dataSize = this.size || this[RELATION_MAP.Avatar]?.size;
+      this.dataBordered = true;
+    },
+    hide() {
+      this.isShow = false;
+    },
+    onLoadError(t) {
+      if (this.hideOnLoadFailed) {
+        this.isShow = false;
+      }
+      this.$emit('error', {
+        detail: t.detail,
+      });
+    },
+  },
+});
+
+// let Avatar = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-image`, `${prefix}-class-icon`, `${prefix}-class-alt`, `${prefix}-class-content`];
+//     this.properties = avatarProps;
+
+//     this._ = _;
+//     this.components = {
+//       tIcon,
+//       tBadge,
+//       tImage,
+//     };
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//       isShow: true,
+//       zIndex: 0,
+//       systemInfo,
+//       utils,
+//       badgeProps: {},
+//     });
+//     this.relations = {
+//       '../avatar-group/avatar-group': {
+//         type: 'ancestor',
+//         linked(t) {
+//           this.parent = t;
+//           this.setData({
+//             shape: this.shape || t.data.shape || 'circle',
+//             size: this.size || t.data.size,
+//             bordered: true,
+//           });
+//         },
+//       },
+//     };
+//     this.observers = {
+//       icon(t) {
+//         const s = setIcon('icon', t, '');
+//         this.setData(Object.assign({}, s));
+//       },
+//     };
+//     this.methods = {
+
+//     };
+//   }
+// };
+// Avatar = initTDesign(__decorate([wxComponent()], Avatar));
+// export default Avatar;
 </script>
 <style>
 @import './avatar.css';
