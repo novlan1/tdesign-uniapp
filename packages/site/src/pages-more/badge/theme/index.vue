@@ -68,12 +68,15 @@
       title="单行标题"
       t-class="t-class-cell"
     >
-      <t-badge
-        slot="note"
-        count="New"
-        :offset="skylineRender ? ['-16rpx', '-56rpx'] : [0, 0]"
-        shape="ribbon"
-      />
+      <template
+        #note
+      >
+        <t-badge
+          count="New"
+          :offset="skylineRender ? ['-16rpx', '-56rpx'] : [0, 0]"
+          shape="ribbon"
+        />
+      </template>
     </t-cell>
   </view>
 </template>
@@ -82,12 +85,14 @@
 import tBadge from 'tdesign-uniapp/badge/badge';
 import tCell from 'tdesign-uniapp/cell/cell';
 import tIcon from 'tdesign-uniapp/icon/icon';
+import tButton from 'tdesign-uniapp/button/button';
 // import SkylineBehavior from '@behaviors/skyline.js';
 export default {
   components: {
     tBadge,
     tCell,
     tIcon,
+    tButton,
   },
   //   mixins: [SkylineBehavior],
   data() {

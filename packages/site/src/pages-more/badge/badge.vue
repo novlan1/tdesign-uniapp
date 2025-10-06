@@ -7,7 +7,6 @@
     <t-demo-header
       title="Badge 徽标"
       desc="用于告知用户，该区域的状态变化或者待处理任务的数量。"
-      notice="渲染框架支持情况：Skyline、WebView"
     />
     <t-demo title="01 组件类型">
       <baseComp />
@@ -22,9 +21,9 @@
 </template>
 
 <script lang="ts">
-import baseComp from './base';
-import theme from './theme';
-import size from './size';
+import baseComp from './base/index.vue';
+import theme from './theme/index.vue';
+import size from './size/index.vue';
 export default {
   components: {
     baseComp,
