@@ -49,8 +49,11 @@
 <script lang="ts" setup>
 import TFooter from 'tdesign-uniapp/footer/footer';
 // import TNavbar from 'tdesign-uniapp/navbar/navbar';
+import { useTheme } from 'tdesign-uniapp/mixins/theme-change';
+
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';
+
 import { list as dataList, skylineList } from './data/index';
 import PullDownList from '../../components/pull-down-list/index.vue';
 import TrdPrivacy from '../../components/trd-privacy/index.vue';
@@ -74,7 +77,7 @@ const isSkyline = ref(false);
 const showTrySkyline = ref(false);
 
 const trdPrivacy = ref<any>(null);
-const theme = ref(''); // TODO:
+const { theme } = useTheme();
 const winStyle = ref(false);
 
 onLoad((options) => {

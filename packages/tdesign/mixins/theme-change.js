@@ -1,25 +1,20 @@
 import { appBaseInfo } from '../common/utils';
-const themeChangeBehavior = {
-    data() {
-        return {
-            theme: 'light'
-        };
-    },
-    beforeMount() {
-        this._initTheme();
-    },
-    methods: {
-        _initTheme() {
-            const that = this;
-            that.setData({
-                theme: appBaseInfo.theme
-            });
-            uni.onThemeChange((t) => {
-                that.setData({
-                    theme: t.theme
-                });
-            });
-        }
-    }
+import { ref, onBeforeMount } from 'vue';
+
+export const useTheme = () => {
+  const theme = ref('light');
+  const initTheme = () => {
+    theme.value = appBaseInfo.theme;
+    uni.onThemeChange((t) => {
+      theme.value = t.theme;
+    });
+  };
+
+  onBeforeMount(() => {
+    initTheme();
+  });
+
+  return {
+    theme,
+  };
 };
-export default themeChangeBehavior;
