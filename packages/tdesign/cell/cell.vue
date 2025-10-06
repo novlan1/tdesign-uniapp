@@ -168,7 +168,9 @@ export default uniComponent({
     return {
       prefix,
       classPrefix: name,
-      _arrow: {},
+      _arrow: null,
+      _rightIcon: null,
+      _leftIcon: null,
       isLastChild: false,
       _,
     };

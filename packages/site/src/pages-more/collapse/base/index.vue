@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      activeValues: [],
+      activeValues: [0],
     };
   },
   created() {},

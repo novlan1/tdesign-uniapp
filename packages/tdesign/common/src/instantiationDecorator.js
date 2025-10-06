@@ -3,6 +3,8 @@ import { isPlainObject } from '../validator';
 import { canUseVirtualHost } from '../version';
 import { toCamel } from '../utils';
 
+const getInnerControlledValue = key => `tData${key.replace(/^(\w)/, (e, t) => t.toUpperCase())}`;
+
 const RawLifeCycles = ['Created', 'Attached', 'Ready', 'Moved', 'Detached', 'Error'];
 const NativeLifeCycles = RawLifeCycles.map(e => e.toLowerCase());
 const ComponentNativeProps = [
@@ -20,7 +22,6 @@ const ComponentNativeProps = [
   'definitionFilter',
 ];
 export const toComponent = function (e) {
-  console.log('toComponent.e', e);
   if (!e.properties && e.props) {
     e.properties = e.props;
   }
@@ -109,41 +110,52 @@ export const toComponent = function (e) {
     }
   });
   if (Object.keys(s).length) {
-    const t = e.lifetimes.created;
-    const o = e.lifetimes.attached;
+    // const t = e.lifetimes.created;
+    const o = e.created;
     const { controlledProps: i = [] } = e;
-    e.lifetimes.created = function (...e) {
-      Object.defineProperties(this, s);
-      if (t) {
-        t.apply(this, e);
-      }
-    };
-    e.lifetimes.attached = function (...e) {
+    // e.lifetimes.created = function (...e) {
+    //   Object.defineProperties(this, s);
+    //   if (t) {
+    //     t.apply(this, e);
+    //   }
+    // };
+    e.created = function (...args) {
       if (o) {
-        o.apply(this, e);
+        o.apply(this, args);
       }
-      i.forEach(({ key: e }) => {
-        const t = `default${e.replace(/^(\w)/, (e, t) => t.toUpperCase())}`;
+      i.forEach(({ key }) => {
+        const t = `default${key.replace(/^(\w)/, (e, t) => t.toUpperCase())}`;
+        const tDataKey = getInnerControlledValue(key);
         const o = this;
-        if (null == o[e]) {
+        this[tDataKey] = this[key];
+
+        if (null == o[key]) {
           this._selfControlled = true;
         }
-        if (null == o[e] && null != o[t]) {
+        if (null == o[key] && null != o[t]) {
+          // this[e] = o[t];
+          this[tDataKey] = o[t];
+          // e.props[key].default = o[t];
           // TODO: to double check
           // this.setData({
           //   [e]: o[t],
           // });
+        } else {
+
         }
       });
     };
     e.methods._trigger = function (e, t, o) {
       const s = i.find(t => t.event === e);
+
       if (s) {
-        const { key: e } = s;
+        const { key } = s;
         if (this._selfControlled) {
+          const tDataKey = getInnerControlledValue(key);
+          this[tDataKey] = t[key];
           // TODO: to double check
           // this.setData({
-          //   [e]: t[e],
+          //   [key]: t[key],
           // });
         }
       }
@@ -161,8 +173,8 @@ export const toComponent = function (e) {
 export const wxComponent = function () {
   return function (e) {
     const t = new (class extends e {})();
-    console.log('t', t);
-    console.log('e', e);
+
+
     t.options = t.options || {};
     if (canUseVirtualHost()) {
       t.options.virtualHost = true;

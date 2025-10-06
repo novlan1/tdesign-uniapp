@@ -123,7 +123,7 @@ export default uniComponent({
 
       const { value } = this;
       const { defaultExpandAll } = this[RELATION_MAP.CollapsePanel];
-      const expanded = defaultExpandAll ? !this.expanded : activeValues.includes(value);
+      const expanded = defaultExpandAll ? !this.expanded : activeValues?.includes(value);
 
       if (expanded === this.expanded) return;
 
@@ -141,15 +141,30 @@ export default uniComponent({
           });
 
           if (expanded) {
-            animation.height(height).top(0)
+            animation
+              .height(height)
+              .top(0)
               .step({ duration: 300 })
               .height('auto')
               .step();
           } else {
-            animation.height(height).top(1)
+            // #ifdef H5
+            animation
+              .height(height)
+              .top(1)
+              .step({ duration: 17 })
+              .height(0)
+              .step({ duration: 300 });
+            // #endif
+
+            // #ifndef H5
+            animation
+              .height(height)
+              .top(1)
               .step({ duration: 1 })
               .height(0)
               .step({ duration: 300 });
+            // #endif
           }
 
           this.animation =  animation.export();
@@ -159,6 +174,7 @@ export default uniComponent({
     onClick() {
       const { ultimateDisabled } = this;
       const { value } = this;
+
 
       if (ultimateDisabled) return;
 
@@ -170,12 +186,13 @@ export default uniComponent({
     },
 
     innerAfterLinked() {
-      const { value, expandIcon, disabled } =  this[RELATION_MAP.CollapsePanel];
+      const { tDataValue, expandIcon, disabled } =  this[RELATION_MAP.CollapsePanel];
 
       this.ultimateExpandIcon = this.expandIcon == null ? expandIcon : this.expandIcon;
       this.ultimateDisabled = this.disabled == null ? disabled : this.disabled;
 
-      this.updateExpanded(value);
+
+      this.updateExpanded(tDataValue);
     },
   },
 });

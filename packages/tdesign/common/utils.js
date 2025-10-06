@@ -196,13 +196,16 @@ export const uniqueFactory = (e) => {
     return n;
   };
 };
-export const calcIcon = (e, t) => (e && ((isBoolean(e) && t) || isString(e))
-  ? {
-    name: isBoolean(e) ? t : e,
+export const calcIcon = (icon, defaultIcon) => {
+  if (icon && ((isBoolean(icon) && defaultIcon) || isString(icon))) {
+    return { name: isBoolean(icon) ? defaultIcon : icon };
   }
-  : isObject(e)
-    ? e
-    : 'null');
+  if (isObject(icon)) {
+    return icon;
+  }
+  return null;
+};
+
 
 export const isOverSize = (e, t) => {
   let n;

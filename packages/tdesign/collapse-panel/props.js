@@ -4,12 +4,12 @@ const props = {
     default: '',
   },
   disabled: {
-    type: Boolean,
-    default: false,
+    type: [Boolean, null],
+    default: null,
   },
   expandIcon: {
-    type: Boolean,
-    default: false,
+    type: [Boolean, null],
+    default: null,
   },
   externalClasses: {
     type: Array,

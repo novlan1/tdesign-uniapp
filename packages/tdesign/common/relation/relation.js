@@ -180,7 +180,7 @@ export function ChildrenMixin(parent, options = {}) {
         // #endif
 
         this[parent].children = children;
-        this[parent]?.innerAfterLinked?.(this);
+        this.innerAfterLinked?.(this);
 
         // console.log('bindRelation.children', children);
       },

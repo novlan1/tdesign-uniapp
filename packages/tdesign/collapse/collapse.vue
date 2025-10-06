@@ -28,20 +28,34 @@ export default uniComponent({
   props: {
     ...props,
   },
+  controlledProps: [
+    {
+      key: 'value',
+      event: 'change',
+    },
+  ],
   data() {
     return {
       prefix,
       classPrefix: name,
       _,
       border: false,
+      tDataValue: [],
     };
   },
   watch: {
     value: {
+      handler(value) {
+        this.tDataValue = value;
+      },
+      immediate: true,
+    },
+    tDataValue: {
       handler() {
         this.updateExpanded();
       },
       immediate: true,
+      deep: true,
     },
     expandMutex: {
       handler() {
@@ -54,19 +68,22 @@ export default uniComponent({
   methods: {
     updateExpanded() {
       this.children?.forEach((e) => {
-        e.updateExpanded(this.value);
+        e.updateExpanded(this.tDataValue);
       });
     },
-    switch(e) {
-      const {
-        expandMutex: t,
-        value: o,
-      } = this;
-      let p = [];
-      p = o.indexOf(e) > -1 ? o.filter(t => t !== e) : t ? [e] : o.concat(e);
-      this._trigger('change', {
-        value: p,
-      });
+    switch(panelValue) {
+      const { expandMutex, tDataValue: activeValues } = this;
+
+      let value = [];
+      const hit = activeValues?.indexOf(panelValue);
+
+      if (hit > -1) {
+        value = activeValues.filter(item => item !== panelValue);
+      } else {
+        value = expandMutex ? [panelValue] : activeValues.concat(panelValue);
+      }
+
+      this._trigger('change', { value });
     },
   },
 });
