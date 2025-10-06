@@ -13,12 +13,12 @@
 
 <script>
 import tFooter from 'tdesign-uniapp/footer/footer';
-import themeChangeBehavior from 'tdesign-uniapp/mixins/theme-change';
+// import themeChangeBehavior from 'tdesign-uniapp/mixins/theme-change';
 export default {
   components: {
     tFooter,
   },
-  mixins: [themeChangeBehavior],
+  // mixins: [themeChangeBehavior],
   data() {
     return {
       logo: {
