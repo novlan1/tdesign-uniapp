@@ -181,6 +181,7 @@ export function ChildrenMixin(parent, options = {}) {
 
         this[parent].children = children;
         this.innerAfterLinked?.(this);
+        this[parent].innerAfterLinked?.(this);
 
         // console.log('bindRelation.children', children);
       },
@@ -188,7 +189,8 @@ export function ChildrenMixin(parent, options = {}) {
         const that = this;
         if (that[parent]) {
           that[parent].children = that[parent].children.filter(item => item !== that);
-          this[parent]?.innerAfterUnLinked?.(this);
+          this[parent].innerAfterUnLinked?.(this);
+          this.innerAfterUnLinked?.(this);
 
           that?.destroyCallback?.();
         }

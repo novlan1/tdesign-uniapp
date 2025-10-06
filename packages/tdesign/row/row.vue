@@ -46,6 +46,7 @@ export default uniComponent({
       const {
         gutter,
       } = this;
+
       this.children?.forEach((o) => {
         o.gutter = gutter;
       });

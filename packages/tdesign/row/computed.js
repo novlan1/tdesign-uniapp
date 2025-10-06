@@ -9,6 +9,5 @@ export function getRowStyles(gutter, style, customStyle) {
     });
   }
 
-  return utils._style([style, customStyle, _style]);
+  return utils._style([style, customStyle]) + _style;
 }
-

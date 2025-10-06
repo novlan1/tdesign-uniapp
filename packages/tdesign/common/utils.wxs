@@ -14,7 +14,7 @@ function addUnit(value) {
 }
 
 function isString(string) {
-  return string && string.constructor === 'String';
+  return typeof string === 'string';
 }
 
 function isArray(array) {
@@ -22,8 +22,9 @@ function isArray(array) {
   // return array && array.constructor === 'Array';
 }
 
-function isObject(obj) {
-  return obj && obj.constructor === 'Object';
+function isObject(x) {
+  const type = typeof x;
+  return x !== null && (type === 'object' || type === 'function');
 }
 
 function isBoolean(value) {
@@ -85,6 +86,7 @@ function getBadgeAriaLabel(options) {
 }
 
 function endsWith(str, endStr) {
+  
   return str.slice(-endStr.length) === endStr ? str : str + endStr;
 }
 
