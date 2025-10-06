@@ -1,0 +1,34 @@
+<template>
+  <view class="demo">
+    <view class="container">
+      <TIcon
+        :name="failImage"
+        size="224rpx"
+        color="#DCDCDC"
+      />
+      <view class="fail-error">
+        页面加载错误
+      </view>
+      <TButton
+        class="fail-button"
+        @click="toHome"
+      >
+        回到首页
+      </TButton>
+    </view>
+  </view>
+</template>
+<script lang="ts" setup>
+import { ref } from 'vue';
+import TButton from 'tdesign-uniapp/button/button';
+import TIcon from 'tdesign-uniapp/icon/icon';
+
+const failImage = ref('error-circle-filled');
+
+const toHome = () => {
+  uni.reLaunch({
+    url: '/pages/home/home',
+  });
+};
+</script>
+<style lang="less" src="./index.less"></style>

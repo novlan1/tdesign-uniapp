@@ -7,6 +7,12 @@
       }
     },
     {
+      "path": "pages/home/navigate-fail/index",
+      "style": {
+        "navigationBarTitleText": "TDesign UniApp"
+      }
+    },
+    {
       "path": "pages/index/index",
       "style": {
         "navigationBarTitleText": "TDesign Uni"

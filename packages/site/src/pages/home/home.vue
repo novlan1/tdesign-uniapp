@@ -134,7 +134,7 @@ const clickHandle = (item) => {
     url: path,
     fail: () => {
       uni.navigateTo({
-        url: '/pages/home/navigateFail/navigateFail',
+        url: '/pages/home/navigate-fail/index',
       });
     },
   });
