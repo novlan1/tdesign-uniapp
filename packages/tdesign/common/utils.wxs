@@ -18,7 +18,8 @@ function isString(string) {
 }
 
 function isArray(array) {
-  return array && array.constructor === 'Array';
+  return Array.isArray(array);
+  // return array && array.constructor === 'Array';
 }
 
 function isObject(obj) {
@@ -51,7 +52,7 @@ function cls(base, arr) {
   for (var size = arr.length; i < size; i++) {
     var item = arr[i];
 
-    if (item && item.constructor === 'Array') {
+    if (item && Array.isArray(item)) {
       var key = arr[i][0];
       var value = arr[i][1];
 

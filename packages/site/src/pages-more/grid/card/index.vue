@@ -50,7 +50,6 @@
 
     <view class="block">
       <t-grid
-        :border="border"
         :column="2"
         theme="card"
         align="left"

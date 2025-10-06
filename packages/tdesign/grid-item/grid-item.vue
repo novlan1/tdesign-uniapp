@@ -1,6 +1,9 @@
 <template>
   <view
-    :class="_.cls(classPrefix, [['auto-size', column == 0]]) + ' class ' + prefix + '-class'"
+    :class="[
+      _.cls(classPrefix, [['auto-size', column == 0]]) + ' class ',
+      tClass
+    ]"
     :style="_._style([gridItemStyle, style, customStyle])"
     :hover-class="hover ? classPrefix + '--hover' : ''"
     :hover-stay-time="200"
@@ -14,7 +17,10 @@
       :style="gridItemWrapperStyle"
     >
       <view
-        :class="_.cls(classPrefix + '__content', [align, layout]) + ' ' + prefix + '-class-content'"
+        :class="[
+          _.cls(classPrefix + '__content', [align, layout]),
+          tClassContent
+        ]"
         :style="gridItemContentStyle"
       >
         <slot />
@@ -33,30 +39,31 @@
           :t-class-content="badgeProps.tClassContent"
           :t-class-count="badgeProps.tClassCount"
         >
-          <view :class="_.cls(classPrefix + '__image', [getImageSize(column), ['icon', icon]]) + ' ' + prefix + '-class-image'">
+          <view
+            :class="[
+              _.cls(classPrefix + '__image', [getImageSize(column), ['icon', icon]]),
+              tClassImage
+            ]"
+          >
             <block v-if="image && image != 'slot'">
               <!-- parse <template is="image" :data="src: image, shape: 'round', mode: 'widthFix', tClass: _.cls(classPrefix + '__image', [getImageSize(column)]) + ' ' + prefix + '-class-image', ...imageProps"/> -->
-              <block name="image">
-                <t-image
-                  :t-class="_.cls(classPrefix + '__image', [getImageSize(column)]) + ' ' + prefix + '-class-image'"
-                  :t-class-load="tClassLoad"
-                  :style="style || ''"
-                  :custom-style="customStyle || ''"
-                  :height="height || ''"
-                  :width="width || ''"
-                  :error="error || 'default'"
-                  :lazy="lazy || false"
-                  :loading="count || 'default'"
-                  :shape="'round' || 'square'"
-                  :src="image || ''"
-                  :mode="'widthFix' || 'scaleToFill'"
-                  :webp="webp || false"
-                  :show-menu-by-longpress="showMenuByLongpress || false"
-                  :data-custom="dataset || null"
-                  @error="binderror($event, { custom: dataset || null })"
-                  @load="bindload($event, { custom: dataset || null })"
-                />
-              </block>
+              <t-image
+                :t-class="_.cls(classPrefix + '__image', [getImageSize(column)]) + ' ' + tClassImage"
+                :custom-style="_._style([style, customStyle])"
+                :height="imageProps.height || ''"
+                :width="imageProps.width || ''"
+                :error="imageProps.error"
+                :lazy="imageProps.lazy"
+                :loading="imageProps.loading"
+                :shape="imageProps.shape || 'round'"
+                :src="imageProps.src || image"
+                :mode="imageProps.mode || 'widthFix'"
+                :webp="imageProps.webp"
+                :show-menu-by-longpress="imageProps.showMenuByLongpress"
+                :data-custom="imageProps.dataset"
+                @error="binderror($event, { custom: dataset || null })"
+                @load="bindload($event, { custom: dataset || null })"
+              />
             </block>
             <slot name="image" />
             <!-- parse <template v-if="iconName || _.isNoEmptyObj(iconData)" is="icon" :data="tClass: classPrefix + '__icon', name: iconName, ...iconData"/> -->
@@ -65,16 +72,15 @@
               name="icon"
             >
               <t-icon
-                :style="style || ''"
-                :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-                :prefix="prefix || ''"
-                :name="'close' || ''"
-                :size="22 || ''"
-                :color="color || ''"
-                :aria-hidden="true || ''"
-                :aria-label="ariaLabel || ''"
-                :aria-role="ariaRole || ''"
-                @click="bindclick || ''"
+                :custom-style="iconData.style || ''"
+                :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (iconData.activeIdx == iconData.index ? 'active ' : ' ')"
+                :prefix="iconData.prefix"
+                :name="iconName || iconData.name"
+                :size="iconData.size"
+                :color="iconData.color"
+                :aria-hidden="!!iconData.ariaHidden"
+                :aria-label="iconData.ariaLabel"
+                :aria-role="iconData.ariaRole"
               />
             </block>
           </view>
@@ -86,14 +92,20 @@
         >
           <view
             v-if="text"
-            :class="_.cls(classPrefix + '__text', [getImageSize(column), layout]) + ' ' + prefix + '-class-text'"
+            :class="[
+              _.cls(classPrefix + '__text', [getImageSize(column), layout]) + ' ',
+              tClassText
+            ]"
           >
             {{ text }}
           </view>
           <slot name="text" />
           <view
             v-if="description"
-            :class="_.cls(classPrefix + '__description', [getImageSize(column), layout]) + ' ' + prefix + '-class-description'"
+            :class="[
+              _.cls(classPrefix + '__description', [getImageSize(column), layout]) + ' ',
+              tClassDescription
+            ]"
           >
             {{ description }}
           </view>
@@ -107,54 +119,47 @@
 import tImage from '../image/image';
 import tIcon from '../icon/icon';
 import tBadge from '../badge/badge';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import { uniqueFactory, setIcon } from '../common/utils';
 import { isObject } from '../common/validator';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
+import { ChildrenMixin, RELATION_MAP } from '../common/relation';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-grid-item`;
 const getUniqueID = uniqueFactory('grid_item');
-let LinkTypes;
-!(function (t) {
-  t['redirect-to'] = 'redirectTo';
-  t['switch-tab'] = 'switchTab';
-  t.relaunch = 'reLaunch';
-  t['navigate-to'] = 'navigateTo';
-}(LinkTypes || (LinkTypes = {})));
-let GridItem = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-image`, `${prefix}-class-text`, `${prefix}-class-description`];
-    this.options = {
-      multipleSlots: true,
-    };
-    this.relations = {
-      '../grid/grid': {
-        type: 'ancestor',
-        linked(t) {
-          this.parent = t;
-          this.updateStyle();
-          this.setData({
-            column: t.data.column,
-          });
-        },
-      },
-    };
-    this.properties = props;
-    this._ = _;
-    this.components = {
-      tImage,
-      tIcon,
-      tBadge,
-    };
-    this.setData({
+
+
+const LinkTypes = {
+  'redirect-to': 'redirectTo',
+  'switch-tab': 'switchTab',
+  relaunch: 'reLaunch',
+  'navigate-to': 'navigateTo',
+};
+
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-content`,
+    `${prefix}-class-image`,
+    `${prefix}-class-text`,
+    `${prefix}-class-description`,
+  ],
+  mixins: [ChildrenMixin(RELATION_MAP.GridItem)],
+  components: {
+    tImage,
+    tIcon,
+    tBadge,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       gridItemStyle: '',
@@ -163,112 +168,169 @@ let GridItem = class extends SuperComponent {
       align: 'center',
       column: 0,
       describedbyID: '',
-      // badgeProps: {},
-    });
-    this.observers = {
-      icon(t) {
-        const e = setIcon('icon', t, '');
-        this.setData(Object.assign({}, e));
-      },
+      _,
+
+      iconName: '',
+      iconData: {},
+
+      hover: false,
     };
-    this.lifetimes = {
-      ready() {
-        this.setData({
-          describedbyID: getUniqueID(),
+  },
+  watch: {
+    icon: {
+      handler(t) {
+        const obj = setIcon('icon', t, '');
+
+        Object.keys(obj).forEach((key) => {
+          this[key] = obj[key];
         });
       },
-    };
-    this.methods = {
-      bindload() {},
-      getImageSize(column) {
-        if (column >= 5) return 'small';
-        if (column == 4) return 'middle';
-        return 'large';
-      },
-      updateStyle() {
-        const {
-          hover: t,
-          align: e,
-        } = this[this.relationParentName].properties || {};
-        const r = [];
-        const i = [];
-        const o = [];
-        const s = this.getWidthStyle();
-        const n = this.getPaddingStyle();
-        const p = this.getBorderStyle();
-        if (s) {
-          r.push(s);
+      immediate: true,
+    },
+  },
+  mounted() {
+    this.describedbyID = getUniqueID();
+  },
+  methods: {
+    innerAfterLinked() {
+      this.updateStyle();
+      this.column = this[RELATION_MAP.GridItem].column;
+    },
+    bindload() {},
+    getImageSize(column) {
+      if (column >= 5) return 'small';
+      if (column == 4) return 'middle';
+      return 'large';
+    },
+    updateStyle() {
+      const { hover, align } = this[RELATION_MAP.GridItem];
+      const gridItemStyles = [];
+      const gridItemWrapperStyles = [];
+      const gridItemContentStyles = [];
+      const widthStyle = this.getWidthStyle();
+      const paddingStyle = this.getPaddingStyle();
+      const borderStyle = this.getBorderStyle();
+      widthStyle && gridItemStyles.push(widthStyle);
+      paddingStyle && gridItemWrapperStyles.push(paddingStyle);
+      borderStyle && gridItemContentStyles.push(borderStyle);
+
+      this.gridItemStyle = `${gridItemStyles.join(';')}`;
+      this.gridItemWrapperStyle = gridItemWrapperStyles.join(';');
+      this.gridItemContentStyle = gridItemContentStyles.join(';');
+      this.hover = hover;
+      this.align = align;
+    },
+
+    // 判断应该加在gridItem上的宽度
+    getWidthStyle() {
+      const { column } = this[RELATION_MAP.GridItem];
+      return column > 0 ? `width:${(1 / column) * 100}%` : '';
+    },
+
+    // 获取应该加在gridWrap上的padding
+    getPaddingStyle() {
+      const { gutter } = this[RELATION_MAP.GridItem];
+      if (gutter) return `padding-bottom:${gutter}rpx;padding-right:${gutter}rpx`;
+      return '';
+    },
+
+    // 判断border在grid-item-content上的css属性
+    getBorderStyle() {
+      const { gutter } = this[RELATION_MAP.GridItem];
+      let { border } = this[RELATION_MAP.GridItem];
+
+      if (!border) {
+        // 如果border的值没传或者是border的值为false
+        return '';
+      }
+
+      if (!isObject(border)) {
+        border = {};
+      }
+      const { color = '#266FE8', width = 2, style = 'solid' } = border ;
+
+      if (gutter) {
+        return `border:${width}rpx ${style} ${color}`;
+      }
+
+      return `border-bottom:${width}rpx ${style} ${color};border-right:${width}rpx ${style} ${color}`;
+    },
+
+    onClick(e) {
+      const { item } = e.currentTarget.dataset;
+      this.$emit('click', item);
+      this.jumpLink();
+    },
+
+    jumpLink() {
+      const { url, jumpType } = this;
+      if (url && jumpType) {
+        if (LinkTypes[jumpType]) {
+          wx[LinkTypes[jumpType]]({ url });
         }
-        if (n) {
-          i.push(n);
-        }
-        if (p) {
-          o.push(p);
-        }
-        this.setData({
-          gridItemStyle: `${r.join(';')}`,
-          gridItemWrapperStyle: i.join(';'),
-          gridItemContentStyle: o.join(';'),
-          hover: t,
-          // layout: this.layout,
-          align: e,
-        });
-      },
-      getWidthStyle() {
-        const {
-          column: t,
-        } = this[this.relationParentName].properties || {};
-        return t > 0 ? `width:${1 / t * 100}%` : '';
-      },
-      getPaddingStyle() {
-        const {
-          gutter: t,
-        } = this[this.relationParentName].properties || {};
-        return t ? `padding-left:${t}rpx;padding-top:${t}rpx` : '';
-      },
-      getBorderStyle() {
-        const {
-          gutter: t,
-        } = this[this.relationParentName].properties || {};
-        let {
-          border: e,
-        } = this[this.relationParentName].properties || {};
-        if (!e) {
-          return '';
-        }
-        isObject(e) || (e = {});
-        const {
-          color: r = '#266FE8',
-          width: i = 2,
-          style: o = 'solid',
-        } = e;
-        return t ? `border:${i}rpx ${o} ${r}` : `border-top:${i}rpx ${o} ${r};border-left:${i}rpx ${o} ${r}`;
-      },
-      onClick(t) {
-        const {
-          item: e,
-        } = t.currentTarget.dataset;
-        this.$emit('click', {
-          detail: e,
-        });
-        this.jumpLink();
-      },
-      jumpLink() {
-        const {
-          url: t,
-          jumpType: e,
-        } = this;
-        if (t && e && LinkTypes[e]) {
-          uni[LinkTypes[e]]({
-            url: t,
-          });
-        }
-      },
-    };
-  }
-};
-GridItem = initTDesign(__decorate([wxComponent()], GridItem));
-export default GridItem;
+      }
+    },
+  },
+});
+
+
+// let GridItem = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-image`, `${prefix}-class-text`, `${prefix}-class-description`];
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     this.relations = {
+//       '../grid/grid': {
+//         type: 'ancestor',
+//         linked(t) {
+//           this[RELATION_MAP.GridItem] = t;
+//           this.updateStyle();
+//           this.setData({
+//             column: t.data.column,
+//           });
+//         },
+//       },
+//     };
+//     this = props;
+//     this._ = _;
+//     this.components = {
+//       tImage,
+//       tIcon,
+//       tBadge,
+//     };
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//       gridItemStyle: '',
+//       gridItemWrapperStyle: '',
+//       gridItemContentStyle: '',
+//       align: 'center',
+//       column: 0,
+//       describedbyID: '',
+//       // badgeProps: {},
+//     });
+//     this.observers = {
+//       icon(t) {
+//         const e = setIcon('icon', t, '');
+//         this.setData(Object.assign({}, e));
+//       },
+//     };
+//     this.lifetimes = {
+//       ready() {
+//         this.setData({
+//           describedbyID: getUniqueID(),
+//         });
+//       },
+//     };
+//     this.methods = {
+
+//     };
+//   }
+// };
+// GridItem = initTDesign(__decorate([wxComponent()], GridItem));
+// export default GridItem;
 </script>
 <style>
 @import './grid-item.css';

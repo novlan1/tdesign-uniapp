@@ -47,23 +47,24 @@
 <script lang="ts">
 
 import BaseDemo from './base/index.vue';
-// import border from './border/index.vue';
-// import description from './description/index.vue';
-// import badge from './badge/index.vue';
-// import scroll from './scroll/index.vue';
-// import multiple from './multiple/index.vue';
-// import card from './card/index.vue';
-// import iconGrid from './icon-grid/index.vue';
+import border from './border/index.vue';
+import description from './description/index.vue';
+import badge from './badge/index.vue';
+import scroll from './scroll/index.vue';
+import multiple from './multiple/index.vue';
+import card from './card/index.vue';
+import iconGrid from './icon-grid/index.vue';
+
 export default {
   components: {
     BaseDemo,
-    // border,
-    // description,
-    // badge,
-    // scroll,
-    // multiple,
-    // card,
-    // iconGrid,
+    border,
+    description,
+    badge,
+    scroll,
+    multiple,
+    card,
+    iconGrid,
   },
   data() {
     return {};

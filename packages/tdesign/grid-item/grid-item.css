@@ -27,6 +27,8 @@
 .t-grid-item__content--left {
     justify-self: flex-start;
     align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
 }
 .t-grid-item__content--left .t-grid-item__words {
     text-align: left;
@@ -63,7 +65,7 @@
     width: 100%;
     height: 100%;
 }
-.t-grid-item__image--icon {
+:deep(.t-grid-item__image--icon) {
     display: flex;
     align-items: center;
     justify-content: center;

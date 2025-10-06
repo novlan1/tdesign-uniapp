@@ -48,7 +48,7 @@ module.exports = {
   },
 
   getColor: function (color) {
-    if (color.constructor === 'Array' && color.length === 2) {
+    if (Array.isArray(color) && color.length === 2) {
       return ';--td-rate-selected-color: ' + color[0] + '; --td-rate-unselected-color: ' + color[1];
     }
 

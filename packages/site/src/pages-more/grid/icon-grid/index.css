@@ -3,7 +3,7 @@
     margin-bottom: 32rpx;
 }
 
-.grid-item__image {
+:deep(.grid-item__image) {
     --td-button-medium-icon-font-size: 48rpx;
 
     height: 100%;

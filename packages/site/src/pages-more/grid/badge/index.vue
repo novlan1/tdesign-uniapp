@@ -5,25 +5,25 @@
         t-class-image="image"
         text="标题文字"
         :image="img1"
-        badge-props=""
+        :badge-props="{ dot: true }"
       />
       <t-grid-item
         t-class-image="image"
         text="标题文字"
         :image="img2"
-        badge-props=""
+        :badge-props=" { count: 8 } "
       />
       <t-grid-item
         t-class-image="image"
         text="标题文字"
         :image="img3"
-        badge-props=""
+        :badge-props="{ count: 13 } "
       />
       <t-grid-item
         t-class-image="image"
         text="标题文字"
         :image="img3"
-        badge-props=""
+        :badge-props="{ count: 'NEW' } "
       />
     </t-grid>
   </view>

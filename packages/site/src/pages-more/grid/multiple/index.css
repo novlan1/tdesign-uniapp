@@ -3,11 +3,11 @@
     margin-bottom: 32rpx;
 }
 
-.block .image {
+.block :deep(.image) {
     position: inherit;
 }
 
-.block .image::before {
+.block :deep(.image)::before {
     content: ' ';
     position: absolute;
     top: 0;

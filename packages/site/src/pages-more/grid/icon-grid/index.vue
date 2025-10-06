@@ -5,16 +5,19 @@
         text="分享"
         image="slot"
       >
-        <view
-          slot="image"
-          class="grid-item__image"
+        <template
+          #image
         >
-          <t-button
-            variant="text"
-            icon="share"
-            open-type="share"
-          />
-        </view>
+          <view
+            class="grid-item__image"
+          >
+            <t-button
+              variant="text"
+              icon="share"
+              open-type="share"
+            />
+          </view>
+        </template>
       </t-grid-item>
       <t-grid-item
         text="收藏"

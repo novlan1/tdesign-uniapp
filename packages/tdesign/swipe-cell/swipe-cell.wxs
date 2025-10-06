@@ -36,7 +36,7 @@ var initOpen = function (ownerInstance) {
     }
   }
 
-  if (state.opened.constructor === 'Array') {
+  if (Array.isArray(state.opened)) {
     // opened为array类型，判断默认打开，同时设定左右action时优先打开右边
     if (state.opened[1] && state.rightWidth > 0) {
       swipeMove(-state.rightWidth);

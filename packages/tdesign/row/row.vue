@@ -19,7 +19,7 @@ const name = `${prefix}-row`;
 
 export default uniComponent({
   name,
-  mixins: [ParentMixin(RELATION_MAP.Col, this)],
+  mixins: [ParentMixin(RELATION_MAP.Col)],
   props: {
     ...props,
   },

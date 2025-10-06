@@ -7,7 +7,7 @@
     line-height: 40rpx !important;
     padding-top: 20rpx !important;
 }
-.image {
+:deep(.image) {
     width: 64rpx !important;
     height: 64rpx !important;
 }
@@ -42,11 +42,11 @@
     display: flex;
 }
 
-.badge .image {
+.badge :deep(.image) {
     position: inherit;
 }
 
-.badge .image::before {
+.badge :deep(.image)::before {
     content: ' ';
     position: absolute;
     top: 0;
