@@ -18,7 +18,7 @@
         :key="index"
       >
         <text :class="classPrefix + '__item ' + prefix + '-class-count'">
-          {{ format(timeData[timeRange[index]]) }}
+          {{ formatUtil(timeData[timeRange[index]]) }}
         </text>
 
         <text
@@ -33,115 +33,169 @@
 </template>
 <script>
 import tIcon from '../icon/icon';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import { isSameSecond, parseFormat, parseTimeData, TimeDataUnit } from './utils';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
-import { format } from './count-down.wxs';
+import { format as formatUtil } from './count-down.wxs';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-count-down`;
-let CountDown = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-count`, `${prefix}-class-split`];
-    this.properties = props;
-    this._ = _;
-    this.components = {
-      tIcon,
-    };
-    this.observers = {
-      time() {
-        this.reset();
-      },
-    };
-    this.setData({
+
+
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-count`,
+    `${prefix}-class-split`,
+  ],
+  components: {
+    tIcon,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       timeDataUnit: TimeDataUnit,
       timeData: parseTimeData(0),
       formattedTime: '0',
-    });
-    this.timeoutId = null;
-    this.isInitialTime = false;
-    this.lifetimes = {
-      detached() {
-        if (this.timeoutId) {
-          clearTimeout(this.timeoutId);
-          this.timeoutId = null;
-        }
-      },
+      _,
+      timeoutId: null,
+      isInitialTime: false,
     };
-    this.methods = {
-      format,
-      start() {
-        this.counting || (this.counting = true, this.endTime = Date.now() + this.remain, this.doCount());
+  },
+  watch: {
+    time: {
+      handler() {
+        this.reset();
       },
-      pause() {
-        this.counting = false;
-        if (this.timeoutId) {
-          clearTimeout(this.timeoutId);
-        }
-      },
-      reset() {
+      immediate: true,
+    },
+  },
+  mounted() {
+
+  },
+  beforeUnMount() {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = null;
+    }
+  },
+  methods: {
+    formatUtil,
+    start() {
+      if (this.counting) {
+        return;
+      }
+
+      this.counting = true;
+      this.endTime = Date.now() + this.remain;
+      this.doCount();
+    },
+
+    pause() {
+      this.counting = false;
+      this.timeoutId && clearTimeout(this.timeoutId);
+    },
+
+    reset() {
+      this.pause();
+      this.remain = this.time;
+      this.updateTime(this.remain);
+
+      if (this.autoStart && this.remain > 0) {
+        this.start();
+      }
+
+      this.isInitialTime = true;
+    },
+
+    getTime() {
+      return Math.max(this.endTime - Date.now(), 0);
+    },
+
+    updateTime(remain) {
+      const { format } = this;
+      this.remain = remain;
+      const timeData = parseTimeData(remain);
+      this.$emit('change', timeData);
+
+      const { timeText } = parseFormat(remain, format);
+
+      const timeRange = format.split(':');
+
+      this.timeRange = timeRange;
+      this.timeData = timeData;
+      this.formattedTime = timeText.replace(/:/g, ' : ');
+
+      if (remain === 0 && (this.counting || this.isInitialTime)) {
         this.pause();
-        this.remain = this.time;
-        this.updateTime(this.remain);
-        if (this.autoStart && this.remain > 0) {
-          this.start();
+        this.$emit('finish');
+        this.counting = false;
+      }
+    },
+
+    doCount() {
+      this.timeoutId = setTimeout(() => {
+        const time = this.getTime();
+
+        if (this.millisecond) {
+          this.updateTime(time);
+        } else if (!isSameSecond(time, this.remain) || time === 0) {
+          this.updateTime(time);
         }
-        this.isInitialTime = true;
-      },
-      getTime() {
-        return Math.max(this.endTime - Date.now(), 0);
-      },
-      updateTime(t) {
-        const {
-          format: i,
-        } = this;
-        this.remain = t;
-        const e = parseTimeData(t);
-        this.$emit('change', {
-          detail: e,
-        });
-        const {
-          timeText: s,
-        } = parseFormat(t, i);
-        const o = i.split(':');
-        this.setData({
-          timeRange: o,
-          timeData: e,
-          formattedTime: s.replace(/:/g, ' : '),
-        });
-        if (0 === t && (this.counting || this.isInitialTime)) {
-          this.pause();
-          this.$emit('finish');
-          this.counting = false;
+
+        if (time !== 0) {
+          this.doCount();
         }
-      },
-      doCount() {
-        this.timeoutId = setTimeout(() => {
-          const t = this.getTime();
-          if (this.millisecond) {
-            this.updateTime(t);
-          } else {
-            isSameSecond(t, this.remain) && 0 !== t || this.updateTime(t);
-          }
-          if (0 !== t) {
-            this.doCount();
-          }
-        }, 33);
-      },
-    };
-  }
-};
-CountDown = initTDesign(__decorate([wxComponent()], CountDown));
-export default CountDown;
+      }, 33); // 30 帧，因此 1000 / 30 = 33
+    },
+  },
+});
+
+// let CountDown = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-count`, `${prefix}-class-split`];
+//     this = props;
+//     this._ = _;
+//     this.components = {
+//       tIcon,
+//     };
+//     this.observers = {
+//       time() {
+//         this.reset();
+//       },
+//     };
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//       timeDataUnit: TimeDataUnit,
+//       timeData: parseTimeData(0),
+//       formattedTime: '0',
+//     });
+//     this.timeoutId = null;
+//     this.isInitialTime = false;
+//     this.lifetimes = {
+//       detached() {
+//         if (this.timeoutId) {
+//           clearTimeout(this.timeoutId);
+//           this.timeoutId = null;
+//         }
+//       },
+//     };
+//     this.methods = {
+
+//     };
+//   }
+// };
+// CountDown = initTDesign(__decorate([wxComponent()], CountDown));
+// export default CountDown;
 </script>
 <style>
 @import './count-down.css';
