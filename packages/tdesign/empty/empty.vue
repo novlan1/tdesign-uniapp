@@ -1,7 +1,11 @@
 <template>
   <view
     :style="_._style([style, customStyle])"
-    :class="'class ' + prefix + '-class ' + classPrefix"
+    :class="[
+      'class ',
+      tClass,
+      classPrefix
+    ]"
   >
     <view
       :aria-hidden="true"
@@ -9,7 +13,7 @@
     >
       <t-image
         v-if="image"
-        :t-class="prefix + '-class-image'"
+        :t-class="tClassImage"
         :src="image"
         mode="aspectFit"
       />
@@ -19,16 +23,15 @@
         name="icon"
       >
         <t-icon
-          :style="style || ''"
-          :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-          :prefix="prefix || ''"
-          :name="'close' || ''"
-          :size="22 || ''"
-          :color="color || ''"
-          :aria-hidden="true || ''"
-          :aria-label="ariaLabel || ''"
-          :aria-role="ariaRole || ''"
-          @click="bindclick || ''"
+          :custom-style="iconData.style || ''"
+          :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (iconData.activeIdx == iconData.index ? 'active ' : ' ')"
+          :prefix="iconData.prefix"
+          :name="iconName || iconData.name"
+          :size="iconData.size"
+          :color="iconData.color"
+          :aria-hidden="!!iconData.ariaHidden"
+          :aria-label="iconData.ariaLabel"
+          :aria-role="iconData.ariaRole"
         />
       </block>
       <slot
@@ -36,13 +39,23 @@
         name="image"
       />
     </view>
-    <view :class="classPrefix + '__description ' + prefix + '-class-description'">
+    <view
+      :class="[
+        classPrefix + '__description ',
+        tClassDescription
+      ]"
+    >
       <block v-if="description">
         {{ description }}
       </block>
       <slot name="description" />
     </view>
-    <view :class="classPrefix + '__actions ' + prefix + '-class-actions'">
+    <view
+      :class="[
+        classPrefix + '__actions ',
+        tClassActions
+      ]"
+    >
       <slot name="action" />
     </view>
   </view>
@@ -50,43 +63,87 @@
 <script>
 import tIcon from '../icon/icon';
 import tImage from '../image/image';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
+import { uniComponent } from '../common/src/index';
 import props from './props';
-import config from '../common/config';
+import { prefix } from '../common/config';
 import { setIcon } from '../common/utils';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
 
 
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-empty`;
-let default_1 = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.options = {
-      multipleSlots: true,
-    };
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-description`, `${prefix}-class-image`];
-    this.properties = props;
-    this._ = _;
-    this.components = { tIcon, tImage };
-    this.setData({
+
+
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-description`,
+    `${prefix}-class-image`,
+    `${prefix}-class-actions`,
+  ],
+  components: {
+    tIcon,
+    tImage,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
-    });
-    this.observers = {
-      icon(e) {
-        const o = setIcon('icon', e, '');
-        this.setData(Object.assign({}, o));
-      },
+
+      iconName: '',
+      iconData: {},
+
+      _,
     };
-  }
-};
-default_1 = initTDesign(__decorate([wxComponent()], default_1));
-export default default_1;
+  },
+  watch: {
+    icon: {
+      handler(t) {
+        const obj = setIcon('icon', t, '');
+
+        Object.keys(obj).forEach((key) => {
+          this[key] = obj[key];
+        });
+      },
+      immediate: true,
+    },
+
+  },
+  mounted() {
+
+  },
+  methods: {
+
+  },
+});
+
+// let default_1 = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-description`, `${prefix}-class-image`];
+//     this.properties = props;
+//     this._ = _;
+//     this.components = { tIcon, tImage };
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//     });
+//     this.observers = {
+//       icon(e) {
+//         const o = setIcon('icon', e, '');
+//         this.setData(Object.assign({}, o));
+//       },
+//     };
+//   }
+// };
+// default_1 = initTDesign(__decorate([wxComponent()], default_1));
+// export default default_1;
 </script>
 <style>
 @import './empty.css';

@@ -9,7 +9,6 @@
       <t-demo-header
         title="Empty 空状态"
         desc="用于空状态时的占位提示。"
-        notice="渲染框架支持情况：Skyline、WebView"
       />
       <t-demo
         title="01 类型"
@@ -29,15 +28,11 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import imageEmpty from './imageEmpty';
-import buttonEmpty from './buttonEmpty';
-/*
- * @Author: shiyanzhang
- * @Date: 2021-08-24 15:56:07
- * @Description:
- * @FilePath: /tdesign-miniprogram/example/pages/empty/empty.ts
- */
+import BaseDemo from './base/index.vue';
+import imageEmpty from './imageEmpty/index.vue';
+import buttonEmpty from './buttonEmpty/index.vue';
+
+
 export default {
   components: {
     BaseDemo,

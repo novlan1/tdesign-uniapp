@@ -1,15 +1,19 @@
 const props = {
-    description: {
-        type: String
-    },
-    externalClasses: {
-        type: Array
-    },
-    icon: {
-        type: null
-    },
-    image: {
-        type: String
-    }
+  description: {
+    type: String,
+    default: '',
+  },
+  externalClasses: {
+    type: Array,
+    default: () => ([]),
+  },
+  icon: {
+    type: [null, String, Object, Function],
+    default: null,
+  },
+  image: {
+    type: String,
+    default: '',
+  },
 };
 export default props;
