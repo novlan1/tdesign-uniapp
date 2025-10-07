@@ -9,7 +9,6 @@
       <t-demo-header
         title="Skeleton 骨架屏"
         desc="用于等待加载内容所展示的占位图形组合，有动态效果加载效果，减少用户等待焦虑。"
-        notice="渲染框架支持情况：Skyline、WebView"
       />
       <t-demo
         title="01 骨架屏类型"
