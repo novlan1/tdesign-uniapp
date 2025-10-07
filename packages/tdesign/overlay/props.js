@@ -1,19 +1,19 @@
 const props = {
-    backgroundColor: {
-        type: String,
-        value: ''
-    },
-    duration: {
-        type: Number,
-        value: 300
-    },
-    preventScrollThrough: {
-        type: Boolean,
-        value: true
-    },
-    zIndex: {
-        type: Number,
-        value: 11000
-    }
+  backgroundColor: {
+    type: String,
+    default: '',
+  },
+  duration: {
+    type: Number,
+    default: 300,
+  },
+  preventScrollThrough: {
+    type: Boolean,
+    default: true,
+  },
+  zIndex: {
+    type: Number,
+    default: 11000,
+  },
 };
 export default props;

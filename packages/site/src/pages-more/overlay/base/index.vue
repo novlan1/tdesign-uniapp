@@ -36,8 +36,8 @@ export default {
     handleClick() {
       this.visible = true;
     },
-    handleOverlayClick(e) {
-      this.visible = e.detail.visible;
+    handleOverlayClick() {
+      this.visible = !this.visible;
     },
   },
 };

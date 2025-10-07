@@ -6,7 +6,7 @@
       :style="_._style(['--td-overlay-transition-duration:' + duration + 'ms', 'z-index:' + _zIndex, 'top:' + distanceTop + 'px', computedStyle, style, customStyle])"
       :aria-role="ariaRole || 'button'"
       :aria-label="ariaLabel || '关闭'"
-      @click="handleClick"
+      @click.stop="handleClick"
       @touchmove.stop.prevent="noop"
       @transitionend="onTransitionEnd"
     >
@@ -18,7 +18,7 @@
       :style="_._style(['z-index:' + _zIndex, 'top:' + distanceTop + 'px', computedStyle, style, customStyle])"
       :aria-role="ariaRole || 'button'"
       :aria-label="ariaLabel || '关闭'"
-      @click="handleClick"
+      @click.stop="handleClick"
       @transitionend="onTransitionEnd"
     >
       <slot />
@@ -26,59 +26,102 @@
   </view>
 </template>
 <script>
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import transition from '../mixins/transition';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-overlay`;
-let Overlay = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.properties = props;
-    this._ = _;
-    this.mixins = [transition(), useCustomNavbar];
-    this.setData({
+
+
+export default uniComponent({
+  name,
+  mixins: [
+    transition(),
+    useCustomNavbar,
+  ],
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       computedStyle: '',
       _zIndex: 11000,
-    });
-    this.observers = {
-      backgroundColor(o) {
-        this.setData({
-          computedStyle: o ? `background-color: ${o};` : '',
-        });
+      _,
+    };
+  },
+  watch: {
+    backgroundColor: {
+      handler(v) {
+        this.computedStyle = v ? `background-color: ${v};` : '';
       },
-      zIndex(o) {
-        if (0 !== o) {
-          this.setData({
-            _zIndex: o,
-          });
+      immediate: true,
+    },
+    zIndex: {
+      handler(v) {
+        if (v !== 0) {
+          this._zIndex = v;
         }
       },
-    };
-    this.methods = {
-      handleClick() {
-        this.$emit('click', {
-          detail: {
-            visible: !this.visible,
-          },
-        });
-      },
-      noop() {},
-    };
-  }
-};
-Overlay = initTDesign(__decorate([wxComponent()], Overlay));
-export default Overlay;
+      immediate: true,
+
+    },
+  },
+  methods: {
+    handleClick() {
+      this.$emit('click', {
+        visible: !this.visible,
+      });
+    },
+    noop() {},
+  },
+});
+
+// let Overlay = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.properties = props;
+//     this._ = _;
+//     this.mixins = [transition(), useCustomNavbar];
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//       computedStyle: '',
+//       _zIndex: 11000,
+//     });
+//     this.observers = {
+//       backgroundColor(o) {
+//         this.setData({
+//           computedStyle: o ? `background-color: ${o};` : '',
+//         });
+//       },
+//       zIndex(o) {
+//         if (0 !== o) {
+//           this.setData({
+//             _zIndex: o,
+//           });
+//         }
+//       },
+//     };
+//     this.methods = {
+//       handleClick() {
+//         this.$emit('click', {
+//           detail: {
+//             visible: !this.visible,
+//           },
+//         });
+//       },
+//       noop() {},
+//     };
+//   }
+// };
+// Overlay = initTDesign(__decorate([wxComponent()], Overlay));
+// export default Overlay;
 </script>
 <style>
 @import './overlay.css';
