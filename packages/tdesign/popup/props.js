@@ -1,51 +1,52 @@
 const props = {
-    closeBtn: {
-        type: Boolean
-    },
-    closeOnOverlayClick: {
-        type: Boolean,
-        value: true
-    },
-    content: {
-        type: String
-    },
-    duration: {
-        type: Number,
-        value: 240
-    },
-    externalClasses: {
-        type: Array
-    },
-    overlayProps: {
-        type: Object,
-        value: {}
-    },
-    placement: {
-        type: String,
-        value: 'top'
-    },
-    preventScrollThrough: {
-        type: Boolean,
-        value: true
-    },
-    showOverlay: {
-        type: Boolean,
-        value: true
-    },
-    usingCustomNavbar: {
-        type: Boolean,
-        value: false
-    },
-    visible: {
-        type: Boolean,
-        value: null
-    },
-    defaultVisible: {
-        type: Boolean
-    },
-    zIndex: {
-        type: Number,
-        value: 11500
-    }
+  closeBtn: {
+    type: Boolean,
+  },
+  closeOnOverlayClick: {
+    type: Boolean,
+    default: true,
+  },
+  content: {
+    type: String,
+  },
+  duration: {
+    type: Number,
+    default: 240,
+  },
+  externalClasses: {
+    type: Array,
+  },
+  overlayProps: {
+    type: Object,
+    value: {},
+  },
+  placement: {
+    type: String,
+    default: 'top',
+  },
+  preventScrollThrough: {
+    type: Boolean,
+    default: true,
+  },
+  showOverlay: {
+    type: Boolean,
+    default: true,
+  },
+  usingCustomNavbar: {
+    type: Boolean,
+    default: false,
+  },
+  visible: {
+    type: [Boolean, null],
+    default: null,
+  },
+  defaultVisible: {
+    type: [Boolean, null],
+    default: null,
+  },
+  zIndex: {
+    type: Number,
+    default: 11500,
+  },
 };
 export default props;

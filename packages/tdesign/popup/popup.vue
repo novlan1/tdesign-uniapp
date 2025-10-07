@@ -39,83 +39,119 @@
       :background-color="(overlayProps && overlayProps.backgroundColor) || ''"
       :prevent-scroll-through="preventScrollThrough || (overlayProps ? !!overlayProps.preventScrollThrough : false)"
       :custom-style="(overlayProps && overlayProps.style) || ''"
-      @tap.native="handleOverlayClick($event, { tagId: 'popup-overlay' })"
+      @click="handleOverlayClick($event, { tagId: 'popup-overlay' })"
     />
   </view>
 </template>
 <script>
 import tOverlay from '../overlay/overlay';
 import tIcon from '../icon/icon';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
+import { uniComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
-import transition, { transitionMixins } from '../mixins/transition';
+import { transitionMixins } from '../mixins/transition';
 import useCustomNavbar from '../mixins/using-custom-navbar';
-import { initTDesign } from '../common/runtime';
 import _ from '../common/utils.wxs';
 import popup from './popup.wxs';
 
 delete props.visible;
+
 const {
   prefix: prefix,
 } = config;
 const name = `${prefix}-popup`;
-let Popup = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`];
-    this.mixins = [transition(), useCustomNavbar];
-    this.options = {
-      multipleSlots: true,
-    };
-    this.components = {
-      tOverlay,
-      tIcon,
-    };
-    this.properties = props;
-    // this._ = _;
-    // this._wxs = {
-    //   _,
-    //   popup
-    // }
-    this.rawData = { popup, _ };
-    this.setData({
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-content`,
+  ],
+  mixins: [transitionMixins, useCustomNavbar],
+  components: {
+    tOverlay,
+    tIcon,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
-    });
-    this.methods = {
-      handleOverlayClick() {
-        const {
-          closeOnOverlayClick: e,
-        } = this;
-        if (e) {
-          this.$emit('visible-change', {
-            detail: {
-              visible: false,
-              trigger: 'overlay',
-            },
-          });
-        }
-      },
-      handleClose() {
-        this.$emit('visible-change', {
-          detail: {
-            visible: false,
-            trigger: 'close-btn',
-          },
-        });
-      },
+      popup,
+      _,
     };
-  }
-};
-Popup = initTDesign(__decorate([wxComponent()], Popup));
-Popup = {
-  ...Popup,
-  mixins: [transitionMixins, useCustomNavbar],
-};
+  },
+  methods: {
+    handleOverlayClick() {
+      const { closeOnOverlayClick } = this;
+      if (closeOnOverlayClick) {
+        this.$emit('visible-change', { visible: false, trigger: 'overlay' });
+      }
+    },
 
-export default Popup;
+    handleClose() {
+      this.$emit('visible-change', { visible: false, trigger: 'close-btn' });
+    },
+  },
+});
+
+
+// let Popup = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`];
+//     this.mixins = [transition(), useCustomNavbar];
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     this.components = {
+//       tOverlay,
+//       tIcon,
+//     };
+//     this.properties = props;
+//     // this._ = _;
+//     // this._wxs = {
+//     //   _,
+//     //   popup
+//     // }
+//     this.rawData = { popup, _ };
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//     });
+//     this.methods = {
+//       handleOverlayClick() {
+//         const {
+//           closeOnOverlayClick: e,
+//         } = this;
+//         if (e) {
+//           this.$emit('visible-change', {
+//             detail: {
+//               visible: false,
+//               trigger: 'overlay',
+//             },
+//           });
+//         }
+//       },
+//       handleClose() {
+//         this.$emit('visible-change', {
+//           detail: {
+//             visible: false,
+//             trigger: 'close-btn',
+//           },
+//         });
+//       },
+//     };
+//   }
+// };
+// Popup = initTDesign(__decorate([wxComponent()], Popup));
+// Popup = {
+//   ...Popup,
+//   mixins: [transitionMixins, useCustomNavbar],
+// };
+
+// export default Popup;
 </script>
 <style>
 @import './popup.css';

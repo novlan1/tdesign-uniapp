@@ -31,14 +31,14 @@
 </template>
 
 <script lang="ts">
-import BaseDemo from './base';
-// import withTitle from './with-title';
-// import customClose from './custom-close';
+import BaseDemo from './base/index.vue';
+import withTitle from './with-title/index.vue';
+import customClose from './custom-close/index.vue';
 export default {
   components: {
     BaseDemo,
-    // withTitle,
-    // customClose,
+    withTitle,
+    customClose,
   },
   data() {
     return {
@@ -53,17 +53,13 @@ export default {
     handlePopup(e: any) {
       const placement = e.currentTarget.dataset.type;
       this.placement = placement;
-      this.setData({
-        [placement]: true,
-      });
+      this[placement] = true;
     },
 
     onVisibleChange({ detail }) {
       const { visible } = detail;
       if (this.placement) {
-        this.setData({
-          [this.placement]: visible,
-        });
+        this[this.placement] = visible;
       }
     },
   },

@@ -92,8 +92,8 @@ export default {
     //     },
     //   );
     },
-    onVisibleChange(e) {
-      this.visible = e.detail.visible;
+    onVisibleChange({ visible }) {
+      this.visible = visible;
     },
   },
 };
