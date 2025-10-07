@@ -14,16 +14,15 @@
         name="icon"
       >
         <t-icon
-          :style="style || ''"
-          :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-          :prefix="prefix || ''"
-          :name="'close' || ''"
-          :size="22 || ''"
-          :color="color || ''"
-          :aria-hidden="true || ''"
-          :aria-label="'清除' || ''"
-          :aria-role="'button' || ''"
-          @click="'handleClose' || ''"
+          :custom-style="_icon.style || ''"
+          :t-class="prefix + '-icon'"
+          :prefix="_icon.prefix"
+          :name="_icon.name"
+          :size="_icon.size"
+          :color="_icon.color"
+          :aria-hidden="!!_icon.ariaHidden"
+          :aria-label="_icon.ariaLabel"
+          :aria-role="_icon.ariaRole"
         />
       </block>
       <slot name="icon" />
@@ -32,7 +31,7 @@
       <slot />
       <slot name="content" />
       <block v-if="_.isArray(content) && content.length == 2">
-        {{ checked ? content[0] : content[1] }}
+        {{ tDataChecked ? content[0] : content[1] }}
       </block>
       <block v-else>
         {{ content }}
@@ -45,97 +44,176 @@
       name="close"
       aria-role="button"
       aria-label="关闭"
-      @tap.native.stop.prevent="onClose"
+      @click="onClose"
     />
   </view>
 </template>
 <script>
 import tIcon from '../icon/icon';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { wxComponent, SuperComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import { classNames, calcIcon } from '../common/utils';
 import _ from '../common/utils.wxs';
 
 
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-tag`;
-let CheckTag = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.setData({
+
+
+export default uniComponent({
+  name,
+  controlledProps: [{
+    key: 'checked',
+    event: 'change',
+  }],
+  externalClasses: [
+    `${prefix}-class`,
+
+  ],
+  components: {
+    tIcon,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       className: '',
-    });
-    this.components = {
-      tIcon,
+      _,
+      _icon: null,
+
+      tDataChecked: this.checked,
     };
-    this._ = _;
-    this.properties = props;
-    this.externalClasses = [`${prefix}-class`];
-    this.controlledProps = [{
-      key: 'checked',
-      event: 'change',
-    }];
-    this.options = {
-      multipleSlots: true,
-    };
-    this.lifetimes = {
-      attached() {
-        this.setClass();
+  },
+  watch: {
+    size: 'setClass',
+    disabled: 'setClass',
+    tDataChecked: 'setClass',
+    icon: {
+      handler(e) {
+        this._icon = calcIcon(e);
       },
-    };
-    this.observers = {
-      'size, disabled, checked'() {
-        this.setClass();
+      immediate: true,
+    },
+    checked: {
+      handler(value) {
+        this.tDataChecked = value;
       },
-      icon(e) {
-        this.setData({
-          _icon: calcIcon(e),
-        });
-      },
-    };
-    this.methods = {
-      setClass() {
-        const {
-          classPrefix: e,
-        } = this;
-        const {
-          size: s,
-          variant: t,
-          disabled: i,
-          checked: a,
-          shape: c,
-        } = this;
-        const o = classNames([e, `${e}--checkable`, i ? `${e}--disabled` : '', a ? `${e}--checked` : '', `${e}--${a ? 'primary' : 'default'}`, `${e}--${s}`, `${e}--${t}`, `${e}--${c}`]);
-        this.setData({
-          className: o,
-        });
-      },
-      onClick() {
-        if (this.disabled) {
-          return;
-        }
-        const {
-          checked: e,
-        } = this;
-        this._trigger('click');
-        this._trigger('change', {
-          checked: !e,
-        });
-      },
-      onClose(e) {
-        this.disabled || this._trigger('close', e);
-      },
-    };
-  }
-};
-CheckTag = __decorate([wxComponent()], CheckTag);
-export default CheckTag;
+      immediate: true,
+    },
+  },
+  mounted() {
+    this.setClass();
+  },
+  methods: {
+    setClass() {
+      const { classPrefix } = this;
+      const { size, variant, disabled, tDataChecked, shape } = this;
+      const tagClass = [
+        classPrefix,
+        `${classPrefix}--checkable`,
+        disabled ? `${classPrefix}--disabled` : '',
+        tDataChecked ? `${classPrefix}--checked` : '',
+        `${classPrefix}--${tDataChecked ? 'primary' : 'default'}`,
+        `${classPrefix}--${size}`,
+        `${classPrefix}--${variant}`,
+        `${classPrefix}--${shape}`,
+      ];
+      const className = classNames(tagClass);
+      this.className = className;
+    },
+
+    onClick() {
+      if (this.disabled) return;
+      const { tDataChecked } = this;
+
+      this._trigger('click');
+      this._trigger('change', { checked: !tDataChecked });
+    },
+
+    onClose(e) {
+      if (this.disabled) return;
+      this._trigger('close', e);
+    },
+  },
+});
+
+
+// let CheckTag = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//       className: '',
+//     });
+//     this.components = {
+//       tIcon,
+//     };
+//     this._ = _;
+//     this.properties = props;
+//     this.externalClasses = [`${prefix}-class`];
+//     this.controlledProps = [{
+//       key: 'checked',
+//       event: 'change',
+//     }];
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     this.lifetimes = {
+//       attached() {
+//         this.setClass();
+//       },
+//     };
+//     this.observers = {
+//       'size, disabled, checked'() {
+//         this.setClass();
+//       },
+//       icon(e) {
+//         this.setData({
+//           _icon: calcIcon(e),
+//         });
+//       },
+//     };
+//     this.methods = {
+//       setClass() {
+//         const {
+//           classPrefix: e,
+//         } = this;
+//         const {
+//           size: s,
+//           variant: t,
+//           disabled: i,
+//           checked: a,
+//           shape: c,
+//         } = this;
+//         const o = classNames([e, `${e}--checkable`, i ? `${e}--disabled` : '', a ? `${e}--checked` : '', `${e}--${a ? 'primary' : 'default'}`, `${e}--${s}`, `${e}--${t}`, `${e}--${c}`]);
+//         this.setData({
+//           className: o,
+//         });
+//       },
+//       onClick() {
+//         if (this.disabled) {
+//           return;
+//         }
+//         const {
+//           checked: e,
+//         } = this;
+//         this._trigger('click');
+//         this._trigger('change', {
+//           checked: !e,
+//         });
+//       },
+//       onClose(e) {
+//         this.disabled || this._trigger('close', e);
+//       },
+//     };
+//   }
+// };
+// CheckTag = __decorate([wxComponent()], CheckTag);
+// export default CheckTag;
 </script>
 <style>
 @import './check-tag.css';

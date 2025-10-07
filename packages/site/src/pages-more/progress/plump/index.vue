@@ -21,7 +21,7 @@
     />
     <t-progress
       theme="plump"
-      color=""
+      :color="{ from: '#0052D9', to: '#00A870' }"
       percentage="88"
       status="active"
     />

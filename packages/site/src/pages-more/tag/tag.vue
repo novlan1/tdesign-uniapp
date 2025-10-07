@@ -9,7 +9,6 @@
       <t-demo-header
         title="Tag 标签"
         desc="用于表明主体的类目，属性或状态。"
-        notice="渲染框架支持情况：Skyline、WebView"
       />
       <t-demo title="01 组件类型">
         <typeDemo />
@@ -40,6 +39,7 @@ import size from './size/index.vue';
 import typeDemo from './type/index.vue';
 import closable from './closable/index.vue';
 import checkable from './checkable/index.vue';
+
 export default {
   components: {
     theme,

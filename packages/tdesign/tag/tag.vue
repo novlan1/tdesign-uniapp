@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="className + ' class ' + prefix + '-class'"
+    :class="[className + ' class ', tClass]"
     :style="_._style([tagStyle, style, customStyle])"
     @tap="handleClick"
   >
@@ -14,16 +14,15 @@
         name="icon"
       >
         <t-icon
-          :style="style || ''"
-          :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-          :prefix="prefix || ''"
-          :name="'close' || ''"
-          :size="22 || ''"
-          :color="color || ''"
-          :aria-hidden="true || ''"
-          :aria-label="'清除' || ''"
-          :aria-role="'button' || ''"
-          @click="bindclick || ''"
+          :custom-style="_icon.style || ''"
+          :t-class="prefix + '-icon'"
+          :prefix="_icon.prefix"
+          :name="_icon.name"
+          :size="_icon.size"
+          :color="_icon.color"
+          :aria-hidden="!!_icon.ariaHidden"
+          :aria-label="_icon.ariaLabel"
+          :aria-role="_icon.ariaRole"
         />
       </block>
       <slot name="icon" />
@@ -35,19 +34,19 @@
     <block
       v-if="_closable"
       name="icon"
-      @tap.native.stop.prevent="handleClose"
+      @click.stop.prevent="handleClose"
     >
       <t-icon
-        :style="style || ''"
-        :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-        :prefix="prefix || ''"
-        :name="'close' || ''"
-        :size="22 || ''"
-        :color="color || ''"
-        :aria-hidden="true || ''"
-        :aria-label="'清除' || ''"
-        :aria-role="'button' || ''"
-        @click="'handleClose' || ''"
+        :custom-style="_closable.style || ''"
+        :t-class="classPrefix + '__icon-close ' + prefix + '-icon'"
+        :prefix="_closable.prefix"
+        :name="_closable.name"
+        :size="_closable.size"
+        :color="_closable.color"
+        :aria-hidden="!!_closable.ariaHidden"
+        :aria-label="_closable.ariaLabel || '关闭'"
+        :aria-role="_closable.ariaRole"
+        @click="handleClose"
       />
     </block>
     <slot
@@ -58,107 +57,192 @@
 </template>
 <script>
 import tIcon from '.././icon/icon';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { wxComponent, SuperComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import { classNames, calcIcon } from '../common/utils';
 import { isNumber } from '../common/validator';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-tag`;
-let Tag = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.components = {
-      tIcon,
-    };
-    this.setData({
+
+
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+  ],
+  components: {
+    tIcon,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       className: '',
       tagStyle: '',
-    });
-    this.properties = props;
-    this._ = _;
-    this.externalClasses = [`${prefix}-class`];
-    this.options = {
-      multipleSlots: true,
+      _,
+
+      _icon: null,
+      _closable: null,
     };
-    this.lifetimes = {
-      attached() {
+  },
+  watch: {
+    size: 'setClass',
+    shape: 'setClass',
+    theme: 'setClass',
+    variant: 'setClass',
+    disabled: 'setClass',
+    maxWidth: 'setTagStyle',
+    icon: {
+      handler(s) {
+        this._icon = calcIcon(s);
+      },
+      immediate: true,
+    },
+    closable: {
+      handler(s) {
         this.setClass();
-        this.setTagStyle();
+        this._closable = calcIcon(s, 'close');
       },
-    };
-    this.observers = {
-      'size, shape, theme, variant, closable, disabled'() {
-        this.setClass();
-      },
-      maxWidth() {
-        this.setTagStyle();
-      },
-      icon(s) {
-        this.setData({
-          _icon: calcIcon(s),
-        });
-      },
-      closable(s) {
-        this.setData({
-          _closable: calcIcon(s, 'close'),
-        });
-      },
-    };
-    this.methods = {
-      setClass() {
-        const {
-          prefix: s,
-          classPrefix: t,
-        } = this;
-        const {
-          size: e,
-          shape: a,
-          theme: i,
-          variant: o,
-          closable: l,
-          disabled: r,
-        } = this;
-        const c = classNames([t, `${t}--${i || 'default'}`, `${t}--${o}`, l ? `${t}--closable ${s}-is-closable` : '', r ? `${t}--disabled ${s}-is-disabled` : '', `${t}--${e}`, `${t}--${a}`]);
-        this.setData({
-          className: c,
-        });
-      },
-      setTagStyle() {
-        const {
-          maxWidth: s,
-        } = this;
-        if (!s) {
-          return '';
-        }
-        const t = isNumber(s) ? `${s}px` : s;
-        this.setData({
-          tagStyle: `max-width:${t};`,
-        });
-      },
-      handleClick(s) {
-        this.disabled || this.$emit('click', {
-          detail: s,
-        });
-      },
-      handleClose(s) {
-        this.disabled || this.$emit('close', {
-          detail: s,
-        });
-      },
-    };
-  }
-};
-Tag = initTDesign(__decorate([wxComponent()], Tag));
-export default Tag;
+      immediate: true,
+    },
+  },
+  mounted() {
+    this.setClass();
+    this.setTagStyle();
+  },
+  methods: {
+    setClass() {
+      const { prefix, classPrefix } = this;
+      const { size, shape, theme, variant, closable, disabled } = this;
+      const tagClass = [
+        classPrefix,
+        `${classPrefix}--${theme || 'default'}`,
+        `${classPrefix}--${variant}`,
+        closable ? `${classPrefix}--closable ${prefix}-is-closable` : '',
+        disabled ? `${classPrefix}--disabled ${prefix}-is-disabled` : '',
+        `${classPrefix}--${size}`,
+        `${classPrefix}--${shape}`,
+      ];
+      const className = classNames(tagClass);
+      this.className = className;
+    },
+
+    setTagStyle() {
+      const { maxWidth } = this;
+      if (!maxWidth) {
+        return '';
+      }
+      const width = isNumber(maxWidth) ? `${maxWidth}px` : maxWidth;
+      this.tagStyle = `max-width:${width};`;
+    },
+
+    handleClick(e) {
+      if (this.disabled) return;
+      this.$emit('click', e);
+    },
+
+    handleClose(e) {
+      if (this.disabled) return;
+      this.$emit('close', e);
+    },
+  },
+});
+
+
+// let Tag = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.components = {
+//       tIcon,
+//     };
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//       className: '',
+//       tagStyle: '',
+//     });
+//     this.properties = props;
+//     this._ = _;
+//     this.externalClasses = [`${prefix}-class`];
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     this.lifetimes = {
+//       attached() {
+//         this.setClass();
+//         this.setTagStyle();
+//       },
+//     };
+//     this.observers = {
+//       'size, shape, theme, variant, closable, disabled'() {
+//         this.setClass();
+//       },
+//       maxWidth() {
+//         this.setTagStyle();
+//       },
+//       icon(s) {
+//         this.setData({
+//           _icon: calcIcon(s),
+//         });
+//       },
+//       closable(s) {
+//         this.setData({
+//           _closable: calcIcon(s, 'close'),
+//         });
+//       },
+//     };
+//     this.methods = {
+//       setClass() {
+//         const {
+//           prefix: s,
+//           classPrefix: t,
+//         } = this;
+//         const {
+//           size: e,
+//           shape: a,
+//           theme: i,
+//           variant: o,
+//           closable: l,
+//           disabled: r,
+//         } = this;
+//         const c = classNames([t, `${t}--${i || 'default'}`, `${t}--${o}`, l ? `${t}--closable ${s}-is-closable` : '', r ? `${t}--disabled ${s}-is-disabled` : '', `${t}--${e}`, `${t}--${a}`]);
+//         this.setData({
+//           className: c,
+//         });
+//       },
+//       setTagStyle() {
+//         const {
+//           maxWidth: s,
+//         } = this;
+//         if (!s) {
+//           return '';
+//         }
+//         const t = isNumber(s) ? `${s}px` : s;
+//         this.setData({
+//           tagStyle: `max-width:${t};`,
+//         });
+//       },
+//       handleClick(s) {
+//         this.disabled || this.$emit('click', {
+//           detail: s,
+//         });
+//       },
+//       handleClose(s) {
+//         this.disabled || this.$emit('close', {
+//           detail: s,
+//         });
+//       },
+//     };
+//   }
+// };
+// Tag = initTDesign(__decorate([wxComponent()], Tag));
+// export default Tag;
 </script>
 <style>
 @import './tag.css';

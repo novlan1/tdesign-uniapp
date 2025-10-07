@@ -1,34 +1,46 @@
 <template>
-    <view class="demo">
-        <t-tag v-if="show[0]" class="margin-16" @close="handleClose0" closable variant="light">文字标签</t-tag>
-        <t-tag v-if="show[1]" class="margin-16" @close="handleClose1" closable variant="outline">文字标签</t-tag>
-    </view>
+  <view class="demo">
+    <t-tag
+      v-if="show[0]"
+      class="margin-16"
+      closable
+      variant="light"
+      @close="handleClose0"
+    >
+      文字标签
+    </t-tag>
+    <t-tag
+      v-if="show[1]"
+      class="margin-16"
+      closable
+      variant="outline"
+      @close="handleClose1"
+    >
+      文字标签
+    </t-tag>
+  </view>
 </template>
 
 <script>
 import tTag from 'tdesign-uniapp/tag/tag';
 export default {
-    components: {
-        tTag
+  components: {
+    tTag,
+  },
+  data() {
+    return {
+      show: [true, true],
+    };
+  },
+  created() {},
+  methods: {
+    handleClose0() {
+      this.show[0] = false;
     },
-    data() {
-        return {
-            show: [true, true]
-        };
+    handleClose1() {
+      this.show[1] = false;
     },
-    methods: {
-        handleClose0() {
-            this.setData({
-                [`show[0]`]: false
-            });
-        },
-        handleClose1() {
-            this.setData({
-                [`show[1]`]: false
-            });
-        }
-    },
-    created: function () {}
+  },
 };
 </script>
 <style>
