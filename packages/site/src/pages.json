@@ -193,6 +193,12 @@
       }
     },
     {
+      "path": "pages-more/result/result-page",
+      "style": {
+        "navigationBarTitleText": "Result Page"
+      }
+    },
+    {
       "path": "pages-more/skeleton/skeleton",
       "style": {
         "navigationBarTitleText": "Skeleton"

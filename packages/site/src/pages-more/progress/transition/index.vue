@@ -10,7 +10,7 @@
         theme="primary"
         variant="plain"
         size="small"
-        @tap.native="clickReduce"
+        @click="clickReduce"
       >
         减少
       </t-button>
@@ -18,7 +18,7 @@
       <t-button
         theme="primary"
         size="small"
-        @tap.native="clickAdd"
+        @click="clickAdd"
       >
         增加
       </t-button>
@@ -42,14 +42,10 @@ export default {
   created() {},
   methods: {
     clickAdd() {
-      this.setData({
-        percentage: Math.min(this.percentage + 10, 100),
-      });
+      this.percentage = Math.min(this.percentage + 10, 100);
     },
     clickReduce() {
-      this.setData({
-        percentage: Math.max(0, this.percentage - 10),
-      });
+      this.percentage = Math.max(0, this.percentage - 10);
     },
   },
 };

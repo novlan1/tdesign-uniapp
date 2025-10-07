@@ -19,7 +19,7 @@
           block
           size="large"
           variant="outline"
-          @tap.native="goBack"
+          @click="goBack"
         >
           返回
         </t-button>

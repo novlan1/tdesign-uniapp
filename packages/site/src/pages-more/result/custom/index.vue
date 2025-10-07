@@ -4,12 +4,16 @@
       t-class-image="external-class-image"
       image="https://tdesign.gtimg.com/mobile/demos/result1.png"
     >
-      <view slot="title">
-        自定义结果
-      </view>
-      <view slot="description">
-        描述文字
-      </view>
+      <template #title>
+        <view>
+          自定义结果
+        </view>
+      </template>
+      <template #description>
+        <view>
+          描述文字
+        </view>
+      </template>
     </t-result>
   </view>
 </template>

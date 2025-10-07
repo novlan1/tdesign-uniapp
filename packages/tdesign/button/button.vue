@@ -73,19 +73,16 @@
 <script>
 import tIcon from '../icon/icon';
 import tLoading from '../loading/loading';
-// import { __decorate } from '../miniprogram_npm/tslib';
 import { uniComponent } from '../common/src/index';
-import config from '../common/config';
+import { prefix } from '../common/config';
 import props from './props';
-// import { canIUseFormFieldButton } from '../common/version';
 import { calcIcon } from '../common/utils';
 import _ from '../common/utils.wxs';
-// import { initTDesign } from '../common/runtime';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-button`;
+
+
 export default uniComponent({
   name,
   components: {
@@ -105,6 +102,9 @@ export default uniComponent({
       // loadingProps: {},
     };
   },
+  emits: [
+    'click',
+  ],
   watch: {
     icon: {
       handler(value) {
@@ -187,6 +187,7 @@ export default uniComponent({
     },
     handleTap(t) {
       if (this.disabled || this.loading) return;
+      console.log('11111');
       this.$emit('click', t);
     },
   },

@@ -1,21 +1,23 @@
 const props = {
-    description: {
-        type: String
-    },
-    icon: {
-        type: null,
-        value: true
-    },
-    image: {
-        type: String
-    },
-    theme: {
-        type: String,
-        value: 'default'
-    },
-    title: {
-        type: String,
-        value: ''
-    }
+  description: {
+    type: String,
+    default: '',
+  },
+  icon: {
+    type: [null, String, Object, Boolean, Function],
+    default: true,
+  },
+  image: {
+    type: String,
+    default: '',
+  },
+  theme: {
+    type: String,
+    default: 'default',
+  },
+  title: {
+    type: String,
+    default: '',
+  },
 };
 export default props;

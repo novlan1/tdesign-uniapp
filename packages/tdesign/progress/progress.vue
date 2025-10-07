@@ -5,7 +5,10 @@
   >
     <view
       v-if="theme === PRO_THEME.LINE"
-      :class="classPrefix + '--thin ' + classPrefix + '--status--' + (status || computedStatus) + ' ' + prefix + '-class'"
+      :class="[
+        classPrefix + '--thin ' + classPrefix + '--status--' + (status || computedStatus),
+        tClass
+      ]"
     >
       <view
         aria-role="progressbar"
@@ -18,13 +21,16 @@
         :style="'height: ' + heightBar + 'px;border-radius: ' + heightBar + 'px;background-color: ' + bgColorBar"
       >
         <view
-          :class="classPrefix + '__inner ' + prefix + '-class-bar'"
+          :class="[
+            classPrefix + '__inner ',
+            tClassBar
+          ]"
           :style="'background: ' + colorBar + '; width: ' + (computedProgress + '%')"
         />
       </view>
       <view
         v-if="label"
-        :class="classPrefix + '__info ' + prefix + '-class-label'"
+        :class="classPrefix + '__info ' + tClassLabel"
         :aria-hidden="true"
       >
         <!-- parse <template v-if="_.includes(STATUS, status)" is="icon" :data="tClass: classPrefix + '__icon', size:'44rpx', name: LINE_STATUS_ICON[status]"></template> -->
@@ -63,18 +69,17 @@
           '--status--' +
           (status || computedStatus) +
           ' ' +
-          prefix +
-          '-class'
+          tClass
       "
       :style="'height: ' + heightBar + 'px;border-radius: ' + heightBar + 'px;background-color: ' + bgColorBar"
     >
       <view
-        :class="classPrefix + '__inner ' + prefix + '-class-bar'"
+        :class="classPrefix + '__inner ' + tClassBar"
         :style="'background: ' + colorBar + '; width: ' + computedProgress + '%'"
       >
         <view
           v-if="label && computedProgress > 10"
-          :class="classPrefix + '__info ' + prefix + '-class-label'"
+          :class="classPrefix + '__info ' + tClassLabel"
         >
           <text>{{ _.isString(label) ? label : computedProgress + '%' }}</text>
         </view>
@@ -85,7 +90,7 @@
       </view>
       <view
         v-if="label && computedProgress <= 10"
-        :class="classPrefix + '__info ' + prefix + '-class-label'"
+        :class="classPrefix + '__info ' + tClassLabel"
         :aria-hidden="true"
       >
         <text>{{ _.isString(label) ? label : computedProgress + '%' }}</text>
@@ -97,7 +102,7 @@
     </view>
     <view
       v-if="theme === PRO_THEME.CIRCLE"
-      :class="classPrefix + '--status--' + (status || computedStatus) + ' ' + prefix + '-class'"
+      :class="classPrefix + '--status--' + (status || computedStatus) + ' ' + tClass"
     >
       <view
         aria-role="progressbar"
@@ -118,10 +123,10 @@
             ' 0%);'
         "
       >
-        <view :class="classPrefix + '__canvas--inner ' + prefix + '-class-bar'">
+        <view :class="classPrefix + '__canvas--inner ' + tClassBar">
           <view
             v-if="label"
-            :class="classPrefix + '__info ' + prefix + '-class-label'"
+            :class="classPrefix + '__info ' + tClassLabel"
             :aria-hidden="true"
           >
             <!-- parse <template v-if="_.includes(STATUS, status)" is="icon" :data="tClass: classPrefix + '__icon', size:'96rpx', name: CIRCLE_STATUS_ICON[status]"></template> -->
@@ -148,7 +153,7 @@
 <script>
 import tIcon from '../icon/icon';
 import { uniComponent } from '../common/src/index';
-import config from '../common/config';
+import { prefix } from '../common/config';
 import props from './props';
 import { getBackgroundColor } from './utils';
 import { unitConvert, isIOS as isIOSValidator } from '../common/utils';
@@ -168,9 +173,7 @@ import {
   getAndroidAriaLabel,
 } from './progress.wxs';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-progress`;
 
 export default uniComponent({

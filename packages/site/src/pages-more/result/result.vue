@@ -30,7 +30,7 @@
             block
             size="large"
             variant="outline"
-            @tap.native="goResultPage"
+            @click="goResultPage"
           >
             页面示例
           </t-button>
