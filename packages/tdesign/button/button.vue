@@ -187,7 +187,6 @@ export default uniComponent({
     },
     handleTap(t) {
       if (this.disabled || this.loading) return;
-      console.log('11111');
       this.$emit('click', t);
     },
   },

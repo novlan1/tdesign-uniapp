@@ -46,15 +46,15 @@
 <script lang="ts">
 
 import BaseDemo from './base/index.vue';
-// import theme from './theme/index.vue';
-// import cover from './cover/index.vue';
-// import close from './close/index.vue';
+import theme from './theme/index.vue';
+import cover from './cover/index.vue';
+import close from './close/index.vue';
 export default {
   components: {
     BaseDemo,
-    // theme,
-    // cover,
-    // close,
+    theme,
+    cover,
+    close,
   },
   data() {
     return {};

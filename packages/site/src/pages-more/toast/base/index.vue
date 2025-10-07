@@ -10,7 +10,7 @@
         variant="outline"
         theme="primary"
         block
-        @tap.native="showText"
+        @click="showText"
       >
         纯文本
       </t-button>
@@ -19,7 +19,7 @@
         variant="outline"
         theme="primary"
         block
-        @tap.native="showMultiText"
+        @click="showMultiText"
       >
         多行文字
       </t-button>
@@ -28,7 +28,7 @@
         variant="outline"
         theme="primary"
         block
-        @tap.native="showHorizontalText"
+        @click="showHorizontalText"
       >
         带横向图标
       </t-button>
@@ -37,7 +37,7 @@
         variant="outline"
         theme="primary"
         block
-        @tap.native="showVerticalText"
+        @click="showVerticalText"
       >
         带竖向图标
       </t-button>
@@ -47,7 +47,7 @@
         variant="outline"
         theme="primary"
         block
-        @tap.native="showLoading"
+        @click="showLoading"
       >
         加载状态
       </t-button>
