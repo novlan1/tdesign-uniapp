@@ -114,7 +114,7 @@ function _style(styles) {
         return item != null && item !== '';
       })
       .map(function (item) {
-        return isArray(item) ? _style(item) : endsWith(item, ';');
+        return (isArray(item) || isObject(item)) ? _style(item) : endsWith(item, ';');
       })
       .join(' ');
   }

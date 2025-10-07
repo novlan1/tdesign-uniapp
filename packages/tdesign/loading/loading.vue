@@ -96,14 +96,10 @@
 </template>
 <script>
 import { uniComponent } from '../common/src/index';
-import config from '../common/config';
+import { prefix } from '../common/config';
 import props from './props';
 import _ from '../common/utils.wxs';
 
-
-const {
-  prefix,
-} = config;
 
 const name = `${prefix}-loading`;
 

@@ -3,6 +3,6 @@
     align-items: center;
 }
 
-.wrapper {
+:deep(.wrapper) {
     margin-right: 40px;
 }
