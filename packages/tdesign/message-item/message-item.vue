@@ -16,16 +16,15 @@
           name="icon"
         >
           <t-icon
-            :style="style || ''"
-            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-            :prefix="prefix || ''"
-            :name="'close' || ''"
-            :size="22 || ''"
-            :color="color || ''"
-            :aria-hidden="true || ''"
-            :aria-label="'清除' || ''"
-            :aria-role="'button' || ''"
-            @click="bindclick || ''"
+            :custom-style="_icon.style || ''"
+            :t-class="prefix + '-class-icon'"
+            :prefix="_icon.prefix"
+            :name="_icon.name"
+            :size="_icon.size"
+            :color="_icon.color"
+            :aria-hidden="true"
+            :aria-label="_icon.ariaLabel"
+            :aria-role="_icon.ariaRole"
           />
         </block>
       </view>
@@ -73,16 +72,15 @@
           name="icon"
         >
           <t-icon
-            :style="style || ''"
-            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-            :prefix="prefix || ''"
-            :name="'close' || ''"
-            :size="22 || ''"
-            :color="color || ''"
-            :aria-hidden="true || ''"
-            :aria-label="'清除' || ''"
-            :aria-role="'button' || ''"
-            @click="bindclick || ''"
+            :custom-style="_closeBtn.style || ''"
+            :t-class="prefix + '-class-close-btn'"
+            :prefix="_closeBtn.prefix"
+            :name="_closeBtn.name"
+            :size="_closeBtn.size"
+            :color="_closeBtn.color"
+            :aria-hidden="false"
+            :aria-label="_closeBtn.ariaLabel || '关闭'"
+            :aria-role="_closeBtn.ariaRole || 'button'"
           />
         </block>
       </view>
@@ -92,19 +90,16 @@
 <script>
 import tIcon from '../icon/icon';
 import tLink from '../link/link';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
-import props from '../message/props';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import { getRect, unitConvert, calcIcon } from '../common/utils';
 import { isObject } from '../common/validator';
-import { initTDesign } from '../common/runtime';
 import _ from '../common/utils.wxs';
 import { getMessageStyles } from '../message-item/message-item.wxs';
+import { messageDefaultData } from '../message/config';
 
-const {
-  prefix: prefix,
-} = config;
+
+const SHOW_DURATION = 400;
 const name = `${prefix}-message`;
 const THEME_ICON = {
   info: 'info-circle-filled',
@@ -112,225 +107,494 @@ const THEME_ICON = {
   warning: 'info-circle-filled',
   error: 'error-circle-filled',
 };
-let Message = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-icon`, `${prefix}-class-link`, `${prefix}-class-close-btn`];
-    this.options = {
-      multipleSlots: true,
-    };
-    // this = Object.assign({}, props);
-    this.properties = props;
-    this._ = _;
-    // this._this = _this;
-    this.components = {
-      tIcon,
-      tLink,
-    };
+const rawData = {
+  prefix,
+  classPrefix: name,
+  loop: -1,
+  animation: [],
+  showAnimation: [],
+  wrapTop: -999,
+  fadeClass: '',
 
-    this.setData({
-      prefix,
-      classPrefix: name,
-      loop: -1,
-      animation: [],
-      showAnimation: [],
-      wrapTop: -999,
-      fadeClass: '',
-      align: '',
-      closeBtn: '',
-      content: '',
-      duration: 3000,
-      height: 0,
-      id: '',
-      gap: 0,
-      icon: null,
-      link: null,
-      marquee: null,
-      offset: [16, 16],
-      style: '',
-      customStyle: '',
-      theme: 'info',
-      visible: false,
-      zIndex: 1000,
-      single: true,
-      defaultVisible: false,
-      ariaHidden: true,
-    });
-    this.closeTimeoutContext = 0;
-    this.nextAnimationContext = 0;
-    this.resetAnimation = uni.createAnimation({
-      duration: 0,
-      timingFunction: 'linear',
-    });
-    this.observers = {
-      marquee(t) {
-        '{}' !== JSON.stringify(t) && 'true' !== JSON.stringify(t) || this.setData({
-          marquee: {
-            speed: 50,
-            loop: -1,
-            delay: 0,
-          },
-        });
-      },
-      'icon, theme'(t, e) {
-        this.setData({
-          _icon: calcIcon(t, THEME_ICON[e]),
-        });
-      },
-      link(t) {
-        const e = isObject(t) ? Object.assign({}, t) : {
-          content: t,
-        };
-        this.setData({
-          _link: e,
-        });
-      },
-      closeBtn(t) {
-        this.setData({
-          _closeBtn: calcIcon(t, 'close'),
-        });
-      },
-    };
-    this.methods = {
-      getMessageStyles,
-      memoInitialData() {
-        this.initialData = Object.assign(Object.assign({}, this), this);
-      },
-      resetData(t) {
-        console.log('resetData', t, this.initialData);
-        Object.keys(this.initialData).forEach((e) => {
-          if (e in this &&  this[e] !== this.initialData[e]) {
-            this[e] = this.initialData[e];
-          }
-        });
-        setTimeout(() => {
-          t && t();
-        }, 0);
-        console.log('this.visible', this.visible);
-        // this.setData(Object.assign({}, this.initialData), t);
-      },
-      checkAnimation() {
-        const {
-          marquee: t,
-        } = this;
-        if (!t || 0 === t.loop) {
-          return;
-        }
-        const e = t.speed;
-        if (this.loop > 0) this.loop -= 1;else if (0 === this.loop) {
-          return void this.setData({
-            animation: this.resetAnimation.translateX(0).step()
-              .export(),
-          });
-        }
-        if (this.nextAnimationContext) {
-          this.clearMessageAnimation();
-        }
-        const i = `#${name}__text-wrap`;
-        const s = `#${name}__text`;
-        Promise.all([getRect(this, s), getRect(this, i)]).then(([t, i]) => {
-          this.setData({
-            animation: this.resetAnimation.translateX(i.width).step()
-              .export(),
-          }, () => {
-            const s = (t.width + i.width) / e * 1000;
-            const a = uni.createAnimation({
-              duration: s,
-            }).translateX(-t.width)
-              .step()
-              .export();
-            setTimeout(() => {
-              this.nextAnimationContext = setTimeout(this.checkAnimation.bind(this), s);
-              this.setData({
-                animation: a,
-              });
-            }, 20);
-          });
-        });
-      },
-      clearMessageAnimation() {
-        clearTimeout(this.nextAnimationContext);
-        this.nextAnimationContext = 0;
-      },
-      show(t = 0) {
-        const {
-          duration: e,
-          marquee: i,
-          offset: s,
-          id: a,
-        } = this;
-        console.log('showing', { duration: e });
-        this.setData({
-          visible: true,
-          loop: i?.loop || this.loop,
-          fadeClass: `${name}__fade`,
-          wrapTop: unitConvert(s[0]) + t,
-        });
-        this.reset();
-        this.checkAnimation();
-        if (e && e > 0) {
-          this.closeTimeoutContext = setTimeout(() => {
-            this.hide();
-            this.$emit('duration-end', {
-              detail: {
-                self: this,
-              },
-            });
-          }, e);
-        }
-        getRect(this, a ? `#${a}` : `#${name}`).then((t) => {
-          this.setData({
-            height: t.height,
-          }, () => {
-          });
-
-          setTimeout(() => {
-            this.fadeClass = '';
-          });
-        });
-      },
-      hide() {
-        this.reset();
-        this.setData({
-          fadeClass: `${name}__fade`,
-        });
-        setTimeout(() => {
-          this.setData({
-            visible: false,
-            animation: [],
-          });
-        }, 500);
-        if ('function' === typeof this.onHide) {
-          this.onHide();
-        }
-      },
-      reset() {
-        if (this.nextAnimationContext) {
-          this.clearMessageAnimation();
-        }
-        clearTimeout(this.closeTimeoutContext);
-        this.closeTimeoutContext = 0;
-      },
-      handleClose() {
-        this.hide();
-        this.$emit('close-btn-click');
-      },
-      handleLinkClick() {
-        this.$emit('link-click');
-      },
-    };
-    this.lifetimes = {
-      ready() {
-        this.memoInitialData();
-      },
-      detached() {
-        this.clearMessageAnimation();
-      },
-    };
-  }
+  closeTimeoutContext: 0,
+  nextAnimationContext: 0,
+  resetAnimation: uni.createAnimation({
+    duration: 0,
+    timingFunction: 'linear',
+  }),
 };
-Message = initTDesign(__decorate([wxComponent()], Message));
-export default Message;
+
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-content`,
+    `${prefix}-class-icon`,
+    `${prefix}-class-link`,
+    `${prefix}-class-close-btn`,
+  ],
+  components: {
+    tIcon,
+    tLink,
+  },
+  props: {
+    // ...props,
+  },
+  data() {
+    return {
+      ...rawData,
+      ...messageDefaultData,
+      animation: [],
+
+      // align: '',
+      // closeBtn: '',
+      // content: '',
+      // duration: 3000,
+      // height: 0,
+      // id: '',
+      // gap: 0,
+      // icon: null,
+      // link: null,
+      // marquee: null,
+      // offset: [16, 16],
+      // style: '',
+      // customStyle: '',
+      // theme: 'info',
+      // visible: false,
+      // zIndex: 1000,
+      // single: true,
+      // defaultVisible: false,
+      // ariaHidden: true,
+      _,
+    };
+  },
+  computed: {
+    innerMarquee() {
+      const { marquee } = this;
+      if (JSON.stringify(marquee) === '{}' || JSON.stringify(marquee) === 'true') {
+        return {
+          speed: 50,
+          loop: -1,
+          delay: 0,
+        };
+      }
+      return this.marquee;
+    },
+  },
+  watch: {
+    theme: {
+      handler(theme) {
+        this._icon = calcIcon(this.icon, THEME_ICON[theme]);
+      },
+      immediate: true,
+    },
+    icon: {
+      handler(icon) {
+        this._icon = calcIcon(icon, THEME_ICON[this.theme]);
+      },
+      immediate: true,
+    },
+
+
+    link: {
+      handler(v) {
+        const _link = isObject(v) ? { ...v } : { content: v };
+        this._link = _link;
+      },
+      immediate: true,
+    },
+
+    closeBtn: {
+      handler(v) {
+        this._closeBtn = calcIcon(v, 'close');
+      },
+      immediate: true,
+    },
+  },
+  mounted() {
+    this.memoInitialData();
+  },
+  beforeUnMount() {
+    this.clearMessageAnimation();
+  },
+  methods: {
+    getMessageStyles,
+    /** 记录组件设置的项目 */
+    memoInitialData() {
+      this.initialData = {
+        ...rawData,
+        ...messageDefaultData,
+        animation: [],
+      };
+    },
+
+    resetData(cb) {
+      const { initialData } = this;
+      Object.keys(initialData).forEach((key) => {
+        this[key] = initialData[key];
+      });
+      setTimeout(cb);
+    },
+
+    /** 检查是否需要开启一个新的动画循环 */
+    checkAnimation() {
+      const { innerMarquee } = this;
+      if (!innerMarquee || innerMarquee.loop === 0) {
+        return;
+      }
+
+      const speeding = innerMarquee.speed;
+
+      if (this.loop > 0) {
+        this.loop -= 1;
+      } else if (this.loop === 0) {
+      // 动画回到初始位置
+        this.animation = this.resetAnimation
+          .translateX(0)
+          .step()
+          .export();
+        return;
+      }
+
+      if (this.nextAnimationContext) {
+        this.clearMessageAnimation();
+      }
+
+      const warpID = `#${name}__text-wrap`;
+      const nodeID = `#${name}__text`;
+      Promise.all([getRect(this, nodeID), getRect(this, warpID)]).then(([nodeRect, wrapRect]) => {
+        this.animation = this.resetAnimation.translateX(wrapRect.width).step()
+          .export();
+
+        // this.setData(
+        //   {
+        //     this.animation = this.resetAnimation.translateX(wrapRect.width).step()
+        //       .export()
+        //   },
+        //   () => {
+        setTimeout(() => {
+          const durationTime = ((nodeRect.width + wrapRect.width) / speeding) * 1000;
+          const nextAnimation = wx
+            .createAnimation({
+            // 默认50px/s
+              duration: durationTime,
+            })
+            .translateX(-nodeRect.width)
+            .step()
+            .export();
+
+          // 这里就只能用 setTimeout/20, nextTick 没用
+          // 不用这个的话会出现reset动画没跑完就开始跑这个等的奇怪问题
+          setTimeout(() => {
+            this.nextAnimationContext = setTimeout(this.checkAnimation.bind(this), durationTime);
+            // this.setData({ animation: nextAnimation });
+            this.animation = nextAnimation;
+          }, 20);
+        });
+      });
+      // });
+    },
+
+    /** 清理动画循环 */
+    clearMessageAnimation() {
+      clearTimeout(this.nextAnimationContext);
+      this.nextAnimationContext = 0;
+    },
+
+    show(offsetHeight = 0) {
+      const { duration, innerMarquee, offset, id } = this;
+      // this.setData({
+      this.visible = true;
+      this.loop = innerMarquee.loop || this.loop;
+      this.fadeClass = `${name}__fade`;
+      this.wrapTop = unitConvert(offset[0]) + offsetHeight;
+      // });
+
+      this.reset();
+      setTimeout(() => {
+        this.checkAnimation();
+      });
+
+      if (duration && duration > 0) {
+        this.closeTimeoutContext = setTimeout(() => {
+          this.hide();
+          this.$emit('duration-end', { self: this });
+        }, duration);
+      }
+      const wrapID = id ? `#${id}` : `#${name}`;
+      console.log('wrapID', wrapID);
+      setTimeout(() => {
+        getRect(this, wrapID)
+          .then((wrapRect) => {
+            console.log('wrapRect', wrapRect);
+            this.height = wrapRect.height;
+            setTimeout(() => {
+              this.fadeClass = '';
+            });
+            // this.setData({ height: wrapRect.height }, () => {
+            //   this.setData({
+            //     fadeClass: '',
+            //   });
+            // });
+          })
+          .catch((err) => {
+            console.warn('err', err);
+          });
+      });
+    },
+
+    hide() {
+      this.reset();
+      this.fadeClass = `${name}__fade`;
+
+      setTimeout(() => {
+        this.visible = false;
+        this.animation = [];
+      }, SHOW_DURATION);
+      if (typeof this.onHide === 'function') {
+        this.onHide();
+      }
+    },
+
+    // 重置定时器
+    reset() {
+      if (this.nextAnimationContext) {
+        this.clearMessageAnimation();
+      }
+      clearTimeout(this.closeTimeoutContext);
+      this.closeTimeoutContext = 0;
+    },
+
+    handleClose() {
+      this.hide();
+      this.$emit('close-btn-click');
+    },
+
+    handleLinkClick() {
+      this.$emit('link-click');
+    },
+  },
+});
+
+// let Message = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-icon`, `${prefix}-class-link`, `${prefix}-class-close-btn`];
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     // this = Object.assign({}, props);
+//     this.properties = props;
+//     this._ = _;
+//     // this._this = _this;
+//     this.components = {
+//       tIcon,
+//       tLink,
+//     };
+
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//       loop: -1,
+//       animation: [],
+//       showAnimation: [],
+//       wrapTop: -999,
+//       fadeClass: '',
+//       align: '',
+//       closeBtn: '',
+//       content: '',
+//       duration: 3000,
+//       height: 0,
+//       id: '',
+//       gap: 0,
+//       icon: null,
+//       link: null,
+//       marquee: null,
+//       offset: [16, 16],
+//       style: '',
+//       customStyle: '',
+//       theme: 'info',
+//       visible: false,
+//       zIndex: 1000,
+//       single: true,
+//       defaultVisible: false,
+//       ariaHidden: true,
+//     });
+//     this.closeTimeoutContext = 0;
+//     this.nextAnimationContext = 0;
+//     this.resetAnimation = uni.createAnimation({
+//       duration: 0,
+//       timingFunction: 'linear',
+//     });
+//     this.observers = {
+//       marquee(t) {
+//         '{}' !== JSON.stringify(t) && 'true' !== JSON.stringify(t) || this.setData({
+//           marquee: {
+//             speed: 50,
+//             loop: -1,
+//             delay: 0,
+//           },
+//         });
+//       },
+//       'icon, theme'(t, e) {
+//         this.setData({
+//           _icon: calcIcon(t, THEME_ICON[e]),
+//         });
+//       },
+//       link(t) {
+//         const e = isObject(t) ? Object.assign({}, t) : {
+//           content: t,
+//         };
+//         this.setData({
+//           _link: e,
+//         });
+//       },
+//       closeBtn(t) {
+//         this.setData({
+//           _closeBtn: calcIcon(t, 'close'),
+//         });
+//       },
+//     };
+//     this.methods = {
+//       getMessageStyles,
+//       memoInitialData() {
+//         this.initialData = Object.assign(Object.assign({}, this), this);
+//       },
+//       resetData(t) {
+//         console.log('resetData', t, this.initialData);
+//         Object.keys(this.initialData).forEach((e) => {
+//           if (e in this &&  this[e] !== this.initialData[e]) {
+//             this[e] = this.initialData[e];
+//           }
+//         });
+//         setTimeout(() => {
+//           t && t();
+//         }, 0);
+//         console.log('this.visible', this.visible);
+//         // this.setData(Object.assign({}, this.initialData), t);
+//       },
+//       checkAnimation() {
+//         const {
+//           marquee: t,
+//         } = this;
+//         if (!t || 0 === t.loop) {
+//           return;
+//         }
+//         const e = t.speed;
+//         if (this.loop > 0) this.loop -= 1;else if (0 === this.loop) {
+//           return void this.setData({
+//             animation: this.resetAnimation.translateX(0).step()
+//               .export(),
+//           });
+//         }
+//         if (this.nextAnimationContext) {
+//           this.clearMessageAnimation();
+//         }
+//         const i = `#${name}__text-wrap`;
+//         const s = `#${name}__text`;
+//         Promise.all([getRect(this, s), getRect(this, i)]).then(([t, i]) => {
+//           this.setData({
+//             animation: this.resetAnimation.translateX(i.width).step()
+//               .export(),
+//           }, () => {
+//             const s = (t.width + i.width) / e * 1000;
+//             const a = uni.createAnimation({
+//               duration: s,
+//             }).translateX(-t.width)
+//               .step()
+//               .export();
+//             setTimeout(() => {
+//               this.nextAnimationContext = setTimeout(this.checkAnimation.bind(this), s);
+//               this.setData({
+//                 animation: a,
+//               });
+//             }, 20);
+//           });
+//         });
+//       },
+//       clearMessageAnimation() {
+//         clearTimeout(this.nextAnimationContext);
+//         this.nextAnimationContext = 0;
+//       },
+//       show(t = 0) {
+//         const {
+//           duration: e,
+//           marquee: i,
+//           offset: s,
+//           id: a,
+//         } = this;
+//         console.log('showing', { duration: e });
+//         this.setData({
+//           visible: true,
+//           loop: i?.loop || this.loop,
+//           fadeClass: `${name}__fade`,
+//           wrapTop: unitConvert(s[0]) + t,
+//         });
+//         this.reset();
+//         this.checkAnimation();
+//         if (e && e > 0) {
+//           this.closeTimeoutContext = setTimeout(() => {
+//             this.hide();
+//             this.$emit('duration-end', {
+//               detail: {
+//                 self: this,
+//               },
+//             });
+//           }, e);
+//         }
+//         getRect(this, a ? `#${a}` : `#${name}`).then((t) => {
+//           this.setData({
+//             height: t.height,
+//           }, () => {
+//           });
+
+//           setTimeout(() => {
+//             this.fadeClass = '';
+//           });
+//         });
+//       },
+//       hide() {
+//         this.reset();
+//         this.setData({
+//           fadeClass: `${name}__fade`,
+//         });
+//         setTimeout(() => {
+//           this.setData({
+//             visible: false,
+//             animation: [],
+//           });
+//         }, 500);
+//         if ('function' === typeof this.onHide) {
+//           this.onHide();
+//         }
+//       },
+//       reset() {
+//         if (this.nextAnimationContext) {
+//           this.clearMessageAnimation();
+//         }
+//         clearTimeout(this.closeTimeoutContext);
+//         this.closeTimeoutContext = 0;
+//       },
+//       handleClose() {
+//         this.hide();
+//         this.$emit('close-btn-click');
+//       },
+//       handleLinkClick() {
+//         this.$emit('link-click');
+//       },
+//     };
+//     this.lifetimes = {
+//       ready() {
+//         this.memoInitialData();
+//       },
+//       detached() {
+//         this.clearMessageAnimation();
+//       },
+//     };
+//   }
+// };
+// Message = initTDesign(__decorate([wxComponent()], Message));
+// export default Message;
 </script>
 <style>
 @import './message-item.css';

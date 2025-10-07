@@ -1,56 +1,59 @@
 const props = {
-    align: {
-        type: String,
-        value: 'left'
-    },
-    closeBtn: {
-        type: null,
-        value: false
-    },
-    content: {
-        type: String
-    },
-    duration: {
-        type: Number,
-        value: 3000
-    },
-    gap: {
-        type: null,
-        value: 12
-    },
-    icon: {
-        type: null,
-        value: true
-    },
-    link: {
-        type: null
-    },
-    marquee: {
-        type: null,
-        value: false
-    },
-    offset: {
-        type: Array
-    },
-    single: {
-        type: Boolean,
-        value: true
-    },
-    theme: {
-        type: String,
-        value: 'info'
-    },
-    visible: {
-        type: Boolean,
-        value: false
-    },
-    defaultVisible: {
-        type: Boolean,
-        value: false
-    },
-    zIndex: {
-        type: Number,
-        value: 15000
-    }
+  align: {
+    type: String,
+    default: 'left',
+  },
+  closeBtn: {
+    type: [String, Boolean, Object],
+    default: false,
+  },
+  content: {
+    type: String,
+    default: '',
+  },
+  duration: {
+    type: Number,
+    default: 3000,
+  },
+  gap: {
+    type: [String, Number, Boolean],
+    default: 12,
+  },
+  icon: {
+    type: [String, Boolean, Object],
+    default: true,
+  },
+  link: {
+    type: [String, Object],
+    default: '',
+  },
+  marquee: {
+    type: [Boolean, Object],
+    default: false,
+  },
+  offset: {
+    type: Array,
+    default: () => ([]),
+  },
+  single: {
+    type: Boolean,
+    default: true,
+  },
+  theme: {
+    type: String,
+    default: 'info',
+  },
+  visible: {
+    type: Boolean,
+    default: false,
+  },
+  defaultVisible: {
+    type: Boolean,
+    default: false,
+  },
+  zIndex: {
+    type: Number,
+    default: 15000,
+  },
 };
 export default props;

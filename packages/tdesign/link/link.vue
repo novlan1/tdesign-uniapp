@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view
+    <navigator
       :class="className + ' class ' + prefix + '-class'"
       :style="_._style([style, customStyle])"
       :target="navigatorProps.target"
@@ -70,7 +70,7 @@
           />
         </block>
       </view>
-    </view>
+    </navigator>
   </view>
 </template>
 <script>

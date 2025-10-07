@@ -1,4 +1,12 @@
 @import '../common/style/index.css';
+
+/* #ifdef H5 */
+    :deep(.navigator-wrap) {
+        display: flex;
+        align-items: center;
+    }
+/* #endif */
+
 .t-link--small .t-link__content {
     font-size: 24rpx;
     line-height: 40rpx;

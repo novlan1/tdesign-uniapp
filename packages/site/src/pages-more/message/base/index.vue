@@ -9,6 +9,7 @@
       :visible="visible"
       :offset="[90, 32]"
       content="这是一条通过组件调用的消息通知"
+      @duration-end="() => visible = false"
     />
 
     <view class="message-example">
@@ -18,7 +19,7 @@
         variant="outline"
         size="large"
         block
-        @tap.native="showTextMessage"
+        @click="showTextMessage"
       >
         纯文字的通知
       </t-button>
@@ -29,7 +30,7 @@
         variant="outline"
         size="large"
         block
-        @tap.native="showIconMessage"
+        @click="showIconMessage"
       >
         带图标的通知
       </t-button>
@@ -40,7 +41,7 @@
         variant="outline"
         size="large"
         block
-        @tap.native="showCloseMessage"
+        @click="showCloseMessage"
       >
         带关闭的通知
       </t-button>
@@ -51,7 +52,7 @@
         variant="outline"
         size="large"
         block
-        @tap.native="showScrollMessage"
+        @click="showScrollMessage"
       >
         可滚动的通知
       </t-button>
@@ -62,7 +63,7 @@
         variant="outline"
         size="large"
         block
-        @tap.native="showBtnMessage"
+        @click="showBtnMessage"
       >
         带按钮的通知
       </t-button>
@@ -73,7 +74,7 @@
         variant="outline"
         size="large"
         block
-        @tap.native="showComponent"
+        @click="showComponent"
       >
         组件调用
       </t-button>
@@ -154,7 +155,7 @@ export default {
         link: {
           content: '链接',
           navigatorProps: {
-            url: '/page/xxx/xxx',
+            url: '/pages/home/home',
           },
         },
       });
@@ -170,9 +171,7 @@ export default {
       });
     },
     showComponent() {
-      this.setData({
-        visible: true,
-      });
+      this.visible = true;
     },
   },
 };
