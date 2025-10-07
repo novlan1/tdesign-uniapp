@@ -23,7 +23,7 @@
           desc="过渡样式"
           padding
         >
-          <transition />
+          <transitionDemo />
         </t-demo>
         <t-demo
           desc="自定义颜色/圆角"
@@ -36,7 +36,7 @@
           desc="线性进度条"
           padding
         >
-          <line />
+          <lineDemo />
         </t-demo>
         <t-demo
           desc="百分比内显进度条"
@@ -44,7 +44,7 @@
         >
           <plump />
         </t-demo>
-        <circle />
+        <circleDemo />
       </view>
     </scroll-view>
   </view>
@@ -53,19 +53,19 @@
 <script lang="ts">
 
 import BaseDemo from './base/index.vue';
-import transition from './transition/index.vue';
+import transitionDemo from './transition/index.vue';
 import custom from './custom/index.vue';
-import line from './line/index.vue';
+import lineDemo from './line/index.vue';
 import plump from './plump/index.vue';
-import circle from './circle/index.vue';
+import circleDemo from './circle/index.vue';
 export default {
   components: {
     BaseDemo,
-    transition,
+    transitionDemo,
     custom,
-    line,
+    lineDemo,
     plump,
-    circle,
+    circleDemo,
   },
   data() {
     return {};

@@ -33,16 +33,9 @@
           name="icon"
         >
           <t-icon
-            :style="style || ''"
-            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-            :prefix="prefix || ''"
-            :name="'close' || ''"
+            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--'"
+            :name="LINE_STATUS_ICON[status]"
             :size="22 || ''"
-            :color="color || ''"
-            :aria-hidden="true || ''"
-            :aria-label="'清除' || ''"
-            :aria-role="'button' || ''"
-            @click="bindclick || ''"
           />
         </block>
         <text v-else>
@@ -137,16 +130,9 @@
               name="icon"
             >
               <t-icon
-                :style="style || ''"
-                :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-                :prefix="prefix || ''"
-                :name="'close' || ''"
-                :size="22 || ''"
-                :color="color || ''"
-                :aria-hidden="true || ''"
-                :aria-label="'清除' || ''"
-                :aria-role="'button' || ''"
-                @click="bindclick || ''"
+                :t-class="classPrefix + '__icon ' + classPrefix + '__icon--'"
+                :name="CIRCLE_STATUS_ICON[status]"
+                size="96rpx"
               />
             </block>
             <text v-else>
@@ -161,14 +147,13 @@
 </template>
 <script>
 import tIcon from '../icon/icon';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
+import { uniComponent } from '../common/src/index';
 import config from '../common/config';
 import props from './props';
 import { getBackgroundColor } from './utils';
 import { unitConvert, isIOS as isIOSValidator } from '../common/utils';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
+
 import {
   STATUS,
   STATUS_TEXT,
@@ -187,26 +172,29 @@ const {
   prefix: prefix,
 } = config;
 const name = `${prefix}-progress`;
-let Progress = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-bar`, `${prefix}-class-label`];
-    this.options = {
-      multipleSlots: true,
-    };
-    this.properties = props;
-    this._ = _;
-    this.components = {
-      tIcon,
-    };
-    this.setData({
+
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-bar`,
+    `${prefix}-class-label`,
+  ],
+  components: {
+    tIcon,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       colorBar: '',
       heightBar: '',
       computedStatus: '',
       computedProgress: 0,
-      isIOS: false,
+      isIOS: isIOSValidator(),
       STATUS,
       STATUS_TEXT,
       PRO_THEME,
@@ -218,45 +206,121 @@ let Progress = class extends SuperComponent {
       getCircleStyle,
       getIOSAriaLabel,
       getAndroidAriaLabel,
-    });
-    this.observers = {
-      percentage(o) {
-        o = Math.max(0, Math.min(o, 100));
-        this.setData({
-          computedStatus: 100 === o ? 'success' : '',
-          computedProgress: o,
-        });
+      _,
+    };
+  },
+  watch: {
+    percentage: {
+      handler(percentage) {
+        percentage = Math.max(0, Math.min(percentage, 100));
+
+        this.computedStatus = percentage === 100 ? 'success' : '';
+        this.computedProgress = percentage;
       },
-      color(o) {
-        this.setData({
-          colorBar: getBackgroundColor(o),
-          colorCircle: 'object' === typeof o ? '' : o,
-        });
+      immediate: true,
+    },
+
+    color: {
+      handler(color) {
+        this.colorBar = getBackgroundColor(color);
+        this.colorCircle = typeof color === 'object' ? '' : color; // 环形不支持渐变，单独处理
       },
-      strokeWidth(o) {
-        if (!o) {
+      immediate: true,
+    },
+
+    strokeWidth: {
+      handler(strokeWidth) {
+        if (!strokeWidth) {
           return '';
         }
-        this.setData({
-          heightBar: unitConvert(o),
-        });
+        this.heightBar = unitConvert(strokeWidth);
       },
-      trackColor(o) {
-        this.setData({
-          bgColorBar: o,
-        });
+      immediate: true,
+    },
+
+    trackColor: {
+      handler(trackColor) {
+        this.bgColorBar = trackColor;
       },
-    };
-  }
-  attached() {
-    const o = isIOSValidator();
-    this.setData({
-      isIOS: o,
-    });
-  }
-};
-Progress = initTDesign(__decorate([wxComponent()], Progress));
-export default Progress;
+      immediate: true,
+    },
+  },
+  methods: {
+
+  },
+});
+
+
+// let Progress = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-bar`, `${prefix}-class-label`];
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     this.properties = props;
+//     this._ = _;
+//     this.components = {
+//       tIcon,
+//     };
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//       colorBar: '',
+//       heightBar: '',
+//       computedStatus: '',
+//       computedProgress: 0,
+//       isIOS: false,
+//       STATUS,
+//       STATUS_TEXT,
+//       PRO_THEME,
+
+//       STATUS_COLOR,
+//       LINE_STATUS_ICON,
+//       CIRCLE_STATUS_ICON,
+
+//       getCircleStyle,
+//       getIOSAriaLabel,
+//       getAndroidAriaLabel,
+//     });
+//     this.observers = {
+//       percentage(o) {
+//         o = Math.max(0, Math.min(o, 100));
+//         this.setData({
+//           computedStatus: 100 === o ? 'success' : '',
+//           computedProgress: o,
+//         });
+//       },
+//       color(o) {
+//         this.setData({
+//           colorBar: getBackgroundColor(o),
+//           colorCircle: 'object' === typeof o ? '' : o,
+//         });
+//       },
+//       strokeWidth(o) {
+//         if (!o) {
+//           return '';
+//         }
+//         this.setData({
+//           heightBar: unitConvert(o),
+//         });
+//       },
+//       trackColor(o) {
+//         this.setData({
+//           bgColorBar: o,
+//         });
+//       },
+//     };
+//   }
+//   attached() {
+//     const o = isIOSValidator();
+//     this.setData({
+//       isIOS: o,
+//     });
+//   }
+// };
+// Progress = initTDesign(__decorate([wxComponent()], Progress));
+// export default Progress;
 </script>
 <style>
 @import './progress.css';

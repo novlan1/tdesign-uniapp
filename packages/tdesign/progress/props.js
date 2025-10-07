@@ -1,33 +1,35 @@
 const props = {
-    color: {
-        type: null,
-        value: ''
-    },
-    label: {
-        type: null,
-        value: true
-    },
-    percentage: {
-        type: Number,
-        value: 0
-    },
-    size: {
-        type: null,
-        value: 'default'
-    },
-    status: {
-        type: String
-    },
-    strokeWidth: {
-        type: null
-    },
-    theme: {
-        type: String,
-        value: 'line'
-    },
-    trackColor: {
-        type: String,
-        value: ''
-    }
+  color: {
+    type: [String, Object, Array],
+    default: '',
+  },
+  label: {
+    type: [String, Boolean],
+    default: true,
+  },
+  percentage: {
+    type: [Number, String],
+    default: 0,
+  },
+  size: {
+    type: [String, Number],
+    default: 'default',
+  },
+  status: {
+    type: String,
+    default: '',
+  },
+  strokeWidth: {
+    type: [String, Number],
+    default: '',
+  },
+  theme: {
+    type: String,
+    default: 'line',
+  },
+  trackColor: {
+    type: String,
+    default: '',
+  },
 };
 export default props;
