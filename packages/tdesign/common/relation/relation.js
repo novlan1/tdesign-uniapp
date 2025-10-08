@@ -157,15 +157,12 @@ export function ChildrenMixin(parent, options = {}) {
         const parentComponentName = `Press${parent.replace(/^\w/, a => a.toUpperCase())}`;
         this[parent] = getParent.call(this, parentComponentName);
         // #endif
-        console.log('bindRelation', this[parent], this[parent]?.children, this, parent);
         if (!this[parent] || (this[parent].children && this[parent].children.indexOf(this) !== -1)) {
-          console.log('11112323');
           return;
         }
 
         const children = [...(this[parent].children || []), this];
 
-        console.log('children.123123', children);
 
         // #ifdef H5
         try {

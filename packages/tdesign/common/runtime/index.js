@@ -81,7 +81,6 @@ function executeWatchers(info) {
   Object.keys(observers).forEach((key) => {
     const list = key.split(',').map(item => item.trim());
     const isDiff = list.find(item => that[item] !== properties[key]?.value);
-    console.log('isDiff', isDiff, key, list.map(item => that[item]));
 
     if (isDiff) {
       const handler = observers[key];

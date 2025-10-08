@@ -197,8 +197,6 @@ export default uniComponent({
   },
   methods: {
     setIcon(e, t, s) {
-      console.log('this.arrow', this.arrow);
-      console.log('setIcon', e, t, s, calcIcon(t, s));
       this[e] = calcIcon(t, s);
     },
     onClick(e) {

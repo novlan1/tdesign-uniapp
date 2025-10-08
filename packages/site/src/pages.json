@@ -209,6 +209,12 @@
       "style": {
         "navigationBarTitleText": "ActionSheet"
       }
+    },
+    {
+      "path": "pages-more/swipe-cell/swipe-cell",
+      "style": {
+        "navigationBarTitleText": "SwipeCell"
+      }
     }
   ],
   "globalStyle": {
