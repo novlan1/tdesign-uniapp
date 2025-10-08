@@ -1,5 +1,7 @@
 # TDesign Uni App
 
+> TDesign is an artwork.
+
 TDesign 在 uni-app 的适配方案。
 
 ## Usage
