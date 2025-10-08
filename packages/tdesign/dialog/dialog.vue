@@ -5,14 +5,14 @@
       :custom-style="_._style([style, customStyle])"
       class="class"
       :t-class="classPrefix + '__wrapper'"
-      :visible="visible"
-      :show-overlay="showOverlay"
-      :close-on-overlay-click="closeOnOverlayClick"
-      :prevent-scroll-through="preventScrollThrough"
-      :overlay-props="overlayProps"
-      :z-index="zIndex"
+      :visible="dataVisible"
+      :show-overlay="dataShowOverlay"
+      :close-on-overlay-click="dataCloseOnOverlayClick"
+      :prevent-scroll-through="dataPreventScrollThrough"
+      :overlay-props="dataOverlayProps"
+      :z-index="dataZIndex"
       placement="center"
-      :using-custom-navbar="usingCustomNavbar"
+      :using-custom-navbar="dataUsingCustomNavbar"
       @visible-change="overlayClick"
     >
       <template #content>
@@ -21,23 +21,23 @@
         >
           <slot name="top" />
           <view
-            v-if="closeBtn"
+            v-if="dataCloseBtn"
             :class="classPrefix + '__close-btn'"
             @click="onClose"
           >
             <!-- parse <template v-if="_.isObject(closeBtn)" is="icon" :data="name: 'close', size: 22, ...closeBtn"/> -->
             <template
-              v-if="_.isObject(closeBtn)"
+              v-if="_.isObject(dataCloseBtn)"
             >
               <t-icon
-                :custom-style="closeBtn.style || ''"
-                :prefix="closeBtn.prefix"
-                :name="closeBtn.name || 'close'"
-                :size="closeBtn.size || 22"
-                :color="closeBtn.color"
+                :custom-style="dataCloseBtn.style || ''"
+                :prefix="dataCloseBtn.prefix"
+                :name="dataCloseBtn.name || 'close'"
+                :size="dataCloseBtn.size || 22"
+                :color="dataCloseBtn.color"
                 :aria-hidden="true"
-                :aria-label="closeBtn.ariaLabel"
-                :aria-role="closeBtn.ariaRole"
+                :aria-label="dataCloseBtn.ariaLabel"
+                :aria-role="dataCloseBtn.ariaRole"
               />
             </template>
             <t-icon
@@ -48,18 +48,18 @@
           </view>
           <view :class="classPrefix + '__content ' + prefix + '-class-content'">
             <view
-              v-if="title"
+              v-if="dataTitle"
               :class="classPrefix + '__header'"
             >
-              {{ title }}
+              {{ dataTitle }}
             </view>
             <slot name="title" />
             <view
-              v-if="content"
+              v-if="dataContent"
               :class="classPrefix + '__body'"
             >
               <text :class="classPrefix + '__body-text'">
-                {{ content }}
+                {{ dataContent }}
               </text>
             </view>
             <slot name="content" />
@@ -68,14 +68,14 @@
           <view
             :class="
               _.cls(classPrefix + '__footer', [
-                ['column', buttonLayout === 'vertical'],
-                ['full', buttonVariant == 'text' && actions.length == 0]
+                ['column', dataButtonLayout === 'vertical'],
+                ['full', buttonVariant == 'text' && dataActions.length == 0]
               ])
             "
           >
-            <template v-if="actions">
+            <template v-if="dataActions">
               <template
-                v-for="(actionItem, index) in actions"
+                v-for="(actionItem, index) in dataActions"
                 :key="index"
               >
                 <!-- parse <template is="button" :data="block: true, type: 'action', extra: index, tClass: prefix + '-class-action', rootClass: getActionClass(classPrefix, buttonLayout), ...item"/> -->
@@ -84,7 +84,7 @@
                   :custom-style="actionItem.style"
                   :block="actionItem.block ?? true"
                   :t-class="actionItem.tClass ?? prefix + '-class-action'"
-                  :class="getActionClass(classPrefix, buttonLayout)"
+                  :class="getActionClass(classPrefix, dataButtonLayout)"
                   :disabled="actionItem.disabled"
                   :data-type="'action'"
                   :data-extra="actionItem.index ?? index"
@@ -239,9 +239,11 @@ import { isObject } from '../common/validator';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
 import { getActionClass } from './dialog.wxs';
+import { getFunctionalMixin } from '../common/functional/mixin';
 
 
 const name = `${prefix}-dialog`;
+
 
 export default uniComponent({
   name,
@@ -252,7 +254,7 @@ export default uniComponent({
     `${prefix}-class-cancel`,
     `${prefix}-class-action`,
   ],
-  mixins: [useCustomNavbar],
+  mixins: [getFunctionalMixin(props), useCustomNavbar],
   components: {
     tPopup,
     tIcon,
@@ -273,40 +275,32 @@ export default uniComponent({
     };
   },
   watch: {
-    confirmBtn: {
+    dataConfirmBtn: {
       handler() {
-        this.onWatchBtn(this.confirmBtn, this.cancelBtn);
+        this.onWatchBtn(this.dataConfirmBtn, this.dataCancelBtn);
       },
       immediate: true,
     },
-    cancelBtn: {
+    dataCancelBtn: {
       handler() {
-        this.onWatchBtn(this.confirmBtn, this.cancelBtn);
+        this.onWatchBtn(this.dataConfirmBtn, this.dataCancelBtn);
       },
       immediate: true,
     },
   },
   methods: {
-    setData(data) {
-      if (!data) return;
-
-      Object.keys(data).forEach((key) => {
-        this[key] = data[key];
-      });
-    },
     getActionClass,
     onWatchBtn(confirm, cancel) {
-      const { prefix, classPrefix, buttonLayout } = this;
+      const { prefix, classPrefix, dataButtonLayout } = this;
       const rect = { buttonVariant: 'text' };
       const useBaseVariant = [confirm, cancel].some(item => isObject(item) && item.variant && item.variant !== 'text');
       const buttonMap = { confirm, cancel };
       const cls = [`${classPrefix}__button`];
       const externalCls = [];
 
-      console.log('useBaseVariant', useBaseVariant);
       if (useBaseVariant) {
         rect.buttonVariant = 'base';
-        cls.push(`${classPrefix}__button--${buttonLayout}`);
+        cls.push(`${classPrefix}__button--${dataButtonLayout}`);
       } else {
         cls.push(`${classPrefix}__button--text`);
         externalCls.push(`${classPrefix}-button`);
@@ -403,13 +397,13 @@ export default uniComponent({
 
     close() {
       // this.setData({ visible: false });
-      this.visible = false;
+      this.dataVisible = false;
     },
 
     overlayClick() {
       this.$emit('overlay-click');
 
-      if (this.closeOnOverlayClick) {
+      if (this.dataCloseOnOverlayClick) {
         const trigger = { trigger: 'overlay' };
 
         this.$emit('close', trigger);
