@@ -11,7 +11,7 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
+import BaseDemo from './base/index.vue';
 export default {
   components: {
     BaseDemo,

@@ -215,6 +215,12 @@
       "style": {
         "navigationBarTitleText": "SwipeCell"
       }
+    },
+    {
+      "path": "pages-more/pull-down-refresh/pull-down-refresh",
+      "style": {
+        "navigationBarTitleText": "PullDownRefresh"
+      }
     }
   ],
   "globalStyle": {

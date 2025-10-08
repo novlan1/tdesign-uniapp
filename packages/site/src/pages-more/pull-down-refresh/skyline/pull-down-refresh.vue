@@ -1,22 +1,26 @@
 <template>
-    <view>
-        <t-navbar class="demo-navbar" title="PullDownRefresh" left-arrow />
-        <base />
-    </view>
+  <view>
+    <t-navbar
+      class="demo-navbar"
+      title="PullDownRefresh"
+      left-arrow
+    />
+    <baseComp />
+  </view>
 </template>
 
 <script>
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
-import base from '../base';
+import baseComp from '../base';
 export default {
-    components: {
-        tNavbar,
-        base
-    },
-    data() {
-        return {};
-    },
-    methods: {}
+  components: {
+    tNavbar,
+    baseComp,
+  },
+  data() {
+    return {};
+  },
+  methods: {},
 };
 </script>
 <style>
