@@ -2,7 +2,7 @@
   <view>
     <t-popup
       name="dialog"
-      :style="_._style([style, customStyle])"
+      :custom-style="_._style([style, customStyle])"
       class="class"
       :t-class="classPrefix + '__wrapper'"
       :visible="visible"
@@ -15,107 +15,103 @@
       :using-custom-navbar="usingCustomNavbar"
       @visible-change="overlayClick"
     >
-      <view
-        slot="content"
-        :class="classPrefix + ' ' + prefix + '-class'"
-      >
-        <slot name="top" />
+      <template #content>
         <view
-          v-if="closeBtn"
-          :class="classPrefix + '__close-btn'"
-          @tap="onClose"
+          :class="classPrefix + ' ' + prefix + '-class'"
         >
-          <!-- parse <template v-if="_.isObject(closeBtn)" is="icon" :data="name: 'close', size: 22, ...closeBtn"/> -->
-          <template
-            v-if="_.isObject(closeBtn)"
-            name="icon"
-          >
-            <t-icon
-              :style="style || ''"
-              :t-class="tClass"
-              :prefix="prefix || ''"
-              :name="'close' || ''"
-              :size="22 || ''"
-              :color="color || ''"
-              :aria-hidden="ariaHidden || ''"
-              :aria-label="ariaLabel || ''"
-              :aria-role="ariaRole || ''"
-              @click="bindclick || ''"
-            />
-          </template>
-          <t-icon
-            v-else
-            name="close"
-            size="44rpx"
-          />
-        </view>
-        <view :class="classPrefix + '__content ' + prefix + '-class-content'">
+          <slot name="top" />
           <view
-            v-if="title"
-            :class="classPrefix + '__header'"
+            v-if="closeBtn"
+            :class="classPrefix + '__close-btn'"
+            @click="onClose"
           >
-            {{ title }}
-          </view>
-          <slot name="title" />
-          <view
-            v-if="content"
-            :class="classPrefix + '__body'"
-          >
-            <text :class="classPrefix + '__body-text'">
-              {{ content }}
-            </text>
-          </view>
-          <slot name="content" />
-        </view>
-        <slot name="middle" />
-        <view
-          :class="
-            _.cls(classPrefix + '__footer', [
-              ['column', buttonLayout === 'vertical'],
-              ['full', buttonVariant == 'text' && actions.length == 0]
-            ])
-          "
-        >
-          <template v-if="actions">
+            <!-- parse <template v-if="_.isObject(closeBtn)" is="icon" :data="name: 'close', size: 22, ...closeBtn"/> -->
             <template
-              v-for="(item, index) in actions"
-              :key="index"
+              v-if="_.isObject(closeBtn)"
             >
-              <!-- parse <template is="button" :data="block: true, type: 'action', extra: index, tClass: prefix + '-class-action', rootClass: getActionClass(classPrefix, buttonLayout), ...item"/> -->
-              <template name="button">
+              <t-icon
+                :custom-style="closeBtn.style || ''"
+                :prefix="closeBtn.prefix"
+                :name="closeBtn.name || 'close'"
+                :size="closeBtn.size || 22"
+                :color="closeBtn.color"
+                :aria-hidden="true"
+                :aria-label="closeBtn.ariaLabel"
+                :aria-role="closeBtn.ariaRole"
+              />
+            </template>
+            <t-icon
+              v-else
+              name="close"
+              size="44rpx"
+            />
+          </view>
+          <view :class="classPrefix + '__content ' + prefix + '-class-content'">
+            <view
+              v-if="title"
+              :class="classPrefix + '__header'"
+            >
+              {{ title }}
+            </view>
+            <slot name="title" />
+            <view
+              v-if="content"
+              :class="classPrefix + '__body'"
+            >
+              <text :class="classPrefix + '__body-text'">
+                {{ content }}
+              </text>
+            </view>
+            <slot name="content" />
+          </view>
+          <slot name="middle" />
+          <view
+            :class="
+              _.cls(classPrefix + '__footer', [
+                ['column', buttonLayout === 'vertical'],
+                ['full', buttonVariant == 'text' && actions.length == 0]
+              ])
+            "
+          >
+            <template v-if="actions">
+              <template
+                v-for="(actionItem, index) in actions"
+                :key="index"
+              >
+                <!-- parse <template is="button" :data="block: true, type: 'action', extra: index, tClass: prefix + '-class-action', rootClass: getActionClass(classPrefix, buttonLayout), ...item"/> -->
                 <t-button
-                  :t-id="tId || ''"
-                  :style="style || ''"
-                  :block="true || false"
-                  :class="getActionClass(classPrefix, buttonLayout) || ''"
-                  :t-class="prefix + '-class-action'"
-                  :disabled="disabled || false"
+                  :t-id="actionItem.tId"
+                  :custom-style="actionItem.style"
+                  :block="actionItem.block ?? true"
+                  :t-class="actionItem.tClass ?? prefix + '-class-action'"
+                  :class="getActionClass(classPrefix, buttonLayout)"
+                  :disabled="actionItem.disabled"
                   :data-type="'action'"
-                  :data-extra="index"
-                  :custom-dataset="customDataset"
-                  :content="content || ''"
-                  :icon="icon || ''"
-                  :loading="loading || false"
-                  :loading-props="loadingProps || null"
-                  :theme="theme || 'default'"
-                  :ghost="ghost || false"
-                  :shape="shape || 'rectangle'"
-                  :size="size || 'medium'"
-                  :variant="variant || 'base'"
-                  :open-type="openType || ''"
-                  :hover-class="hoverClass || ''"
-                  :hover-stop-propagation="hoverStopPropagation || false"
-                  :hover-start-time="hoverStartTime || 20"
-                  :hover-stay-time="hoverStayTime || 70"
-                  :lang="lang || 'en'"
-                  :session-from="sessionFrom || ''"
-                  :send-message-title="sendMessageTitle || ''"
-                  :send-message-path="sendMessagePath || ''"
-                  :send-message-img="sendMessageImg || ''"
-                  :app-parameter="appParameter || ''"
-                  :show-message-card="showMessageCard || false"
-                  :aria-label="ariaLabel || ''"
-                  @tap.native="onTplButtonTap($event, { type: 'action', extra: index })"
+                  :data-extra="actionItem.index ?? index"
+                  :custom-dataset="actionItem.customDataset"
+                  :content="actionItem.content"
+                  :icon="actionItem.icon"
+                  :loading="actionItem.loading"
+                  :loading-props="actionItem.loadingProps"
+                  :theme="actionItem.theme"
+                  :ghost="actionItem.ghost"
+                  :shape="actionItem.shape"
+                  :size="actionItem.size"
+                  :variant="actionItem.variant"
+                  :open-type="actionItem.openType"
+                  :hover-class="actionItem.hoverClass"
+                  :hover-stop-propagation="actionItem.hoverStopPropagation"
+                  :hover-start-time="actionItem.hoverStartTime"
+                  :hover-stay-time="actionItem.hoverStayTime"
+                  :lang="actionItem.lang"
+                  :session-from="actionItem.sessionFrom"
+                  :send-message-title="actionItem.sendMessageTitle"
+                  :send-message-path="actionItem.sendMessagePath"
+                  :send-message-img="actionItem.sendMessageImg"
+                  :app-parameter="actionItem.appParameter"
+                  :show-message-card="actionItem.showMessageCard"
+                  :aria-label="actionItem.ariaLabel"
+                  @click="onTplButtonTap($event, { type: 'action', extra: index })"
                   @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
                   @contact="onTplButtonTap($event, { type: 'action', extra: index })"
                   @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
@@ -124,51 +120,46 @@
                   @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
                   @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
                 >
-                  <slot v-if="useDefaultSlot || false" />
+                  <slot v-if="actionItem.useDefaultSlot || false" />
                 </t-button>
               </template>
             </template>
-          </template>
-          <slot name="actions" />
-          <template v-if="_cancel">
-            <!-- parse <template is="button" :data="type: 'cancel', ..._cancel"/> -->
-            <template
-              v-if="false"
-              name="button"
-            >
+            <slot name="actions" />
+            <template v-if="_cancel">
+              <!-- parse <template is="button" :data="type: 'cancel', ..._cancel"/> -->
+
               <t-button
-                :t-id="tId || ''"
-                :style="style || ''"
-                :block="true || false"
-                :class="getActionClass(classPrefix, buttonLayout) || ''"
-                :t-class="prefix + '-class-action'"
-                :disabled="disabled || false"
-                :data-type="'action'"
-                :data-extra="index"
-                :custom-dataset="customDataset"
-                :content="content || ''"
-                :icon="icon || ''"
-                :loading="loading || false"
-                :loading-props="loadingProps || null"
-                :theme="theme || 'default'"
-                :ghost="ghost || false"
-                :shape="shape || 'rectangle'"
-                :size="size || 'medium'"
-                :variant="variant || 'base'"
-                :open-type="openType || ''"
-                :hover-class="hoverClass || ''"
-                :hover-stop-propagation="hoverStopPropagation || false"
-                :hover-start-time="hoverStartTime || 20"
-                :hover-stay-time="hoverStayTime || 70"
-                :lang="lang || 'en'"
-                :session-from="sessionFrom || ''"
-                :send-message-title="sendMessageTitle || ''"
-                :send-message-path="sendMessagePath || ''"
-                :send-message-img="sendMessageImg || ''"
-                :app-parameter="appParameter || ''"
-                :show-message-card="showMessageCard || false"
-                :aria-label="ariaLabel || ''"
-                @tap.native="onTplButtonTap($event, { type: 'action', extra: index })"
+                :t-id="_cancel.tId"
+                :custom-style="_cancel.style"
+                :block="_cancel.block"
+                :t-class="_cancel.tClass"
+                :disabled="_cancel.disabled"
+                :data-type="'cancel'"
+                :data-extra="_cancel.index"
+                :custom-dataset="_cancel.customDataset"
+                :content="_cancel.content"
+                :icon="_cancel.icon"
+                :loading="_cancel.loading"
+                :loading-props="_cancel.loadingProps"
+                :theme="_cancel.theme"
+                :ghost="_cancel.ghost"
+                :shape="_cancel.shape"
+                :size="_cancel.size"
+                :variant="_cancel.variant"
+                :open-type="_cancel.openType"
+                :hover-class="_cancel.hoverClass"
+                :hover-stop-propagation="_cancel.hoverStopPropagation"
+                :hover-start-time="_cancel.hoverStartTime"
+                :hover-stay-time="_cancel.hoverStayTime"
+                :lang="_cancel.lang"
+                :session-from="_cancel.sessionFrom"
+                :send-message-title="_cancel.sendMessageTitle"
+                :send-message-path="_cancel.sendMessagePath"
+                :send-message-img="_cancel.sendMessageImg"
+                :app-parameter="_cancel.appParameter"
+                :show-message-card="_cancel.showMessageCard"
+                :aria-label="_cancel.ariaLabel"
+                @click="onTplButtonTap($event, { type: 'action', extra: index })"
                 @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
                 @contact="onTplButtonTap($event, { type: 'action', extra: index })"
                 @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
@@ -177,63 +168,62 @@
                 @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
                 @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
               >
-                <slot v-if="useDefaultSlot || false" />
+                <slot v-if="_cancel.useDefaultSlot || false" />
               </t-button>
             </template>
-          </template>
-          <slot name="cancel-btn" />
-          <template v-if="_confirm">
-            <!-- TODO: 改成 v-bind？ -->
-            <!-- parse <template is="button" :data="type: 'confirm', theme: 'primary', ..._confirm"/> -->
-            <!-- <template name="button"> -->
-            <t-button
-              :t-id="tId || ''"
-              :style="style || ''"
-              :block="!!_confirm.block"
-              :class="getActionClass(classPrefix, buttonLayout) || ''"
-              :t-class="prefix + '-class-action'"
-              :disabled="disabled || false"
-              :data-type="'action'"
-              :data-extra="index"
-              :custom-dataset="customDataset"
-              :content="_confirm.content || ''"
-              :icon="icon || ''"
-              :loading="loading || false"
-              :loading-props="loadingProps || null"
-              :theme="'primary' || 'default'"
-              :ghost="ghost || false"
-              :shape="shape || 'rectangle'"
-              :size="size || 'medium'"
-              :variant="variant || 'base'"
-              :open-type="openType || ''"
-              :hover-class="hoverClass || ''"
-              :hover-stop-propagation="hoverStopPropagation || false"
-              :hover-start-time="hoverStartTime || 20"
-              :hover-stay-time="hoverStayTime || 70"
-              :lang="lang || 'en'"
-              :session-from="sessionFrom || ''"
-              :send-message-title="sendMessageTitle || ''"
-              :send-message-path="sendMessagePath || ''"
-              :send-message-img="sendMessageImg || ''"
-              :app-parameter="appParameter || ''"
-              :show-message-card="showMessageCard || false"
-              :aria-label="ariaLabel || ''"
-              @tap.native="onConfirm($event, { type: 'action', extra: index })"
-              @getuserinfo="onConfirm($event, { type: 'action', extra: index })"
-              @contact="onConfirm($event, { type: 'action', extra: index })"
-              @getphonenumber="onConfirm($event, { type: 'action', extra: index })"
-              @error="onTplButtonConfirmonTap($event, { type: 'action', extra: index })"
-              @opensetting="onConfirm($event, { type: 'action', extra: index })"
-              @launchapp="onConfirm($event, { type: 'action', extra: index })"
-              @agreeprivacyauthorization="onConfirm($event, { type: 'action', extra: index })"
-            >
-              <slot v-if="useDefaultSlot || false" />
-            </t-button>
+            <slot name="cancel-btn" />
+            <template v-if="_confirm">
+              <!-- TODO: 改成 v-bind？ -->
+              <!-- parse <template is="button" :data="type: 'confirm', theme: 'primary', ..._confirm"/> -->
+              <!-- <template name="button"> -->
+              <t-button
+                :t-id="_confirm.tId"
+                :custom-style="_confirm.style"
+                :block="_confirm.block"
+                :t-class="_confirm.tClass"
+                :disabled="_confirm.disabled"
+                :data-type="'confirm'"
+                :data-extra="_confirm.index"
+                :custom-dataset="_confirm.customDataset"
+                :content="_confirm.content"
+                :icon="_confirm.icon"
+                :loading="_confirm.loading"
+                :loading-props="_confirm.loadingProps"
+                :theme="_confirm.theme || 'primary'"
+                :ghost="_confirm.ghost"
+                :shape="_confirm.shape"
+                :size="_confirm.size"
+                :variant="_confirm.variant"
+                :open-type="_confirm.openType"
+                :hover-class="_confirm.hoverClass"
+                :hover-stop-propagation="_confirm.hoverStopPropagation"
+                :hover-start-time="_confirm.hoverStartTime"
+                :hover-stay-time="_confirm.hoverStayTime"
+                :lang="_confirm.lang"
+                :session-from="_confirm.sessionFrom"
+                :send-message-title="_confirm.sendMessageTitle"
+                :send-message-path="_confirm.sendMessagePath"
+                :send-message-img="_confirm.sendMessageImg"
+                :app-parameter="_confirm.appParameter"
+                :show-message-card="_confirm.showMessageCard"
+                :aria-label="_confirm.ariaLabel"
+                @click="onConfirm($event, { type: 'action', extra: index })"
+                @getuserinfo="onConfirm($event, { type: 'action', extra: index })"
+                @contact="onConfirm($event, { type: 'action', extra: index })"
+                @getphonenumber="onConfirm($event, { type: 'action', extra: index })"
+                @error="onTplButtonConfirmonTap($event, { type: 'action', extra: index })"
+                @opensetting="onConfirm($event, { type: 'action', extra: index })"
+                @launchapp="onConfirm($event, { type: 'action', extra: index })"
+                @agreeprivacyauthorization="onConfirm($event, { type: 'action', extra: index })"
+              >
+                <slot v-if="_confirm.useDefaultSlot || false" />
+              </t-button>
             <!-- </template> -->
-          </template>
-          <slot name="confirm-btn" />
+            </template>
+            <slot name="confirm-btn" />
+          </view>
         </view>
-      </view>
+      </template>
     </t-popup>
   </view>
 </template>
@@ -241,195 +231,385 @@
 import tPopup from '../popup/popup';
 import tIcon from '../icon/icon';
 import tButton from '../button/button';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import { toCamel } from '../common/utils';
 import { isObject } from '../common/validator';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
 import { getActionClass } from './dialog.wxs';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-dialog`;
-let Dialog = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.behaviors = [useCustomNavbar];
-    this.options = {
-      multipleSlots: true,
-    };
-    this._ = _;
-    this.components = {
-      tPopup,
-      tIcon,
-      tButton,
-    };
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-confirm`, `${prefix}-class-cancel`, `${prefix}-class-action`];
-    this.properties = props;
-    this.setData({
+
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-content`,
+    `${prefix}-class-confirm`,
+    `${prefix}-class-cancel`,
+    `${prefix}-class-action`,
+  ],
+  mixins: [useCustomNavbar],
+  components: {
+    tPopup,
+    tIcon,
+    tButton,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       buttonVariant: 'text',
-    });
-    this.observers = {
-      'confirmBtn, cancelBtn'(t, e) {
-        const {
-          prefix: o,
-          classPrefix: i,
-          buttonLayout: n,
-        } = this;
-        const s = {
-          buttonVariant: 'text',
+      _,
+
+      _confirm: null,
+      _cancel: null,
+    };
+  },
+  watch: {
+    confirmBtn: {
+      handler() {
+        this.onWatchBtn(this.confirmBtn, this.cancelBtn);
+      },
+      immediate: true,
+    },
+    cancelBtn: {
+      handler() {
+        this.onWatchBtn(this.confirmBtn, this.cancelBtn);
+      },
+      immediate: true,
+    },
+  },
+  methods: {
+    setData(data) {
+      if (!data) return;
+
+      Object.keys(data).forEach((key) => {
+        this[key] = data[key];
+      });
+    },
+    getActionClass,
+    onWatchBtn(confirm, cancel) {
+      const { prefix, classPrefix, buttonLayout } = this;
+      const rect = { buttonVariant: 'text' };
+      const useBaseVariant = [confirm, cancel].some(item => isObject(item) && item.variant && item.variant !== 'text');
+      const buttonMap = { confirm, cancel };
+      const cls = [`${classPrefix}__button`];
+      const externalCls = [];
+
+      console.log('useBaseVariant', useBaseVariant);
+      if (useBaseVariant) {
+        rect.buttonVariant = 'base';
+        cls.push(`${classPrefix}__button--${buttonLayout}`);
+      } else {
+        cls.push(`${classPrefix}__button--text`);
+        externalCls.push(`${classPrefix}-button`);
+      }
+
+      Object.keys(buttonMap).forEach((key) => {
+        const btn = buttonMap[key];
+        const rootClass = [...cls, `${classPrefix}__button--${key}`];
+
+        const base = {
+          block: true,
+          rootClass,
+          // tClass: [...externalCls, `${prefix}-class-${key}`],
+          tClass: [...externalCls, `${prefix}-class-${key}`, ...rootClass].join(' '),
+          variant: rect.buttonVariant,
+          openType: '',
         };
-        const r = [t, e].some(t => isObject(t) && t.variant && 'text' !== t.variant);
-        const a = {
-          confirm: t,
-          cancel: e,
-        };
-        const c = [`${i}__button`];
-        const l = [];
-        if (r) {
-          s.buttonVariant = 'base';
-          c.push(`${i}__button--${n}`);
+
+        if (key === 'cancel' && rect.buttonVariant === 'base') {
+          base.theme = 'light';
+        }
+
+        if (typeof btn === 'string') {
+          rect[`_${key}`] = { ...base, content: btn };
+        } else if (btn && typeof btn === 'object') {
+          rect[`_${key}`] = { ...base, ...btn };
         } else {
-          c.push(`${i}__button--text`);
-          l.push(`${i}-button`);
+          rect[`_${key}`] = null;
         }
-        Object.keys(a).forEach((t) => {
-          const e = a[t];
-          const n = {
-            block: true,
-            rootClass: [...c, `${i}__button--${t}`],
-            tClass: [...l, `${o}-class-${t}`],
-            variant: s.buttonVariant,
-            openType: '',
-          };
-          if ('cancel' === t && 'base' === s.buttonVariant) {
-            n.theme = 'light';
-          }
-          s[`_${t}`] = 'string' === typeof e ? Object.assign(Object.assign({}, n), {
-            content: e,
-          }) : e && 'object' === typeof e ? Object.assign(Object.assign({}, n), e) : null;
-        });
-        this.setData(Object.assign({}, s));
-      },
-    };
-    this.methods = {
-      getActionClass,
-      onTplButtonTap(t) {
-        let e;
-        let o;
-        let i;
-        const n = t.type;
-        const {
-          type: s,
-          extra: r,
-        } = t.target.dataset;
-        const a = this[`_${s}`];
-        const c = `bind${n}`;
-        if ('action' === s) {
-          return void this.onActionTap(r);
-        }
-        if ('function' === typeof a[c]) {
-          if (a[c](t)) {
-            this.close();
-          }
-        }
-        if (!a.openType && ['confirm', 'cancel'].includes(s)) {
-          null === (e = this[toCamel(`on-${s}`)]) || void 0 === e || e.call(this, s);
-        }
-        if ('tap' !== n) {
-          const e = (null === (i = null === (o = t.detail) || void 0 === o ? void 0 : o.errMsg) || void 0 === i ? void 0 : i.indexOf('ok')) > -1;
-          this.$emit(e ? 'open-type-event' : 'open-type-error-event', {
-            detail: t.detail,
-          });
-        }
-      },
-      onConfirm() {
-        this.$emit('confirm');
-        if (this._onConfirm) {
-          this._onConfirm({
-            trigger: 'confirm',
-          });
+      });
+
+      Object.keys(rect).forEach((key) => {
+        this[key] = rect[key];
+      });
+      // this.setData({ ...rect });
+    },
+    onTplButtonTap(e) {
+      const evtType = e.type;
+      const { type, extra } = e.target.dataset;
+      const button = this[`_${type}`];
+      const cbName = `bind${evtType}`;
+
+      if (type === 'action') {
+        this.onActionTap(extra);
+        return;
+      }
+
+      if (typeof button[cbName] === 'function') {
+        const closeFlag = button[cbName](e);
+        if (closeFlag) {
           this.close();
         }
-      },
-      onCancel() {
-        const t = {
-          trigger: 'cancel',
-        };
-        this.$emit('cancel');
-        this.$emit('close', {
-          detail: t,
-        });
-        if (this._onCancel) {
-          this._onCancel(t);
-          this.close();
-        }
-      },
-      onClose() {
-        let t;
-        const e = {
-          trigger: 'close-btn',
-        };
-        this.$emit('close', {
-          detail: e,
-        });
-        null === (t = this._onCancel) || void 0 === t || t.call(this, e);
+      }
+
+      const hasOpenType = !!button.openType;
+      if (!hasOpenType && ['confirm', 'cancel'].includes(type)) {
+        this[toCamel(`on-${type}`)]?.(type);
+      }
+
+      if (evtType !== 'tap') {
+        const success = e.detail?.errMsg?.indexOf('ok') > -1;
+        this.$emit(success ? 'open-type-event' : 'open-type-error-event', e.detail);
+      }
+    },
+
+    onConfirm() {
+      this.$emit('confirm');
+
+      if (this._onConfirm) {
+        this._onConfirm({ trigger: 'confirm' });
         this.close();
-      },
-      close() {
-        this.setData({
-          visible: false,
-        });
-      },
-      overlayClick() {
-        let t;
-        this.$emit('overlay-click');
-        if (this.closeOnOverlayClick) {
-          const e = {
-            trigger: 'overlay',
-          };
-          this.$emit('close', {
-            detail: e,
-          });
-          null === (t = this._onCancel) || void 0 === t || t.call(this, e);
-          this.close();
-        }
-      },
-      onActionTap(t) {
-        this.$emit('action', {
-          detail: {
-            index: t,
-          },
-        });
-        if (this._onAction) {
-          this._onAction({
-            index: t,
-          });
-          this.close();
-        }
-      },
-      openValueCBHandle(t) {
-        this.$emit('open-type-event', {
-          detail: t.detail,
-        });
-      },
-      openValueErrCBHandle(t) {
-        this.$emit('open-type-error-event', {
-          detail: t.detail,
-        });
-      },
-    };
-  }
-};
-Dialog = initTDesign(__decorate([wxComponent()], Dialog));
-export default Dialog;
+      }
+    },
+
+    onCancel() {
+      const trigger = { trigger: 'cancel' };
+
+      this.$emit('cancel');
+      this.$emit('close', trigger);
+
+      if (this._onCancel) {
+        this._onCancel(trigger);
+        this.close();
+      }
+    },
+
+    onClose() {
+      const trigger = { trigger: 'close-btn' };
+
+      this.$emit('close', trigger);
+      this._onCancel?.(trigger);
+      this.close();
+    },
+
+    close() {
+      // this.setData({ visible: false });
+      this.visible = false;
+    },
+
+    overlayClick() {
+      this.$emit('overlay-click');
+
+      if (this.closeOnOverlayClick) {
+        const trigger = { trigger: 'overlay' };
+
+        this.$emit('close', trigger);
+        this._onCancel?.(trigger);
+        this.close();
+      }
+    },
+
+    onActionTap(index) {
+      this.$emit('action', { index });
+      if (this._onAction) {
+        this._onAction({ index });
+        this.close();
+      }
+    },
+
+    openValueCBHandle(e) {
+      this.$emit('open-type-event', e.detail);
+    },
+
+    openValueErrCBHandle(e) {
+      this.$emit('open-type-error-event', e.detail);
+    },
+  },
+});
+
+// let Dialog = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.behaviors = [useCustomNavbar];
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     this._ = _;
+//     this.components = {
+//       tPopup,
+//       tIcon,
+//       tButton,
+//     };
+//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-confirm`, `${prefix}-class-cancel`, `${prefix}-class-action`];
+//     this.properties = props;
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//       buttonVariant: 'text',
+//     });
+//     this.observers = {
+//       'confirmBtn, cancelBtn'(t, e) {
+//         const {
+//           prefix: o,
+//           classPrefix: i,
+//           buttonLayout: n,
+//         } = this;
+//         const s = {
+//           buttonVariant: 'text',
+//         };
+//         const r = [t, e].some(t => isObject(t) && t.variant && 'text' !== t.variant);
+//         const a = {
+//           confirm: t,
+//           cancel: e,
+//         };
+//         const c = [`${i}__button`];
+//         const l = [];
+//         if (r) {
+//           s.buttonVariant = 'base';
+//           c.push(`${i}__button--${n}`);
+//         } else {
+//           c.push(`${i}__button--text`);
+//           l.push(`${i}-button`);
+//         }
+//         Object.keys(a).forEach((t) => {
+//           const e = a[t];
+//           const n = {
+//             block: true,
+//             rootClass: [...c, `${i}__button--${t}`],
+//             tClass: [...l, `${o}-class-${t}`],
+//             variant: s.buttonVariant,
+//             openType: '',
+//           };
+//           if ('cancel' === t && 'base' === s.buttonVariant) {
+//             n.theme = 'light';
+//           }
+//           s[`_${t}`] = 'string' === typeof e ? Object.assign(Object.assign({}, n), {
+//             content: e,
+//           }) : e && 'object' === typeof e ? Object.assign(Object.assign({}, n), e) : null;
+//         });
+//         this.setData(Object.assign({}, s));
+//       },
+//     };
+//     this.methods = {
+//       getActionClass,
+//       onTplButtonTap(t) {
+//         let e;
+//         let o;
+//         let i;
+//         const n = t.type;
+//         const {
+//           type: s,
+//           extra: r,
+//         } = t.target.dataset;
+//         const a = this[`_${s}`];
+//         const c = `bind${n}`;
+//         if ('action' === s) {
+//           return void this.onActionTap(r);
+//         }
+//         if ('function' === typeof a[c]) {
+//           if (a[c](t)) {
+//             this.close();
+//           }
+//         }
+//         if (!a.openType && ['confirm', 'cancel'].includes(s)) {
+//           null === (e = this[toCamel(`on-${s}`)]) || void 0 === e || e.call(this, s);
+//         }
+//         if ('tap' !== n) {
+//           const e = (null === (i = null === (o = t.detail) || void 0 === o ? void 0 : o.errMsg) || void 0 === i ? void 0 : i.indexOf('ok')) > -1;
+//           this.$emit(e ? 'open-type-event' : 'open-type-error-event', {
+//             detail: t.detail,
+//           });
+//         }
+//       },
+//       onConfirm() {
+//         this.$emit('confirm');
+//         if (this._onConfirm) {
+//           this._onConfirm({
+//             trigger: 'confirm',
+//           });
+//           this.close();
+//         }
+//       },
+//       onCancel() {
+//         const t = {
+//           trigger: 'cancel',
+//         };
+//         this.$emit('cancel');
+//         this.$emit('close', {
+//           detail: t,
+//         });
+//         if (this._onCancel) {
+//           this._onCancel(t);
+//           this.close();
+//         }
+//       },
+//       onClose() {
+//         let t;
+//         const e = {
+//           trigger: 'close-btn',
+//         };
+//         this.$emit('close', {
+//           detail: e,
+//         });
+//         null === (t = this._onCancel) || void 0 === t || t.call(this, e);
+//         this.close();
+//       },
+//       close() {
+//         this.setData({
+//           visible: false,
+//         });
+//       },
+//       overlayClick() {
+//         let t;
+//         this.$emit('overlay-click');
+//         if (this.closeOnOverlayClick) {
+//           const e = {
+//             trigger: 'overlay',
+//           };
+//           this.$emit('close', {
+//             detail: e,
+//           });
+//           null === (t = this._onCancel) || void 0 === t || t.call(this, e);
+//           this.close();
+//         }
+//       },
+//       onActionTap(t) {
+//         this.$emit('action', {
+//           detail: {
+//             index: t,
+//           },
+//         });
+//         if (this._onAction) {
+//           this._onAction({
+//             index: t,
+//           });
+//           this.close();
+//         }
+//       },
+//       openValueCBHandle(t) {
+//         this.$emit('open-type-event', {
+//           detail: t.detail,
+//         });
+//       },
+//       openValueErrCBHandle(t) {
+//         this.$emit('open-type-error-event', {
+//           detail: t.detail,
+//         });
+//       },
+//     };
+//   }
+// };
+// Dialog = initTDesign(__decorate([wxComponent()], Dialog));
+// export default Dialog;
 </script>
 <style>
 @import './dialog.css';

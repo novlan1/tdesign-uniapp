@@ -10,7 +10,7 @@
       variant="outline"
       data-key="showConfirm"
       block
-      @tap.native="showDialog($event, { key: 'showConfirm' })"
+      @click="showDialog($event, { key: 'showConfirm' })"
     >
       文字按钮
     </t-button>
@@ -34,14 +34,14 @@
       variant="outline"
       data-key="showWarnConfirm"
       block
-      @tap.native="showDialog($event, { key: 'showWarnConfirm' })"
+      @click="showDialog($event, { key: 'showWarnConfirm' })"
     >
       水平基础按钮
     </t-button>
     <t-dialog
       :visible="showWarnConfirm"
       content="告知当前状态、信息和解决方法，等内容。描述文案尽可能控制在三行内"
-      confirm-btn=""
+      :confirm-btn="{ content: '确定', variant: 'base' }"
       cancel-btn="取消"
       @confirm="closeDialog"
       @cancel="closeDialog"
@@ -57,7 +57,7 @@
       variant="outline"
       data-key="showTooLongBtnContent"
       block
-      @tap.native="showDialog($event, { key: 'showTooLongBtnContent' })"
+      @click="showDialog($event, { key: 'showTooLongBtnContent' })"
     >
       垂直基础按钮
     </t-button>
@@ -82,7 +82,7 @@
       variant="outline"
       data-key="showMultiBtn"
       block
-      @tap.native="showDialog($event, { key: 'showMultiBtn' })"
+      @click="showDialog($event, { key: 'showMultiBtn' })"
     >
       多按钮
     </t-button>
@@ -105,7 +105,7 @@
       variant="outline"
       data-key="showCloseBtn"
       block
-      @tap.native="showDialog($event, { key: 'showCloseBtn' })"
+      @click="showDialog($event, { key: 'showCloseBtn' })"
     >
       带关闭按钮的对话框
     </t-button>
@@ -114,7 +114,7 @@
       title="对话框标题"
       content="告知当前状态、信息和解决方法，等内容。描述文案尽可能控制在三行内"
       close-btn
-      confirm-btn=""
+      :confirm-btn="{ content: '警示操作', variant: 'base', theme: 'danger' }"
       cancel-btn="取消"
       @confirm="closeDialog"
       @cancel="closeDialog"
@@ -142,6 +142,7 @@ export default {
       showWarnConfirm: false,
       showTooLongBtnContent: false,
       showMultiBtn: false,
+      showCloseBtn: false,
 
       multiBtnList: [
         {
@@ -158,26 +159,17 @@ export default {
         },
       ],
 
-      showCloseBtn: '',
     };
   },
   created() {},
   methods: {
-    showDialog(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { key } = e.currentTarget.dataset;
-      this.setData({
-        [key]: true,
-        dialogKey: key,
-      });
+    showDialog(e, { key }) {
+      this[key] = true;
+      this.dialogKey = key;
     },
     closeDialog() {
       const { dialogKey } = this;
-      this.setData({
-        [dialogKey]: false,
-      });
+      this[dialogKey] = false;
     },
   },
 };

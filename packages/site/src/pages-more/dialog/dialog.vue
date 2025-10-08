@@ -68,21 +68,21 @@
 <script lang="ts">
 
 import BaseDemo from './base/index.vue';
-// import confirm from './confirm/index.vue';
-// import withInput from './with-input/index.vue';
-// import withImage from './with-image/index.vue';
-// import commandDemo from './command/index.vue';
-// import status from './status/index.vue';
-// import buttonDemo from './button/index.vue';
+import confirm from './confirm/index.vue';
+import withInput from './with-input/index.vue';
+import withImage from './with-image/index.vue';
+import commandDemo from './command/index.vue';
+import status from './status/index.vue';
+import buttonDemo from './button/index.vue';
 export default {
   components: {
     BaseDemo,
-    // confirm,
-    // withInput,
-    // withImage,
-    // commandDemo,
-    // status,
-    // buttonDemo,
+    confirm,
+    withInput,
+    withImage,
+    commandDemo,
+    status,
+    buttonDemo,
   },
   data() {
     return {};

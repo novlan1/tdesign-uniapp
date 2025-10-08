@@ -6,11 +6,14 @@
       variant="outline"
       data-type="hasCancelBtn"
       block
-      @tap.native="showDialog($event, { type: 'hasCancelBtn' })"
+      @click="showDialog($event, { type: 'hasCancelBtn' })"
     >
       开放能力按钮
     </t-button>
-    <t-dialog id="t-dialog" />
+    <t-dialog
+      id="t-dialog"
+      ref="t-dialog"
+    />
   </view>
 </template>
 
@@ -28,10 +31,7 @@ export default {
   },
   created() {},
   methods: {
-    showDialog(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
+    showDialog() {
       const dialogConfig = {
         context: this,
         title: '弹窗标题',

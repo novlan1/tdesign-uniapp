@@ -171,9 +171,7 @@ export default uniComponent({
       for (let i = 0; i < len; i += 1) {
         const instance = this.instances[i];
         offsetHeight += instance.height + instance.gap;
-        console.log('dddd', instance.gap);
       }
-      console.log('instance', this.instances, len);
       return offsetHeight;
     },
 
@@ -186,7 +184,6 @@ export default uniComponent({
    */
     showMessageItem(options, id, offsetHeight) {
       let instance = this.$refs[`${id}`];
-      console.log('id', { id, refs: this.$refs, messageList: this.messageList });
       if (Array.isArray(instance)) {
         instance = instance[0];
       }
@@ -211,7 +208,6 @@ export default uniComponent({
     },
 
     close(id) {
-      console.log('close id');
       setTimeout(() => {
         this.removeMsg(id);
       }, SHOW_DURATION);
@@ -223,7 +219,6 @@ export default uniComponent({
    * @param id
    */
     hide(id) {
-      console.log('hide id');
       if (!id) {
         this.hideAll();
       }
@@ -249,7 +244,6 @@ export default uniComponent({
    */
     removeInstance(id) {
       const index = this.instances.findIndex(x => x.id === id);
-      console.log('removeInstance.index', index);
       if (index < 0) return;
       const instance = this.instances[index];
       const removedHeight = instance.height;

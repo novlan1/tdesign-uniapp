@@ -7,7 +7,7 @@
       variant="outline"
       data-key="showTextAndTitle"
       block
-      @tap.native="showDialog($event, { key: 'showTextAndTitle' })"
+      @click="showDialog($event, { key: 'showTextAndTitle' })"
     >
       反馈类-带标题
     </t-button>
@@ -26,7 +26,7 @@
       variant="outline"
       data-key="showContentOnly"
       block
-      @tap.native="showDialog($event, { key: 'showContentOnly' })"
+      @click="showDialog($event, { key: 'showContentOnly' })"
     >
       反馈类-无标题
     </t-button>
@@ -44,7 +44,7 @@
       variant="outline"
       data-key="showTitleOnly"
       block
-      @tap.native="showDialog($event, { key: 'showTitleOnly' })"
+      @click="showDialog($event, { key: 'showTitleOnly' })"
     >
       反馈类-纯标题
     </t-button>
@@ -62,7 +62,7 @@
       variant="outline"
       data-key="showMultiTextAndTitle"
       block
-      @tap.native="showDialog($event, { key: 'showMultiTextAndTitle' })"
+      @click="showDialog($event, { key: 'showMultiTextAndTitle' })"
     >
       反馈类-内容超长
     </t-button>
@@ -72,21 +72,24 @@
       :confirm-btn="confirmBtn"
       @confirm="closeDialog"
     >
-      <!-- 适配skyline，增加type="list" -->
-      <scroll-view
-        slot="content"
-        type="list"
-        scroll-y
-        class="long-content"
+      <template
+        #content
       >
-        <view class="content-container">
-          这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案 这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案
-          这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案 这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案
-          这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案 这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案
-          这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案 这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案
-          这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案 这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案
-        </view>
-      </scroll-view>
+        <!-- 适配skyline，增加type="list" -->
+        <scroll-view
+          type="list"
+          scroll-y
+          class="long-content"
+        >
+          <view class="content-container">
+            这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案 这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案
+            这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案 这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案
+            这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案 这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案
+            这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案 这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案
+            这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案 这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案，这里是辅助内容文案
+          </view>
+        </scroll-view>
+      </template>
     </t-dialog>
   </view>
 </template>
@@ -117,11 +120,7 @@ export default {
   },
   created() {},
   methods: {
-    showDialog(e, _dataset) {
-    //   console.log('_dataset', { _dataset, e });
-      /* ---处理dataset begin--- */
-      /* ---处理dataset end--- */
-      const { key } = _dataset;
+    showDialog(e, { key }) {
       this[key] = true;
       this.dialogKey = key;
     },

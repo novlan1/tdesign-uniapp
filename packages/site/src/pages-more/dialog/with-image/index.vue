@@ -7,7 +7,7 @@
       variant="outline"
       data-key="imageOnTop"
       block
-      @tap.native="showDialog($event, { key: 'imageOnTop' })"
+      @click="showDialog($event, { key: 'imageOnTop' })"
     >
       图片置顶-带标题描述
     </t-button>
@@ -15,16 +15,19 @@
       :visible="imageOnTop"
       title="对话框标题"
       content="告知当前状态、信息和解决方法，等内容。描述文案尽可能控制在三行内"
-      confirm-btn=""
+      :confirm-btn="{ content: '确定', variant: 'base' }"
       cancel-btn="取消"
       @confirm="closeDialog"
       @cancel="closeDialog"
     >
-      <t-image
-        slot="top"
-        t-class="dialog-image"
-        src="https://tdesign.gtimg.com/mobile/demos/dialog1.png"
-      />
+      <template
+        #top
+      >
+        <t-image
+          t-class="dialog-image"
+          src="https://tdesign.gtimg.com/mobile/demos/dialog1.png"
+        />
+      </template>
     </t-dialog>
 
     <t-button
@@ -34,23 +37,26 @@
       variant="outline"
       data-key="imageOnTopWithContent"
       block
-      @tap.native="showDialog($event, { key: 'imageOnTopWithContent' })"
+      @click="showDialog($event, { key: 'imageOnTopWithContent' })"
     >
       图片置顶-无标题
     </t-button>
     <t-dialog
       :visible="imageOnTopWithContent"
       content="告知当前状态、信息和解决方法，等内容。描述文案尽可能控制在三行内"
-      confirm-btn=""
+      :confirm-btn="{ content: '确定', variant: 'base' }"
       cancel-btn="取消"
       @confirm="closeDialog"
       @cancel="closeDialog"
     >
-      <t-image
-        slot="top"
-        t-class="dialog-image"
-        src="https://tdesign.gtimg.com/mobile/demos/dialog1.png"
-      />
+      <template
+        #top
+      >
+        <t-image
+          t-class="dialog-image"
+          src="https://tdesign.gtimg.com/mobile/demos/dialog1.png"
+        />
+      </template>
     </t-dialog>
 
     <t-button
@@ -60,23 +66,26 @@
       variant="outline"
       data-key="imageOnTopWithTitle"
       block
-      @tap.native="showDialog($event, { key: 'imageOnTopWithTitle' })"
+      @click="showDialog($event, { key: 'imageOnTopWithTitle' })"
     >
       图片置顶-纯标题
     </t-button>
     <t-dialog
       :visible="imageOnTopWithTitle"
       title="对话框标题"
-      confirm-btn=""
+      :confirm-btn="{ content: '确定', variant: 'base' }"
       cancel-btn="取消"
       @confirm="closeDialog"
       @cancel="closeDialog"
     >
-      <t-image
-        slot="top"
-        t-class="dialog-image"
-        src="https://tdesign.gtimg.com/mobile/demos/dialog1.png"
-      />
+      <template
+        #top
+      >
+        <t-image
+          t-class="dialog-image"
+          src="https://tdesign.gtimg.com/mobile/demos/dialog1.png"
+        />
+      </template>
     </t-dialog>
 
     <t-button
@@ -86,22 +95,25 @@
       variant="outline"
       data-key="imageOnMiddleWithImage"
       block
-      @tap.native="showDialog($event, { key: 'imageOnMiddleWithImage' })"
+      @click="showDialog($event, { key: 'imageOnMiddleWithImage' })"
     >
       图片置顶-纯图片
     </t-button>
     <t-dialog
       :visible="imageOnMiddleWithImage"
-      confirm-btn=""
+      :confirm-btn="{ content: '确定', variant: 'base' }"
       cancel-btn="取消"
       @confirm="closeDialog"
       @cancel="closeDialog"
     >
-      <t-image
-        slot="top"
-        t-class="dialog-image"
-        src="https://tdesign.gtimg.com/mobile/demos/dialog1.png"
-      />
+      <template
+        #top
+      >
+        <t-image
+          t-class="dialog-image"
+          src="https://tdesign.gtimg.com/mobile/demos/dialog1.png"
+        />
+      </template>
     </t-dialog>
 
     <t-button
@@ -111,7 +123,7 @@
       variant="outline"
       data-key="imageOnMiddle"
       block
-      @tap.native="showDialog($event, { key: 'imageOnMiddle' })"
+      @click="showDialog($event, { key: 'imageOnMiddle' })"
     >
       图片居中-带标题描述
     </t-button>
@@ -119,16 +131,19 @@
       :visible="imageOnMiddle"
       title="对话框标题"
       content="告知当前状态、信息和解决方法，等内容。描述文案尽可能控制在三行内"
-      confirm-btn=""
+      :confirm-btn="{ content: '确定', variant: 'base' }"
       cancel-btn="取消"
       @confirm="closeDialog"
       @cancel="closeDialog"
     >
-      <t-image
-        slot="middle"
-        t-class="image-host dialog-image"
-        src="https://tdesign.gtimg.com/mobile/demos/dialog1.png"
-      />
+      <template
+        #middle
+      >
+        <t-image
+          t-class="image-host dialog-image"
+          src="https://tdesign.gtimg.com/mobile/demos/dialog1.png"
+        />
+      </template>
     </t-dialog>
 
     <t-button
@@ -138,23 +153,26 @@
       variant="outline"
       data-key="imageOnMiddleWithTitle"
       block
-      @tap.native="showDialog($event, { key: 'imageOnMiddleWithTitle' })"
+      @click="showDialog($event, { key: 'imageOnMiddleWithTitle' })"
     >
       图片居中-纯标题
     </t-button>
     <t-dialog
       :visible="imageOnMiddleWithTitle"
       title="对话框标题"
-      confirm-btn=""
+      :confirm-btn="{ content: '确定', variant: 'base' }"
       cancel-btn="取消"
       @confirm="closeDialog"
       @cancel="closeDialog"
     >
-      <t-image
-        slot="middle"
-        t-class="image-host dialog-image"
-        src="https://tdesign.gtimg.com/mobile/demos/dialog1.png"
-      />
+      <template
+        #middle
+      >
+        <t-image
+          t-class="image-host dialog-image"
+          src="https://tdesign.gtimg.com/mobile/demos/dialog1.png"
+        />
+      </template>
     </t-dialog>
   </view>
 </template>
@@ -182,21 +200,13 @@ export default {
   },
   created() {},
   methods: {
-    showDialog(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { key } = e.currentTarget.dataset;
-      this.setData({
-        [key]: true,
-        dialogKey: key,
-      });
+    showDialog(e, { key }) {
+      this[key] = true;
+      this.dialogKey = key;
     },
     closeDialog() {
       const { dialogKey } = this;
-      this.setData({
-        [dialogKey]: false,
-      });
+      this[dialogKey] = false;
     },
   },
 };

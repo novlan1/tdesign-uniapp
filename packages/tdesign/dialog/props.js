@@ -1,53 +1,59 @@
 const props = {
-    actions: {
-        type: Array
-    },
-    buttonLayout: {
-        type: String,
-        value: 'horizontal'
-    },
-    cancelBtn: {
-        type: null
-    },
-    closeBtn: {
-        type: null,
-        value: false
-    },
-    closeOnOverlayClick: {
-        type: Boolean,
-        value: false
-    },
-    confirmBtn: {
-        type: null
-    },
-    content: {
-        type: String
-    },
-    overlayProps: {
-        type: Object,
-        value: {}
-    },
-    preventScrollThrough: {
-        type: Boolean,
-        value: true
-    },
-    showOverlay: {
-        type: Boolean,
-        value: true
-    },
-    title: {
-        type: String
-    },
-    usingCustomNavbar: {
-        type: Boolean,
-        value: false
-    },
-    visible: {
-        type: Boolean
-    },
-    zIndex: {
-        type: Number,
-        value: 11500
-    }
+  actions: {
+    type: Array,
+    default: () => ([]),
+  },
+  buttonLayout: {
+    type: String,
+    default: 'horizontal',
+  },
+  cancelBtn: {
+    type: [null, String, Object],
+    default: null,
+  },
+  closeBtn: {
+    type: [null, Boolean, Object],
+    default: false,
+  },
+  closeOnOverlayClick: {
+    type: Boolean,
+    default: false,
+  },
+  confirmBtn: {
+    type: [null, String, Object],
+    default: null,
+  },
+  content: {
+    type: String,
+    default: '',
+  },
+  overlayProps: {
+    type: Object,
+    value: () => ({}),
+  },
+  preventScrollThrough: {
+    type: Boolean,
+    default: true,
+  },
+  showOverlay: {
+    type: Boolean,
+    default: true,
+  },
+  title: {
+    type: String,
+    default: '',
+  },
+  usingCustomNavbar: {
+    type: Boolean,
+    default: false,
+  },
+  visible: {
+    type: Boolean,
+    default: false,
+  },
+  zIndex: {
+    type: Number,
+    default: 11500,
+  },
 };
 export default props;

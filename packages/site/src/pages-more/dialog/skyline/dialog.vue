@@ -22,7 +22,7 @@
           desc="反馈类对话框"
           padding
         >
-          <base>
+          <baseDemo />
         </t-demo>
 
         <t-demo
@@ -58,7 +58,7 @@
           desc="命令调用"
           padding
         >
-          <command />
+          <commandDemo />
         </t-demo>
 
         <t-demo
@@ -75,21 +75,21 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
-import base from '../base';
-import confirm from '../confirm';
-import withInput from '../with-input';
-import withImage from '../with-image';
-import command from '../command';
-import status from '../status';
-import buttonDemo from '../button';
+import baseDemo from '../base/index.vue';
+import confirm from '../confirm/index.vue';
+import withInput from '../with-input/index.vue';
+import withImage from '../with-image/index.vue';
+import commandDemo from '../command/index.vue';
+import status from '../status/index.vue';
+import buttonDemo from '../button/index.vue';
 export default {
   components: {
     tNavbar,
-    base,
+    baseDemo,
     confirm,
     withInput,
     withImage,
-    command,
+    commandDemo,
     status,
     buttonDemo,
   },

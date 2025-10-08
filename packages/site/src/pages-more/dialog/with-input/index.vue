@@ -7,7 +7,7 @@
       variant="outline"
       data-key="showWithInput"
       block
-      @tap.native="showDialog($event, { key: 'showWithInput' })"
+      @click="showDialog($event, { key: 'showWithInput' })"
     >
       输入类-无描述
     </t-button>
@@ -19,14 +19,17 @@
       @confirm="closeDialog"
       @cancel="closeDialog"
     >
-      <t-input
-        slot="content"
-        borderless
-        class="dialog-input"
-        clearable
-        placeholder="输入12文案"
-        placeholder-class="placeholder"
-      />
+      <template
+        #content
+      >
+        <t-input
+          borderless
+          class="dialog-input"
+          clearable
+          placeholder="输入12文案"
+          placeholder-class="placeholder"
+        />
+      </template>
     </t-dialog>
 
     <t-button
@@ -36,7 +39,7 @@
       variant="outline"
       data-key="showTextAndTitleWithInput"
       block
-      @tap.native="showDialog($event, { key: 'showTextAndTitleWithInput' })"
+      @click="showDialog($event, { key: 'showTextAndTitleWithInput' })"
     >
       输入类-带描述
     </t-button>
@@ -49,14 +52,17 @@
       @confirm="closeDialog"
       @cancel="closeDialog"
     >
-      <t-input
-        slot="content"
-        borderless
-        class="dialog-input"
-        clearable
-        placeholder="输入12文案"
-        placeholder-class="placeholder"
-      />
+      <template
+        #content
+      >
+        <t-input
+          borderless
+          class="dialog-input"
+          clearable
+          placeholder="输入12文案"
+          placeholder-class="placeholder"
+        />
+      </template>
     </t-dialog>
   </view>
 </template>
@@ -80,21 +86,13 @@ export default {
   },
   created() {},
   methods: {
-    showDialog(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { key } = e.currentTarget.dataset;
-      this.setData({
-        [key]: true,
-        dialogKey: key,
-      });
+    showDialog(e, { key }) {
+      this[key] = true;
+      this.dialogKey = key;
     },
     closeDialog() {
       const { dialogKey } = this;
-      this.setData({
-        [dialogKey]: false,
-      });
+      this[dialogKey] = false;
     },
   },
 };

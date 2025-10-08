@@ -5,11 +5,14 @@
       variant="outline"
       theme="primary"
       block
-      @tap.native="showDialog"
+      @click="showDialog"
     >
       命令行操作
     </t-button>
-    <t-dialog id="t-dialog" />
+    <t-dialog
+      id="t-dialog"
+      ref="t-dialog"
+    />
   </view>
 </template>
 
