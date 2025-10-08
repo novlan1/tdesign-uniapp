@@ -31,7 +31,7 @@
       <slot />
       <slot name="content" />
       <block v-if="_.isArray(content) && content.length == 2">
-        {{ tDataChecked ? content[0] : content[1] }}
+        {{ dataChecked ? content[0] : content[1] }}
       </block>
       <block v-else>
         {{ content }}
@@ -84,13 +84,13 @@ export default uniComponent({
       _,
       _icon: null,
 
-      tDataChecked: this.checked,
+      dataChecked: this.checked,
     };
   },
   watch: {
     size: 'setClass',
     disabled: 'setClass',
-    tDataChecked: 'setClass',
+    dataChecked: 'setClass',
     icon: {
       handler(e) {
         this._icon = calcIcon(e);
@@ -99,7 +99,7 @@ export default uniComponent({
     },
     checked: {
       handler(value) {
-        this.tDataChecked = value;
+        this.dataChecked = value;
       },
       immediate: true,
     },
@@ -110,13 +110,13 @@ export default uniComponent({
   methods: {
     setClass() {
       const { classPrefix } = this;
-      const { size, variant, disabled, tDataChecked, shape } = this;
+      const { size, variant, disabled, dataChecked, shape } = this;
       const tagClass = [
         classPrefix,
         `${classPrefix}--checkable`,
         disabled ? `${classPrefix}--disabled` : '',
-        tDataChecked ? `${classPrefix}--checked` : '',
-        `${classPrefix}--${tDataChecked ? 'primary' : 'default'}`,
+        dataChecked ? `${classPrefix}--checked` : '',
+        `${classPrefix}--${dataChecked ? 'primary' : 'default'}`,
         `${classPrefix}--${size}`,
         `${classPrefix}--${variant}`,
         `${classPrefix}--${shape}`,
@@ -127,10 +127,10 @@ export default uniComponent({
 
     onClick() {
       if (this.disabled) return;
-      const { tDataChecked } = this;
+      const { dataChecked } = this;
 
       this._trigger('click');
-      this._trigger('change', { checked: !tDataChecked });
+      this._trigger('change', { checked: !dataChecked });
     },
 
     onClose(e) {

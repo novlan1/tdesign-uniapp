@@ -12,7 +12,7 @@
       variant="outline"
       block
       theme="primary"
-      @tap.native="handleAction"
+      @click="handleAction"
     >
       列表型
     </t-button>
@@ -22,7 +22,7 @@
       variant="outline"
       block
       theme="primary"
-      @tap.native="showDescAction"
+      @click="showDescAction"
     >
       带描述列表型
     </t-button>
@@ -32,7 +32,7 @@
       variant="outline"
       block
       theme="primary"
-      @tap.native="showIconAction"
+      @click="showIconAction"
     >
       带图标列表型
     </t-button>
@@ -122,7 +122,7 @@ export default {
       /* ---处理dataset begin--- */
       // this.handleDataset(e, _dataset);
       /* ---处理dataset end--- */
-      console.log(e.detail);
+      console.log(e);
     },
   },
 };

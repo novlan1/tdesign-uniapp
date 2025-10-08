@@ -47,14 +47,14 @@
 
 <script lang="ts">
 
-import tToast from 'tdesign-uniapp/toast/toast';
+// import tToast from 'tdesign-uniapp/toast/toast';
 import list from './list/index.vue';
 import status from './status/index.vue';
 import grid from './grid/index.vue';
 import align from './align/index.vue';
 export default {
   components: {
-    tToast,
+    // tToast,
     list,
     status,
     grid,

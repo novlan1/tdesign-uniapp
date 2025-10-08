@@ -1,51 +1,52 @@
 const props = {
-    align: {
-        type: String,
-        value: 'center'
-    },
-    cancelText: {
-        type: String,
-        value: ''
-    },
-    count: {
-        type: Number,
-        value: 8
-    },
-    description: {
-        type: String,
-        value: ''
-    },
-    items: {
-        type: Array,
-        required: true
-    },
-    popupProps: {
-        type: Object,
-        value: {}
-    },
-    showCancel: {
-        type: Boolean,
-        value: true
-    },
-    showOverlay: {
-        type: Boolean,
-        value: true
-    },
-    theme: {
-        type: String,
-        value: 'list'
-    },
-    usingCustomNavbar: {
-        type: Boolean,
-        value: false
-    },
-    visible: {
-        type: Boolean,
-        value: null
-    },
-    defaultVisible: {
-        type: Boolean,
-        value: false
-    }
+  align: {
+    type: String,
+    default: 'center',
+  },
+  cancelText: {
+    type: String,
+    default: '',
+  },
+  count: {
+    type: Number,
+    default: 8,
+  },
+  description: {
+    type: String,
+    default: '',
+  },
+  items: {
+    type: Array,
+    required: true,
+    default: () => ([]),
+  },
+  popupProps: {
+    type: Object,
+    value: () => ({}),
+  },
+  showCancel: {
+    type: Boolean,
+    default: true,
+  },
+  showOverlay: {
+    type: Boolean,
+    default: true,
+  },
+  theme: {
+    type: String,
+    default: 'list',
+  },
+  usingCustomNavbar: {
+    type: Boolean,
+    default: false,
+  },
+  visible: {
+    type: [Boolean, null],
+    default: null,
+  },
+  defaultVisible: {
+    type: [Boolean, null],
+    default: null,
+  },
 };
 export default props;

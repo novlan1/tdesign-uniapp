@@ -186,13 +186,13 @@ export default uniComponent({
     },
 
     innerAfterLinked() {
-      const { tDataValue, expandIcon, disabled } =  this[RELATION_MAP.CollapsePanel];
+      const { dataValue, expandIcon, disabled } =  this[RELATION_MAP.CollapsePanel];
 
       this.ultimateExpandIcon = this.expandIcon == null ? expandIcon : this.expandIcon;
       this.ultimateDisabled = this.disabled == null ? disabled : this.disabled;
 
 
-      this.updateExpanded(tDataValue);
+      this.updateExpanded(dataValue);
     },
   },
 });

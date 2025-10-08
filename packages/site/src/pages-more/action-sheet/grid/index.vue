@@ -2,6 +2,7 @@
   <view>
     <t-action-sheet
       id="t-action-sheet"
+      ref="t-action-sheet"
       using-custom-navbar
       @selected="handleSelected($event, { tagId: 't-action-sheet' })"
     />
@@ -11,7 +12,7 @@
       variant="outline"
       block
       theme="primary"
-      @tap.native="handleAction"
+      @click="handleAction"
     >
       常规宫格型
     </t-button>
@@ -21,7 +22,7 @@
       variant="outline"
       block
       theme="primary"
-      @tap.native="handleMultiAction"
+      @click="handleMultiAction"
     >
       带翻页宫格型
     </t-button>
@@ -99,7 +100,7 @@ export default {
       /* ---处理dataset begin--- */
       // this.handleDataset(e, _dataset);
       /* ---处理dataset end--- */
-      console.log(e.detail);
+      console.log(e);
     },
   },
 };

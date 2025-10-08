@@ -40,17 +40,17 @@ export default uniComponent({
       classPrefix: name,
       _,
       border: false,
-      tDataValue: [],
+      dataValue: this.value,
     };
   },
   watch: {
     value: {
       handler(value) {
-        this.tDataValue = value;
+        this.dataValue = value;
       },
       immediate: true,
     },
-    tDataValue: {
+    dataValue: {
       handler() {
         this.updateExpanded();
       },
@@ -68,11 +68,11 @@ export default uniComponent({
   methods: {
     updateExpanded() {
       this.children?.forEach((e) => {
-        e.updateExpanded(this.tDataValue);
+        e.updateExpanded(this.dataValue);
       });
     },
     switch(panelValue) {
-      const { expandMutex, tDataValue: activeValues } = this;
+      const { expandMutex, dataValue: activeValues } = this;
 
       let value = [];
       const hit = activeValues?.indexOf(panelValue);

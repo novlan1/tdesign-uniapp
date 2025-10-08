@@ -3,7 +3,7 @@ import { isPlainObject } from '../validator';
 import { canUseVirtualHost } from '../version';
 import { toCamel } from '../utils';
 
-const getInnerControlledValue = key => `tData${key.replace(/^(\w)/, (e, t) => t.toUpperCase())}`;
+const getInnerControlledValue = key => `data${key.replace(/^(\w)/, (e, t) => t.toUpperCase())}`;
 
 const RawLifeCycles = ['Created', 'Attached', 'Ready', 'Moved', 'Detached', 'Error'];
 const NativeLifeCycles = RawLifeCycles.map(e => e.toLowerCase());
