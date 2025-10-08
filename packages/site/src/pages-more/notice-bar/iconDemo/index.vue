@@ -5,9 +5,13 @@
       :prefix-icon="false"
       content="提示文字描述提示文字描述提示文字描述"
     >
-      <view slot="prefix-icon">
-        <t-icon name="error-circle-filled" />
-      </view>
+      <template
+        #prefix-icon
+      >
+        <view>
+          <t-icon name="error-circle-filled" />
+        </view>
+      </template>
     </t-notice-bar>
   </view>
 </template>

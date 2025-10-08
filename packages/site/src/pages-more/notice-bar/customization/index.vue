@@ -2,24 +2,33 @@
   <view>
     <!-- slot实现自定义content内容 -->
     <t-notice-bar :visible="true">
-      <view
-        slot="content"
-        class="inline"
+      <template
+        #content
       >
-        提示文字描述提示文字描述提示文字描述提示文字描述提示文字描述提示文字描述
-      </view>
-      <t-link
-        slot="operation"
-        content="详情"
-        theme="primary"
-        :underline="false"
-        :navigator-props="navigatorProps"
-      />
-      <t-icon
-        slot="suffix-icon"
-        name="close"
-        size="44rpx"
-      />
+        <view
+          class="inline"
+        >
+          提示文字描述提示文字描述提示文字描述提示文字描述提示文字描述提示文字描述
+        </view>
+      </template>
+      <template
+        #operation
+      >
+        <t-link
+          content="详情"
+          theme="primary"
+          :underline="false"
+          :navigator-props="navigatorProps"
+        />
+      </template>
+      <template
+        #suffix-icon
+      >
+        <t-icon
+          name="close"
+          size="44rpx"
+        />
+      </template>
     </t-notice-bar>
   </view>
 </template>
@@ -37,7 +46,7 @@ export default {
   data() {
     return {
       navigatorProps: {
-        url: '/pages/xxx/xxx',
+        url: '/pages/home/home',
       },
     };
   },

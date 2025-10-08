@@ -5,19 +5,25 @@
       suffix-icon="chevron-right"
       @click="click"
     >
-      <view
-        slot="content"
-        class="inline"
+      <template
+        #content
       >
-        这是一条普通的通知信息
-      </view>
-      <t-link
-        slot="operation"
-        content="详情"
-        theme="primary"
-        :underline="false"
-        :navigator-props="navigatorProps"
-      />
+        <view
+          class="inline"
+        >
+          这是一条普通的通知信息
+        </view>
+      </template>
+      <template
+        #operation
+      >
+        <t-link
+          content="详情"
+          theme="primary"
+          :underline="false"
+          :navigator-props="navigatorProps"
+        />
+      </template>
     </t-notice-bar>
 
     <t-notice-bar
@@ -41,14 +47,14 @@ export default {
     return {
       visible: true,
       navigatorProps: {
-        url: '/pages/xxx/xxx',
+        url: '/pages/home/home',
       },
     };
   },
   created() {},
   methods: {
     click(e) {
-      const { trigger } = e.detail;
+      const { trigger } = e;
       console.log(`click on the ${trigger} area`);
     },
   },

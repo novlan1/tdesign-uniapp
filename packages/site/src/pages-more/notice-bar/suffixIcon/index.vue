@@ -23,7 +23,7 @@ export default {
   created() {},
   methods: {
     click(e) {
-      const { trigger } = e.detail;
+      const { trigger } = e;
       console.log(`click on the ${trigger} area`);
     },
   },

@@ -66,7 +66,6 @@ export const styles = function (e) {
     .join('; ');
 };
 export const getAnimationFrame = function (e, t) {
-  console.log('getAnimationFrame', { e, t });
   return uni
     .createSelectorQuery()
     .in(e)

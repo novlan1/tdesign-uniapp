@@ -1,40 +1,43 @@
 const props = {
-    content: {
-        type: null
-    },
-    direction: {
-        type: String,
-        value: 'horizontal'
-    },
-    interval: {
-        type: Number,
-        value: 2000
-    },
-    marquee: {
-        type: null,
-        value: false
-    },
-    operation: {
-        type: String
-    },
-    prefixIcon: {
-        type: null,
-        value: true
-    },
-    suffixIcon: {
-        type: null
-    },
-    theme: {
-        type: String,
-        value: 'info'
-    },
-    visible: {
-        type: Boolean,
-        value: null
-    },
-    defaultVisible: {
-        type: Boolean,
-        value: false
-    }
+  content: {
+    type: [String, Array],
+    default: '',
+  },
+  direction: {
+    type: String,
+    default: 'horizontal',
+  },
+  interval: {
+    type: Number,
+    default: 2000,
+  },
+  marquee: {
+    type: [Boolean, Object],
+    default: false,
+  },
+  operation: {
+    type: String,
+    default: '',
+  },
+  prefixIcon: {
+    type: [String, Boolean, Object],
+    default: true,
+  },
+  suffixIcon: {
+    type: [String, Boolean, Object],
+    default: '',
+  },
+  theme: {
+    type: String,
+    default: 'info',
+  },
+  visible: {
+    type: Boolean,
+    default: null,
+  },
+  defaultVisible: {
+    type: Boolean,
+    default: false,
+  },
 };
 export default props;
