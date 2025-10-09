@@ -26,7 +26,7 @@
       </t-demo>
 
       <t-demo desc="双层级文本标签栏">
-        <sub />
+        <subDemo />
       </t-demo>
 
       <t-demo
@@ -52,19 +52,19 @@
 
 <script lang="ts">
 
-import textOnly from './text-only';
-import iconOnly from './icon-only';
-import BaseDemo from './base';
-import sub from './sub';
-import badge from './badge';
-import round from './round';
-import custom from './custom';
+import textOnly from './text-only/index.vue';
+import iconOnly from './icon-only/index.vue';
+import BaseDemo from './base/index.vue';
+import subDemo from './sub/index.vue';
+import badge from './badge/index.vue';
+import round from './round/index.vue';
+import custom from './custom/index.vue';
 export default {
   components: {
     textOnly,
     iconOnly,
     BaseDemo,
-    sub,
+    subDemo,
     badge,
     round,
     custom,

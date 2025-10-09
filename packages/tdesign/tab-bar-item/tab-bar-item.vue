@@ -31,19 +31,20 @@
         >
           <!-- parse <template is="icon" :data="size: iconOnly ? 24 : 20, ..._icon"/> -->
           <block
+            v-if="_icon"
             name="icon"
           >
             <t-icon
-              :style="style || ''"
-              :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-              :prefix="prefix || ''"
-              :name="'close' || ''"
-              :size="22 || ''"
-              :color="color || ''"
-              :aria-hidden="true || ''"
-              :aria-label="'清除' || ''"
-              :aria-role="'button' || ''"
-              @click="bindclick || ''"
+              :custom-style="_icon.style || ''"
+              :t-class="_icon.tClass || ''"
+              :prefix="_icon.prefix"
+              :name="_icon.name"
+              :size="_icon.size || (iconOnly ? 24 : 20)"
+              :color="_icon.color"
+              :aria-hidden="_icon.ariaHidden"
+              :aria-label="_icon.ariaLabel"
+              :aria-role="_icon.ariaRole"
+              @click="_icon.click || ''"
             />
           </block>
         </t-badge>
@@ -53,16 +54,16 @@
           name="icon"
         >
           <t-icon
-            :style="style || ''"
-            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-            :prefix="prefix || ''"
-            :name="'close' || ''"
-            :size="22 || ''"
-            :color="color || ''"
-            :aria-hidden="true || ''"
-            :aria-label="'清除' || ''"
-            :aria-role="'button' || ''"
-            @click="bindclick || ''"
+            :custom-style="_icon.style || ''"
+            :t-class="_icon.tClass || ''"
+            :prefix="_icon.prefix"
+            :name="_icon.name"
+            :size="_icon.size || (iconOnly ? 24 : 20)"
+            :color="_icon.color"
+            :aria-hidden="!iconOnly"
+            :aria-label="_icon.ariaLabel"
+            :aria-role="_icon.ariaRole"
+            @click="_icon.click || ''"
           />
         </block>
         <slot name="icon" />
@@ -106,131 +107,219 @@
     </view>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import tIcon from "../icon/icon";
-import tBadge from "../badge/badge";
-import { __awaiter, __decorate } from "../miniprogram_npm/tslib";
-import { wxComponent, SuperComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
-import { getRect, calcIcon } from "../common/utils";
-const {
-  prefix: prefix
-} = config;
+import tIcon from '../icon/icon';
+import tBadge from '../badge/badge';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
+import props from './props';
+import { getRect, calcIcon } from '../common/utils';
+import _ from '../common/utils.wxs';
+import { ChildrenMixin, RELATION_MAP } from '../common/relation';
+
 const classPrefix = `${prefix}-tab-bar-item`;
-let TabBarItem = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`];
-    this.parent = null;
-    this.relations = {
-      "../tab-bar/tab-bar": {
-        type: "ancestor",
-        linked(t) {
-          const {
-            theme: e,
-            split: a,
-            shape: s
-          } = t.data;
-          this.setData({
-            theme: e,
-            split: a,
-            shape: s,
-            currentName: this.value ? this.value : t.initName()
-          });
-          t.updateChildren();
-        }
-      }
-    };
-    this.options = {
-      multipleSlots: true
-    };
-    this.setData({
-      prefix: prefix,
-      classPrefix: classPrefix,
+
+
+export default uniComponent({
+  name: classPrefix,
+  mixins: [ChildrenMixin(RELATION_MAP.TabBarItem)],
+  components: {
+    tIcon,
+    tBadge,
+  },
+  props: {
+    ...props,
+  },
+  emits: [],
+  watch: {
+    subTabBar: {
+      handler(value) {
+        this.hasChildren = value.length > 0;
+      },
+      immediate: true,
+    },
+    icon: {
+      handler(v) {
+        this._icon = calcIcon(v);
+      },
+      immediate: true,
+    },
+  },
+  data() {
+    return {
+      prefix,
+      classPrefix,
       isSpread: false,
       isChecked: false,
       hasChildren: false,
-      currentName: "",
+      currentName: '',
       split: true,
       iconOnly: false,
-      theme: "",
+      theme: '',
       crowded: false,
-      shape: "normal"
-    });
-    this.properties = props;;
-    this.observers = {
-      subTabBar(t) {
-        this.setData({
-          hasChildren: t.length > 0
-        });
-      },
-      icon(t) {
-        this.setData({
-          _icon: calcIcon(t)
-        });
-      }
+      shape: 'normal',
+      _,
     };
-    this.lifetimes = {
-      attached() {
-        return __awaiter(this, void 0, void 0, function* () {
-          const t = yield getRect(this, `.${classPrefix}__text`);
-          this.setData({
-            iconOnly: 0 === t.height
-          });
-        });
+  },
+  async mounted() {
+    const res = await getRect(this, `.${classPrefix}__text`);
+
+    this.iconOnly = res.height === 0;
+  },
+  methods: {
+    innerAfterLinked() {
+      const parent = this[RELATION_MAP.TabBarItem];
+      const { theme, split, shape } = parent;
+
+      this.theme = theme;
+      this.split = split;
+      this.shape = shape;
+      this.currentName = this.value ? this.value : parent.initName();
+
+      parent.updateChildren();
+    },
+    showSpread() {
+      this.isSpread = true;
+    },
+    toggle() {
+      const { currentName, hasChildren, isSpread } = this;
+
+      if (hasChildren) {
+        this.isSpread = !isSpread;
       }
-    };
-    this.methods = {
-      showSpread() {
-        this.setData({
-          isSpread: true
-        });
-      },
-      toggle() {
-        const {
-          currentName: t,
-          hasChildren: e,
-          isSpread: a
-        } = this;
-        if (e) {
-          this.setData({
-            isSpread: !a
-          });
-        }
-        this.$parent.updateValue(t);
-        this.$parent.changeOtherSpread(t);
-      },
-      selectChild(t) {
-        const {
-          value: e
-        } = t.target.dataset;
-        this.$parent.updateValue(e);
-        this.setData({
-          isSpread: false
-        });
-      },
-      checkActive(t) {
-        const {
-          currentName: e,
-          subTabBar: a
-        } = this;
-        const s = (null == a ? void 0 : a.some(e => e.value === t)) || e === t;
-        this.setData({
-          isChecked: s
-        });
-      },
-      closeSpread() {
-        this.setData({
-          isSpread: false
-        });
-      }
-    };
-  }
-};
-TabBarItem = __decorate([wxComponent()], TabBarItem);
-export default TabBarItem;
+      this[RELATION_MAP.TabBarItem].updateValue(currentName);
+      this[RELATION_MAP.TabBarItem].changeOtherSpread(currentName);
+    },
+    selectChild(event) {
+      const { value } = event.target.dataset;
+
+      this[RELATION_MAP.TabBarItem].updateValue(value);
+      this.isSpread = false;
+    },
+    checkActive(value) {
+      const { currentName, subTabBar } = this;
+      const isChecked = subTabBar?.some(item => item.value === value) || currentName === value;
+
+      this.isChecked = isChecked;
+    },
+    closeSpread() {
+      this.isSpread = false;
+    },
+  },
+});
+
+// let TabBarItem = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.externalClasses = [`${prefix}-class`];
+//     this.parent = null;
+//     this.relations = {
+//       "../tab-bar/tab-bar": {
+//         type: "ancestor",
+//         linked(t) {
+//           const {
+//             theme: e,
+//             split: a,
+//             shape: s
+//           } = t.data;
+//           this.setData({
+//             theme: e,
+//             split: a,
+//             shape: s,
+//             currentName: this.value ? this.value : t.initName()
+//           });
+//           t.updateChildren();
+//         }
+//       }
+//     };
+//     this.options = {
+//       multipleSlots: true
+//     };
+//     this.setData({
+//       prefix: prefix,
+//       classPrefix: classPrefix,
+//       isSpread: false,
+//       isChecked: false,
+//       hasChildren: false,
+//       currentName: "",
+//       split: true,
+//       iconOnly: false,
+//       theme: "",
+//       crowded: false,
+//       shape: "normal"
+//     });
+//     this.properties = props;;
+//     this.observers = {
+//       subTabBar(t) {
+//         this.setData({
+//           hasChildren: t.length > 0
+//         });
+//       },
+//       icon(t) {
+//         this.setData({
+//           _icon: calcIcon(t)
+//         });
+//       }
+//     };
+//     this.lifetimes = {
+//       attached() {
+//         return __awaiter(this, void 0, void 0, function* () {
+//           const t = yield getRect(this, `.${classPrefix}__text`);
+//           this.setData({
+//             iconOnly: 0 === t.height
+//           });
+//         });
+//       }
+//     };
+//     this.methods = {
+//       showSpread() {
+//         this.setData({
+//           isSpread: true
+//         });
+//       },
+//       toggle() {
+//         const {
+//           currentName: t,
+//           hasChildren: e,
+//           isSpread: a
+//         } = this;
+//         if (e) {
+//           this.setData({
+//             isSpread: !a
+//           });
+//         }
+//         this.$parent.updateValue(t);
+//         this.$parent.changeOtherSpread(t);
+//       },
+//       selectChild(t) {
+//         const {
+//           value: e
+//         } = t.target.dataset;
+//         this.$parent.updateValue(e);
+//         this.setData({
+//           isSpread: false
+//         });
+//       },
+//       checkActive(t) {
+//         const {
+//           currentName: e,
+//           subTabBar: a
+//         } = this;
+//         const s = (null == a ? void 0 : a.some(e => e.value === t)) || e === t;
+//         this.setData({
+//           isChecked: s
+//         });
+//       },
+//       closeSpread() {
+//         this.setData({
+//           isSpread: false
+//         });
+//       }
+//     };
+//   }
+// };
+// TabBarItem = __decorate([wxComponent()], TabBarItem);
+// export default TabBarItem;
 </script>
 <style>
 @import './tab-bar-item.css';

@@ -1,37 +1,39 @@
 const props = {
-    bordered: {
-        type: Boolean,
-        value: true
-    },
-    externalClasses: {
-        type: Array
-    },
-    fixed: {
-        type: Boolean,
-        value: true
-    },
-    safeAreaInsetBottom: {
-        type: Boolean,
-        value: true
-    },
-    shape: {
-        type: String,
-        value: 'normal'
-    },
-    split: {
-        type: Boolean,
-        value: true
-    },
-    theme: {
-        type: String,
-        value: 'normal'
-    },
-    value: {
-        type: null,
-        value: null
-    },
-    defaultValue: {
-        type: null
-    }
+  bordered: {
+    type: Boolean,
+    default: true,
+  },
+  externalClasses: {
+    type: Array,
+    default: () => ([]),
+  },
+  fixed: {
+    type: Boolean,
+    default: true,
+  },
+  safeAreaInsetBottom: {
+    type: Boolean,
+    default: true,
+  },
+  shape: {
+    type: String,
+    default: 'normal',
+  },
+  split: {
+    type: Boolean,
+    default: true,
+  },
+  theme: {
+    type: String,
+    default: 'normal',
+  },
+  value: {
+    type: [null, String, Number, Array],
+    default: null,
+  },
+  defaultValue: {
+    type: [null, String, Number, Array],
+    default: null,
+  },
 };
 export default props;

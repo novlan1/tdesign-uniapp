@@ -161,9 +161,7 @@ export const toComponent = function (e) {
       }
       this.$emit(
         e,
-        {
-          detail: t,
-        },
+        t,
         o,
       );
     };

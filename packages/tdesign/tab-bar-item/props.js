@@ -1,15 +1,19 @@
 const props = {
-    badgeProps: {
-        type: Object
-    },
-    icon: {
-        type: null
-    },
-    subTabBar: {
-        type: Array
-    },
-    value: {
-        type: null
-    }
+  badgeProps: {
+    type: Object,
+    default: () => ({}),
+  },
+  icon: {
+    type: [String, Object],
+    default: '',
+  },
+  subTabBar: {
+    type: Array,
+    default: () => ([]),
+  },
+  value: {
+    type: [String, Number],
+    default: '',
+  },
 };
 export default props;

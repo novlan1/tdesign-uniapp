@@ -233,6 +233,9 @@
       "style": {
         "navigationBarTitleText": "Navbar"
       }
+    },
+    {
+      "path": "pages-more/tab-bar/tab-bar"
     }
   ],
   "globalStyle": {
