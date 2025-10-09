@@ -97,21 +97,17 @@ export default {
   },
   methods: {
     onChange(e) {
-      const { index } = e.detail;
+      const { index } = e;
       console.log(index);
-      this.setData({
-        curIndex: index,
-      });
+      this.curIndex = index;
     },
 
     getCustomNavbarHeight() {
-      const query = uni.createSelectorQuery();
+      const query = uni.createSelectorQuery().in(this);
       query.select('.custom-navbar').boundingClientRect();
       query.exec((res) => {
         const { height = 0 } = res[0] || {};
-        this.setData({
-          stickyOffset: height,
-        });
+        this.stickyOffset = height;
       });
     },
   },

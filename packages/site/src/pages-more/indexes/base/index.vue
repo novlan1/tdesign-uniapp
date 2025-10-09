@@ -116,29 +116,25 @@ export default {
     this.getCustomNavbarHeight();
   },
   onReady() {
-    this.setData({
-      indexList: this.list.map(item => item.index),
-    });
+    this.indexList = this.list.map(item => item.index);
   },
   methods: {
     onChange(e) {
-      const { index } = e.detail;
+      const { index } = e;
       console.log('change:', index);
     },
 
     onSelect(e) {
-      const { index } = e.detail;
+      const { index } = e;
       console.log('select:', index);
     },
 
     getCustomNavbarHeight() {
-      const query = uni.createSelectorQuery();
+      const query = uni.createSelectorQuery().in(this);
       query.select('.custom-navbar').boundingClientRect();
       query.exec((res) => {
         const { height = 0 } = res[0] || {};
-        this.setData({
-          stickyOffset: height,
-        });
+        this.stickyOffset = height;
       });
     },
   },

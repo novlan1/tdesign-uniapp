@@ -147,7 +147,7 @@ export default {
   },
   methods: {
     getCustomNavbarHeight() {
-      const query = uni.createSelectorQuery();
+      const query = uni.createSelectorQuery().in(this);
       query.select('.custom-navbar').boundingClientRect();
       query.exec((res) => {
         const { height = 0 } = res[0] || {};

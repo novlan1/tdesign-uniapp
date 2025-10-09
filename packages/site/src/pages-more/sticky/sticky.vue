@@ -37,9 +37,9 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import offset from './offset';
-import container from './container';
+import BaseDemo from './base/index.vue';
+import offset from './offset/index.vue';
+import container from './container/index.vue';
 export default {
   components: {
     BaseDemo,
@@ -51,19 +51,16 @@ export default {
       navbarHeight: 0,
     };
   },
-  onLoad() {
+  mounted() {
     this.getCustomNavbarHeight();
   },
   methods: {
     getCustomNavbarHeight() {
-      const query = uni.createSelectorQuery();
+      const query = uni.createSelectorQuery().in(this);
       query.select('.custom-navbar').boundingClientRect();
       query.exec((res) => {
-        console.log(res);
         const { height = 0 } = res[0] || {};
-        this.setData({
-          navbarHeight: height,
-        });
+        this.navbarHeight = height;
       });
     },
   },

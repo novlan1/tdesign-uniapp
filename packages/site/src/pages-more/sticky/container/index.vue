@@ -41,10 +41,8 @@ export default {
   created() {},
   methods: {
     ready() {
-      this.setData({
-        container: () => uni.createSelectorQuery().in(this)
-          .select('.wrapper'),
-      });
+      this.container = () => uni.createSelectorQuery().in(this)
+        .select('.wrapper');
     },
   },
 };
