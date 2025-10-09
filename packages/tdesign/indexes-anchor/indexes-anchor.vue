@@ -1,7 +1,7 @@
 <template>
   <view
     :class="classPrefix + ' class ' + tClass"
-    :style="_._style([style, customStyle])"
+    :style="_._style([dataStyle, customStyle])"
   >
     <view
       :class="
@@ -38,7 +38,9 @@ export default uniComponent({
     `${prefix}-class`,
   ],
   mixins: [
-    ChildrenMixin(RELATION_MAP.IndexesAnchor),
+    ChildrenMixin(RELATION_MAP.IndexesAnchor, {
+      indexKey: 'tIndex',
+    }),
   ],
   props: {
     ...props,
@@ -51,7 +53,13 @@ export default uniComponent({
       sticky: false,
       active: false,
       _,
+      dataStyle: this.style,
     };
+  },
+  watch: {
+    style(e) {
+      this.dataStyle = e;
+    },
   },
   mounted() {
 

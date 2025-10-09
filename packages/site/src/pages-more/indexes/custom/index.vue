@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="wrap">
     <view class="custom-navbar">
       <t-navbar
         title="TDesign"
@@ -13,7 +13,7 @@
         t-class="wrapper"
         @change="onChange"
       >
-        <block
+        <template
           v-for="(item, index) in list"
           :key="index"
         >
@@ -34,7 +34,7 @@
               :bordered="item.children.length - 1 != index"
             />
           </t-cell-group>
-        </block>
+        </template>
       </t-indexes>
     </view>
   </view>
@@ -92,8 +92,10 @@ export default {
       city: '',
     };
   },
-  onLoad() {
-    this.getCustomNavbarHeight();
+  mounted() {
+    setTimeout(() => {
+      this.getCustomNavbarHeight();
+    }, 30);
   },
   methods: {
     onChange(e) {

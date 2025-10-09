@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="wrap">
     <view class="custom-navbar">
       <t-navbar
         title="TDesign"
@@ -112,10 +112,10 @@ export default {
       city: '',
     };
   },
-  onLoad() {
-    this.getCustomNavbarHeight();
-  },
-  onReady() {
+  mounted() {
+    setTimeout(() => {
+      this.getCustomNavbarHeight();
+    }, 30);
     this.indexList = this.list.map(item => item.index);
   },
   methods: {

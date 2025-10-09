@@ -142,8 +142,10 @@ export default {
       },
     };
   },
-  onLoad() {
-    this.getCustomNavbarHeight();
+  mounted() {
+    setTimeout(() => {
+      this.getCustomNavbarHeight();
+    }, 30);
   },
   methods: {
     getCustomNavbarHeight() {

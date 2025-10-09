@@ -37,7 +37,7 @@ function main() {
     ...DEFAULT_PAGES,
     ...componentPages,
   ];
-  writeFileSync(pagesJson, rawData, true);
+  writeFileSync(pagesJson, `${JSON.stringify(rawData, null, 2)}\n`, false);
   console.log('[pages.json] Wrote!');
 }
 

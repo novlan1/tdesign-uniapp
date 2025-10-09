@@ -52,7 +52,9 @@ export default {
     };
   },
   mounted() {
-    this.getCustomNavbarHeight();
+    setTimeout(() => {
+      this.getCustomNavbarHeight();
+    }, 30);
   },
   methods: {
     getCustomNavbarHeight() {

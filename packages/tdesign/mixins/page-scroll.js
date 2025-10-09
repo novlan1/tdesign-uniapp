@@ -17,7 +17,18 @@ const onPageScroll = function (event) {
 
 export default (funcName = 'onScroll') => ({
   mounted() {
-    const bindScroller = this[funcName]?.bind(this);
+    const that = this;
+    // const bindScroller = this[funcName]?.bind(this);
+    function bindScroller(e) {
+      let result;
+      // #ifdef H5
+      result = that[funcName]?.call(that, e.target);
+      // #endif
+      // #ifndef H5
+      result = that[funcName]?.call(that, e);
+      // #endif
+      return result;
+    }
     // #ifdef H5
     this._scroller = getScroller(this.$el);
     if (this._scroller) {
@@ -30,7 +41,7 @@ export default (funcName = 'onScroll') => ({
     if (bindScroller) {
       this._pageScroller = bindScroller;
     }
-    console.log('pageScroller', page.pageScroller);
+
 
     if (Array.isArray(page.pageScroller)) {
       page.pageScroller.push(bindScroller);
