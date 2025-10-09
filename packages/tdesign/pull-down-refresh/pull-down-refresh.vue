@@ -1,67 +1,65 @@
 <template>
-  <view>
-    <scroll-view
-      :style="_._style([style, customStyle, 'max-height: calc(100vh - ' + distanceTop + 'px)'])"
-      :class="classPrefix + ' class ' + prefix + '-class'"
-      type="list"
-      :scroll-top="scrollTop"
-      scroll-y
-      :enable-back-to-top="enableBackToTop"
-      :enable-passive="enablePassive"
-      :lower-threshold="lowerThreshold"
-      :upper-threshold="upperThreshold"
-      :scroll-into-view="scrollIntoView"
-      :show-scrollbar="showScrollbar"
-      enhanced
-      scroll-with-animation
-      :bounces="false"
-      :throttle="false"
-      @touchstart="onTouchStart"
-      @touchmove="onTouchMove"
-      @touchend="onTouchEnd"
-      @scroll="onScroll"
-      @dragstart="onDragStart"
-      @dragging="onDragging"
-      @dragend="onDragEnd"
-      @scrolltoupper="onScrollToTop"
-      @scrolltolower="onScrollToBottom"
+  <scroll-view
+    :style="_._style([style, customStyle, 'max-height: calc(100vh - ' + distanceTop + 'px)'])"
+    :class="classPrefix + ' class ' + prefix + '-class'"
+    type="list"
+    :scroll-top="scrollTop"
+    scroll-y
+    :enable-back-to-top="enableBackToTop"
+    :enable-passive="enablePassive"
+    :lower-threshold="lowerThreshold"
+    :upper-threshold="upperThreshold"
+    :scroll-into-view="scrollIntoView"
+    :show-scrollbar="showScrollbar"
+    enhanced
+    scroll-with-animation
+    :bounces="false"
+    :throttle="false"
+    @touchstart="onTouchStart"
+    @touchmove="onTouchMove"
+    @touchend="onTouchEnd"
+    @scroll="onScroll"
+    @dragstart="onDragStart"
+    @dragging="onDragging"
+    @dragend="onDragEnd"
+    @scrolltoupper="onScrollToTop"
+    @scrolltolower="onScrollToBottom"
+  >
+    <slot name="header" />
+    <view
+      :class="classPrefix + '__track ' + (classPrefix + '__track--' + (loosing ? 'loosing' : ''))"
+      :style="barHeight > 0 ? 'transform: translate3d(0, ' + barHeight + 'px, 0);' : ''"
     >
-      <slot name="header" />
       <view
-        :class="classPrefix + '__track ' + (classPrefix + '__track--' + (loosing ? 'loosing' : ''))"
-        :style="barHeight > 0 ? 'transform: translate3d(0, ' + barHeight + 'px, 0);' : ''"
+        :class="classPrefix + '__tips ' + (classPrefix + '__tips--' + (loosing ? 'loosing' : ''))"
+        :style="'height: ' + tipsHeight + 'px'"
+        aria-live="polite"
       >
+        <t-loading
+          v-if="refreshStatus === 2"
+          :delay="loadingProps.delay || 0"
+          :duration="loadingProps.duration || 800"
+          :indicator="loadingProps.indicator || true"
+          :layout="loadingProps.layout || 'horizontal'"
+          :loading="loadingProps.loading || true"
+          :pause="loadingProps.pause || false"
+          :progress="loadingProps.progress || 0"
+          :reverse="loadingProps.reverse || false"
+          :size="loadingProps.size || '50rpx'"
+          :text="loadingProps.text || dataLoadingTexts[refreshStatus]"
+          :theme="loadingProps.theme || 'circular'"
+          :t-class-indicator="prefix + '-class-indicator'"
+        />
         <view
-          :class="classPrefix + '__tips ' + (classPrefix + '__tips--' + (loosing ? 'loosing' : ''))"
-          :style="'height: ' + tipsHeight + 'px'"
-          aria-live="polite"
+          v-else-if="refreshStatus >= 0"
+          :class="classPrefix + '__text ' + prefix + '-class-text'"
         >
-          <t-loading
-            v-if="refreshStatus === 2"
-            :delay="loadingProps.delay || 0"
-            :duration="loadingProps.duration || 800"
-            :indicator="loadingProps.indicator || true"
-            :layout="loadingProps.layout || 'horizontal'"
-            :loading="loadingProps.loading || true"
-            :pause="loadingProps.pause || false"
-            :progress="loadingProps.progress || 0"
-            :reverse="loadingProps.reverse || false"
-            :size="loadingProps.size || '50rpx'"
-            :text="loadingProps.text || dataLoadingTexts[refreshStatus]"
-            :theme="loadingProps.theme || 'circular'"
-            :t-class-indicator="prefix + '-class-indicator'"
-          />
-          <view
-            v-else-if="refreshStatus >= 0"
-            :class="classPrefix + '__text ' + prefix + '-class-text'"
-          >
-            {{ dataLoadingTexts[refreshStatus] }}
-          </view>
+          {{ dataLoadingTexts[refreshStatus] }}
         </view>
-        <slot />
       </view>
-    </scroll-view>
-  </view>
+      <slot />
+    </view>
+  </scroll-view>
 </template>
 <script>
 import tLoading from '../loading/loading';
@@ -72,6 +70,7 @@ import { getRect, systemInfo, unitConvert } from '../common/utils';
 // import { canUseProxyScrollView } from '../common/version';
 import _ from '../common/utils.wxs';
 import { getObserver } from '../common/wechat';
+import { ParentMixin, RELATION_MAP } from '../common/relation';
 
 
 const name = `${prefix}-pull-down-refresh`;
@@ -85,6 +84,9 @@ export default uniComponent({
     `${prefix}-class-loading`,
     `${prefix}-class-text`,
     `${prefix}-class-indicator`,
+  ],
+  mixins: [
+    ParentMixin(RELATION_MAP.BackTop),
   ],
   components: {
     tLoading,
@@ -326,7 +328,13 @@ export default uniComponent({
     },
 
     scrollToTop() {
+      // https://yuanbao.tencent.com/chat/naQivTmsDa/c10ae37f-c66f-4489-ac4e-e72710a3f65a
+      // #ifdef H5
+      this.scrollTop = this.scrollTop === 0 ? 0.01 : 0;
+      // #endif
+      // #ifndef H5
       this.setScrollTop(0);
+      // #endif
     },
   },
 });

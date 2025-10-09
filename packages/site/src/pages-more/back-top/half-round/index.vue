@@ -21,6 +21,9 @@ export default {
       default: 0,
     },
   },
+  emits: [
+    'to-top',
+  ],
   data() {
     return {
       backTopTheme: 'half-round-dark',

@@ -103,8 +103,8 @@
 
 import tButton from 'tdesign-uniapp/button/button';
 import tSkeleton from 'tdesign-uniapp/skeleton/skeleton';
-import BaseDemo from './base';
-import halfRound from './half-round';
+import BaseDemo from './base/index.vue';
+import halfRound from './half-round/index.vue';
 export default {
   components: {
     tButton,
@@ -130,19 +130,11 @@ export default {
   },
   onPageScroll(e: any) {
     const { scrollTop } = e;
-    this.setData({
-      scrollTop,
-    });
+    this.scrollTop = scrollTop;
   },
   methods: {
-    onBtnClick(e: any, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { source: type } = e.currentTarget.dataset;
-      this.setData({
-        type,
-      });
+    onBtnClick(e: any, { source: type }) {
+      this.type = type;
       uni.pageScrollTo({
         duration: 300,
         scrollTop: 1000,
