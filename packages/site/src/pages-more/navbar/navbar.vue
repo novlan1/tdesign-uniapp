@@ -21,7 +21,7 @@
         <search />
       </t-demo>
       <t-demo desc="带图片的导航栏">
-        <img>
+        <imgDemo />
       </t-demo>
       <t-demo
         title="02 组件样式"
@@ -38,18 +38,18 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import search from './search';
-import backHome from './back-home';
-import img from './img';
-import leftTitle from './left-title';
-import customColor from './custom-color';
+import BaseDemo from './base/index.vue';
+import search from './search/index.vue';
+import backHome from './back-home/index.vue';
+import imgDemo from './img/index.vue';
+import leftTitle from './left-title/index.vue';
+import customColor from './custom-color/index.vue';
 export default {
   components: {
     BaseDemo,
     search,
     backHome,
-    img,
+    imgDemo,
     leftTitle,
     customColor,
   },

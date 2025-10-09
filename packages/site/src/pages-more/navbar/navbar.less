@@ -1,10 +1,10 @@
-.demo .t-navbar--fixed .t-navbar__content {
+.demo :deep(.t-navbar--fixed .t-navbar__content) {
     position: relative !important;
     padding-top: 0;
     z-index: 5000;
 }
 
-.demo .t-navbar__placeholder {
+.demo :deep(.t-navbar__placeholder) {
     display: none !important;
 }
 
@@ -12,7 +12,7 @@
     display: block;
 }
 
-.block + .block {
+:deep(.block + .block) {
     margin-top: 48rpx;
 }
 

@@ -227,6 +227,12 @@
       "style": {
         "navigationBarTitleText": "DropdownMenu"
       }
+    },
+    {
+      "path": "pages-more/navbar/navbar",
+      "style": {
+        "navigationBarTitleText": "Navbar"
+      }
     }
   ],
   "globalStyle": {

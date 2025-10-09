@@ -108,165 +108,167 @@
     </view>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
-<script module="_this" lang="wxs" src="@/search/search.wxs"></script>
 <script>
-import tIcon from "../icon/icon";
-import tCell from "../cell/cell";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
-import { getCharacterLength } from "../common/utils";
+import tIcon from '../icon/icon';
+import tCell from '../cell/cell';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import { getCharacterLength } from '../common/utils';
+import _ from '../common/utils.wxs';
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-search`;
+
+
 let Search = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-input-container`, `${prefix}-class-input`, `${prefix}-class-action`, `${prefix}-class-left`, `${prefix}-class-clear`];
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
-    this.properties = props;;
+    this.properties = props;
     this.observers = {
       resultList(e) {
         const {
-          isSelected: t
+          isSelected: t,
         } = this;
         if (e.length) {
           if (t) {
             this.setData({
               isShowResultList: false,
-              isSelected: false
+              isSelected: false,
             });
           } else {
             this.setData({
-              isShowResultList: true
+              isShowResultList: true,
             });
           }
         } else {
           this.setData({
-            isShowResultList: false
+            isShowResultList: false,
           });
         }
       },
-      "clearTrigger, clearable, disabled, readonly"() {
+      'clearTrigger, clearable, disabled, readonly'() {
         this.updateClearIconVisible();
-      }
+      },
     };
     this.setData({
       classPrefix: name,
-      prefix: prefix,
+      prefix,
       isShowResultList: false,
       isSelected: false,
-      showClearIcon: true
+      showClearIcon: true,
+      _,
     });
   }
   updateClearIconVisible(e = false) {
     const {
       clearTrigger: t,
       disabled: s,
-      readonly: i
+      readonly: i,
     } = this;
     s || i ? this.setData({
-      showClearIcon: false
+      showClearIcon: false,
     }) : this.setData({
-      showClearIcon: e || "always" === String(t)
+      showClearIcon: e || 'always' === String(t),
     });
   }
   onInput(e) {
     let {
-      value: t
+      value: t,
     } = e.detail;
     const {
-      maxcharacter: s
+      maxcharacter: s,
     } = this;
-    if (s && "number" == typeof s && s > 0) {
+    if (s && 'number' === typeof s && s > 0) {
       const {
-        characters: e
-      } = getCharacterLength("maxcharacter", t, s);
+        characters: e,
+      } = getCharacterLength('maxcharacter', t, s);
       t = e;
     }
     this.setData({
-      value: t
+      value: t,
     });
-    this.$emit("change", {
+    this.$emit('change', {
       detail: {
-        value: t
-      }
+        value: t,
+      },
     });
   }
   onFocus(e) {
     const {
-      value: t
+      value: t,
     } = e.detail;
     this.updateClearIconVisible(true);
-    this.$emit("focus", {
+    this.$emit('focus', {
       detail: {
-        value: t
-      }
+        value: t,
+      },
     });
   }
   onBlur(e) {
     const {
-      value: t
+      value: t,
     } = e.detail;
     this.updateClearIconVisible();
-    this.$emit("blur", {
+    this.$emit('blur', {
       detail: {
-        value: t
-      }
+        value: t,
+      },
     });
   }
   handleClear() {
     this.setData({
-      value: ""
+      value: '',
     });
-    this.$emit("clear", {
+    this.$emit('clear', {
       detail: {
-        value: ""
-      }
+        value: '',
+      },
     });
-    this.$emit("change", {
+    this.$emit('change', {
       detail: {
-        value: ""
-      }
+        value: '',
+      },
     });
   }
   onConfirm(e) {
     const {
-      value: t
+      value: t,
     } = e.detail;
-    this.$emit("submit", {
+    this.$emit('submit', {
       detail: {
-        value: t
-      }
+        value: t,
+      },
     });
   }
   onActionClick() {
-    this.$emit("action-click");
+    this.$emit('action-click');
   }
   onSelectResultItem(e) {
     const {
-      index: t
+      index: t,
     } = e.currentTarget.dataset;
     const s = this.resultList[t];
     this.setData({
       value: s,
-      isSelected: true
+      isSelected: true,
     });
-    this.$emit("change", {
+    this.$emit('change', {
       detail: {
-        value: s
-      }
+        value: s,
+      },
     });
-    this.$emit("selectresult", {
+    this.$emit('selectresult', {
       detail: {
         index: t,
-        item: s
-      }
+        item: s,
+      },
     });
   }
 };
