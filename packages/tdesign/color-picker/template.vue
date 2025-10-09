@@ -128,7 +128,11 @@
     </view>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
+
+<script>
+import _ from '../common/utils.wxs';
+
+</script>
 
 <style>
 @import './template.css';

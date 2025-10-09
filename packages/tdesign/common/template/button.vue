@@ -33,7 +33,7 @@
                 :send-message-img="sendMessageImg || ''"
                 :app-parameter="appParameter || ''"
                 :show-message-card="showMessageCard || false"
-                @tap.native="onTplButtonTap"
+                @click="onTplButtonTap"
                 @getuserinfo="onTplButtonTap"
                 @contact="onTplButtonTap"
                 @getphonenumber="onTplButtonTap"

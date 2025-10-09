@@ -23,7 +23,7 @@
           <t-button
             theme="primary"
             content="用户引导"
-            @tap.native="handleBaseClick"
+            @click="handleBaseClick"
           />
         </view>
         <t-popup
@@ -47,7 +47,7 @@
           <t-button
             theme="primary"
             content="用户引导"
-            @tap.native="handleNoMaskClick"
+            @click="handleNoMaskClick"
           />
         </view>
         <t-popup
@@ -71,7 +71,7 @@
           <t-button
             theme="primary"
             content="用户引导"
-            @tap.native="handleDialogClick"
+            @click="handleDialogClick"
           />
         </view>
         <t-popup
@@ -95,7 +95,7 @@
           <t-button
             theme="primary"
             content="用户引导"
-            @tap.native="handleDialog1Click"
+            @click="handleDialog1Click"
           />
         </view>
         <t-popup
@@ -119,7 +119,7 @@
           <t-button
             theme="primary"
             content="用户引导"
-            @tap.native="handleContentClick"
+            @click="handleContentClick"
           />
         </view>
         <t-popup

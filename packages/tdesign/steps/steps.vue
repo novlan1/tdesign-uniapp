@@ -6,51 +6,52 @@
     <slot />
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import tStep from "../step-item/step-item";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { wxComponent, SuperComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
+import tStep from '../step-item/step-item';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { wxComponent, SuperComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import _ from '../common/utils.wxs';
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-steps`;
 let Steps = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.relations = {
-      "../step-item/step-item": {
-        type: "child",
+      '../step-item/step-item': {
+        type: 'child',
         linked(e) {
           this.updateChildren();
           const {
-            readonly: t
+            readonly: t,
           } = this;
           e.setData({
-            readonly: t
+            readonly: t,
           });
         },
         unlinked() {
           this.updateLastChid();
-        }
-      }
+        },
+      },
     };
     this.externalClasses = [`${prefix}-class`];
-    this.properties = props;;
+    this.properties = props;
     this.controlledProps = [{
-      key: "current",
-      event: "change"
+      key: 'current',
+      event: 'change',
     }];
     this.setData({
-      prefix: prefix,
-      classPrefix: name
+      prefix,
+      classPrefix: name,
     });
     this.observers = {
-      "current, theme, sequence"() {
+      'current, theme, sequence'() {
         this.updateChildren();
-      }
+      },
     };
     this.methods = {
       updateChildren() {
@@ -58,25 +59,25 @@ let Steps = class extends SuperComponent {
         e.forEach((t, s) => {
           t.updateStatus(Object.assign({
             index: s,
-            items: e
+            items: e,
           }, this));
         });
       },
       updateLastChid() {
         const e = this.$children;
         e.forEach((t, s) => t.setData({
-          isLastChild: s === e.length - 1
+          isLastChild: s === e.length - 1,
         }));
       },
       handleClick(e) {
         if (!this.readonly) {
           const t = this.current;
-          this._trigger("change", {
+          this._trigger('change', {
             previous: t,
-            current: e
+            current: e,
           });
         }
-      }
+      },
     };
   }
 };

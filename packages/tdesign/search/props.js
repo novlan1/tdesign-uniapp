@@ -1,108 +1,108 @@
 const props = {
     action: {
         type: String,
-        value: ''
+        default: ''
     },
     adjustPosition: {
         type: Boolean,
-        value: true
+        default: true
     },
     alwaysEmbed: {
         type: Boolean,
-        value: false
+        default: false
     },
     center: {
         type: Boolean,
-        value: false
+        default: false
     },
     clearTrigger: {
         type: String,
-        value: 'always'
+        default: 'always'
     },
     clearable: {
         type: Boolean,
-        value: true
+        default: true
     },
     confirmHold: {
         type: Boolean,
-        value: false
+        default: false
     },
     confirmType: {
         type: String,
-        value: 'search'
+        default: 'search'
     },
     cursor: {
         type: Number,
-        value: -1,
+        default: -1,
         required: true
     },
     cursorSpacing: {
         type: Number,
-        value: 0
+        default: 0
     },
     disabled: {
         type: Boolean,
-        value: false
+        default: false
     },
     focus: {
         type: Boolean,
-        value: false
+        default: false
     },
     holdKeyboard: {
         type: Boolean,
-        value: false
+        default: false
     },
     leftIcon: {
         type: String,
-        value: 'search'
+        default: 'search'
     },
     maxcharacter: {
         type: Number
     },
     maxlength: {
         type: Number,
-        value: -1
+        default: -1
     },
     placeholder: {
         type: String,
-        value: ''
+        default: ''
     },
     placeholderClass: {
         type: String,
-        value: 'input-placeholder'
+        default: 'input-placeholder'
     },
     placeholderStyle: {
         type: String,
-        value: '',
+        default: '',
         required: true
     },
     readonly: {
         type: null,
-        value: void 0
+        default: void 0
     },
     resultList: {
         type: Array,
-        value: []
+        default: []
     },
     selectionEnd: {
         type: Number,
-        value: -1
+        default: -1
     },
     selectionStart: {
         type: Number,
-        value: -1
+        default: -1
     },
     shape: {
         type: String,
-        value: 'square'
+        default: 'square'
     },
     type: {
         type: String,
-        value: 'text'
+        default: 'text'
     },
     value: {
         type: String,
-        value: ''
+        default: ''
     }
 };
 export default props;

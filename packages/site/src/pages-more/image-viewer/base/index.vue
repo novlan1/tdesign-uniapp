@@ -5,7 +5,7 @@
       size="large"
       variant="outline"
       block
-      @tap.native="onClick"
+      @click="onClick"
     >
       基础图片预览
     </t-button>

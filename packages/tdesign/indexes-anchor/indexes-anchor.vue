@@ -21,32 +21,34 @@
     </view>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import _ from '../common/utils.wxs';
+
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-indexes-anchor`;
 let IndexesAnchor = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`];
-    this.properties = props;;
+    this.properties = props;
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
-      anchorStyle: "",
+      anchorStyle: '',
       sticky: false,
-      active: false
+      active: false,
     });
     this.relations = {
-      "../indexes/indexes": {
-        type: "parent"
-      }
+      '../indexes/indexes': {
+        type: 'parent'
+      },
     };
   }
 };

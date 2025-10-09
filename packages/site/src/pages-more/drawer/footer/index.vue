@@ -1,6 +1,6 @@
 <template>
     <view>
-        <t-button variant="outline" @tap.native="openDrawerBase" block size="large" theme="primary">带底部插槽</t-button>
+        <t-button variant="outline" @click="openDrawerBase" block size="large" theme="primary">带底部插槽</t-button>
 
         <t-drawer :visible="visible" :placement="placement" title="标题" :items="sidebar" usingCustomNavbar @overlay-click="overlayClick" @item-click="itemClick">
             <view class="button-host">

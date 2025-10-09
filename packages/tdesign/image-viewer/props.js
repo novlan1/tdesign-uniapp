@@ -1,43 +1,43 @@
 const props = {
     backgroundColor: {
         type: String,
-        value: 'rgba(0, 0, 0, 1)'
+        default: 'rgba(0, 0, 0, 1)'
     },
     closeBtn: {
         type: null,
-        value: false
+        default: false
     },
     deleteBtn: {
         type: null,
-        value: false
+        default: false
     },
     images: {
         type: Array,
-        value: []
+        default: []
     },
     initialIndex: {
         type: Number,
-        value: 0
+        default: 0
     },
     lazy: {
         type: Boolean,
-        value: true
+        default: true
     },
     showIndex: {
         type: Boolean,
-        value: false
+        default: false
     },
     usingCustomNavbar: {
         type: Boolean,
-        value: false
+        default: false
     },
     visible: {
         type: Boolean,
-        value: null
+        default: null
     },
     defaultVisible: {
         type: Boolean,
-        value: false
+        default: false
     }
 };
 export default props;

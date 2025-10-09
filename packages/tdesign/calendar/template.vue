@@ -19,7 +19,7 @@
       size="48rpx"
       aria-role="button"
       aria-label="关闭"
-      @tap.native="handleClose"
+      @click="handleClose"
     />
     <!-- parse <template v-if="switchMode !== 'none'" is="calendar-header" :data="classPrefix: classPrefix + '-header', switchMode, ...actionButtons, title: _this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle)"/> -->
     <block
@@ -245,7 +245,7 @@
             :app-parameter="appParameter || ''"
             :show-message-card="showMessageCard || false"
             :aria-label="ariaLabel || ''"
-            @tap.native="onTplButtonTap"
+            @click="onTplButtonTap"
             @getuserinfo="onTplButtonTap"
             @contact="onTplButtonTap"
             @getphonenumber="onTplButtonTap"
@@ -261,9 +261,11 @@
     </view>
   </view>
 </template>
-<script module="_this" lang="wxs" src="@/calendar/calendar.wxs"></script>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
+<script>
+import _ from '../common/utils.wxs';
+import * as _this from './calendar.wxs';
 
+</script>
 <style>
 @import './template.css';
 

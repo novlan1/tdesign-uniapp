@@ -2,7 +2,7 @@
     <view>
         <t-color-picker :visible="visible" use-popup enableAlpha type="multiple" @change="onChange" @palette-bar-change="onPaletteBarChange" />
 
-        <t-button block size="large" variant="outline" theme="primary" @tap.native="handlePopup" t-class="wrapper">弹窗形式的颜色选择器</t-button>
+        <t-button block size="large" variant="outline" theme="primary" @click="handlePopup" t-class="wrapper">弹窗形式的颜色选择器</t-button>
     </view>
 </template>
 

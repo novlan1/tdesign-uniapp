@@ -4,22 +4,22 @@ const props = {
     },
     height: {
         type: null,
-        value: 336
+        default: 336
     },
     keys: {
         type: Object
     },
     multiple: {
         type: Boolean,
-        value: false
+        default: false
     },
     options: {
         type: Array,
-        value: []
+        default: []
     },
     value: {
         type: null,
-        value: null
+        default: null
     },
     defaultValue: {
         type: null

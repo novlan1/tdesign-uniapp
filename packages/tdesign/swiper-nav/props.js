@@ -1,31 +1,31 @@
 const props = {
     current: {
         type: Number,
-        value: 0
+        default: 0
     },
     direction: {
         type: String,
-        value: 'horizontal'
+        default: 'horizontal'
     },
     minShowNum: {
         type: Number,
-        value: 2
+        default: 2
     },
     paginationPosition: {
         type: String,
-        value: 'bottom'
+        default: 'bottom'
     },
     showControls: {
         type: Boolean,
-        value: false
+        default: false
     },
     total: {
         type: Number,
-        value: 0
+        default: 0
     },
     type: {
         type: String,
-        value: 'dots'
+        default: 'dots'
     }
 };
 export default props;

@@ -1,28 +1,28 @@
 const props = {
     addBtn: {
         type: Boolean,
-        value: true
+        default: true
     },
     addContent: {
         type: String
     },
     allowUploadDuplicateFile: {
         type: Boolean,
-        value: false
+        default: false
     },
     config: {
         type: Object
     },
     disabled: {
         type: null,
-        value: void 0
+        default: void 0
     },
     draggable: {
         type: null
     },
     files: {
         type: Array,
-        value: null
+        default: null
     },
     defaultFiles: {
         type: Array
@@ -32,26 +32,26 @@ const props = {
     },
     gutter: {
         type: Number,
-        value: 16
+        default: 16
     },
     imageProps: {
         type: Object
     },
     max: {
         type: Number,
-        value: 0
+        default: 0
     },
     mediaType: {
         type: Array,
-        value: ['image', 'video']
+        default: ['image', 'video']
     },
     preview: {
         type: Boolean,
-        value: true
+        default: true
     },
     removeBtn: {
         type: Boolean,
-        value: true
+        default: true
     },
     requestMethod: {
         type: null
@@ -61,7 +61,7 @@ const props = {
     },
     source: {
         type: String,
-        value: 'media'
+        default: 'media'
     },
     transition: {
         type: Object,

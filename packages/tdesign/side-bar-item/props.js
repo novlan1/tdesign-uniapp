@@ -4,14 +4,14 @@ const props = {
     },
     disabled: {
         type: Boolean,
-        value: false
+        default: false
     },
     icon: {
         type: null
     },
     label: {
         type: String,
-        value: ''
+        default: ''
     },
     value: {
         type: null

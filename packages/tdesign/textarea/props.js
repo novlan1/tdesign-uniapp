@@ -1,63 +1,63 @@
 const props = {
     adjustPosition: {
         type: Boolean,
-        value: true
+        default: true
     },
     allowInputOverMax: {
         type: Boolean,
-        value: false
+        default: false
     },
     autofocus: {
         type: Boolean,
-        value: false
+        default: false
     },
     autosize: {
         type: null,
-        value: false
+        default: false
     },
     bordered: {
         type: Boolean,
-        value: false
+        default: false
     },
     confirmHold: {
         type: Boolean,
-        value: false
+        default: false
     },
     confirmType: {
         type: String,
-        value: 'return'
+        default: 'return'
     },
     cursor: {
         type: Number,
-        value: -1
+        default: -1
     },
     cursorSpacing: {
         type: Number,
-        value: 0
+        default: 0
     },
     disableDefaultPadding: {
         type: Boolean,
-        value: false
+        default: false
     },
     disabled: {
         type: null,
-        value: void 0
+        default: void 0
     },
     fixed: {
         type: Boolean,
-        value: false
+        default: false
     },
     focus: {
         type: Boolean,
-        value: false
+        default: false
     },
     holdKeyboard: {
         type: Boolean,
-        value: false
+        default: false
     },
     indicator: {
         type: Boolean,
-        value: false
+        default: false
     },
     label: {
         type: String
@@ -67,39 +67,39 @@ const props = {
     },
     maxlength: {
         type: Number,
-        value: -1
+        default: -1
     },
     placeholder: {
         type: String,
-        value: void 0
+        default: void 0
     },
     placeholderClass: {
         type: String,
-        value: 'textarea-placeholder'
+        default: 'textarea-placeholder'
     },
     placeholderStyle: {
         type: String,
-        value: ''
+        default: ''
     },
     readonly: {
         type: null,
-        value: void 0
+        default: void 0
     },
     selectionEnd: {
         type: Number,
-        value: -1
+        default: -1
     },
     selectionStart: {
         type: Number,
-        value: -1
+        default: -1
     },
     showConfirmBar: {
         type: Boolean,
-        value: true
+        default: true
     },
     value: {
         type: null,
-        value: null
+        default: null
     },
     defaultValue: {
         type: null

@@ -1,30 +1,30 @@
 const props = {
     current: {
         type: null,
-        value: null
+        default: null
     },
     defaultCurrent: {
         type: null
     },
     currentStatus: {
         type: String,
-        value: 'process'
+        default: 'process'
     },
     layout: {
         type: String,
-        value: 'horizontal'
+        default: 'horizontal'
     },
     readonly: {
         type: Boolean,
-        value: false
+        default: false
     },
     sequence: {
         type: String,
-        value: 'positive'
+        default: 'positive'
     },
     theme: {
         type: String,
-        value: 'default'
+        default: 'default'
     }
 };
 export default props;

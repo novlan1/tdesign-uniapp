@@ -1,9 +1,9 @@
 <template>
     <view class="container">
         <view class="button-group">
-            <t-button class="button" variant="text" :disabled="size <= minSize" @tap.native="changeSize($event, { step: -10 })" :data-step="-10">- Smaller</t-button>
+            <t-button class="button" variant="text" :disabled="size <= minSize" @click="changeSize($event, { step: -10 })" :data-step="-10">- Smaller</t-button>
             <view class="line"></view>
-            <t-button class="button" variant="text" :disabled="size >= maxSize" @tap.native="changeSize($event, { step: 10 })" :data-step="10">+ Larger</t-button>
+            <t-button class="button" variant="text" :disabled="size >= maxSize" @click="changeSize($event, { step: 10 })" :data-step="10">+ Larger</t-button>
         </view>
         <view class="qrcode-container">
             <t-qrcode :size="size" value="https://tdesign.tencent.com/" />

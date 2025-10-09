@@ -1,10 +1,10 @@
 <template>
     <view>
         <view class="demo-desc">时分秒选择器</view>
-        <t-cell title="选择时间" hover :note="secondText || ''" arrow data-mode="second" @tap.native="showPicker($event, { mode: 'second' })" t-class="panel-item" />
+        <t-cell title="选择时间" hover :note="secondText || ''" arrow data-mode="second" @click="showPicker($event, { mode: 'second' })" t-class="panel-item" />
 
         <view class="demo-desc">时分选择器</view>
-        <t-cell title="选择时间" hover :note="minuteText || ''" arrow data-mode="minute" @tap.native="showPicker($event, { mode: 'minute' })" t-class="panel-item" />
+        <t-cell title="选择时间" hover :note="minuteText || ''" arrow data-mode="minute" @click="showPicker($event, { mode: 'minute' })" t-class="panel-item" />
 
         <!-- 时分 -->
         <t-date-time-picker

@@ -1,34 +1,34 @@
 const props = {
     borderless: {
         type: Boolean,
-        value: false
+        default: false
     },
     disabled: {
         type: null,
-        value: void 0
+        default: void 0
     },
     keys: {
         type: Object
     },
     max: {
         type: Number,
-        value: void 0
+        default: void 0
     },
     name: {
         type: String,
-        value: ''
+        default: ''
     },
     options: {
         type: Array,
-        value: []
+        default: []
     },
     value: {
         type: Array,
-        value: [],
+        default: [],
     },
     defaultValue: {
         type: Array,
-        value: [],
+        default: [],
     }
 };
 export default props;

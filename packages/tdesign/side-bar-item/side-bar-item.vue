@@ -66,16 +66,18 @@
     </block>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import tBadge from "../badge/badge";
-import tIcon from "../icon/icon";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
+import tBadge from '../badge/badge';
+import tIcon from '../icon/icon';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import _ from '../common/utils.wxs';
+
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-side-bar-item`;
 let SideBarItem = class extends SuperComponent {
@@ -84,55 +86,55 @@ let SideBarItem = class extends SuperComponent {
     this.externalClasses = [`${prefix}-class`];
     this = Object.assign(Object.assign({}, props), {
       tId: {
-        type: String
+        type: String,
       }
     });
     this.relations = {
-      "../side-bar/side-bar": {
-        type: "parent",
+      '../side-bar/side-bar': {
+        type: 'parent',
         linked(e) {
           this.parent = e;
           this.updateActive(e.data.value);
-        }
+        },
       }
     };
     this.observers = {
       icon(e) {
         this.setData({
-          _icon: "string" == typeof e ? {
-            name: e
-          } : e
+          _icon: 'string' === typeof e ? {
+            name: e,
+          } : e,
         });
-      }
+      },
     };
     this.setData({
       classPrefix: name,
-      prefix: prefix,
+      prefix,
       active: false,
       isPre: false,
-      isNext: false
+      isNext: false,
     });
     this.methods = {
       updateActive(e) {
         const t = e === this.value;
         this.setData({
-          active: t
+          active: t,
         });
       },
       handleClick() {
-        var e;
+        let e;
         if (this.disabled) {
           return;
         }
         const {
           value: t,
-          label: i
+          label: i,
         } = this;
         null === (e = this.parent) || void 0 === e || e.doChange({
           value: t,
-          label: i
+          label: i,
         });
-      }
+      },
     };
   }
 };

@@ -37,105 +37,108 @@
     </t-picker>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import tPicker from "../picker/picker";
-import tPickerItem from "../picker-item/picker-item";
-var _a;
-var _b;
-import { __decorate } from "../miniprogram_npm/tslib";
-import config from "../common/config";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import props from "./props";
-import dayjsLocaleMap from "./locale/dayjs";
-const dayjs = require("@/miniprogram_npm/dayjs");
-const localeData = require("./dayjs/plugin/localeData");
+import tPicker from '../picker/picker';
+import tPickerItem from '../picker-item/picker-item';
+import { __decorate } from '../miniprogram_npm/tslib';
+import config from '../common/config';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import props from './props';
+import dayjsLocaleMap from './locale/dayjs';
+import _ from '../common/utils.wxs';
+let _a;
+let _b;
+
+
+const dayjs = require('@/miniprogram_npm/dayjs');
+const localeData = require('./dayjs/plugin/localeData');
 dayjs.extend(localeData);
-dayjs.locale("zh-cn");
+dayjs.locale('zh-cn');
 const defaultLocale = (null === (_a = dayjsLocaleMap[dayjs.locale()]) || void 0 === _a ? void 0 : _a.key) || (null === (_b = dayjsLocaleMap.default) || void 0 === _b ? void 0 : _b.key);
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-date-time-picker`;
-var ModeItem;
-!function (e) {
-  e.YEAR = "year";
-  e.MONTH = "month";
-  e.DATE = "date";
-  e.HOUR = "hour";
-  e.MINUTE = "minute";
-  e.SECOND = "second";
-}(ModeItem || (ModeItem = {}));
-const DATE_MODES = ["year", "month", "date"];
-const TIME_MODES = ["hour", "minute", "second"];
+let ModeItem;
+!(function (e) {
+  e.YEAR = 'year';
+  e.MONTH = 'month';
+  e.DATE = 'date';
+  e.HOUR = 'hour';
+  e.MINUTE = 'minute';
+  e.SECOND = 'second';
+}(ModeItem || (ModeItem = {})));
+const DATE_MODES = ['year', 'month', 'date'];
+const TIME_MODES = ['hour', 'minute', 'second'];
 const FULL_MODES = [...DATE_MODES, ...TIME_MODES];
 let DateTimePicker = class extends SuperComponent {
   constructor() {
     super(...arguments);
-    this.properties = props;;
+    this.properties = props;
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-confirm`, `${prefix}-class-cancel`, `${prefix}-class-title`];
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
     this.observers = {
-      "start, end, value": function () {
+      'start, end, value'() {
         this.updateColumns();
       },
       customLocale(e) {
         if (e && dayjsLocaleMap[e].key) {
           this.setData({
             locale: dayjsLocaleMap[e].i18n,
-            dayjsLocale: dayjsLocaleMap[e].key
+            dayjsLocale: dayjsLocaleMap[e].key,
           });
         }
       },
       mode(e) {
         const t = this.getFullModeArray(e);
         this.setData({
-          fullModes: t
+          fullModes: t,
         });
         this.updateColumns();
-      }
+      },
     };
     this.date = null;
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
       columns: [],
       columnsValue: [],
       fullModes: [],
       locale: dayjsLocaleMap[defaultLocale].i18n,
-      dayjsLocale: dayjsLocaleMap[defaultLocale].key
+      dayjsLocale: dayjsLocaleMap[defaultLocale].key,
     });
     this.controlledProps = [{
-      key: "value",
-      event: "change"
+      key: 'value',
+      event: 'change',
     }];
     this.methods = {
       updateColumns() {
         this.date = this.getParseDate();
         const {
           columns: e,
-          columnsValue: t
+          columnsValue: t,
         } = this.getValueCols();
         this.setData({
           columns: e,
-          columnsValue: t
+          columnsValue: t,
         });
       },
       getDaysOfWeekInMonth(e) {
         const {
           locale: t,
-          dayjsLocale: a
+          dayjsLocale: a,
         } = this;
-        const s = e.startOf("month");
-        const o = e.endOf("month");
+        const s = e.startOf('month');
+        const o = e.endOf('month');
         const n = [];
-        for (let e = 0; e <= o.diff(s, "days"); e += 1) {
-          const o = s.add(e, "days").locale(a).format("ddd");
+        for (let e = 0; e <= o.diff(s, 'days'); e += 1) {
+          const o = s.add(e, 'days').locale(a)
+            .format('ddd');
           n.push({
             value: `${e + 1}`,
-            label: `${e + 1}${t.date || ""} ${o}`
+            label: `${e + 1}${t.date || ''} ${o}`,
           });
         }
         return n;
@@ -143,32 +146,32 @@ let DateTimePicker = class extends SuperComponent {
       getParseDate() {
         const {
           value: e,
-          defaultValue: t
+          defaultValue: t,
         } = this;
         const a = this.getMinDate();
         let s = e || t;
         if (this.isTimeMode()) {
-          const e = dayjs(a).format("YYYY-MM-DD");
+          const e = dayjs(a).format('YYYY-MM-DD');
           s = dayjs(`${e} ${s}`);
         }
         const o = dayjs(s || a);
         return o.isValid() ? o : a;
       },
-      normalize: (e, t) => e && dayjs(e).isValid() ? dayjs(e) : t,
+      normalize: (e, t) => (e && dayjs(e).isValid() ? dayjs(e) : t),
       getMinDate() {
-        return this.normalize(this.start, dayjs().subtract(10, "year"));
+        return this.normalize(this.start, dayjs().subtract(10, 'year'));
       },
       getMaxDate() {
-        return this.normalize(this.end, dayjs().add(10, "year"));
+        return this.normalize(this.end, dayjs().add(10, 'year'));
       },
-      getDateRect(e = "default") {
+      getDateRect(e = 'default') {
         const t = this[{
-          min: "getMinDate",
-          max: "getMaxDate",
-          default: "getDate"
+          min: 'getMinDate',
+          max: 'getMaxDate',
+          default: 'getDate',
         }[e]]();
-        return ["year", "month", "date", "hour", "minute", "second"].map(e => {
-          var a;
+        return ['year', 'month', 'date', 'hour', 'minute', 'second'].map((e) => {
+          let a;
           return null === (a = t[e]) || void 0 === a ? void 0 : a.call(t);
         });
       },
@@ -193,51 +196,53 @@ let DateTimePicker = class extends SuperComponent {
       getColumnOptions() {
         const {
           fullModes: e,
-          filter: t
+          filter: t,
         } = this;
         const a = [];
-        null == e || e.forEach(e => {
+        null == e || e.forEach((e) => {
           const s = this.getOptionByType(e);
-          "function" == typeof t ? a.push(t(e, s)) : a.push(s);
+          'function' === typeof t ? a.push(t(e, s)) : a.push(s);
         });
         return a;
       },
       getOptionByType(e) {
-        var t;
+        let t;
         const {
           locale: a,
           steps: s,
-          showWeek: o
+          showWeek: o,
         } = this;
         const n = [];
-        const l = this.getOptionEdge("min", e);
-        const i = this.getOptionEdge("max", e);
+        const l = this.getOptionEdge('min', e);
+        const i = this.getOptionEdge('max', e);
         const r = null !== (t = null == s ? void 0 : s[e]) && void 0 !== t ? t : 1;
-        const u = dayjs().locale(this.dayjsLocale).localeData().monthsShort();
-        if ("date" === e && o) {
+        const u = dayjs().locale(this.dayjsLocale)
+          .localeData()
+          .monthsShort();
+        if ('date' === e && o) {
           return this.getDaysOfWeekInMonth(this.date);
         }
         for (let t = l; t <= i; t += r) {
           n.push({
             value: `${t}`,
-            label: "month" === e ? u[t] : `${t + a[e]}`
+            label: 'month' === e ? u[t] : `${t + a[e]}`,
           });
         }
         return n;
       },
       getYearOptions(e) {
         const {
-          locale: t
+          locale: t,
         } = this;
         const {
           minDateYear: a,
-          maxDateYear: s
+          maxDateYear: s,
         } = e;
         const o = [];
         for (let e = a; e <= s; e += 1) {
           o.push({
             value: `${e}`,
-            label: `${e + t.year}`
+            label: `${e + t.year}`,
           });
         }
         return o;
@@ -250,73 +255,73 @@ let DateTimePicker = class extends SuperComponent {
           date: [1, this.getDate().daysInMonth()],
           hour: [0, 23],
           minute: [0, 59],
-          second: [0, 59]
+          second: [0, 59],
         };
-        const n = ["year", "month", "date", "hour", "minute", "second"];
+        const n = ['year', 'month', 'date', 'hour', 'minute', 'second'];
         for (let l = 0, i = a.length; l < i; l += 1) {
           if (n[l] === t) {
             return s[l];
           }
           if (s[l] !== a[l]) {
-            return o[t]["min" === e ? 0 : 1];
+            return o[t]['min' === e ? 0 : 1];
           }
         }
-        return o[t]["min" === e ? 0 : 1];
+        return o[t]['min' === e ? 0 : 1];
       },
       getMonthOptions() {
         const e = [];
-        const t = this.getOptionEdge("min", "month");
-        const a = this.getOptionEdge("max", "month");
+        const t = this.getOptionEdge('min', 'month');
+        const a = this.getOptionEdge('max', 'month');
         const s = dayjs.monthsShort();
         for (let o = t; o <= a; o += 1) {
           e.push({
             value: `${o}`,
-            label: s[o]
+            label: s[o],
           });
         }
         return e;
       },
       getDayOptions() {
         const {
-          locale: e
+          locale: e,
         } = this;
         const t = [];
-        const a = this.getOptionEdge("min", "date");
-        const s = this.getOptionEdge("max", "date");
+        const a = this.getOptionEdge('min', 'date');
+        const s = this.getOptionEdge('max', 'date');
         for (let o = a; o <= s; o += 1) {
           t.push({
             value: `${o}`,
-            label: `${o + e.day}`
+            label: `${o + e.day}`,
           });
         }
         return t;
       },
       getHourOptions() {
         const {
-          locale: e
+          locale: e,
         } = this;
         const t = [];
-        const a = this.getOptionEdge("min", "hour");
-        const s = this.getOptionEdge("max", "hour");
+        const a = this.getOptionEdge('min', 'hour');
+        const s = this.getOptionEdge('max', 'hour');
         for (let o = a; o <= s; o += 1) {
           t.push({
             value: `${o}`,
-            label: `${o + e.hour}`
+            label: `${o + e.hour}`,
           });
         }
         return t;
       },
       getMinuteOptions() {
         const {
-          locale: e
+          locale: e,
         } = this;
         const t = [];
-        const a = this.getOptionEdge("min", "minute");
-        const s = this.getOptionEdge("max", "minute");
+        const a = this.getOptionEdge('min', 'minute');
+        const s = this.getOptionEdge('max', 'minute');
         for (let o = a; o <= s; o += 1) {
           t.push({
             value: `${o}`,
-            label: `${o + e.minute}`
+            label: `${o + e.minute}`,
           });
         }
         return t;
@@ -324,16 +329,16 @@ let DateTimePicker = class extends SuperComponent {
       getValueCols() {
         return {
           columns: this.getColumnOptions(),
-          columnsValue: this.getColumnsValue()
+          columnsValue: this.getColumnsValue(),
         };
       },
       getColumnsValue() {
         const {
-          fullModes: e
+          fullModes: e,
         } = this;
         const t = this.getDate();
         const a = [];
-        null == e || e.forEach(e => {
+        null == e || e.forEach((e) => {
           a.push(`${t[e]()}`);
         });
         return a;
@@ -364,11 +369,11 @@ let DateTimePicker = class extends SuperComponent {
       onColumnChange(e) {
         const {
           value: t,
-          column: a
+          column: a,
         } = null == e ? void 0 : e.detail;
         const {
           fullModes: s,
-          format: o
+          format: o,
         } = this;
         const n = null == t ? void 0 : t[a];
         const l = null == s ? void 0 : s[a];
@@ -376,51 +381,51 @@ let DateTimePicker = class extends SuperComponent {
         this.date = i;
         const {
           columns: r,
-          columnsValue: u
+          columnsValue: u,
         } = this.getValueCols();
         this.setData({
           columns: r,
-          columnsValue: u
+          columnsValue: u,
         });
         const d = this.getDate();
         const h = o ? d.format(o) : d.valueOf();
-        this.$emit("pick", {
+        this.$emit('pick', {
           detail: {
-            value: h
-          }
+            value: h,
+          },
         });
       },
       onConfirm() {
         const {
-          format: e
+          format: e,
         } = this;
         const t = this.getDate();
         const a = e ? t.format(e) : t.valueOf();
-        this._trigger("change", {
-          value: a
+        this._trigger('change', {
+          value: a,
         });
-        this.$emit("confirm", {
+        this.$emit('confirm', {
           detail: {
-            value: a
-          }
+            value: a,
+          },
         });
         this.resetColumns();
       },
       onCancel() {
         this.resetColumns();
-        this.$emit("cancel");
+        this.$emit('cancel');
       },
       onVisibleChange(e) {
         e.detail.visible || this.resetColumns();
       },
       onClose(e) {
         const {
-          trigger: t
+          trigger: t,
         } = e.detail;
-        this.$emit("close", {
+        this.$emit('close', {
           detail: {
-            trigger: t
-          }
+            trigger: t,
+          },
         });
       },
       resetColumns() {
@@ -428,17 +433,17 @@ let DateTimePicker = class extends SuperComponent {
         this.date = e;
         const {
           columns: t,
-          columnsValue: a
+          columnsValue: a,
         } = this.getValueCols();
         this.setData({
           columns: t,
-          columnsValue: a
+          columnsValue: a,
         });
-      }
+      },
     };
   }
   getFullModeArray(e) {
-    if ("string" == typeof e || e instanceof String) {
+    if ('string' === typeof e || e instanceof String) {
       return this.getFullModeByModeString(e, FULL_MODES);
     }
     if (Array.isArray(e)) {
@@ -459,7 +464,7 @@ let DateTimePicker = class extends SuperComponent {
   }
   isTimeMode() {
     const {
-      fullModes: e
+      fullModes: e,
     } = this;
     return e[0] === ModeItem.HOUR;
   }

@@ -60,7 +60,8 @@
     </block>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
+<!-- template. ignore -->
+<!-- <script module="_" lang="wxs" src="@/common/utils.wxs"></script> -->
 
 <style>
 @import './calendar-header.css';

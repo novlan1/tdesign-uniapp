@@ -38,7 +38,7 @@
               :shape="(imageProps && imageProps.shape) || 'round'"
               :webp="(imageProps && imageProps.webp) || false"
               :show-menu-by-longpress="(imageProps && imageProps.showMenuByLongpress) || false"
-              @tap.native="onProofTap($event, { file, index })"
+              @click="onProofTap($event, { file, index })"
             />
             <video
               v-if="file.type === 'video'"
@@ -174,7 +174,7 @@
                   :shape="(imageProps && imageProps.shape) || 'round'"
                   :webp="(imageProps && imageProps.webp) || false"
                   :show-menu-by-longpress="(imageProps && imageProps.showMenuByLongpress) || false"
-                  @tap.native="onProofTap($event, { file, index })"
+                  @click="onProofTap($event, { file, index })"
                 />
                 <video
                   v-if="file.type === 'video'"
@@ -270,22 +270,24 @@
     </t-grid>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
-<script module="_this" lang="wxs" src="@/upload/upload.wxs"></script>
-<script module="handler" lang="wxs" src="@/upload/drag.wxs"></script>
 <script>
-import tGrid from "../grid/grid";
-import tGridItem from "../grid-item/grid-item";
-import tIcon from "../icon/icon";
-import tImage from "../image/image";
-import { __decorate, __rest } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import props from "./props";
-import config from "../common/config";
-import { isOverSize } from "../common/utils";
-import { isObject } from "../common/validator";
+import tGrid from '../grid/grid';
+import tGridItem from '../grid-item/grid-item';
+import tIcon from '../icon/icon';
+import tImage from '../image/image';
+import { __decorate, __rest } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import props from './props';
+import config from '../common/config';
+import { isOverSize } from '../common/utils';
+import { isObject } from '../common/validator';
+import _ from '../common/utils.wxs';
+import * as _this from './upload.wxs';
+import * as handler from './drag.wxs';
+
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-upload`;
 let Upload = class extends SuperComponent {
@@ -293,11 +295,11 @@ let Upload = class extends SuperComponent {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`];
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
     this.setData({
       classPrefix: name,
-      prefix: prefix,
+      prefix,
       current: false,
       proofs: [],
       customFiles: [],
@@ -305,33 +307,33 @@ let Upload = class extends SuperComponent {
       column: 4,
       dragBaseData: {},
       rows: 0,
-      dragWrapStyle: "",
+      dragWrapStyle: '',
       dragList: [],
       dragging: true,
-      dragLayout: false
+      dragLayout: false,
     });
-    this.properties = props;;
+    this.properties = props;
     this.controlledProps = [{
-      key: "files",
-      event: "success"
+      key: 'files',
+      event: 'success',
     }];
     this.observers = {
-      "files, max, draggable"(t, e) {
+      'files, max, draggable'(t, e) {
         this.handleLimit(t, e);
       },
       gridConfig() {
         this.updateGrid();
-      }
+      },
     };
     this.lifetimes = {
       ready() {
         this.handleLimit(this.customFiles, this.max);
         this.updateGrid();
-      }
+      },
     };
     this.methods = {
       uploadFiles(t) {
-        return new Promise(e => {
+        return new Promise((e) => {
           const i = this.requestMethod(t);
           if (i instanceof Promise) {
             return i;
@@ -340,38 +342,39 @@ let Upload = class extends SuperComponent {
         });
       },
       startUpload(t) {
-        return "function" == typeof this.requestMethod ? this.uploadFiles(t).then(() => {
-          t.forEach(t => {
+        return 'function' === typeof this.requestMethod ? this.uploadFiles(t).then(() => {
+          t.forEach((t) => {
             t.percent = 100;
           });
           this.triggerSuccessEvent(t);
-        }).catch(t => {
-          this.triggerFailEvent(t);
-        }) : (this.triggerSuccessEvent(t), this.handleLimit(this.customFiles, this.max), Promise.resolve());
+        })
+          .catch((t) => {
+            this.triggerFailEvent(t);
+          }) : (this.triggerSuccessEvent(t), this.handleLimit(this.customFiles, this.max), Promise.resolve());
       },
       onAddTap() {
         const {
           disabled: t,
           mediaType: e,
-          source: i
+          source: i,
         } = this;
-        t || ("media" === i ? this.chooseMedia(e) : this.chooseMessageFile(e));
+        t || ('media' === i ? this.chooseMedia(e) : this.chooseMessageFile(e));
       },
       chooseMedia(t) {
         const {
-          customLimit: e
+          customLimit: e,
         } = this;
         const {
           config: i,
-          sizeLimit: s
+          sizeLimit: s,
         } = this;
         uni.chooseMedia(Object.assign(Object.assign({
           count: Math.min(20, e),
-          mediaType: t
+          mediaType: t,
         }, i), {
-          success: e => {
+          success: (e) => {
             const i = [];
-            e.tempFiles.forEach(e => {
+            e.tempFiles.forEach((e) => {
               const {
                 size: r,
                 fileType: a,
@@ -379,17 +382,17 @@ let Upload = class extends SuperComponent {
                 width: n,
                 height: l,
                 duration: c,
-                thumbTempFilePath: h
+                thumbTempFilePath: h,
               } = e;
-              const g = __rest(e, ["size", "fileType", "tempFilePath", "width", "height", "duration", "thumbTempFilePath"]);
+              const g = __rest(e, ['size', 'fileType', 'tempFilePath', 'width', 'height', 'duration', 'thumbTempFilePath']);
               if (isOverSize(r, s)) {
-                let t = ("image" === a ? "图片" : "视频") + "大小超过限制";
-                if ("number" != typeof s) {
-                  t = s.message.replace("{sizeLimit}", null == s ? void 0 : s.size);
+                let t = `${'image' === a ? '图片' : '视频'}大小超过限制`;
+                if ('number' !== typeof s) {
+                  t = s.message.replace('{sizeLimit}', null == s ? void 0 : s.size);
                 }
                 return void uni.showToast({
-                  icon: "none",
-                  title: t
+                  icon: 'none',
+                  title: t,
                 });
               }
               const d = this.getRandFileName(o);
@@ -402,50 +405,50 @@ let Upload = class extends SuperComponent {
                 height: l,
                 duration: c,
                 thumb: h,
-                percent: 0
+                percent: 0,
               }, g));
             });
             this.afterSelect(i);
           },
-          fail: t => {
+          fail: (t) => {
             this.triggerFailEvent(t);
           },
-          complete: t => {
-            this.$emit("complete", {
-              detail: t
+          complete: (t) => {
+            this.$emit('complete', {
+              detail: t,
             });
-          }
+          },
         }));
       },
       chooseMessageFile(t) {
         const {
-          customLimit: e
+          customLimit: e,
         } = this;
         const {
           config: i,
-          sizeLimit: s
+          sizeLimit: s,
         } = this;
         uni.chooseMessageFile(Object.assign(Object.assign({
           count: Math.min(100, e),
-          type: Array.isArray(t) ? "all" : t
+          type: Array.isArray(t) ? 'all' : t,
         }, i), {
-          success: e => {
+          success: (e) => {
             const i = [];
-            e.tempFiles.forEach(e => {
+            e.tempFiles.forEach((e) => {
               const {
                 size: r,
                 type: a,
-                path: o
+                path: o,
               } = e;
-              const n = __rest(e, ["size", "type", "path"]);
+              const n = __rest(e, ['size', 'type', 'path']);
               if (isOverSize(r, s)) {
-                let t = ("image" === a ? "图片" : "视频") + "大小超过限制";
-                if ("number" != typeof s) {
-                  t = s.message.replace("{sizeLimit}", null == s ? void 0 : s.size);
+                let t = `${'image' === a ? '图片' : '视频'}大小超过限制`;
+                if ('number' !== typeof s) {
+                  t = s.message.replace('{sizeLimit}', null == s ? void 0 : s.size);
                 }
                 return void uni.showToast({
-                  icon: "none",
-                  title: t
+                  icon: 'none',
+                  title: t,
                 });
               }
               const l = this.getRandFileName(o);
@@ -454,61 +457,61 @@ let Upload = class extends SuperComponent {
                 type: this.getFileType(t, o, a),
                 url: o,
                 size: r,
-                percent: 0
+                percent: 0,
               }, n));
             });
             this.afterSelect(i);
           },
           fail: t => this.triggerFailEvent(t),
-          complete: t => this.$emit("complete", {
-            detail: t
-          })
+          complete: t => this.$emit('complete', {
+            detail: t,
+          }),
         }));
       },
       afterSelect(t) {
-        this._trigger("select-change", {
+        this._trigger('select-change', {
           files: [...this.customFiles],
-          currentSelectedFiles: [t]
+          currentSelectedFiles: [t],
         });
-        this._trigger("add", {
-          files: t
+        this._trigger('add', {
+          files: t,
         });
         this.startUpload(t);
       },
       dragVibrate(t) {
-        var e;
+        let e;
         const {
-          vibrateType: i
+          vibrateType: i,
         } = t;
         const {
-          draggable: s
+          draggable: s,
         } = this;
         const r = null === (e = null == s ? void 0 : s.vibrate) || void 0 === e || e;
         const a = null == s ? void 0 : s.collisionVibrate;
-        if (r && "longPress" === i || a && "touchMove" === i) {
+        if (r && 'longPress' === i || a && 'touchMove' === i) {
           uni.vibrateShort({
-            type: "light"
+            type: 'light',
           });
         }
       },
       dragStatusChange(t) {
         const {
-          dragging: e
+          dragging: e,
         } = t;
         this.setData({
-          dragging: e
+          dragging: e,
         });
       },
       dragEnd(t) {
         const {
-          dragCollisionList: e
+          dragCollisionList: e,
         } = t;
         let i = [];
         i = 0 === e.length ? this.customFiles : e.reduce((t, e) => {
           const {
             realKey: i,
             data: s,
-            fixed: r
+            fixed: r,
           } = e;
           r || (t[i] = Object.assign({}, s));
           return t;
@@ -517,42 +520,42 @@ let Upload = class extends SuperComponent {
       },
       triggerDropEvent(t) {
         const {
-          transition: e
+          transition: e,
         } = this;
         if (e.backTransition) {
           const i = setTimeout(() => {
-            this.$emit("drop", {
+            this.$emit('drop', {
               detail: {
-                files: t
-              }
+                files: t,
+              },
             });
             clearTimeout(i);
           }, e.duration);
         } else {
-          this.$emit("drop", {
+          this.$emit('drop', {
             detail: {
-              files: t
-            }
+              files: t,
+            },
           });
         }
-      }
+      },
     };
   }
   onProofTap(t) {
-    var e;
+    let e;
     this.onFileClick(t);
     const {
-      preview: i
+      preview: i,
     } = this;
     if (!i) {
       return;
     }
     const {
-      index: s
+      index: s,
     } = t.currentTarget.dataset;
     uni.previewImage({
       urls: this.customFiles.filter(t => -1 !== t.percent).map(t => t.url),
-      current: null === (e = this.customFiles[s]) || void 0 === e ? void 0 : e.url
+      current: null === (e = this.customFiles[s]) || void 0 === e ? void 0 : e.url,
     });
   }
   handleLimit(t, e) {
@@ -562,28 +565,28 @@ let Upload = class extends SuperComponent {
     this.setData({
       customFiles: t.length > e ? t.slice(0, e) : t,
       customLimit: e - t.length,
-      dragging: true
+      dragging: true,
     });
     this.initDragLayout();
   }
   triggerSuccessEvent(t) {
-    this._trigger("success", {
-      files: [...this.customFiles, ...t]
+    this._trigger('success', {
+      files: [...this.customFiles, ...t],
     });
   }
   triggerFailEvent(t) {
-    this.$emit("fail", {
-      detail: t
+    this.$emit('fail', {
+      detail: t,
     });
   }
   onFileClick(t) {
     const {
-      file: e
+      file: e,
     } = t.currentTarget.dataset;
-    this.$emit("click", {
+    this.$emit('click', {
       detail: {
-        file: e
-      }
+        file: e,
+      },
     });
   }
   getFileType(t, e, i) {
@@ -593,52 +596,52 @@ let Upload = class extends SuperComponent {
     if (1 === t.length) {
       return t[0];
     }
-    const s = e.split(".");
+    const s = e.split('.');
     const r = s[s.length - 1];
-    return ["avi", "wmv", "mkv", "mp4", "mov", "rm", "3gp", "flv", "mpg", "rmvb"].includes(r.toLocaleLowerCase()) ? "video" : "image";
+    return ['avi', 'wmv', 'mkv', 'mp4', 'mov', 'rm', '3gp', 'flv', 'mpg', 'rmvb'].includes(r.toLocaleLowerCase()) ? 'video' : 'image';
   }
   getRandFileName(t) {
-    const e = t.lastIndexOf(".");
-    const i = -1 === e ? "" : t.substr(e);
+    const e = t.lastIndexOf('.');
+    const i = -1 === e ? '' : t.substr(e);
     return parseInt(`${Date.now()}${Math.floor(900 * Math.random() + 100)}`, 10).toString(36) + i;
   }
   onDelete(t) {
     const {
-      index: e
+      index: e,
     } = t.currentTarget.dataset;
     this.deleteHandle(e);
   }
   deleteHandle(t) {
     const {
-      customFiles: e
+      customFiles: e,
     } = this;
     const i = e[t];
-    this.$emit("remove", {
+    this.$emit('remove', {
       detail: {
         index: t,
-        file: i
-      }
+        file: i,
+      },
     });
   }
   updateGrid() {
     let {
-      gridConfig: t = {}
+      gridConfig: t = {},
     } = this;
     isObject(t) || (t = {});
     const {
       column: e = 4,
       width: i = 160,
-      height: s = 160
+      height: s = 160,
     } = t;
     this.setData({
       gridItemStyle: `width:${i}rpx;height:${s}rpx`,
-      column: e
+      column: e,
     });
   }
   initDragLayout() {
     const {
       draggable: t,
-      disabled: e
+      disabled: e,
     } = this;
     if (t && !e) {
       this.initDragList();
@@ -650,16 +653,16 @@ let Upload = class extends SuperComponent {
     const {
       column: e,
       customFiles: i,
-      customLimit: s
+      customLimit: s,
     } = this;
     const r = [];
     i.forEach((i, s) => {
       r.push({
         realKey: t,
         sortKey: s,
-        tranX: s % e * 100 + "%",
-        tranY: 100 * Math.floor(s / e) + "%",
-        data: Object.assign({}, i)
+        tranX: `${s % e * 100}%`,
+        tranY: `${100 * Math.floor(s / e)}%`,
+        data: Object.assign({}, i),
       });
       t += 1;
     });
@@ -668,14 +671,14 @@ let Upload = class extends SuperComponent {
       r.push({
         realKey: t,
         sortKey: t,
-        tranX: t % e * 100 + "%",
-        tranY: 100 * Math.floor(t / e) + "%",
-        fixed: true
+        tranX: `${t % e * 100}%`,
+        tranY: `${100 * Math.floor(t / e)}%`,
+        fixed: true,
       });
     }
     this.rows = Math.ceil(r.length / e);
     this.setData({
-      dragList: r
+      dragList: r,
     });
   }
   initDragBaseData() {
@@ -683,13 +686,13 @@ let Upload = class extends SuperComponent {
       classPrefix: t,
       rows: e,
       column: i,
-      customFiles: s
+      customFiles: s,
     } = this;
     if (0 === s.length) {
       return void this.setData({
         dragBaseData: {},
-        dragWrapStyle: "",
-        dragLayout: false
+        dragWrapStyle: '',
+        dragLayout: false,
       });
     }
     const r = uni.createSelectorQuery().in(this);
@@ -698,15 +701,15 @@ let Upload = class extends SuperComponent {
     r.select(a).boundingClientRect();
     r.select(o).boundingClientRect();
     r.selectViewport().scrollOffset();
-    r.exec(s => {
+    r.exec((s) => {
       const [{
         width: r,
-        height: a
+        height: a,
       }, {
         left: o,
-        top: n
+        top: n,
       }, {
-        scrollTop: l
+        scrollTop: l,
       }] = s;
       const c = {
         rows: e,
@@ -715,17 +718,17 @@ let Upload = class extends SuperComponent {
         itemHeight: a,
         wrapLeft: o,
         wrapTop: n + l,
-        columns: i
+        columns: i,
       };
       const h = `height: ${e * a}px`;
       this.setData({
         dragBaseData: c,
         dragWrapStyle: h,
-        dragLayout: true
+        dragLayout: true,
       }, () => {
         const t = setTimeout(() => {
           this.setData({
-            dragging: false
+            dragging: false,
           });
           clearTimeout(t);
         }, 0);

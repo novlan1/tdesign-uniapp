@@ -30,7 +30,7 @@
             size="48rpx"
             aria-role="button"
             aria-label="关闭"
-            @tap.native="handleClose"
+            @click="handleClose"
           />
           <!-- parse <template v-if="switchMode !== 'none'" is="calendar-header" :data="classPrefix: classPrefix + '-header', switchMode, ...actionButtons, title: _this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle)"/> -->
           <block
@@ -256,7 +256,7 @@
                   :app-parameter="appParameter || ''"
                   :show-message-card="showMessageCard || false"
                   :aria-label="ariaLabel || ''"
-                  @tap.native="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @click="onTplButtonTap($event, { type: 'action', extra: index })"
                   @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
                   @contact="onTplButtonTap($event, { type: 'action', extra: index })"
                   @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
@@ -296,7 +296,7 @@
             size="48rpx"
             aria-role="button"
             aria-label="关闭"
-            @tap.native="handleClose"
+            @click="handleClose"
           />
           <!-- parse <template v-if="switchMode !== 'none'" is="calendar-header" :data="classPrefix: classPrefix + '-header', switchMode, ...actionButtons, title: _this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle)"/> -->
           <block
@@ -522,7 +522,7 @@
                   :app-parameter="appParameter || ''"
                   :show-message-card="showMessageCard || false"
                   :aria-label="ariaLabel || ''"
-                  @tap.native="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @click="onTplButtonTap($event, { type: 'action', extra: index })"
                   @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
                   @contact="onTplButtonTap($event, { type: 'action', extra: index })"
                   @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
@@ -541,44 +541,45 @@
     </block>
   </view>
 </template>
-<script module="_this" lang="wxs" src="@/calendar/calendar.wxs"></script>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import tPopup from "../popup/popup";
-import tButton from "../button/button";
-import tIcon from "../icon/icon";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
-import TCalendar from "../common/shared/calendar/index";
-import useCustomNavbar from "../mixins/using-custom-navbar";
-import { getPrevMonth, getPrevYear, getNextMonth, getNextYear } from "./utils";
+import tPopup from '../popup/popup';
+import tButton from '../button/button';
+import tIcon from '../icon/icon';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import TCalendar from '../common/shared/calendar/index';
+import useCustomNavbar from '../mixins/using-custom-navbar';
+import { getPrevMonth, getPrevYear, getNextMonth, getNextYear } from './utils';
+import _ from '../common/utils.wxs';
+import * as _this from './calendar.wxs';
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-calendar`;
 const defaultLocaleText = {
-  title: "请选择日期",
-  weekdays: ["日", "一", "二", "三", "四", "五", "六"],
-  monthTitle: "{year} 年 {month}",
-  months: ["1 月", "2 月", "3 月", "4 月", "5 月", "6 月", "7 月", "8 月", "9 月", "10 月", "11 月", "12 月"],
-  confirm: "确认"
-};
+  title: '请选择日期',
+  weekdays: ['日', '一', '二', '三', '四', '五', '六'],
+  monthTitle: '{year} 年 {month}',
+  months: ['1 月', '2 月', '3 月', '4 月', '5 月', '6 月', '7 月', '8 月', '9 月', '10 月', '11 月', '12 月'],
+  confirm:'确认',
+}};
 let Calendar = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.behaviors = [useCustomNavbar];
     this.externalClasses = [`${prefix}-class`];
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
-    this.properties = props;;
+    this.properties = props;
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
       months: [],
-      scrollIntoView: "",
+      scrollIntoView: '',
       innerConfirmBtn: {},
       realLocalText: {},
       currentMonth: {},
@@ -586,16 +587,16 @@ let Calendar = class extends SuperComponent {
         preYearBtnDisable: false,
         prevMonthBtnDisable: false,
         nextMonthBtnDisable: false,
-        nextYearBtnDisable: false
-      }
-    });
+        nextYearBtnDisable: false,
+     },
+    }});
     this.controlledProps = [{
-      key: "value",
-      event: "confirm"
-    }, {
-      key: "value",
-      event: "change"
-    }];
+      key: 'value',
+      event:'confirm',
+    }}, {
+      key: 'value',
+      event:'change',
+    }}];
     this.lifetimes = {
       created() {
         this.base = new TCalendar(this);
@@ -605,33 +606,33 @@ let Calendar = class extends SuperComponent {
         this.initialValue();
         this.setData({
           days: this.base.getDays(t.weekdays),
-          realLocalText: t
+          realLocalText: t,
         });
         this.calcMonths();
         this.updateCurrentMonth();
         this.usePopup || this.scrollIntoView();
-      }
+      },
     };
     this.observers = {
       type(t) {
         this.base.type = t;
       },
       confirmBtn(t) {
-        if ("string" == typeof t) {
+        if ('string' === typeof t) {
           this.setData({
-            innerConfirmBtn: "slot" === t ? "slot" : {
-              content: t
-            }
-          });
+            innerConfirmBtn: 'slot' === t ? 'slot' : {
+              content: t,
+           },
+          }});
         } else {
-          if ("object" == typeof t) {
+          if ('object' === typeof t) {
             this.setData({
-              innerConfirmBtn: t
+              innerConfirmBtn: t,
             });
           }
         }
       },
-      "firstDayOfWeek,minDate,maxDate"(t, e, a) {
+      'firstDayOfWeek,minDate,maxDate'(t, e, a) {
         if (t) {
           this.base.firstDayOfWeek = t;
         }
@@ -658,35 +659,35 @@ let Calendar = class extends SuperComponent {
       format(t) {
         const {
           usePopup: e,
-          visible: a
+          visible: a,
         } = this;
         this.base.format = t;
         e && !a || this.calcMonths();
-      }
+      },
     };
     this.methods = {
       initialValue() {
         const {
           value: t,
           type: e,
-          minDate: a
+          minDate: a,
         } = this;
         if (!t) {
           const t = new Date();
           const n = a || new Date(t.getFullYear(), t.getMonth(), t.getDate()).getTime();
-          const s = "single" === e ? n : [n];
-          if ("range" === e) {
+          const s = 'single' === e ? n : [n];
+          if ('range' === e) {
             s[1] = n + 86400000;
           }
           this.setData({
-            value: s
+            value: s,
           });
           this.base.value = s;
         }
       },
       scrollIntoView() {
         const {
-          value: t
+          value: t,
         } = this;
         if (!t) {
           return;
@@ -694,7 +695,7 @@ let Calendar = class extends SuperComponent {
         const e = new Date(Array.isArray(t) ? t[0] : t);
         if (e) {
           this.setData({
-            scrollIntoView: `year_${e.getFullYear()}_month_${e.getMonth()}`
+            scrollIntoView: `year_${e.getFullYear()}_month_${e.getMonth()}`,
           });
         }
       },
@@ -702,7 +703,7 @@ let Calendar = class extends SuperComponent {
         const e = new Date(t);
         return {
           year: e.getFullYear(),
-          month: e.getMonth()
+          month: e.getMonth(),
         };
       },
       updateActionButton(t) {
@@ -723,12 +724,12 @@ let Calendar = class extends SuperComponent {
             preYearBtnDisable: l,
             prevMonthBtnDisable: c,
             nextYearBtnDisable: m,
-            nextMonthBtnDisable: u
-          }
-        });
+            nextMonthBtnDisable: u,
+         },
+        }});
       },
       updateCurrentMonth() {
-        if ("none" !== this.switchMode) {
+        if ('none' !== this.switchMode) {
           this.calcCurrentMonth();
         }
       },
@@ -736,86 +737,86 @@ let Calendar = class extends SuperComponent {
         const e = t || this.getCurrentDate();
         const {
           year: a,
-          month: n
+          month: n,
         } = this.getCurrentYearAndMonth(e);
         const s = this.months.filter(t => t.year === a && t.month === n);
         this.updateActionButton(e);
         this.setData({
-          currentMonth: s.length > 0 ? s : [this.months[0]]
+          currentMonth: s.length > 0 ? s : [this.months[0]],
         });
       },
       calcMonths() {
         const t = this.base.getMonths();
         this.setData({
-          months: t
+          months: t,
         });
       },
       close(t) {
         if (this.autoClose) {
           this.setData({
-            visible: false
+            visible: false,
           });
         }
-        this.$emit("close", {
+        this.$emit('close', {
           detail: {
-            trigger: t
-          }
-        });
+            trigger: t,
+         },
+        }});
       },
       onVisibleChange() {
-        this.close("overlay");
+        this.close('overlay');
       },
       handleClose() {
-        this.close("close-btn");
+        this.close('close-btn');
       },
       handleSelect(t) {
         const {
           date: e,
           year: a,
-          month: n
+          month: n,
         } = t.currentTarget.dataset;
-        if ("disabled" === e.type) {
+        if ('disabled' === e.type) {
           return;
         }
         const s = this.base.select({
           cellType: e.type,
           year: a,
           month: n,
-          date: e.day
+          date: e.day,
         });
         const r = this.toTime(s);
         this.calcMonths();
         this.updateCurrentMonth();
         if (null == this.confirmBtn) {
-          "single" !== this.type && 2 !== s.length || (this.setData({
-            visible: false
-          }), this._trigger("change", {
-            value: r
+          'single' !== this.type && 2 !== s.length || (this.setData({
+            visible: false,
+          }), this._trigger('change', {
+            value: r,
           }));
         }
-        this.$emit("select", {
+        this.$emit('select', {
           detail: {
-            value: r
-          }
-        });
+            value: r,
+         },
+        }});
       },
       onTplButtonTap() {
         const t = this.base.getTrimValue();
         const e = this.toTime(t);
-        this.close("confirm-btn");
-        this._trigger("confirm", {
-          value: e
+        this.close('confirm-btn');
+        this._trigger('confirm', {
+          value: e,
         });
       },
-      toTime: t => t ? Array.isArray(t) ? t.map(t => t.getTime()) : t.getTime() : null,
+      toTime: t => (t ? Array.isArray(t) ? t.map(t => t.getTime()) : t.getTime() : null),
       onScroll(t) {
-        this.$emit("scroll", {
-          detail: t.detail
+        this.$emit('scroll', {
+          detail: t.detail,
         });
       },
       getCurrentDate() {
-        var t;
-        var e;
+        let t;
+        let e;
         let a = Array.isArray(this.base.value) ? this.base.value[0] : this.base.value;
         if (this.currentMonth.length > 0) {
           const n = null === (t = this.currentMonth[0]) || void 0 === t ? void 0 : t.year;
@@ -827,33 +828,33 @@ let Calendar = class extends SuperComponent {
       handleSwitchModeChange(t) {
         const {
           type: e,
-          disabled: a
+          disabled: a,
         } = t.currentTarget.dataset;
         if (a) {
           return;
         }
         const n = this.getCurrentDate();
         const s = {
-          "pre-year": () => getPrevYear(n),
-          "pre-month": () => getPrevMonth(n),
-          "next-month": () => getNextMonth(n),
-          "next-year": () => getNextYear(n)
+          'pre-year': () => getPrevYear(n),
+          'pre-month': () => getPrevMonth(n),
+          'next-month': () => getNextMonth(n),
+          'next-year': () => getNextYear(n),
         }[e]();
         if (!s) {
           return;
         }
         const {
           year: r,
-          month: i
+          month: i,
         } = this.getCurrentYearAndMonth(s);
-        this.$emit("panel-change", {
+        this.$emit('panel-change', {
           detail: {
             year: r,
-            month: i + 1
-          }
-        });
+            month: i + 1,
+         },
+        }});
         this.calcCurrentMonth(s);
-      }
+      },
     };
   }
 };

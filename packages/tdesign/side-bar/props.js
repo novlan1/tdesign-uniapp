@@ -1,7 +1,7 @@
 const props = {
     value: {
         type: null,
-        value: null
+        default: null
     },
     defaultValue: {
         type: null

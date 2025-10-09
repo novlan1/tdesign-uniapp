@@ -114,37 +114,38 @@
     </view>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
-<script module="utils" lang="wxs" src="@/rate/rate.wxs"></script>
 <script>
-import tIcon from "../icon/icon";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
-import { unitConvert, getRect } from "../common/utils";
+import tIcon from '../icon/icon';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import { unitConvert, getRect } from '../common/utils';
+import _ from '../common/utils.wxs';
+import * as utils from './rate.wxs';
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-rate`;
 let Rate = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-icon`, `${prefix}-class-text`];
-    this.properties = props;;
+    this.properties = props;
     this.controlledProps = [{
-      key: "value",
-      event: "change"
+      key: 'value',
+      event: 'change'
     }];
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
-      defaultTexts: ["极差", "失望", "一般", "满意", "惊喜"],
+      defaultTexts: ['极差', '失望', '一般', '满意', '惊喜'],
       tipsVisible: false,
       tipsLeft: 0,
-      actionType: "",
+      actionType: '',
       scaleIndex: -1,
-      isVisibleToScreenReader: false
+      isVisibleToScreenReader: false,
     });
     this.methods = {
       onTouch(e, t) {
@@ -153,14 +154,14 @@ let Rate = class extends SuperComponent {
           allowHalf: s,
           gap: o,
           value: a,
-          size: n
+          size: n,
         } = this;
         const [r] = e.changedTouches;
         const c = unitConvert(o);
-        getRect(this, `.${name}__wrapper`).then(e => {
+        getRect(this, `.${name}__wrapper`).then((e) => {
           const {
             width: p,
-            left: h
+            left: h,
           } = e;
           const l = (p - (i - 1) * c) / i;
           const d = (r.pageX - h + c) / (l + c);
@@ -173,11 +174,11 @@ let Rate = class extends SuperComponent {
             tipsVisible: true,
             actionType: t,
             scaleIndex: Math.ceil(T),
-            tipsLeft: Math.max(x, 0)
+            tipsLeft: Math.max(x, 0),
           });
           if (T !== a) {
-            this._trigger("change", {
-              value: T
+            this._trigger('change', {
+              value: T,
             });
           }
           if (this.touchEnd) {
@@ -187,15 +188,15 @@ let Rate = class extends SuperComponent {
       },
       onTap(e) {
         const {
-          disabled: t
+          disabled: t,
         } = this;
-        t || this.onTouch(e, "tap");
+        t || this.onTouch(e, 'tap');
       },
       onTouchStart() {
         this.touchEnd = false;
       },
       onTouchMove(e) {
-        this.onTouch(e, "move");
+        this.onTouch(e, 'move');
         this.showAlertText();
       },
       onTouchEnd() {
@@ -203,42 +204,42 @@ let Rate = class extends SuperComponent {
         this.hideTips();
       },
       hideTips() {
-        if ("move" === this.actionType) {
+        if ('move' === this.actionType) {
           this.setData({
             tipsVisible: false,
-            scaleIndex: -1
+            scaleIndex: -1,
           });
         }
       },
       onSelect(e) {
         const {
-          value: t
+          value: t,
         } = e.currentTarget.dataset;
         const {
-          actionType: i
+          actionType: i,
         } = this;
-        if ("move" !== i) {
-          this._trigger("change", {
-            value: t
+        if ('move' !== i) {
+          this._trigger('change', {
+            value: t,
           });
           setTimeout(() => this.setData({
             tipsVisible: false,
-            scaleIndex: -1
+            scaleIndex: -1,
           }), 300);
         }
       },
       showAlertText() {
         if (true !== this.isVisibleToScreenReader) {
           this.setData({
-            isVisibleToScreenReader: true
+            isVisibleToScreenReader: true,
           });
           setTimeout(() => {
             this.setData({
-              isVisibleToScreenReader: false
+              isVisibleToScreenReader: false,
             });
           }, 2000);
         }
-      }
+      },
     };
   }
 };

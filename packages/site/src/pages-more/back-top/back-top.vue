@@ -22,7 +22,7 @@
           block
           variant="outline"
           data-source="round"
-          @tap.native="onBtnClick($event, { source: 'round' })"
+          @click="onBtnClick($event, { source: 'round' })"
         >
           圆形返回顶部
         </t-button>
@@ -37,7 +37,7 @@
           block
           variant="outline"
           data-source="half-round"
-          @tap.native="onBtnClick($event, { source: 'half-round' })"
+          @click="onBtnClick($event, { source: 'half-round' })"
         >
           半圆形返回顶部
         </t-button>

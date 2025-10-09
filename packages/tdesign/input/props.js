@@ -1,97 +1,97 @@
 const props = {
     adjustPosition: {
         type: Boolean,
-        value: true
+        default: true
     },
     align: {
         type: String,
-        value: 'left'
+        default: 'left'
     },
     allowInputOverMax: {
         type: Boolean,
-        value: false
+        default: false
     },
     alwaysEmbed: {
         type: Boolean,
-        value: false
+        default: false
     },
     autoFocus: {
         type: Boolean,
-        value: false
+        default: false
     },
     borderless: {
         type: Boolean,
-        value: false
+        default: false
     },
     clearTrigger: {
         type: String,
-        value: 'always'
+        default: 'always'
     },
     clearable: {
         type: null,
-        value: false
+        default: false
     },
     confirmHold: {
         type: Boolean,
-        value: false
+        default: false
     },
     confirmType: {
         type: String,
-        value: 'done'
+        default: 'done'
     },
     cursor: {
         type: Number,
-        value: -1,
+        default: -1,
         required: true
     },
     cursorColor: {
         type: String,
-        value: '#0052d9'
+        default: '#0052d9'
     },
     cursorSpacing: {
         type: Number,
-        value: 0
+        default: 0
     },
     disabled: {
         type: null,
-        value: void 0
+        default: void 0
     },
     focus: {
         type: Boolean,
-        value: false
+        default: false
     },
     format: {
         type: null
     },
     holdKeyboard: {
         type: Boolean,
-        value: false
+        default: false
     },
     label: {
         type: String
     },
     layout: {
         type: String,
-        value: 'horizontal'
+        default: 'horizontal'
     },
     maxcharacter: {
         type: Number
     },
     maxlength: {
         type: Number,
-        value: -1
+        default: -1
     },
     placeholder: {
         type: String,
-        value: void 0
+        default: void 0
     },
     placeholderClass: {
         type: String,
-        value: 'input-placeholder'
+        default: 'input-placeholder'
     },
     placeholderStyle: {
         type: String,
-        value: '',
+        default: '',
         required: true
     },
     prefixIcon: {
@@ -99,41 +99,41 @@ const props = {
     },
     readonly: {
         type: null,
-        value: void 0
+        default: void 0
     },
     safePasswordCertPath: {
         type: String,
-        value: ''
+        default: ''
     },
     safePasswordCustomHash: {
         type: String,
-        value: ''
+        default: ''
     },
     safePasswordLength: {
         type: Number
     },
     safePasswordNonce: {
         type: String,
-        value: ''
+        default: ''
     },
     safePasswordSalt: {
         type: String,
-        value: ''
+        default: ''
     },
     safePasswordTimeStamp: {
         type: Number
     },
     selectionEnd: {
         type: Number,
-        value: -1
+        default: -1
     },
     selectionStart: {
         type: Number,
-        value: -1
+        default: -1
     },
     status: {
         type: String,
-        value: 'default'
+        default: 'default'
     },
     suffix: {
         type: String
@@ -146,7 +146,7 @@ const props = {
     },
     type: {
         type: String,
-        value: 'text'
+        default: 'text'
     },
     value: {
         type: null

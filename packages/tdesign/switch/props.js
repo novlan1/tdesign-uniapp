@@ -1,35 +1,35 @@
 const props = {
     customValue: {
         type: Array,
-        value: [true, false]
+        default: [true, false]
     },
     disabled: {
         type: null,
-        value: void 0
+        default: void 0
     },
     icon: {
         type: Array,
-        value: []
+        default: []
     },
     label: {
         type: Array,
-        value: []
+        default: []
     },
     loading: {
         type: Boolean,
-        value: false
+        default: false
     },
     size: {
         type: String,
-        value: 'medium'
+        default: 'medium'
     },
     value: {
         type: null,
-        value: null
+        default: null
     },
     defaultValue: {
         type: null,
-        value: null
+        default: null
     }
 };
 export default props;

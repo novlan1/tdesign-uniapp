@@ -22,30 +22,30 @@
                 <t-icon name="arrow-up" size="64rpx" color="#fff" class="icon" />
                 <p class="text">1、自定义的图形或说明文案，用来解释或指导该功能使用。</p>
                 <view class="footer">
-                    <t-button v-if="current < steps.length - 1" theme="light" content="跳过" size="extra-small" @tap.native="skip" class="guide-demo-button"></t-button>
-                    <t-button v-else class="guide-demo-button" theme="light" content="返回" size="extra-small" @tap.native="back"></t-button>
-                    <t-button v-if="current < steps.length - 1" theme="primary" content="下一步" size="extra-small" @tap.native="next" class="guide-demo-button"></t-button>
-                    <t-button v-else class="guide-demo-button" theme="primary" content="完成" size="extra-small" @tap.native="finish"></t-button>
+                    <t-button v-if="current < steps.length - 1" theme="light" content="跳过" size="extra-small" @click="skip" class="guide-demo-button"></t-button>
+                    <t-button v-else class="guide-demo-button" theme="light" content="返回" size="extra-small" @click="back"></t-button>
+                    <t-button v-if="current < steps.length - 1" theme="primary" content="下一步" size="extra-small" @click="next" class="guide-demo-button"></t-button>
+                    <t-button v-else class="guide-demo-button" theme="primary" content="完成" size="extra-small" @click="finish"></t-button>
                 </view>
             </view>
             <view slot="content-1" class="content">
                 <t-icon name="arrow-up" size="64rpx" color="#fff" class="icon" />
                 <p class="text">2、自定义的图形或说明文案，用来解释或指导该功能使用。</p>
                 <view class="footer">
-                    <t-button v-if="current < steps.length - 1" theme="light" content="跳过" size="extra-small" @tap.native="skip" class="guide-demo-button"></t-button>
-                    <t-button v-else class="guide-demo-button" theme="light" content="返回" size="extra-small" @tap.native="back"></t-button>
-                    <t-button v-if="current < steps.length - 1" theme="primary" content="下一步" size="extra-small" @tap.native="next" class="guide-demo-button"></t-button>
-                    <t-button v-else class="guide-demo-button" theme="primary" content="完成" size="extra-small" @tap.native="finish"></t-button>
+                    <t-button v-if="current < steps.length - 1" theme="light" content="跳过" size="extra-small" @click="skip" class="guide-demo-button"></t-button>
+                    <t-button v-else class="guide-demo-button" theme="light" content="返回" size="extra-small" @click="back"></t-button>
+                    <t-button v-if="current < steps.length - 1" theme="primary" content="下一步" size="extra-small" @click="next" class="guide-demo-button"></t-button>
+                    <t-button v-else class="guide-demo-button" theme="primary" content="完成" size="extra-small" @click="finish"></t-button>
                 </view>
             </view>
             <view slot="content-2" class="content">
                 <t-icon name="arrow-up" size="64rpx" color="#fff" class="icon" />
                 <p class="text">3、自定义的图形或说明文案，用来解释或指导该功能使用。</p>
                 <view class="footer">
-                    <t-button v-if="current < steps.length - 1" theme="light" content="跳过" size="extra-small" @tap.native="skip" class="guide-demo-button"></t-button>
-                    <t-button v-else class="guide-demo-button" theme="light" content="返回" size="extra-small" @tap.native="back"></t-button>
-                    <t-button v-if="current < steps.length - 1" theme="primary" content="下一步" size="extra-small" @tap.native="next" class="guide-demo-button"></t-button>
-                    <t-button v-else class="guide-demo-button" theme="primary" content="完成" size="extra-small" @tap.native="finish"></t-button>
+                    <t-button v-if="current < steps.length - 1" theme="light" content="跳过" size="extra-small" @click="skip" class="guide-demo-button"></t-button>
+                    <t-button v-else class="guide-demo-button" theme="light" content="返回" size="extra-small" @click="back"></t-button>
+                    <t-button v-if="current < steps.length - 1" theme="primary" content="下一步" size="extra-small" @click="next" class="guide-demo-button"></t-button>
+                    <t-button v-else class="guide-demo-button" theme="primary" content="完成" size="extra-small" @click="finish"></t-button>
                 </view>
             </view>
         </t-guide>

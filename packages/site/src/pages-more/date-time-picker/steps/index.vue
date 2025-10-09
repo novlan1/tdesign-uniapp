@@ -1,6 +1,6 @@
 <template>
     <view>
-        <t-cell title="选择时间" hover :note="text || ''" arrow @tap.native="showPicker" t-class="panel-item" />
+        <t-cell title="选择时间" hover :note="text || ''" arrow @click="showPicker" t-class="panel-item" />
 
         <t-date-time-picker
             title="选择时间"

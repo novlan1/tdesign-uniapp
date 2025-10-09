@@ -1,18 +1,18 @@
 const props = {
     content: {
         type: String,
-        value: ''
+        default: ''
     },
     icon: {
         type: String
     },
     status: {
         type: String,
-        value: 'default'
+        default: 'default'
     },
     title: {
         type: String,
-        value: ''
+        default: ''
     }
 };
 export default props;

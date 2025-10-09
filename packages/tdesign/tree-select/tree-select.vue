@@ -60,8 +60,8 @@
       >
         <t-radio
           v-for="(item, index) in treeOptions[level]"
-          :t-id="'scroll-to-' + item.value"
           :key="index"
+          :t-id="'scroll-to-' + item.value"
           :class="'scroll-into-view ' + classPrefix + '__radio-item ' + prefix + '-class-right-item'"
           :t-class-label="prefix + '-class-right-item-label'"
           icon="line"
@@ -85,8 +85,8 @@
       >
         <t-checkbox
           v-for="(item, index) in treeOptions[level]"
-          :t-id="'scroll-to-' + item.value"
           :key="index"
+          :t-id="'scroll-to-' + item.value"
           :class="'scroll-into-view ' + prefix + '-class-right-item'"
           :t-class-label="prefix + '-class-right-item-label'"
           placement="right"
@@ -103,24 +103,25 @@
     <slot name="content" />
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
-<script module="_this" lang="wxs" src="@/tree-select/index.wxs"></script>
 <script>
-import tRadio from "../radio/radio";
-import tRadioGroup from "../radio-group/radio-group";
-import tCheckbox from "../checkbox/checkbox";
-import tCheckboxGroup from "../checkbox-group/checkbox-group";
-import tSideBar from "../side-bar/side-bar";
-import tSideBarItem from "../side-bar-item/side-bar-item";
-import tScrollView from "../scroll-view/scroll-view";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import { isDef } from "../common/validator";
-import config from "../common/config";
-import { getTreeDepth } from "../common/utils";
-import props from "./props";
+import tRadio from '../radio/radio';
+import tRadioGroup from '../radio-group/radio-group';
+import tCheckbox from '../checkbox/checkbox';
+import tCheckboxGroup from '../checkbox-group/checkbox-group';
+import tSideBar from '../side-bar/side-bar';
+import tSideBarItem from '../side-bar-item/side-bar-item';
+import tScrollView from '../scroll-view/scroll-view';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import { isDef } from '../common/validator';
+import config from '../common/config';
+import { getTreeDepth } from '../common/utils';
+import props from './props';
+import _ from '../common/utils.wxs';
+import * as _this from './index.wxs';
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-tree-select`;
 let TreeSelect = class extends SuperComponent {
@@ -128,38 +129,38 @@ let TreeSelect = class extends SuperComponent {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-left-column`, `${prefix}-class-left-item`, `${prefix}-class-middle-item`, `${prefix}-class-right-column`, `${prefix}-class-right-item`, `${prefix}-class-right-item-label`];
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
-      scrollIntoView: null
+      scrollIntoView: null,
     });
-    this.properties = props;;
+    this.properties = props;
     this.controlledProps = [{
-      key: "value",
-      event: "change"
+      key: 'value',
+      event: 'change'
     }];
     this.observers = {
-      "value, customValue, options, keys, multiple"() {
+      'value, customValue, options, keys, multiple'() {
         this.buildTreeOptions();
-      }
+      },
     };
     this.lifetimes = {
       ready() {
-        this.getScrollIntoView("init");
-      }
+        this.getScrollIntoView('init');
+      },
     };
     this.methods = {
       buildTreeOptions() {
-        var e;
-        var l;
+        let e;
+        let l;
         const {
           options: t,
           value: i,
           customValue: o,
           multiple: n,
-          keys: s
+          keys: s,
         } = this;
         if (!t.length) {
           return;
@@ -167,15 +168,15 @@ let TreeSelect = class extends SuperComponent {
         const r = [];
         let a = -1;
         let c = {
-          children: t
+          children: t,
         };
         for (; null == c ? void 0 : c.children;) {
           a += 1;
           const t = c.children.map(e => ({
-            label: e[(null == s ? void 0 : s.label) || "label"],
-            value: e[(null == s ? void 0 : s.value) || "value"],
-            disabled: e[(null == s ? void 0 : s.disabled) || "disabled"],
-            children: e[(null == s ? void 0 : s.children) || "children"]
+            label: e[(null == s ? void 0 : s.label) || 'label'],
+            value: e[(null == s ? void 0 : s.value) || 'value'],
+            disabled: e[(null == s ? void 0 : s.disabled) || 'disabled'],
+            children: e[(null == s ? void 0 : s.children) || 'children'],
           }));
           r.push(t);
           const n = null !== (e = null == o ? void 0 : o[a]) && void 0 !== e ? e : null == i ? void 0 : i[a];
@@ -188,92 +189,92 @@ let TreeSelect = class extends SuperComponent {
         }
         const d = Math.max(0, a);
         const p = o || r.map((e, l) => {
-          var t;
-          var o;
-          var s;
+          let t;
+          let o;
+          let s;
           const a = l === r.length - 1 && n ? [null === (t = e[0]) || void 0 === t ? void 0 : t.value] : null === (o = e[0]) || void 0 === o ? void 0 : o.value;
           return null !== (s = null == i ? void 0 : i[l]) && void 0 !== s ? s : a;
         });
         this.setData({
           innerValue: p,
           leafLevel: d,
-          treeOptions: r
+          treeOptions: r,
         });
       },
       getScrollIntoView(e) {
         const {
           value: l,
           customValue: t,
-          scrollIntoView: i
+          scrollIntoView: i,
         } = this;
-        if ("init" === e) {
+        if ('init' === e) {
           const e = t || l;
-          const i = Array.isArray(e) ? e.map(e => Array.isArray(e) ? e[0] : e) : [e];
+          const i = Array.isArray(e) ? e.map(e => (Array.isArray(e) ? e[0] : e)) : [e];
           this.setData({
-            scrollIntoView: i
+            scrollIntoView: i,
           });
         } else {
           if (null === i) {
             return;
           }
           this.setData({
-            scrollIntoView: null
+            scrollIntoView: null,
           });
         }
       },
       onRootChange(e) {
         const {
-          innerValue: l
+          innerValue: l,
         } = this;
         const {
-          value: t
+          value: t,
         } = e.detail;
-        this.getScrollIntoView("none");
+        this.getScrollIntoView('none');
         l[0] = t;
-        this._trigger("change", {
+        this._trigger('change', {
           value: l,
-          level: 0
+          level: 0,
         });
       },
       handleTreeClick(e) {
         const {
           level: l,
-          value: t
+          value: t,
         } = e.currentTarget.dataset;
         const {
-          innerValue: i
+          innerValue: i,
         } = this;
         i[l] = t;
-        this.getScrollIntoView("none");
-        this._trigger("change", {
+        this.getScrollIntoView('none');
+        this._trigger('change', {
           value: i,
-          level: 1
+          level: 1,
         });
       },
       handleChange(e) {
         const {
-          innerValue: l
+          innerValue: l,
         } = this;
         const {
           level: t,
-          type: i
+          type: i,
         } = e.target.dataset;
         const {
-          value: o
-        } = "multiple" === i ? e.detail.context : e.detail;
-        if ("multiple" === i) {
+          value: o,
+        } = 'multiple' === i ? e.detail.context : e.detail;
+        if ('multiple' === i) {
           isDef(l[t]) || (l[t] = []);
           const e = l[t].indexOf(o);
           -1 === e ? l[t].push(o) : l[t].splice(e, 1);
         } else {
           l[t] = o;
         }
-        this.getScrollIntoView("none");
-        this._trigger("change", {
+        this.getScrollIntoView('none');
+        this._trigger('change', {
           value: l,
-          level: t
+          level: t,
         });
-      }
+      },
     };
   }
 };

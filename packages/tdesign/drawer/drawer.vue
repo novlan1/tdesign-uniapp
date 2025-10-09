@@ -28,10 +28,10 @@
           <view
             :class="classPrefix + '__sidebar-item'"
             :hover-class="classPrefix + '--hover'"
-            :hover-start-time="0"
             v-for="(item, index) in items"
-            :hover-stay-time="100"
+            :hover-start-time="0"
             :key="index"
+            :hover-stay-time="100"
             wx:item="item"
             :data-item="item"
             :data-index="index"
@@ -60,17 +60,19 @@
     </t-popup>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import tPopup from "../popup/popup";
-import tIcon from "../icon/icon";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
-import useCustomNavbar from "../mixins/using-custom-navbar";
+import tPopup from '../popup/popup';
+import tIcon from '../icon/icon';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import useCustomNavbar from '../mixins/using-custom-navbar';
+import _ from '../common/utils.wxs';
+
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-drawer`;
 let Drawer = class extends SuperComponent {
@@ -79,34 +81,34 @@ let Drawer = class extends SuperComponent {
     this.behaviors = [useCustomNavbar];
     this.externalClasses = [];
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
-    this.properties = props;;
+    this.properties = props;
     this.setData({
-      classPrefix: name
+      classPrefix: name,
     });
     this.methods = {
       visibleChange({
-        detail: e
+        detail: e,
       }) {
         const {
-          visible: t
+          visible: t,
         } = e;
         const {
-          showOverlay: r
+          showOverlay: r,
         } = this;
         this.setData({
-          visible: t
+          visible: t,
         });
-        t || this.$emit("close", {
+        t || this.$emit('close', {
           detail: {
-            trigger: "overlay"
-          }
+            trigger: 'overlay'
+          },
         });
         if (r) {
-          this.$emit("overlay-click", {
+          this.$emit('overlay-click', {
             detail: {
-              visible: t
+              visible: t,
             }
           });
         }
@@ -114,15 +116,15 @@ let Drawer = class extends SuperComponent {
       itemClick(e) {
         const {
           index: t,
-          item: r
+          item: r,
         } = e.currentTarget.dataset;
-        this.$emit("item-click", {
+        this.$emit('item-click', {
           detail: {
             index: t,
-            item: r
+            item: r,
           }
         });
-      }
+      },
     };
   }
 };

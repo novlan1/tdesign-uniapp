@@ -236,6 +236,12 @@
     },
     {
       "path": "pages-more/tab-bar/tab-bar"
+    },
+    {
+      "path": "pages-more/tabs/tabs"
+    },
+    {
+      "path": "pages-more/sticky/sticky"
     }
   ],
   "globalStyle": {

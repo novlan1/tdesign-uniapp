@@ -98,7 +98,7 @@
         :class="classPrefix + '__result-item'"
         hover
         aria-role="option"
-        @tap.native="onSelectResultItem($event, { index })"
+        @click="onSelectResultItem($event, { index })"
       >
         <rich-text
           slot="title"

@@ -1,22 +1,22 @@
 const props = {
     appear: {
         type: Boolean,
-        value: false
+        default: false
     },
     destoryOnHide: {
         type: Boolean,
-        value: false
+        default: false
     },
     durations: {
         type: null
     },
     name: {
         type: String,
-        value: 't-transition'
+        default: 't-transition'
     },
     visible: {
         type: Boolean,
-        value: false
+        default: false
     }
 };
 export default props;

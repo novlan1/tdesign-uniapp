@@ -39,16 +39,17 @@
     <slot />
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import tIcon from "../icon/icon";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
-import { calcIcon } from "../common/utils";
+import tIcon from '../icon/icon';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import { calcIcon } from '../common/utils';
+import _ from '../common/utils.wxs';
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-back-top`;
 let BackTop = class extends SuperComponent {
@@ -56,19 +57,19 @@ let BackTop = class extends SuperComponent {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-icon`, `${prefix}-class-text`];
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
-    this.properties = props;;
+    this.properties = props;
     this.relations = {
-      "../pull-down-refresh/pull-down-refresh": {
-        type: "ancestor"
-      }
+      '../pull-down-refresh/pull-down-refresh': {
+        type: 'ancestor'
+      },
     };
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
       _icon: null,
-      hidden: true
+      hidden: true,
     });
     this.observers = {
       icon() {
@@ -76,42 +77,42 @@ let BackTop = class extends SuperComponent {
       },
       scrollTop(o) {
         const {
-          visibilityHeight: t
+          visibilityHeight: t,
         } = this;
         this.setData({
-          hidden: o < t
+          hidden: o < t,
         });
-      }
+      },
     };
     this.lifetimes = {
       ready() {
         const {
-          icon: o
+          icon: o,
         } = this;
         this.setIcon(o);
-      }
+      },
     };
     this.methods = {
       setIcon(o) {
         this.setData({
-          _icon: calcIcon(o, "backtop")
+          _icon: calcIcon(o, 'backtop'),
         });
       },
       toTop() {
-        var o;
-        this.$emit("to-top");
+        let o;
+        this.$emit('to-top');
         if (this.$parent) {
           null === (o = this.$parent) || void 0 === o || o.setScrollTop(0);
           this.setData({
-            hidden: true
+            hidden: true,
           });
         } else {
           uni.pageScrollTo({
             scrollTop: 0,
-            duration: 300
+            duration: 300,
           });
         }
-      }
+      },
     };
   }
 };

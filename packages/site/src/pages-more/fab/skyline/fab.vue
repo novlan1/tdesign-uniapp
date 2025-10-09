@@ -8,21 +8,21 @@
                     <view class="demo-desc">当功能使用图标即可表意清楚时，可使用纯图标悬浮按钮，例如：添加、发布</view>
                     <t-demo title="01 组件类型" desc="纯图标悬浮按钮">
                         <view class="wrapper">
-                            <t-button theme="primary" size="large" block variant="outline" @tap.native="handleChange($event, { type: 'base' })" data-type="base">
+                            <t-button theme="primary" size="large" block variant="outline" @click="handleChange($event, { type: 'base' })" data-type="base">
                                 纯图标悬浮按钮
                             </t-button>
                         </view>
                     </t-demo>
                     <t-demo desc="图标加文字悬浮按钮">
                         <view class="wrapper">
-                            <t-button theme="primary" size="large" block variant="outline" @tap.native="handleChange($event, { type: 'advance' })" data-type="advance">
+                            <t-button theme="primary" size="large" block variant="outline" @click="handleChange($event, { type: 'advance' })" data-type="advance">
                                 图标加文字悬浮按钮
                             </t-button>
                         </view>
                     </t-demo>
                     <t-demo desc="可移动悬浮按钮">
                         <view class="wrapper">
-                            <t-button theme="primary" size="large" block variant="outline" @tap.native="handleChange($event, { type: 'movable' })" data-type="movable">
+                            <t-button theme="primary" size="large" block variant="outline" @click="handleChange($event, { type: 'movable' })" data-type="movable">
                                 可移动悬浮按钮
                             </t-button>
                         </view>

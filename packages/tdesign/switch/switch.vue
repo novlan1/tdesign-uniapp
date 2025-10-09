@@ -39,40 +39,42 @@
     </view>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import tIcon from "../icon/icon";
-import tLoading from "../loading/loading";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { wxComponent, SuperComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
+import tIcon from '../icon/icon';
+import tLoading from '../loading/loading';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { wxComponent, SuperComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import _ from '../common/utils.wxs';
+
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-switch`;
 let Switch = class extends SuperComponent {
   constructor() {
     super(...arguments);
-    this.externalClasses = ["t-class", "t-class-label", "t-class-body", "t-class-dot"];
-    this.behaviors = ["wx://form-field"];
-    this.properties = props;;
+    this.externalClasses = ['t-class', 't-class-label', 't-class-body', 't-class-dot'];
+    this.behaviors = ['wx://form-field'];
+    this.properties = props;
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
-      checked: false
+      checked: false,
     });
     this.controlledProps = [{
-      key: "value",
-      event: "change"
+      key: 'value',
+      event: 'change'
     }];
     this.observers = {
       value(e) {
         const [t] = this.customValue;
         this.setData({
-          checked: e === t
+          checked: e === t,
         });
-      }
+      },
     };
     this.methods = {
       handleSwitch() {
@@ -80,13 +82,13 @@ let Switch = class extends SuperComponent {
           loading: e,
           disabled: t,
           value: s,
-          customValue: o
+          customValue: o,
         } = this;
         const [i, r] = o;
-        e || t || this._trigger("change", {
-          value: s === i ? r : i
+        e || t || this._trigger('change', {
+          value: s === i ? r : i,
         });
-      }
+      },
     };
   }
 };

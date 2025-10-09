@@ -4,11 +4,11 @@ const props = {
     },
     sticky: {
         type: Boolean,
-        value: true
+        default: true
     },
     stickyOffset: {
         type: Number,
-        value: 0
+        default: 0
     }
 };
 export default props;

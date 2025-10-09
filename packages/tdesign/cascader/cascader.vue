@@ -118,30 +118,33 @@
     </t-popup>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import tIcon from "../icon/icon";
-import tPopup from "../popup/popup";
-import tTabs from "../tabs/tabs";
-import tTabPanel from "../tab-panel/tab-panel";
-import tRadioGroup from "../radio-group/radio-group";
-import { __awaiter, __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
-import { getRect } from "../common/utils";
+import tIcon from '../icon/icon';
+import tPopup from '../popup/popup';
+import tTabs from '../tabs/tabs';
+import tTabPanel from '../tab-panel/tab-panel';
+import tRadioGroup from '../radio-group/radio-group';
+import { __awaiter, __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import { getRect } from '../common/utils';
+
+import _ from '../common/utils.wxs';
+
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-cascader`;
 function parseOptions(e, t) {
-  var s;
-  var i;
-  const l = null !== (s = null == t ? void 0 : t.label) && void 0 !== s ? s : "label";
-  const n = null !== (i = null == t ? void 0 : t.value) && void 0 !== i ? i : "value";
+  let s;
+  let i;
+  const l = null !== (s = null == t ? void 0 : t.label) && void 0 !== s ? s : 'label';
+  const n = null !== (i = null == t ? void 0 : t.value) && void 0 !== i ? i : 'value';
   return e.map(e => ({
     [l]: e[l],
-    [n]: e[n]
+    [n]: e[n],
   }));
 }
 const defaultState = {
@@ -149,7 +152,7 @@ const defaultState = {
   stepHeight: 0,
   tabsHeight: 0,
   subTitlesHeight: 0,
-  stepsInitHeight: 0
+  stepsInitHeight: 0,
 };
 let Cascader = class extends SuperComponent {
   constructor() {
@@ -157,30 +160,30 @@ let Cascader = class extends SuperComponent {
     this.externalClasses = [`${prefix}-class`];
     this.options = {
       multipleSlots: true,
-      pureDataPattern: /^options$/
+      pureDataPattern: /^options$/,
     };
-    this.properties = props;;
+    this.properties = props;
     this.controlledProps = [{
-      key: "value",
-      event: "change"
+      key: 'value',
+      event: 'change',
     }];
     this.state = Object.assign({}, defaultState);
     this.setData({
-      prefix: prefix,
-      name: name,
+      prefix,
+      name,
       stepIndex: 0,
       selectedIndexes: [],
       selectedValue: [],
       scrollTopList: [],
       steps: [],
-      _optionsHeight: 0
+      _optionsHeight: 0,
     });
     this.observers = {
       visible(e) {
         if (e) {
-          const e = this.zpSelectComponent("#tabs");
+          const e = this.zpSelectComponent('#tabs');
           null == e || e.setTrack();
-          null == e || e.getTabHeight().then(e => {
+          null == e || e.getTabHeight().then((e) => {
             this.state.tabsHeight = e.height;
           });
           this.initOptionsHeight(this.steps.length);
@@ -197,50 +200,50 @@ let Cascader = class extends SuperComponent {
         const {
           selectedValue: e,
           steps: t,
-          items: s
+          items: s,
         } = this.genItems();
         this.setData({
           steps: t,
           items: s,
           selectedValue: e,
-          stepIndex: s.length - 1
+          stepIndex: s.length - 1,
         });
       },
       selectedIndexes() {
         const {
           visible: e,
-          theme: t
+          theme: t,
         } = this;
         const {
           selectedValue: s,
           steps: i,
-          items: l
+          items: l,
         } = this.genItems();
         const n = {
           steps: i,
           selectedValue: s,
-          stepIndex: l.length - 1
+          stepIndex: l.length - 1,
         };
         if (JSON.stringify(l) !== JSON.stringify(this.items)) {
           Object.assign(n, {
-            items: l
+            items: l,
           });
         }
         this.setData(n);
-        if (e && "step" === t) {
+        if (e && 'step' === t) {
           this.updateOptionsHeight(i.length);
         }
       },
       stepIndex() {
         return __awaiter(this, void 0, void 0, function* () {
           const {
-            visible: e
+            visible: e,
           } = this;
           if (e) {
             this.updateScrollTop();
           }
         });
-      }
+      },
     };
     this.methods = {
       updateOptionsHeight(e) {
@@ -248,23 +251,23 @@ let Cascader = class extends SuperComponent {
           contentHeight: t,
           stepsInitHeight: s,
           stepHeight: i,
-          subTitlesHeight: l
+          subTitlesHeight: l,
         } = this.state;
         this.setData({
-          _optionsHeight: t - s - l - (e - 1) * i
+          _optionsHeight: t - s - l - (e - 1) * i,
         });
       },
       initOptionsHeight(e) {
         return __awaiter(this, void 0, void 0, function* () {
           const {
             theme: t,
-            subTitles: s
+            subTitles: s,
           } = this;
           const {
-            height: i
+            height: i,
           } = yield getRect(this, `.${name}__content`);
           this.state.contentHeight = i;
-          if ("step" === t) {
+          if ('step' === t) {
             yield Promise.all([getRect(this, `.${name}__steps`), getRect(this, `.${name}__step`)]).then(([t, s]) => {
               this.state.stepsInitHeight = t.height - (e - 1) * s.height;
               this.state.stepHeight = s.height;
@@ -272,44 +275,44 @@ let Cascader = class extends SuperComponent {
           }
           if (s.length > 0) {
             const {
-              height: e
+              height: e,
             } = yield getRect(this, `.${name}__options-title`);
             this.state.subTitlesHeight = e;
           }
           const l = this.state.contentHeight - this.state.subTitlesHeight;
           this.setData({
-            _optionsHeight: "step" === t ? l - this.state.stepsInitHeight - (e - 1) * this.state.stepHeight : l - this.state.tabsHeight
+            _optionsHeight: 'step' === t ? l - this.state.stepsInitHeight - (e - 1) * this.state.stepHeight : l - this.state.tabsHeight,
           });
         });
       },
       initWithValue() {
-        if (null != this.value && "" !== this.value) {
+        if (null != this.value && '' !== this.value) {
           const e = this.getIndexesByValue(this.options, this.value);
           if (e) {
             this.setData({
-              selectedIndexes: e
+              selectedIndexes: e,
             });
           }
         } else {
           this.setData({
-            selectedIndexes: []
+            selectedIndexes: [],
           });
         }
       },
       getIndexesByValue(e, t) {
-        var s;
-        var i;
-        var l;
+        let s;
+        let i;
+        let l;
         const {
-          keys: n
+          keys: n,
         } = this;
         for (let a = 0, h = e.length; a < h; a += 1) {
           const h = e[a];
-          if (h[null !== (s = null == n ? void 0 : n.value) && void 0 !== s ? s : "value"] === t) {
+          if (h[null !== (s = null == n ? void 0 : n.value) && void 0 !== s ? s : 'value'] === t) {
             return [a];
           }
-          if (h[null !== (i = null == n ? void 0 : n.children) && void 0 !== i ? i : "children"]) {
-            const e = this.getIndexesByValue(h[null !== (l = null == n ? void 0 : n.children) && void 0 !== l ? l : "children"], t);
+          if (h[null !== (i = null == n ? void 0 : n.children) && void 0 !== i ? i : 'children']) {
+            const e = this.getIndexesByValue(h[null !== (l = null == n ? void 0 : n.children) && void 0 !== l ? l : 'children'], t);
             if (e) {
               return [a, ...e];
             }
@@ -321,64 +324,64 @@ let Cascader = class extends SuperComponent {
           visible: e,
           items: t,
           selectedIndexes: s,
-          stepIndex: i
+          stepIndex: i,
         } = this;
         if (e) {
-          getRect(this, ".cascader-radio-group-0").then(e => {
-            var l;
+          getRect(this, '.cascader-radio-group-0').then((e) => {
+            let l;
             const n = e.height / (null === (l = t[0]) || void 0 === l ? void 0 : l.length);
             this.setData({
-              [`scrollTopList[${i}]`]: n * s[i]
+              [`scrollTopList[${i}]`]: n * s[i],
             });
           });
         }
       },
       hide(e) {
         this.setData({
-          visible: false
+          visible: false,
         });
-        this.$emit("close", {
+        this.$emit('close', {
           detail: {
-            trigger: e
-          }
+            trigger: e,
+          },
         });
       },
       onVisibleChange() {
-        this.hide("overlay");
+        this.hide('overlay');
       },
       onClose() {
         if (this.checkStrictly) {
           this.triggerChange();
         }
-        this.hide("close-btn");
+        this.hide('close-btn');
       },
       onStepClick(e) {
         const {
-          index: t
+          index: t,
         } = e.currentTarget.dataset;
         this.setData({
-          stepIndex: t
+          stepIndex: t,
         });
       },
       onTabChange(e) {
         const {
-          value: t
+          value: t,
         } = e.detail;
         this.setData({
-          stepIndex: t
+          stepIndex: t,
         });
       },
       genItems() {
-        var e;
-        var t;
-        var s;
-        var i;
-        var l;
+        let e;
+        let t;
+        let s;
+        let i;
+        let l;
         const {
           options: n,
           selectedIndexes: a,
           keys: h,
-          placeholder: o
+          placeholder: o,
         } = this;
         const d = [];
         const r = [];
@@ -387,11 +390,11 @@ let Cascader = class extends SuperComponent {
           let o = n;
           for (let n = 0, u = a.length; n < u; n += 1) {
             const u = o[a[n]];
-            o = u[null !== (e = null == h ? void 0 : h.children) && void 0 !== e ? e : "children"];
-            d.push(u[null !== (t = null == h ? void 0 : h.value) && void 0 !== t ? t : "value"]);
-            r.push(u[null !== (s = null == h ? void 0 : h.label) && void 0 !== s ? s : "label"]);
-            if (u[null !== (i = null == h ? void 0 : h.children) && void 0 !== i ? i : "children"]) {
-              c.push(parseOptions(u[null !== (l = null == h ? void 0 : h.children) && void 0 !== l ? l : "children"], h));
+            o = u[null !== (e = null == h ? void 0 : h.children) && void 0 !== e ? e : 'children'];
+            d.push(u[null !== (t = null == h ? void 0 : h.value) && void 0 !== t ? t : 'value']);
+            r.push(u[null !== (s = null == h ? void 0 : h.label) && void 0 !== s ? s : 'label']);
+            if (u[null !== (i = null == h ? void 0 : h.children) && void 0 !== i ? i : 'children']) {
+              c.push(parseOptions(u[null !== (l = null == h ? void 0 : h.children) && void 0 !== l ? l : 'children'], h));
             }
           }
         }
@@ -401,81 +404,81 @@ let Cascader = class extends SuperComponent {
         return {
           selectedValue: d,
           steps: r,
-          items: c
+          items: c,
         };
       },
       handleSelect(e) {
-        var t;
-        var s;
-        var i;
-        var l;
-        var n;
+        let t;
+        let s;
+        let i;
+        let l;
+        let n;
         const {
-          level: a
+          level: a,
         } = e.target.dataset;
         const {
-          value: h
+          value: h,
         } = e.detail;
         const {
-          checkStrictly: o
+          checkStrictly: o,
         } = this;
         const {
           selectedIndexes: d,
           items: r,
           keys: c,
           options: u,
-          selectedValue: p
+          selectedValue: p,
         } = this;
-        const g = r[a].findIndex(e => {
-          var t;
-          return e[null !== (t = null == c ? void 0 : c.value) && void 0 !== t ? t : "value"] === h;
+        const g = r[a].findIndex((e) => {
+          let t;
+          return e[null !== (t = null == c ? void 0 : c.value) && void 0 !== t ? t : 'value'] === h;
         });
         let v = d.slice(0, a).reduce((e, t, s) => {
-          var i;
-          return 0 === s ? e[t] : e[null !== (i = null == c ? void 0 : c.children) && void 0 !== i ? i : "children"][t];
+          let i;
+          return 0 === s ? e[t] : e[null !== (i = null == c ? void 0 : c.children) && void 0 !== i ? i : 'children'][t];
         }, u);
-        v = 0 === a ? v[g] : v[null !== (t = null == c ? void 0 : c.children) && void 0 !== t ? t : "children"][g];
+        v = 0 === a ? v[g] : v[null !== (t = null == c ? void 0 : c.children) && void 0 !== t ? t : 'children'][g];
         if (v.disabled) {
           return;
         }
-        this.$emit("pick", {
+        this.$emit('pick', {
           detail: {
-            value: v[null !== (s = null == c ? void 0 : c.value) && void 0 !== s ? s : "value"],
-            label: v[null !== (i = null == c ? void 0 : c.label) && void 0 !== i ? i : "label"],
+            value: v[null !== (s = null == c ? void 0 : c.value) && void 0 !== s ? s : 'value'],
+            label: v[null !== (i = null == c ? void 0 : c.label) && void 0 !== i ? i : 'label'],
             index: g,
-            level: a
-          }
+            level: a,
+          },
         });
         d[a] = g;
         if (o && p.includes(String(h))) {
           d.length = a;
           return void this.setData({
-            selectedIndexes: d
+            selectedIndexes: d,
           });
         }
         d.length = a + 1;
         const {
-          items: m
+          items: m,
         } = this.genItems();
-        (null === (n = null == v ? void 0 : v[null !== (l = null == c ? void 0 : c.children) && void 0 !== l ? l : "children"]) || void 0 === n ? void 0 : n.length) >= 0 ? this.setData({
+        (null === (n = null == v ? void 0 : v[null !== (l = null == c ? void 0 : c.children) && void 0 !== l ? l : 'children']) || void 0 === n ? void 0 : n.length) >= 0 ? this.setData({
           selectedIndexes: d,
-          [`items[${a + 1}]`]: m[a + 1]
+          [`items[${a + 1}]`]: m[a + 1],
         }) : (this.setData({
-          selectedIndexes: d
-        }, this.triggerChange), this.hide("finish"));
+          selectedIndexes: d,
+        }, this.triggerChange), this.hide('finish'));
       },
       triggerChange() {
-        var e;
+        let e;
         const {
           items: t,
           selectedValue: s,
-          selectedIndexes: i
+          selectedIndexes: i,
         } = this;
-        this._trigger("change", {
-          value: null !== (e = s[s.length - 1]) && void 0 !== e ? e : "",
-          selectedOptions: t.map((e, t) => e[i[t]]).filter(Boolean)
+        this._trigger('change', {
+          value: null !== (e = s[s.length - 1]) && void 0 !== e ? e : '',
+          selectedOptions: t.map((e, t) => e[i[t]]).filter(Boolean),
         });
-      }
+      },
     };
   }
 };

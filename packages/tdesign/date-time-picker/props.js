@@ -1,19 +1,19 @@
 const props = {
     autoClose: {
         type: Boolean,
-        value: false
+        default: false
     },
     cancelBtn: {
         type: String,
-        value: '取消'
+        default: '取消'
     },
     confirmBtn: {
         type: String,
-        value: ''
+        default: ''
     },
     customLocale: {
         type: String,
-        value: 'zh'
+        default: 'zh'
     },
     end: {
         type: null
@@ -23,18 +23,18 @@ const props = {
     },
     format: {
         type: String,
-        value: 'YYYY-MM-DD HH:mm:ss'
+        default: 'YYYY-MM-DD HH:mm:ss'
     },
     formatter: {
         type: null
     },
     header: {
         type: Boolean,
-        value: true
+        default: true
     },
     mode: {
         type: null,
-        value: 'date'
+        default: 'date'
     },
     popupProps: {
         type: Object,
@@ -42,7 +42,7 @@ const props = {
     },
     showWeek: {
         type: Boolean,
-        value: false
+        default: false
     },
     start: {
         type: null
@@ -52,22 +52,22 @@ const props = {
     },
     title: {
         type: String,
-        value: ''
+        default: ''
     },
     usePopup: {
         type: Boolean,
-        value: true
+        default: true
     },
     value: {
         type: null,
-        value: null
+        default: null
     },
     defaultValue: {
         type: null
     },
     visible: {
         type: Boolean,
-        value: false
+        default: false
     }
 };
 export default props;

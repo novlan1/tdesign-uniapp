@@ -1,19 +1,19 @@
 const props = {
     autoClose: {
         type: Boolean,
-        value: true
+        default: true
     },
     enableAlpha: {
         type: Boolean,
-        value: false
+        default: false
     },
     fixed: {
         type: Boolean,
-        value: false
+        default: false
     },
     format: {
         type: String,
-        value: 'RGB'
+        default: 'RGB'
     },
     popupProps: {
         type: Object,
@@ -24,23 +24,23 @@ const props = {
     },
     type: {
         type: String,
-        value: 'base'
+        default: 'base'
     },
     usePopup: {
         type: Boolean,
-        value: false
+        default: false
     },
     value: {
         type: String,
-        value: null
+        default: null
     },
     defaultValue: {
         type: String,
-        value: ''
+        default: ''
     },
     visible: {
         type: Boolean,
-        value: false
+        default: false
     }
 };
 export default props;

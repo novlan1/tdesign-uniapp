@@ -29,7 +29,7 @@ const props = {
   },
   overlayProps: {
     type: Object,
-    value: () => ({}),
+    default: () => ({}),
   },
   preventScrollThrough: {
     type: Boolean,

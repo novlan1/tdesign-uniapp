@@ -1,11 +1,11 @@
 const props = {
     disabled: {
         type: null,
-        value: void 0
+        default: void 0
     },
     label: {
         type: null,
-        value: false
+        default: false
     },
     marks: {
         type: null,
@@ -13,39 +13,39 @@ const props = {
     },
     max: {
         type: Number,
-        value: 100
+        default: 100
     },
     min: {
         type: Number,
-        value: 0
+        default: 0
     },
     range: {
         type: Boolean,
-        value: false
+        default: false
     },
     showExtremeValue: {
         type: Boolean,
-        value: false
+        default: false
     },
     step: {
         type: Number,
-        value: 1
+        default: 1
     },
     theme: {
         type: String,
-        value: 'default'
+        default: 'default'
     },
     value: {
         type: null,
-        value: null
+        default: null
     },
     defaultValue: {
         type: null,
-        value: 0
+        default: 0
     },
     vertical: {
         type: Boolean,
-        value: false
+        default: false
     }
 };
 export default props;

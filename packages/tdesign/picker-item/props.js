@@ -4,7 +4,7 @@ const props = {
     },
     options: {
         type: Array,
-        value: []
+        default: []
     }
 };
 export default props;

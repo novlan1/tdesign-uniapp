@@ -1,7 +1,7 @@
 <template>
   <view>
     <t-button size="large"
-variant="outline" block @tap.native="onTriggerClick" theme="primary">
+variant="outline" block @click="onTriggerClick" theme="primary">
 Toggle
 </t-button>
 

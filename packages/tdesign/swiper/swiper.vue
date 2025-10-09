@@ -21,13 +21,13 @@
     >
       <swiper-item
         v-for="(item, index) in list"
+        :key="index"
         :class="
           _.cls(classPrefix + '__item', [
             ['preview', _this.isPrev(navCurrent, index, list)],
             ['next', _this.isNext(navCurrent, index, list)]
           ])
         "
-        :key="index"
         :data-index="index"
         :aria-hidden="navCurrent !== index"
         aria-role="image"
@@ -77,17 +77,19 @@
     <slot name="nav" />
   </view>
 </template>
-<script module="_this" lang="wxs" src="@/swiper/index.wxs"></script>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import tSwiperNav from "../swiper-nav/swiper-nav";
-import tImage from "../image/image";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
+import tSwiperNav from '../swiper-nav/swiper-nav';
+import tImage from '../image/image';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import _ from '../common/utils.wxs';
+import * as _this from './index.wxs';
+
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-swiper`;
 let Swiper = class extends SuperComponent {
@@ -95,85 +97,85 @@ let Swiper = class extends SuperComponent {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-nav`, `${prefix}-class-image`, `${prefix}-class-prev-image`, `${prefix}-class-next-image`];
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
-    this.properties = props;;
+    this.properties = props;
     this.observers = {
       navCurrent(t) {
         this.updateNav(t);
-      }
+      },
     };
     this.$nav = null;
     this.relations = {
-      "../swiper-nav/swiper-nav": {
-        type: "child"
-      }
+      '../swiper-nav/swiper-nav': {
+        type: 'child'
+      },
     };
     this.setData({
-      prefix: prefix,
-      classPrefix: name
+      prefix,
+      classPrefix: name,
     });
     this.lifetimes = {
       ready() {
         const {
-          current: t
+          current: t,
         } = this;
         this.setData({
-          navCurrent: t
+          navCurrent: t,
         });
-      }
+      },
     };
     this.methods = {
       updateNav(t) {
-        var e;
+        let e;
         if (this.navigation) {
           return;
         }
-        const i = null === (e = this.getRelationNodes("./swiper-nav")) || void 0 === e ? void 0 : e[0];
+        const i = null === (e = this.getRelationNodes('./swiper-nav')) || void 0 === e ? void 0 : e[0];
         if (!i) {
           return;
         }
         const {
           direction: r,
           paginationPosition: n,
-          list: s
+          list: s,
         } = this;
         i.setData({
           current: t,
           total: s.length,
           direction: r,
-          paginationPosition: n
+          paginationPosition: n,
         });
       },
       onTap(t) {
         const {
-          index: e
+          index: e,
         } = t.currentTarget.dataset;
-        this.$emit("click", {
+        this.$emit('click', {
           detail: {
-            index: e
+            index: e,
           }
         });
       },
       onChange(t) {
         const {
           current: e,
-          source: i
+          source: i,
         } = t.detail;
         this.setData({
-          navCurrent: e
+          navCurrent: e,
         });
-        this.$emit("change", {
+        this.$emit('change', {
           detail: {
             current: e,
-            source: i
+            source: i,
           }
         });
       },
       onNavBtnChange(t) {
         const {
           dir: e,
-          source: i
+          source: i,
         } = t.detail;
         this.doNavBtnChange(e, i);
       },
@@ -181,30 +183,30 @@ let Swiper = class extends SuperComponent {
         const {
           current: i,
           list: r,
-          loop: n
+          loop: n,
         } = this;
         const s = r.length;
-        let o = "next" === t ? i + 1 : i - 1;
-        o = n ? "next" === t ? (i + 1) % s : (i - 1 + s) % s : o < 0 || o >= s ? i : o;
+        let o = 'next' === t ? i + 1 : i - 1;
+        o = n ? 'next' === t ? (i + 1) % s : (i - 1 + s) % s : o < 0 || o >= s ? i : o;
         if (o !== i) {
           this.setData({
-            current: o
+            current: o,
           });
-          this.$emit("change", {
+          this.$emit('change', {
             detail: {
               current: o,
-              source: e
+              source: e,
             }
           });
         }
       },
       onImageLoad(t) {
-        this.$emit("image-load", {
+        this.$emit('image-load', {
           detail: {
-            index: t.target.dataset.custom
+            index: t.target.dataset.custom,
           }
         });
-      }
+      },
     };
   }
 };

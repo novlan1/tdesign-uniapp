@@ -49,141 +49,143 @@
     </view>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
-<script module="_this" lang="wxs" src="@/textarea/textarea.wxs"></script>
 <script>
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
-import { getCharacterLength } from "../common/utils";
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import { getCharacterLength } from '../common/utils';
+import _ from '../common/utils.wxs';
+import * as _this from './computed.js';
+
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-textarea`;
 let Textarea = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
-    this.behaviors = ["wx://form-field"];
+    this.behaviors = ['wx://form-field'];
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-textarea`, `${prefix}-class-label`, `${prefix}-class-indicator`];
-    this.properties = props;;
+    this.properties = props;
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
-      count: 0
+      count: 0,
     });
     this.observers = {
       value(e) {
         this.updateCount(null != e ? e : this.defaultValue);
-      }
+      },
     };
     this.lifetimes = {
       ready() {
-        var e;
+        let e;
         const {
           value: t,
-          defaultValue: a
+          defaultValue: a,
         } = this;
-        this.updateValue(null !== (e = null != t ? t : a) && void 0 !== e ? e : "");
-      }
+        this.updateValue(null !== (e = null != t ? t : a) && void 0 !== e ? e : '');
+      },
     };
     this.methods = {
       updateCount(e) {
         const {
           maxcharacter: t,
-          maxlength: a
+          maxlength: a,
         } = this;
         const {
-          count: r
+          count: r,
         } = this.calculateValue(e, t, a);
         this.setData({
-          count: r
+          count: r,
         });
       },
       updateValue(e) {
         const {
           maxcharacter: t,
-          maxlength: a
+          maxlength: a,
         } = this;
         const {
           value: r,
-          count: s
+          count: s,
         } = this.calculateValue(e, t, a);
         this.setData({
           value: r,
-          count: s
+          count: s,
         });
       },
       calculateValue(e, t, a) {
         const {
-          allowInputOverMax: r
+          allowInputOverMax: r,
         } = this;
         if (t > 0 && !Number.isNaN(t)) {
           const {
             length: a,
-            characters: s
-          } = getCharacterLength("maxcharacter", e, r ? 1 / 0 : t);
+            characters: s,
+          } = getCharacterLength('maxcharacter', e, r ? 1 / 0 : t);
           return {
             value: s,
-            count: a
+            count: a,
           };
         }
         if (a > 0 && !Number.isNaN(a)) {
           const {
             length: t,
-            characters: s
-          } = getCharacterLength("maxlength", e, r ? 1 / 0 : a);
+            characters: s,
+          } = getCharacterLength('maxlength', e, r ? 1 / 0 : a);
           return {
             value: s,
-            count: t
+            count: t,
           };
         }
         return {
           value: e,
-          count: e ? String(e).length : 0
+          count: e ? String(e).length : 0,
         };
       },
       onInput(e) {
         const {
           value: t,
-          cursor: a
+          cursor: a,
         } = e.detail;
         this.updateValue(t);
-        this.$emit("change", {
+        this.$emit('change', {
           detail: {
             value: this.value,
-            cursor: a
-          }
+            cursor: a,
+          },
         });
       },
       onFocus(e) {
-        this.$emit("focus", {
-          detail: Object.assign({}, e.detail)
+        this.$emit('focus', {
+          detail: Object.assign({}, e.detail),
         });
       },
       onBlur(e) {
-        this.$emit("blur", {
-          detail: Object.assign({}, e.detail)
+        this.$emit('blur', {
+          detail: Object.assign({}, e.detail),
         });
       },
       onConfirm(e) {
-        this.$emit("enter", {
-          detail: Object.assign({}, e.detail)
+        this.$emit('enter', {
+          detail: Object.assign({}, e.detail),
         });
       },
       onLineChange(e) {
-        this.$emit("line-change", {
-          detail: Object.assign({}, e.detail)
+        this.$emit('line-change', {
+          detail: Object.assign({}, e.detail),
         });
       },
       onKeyboardHeightChange(e) {
-        this.$emit("keyboardheightchange", {
-          detail: e.detail
+        this.$emit('keyboardheightchange', {
+          detail: e.detail,
         });
-      }
+      },
     };
   }
 };

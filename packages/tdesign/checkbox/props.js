@@ -1,23 +1,23 @@
 const props = {
     block: {
         type: Boolean,
-        value: true
+        default: true
     },
     borderless: {
         type: Boolean,
-        value: false
+        default: false
     },
     checkAll: {
         type: Boolean,
-        value: false
+        default: false
     },
     checked: {
         type: Boolean,
-        value: null
+        default: null
     },
     defaultChecked: {
         type: Boolean,
-        value: false
+        default: false
     },
     content: {
         type: String
@@ -27,38 +27,38 @@ const props = {
     },
     disabled: {
         type: null,
-        value: void 0
+        default: void 0
     },
     icon: {
         type: null,
-        value: 'circle'
+        default: 'circle'
     },
     indeterminate: {
         type: Boolean,
-        value: false
+        default: false
     },
     label: {
         type: String
     },
     maxContentRow: {
         type: Number,
-        value: 5
+        default: 5
     },
     maxLabelRow: {
         type: Number,
-        value: 3
+        default: 3
     },
     name: {
         type: String,
-        value: ''
+        default: ''
     },
     placement: {
         type: String,
-        value: 'left'
+        default: 'left'
     },
     readonly: {
         type: Boolean,
-        value: false
+        default: false
     },
     value: {
         type: null

@@ -1,6 +1,7 @@
-var utils = require('../common/utils.wxs');
+import utils from '../common/utils.wxs';
 
-function textareaStyle(autosize) {
+
+export function textareaStyle(autosize) {
   if (autosize && autosize.constructor === 'Object') {
     return utils._style({
       'min-height': utils.addUnit(autosize.minHeight),
@@ -10,6 +11,4 @@ function textareaStyle(autosize) {
   return '';
 }
 
-module.exports = {
-  textareaStyle: textareaStyle,
-};
+

@@ -40,13 +40,14 @@
     </view>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import _ from '../common/utils.wxs';
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-swiper-nav`;
 let SwiperNav = class extends SuperComponent {
@@ -56,58 +57,58 @@ let SwiperNav = class extends SuperComponent {
     this = {
       current: {
         type: Number,
-        value: 0
+        value: 0,
       },
       total: {
         type: Number,
-        value: 0
+        value: 0,
       },
       type: {
         type: String,
-        value: "dots"
+        value: 'dots'
       },
       minShowNum: {
         type: Number,
-        value: 2
+        value: 2,
       },
       showControls: {
         type: Boolean,
-        value: false
+        value: false,
       },
       direction: {
         type: String,
-        value: "horizontal"
+        value: 'horizontal'
       },
       paginationPosition: {
         type: String,
-        value: "bottom"
-      }
+        value: 'bottom'
+      },
     };
     this.relations = {
-      "../swiper/swiper": {
-        type: "parent"
-      }
+      '../swiper/swiper': {
+        type: 'parent'
+      },
     };
     this.setData({
-      prefix: prefix,
-      classPrefix: name
+      prefix,
+      classPrefix: name,
     });
     this.methods = {
       nav(e) {
-        var t;
+        let t;
         const {
-          dir: r
+          dir: r,
         } = e.target.dataset;
-        this.$emit("nav-btn-change", {
+        this.$emit('nav-btn-change', {
           detail: {
             dir: r,
-            source: "nav"
-          }
+            source: 'nav'
+          },
         });
         if (this.$parent) {
-          null === (t = this.$parent) || void 0 === t || t.doNavBtnChange(r, "nav");
+          null === (t = this.$parent) || void 0 === t || t.doNavBtnChange(r, 'nav');
         }
-      }
+      },
     };
   }
 };

@@ -1,6 +1,6 @@
 <template>
     <view>
-        <t-button size="large" variant="outline" @tap.native="onTriggerClick" block theme="primary">Toggle attach</t-button>
+        <t-button size="large" variant="outline" @click="onTriggerClick" block theme="primary">Toggle attach</t-button>
 
         <t-transition :visible="visible" destroy-on-hide>
             <view class="block"></view>

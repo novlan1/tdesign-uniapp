@@ -7,18 +7,20 @@
     <view :class="classPrefix + '__padding'" />
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import tSideBarItem from "../side-bar-item/side-bar-item";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
+import tSideBarItem from '../side-bar-item/side-bar-item';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import _ from '../common/utils.wxs';
+
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-side-bar`;
-const relationsPath = "../side-bar-item/side-bar-item";
+const relationsPath = '../side-bar-item/side-bar-item';
 let SideBar = class extends SuperComponent {
   constructor() {
     super(...arguments);
@@ -26,42 +28,42 @@ let SideBar = class extends SuperComponent {
     this.children = [];
     this.relations = {
       [relationsPath]: {
-        type: "child",
+        type: 'child',
         linked(e) {
           this.children.push(e);
         },
         unlinked(e) {
           const i = this.children.findIndex(i => i === e);
           this.children.splice(i, 1);
-        }
+        },
       }
     };
     this.controlledProps = [{
-      key: "value",
-      event: "change"
+      key: 'value',
+      event: 'change'
     }];
-    this.properties = props;;
+    this.properties = props;
     this.observers = {
       value(e) {
-        this.$children.forEach(i => {
+        this.$children.forEach((i) => {
           i.updateActive(e);
         });
-      }
+      },
     };
     this.setData({
       classPrefix: name,
-      prefix: prefix
+      prefix
     });
     this.methods = {
       doChange({
         value: e,
-        label: i
+        label: i,
       }) {
-        this._trigger("change", {
+        this._trigger('change', {
           value: e,
-          label: i
+          label: i,
         });
-      }
+      },
     };
   }
 };

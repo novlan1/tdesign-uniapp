@@ -1,45 +1,45 @@
 const props = {
     checkStrictly: {
         type: Boolean,
-        value: false
+        default: false
     },
     closeBtn: {
         type: Boolean,
-        value: true
+        default: true
     },
     keys: {
         type: Object
     },
     options: {
         type: Array,
-        value: []
+        default: []
     },
     placeholder: {
         type: String,
-        value: '选择选项'
+        default: '选择选项'
     },
     subTitles: {
         type: Array,
-        value: []
+        default: []
     },
     theme: {
         type: String,
-        value: 'step'
+        default: 'step'
     },
     title: {
         type: String
     },
     value: {
         type: null,
-        value: null
+        default: null
     },
     defaultValue: {
         type: null,
-        value: null
+        default: null
     },
     visible: {
         type: Boolean,
-        value: false
+        default: false
     }
 };
 export default props;

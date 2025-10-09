@@ -7,7 +7,7 @@ const props = {
     },
     current: {
         type: Number,
-        value: null
+        default: null
     },
     defaultCurrent: {
         type: Number
@@ -17,30 +17,30 @@ const props = {
     },
     hideBack: {
         type: Boolean,
-        value: false
+        default: false
     },
     hideCounter: {
         type: Boolean,
-        value: false
+        default: false
     },
     hideSkip: {
         type: Boolean,
-        value: false
+        default: false
     },
     highlightPadding: {
         type: Number,
-        value: 16
+        default: 16
     },
     mode: {
         type: String,
-        value: 'popover'
+        default: 'popover'
     },
     nextButtonProps: {
         type: Object
     },
     showOverlay: {
         type: Boolean,
-        value: true
+        default: true
     },
     skipButtonProps: {
         type: Object
@@ -50,11 +50,11 @@ const props = {
     },
     usingCustomNavbar: {
         type: Boolean,
-        value: false
+        default: false
     },
     zIndex: {
         type: Number,
-        value: 999999
+        default: 999999
     }
 };
 export default props;

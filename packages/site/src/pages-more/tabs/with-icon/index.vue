@@ -1,24 +1,30 @@
 <template>
-    <view>
-        <t-tabs :defaultValue="0">
-            <t-tab-panel icon="app" label="选项" :value="index" v-for="(item, index) in 3" :key="index"></t-tab-panel>
-        </t-tabs>
-    </view>
+  <view>
+    <t-tabs :default-value="0">
+      <t-tab-panel
+        v-for="(item, index) in 3"
+        :key="index"
+        icon="app"
+        label="选项"
+        :value="index"
+      />
+    </t-tabs>
+  </view>
 </template>
 
 <script>
 import tTabs from 'tdesign-uniapp/tabs/tabs';
 import tTabPanel from 'tdesign-uniapp/tab-panel/tab-panel';
 export default {
-    components: {
-        tTabs,
-        tTabPanel
-    },
-    data() {
-        return {};
-    },
-    methods: {},
-    created: function () {}
+  components: {
+    tTabs,
+    tTabPanel,
+  },
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {},
 };
 </script>
 <style>

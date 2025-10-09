@@ -8,7 +8,7 @@ const props = {
   },
   opened: {
     type: [Boolean, Array],
-    value: false,
+    default: false,
   },
   right: {
     type: Array,
@@ -16,7 +16,7 @@ const props = {
   },
   style: {
     type: String,
-    value: '',
+    default: '',
   },
 };
 export default props;

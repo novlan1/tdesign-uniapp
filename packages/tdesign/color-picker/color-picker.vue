@@ -296,31 +296,34 @@
     </block>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
 <script>
-import tPopup from "../popup/popup";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
-import { SATURATION_PANEL_DEFAULT_HEIGHT, SATURATION_PANEL_DEFAULT_WIDTH, SLIDER_DEFAULT_WIDTH, DEFAULT_COLOR, ALPHA_MAX, HUE_MAX, DEFAULT_SYSTEM_SWATCH_COLORS } from "./constants";
-import { getRect, debounce } from "../common/utils";
-import { Color, getColorObject } from "./utils";
+import tPopup from '../popup/popup';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import { SATURATION_PANEL_DEFAULT_HEIGHT, SATURATION_PANEL_DEFAULT_WIDTH, SLIDER_DEFAULT_WIDTH, DEFAULT_COLOR, ALPHA_MAX, HUE_MAX, DEFAULT_SYSTEM_SWATCH_COLORS } from './constants';
+import { getRect, debounce } from '../common/utils';
+import { Color, getColorObject } from './utils';
+
+import _ from '../common/utils.wxs';
+
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-color-picker`;
 const getCoordinate = (t, e, a) => {
-  var o;
+  let o;
   const {
     pageX: i,
     pageY: r,
-    clientY: l
+    clientY: l,
   } = t.changedTouches[0] || {};
   const s = a ? e.top : null === (o = t.currentTarget) || void 0 === o ? void 0 : o.offsetTop;
   return {
     x: Math.min(Math.max(0, i - e.left), e.width),
-    y: Math.min(Math.max(0, (a ? l : r) - s), e.height)
+    y: Math.min(Math.max(0, (a ? l : r) - s), e.height),
   };
 };
 const getFormatList = (t, e) => {
@@ -334,34 +337,34 @@ const getFormatList = (t, e) => {
     RGBA: Object.values(e.getRgba()),
     CMYK: [...Object.values(e.getCmyk()), 0],
     CSS: [e.css, 0],
-    HEX: [e.hex, 0]
+    HEX: [e.hex, 0],
   };
   const o = a[t];
   return o ? [...o.slice(0, o.length - 1), `${Math.round(100 * e.alpha)}%`] : a.RGB;
 };
-const genSwatchList = t => void 0 === t ? DEFAULT_SYSTEM_SWATCH_COLORS : t && t.length ? t : [];
+const genSwatchList = t => (void 0 === t ? DEFAULT_SYSTEM_SWATCH_COLORS : t && t.length ? t : []);
 let ColorPicker = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.options = {
-      multipleSlots: true
+      multipleSlots: true,
     };
-    this.properties = props;;
+    this.properties = props;
     this.observers = {
       format() {
         this.setCoreStyle();
       },
       swatchColors(t) {
         this.setData({
-          innerSwatchList: genSwatchList(t)
+          innerSwatchList: genSwatchList(t),
         });
       },
       type(t) {
         this.setData({
-          isMultiple: "multiple" === t
+          isMultiple: 'multiple' === t,
         });
       },
-      "usePopup, visible"(t, e) {
+      'usePopup, visible'(t, e) {
         if (this.timer) {
           clearTimeout(this.timer);
         }
@@ -375,44 +378,44 @@ let ColorPicker = class extends SuperComponent {
         if (t) {
           this.init();
         }
-      }
+      },
     };
     this.color = new Color(props.defaultValue.value || props.value.value || DEFAULT_COLOR);
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
       panelRect: {
         width: SATURATION_PANEL_DEFAULT_WIDTH,
-        height: SATURATION_PANEL_DEFAULT_HEIGHT
+        height: SATURATION_PANEL_DEFAULT_HEIGHT,
       },
       sliderRect: {
         width: SLIDER_DEFAULT_WIDTH,
-        left: 0
+        left: 0,
       },
       saturationInfo: {
         saturation: 0,
-        value: 0
+        value: 0,
       },
       saturationThumbStyle: {
         left: 0,
-        top: 0
+        top: 0,
       },
       sliderInfo: {
-        value: 0
+        value: 0,
       },
       hueSliderStyle: {
-        left: 0
+        left: 0,
       },
       alphaSliderStyle: {
-        left: 0
+        left: 0,
       },
       innerValue: props.defaultValue.value || props.value.value,
       showPrimaryColorPreview: false,
       previewColor: props.defaultValue.value || props.value.value,
       formatList: getFormatList(props.format.value, this.color),
       innerSwatchList: genSwatchList(props.swatchColors.value),
-      isMultiple: "multiple" === props.type.value,
-      defaultOverlayProps: {}
+      isMultiple: 'multiple' === props.type.value,
+      defaultOverlayProps: {},
     });
     this.lifetimes = {
       ready() {
@@ -423,18 +426,18 @@ let ColorPicker = class extends SuperComponent {
       },
       detached() {
         clearTimeout(this.timer);
-      }
+      },
     };
     this.methods = {
       init() {
         const {
           value: t,
-          defaultValue: e
+          defaultValue: e,
         } = this;
         const a = t || e;
         if (a) {
           this.setData({
-            innerValue: a
+            innerValue: a,
           });
         }
         this.color = new Color(a || DEFAULT_COLOR);
@@ -446,13 +449,13 @@ let ColorPicker = class extends SuperComponent {
           return;
         }
         const {
-          scrollTop: e
+          scrollTop: e,
         } = t.detail;
         const {
           width: a,
           height: o,
           left: i,
-          initTop: r
+          initTop: r,
         } = this.panelRect;
         this.setData({
           panelRect: {
@@ -460,8 +463,8 @@ let ColorPicker = class extends SuperComponent {
             height: o,
             left: i,
             top: r - e,
-            initTop: r
-          }
+            initTop: r,
+          },
         });
       },
       getEleReact() {
@@ -472,12 +475,12 @@ let ColorPicker = class extends SuperComponent {
               height: t.height || SATURATION_PANEL_DEFAULT_HEIGHT,
               left: t.left || 0,
               top: t.top || 0,
-              initTop: t.top || 0
+              initTop: t.top || 0,
             },
             sliderRect: {
               left: e.left || 0,
-              width: e.width || SLIDER_DEFAULT_WIDTH
-            }
+              width: e.width || SLIDER_DEFAULT_WIDTH,
+            },
           }, () => {
             this.setCoreStyle();
           });
@@ -486,46 +489,46 @@ let ColorPicker = class extends SuperComponent {
       clickSwatch(t) {
         const e = t.currentTarget.dataset.value;
         this.color.update(e);
-        this.emitColorChange("preset");
+        this.emitColorChange('preset');
         this.setCoreStyle();
       },
       setCoreStyle() {
         this.setData({
           sliderInfo: {
-            value: this.color.hue
+            value: this.color.hue,
           },
           hueSliderStyle: this.getSliderThumbStyle({
             value: this.color.hue,
-            maxValue: HUE_MAX
+            maxValue: HUE_MAX,
           }),
           alphaSliderStyle: this.getSliderThumbStyle({
             value: 100 * this.color.alpha,
-            maxValue: ALPHA_MAX
+            maxValue: ALPHA_MAX,
           }),
           saturationInfo: {
             saturation: this.color.saturation,
-            value: this.color.value
+            value: this.color.value,
           },
           saturationThumbStyle: this.getSaturationThumbStyle({
             saturation: this.color.saturation,
-            value: this.color.value
+            value: this.color.value,
           }),
           previewColor: this.color.rgba,
-          formatList: getFormatList(this.format, this.color)
+          formatList: getFormatList(this.format, this.color),
         });
       },
       emitColorChange(t) {
         this.setData({
-          innerValue: this.formatValue()
+          innerValue: this.formatValue(),
         });
-        this.$emit("change", {
+        this.$emit('change', {
           detail: {
             value: this.formatValue(),
             context: {
               trigger: t,
-              color: getColorObject(this.color)
-            }
-          }
+              color: getColorObject(this.color),
+            },
+          },
         });
       },
       defaultEmptyColor: () => DEFAULT_COLOR,
@@ -536,11 +539,11 @@ let ColorPicker = class extends SuperComponent {
       getSaturationAndValueByCoordinate(t) {
         const {
           width: e,
-          height: a
+          height: a,
         } = this.panelRect;
         const {
           x: o,
-          y: i
+          y: i,
         } = t;
         let r = o / e;
         let l = 1 - i / a;
@@ -548,67 +551,67 @@ let ColorPicker = class extends SuperComponent {
         l = Math.min(1, Math.max(0, l));
         return {
           saturation: r,
-          value: l
+          value: l,
         };
       },
       getSaturationThumbStyle({
         saturation: t,
-        value: e
+        value: e,
       }) {
         const {
           width: a,
-          height: o
+          height: o,
         } = this.panelRect;
         const i = Math.round((1 - e) * o);
         const r = Math.round(t * a);
         return {
           color: this.color.rgb,
           left: `${r}px`,
-          top: `${i}px`
+          top: `${i}px`,
         };
       },
       getSliderThumbStyle({
         value: t,
-        maxValue: e
+        maxValue: e,
       }) {
         const {
-          width: a
+          width: a,
         } = this.sliderRect;
         if (!a) {
           return;
         }
         return {
           left: `${Math.round(t / e * 100)}%`,
-          color: this.color.rgb
+          color: this.color.rgb,
         };
       },
       onChangeSaturation({
         saturation: t,
-        value: e
+        value: e,
       }) {
         const {
           saturation: a,
-          value: o
+          value: o,
         } = this.color;
-        let i = "palette-saturation-brightness";
+        let i = 'palette-saturation-brightness';
         if (e !== o && t !== a) {
           this.color.saturation = t;
           this.color.value = e;
-          i = "palette-saturation-brightness";
+          i = 'palette-saturation-brightness';
         } else if (t !== a) {
           this.color.saturation = t;
-          i = "palette-saturation";
+          i = 'palette-saturation';
         } else {
           if (e === o) {
             return;
           }
           this.color.value = e;
-          i = "palette-brightness";
+          i = 'palette-brightness';
         }
-        this.$emit("palette-bar-change", {
+        this.$emit('palette-bar-change', {
           detail: {
-            color: getColorObject(this.color)
-          }
+            color: getColorObject(this.color),
+          },
         });
         this.emitColorChange(i);
         this.setCoreStyle();
@@ -618,34 +621,34 @@ let ColorPicker = class extends SuperComponent {
       },
       onChangeSlider({
         value: t,
-        isAlpha: e
+        isAlpha: e,
       }) {
         e ? this.color.alpha = t / 100 : this.color.hue = t;
-        this.emitColorChange(e ? "palette-alpha-bar" : "palette-hue-bar");
+        this.emitColorChange(e ? 'palette-alpha-bar' : 'palette-hue-bar');
         this.setCoreStyle();
       },
       handleSaturationDrag(t) {
         const {
           usePopup: e,
-          fixed: a
+          fixed: a,
         } = this;
         const o = getCoordinate(t, this.panelRect, e || a);
         const {
           saturation: i,
-          value: r
+          value: r,
         } = this.getSaturationAndValueByCoordinate(o);
         this.onChangeSaturation({
           saturation: i,
-          value: r
+          value: r,
         });
       },
       handleSliderDrag(t, e = false) {
         const {
-          width: a
+          width: a,
         } = this.sliderRect;
         const o = getCoordinate(t, this.sliderRect);
         const {
-          x: i
+          x: i,
         } = o;
         const r = e ? ALPHA_MAX : HUE_MAX;
         let l = Math.round(i / a * r * 100) / 100;
@@ -657,18 +660,18 @@ let ColorPicker = class extends SuperComponent {
         }
         this.onChangeSlider({
           value: l,
-          isAlpha: e
+          isAlpha: e,
         });
       },
       handleDiffDrag(t) {
         switch (t.target.dataset.type || t.currentTarget.dataset.type) {
-          case "saturation":
+          case 'saturation':
             this.handleSaturationDrag(t);
             break;
-          case "hue-slider":
+          case 'hue-slider':
             this.handleSliderDrag(t);
             break;
-          case "alpha-slider":
+          case 'alpha-slider':
             this.handleSliderDrag(t, true);
         }
       },
@@ -686,18 +689,18 @@ let ColorPicker = class extends SuperComponent {
       close(t) {
         if (this.autoClose) {
           this.setData({
-            visible: false
+            visible: false,
           });
         }
-        this.$emit("close", {
+        this.$emit('close', {
           detail: {
-            trigger: t
-          }
+            trigger: t,
+          },
         });
       },
       onVisibleChange() {
-        this.close("overlay");
-      }
+        this.close('overlay');
+      },
     };
   }
 };

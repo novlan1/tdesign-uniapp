@@ -1,23 +1,23 @@
 const props = {
     autoClose: {
         type: Boolean,
-        value: true
+        default: true
     },
     cancelBtn: {
         type: null,
-        value: true
+        default: true
     },
     confirmBtn: {
         type: null,
-        value: true
+        default: true
     },
     header: {
         type: Boolean,
-        value: true
+        default: true
     },
     itemHeight: {
         type: Number,
-        value: 80
+        default: 80
     },
     keys: {
         type: Object
@@ -28,26 +28,26 @@ const props = {
     },
     title: {
         type: String,
-        value: ''
+        default: ''
     },
     usePopup: {
         type: Boolean,
-        value: true
+        default: true
     },
     usingCustomNavbar: {
         type: Boolean,
-        value: false
+        default: false
     },
     value: {
         type: Array,
-        value: null
+        default: null
     },
     defaultValue: {
         type: Array
     },
     visible: {
         type: Boolean,
-        value: false
+        default: false
     }
 };
 export default props;

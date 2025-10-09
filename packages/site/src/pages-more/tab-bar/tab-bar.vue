@@ -8,7 +8,6 @@
       <t-demo-header
         title="TabBar 标签栏"
         desc="用于在不同功能模块之间进行快速切换，位于页面底部。"
-        notice="渲染框架支持情况：Skyline、WebView"
       />
       <t-demo
         title="01 组件类型"

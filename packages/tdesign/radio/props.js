@@ -1,60 +1,60 @@
 const props = {
     allowUncheck: {
         type: Boolean,
-        value: false
+        default: false
     },
     block: {
         type: Boolean,
-        value: true
+        default: true
     },
     checked: {
         type: Boolean,
-        value: null
+        default: null
     },
     defaultChecked: {
         type: Boolean,
-        value: false
+        default: false
     },
     content: {
         type: String
     },
     contentDisabled: {
         type: Boolean,
-        value: false
+        default: false
     },
     disabled: {
         type: null,
-        value: void 0
+        default: void 0
     },
     icon: {
         type: null,
-        value: 'circle'
+        default: 'circle'
     },
     label: {
         type: String
     },
     maxContentRow: {
         type: Number,
-        value: 5
+        default: 5
     },
     maxLabelRow: {
         type: Number,
-        value: 3
+        default: 3
     },
     name: {
         type: String,
-        value: ''
+        default: ''
     },
     placement: {
         type: String
     },
     readonly: {
         type: null,
-        value: void 0
+        default: void 0
     },
     value: {
         type: null,
-        value: false
+        default: false
     }
 };
 export default props;

@@ -1,58 +1,58 @@
 const props = {
     allowHalf: {
         type: Boolean,
-        value: false
+        default: false
     },
     color: {
         type: null,
-        value: '#ED7B2F'
+        default: '#ED7B2F'
     },
     count: {
         type: Number,
-        value: 5
+        default: 5
     },
     disabled: {
         type: null,
-        value: void 0
+        default: void 0
     },
     gap: {
         type: null,
-        value: 8
+        default: 8
     },
     icon: {
         type: null
     },
     iconPrefix: {
         type: String,
-        value: void 0
+        default: void 0
     },
     placement: {
         type: String,
-        value: 'top'
+        default: 'top'
     },
     showText: {
         type: Boolean,
-        value: false
+        default: false
     },
     size: {
         type: String,
-        value: '24px'
+        default: '24px'
     },
     texts: {
         type: Array,
-        value: []
+        default: []
     },
     value: {
         type: Number,
-        value: null
+        default: null
     },
     defaultValue: {
         type: Number,
-        value: 0
+        default: 0
     },
     variant: {
         type: String,
-        value: 'outline'
+        default: 'outline'
     }
 };
 export default props;

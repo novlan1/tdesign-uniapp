@@ -1,6 +1,6 @@
 <template>
     <view>
-        <t-button size="large" variant="outline" @tap.native="onTriggerClick" block theme="primary">Toggle</t-button>
+        <t-button size="large" variant="outline" @click="onTriggerClick" block theme="primary">Toggle</t-button>
 
         <t-transition :visible="visible" :style="style" :customStyle="customStyle">
             <view class="block"></view>

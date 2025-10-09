@@ -4,15 +4,15 @@ const props = {
     },
     disabled: {
         type: Boolean,
-        value: false
+        default: false
     },
     offsetTop: {
         type: null,
-        value: 0
+        default: 0
     },
     zIndex: {
         type: Number,
-        value: 99
+        default: 99
     }
 };
 export default props;

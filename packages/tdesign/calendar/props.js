@@ -1,15 +1,15 @@
 const props = {
     autoClose: {
         type: Boolean,
-        value: true
+        default: true
     },
     confirmBtn: {
         type: null,
-        value: ''
+        default: ''
     },
     firstDayOfWeek: {
         type: Number,
-        value: 0
+        default: 0
     },
     format: {
         type: null
@@ -25,33 +25,33 @@ const props = {
     },
     switchMode: {
         type: String,
-        value: 'none'
+        default: 'none'
     },
     title: {
         type: String
     },
     type: {
         type: String,
-        value: 'single'
+        default: 'single'
     },
     usePopup: {
         type: Boolean,
-        value: true
+        default: true
     },
     usingCustomNavbar: {
         type: Boolean,
-        value: false
+        default: false
     },
     value: {
         type: null,
-        value: null
+        default: null
     },
     defaultValue: {
         type: null
     },
     visible: {
         type: Boolean,
-        value: false
+        default: false
     }
 };
 export default props;

@@ -49,14 +49,14 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import scroll from './scroll';
-import size from './size';
-import status from './status';
-import withIcon from './with-icon';
-import withBadge from './with-badge';
-import theme from './theme';
-import withContent from './with-content';
+import BaseDemo from './base/index.vue';
+import scroll from './scroll/index.vue';
+import size from './size/index.vue';
+import status from './status/index.vue';
+import withIcon from './with-icon/index.vue';
+import withBadge from './with-badge/index.vue';
+import theme from './theme/index.vue';
+import withContent from './with-content/index.vue';
 export default {
   components: {
     BaseDemo,

@@ -1,41 +1,41 @@
 const props = {
     allowUncheck: {
         type: Boolean,
-        value: false
+        default: false
     },
     borderless: {
         type: Boolean,
-        value: false
+        default: false
     },
     disabled: {
         type: null,
-        value: void 0
+        default: void 0
     },
     icon: {
         type: null,
-        value: 'circle'
+        default: 'circle'
     },
     keys: {
         type: Object
     },
     name: {
         type: String,
-        value: ''
+        default: ''
     },
     options: {
         type: Array
     },
     placement: {
         type: String,
-        value: 'left'
+        default: 'left'
     },
     readonly: {
         type: null,
-        value: void 0
+        default: void 0
     },
     value: {
         type: null,
-        value: null
+        default: null
     },
     defaultValue: {
         type: null

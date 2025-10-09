@@ -1,31 +1,31 @@
 const props = {
     fixed: {
         type: Boolean,
-        value: true
+        default: true
     },
     icon: {
         type: null,
-        value: true
+        default: true
     },
     scrollTop: {
         type: Number,
-        value: 0
+        default: 0
     },
     style: {
         type: String,
-        value: ''
+        default: ''
     },
     text: {
         type: String,
-        value: ''
+        default: ''
     },
     theme: {
         type: String,
-        value: 'round'
+        default: 'round'
     },
     visibilityHeight: {
         type: Number,
-        value: 200
+        default: 200
     }
 };
 export default props;

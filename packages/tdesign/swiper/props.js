@@ -1,65 +1,65 @@
 const props = {
     autoplay: {
         type: Boolean,
-        value: true
+        default: true
     },
     current: {
         type: Number,
-        value: 0
+        default: 0
     },
     direction: {
         type: String,
-        value: 'horizontal'
+        default: 'horizontal'
     },
     displayMultipleItems: {
         type: Number,
-        value: 1
+        default: 1
     },
     duration: {
         type: Number,
-        value: 300
+        default: 300
     },
     easingFunction: {
         type: String,
-        value: 'default'
+        default: 'default'
     },
     height: {
         type: null,
-        value: 192
+        default: 192
     },
     imageProps: {
         type: Object
     },
     interval: {
         type: Number,
-        value: 5000
+        default: 5000
     },
     list: {
         type: Array
     },
     loop: {
         type: Boolean,
-        value: true
+        default: true
     },
     navigation: {
         type: null,
-        value: true
+        default: true
     },
     nextMargin: {
         type: null,
-        value: 0
+        default: 0
     },
     paginationPosition: {
         type: String,
-        value: 'bottom'
+        default: 'bottom'
     },
     previousMargin: {
         type: null,
-        value: 0
+        default: 0
     },
     snapToEdge: {
         type: Boolean,
-        value: false
+        default: false
     }
 };
 export default props;

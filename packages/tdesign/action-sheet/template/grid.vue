@@ -22,7 +22,7 @@
             :text="item.label || ''"
             :image="item.image || ''"
             :style="'--td-grid-item-text-color: ' + item.color"
-            @tap.native="onSelect"
+            @click="onSelect"
           />
         </t-grid>
       </block>
@@ -53,7 +53,7 @@
                   :text="item.label || ''"
                   :image="item.image || ''"
                   :style="'--td-grid-item-text-color: ' + item.color"
-                  @tap.native="onSelect"
+                  @click="onSelect"
                 />
               </t-grid>
             </swiper-item>

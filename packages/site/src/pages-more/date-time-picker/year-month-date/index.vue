@@ -1,6 +1,6 @@
 <template>
     <view>
-        <t-cell title="选择日期" hover :note="dateText || ''" arrow data-mode="date" @tap.native="showPicker($event, { mode: 'date' })" class="test" t-class="panel-item" />
+        <t-cell title="选择日期" hover :note="dateText || ''" arrow data-mode="date" @click="showPicker($event, { mode: 'date' })" class="test" t-class="panel-item" />
 
         <!-- 年月日 -->
         <t-date-time-picker

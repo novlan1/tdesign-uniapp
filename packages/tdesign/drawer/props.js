@@ -1,33 +1,33 @@
 const props = {
     closeOnOverlayClick: {
         type: Boolean,
-        value: true
+        default: true
     },
     destroyOnClose: {
         type: Boolean,
-        value: false
+        default: false
     },
     items: {
         type: Array
     },
     placement: {
         type: String,
-        value: 'right'
+        default: 'right'
     },
     showOverlay: {
         type: Boolean,
-        value: true
+        default: true
     },
     title: {
         type: String
     },
     visible: {
         type: Boolean,
-        value: false
+        default: false
     },
     zIndex: {
         type: Number,
-        value: 11500
+        default: 11500
     }
 };
 export default props;

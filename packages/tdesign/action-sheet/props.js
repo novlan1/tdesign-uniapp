@@ -22,7 +22,7 @@ const props = {
   },
   popupProps: {
     type: Object,
-    value: () => ({}),
+    default: () => ({}),
   },
   showCancel: {
     type: Boolean,

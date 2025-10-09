@@ -35,40 +35,42 @@
     <slot />
   </view>
 </template>
-<script module="_" lang="wxs" src="@/common/utils.wxs"></script>
-<script module="_this" lang="wxs" src="@/indexes/indexes.wxs"></script>
 <script>
-import tIcon from "../icon/icon";
-import tCell from "../cell/cell";
-import tCellGroup from "../cell-group/cell-group";
-import { __decorate } from "../miniprogram_npm/tslib";
-import { SuperComponent, wxComponent } from "../common/src/index";
-import config from "../common/config";
-import props from "./props";
-import { getRect, throttle, systemInfo } from "../common/utils";
-import pageScrollMixin from "../mixins/page-scroll";
+import tIcon from '../icon/icon';
+import tCell from '../cell/cell';
+import tCellGroup from '../cell-group/cell-group';
+import { __decorate } from '../miniprogram_npm/tslib';
+import { SuperComponent, wxComponent } from '../common/src/index';
+import config from '../common/config';
+import props from './props';
+import { getRect, throttle, systemInfo } from '../common/utils';
+import pageScrollMixin from '../mixins/page-scroll';
+import _ from '../common/utils.wxs';
+import * as _this from './indexes.wxs';
+
+
 const {
-  prefix: prefix
+  prefix: prefix,
 } = config;
 const name = `${prefix}-indexes`;
 let Indexes = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-sidebar`, `${prefix}-class-sidebar-item`];
-    this.properties = props;;
+    this.properties = props;
     this.setData({
-      prefix: prefix,
+      prefix,
       classPrefix: name,
       _height: 0,
       _indexList: [],
       scrollTop: 0,
       activeAnchor: null,
-      showTips: false
+      showTips: false,
     });
     this.relations = {
-      "../indexes-anchor/indexes-anchor": {
-        type: "child"
-      }
+      '../indexes-anchor/indexes-anchor': {
+        type: 'child',
+      },
     };
     this.behaviors = [pageScrollMixin()];
     this.timer = null;
@@ -82,7 +84,7 @@ let Indexes = class extends SuperComponent {
       },
       height(t) {
         this.setHeight(t);
-      }
+      },
     };
     this.lifetimes = {
       ready() {
@@ -95,18 +97,18 @@ let Indexes = class extends SuperComponent {
         if (null === this.indexList) {
           this.setIndexList();
         }
-      }
+      },
     };
     this.methods = {
       setHeight(t) {
         if (!t) {
           const {
-            windowHeight: e
+            windowHeight: e,
           } = systemInfo;
           t = e;
         }
         this.setData({
-          _height: t
+          _height: t,
         }, () => {
           this.getAllRect();
         });
@@ -114,16 +116,16 @@ let Indexes = class extends SuperComponent {
       setIndexList(t) {
         if (t) {
           this.setData({
-            _indexList: t
+            _indexList: t,
           });
         } else {
-          const t = "A".charCodeAt(0);
+          const t = 'A'.charCodeAt(0);
           const e = [];
           for (let i = t, s = t + 26; i < s; i += 1) {
             e.push(String.fromCharCode(i));
           }
           this.setData({
-            _indexList: e
+            _indexList: e,
           });
         }
       },
@@ -138,43 +140,43 @@ let Indexes = class extends SuperComponent {
         this.getSidebarRect();
       },
       getAnchorsRect() {
-        return Promise.all(this.$children.map(t => getRect(t, `.${name}-anchor`).then(e => {
+        return Promise.all(this.$children.map(t => getRect(t, `.${name}-anchor`).then((e) => {
           this.groupTop.push({
             height: e.height,
             top: e.top,
-            anchor: t.data.index
+            anchor: t.data.index,
           });
         })));
       },
       getSidebarRect() {
-        getRect(this, `#id-${name}__bar`).then(t => {
+        getRect(this, `#id-${name}__bar`).then((t) => {
           const {
             top: e,
-            height: i
+            height: i,
           } = t;
           const {
-            length: s
+            length: s,
           } = this._indexList;
           this.sidebar = {
             top: e,
             height: i,
-            itemHeight: (i - 2 * (s - 1)) / s
+            itemHeight: (i - 2 * (s - 1)) / s,
           };
         });
       },
       toggleTips(t) {
         t ? this.setData({
-          showTips: true
+          showTips: true,
         }) : (clearInterval(this.timer), this.timer = setTimeout(() => {
           this.setData({
-            showTips: false
+            showTips: false,
           });
         }, 300));
       },
       setAnchorByIndex(t) {
         const {
           _indexList: e,
-          stickyOffset: i
+          stickyOffset: i,
         } = this;
         const s = e[t];
         if (null !== this.activeAnchor && this.activeAnchor === s) {
@@ -186,22 +188,22 @@ let Indexes = class extends SuperComponent {
           const t = o.top - i;
           uni.pageScrollTo({
             scrollTop: t,
-            duration: 0
+            duration: 0,
           });
           this.toggleTips(true);
-          this.$emit("select", {
+          this.$emit('select', {
             detail: {
-              index: s
-            }
+              index: s,
+            },
           });
           this.setData({
-            activeAnchor: s
+            activeAnchor: s,
           });
         }
       },
       onClick(t) {
         const {
-          index: e
+          index: e,
         } = t.currentTarget.dataset;
         this.setAnchorByIndex(e);
       },
@@ -216,7 +218,7 @@ let Indexes = class extends SuperComponent {
         this.onAnchorTouch(t);
       },
       onAnchorTouch: throttle(function (t) {
-        const e = (t => {
+        const e = ((t) => {
           const e = t - this.sidebar.top;
           return e <= 0 ? 0 : e > this.sidebar.height ? this._indexList.length - 1 : Math.floor(e / this.sidebar.itemHeight);
         })(t.changedTouches[0].clientY);
@@ -229,7 +231,7 @@ let Indexes = class extends SuperComponent {
         const {
           sticky: e,
           stickyOffset: i,
-          activeAnchor: s
+          activeAnchor: s,
         } = this;
         t += i;
         const o = this.groupTop.findIndex(e => t >= e.top - e.height && t <= e.top + e.totalHeight - e.height);
@@ -237,16 +239,16 @@ let Indexes = class extends SuperComponent {
           return;
         }
         const h = this.groupTop[o];
-        null !== this.currentTouchAnchor ? (this.$emit("change", {
+        null !== this.currentTouchAnchor ? (this.$emit('change', {
           detail: {
-            index: h.anchor
-          }
-        }), this.currentTouchAnchor = null) : s !== h.anchor && (this.$emit("change", {
+            index: h.anchor,
+          },
+        }), this.currentTouchAnchor = null) : s !== h.anchor && (this.$emit('change', {
           detail: {
-            index: h.anchor
-          }
+            index: h.anchor,
+          },
         }), this.setData({
-          activeAnchor: h.anchor
+          activeAnchor: h.anchor,
         }));
         if (e) {
           const e = h.top - t;
@@ -259,7 +261,7 @@ let Indexes = class extends SuperComponent {
                 sticky: o,
                 active: true,
                 style: `height: ${h.height}px`,
-                anchorStyle: r
+                anchorStyle: r,
               });
             } else if (r + 1 === o) {
               const t = `transform: translate3d(0, ${s ? e - h.height : 0}px, 0); top: ${i}px`;
@@ -268,24 +270,24 @@ let Indexes = class extends SuperComponent {
                   sticky: true,
                   active: true,
                   style: `height: ${h.height}px`,
-                  anchorStyle: t
+                  anchorStyle: t,
                 });
               }
             } else {
               n.setData({
                 active: false,
                 sticky: false,
-                anchorStyle: ""
+                anchorStyle: '',
               });
             }
           });
         }
       },
       onScroll({
-        scrollTop: t
+        scrollTop: t,
       }) {
         this.setAnchorOnScroll(t);
-      }
+      },
     };
   }
 };
