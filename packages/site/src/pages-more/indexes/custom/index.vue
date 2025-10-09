@@ -12,6 +12,7 @@
         :sticky-offset="stickyOffset + 8"
         t-class="wrapper"
         @change="onChange"
+        @select="onSelect"
       >
         <template
           v-for="(item, index) in list"
@@ -100,7 +101,13 @@ export default {
   methods: {
     onChange(e) {
       const { index } = e;
-      console.log(index);
+      console.log('change:', index);
+      this.curIndex = index;
+    },
+
+    onSelect(e) {
+      const { index } = e;
+      console.log('select:', index);
       this.curIndex = index;
     },
 
