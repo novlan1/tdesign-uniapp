@@ -35,6 +35,11 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "tinycolor2": "^1.4.2",
+    "tslib": "^2.8.1",
+    "dayjs": "^1.10.7"
+  },
+  "devDependencies": {
     "@dcloudio/uni-app": "3.0.0-4030620241128001",
     "@dcloudio/uni-app-harmony": "3.0.0-4030620241128001",
     "@dcloudio/uni-app-plus": "3.0.0-4030620241128001",
@@ -50,15 +55,13 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-4030620241128001",
     "@dcloudio/uni-mp-xhs": "3.0.0-4030620241128001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4030620241128001",
-    "vue": "^3.4.21",
-    "vue-i18n": "^9.1.9"
-  },
-  "devDependencies": {
     "@dcloudio/types": "^3.4.8",
     "@dcloudio/uni-automator": "3.0.0-4030620241128001",
     "@dcloudio/uni-cli-shared": "3.0.0-4030620241128001",
     "@dcloudio/uni-stacktracey": "3.0.0-4030620241128001",
     "@dcloudio/vite-plugin-uni": "3.0.0-4030620241128001",
+    "vue": "^3.4.21",
+    "vue-i18n": "^9.1.9",
     "@stylistic/eslint-plugin-jsx": "3.1.0",
     "@types/node": "^24.2.0",
     "@typescript-eslint/eslint-plugin": "7.18.0",

@@ -54,36 +54,36 @@ let SwiperNav = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`];
-    this = {
-      current: {
-        type: Number,
-        value: 0,
-      },
-      total: {
-        type: Number,
-        value: 0,
-      },
-      type: {
-        type: String,
-        value: 'dots',
-      },
-      minShowNum: {
-        type: Number,
-        value: 2,
-      },
-      showControls: {
-        type: Boolean,
-        value: false,
-      },
-      direction: {
-        type: String,
-        value: 'horizontal',
-      },
-      paginationPosition: {
-        type: String,
-        value: 'bottom',
-      },
-    };
+    // this = {
+    //   current: {
+    //     type: Number,
+    //     value: 0,
+    //   },
+    //   total: {
+    //     type: Number,
+    //     value: 0,
+    //   },
+    //   type: {
+    //     type: String,
+    //     value: 'dots',
+    //   },
+    //   minShowNum: {
+    //     type: Number,
+    //     value: 2,
+    //   },
+    //   showControls: {
+    //     type: Boolean,
+    //     value: false,
+    //   },
+    //   direction: {
+    //     type: String,
+    //     value: 'horizontal',
+    //   },
+    //   paginationPosition: {
+    //     type: String,
+    //     value: 'bottom',
+    //   },
+    // };
     this.relations = {
       '../swiper/swiper': {
         type: 'parent',

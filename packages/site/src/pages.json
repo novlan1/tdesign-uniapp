@@ -148,9 +148,6 @@
       "path": "pages-more/progress/progress"
     },
     {
-      "path": "pages-more/qrcode/qrcode"
-    },
-    {
       "path": "pages-more/result/result"
     },
     {
@@ -158,9 +155,6 @@
     },
     {
       "path": "pages-more/sticky/sticky"
-    },
-    {
-      "path": "pages-more/swiper/swiper"
     },
     {
       "path": "pages-more/tag/tag"

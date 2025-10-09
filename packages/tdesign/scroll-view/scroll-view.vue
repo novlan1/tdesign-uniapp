@@ -26,11 +26,11 @@ let ScrollView = class extends SuperComponent {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`];
     this.behaviors = canUseProxyScrollView() ? ['wx://proxy-scroll-view'] : [];
-    this = {
-      scrollIntoView: {
-        type: String,
-      },
-    };
+    // this = {
+    //   scrollIntoView: {
+    //     type: String,
+    //   },
+    // };
   }
 };
 ScrollView = __decorate([wxComponent()], ScrollView);

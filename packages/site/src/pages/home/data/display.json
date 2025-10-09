@@ -50,7 +50,8 @@
       {
         "name": "QRCode",
         "label": "二维码",
-        "path": "/pages-more/qrcode/qrcode"
+        "path": "/pages-more/qrcode/qrcode",
+        "hide": true
       },
       {
         "name": "Result",
@@ -124,11 +125,17 @@
       },
       {
         "name": "Swiper",
-        "label": "轮播图"
+        "label": "轮播图",
+        "hide": true
       },
       {
         "name": "Tag",
         "label": "标签"
+      },
+      {
+        "name": "Watermark",
+        "label": "水印",
+        "hide": true
       }
     ]
   }

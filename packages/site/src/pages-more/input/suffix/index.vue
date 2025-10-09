@@ -3,9 +3,10 @@
     <t-input
       label="标签文字"
       placeholder="请输入文字"
-      :suffix-icon=""
       @click="click"
     />
+    <!-- TODO: -->
+    <!-- :suffix-icon="" -->
 
     <t-input
       class="extra"
@@ -23,10 +24,11 @@
       </t-button>
     </t-input>
 
+    <!-- TODO: -->
+    <!-- :suffix-icon="" -->
     <t-input
       label="标签文字"
       placeholder="请输入文字"
-      :suffix-icon=""
     />
   </view>
 </template>

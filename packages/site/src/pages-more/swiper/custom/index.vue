@@ -1,12 +1,12 @@
 <template>
   <view>
+    <!-- :navigation="" TODO: -->
     <t-swiper
       :current="current"
       :autoplay="autoplay"
       :duration="duration"
       :interval="interval"
       :list="swiperList"
-      :navigation=""
     />
   </view>
 </template>

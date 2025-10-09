@@ -100,7 +100,6 @@
                 </block>
                 <!-- parse <template is="button" v-else-if="current === steps.length - 1 && !hideBack" :data="...backButton"/> -->
                 <block
-                  v-if="false"
                   v-else-if="current === steps.length - 1 && !hideBack"
                   name="button"
                 >
@@ -199,7 +198,6 @@
                 </block>
                 <!-- parse <template is="button" v-else :data="...finishButton"/> -->
                 <block
-                  v-if="false"
                   v-else
                   name="button"
                 >
@@ -350,7 +348,6 @@
                 </block>
                 <!-- parse <template is="button" v-else-if="current === steps.length - 1 && !hideBack" :data="...backButton"/> -->
                 <block
-                  v-if="false"
                   v-else-if="current === steps.length - 1 && !hideBack"
                   name="button"
                 >
@@ -449,7 +446,6 @@
                 </block>
                 <!-- parse <template is="button" v-else :data="...finishButton"/> -->
                 <block
-                  v-if="false"
                   v-else
                   name="button"
                 >

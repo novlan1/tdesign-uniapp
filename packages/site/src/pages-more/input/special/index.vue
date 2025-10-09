@@ -1,10 +1,10 @@
 <template>
   <view>
+    <!-- :suffix-icon="" TODO: -->
     <t-input
       label="输入密码"
       type="password"
       :value="textPassword"
-      :suffix-icon=""
     />
 
     <t-input

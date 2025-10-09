@@ -39,7 +39,7 @@
           >
             <view
               :id="tId"
-              :class="(class)+' '+(classPrefix)+' '+(switchMode !== 'none' ? classPrefix + '__with-action' : '')"
+              :class="'class' + ' ' + (classPrefix)+' '+(switchMode !== 'none' ? classPrefix + '__with-action' : '')"
             >
               <view
                 v-if="switchMode !== 'none'"
@@ -121,7 +121,7 @@
               >
                 <view
                   :id="'year_' + item.year + '_month_' + item.month"
-                  :class="(class)+' '+(classPrefix)+' '+(switchMode !== 'none' ? classPrefix + '__with-action' : '')"
+                  :class="'class' +' '+(classPrefix)+' '+(switchMode !== 'none' ? classPrefix + '__with-action' : '')"
                 >
                   <view
                     v-if="switchMode !== 'none'"
@@ -305,7 +305,7 @@
           >
             <view
               :id="tId"
-              :class="(class)+' '+(classPrefix)+' '+(switchMode !== 'none' ? classPrefix + '__with-action' : '')"
+              :class="'class' +' '+(classPrefix)+' '+(switchMode !== 'none' ? classPrefix + '__with-action' : '')"
             >
               <view
                 v-if="switchMode !== 'none'"
@@ -387,7 +387,7 @@
               >
                 <view
                   :id="'year_' + item.year + '_month_' + item.month"
-                  :class="(class)+' '+(classPrefix)+' '+(switchMode !== 'none' ? classPrefix + '__with-action' : '')"
+                  :class="'class' +' '+(classPrefix)+' '+(switchMode !== 'none' ? classPrefix + '__with-action' : '')"
                 >
                   <view
                     v-if="switchMode !== 'none'"
@@ -564,8 +564,9 @@ const defaultLocaleText = {
   weekdays: ['日', '一', '二', '三', '四', '五', '六'],
   monthTitle: '{year} 年 {month}',
   months: ['1 月', '2 月', '3 月', '4 月', '5 月', '6 月', '7 月', '8 月', '9 月', '10 月', '11 月', '12 月'],
-  confirm:'确认',
-}};
+  confirm: '确认',
+};
+
 let Calendar = class extends SuperComponent {
   constructor() {
     super(...arguments);
@@ -588,15 +589,15 @@ let Calendar = class extends SuperComponent {
         prevMonthBtnDisable: false,
         nextMonthBtnDisable: false,
         nextYearBtnDisable: false,
-     },
-    }});
+      },
+    });
     this.controlledProps = [{
       key: 'value',
-      event:'confirm',
-    }}, {
+      event: 'confirm',
+    }, {
       key: 'value',
-      event:'change',
-    }}];
+      event: 'change',
+    }];
     this.lifetimes = {
       created() {
         this.base = new TCalendar(this);
@@ -622,8 +623,8 @@ let Calendar = class extends SuperComponent {
           this.setData({
             innerConfirmBtn: 'slot' === t ? 'slot' : {
               content: t,
-           },
-          }});
+            },
+          });
         } else {
           if ('object' === typeof t) {
             this.setData({
@@ -725,8 +726,8 @@ let Calendar = class extends SuperComponent {
             prevMonthBtnDisable: c,
             nextYearBtnDisable: m,
             nextMonthBtnDisable: u,
-         },
-        }});
+          },
+        });
       },
       updateCurrentMonth() {
         if ('none' !== this.switchMode) {
@@ -760,8 +761,8 @@ let Calendar = class extends SuperComponent {
         this.$emit('close', {
           detail: {
             trigger: t,
-         },
-        }});
+          },
+        });
       },
       onVisibleChange() {
         this.close('overlay');
@@ -797,8 +798,8 @@ let Calendar = class extends SuperComponent {
         this.$emit('select', {
           detail: {
             value: r,
-         },
-        }});
+          },
+        });
       },
       onTplButtonTap() {
         const t = this.base.getTrimValue();
@@ -851,8 +852,8 @@ let Calendar = class extends SuperComponent {
           detail: {
             year: r,
             month: i + 1,
-         },
-        }});
+          },
+        });
         this.calcCurrentMonth(s);
       },
     };

@@ -84,11 +84,11 @@ let SideBarItem = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`];
-    this = Object.assign(Object.assign({}, props), {
-      tId: {
-        type: String,
-      },
-    });
+    // this = Object.assign(Object.assign({}, props), {
+    //   tId: {
+    //     type: String,
+    //   },
+    // });
     this.relations = {
       '../side-bar/side-bar': {
         type: 'parent',

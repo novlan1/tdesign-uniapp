@@ -82,7 +82,7 @@ let Stepper = class extends SuperComponent {
   constructor() {
     super(...arguments);
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-input`, `${prefix}-class-minus`, `${prefix}-class-plus`];
-    this = Object.assign({}, props);
+    // this = Object.assign({}, props);
     this.controlledProps = [{
       key: 'value',
       event: 'change',

@@ -3,10 +3,12 @@
     <view class="input-example__label">
       标签文字
     </view>
+
+    <!-- :suffix-icon="" TODO: -->
+
     <t-input
       placeholder="请输入文字"
       :borderless="true"
-      :suffix-icon=""
       :style="style"
     />
   </view>

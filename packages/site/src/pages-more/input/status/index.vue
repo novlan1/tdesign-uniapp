@@ -1,5 +1,6 @@
 <template>
   <view>
+    <!-- :clearable="" TODO: -->
     <t-input
       class="custom-class"
       label="标签文字"
@@ -7,7 +8,6 @@
       value="已输入内容"
       status="error"
       tips="错误提示"
-      :clearable=""
     />
 
     <t-input

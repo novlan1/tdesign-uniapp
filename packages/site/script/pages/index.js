@@ -22,7 +22,7 @@ function main() {
 
   const componentPages = list.reduce((acc, item) => [
     ...acc,
-    ...(item.childArr || []),
+    ...(item.childArr || []).filter(page => !page.hide),
   ], [])
     .map((item) => {
       const name = hyphenate(item.name);
