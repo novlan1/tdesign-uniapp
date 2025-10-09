@@ -40,7 +40,7 @@
       "path": "pages-more/link/link"
     },
     {
-      "path": "/pages-more/col/col"
+      "path": "pages-more/col/col"
     },
     {
       "path": "pages-more/back-top/back-top"
@@ -148,7 +148,7 @@
       "path": "pages-more/progress/progress"
     },
     {
-      "path": "/pages-more/qrcode/qrcode"
+      "path": "pages-more/qrcode/qrcode"
     },
     {
       "path": "pages-more/result/result"

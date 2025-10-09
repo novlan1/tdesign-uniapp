@@ -8,6 +8,9 @@
       "tdesign-uniapp/*": [
         "packages/tdesign/*"
       ],
+      "tdesign-site/*": [
+        "packages/site/*"
+      ]
     },
     "lib": [
       "esnext",

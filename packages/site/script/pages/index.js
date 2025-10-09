@@ -28,7 +28,7 @@ function main() {
       const name = hyphenate(item.name);
       const { path } = item;
       return {
-        path: path || `pages-more/${name}/${name}`,
+        path: path ? path.replace(/^\//, '') : `pages-more/${name}/${name}`,
       };
     });
 

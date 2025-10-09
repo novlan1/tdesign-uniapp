@@ -90,7 +90,7 @@
 <script>
 import tTag from 'tdesign-uniapp/tag/tag';
 // TODO: check skyline exists
-// import SkylineBehavior from '@behaviors/skyline.js';
+// import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js'
 export default {
   components: {
     tTag,

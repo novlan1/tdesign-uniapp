@@ -35,7 +35,7 @@
 <script>
 import tLoading from 'tdesign-uniapp/loading/loading';
 import tImage from 'tdesign-uniapp/image/image';
-// import SkylineBehavior from '@behaviors/skyline.js';
+// import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js'
 export default {
   components: {
     tLoading,

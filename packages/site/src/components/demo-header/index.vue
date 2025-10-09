@@ -1,7 +1,7 @@
 <template>
   <div>
     <TNoticeBar
-      :visible="!!notice"
+      :visible="false"
       :content="notice"
     />
     <view class="demo-title">
