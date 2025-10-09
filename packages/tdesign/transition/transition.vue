@@ -24,7 +24,7 @@ let Transition = class extends SuperComponent {
     this.behaviors = [transition()];
     this.setData({
       classPrefix: name,
-        });
+    });
   }
 };
 Transition = __decorate([wxComponent()], Transition);

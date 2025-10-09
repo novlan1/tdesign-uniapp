@@ -108,7 +108,7 @@ let Swiper = class extends SuperComponent {
     this.$nav = null;
     this.relations = {
       '../swiper-nav/swiper-nav': {
-        type: 'child'
+        type: 'child',
       },
     };
     this.setData({
@@ -154,7 +154,7 @@ let Swiper = class extends SuperComponent {
         this.$emit('click', {
           detail: {
             index: e,
-          }
+          },
         });
       },
       onChange(t) {
@@ -169,7 +169,7 @@ let Swiper = class extends SuperComponent {
           detail: {
             current: e,
             source: i,
-          }
+          },
         });
       },
       onNavBtnChange(t) {
@@ -196,7 +196,7 @@ let Swiper = class extends SuperComponent {
             detail: {
               current: o,
               source: e,
-            }
+            },
           });
         }
       },
@@ -204,7 +204,7 @@ let Swiper = class extends SuperComponent {
         this.$emit('image-load', {
           detail: {
             index: t.target.dataset.custom,
-          }
+          },
         });
       },
     };

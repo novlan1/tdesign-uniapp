@@ -26,11 +26,11 @@
           type="list"
         >
           <view
+            v-for="(item, index) in items"
+            :key="index"
             :class="classPrefix + '__sidebar-item'"
             :hover-class="classPrefix + '--hover'"
-            v-for="(item, index) in items"
             :hover-start-time="0"
-            :key="index"
             :hover-stay-time="100"
             wx:item="item"
             :data-item="item"
@@ -102,14 +102,14 @@ let Drawer = class extends SuperComponent {
         });
         t || this.$emit('close', {
           detail: {
-            trigger: 'overlay'
+            trigger: 'overlay',
           },
         });
         if (r) {
           this.$emit('overlay-click', {
             detail: {
               visible: t,
-            }
+            },
           });
         }
       },
@@ -122,7 +122,7 @@ let Drawer = class extends SuperComponent {
           detail: {
             index: t,
             item: r,
-          }
+          },
         });
       },
     };

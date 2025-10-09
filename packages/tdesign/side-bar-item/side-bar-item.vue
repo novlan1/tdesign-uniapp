@@ -87,7 +87,7 @@ let SideBarItem = class extends SuperComponent {
     this = Object.assign(Object.assign({}, props), {
       tId: {
         type: String,
-      }
+      },
     });
     this.relations = {
       '../side-bar/side-bar': {
@@ -96,7 +96,7 @@ let SideBarItem = class extends SuperComponent {
           this.parent = e;
           this.updateActive(e.data.value);
         },
-      }
+      },
     };
     this.observers = {
       icon(e) {

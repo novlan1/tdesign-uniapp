@@ -1,0 +1,8 @@
+{
+  "chat": {
+    "name": "AI Chat 对话",
+    "icon": "chat",
+    "childArr": []
+  },
+  "skylineChat": {}
+}

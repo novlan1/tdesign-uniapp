@@ -65,7 +65,7 @@ let SwiperNav = class extends SuperComponent {
       },
       type: {
         type: String,
-        value: 'dots'
+        value: 'dots',
       },
       minShowNum: {
         type: Number,
@@ -77,16 +77,16 @@ let SwiperNav = class extends SuperComponent {
       },
       direction: {
         type: String,
-        value: 'horizontal'
+        value: 'horizontal',
       },
       paginationPosition: {
         type: String,
-        value: 'bottom'
+        value: 'bottom',
       },
     };
     this.relations = {
       '../swiper/swiper': {
-        type: 'parent'
+        type: 'parent',
       },
     };
     this.setData({
@@ -102,7 +102,7 @@ let SwiperNav = class extends SuperComponent {
         this.$emit('nav-btn-change', {
           detail: {
             dir: r,
-            source: 'nav'
+            source: 'nav',
           },
         });
         if (this.$parent) {

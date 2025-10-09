@@ -62,7 +62,7 @@ let BackTop = class extends SuperComponent {
     this.properties = props;
     this.relations = {
       '../pull-down-refresh/pull-down-refresh': {
-        type: 'ancestor'
+        type: 'ancestor',
       },
     };
     this.setData({

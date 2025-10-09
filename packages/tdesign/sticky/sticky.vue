@@ -41,7 +41,7 @@ let Sticky = class extends SuperComponent {
       prefix,
       classPrefix: name,
       containerStyle: '',
-      contentStyle: ''
+      contentStyle: '',
     });
     this.methods = {
       onScroll(t) {
@@ -126,7 +126,7 @@ let Sticky = class extends SuperComponent {
             detail: {
               scrollTop: this.scrollTop,
               isFixed: s,
-            }
+            },
           });
         });
       },

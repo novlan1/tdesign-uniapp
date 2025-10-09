@@ -66,7 +66,7 @@ let Switch = class extends SuperComponent {
     });
     this.controlledProps = [{
       key: 'value',
-      event: 'change'
+      event: 'change',
     }];
     this.observers = {
       value(e) {

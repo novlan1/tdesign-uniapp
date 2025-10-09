@@ -36,11 +36,11 @@ let SideBar = class extends SuperComponent {
           const i = this.children.findIndex(i => i === e);
           this.children.splice(i, 1);
         },
-      }
+      },
     };
     this.controlledProps = [{
       key: 'value',
-      event: 'change'
+      event: 'change',
     }];
     this.properties = props;
     this.observers = {
@@ -52,7 +52,7 @@ let SideBar = class extends SuperComponent {
     };
     this.setData({
       classPrefix: name,
-      prefix
+      prefix,
     });
     this.methods = {
       doChange({

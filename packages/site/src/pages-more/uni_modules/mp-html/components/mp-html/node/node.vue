@@ -54,7 +54,11 @@
         :webp="n.webp"
         :show-menu-by-longpress="opts[3]&&!n.attrs.ignore"
         :image-menu-prevent="!opts[3]||n.attrs.ignore"
-:data-i="i" @load="imgLoad" @error="mediaError" @tap.stop="imgTap" @longpress="imgLongTap"
+        :data-i="i"
+        @load="imgLoad"
+        @error="mediaError"
+        @tap.stop="imgTap"
+        @longpress="imgLongTap"
       />
       <!-- #endif -->
       <!-- #ifdef APP-PLUS && VUE3 -->
@@ -69,7 +73,7 @@
         @load="imgLoad"
         @error="mediaError"
         @tap.stop="imgTap"
-@longpress="imgLongTap"
+        @longpress="imgLongTap"
       />
       <!-- #endif -->
       <!-- 文本 -->
@@ -133,7 +137,10 @@
         :muted="n.attrs.muted"
         :object-fit="n.attrs['object-fit']"
         :poster="n.attrs.poster"
-:src="n.src[ctrl[i]||0]" :data-i="i" @play="play" @error="mediaError"
+        :src="n.src[ctrl[i]||0]"
+        :data-i="i"
+        @play="play"
+        @error="mediaError"
       />
       <!-- #endif -->
       <!-- #ifdef H5 || APP-PLUS -->
@@ -163,7 +170,9 @@
         :name="n.attrs.name"
         :poster="n.attrs.poster"
         :src="n.src[ctrl[i]||0]"
-:data-i="i" @play="play" @error="mediaError"
+        :data-i="i"
+        @play="play"
+        @error="mediaError"
       />
       <!-- #endif -->
       <view

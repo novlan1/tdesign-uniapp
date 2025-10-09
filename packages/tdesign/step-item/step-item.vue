@@ -100,7 +100,7 @@ let StepItem = class extends SuperComponent {
     };
     this.relations = {
       '../steps/steps': {
-        type: 'parent'
+        type: 'parent',
       },
     };
     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-title`, `${prefix}-class-description`, `${prefix}-class-extra`];
@@ -113,7 +113,7 @@ let StepItem = class extends SuperComponent {
       curStatus: '',
       layout: 'vertical',
       isLastChild: false,
-      sequence: 'positive'
+      sequence: 'positive',
     });
     this.observers = {
       status(t) {

@@ -139,7 +139,7 @@ let TreeSelect = class extends SuperComponent {
     this.properties = props;
     this.controlledProps = [{
       key: 'value',
-      event: 'change'
+      event: 'change',
     }];
     this.observers = {
       'value, customValue, options, keys, multiple'() {

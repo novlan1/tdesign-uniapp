@@ -9,7 +9,8 @@
     "build": "pnpm --filter=\"./packages/site\" build:h5",
     "build:mp": "pnpm --filter=\"./packages/site\" build:mp-weixin",
     "build:mp-weixin": "npm run build:mp",
-    "type-check": "vue-tsc --noEmit"
+    "type-check": "vue-tsc --noEmit",
+    "init": "node packages/site/script/pages/index.js"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.4.19",

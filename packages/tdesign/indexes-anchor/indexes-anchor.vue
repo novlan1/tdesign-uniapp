@@ -47,7 +47,7 @@ let IndexesAnchor = class extends SuperComponent {
     });
     this.relations = {
       '../indexes/indexes': {
-        type: 'parent'
+        type: 'parent',
       },
     };
   }

@@ -85,7 +85,7 @@ let Stepper = class extends SuperComponent {
     this = Object.assign({}, props);
     this.controlledProps = [{
       key: 'value',
-      event: 'change'
+      event: 'change',
     }];
     this.observers = {
       value(e) {
@@ -98,7 +98,7 @@ let Stepper = class extends SuperComponent {
     this.setData({
       currentValue: 0,
       classPrefix: name,
-      prefix
+      prefix,
     });
     this.lifetimes = {
       attached() {
@@ -154,7 +154,7 @@ let Stepper = class extends SuperComponent {
         if (this.isDisabled('minus')) {
           this.$emit('overlimit', {
             detail: {
-              type: 'minus'
+              type: 'minus',
             },
           });
           return false;
@@ -169,7 +169,7 @@ let Stepper = class extends SuperComponent {
         if (this.isDisabled('plus')) {
           this.$emit('overlimit', {
             detail: {
-              type: 'plus'
+              type: 'plus',
             },
           });
           return false;
@@ -192,7 +192,7 @@ let Stepper = class extends SuperComponent {
         this.$emit('focus', {
           detail: {
             value: t,
-          }
+          },
         });
       },
       handleInput(e) {
@@ -209,7 +209,7 @@ let Stepper = class extends SuperComponent {
         this.$emit('input', {
           detail: {
             value: s,
-          }
+          },
         });
       },
       handleBlur(e) {
@@ -221,7 +221,7 @@ let Stepper = class extends SuperComponent {
         this.$emit('blur', {
           detail: {
             value: s,
-          }
+          },
         });
       },
     };

@@ -135,7 +135,7 @@ let Rate = class extends SuperComponent {
     this.properties = props;
     this.controlledProps = [{
       key: 'value',
-      event: 'change'
+      event: 'change',
     }];
     this.setData({
       prefix,
