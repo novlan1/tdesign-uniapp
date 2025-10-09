@@ -77,6 +77,12 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'fail',
+    'complete',
+    'success',
+    'go-back',
+  ],
   data() {
     return {
       timer: null,
@@ -172,7 +178,6 @@ export default uniComponent({
         .map(([k, v]) => `${k}: ${v}`)
         .join('; ');
 
-      console.log('boxStyle', boxStyle);
       this.boxStyle = boxStyle;
       this._boxStyle = _boxStyle;
     },
@@ -186,9 +191,7 @@ export default uniComponent({
     },
 
     getMenuRect() {
-      console.log('getMenuButtonBoundingClientRect', uni.getMenuButtonBoundingClientRect);
       // 场景值为1177（视频号直播间）和1175 （视频号profile页）时，小程序禁用了 wx.getMenuButtonBoundingClientRect
-
       let rect = {
         ...BASE_MENU_RECT,
         bottom: BASE_MENU_RECT.top + BASE_MENU_RECT.height,
@@ -241,18 +244,18 @@ export default uniComponent({
       const { delta } = this;
       // eslint-disable-next-line
       const that = this;
-      this.triggerEvent('go-back');
+      this.$emit('go-back');
       if (delta > 0) {
         wx.navigateBack({
           delta,
           fail(e) {
-            that.triggerEvent('fail', e);
+            that.$emit('fail', e);
           },
           complete(e) {
-            that.triggerEvent('complete', e);
+            that.$emit('complete', e);
           },
           success(e) {
-            that.triggerEvent('success', e);
+            that.$emit('success', e);
           },
         });
       }
