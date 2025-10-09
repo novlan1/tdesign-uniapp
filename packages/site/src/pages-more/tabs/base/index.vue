@@ -101,12 +101,24 @@ export default {
     tTabs,
     tTabPanel,
   },
+  props: {
+    stickyOffset: {
+      type: Number,
+      default: 0,
+    },
+  },
   data() {
     return {
-      stickyProps: {
-        zIndex: 2,
-      },
     };
+  },
+  computed: {
+    stickyProps() {
+      return {
+        zIndex: 2,
+        offsetTop: this.stickyOffset,
+
+      };
+    },
   },
   created() {},
   methods: {
@@ -117,7 +129,7 @@ export default {
       console.log(`Click tab, tab-panel value is ${event.value}.`);
     },
     onStickyScroll(event) {
-      console.log(event);
+      console.log('sticky scroll: ', event);
     },
   },
 };

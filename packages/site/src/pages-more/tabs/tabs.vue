@@ -1,9 +1,11 @@
 <template>
-  <view>
-    <t-navbar
-      title="Tabs"
-      left-arrow
-    />
+  <view class="demo-wrap">
+    <view class="custom-navbar">
+      <t-navbar
+        title="Tabs"
+        left-arrow
+      />
+    </view>
     <view class="demo">
       <t-demo-header
         title="Tabs 选项卡"
@@ -14,7 +16,7 @@
         title="01 组件类型"
         desc="基础选项卡"
       >
-        <BaseDemo />
+        <BaseDemo :sticky-offset="stickyOffset" />
       </t-demo>
       <t-demo desc="等距选项卡">
         <scroll />
@@ -69,9 +71,25 @@ export default {
     withContent,
   },
   data() {
-    return {};
+    return {
+      stickyOffset: 0,
+    };
   },
-  methods: {},
+  mounted() {
+    setTimeout(() => {
+      this.getCustomNavbarHeight();
+    }, 30);
+  },
+  methods: {
+    getCustomNavbarHeight() {
+      const query = uni.createSelectorQuery().in(this);
+      query.select('.custom-navbar').boundingClientRect();
+      query.exec((res) => {
+        const { height = 0 } = res[0] || {};
+        this.stickyOffset = height;
+      });
+    },
+  },
 };
 </script>
 <style lang="less">
