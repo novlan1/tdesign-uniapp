@@ -1,76 +1,84 @@
 <template>
-    <view>
-        <t-cell title="选择日期" hover :note="monthText" arrow data-mode="month" @click="showPicker($event, { mode: 'month' })" t-class="panel-item" />
+  <view>
+    <t-cell
+      title="选择日期"
+      hover
+      :note="monthText"
+      arrow
+      data-mode="month"
+      t-class="panel-item"
+      @click="showPicker($event, { mode: 'month' })"
+    />
 
-        <!-- 年月 -->
-        <t-date-time-picker
-            title="选择日期"
-            :visible="monthVisible"
-            mode="month"
-            :value="month"
-            format="YYYY-MM"
-            @change="onConfirm"
-            @pick="onColumnChange"
-            @cancel="hidePicker"
-            :start="start"
-            :end="end"
-        />
-    </view>
+    <!-- 年月 -->
+    <t-date-time-picker
+      title="选择日期"
+      :visible="monthVisible"
+      mode="month"
+      :value="month"
+      format="YYYY-MM"
+      :start="start"
+      :end="end"
+      @change="onConfirm"
+      @pick="onColumnChange"
+      @cancel="hidePicker"
+    />
+  </view>
 </template>
 
 <script>
 import tCell from 'tdesign-uniapp/cell/cell';
 import tDateTimePicker from 'tdesign-uniapp/date-time-picker/date-time-picker';
 export default {
-    components: {
-        tCell,
-        tDateTimePicker
+  components: {
+    tCell,
+    tDateTimePicker,
+  },
+  data() {
+    return {
+      mode: '',
+      monthVisible: false,
+      month: '2021-09',
+      monthText: '',
+      // 指定选择区间起始值
+      start: '2000-01-01 00:00:00',
+      end: '2030-09-09 12:12:12',
+    };
+  },
+  methods: {
+    showPicker(e, _dataset) {
+      /* ---处理dataset begin--- */
+      this.handleDataset(e, _dataset);
+      /* ---处理dataset end--- */
+      const { mode } = e.currentTarget.dataset;
+      this.setData({
+        mode,
+        [`${mode}Visible`]: true,
+      });
     },
-    data() {
-        return {
-            mode: '',
-            monthVisible: false,
-            month: '2021-09',
-            monthText: '',
-            // 指定选择区间起始值
-            start: '2000-01-01 00:00:00',
-            end: '2030-09-09 12:12:12'
-        };
+
+    hidePicker() {
+      const { mode } = this;
+      this.setData({
+        [`${mode}Visible`]: false,
+      });
     },
-    methods: {
-        showPicker(e, _dataset) {
-            /* ---处理dataset begin--- */
-            this.handleDataset(e, _dataset);
-            /* ---处理dataset end--- */
-            const { mode } = e.currentTarget.dataset;
-            this.setData({
-                mode,
-                [`${mode}Visible`]: true
-            });
-        },
 
-        hidePicker() {
-            const { mode } = this;
-            this.setData({
-                [`${mode}Visible`]: false
-            });
-        },
+    onConfirm(e) {
+      const { value } = e.detail;
+      const { mode } = this;
+      console.log('confirm', value);
+      this.setData({
+        [mode]: value,
+        [`${mode}Text`]: value,
+      });
+      this.hidePicker();
+    },
 
-        onConfirm(e) {
-            const { value } = e.detail;
-            const { mode } = this;
-            console.log('confirm', value);
-            this.setData({
-                [mode]: value,
-                [`${mode}Text`]: value
-            });
-            this.hidePicker();
-        },
-
-        onColumnChange(e) {
-            console.log('pick', e.detail.value);
-        }
-    }
+    onColumnChange(e) {
+      console.log('pick', e.detail.value);
+    },
+  },
 };
 </script>
 <style>

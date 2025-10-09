@@ -1,30 +1,46 @@
 <template>
-    <view>
-        <t-tabs :defaultValue="0" theme="tag">
-            <t-tab-panel label="选项" :value="index" v-for="(item, index) in 4" :key="index"></t-tab-panel>
-        </t-tabs>
+  <view>
+    <t-tabs
+      :default-value="0"
+      theme="tag"
+    >
+      <t-tab-panel
+        v-for="(item, index) in 4"
+        :key="index"
+        label="选项"
+        :value="index"
+      />
+    </t-tabs>
 
-        <view style="height: 16px" />
+    <view style="height: 16px" />
 
-        <t-tabs :defaultValue="0" theme="card">
-            <t-tab-panel label="选项" :value="index" v-for="(item, index) in 4" :key="index"></t-tab-panel>
-        </t-tabs>
-    </view>
+    <t-tabs
+      :default-value="0"
+      theme="card"
+    >
+      <t-tab-panel
+        v-for="(item, index) in 4"
+        :key="index"
+        label="选项"
+        :value="index"
+      />
+    </t-tabs>
+  </view>
 </template>
 
 <script>
 import tTabs from 'tdesign-uniapp/tabs/tabs';
 import tTabPanel from 'tdesign-uniapp/tab-panel/tab-panel';
 export default {
-    components: {
-        tTabs,
-        tTabPanel
-    },
-    data() {
-        return {};
-    },
-    methods: {},
-    created: function () {}
+  components: {
+    tTabs,
+    tTabPanel,
+  },
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {},
 };
 </script>
 <style>

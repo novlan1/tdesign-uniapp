@@ -1,13 +1,20 @@
 <template>
   <view>
-    <t-button size="large"
-variant="outline" block @click="onTriggerClick" theme="primary">
-Toggle
-</t-button>
+    <t-button
+      size="large"
+      variant="outline"
+      block
+      theme="primary"
+      @click="onTriggerClick"
+    >
+      Toggle
+    </t-button>
 
-    <t-transition name="translate"
-:visible="visible">
-      <view class="block"/>
+    <t-transition
+      name="translate"
+      :visible="visible"
+    >
+      <view class="block" />
     </t-transition>
   </view>
 </template>
@@ -20,25 +27,25 @@ export default {
   components: {
     tButton,
     tTransition,
-    },
+  },
   data() {
     return {
       visible: false,
-        };
+    };
   },
-    created: function () {},
-    methods: {
-        onTriggerClick() {
-            this.setData({
-                visible: !this.visible
-            });
-        },
-        onClose() {
-            this.setData({
-                visible: false
-            });
-        }
-    }
+  created() {},
+  methods: {
+    onTriggerClick() {
+      this.setData({
+        visible: !this.visible,
+      });
+    },
+    onClose() {
+      this.setData({
+        visible: false,
+      });
+    },
+  },
 };
 </script>
 <style lang="less">

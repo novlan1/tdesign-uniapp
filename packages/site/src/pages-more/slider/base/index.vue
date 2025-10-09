@@ -1,24 +1,28 @@
 <template>
-    <view class="wrapper">
-        <t-slider :default-value="23" :step="0.1" @change="handleChange" />
-    </view>
+  <view class="wrapper">
+    <t-slider
+      :default-value="23"
+      :step="0.1"
+      @change="handleChange"
+    />
+  </view>
 </template>
 
 <script>
 import tSlider from 'tdesign-uniapp/slider/slider';
 export default {
-    components: {
-        tSlider
+  components: {
+    tSlider,
+  },
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {
+    handleChange(e) {
+      console.log(e.detail.value);
     },
-    data() {
-        return {};
-    },
-    methods: {
-        handleChange(e) {
-            console.log(e.detail.value);
-        }
-    },
-    created: function () {}
+  },
 };
 </script>
 <style>

@@ -1,40 +1,63 @@
 <template>
-    <view class="skyline">
-        <t-navbar class="block" title="TabBar" left-arrow />
-        <scroll-view scroll-y type="list" class="scroll-view" :scroll-top="scrollTo" @scroll="onScroll">
-            <view class="demo">
-                <view class="demo-title">TabBar 标签栏</view>
-                <view class="demo-desc">用于在不同功能模块之间进行快速切换，位于页面底部。</view>
-                <t-demo title="01 组件类型" desc="纯文本标签栏">
-                    <text-only />
-                </t-demo>
+  <view class="skyline">
+    <t-navbar
+      class="block"
+      title="TabBar"
+      left-arrow
+    />
+    <scroll-view
+      scroll-y
+      type="list"
+      class="scroll-view"
+      :scroll-top="scrollTo"
+      @scroll="onScroll"
+    >
+      <view class="demo">
+        <view class="demo-title">
+          TabBar 标签栏
+        </view>
+        <view class="demo-desc">
+          用于在不同功能模块之间进行快速切换，位于页面底部。
+        </view>
+        <t-demo
+          title="01 组件类型"
+          desc="纯文本标签栏"
+        >
+          <text-only />
+        </t-demo>
 
-                <t-demo desc="图标加文字标签栏">
-                    <base />
-                </t-demo>
+        <t-demo desc="图标加文字标签栏">
+          <base>
+        </t-demo>
 
-                <t-demo desc="纯图标标签栏">
-                    <icon-only />
-                </t-demo>
+        <t-demo desc="纯图标标签栏">
+          <icon-only />
+        </t-demo>
 
-                <t-demo desc="双层级纯文本标签栏">
-                    <sub />
-                </t-demo>
+        <t-demo desc="双层级纯文本标签栏">
+          <sub />
+        </t-demo>
 
-                <t-demo title="02 组件样式" desc="弱选中标签栏">
-                    <badge />
-                </t-demo>
+        <t-demo
+          title="02 组件样式"
+          desc="弱选中标签栏"
+        >
+          <badge />
+        </t-demo>
 
-                <t-demo desc="悬浮胶囊标签栏">
-                    <round />
-                </t-demo>
+        <t-demo desc="悬浮胶囊标签栏">
+          <round />
+        </t-demo>
 
-                <t-demo title="03 自定义" desc="自定义样式">
-                    <custom />
-                </t-demo>
-            </view>
-        </scroll-view>
-    </view>
+        <t-demo
+          title="03 自定义"
+          desc="自定义样式"
+        >
+          <custom />
+        </t-demo>
+      </view>
+    </scroll-view>
+  </view>
 </template>
 
 <script lang="ts">
@@ -48,31 +71,31 @@ import badge from '../badge';
 import round from '../round';
 import custom from '../custom';
 export default {
-    components: {
-        tNavbar,
-        textOnly,
-        iconOnly,
-        base,
-        sub,
-        badge,
-        round,
-        custom
+  components: {
+    tNavbar,
+    textOnly,
+    iconOnly,
+    base,
+    sub,
+    badge,
+    round,
+    custom,
+  },
+  data() {
+    return {
+      value: 'label_1',
+      scrollTo: '',
+    };
+  },
+  methods: {
+    onChange(event: any) {
+      console.log(event.detail);
     },
-    data() {
-        return {
-            value: 'label_1',
-            scrollTo: ''
-        };
-    },
-    methods: {
-        onChange(event: any) {
-            console.log(event.detail);
-        },
 
-        onScroll() {
-            console.log('占位：函数 onScroll 未声明');
-        }
-    }
+    onScroll() {
+      console.log('占位：函数 onScroll 未声明');
+    },
+  },
 };
 </script>
 <style lang="less">

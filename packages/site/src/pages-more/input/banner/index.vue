@@ -1,22 +1,27 @@
 <template>
-    <view class="input-example">
-        <t-input :style="style" label="标签文字" placeholder="请输入文字" borderless />
-    </view>
+  <view class="input-example">
+    <t-input
+      :style="style"
+      label="标签文字"
+      placeholder="请输入文字"
+      borderless
+    />
+  </view>
 </template>
 
 <script>
 import tInput from 'tdesign-uniapp/input/input';
 export default {
-    components: {
-        tInput
-    },
-    data() {
-        return {
-            style: 'border-radius: 18rpx;'
-        };
-    },
-    methods: {},
-    created: function () {}
+  components: {
+    tInput,
+  },
+  data() {
+    return {
+      style: 'border-radius: 18rpx;',
+    };
+  },
+  created() {},
+  methods: {},
 };
 </script>
 <style>

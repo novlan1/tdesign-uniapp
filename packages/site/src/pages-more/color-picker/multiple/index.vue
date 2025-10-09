@@ -1,27 +1,32 @@
 <template>
-    <view>
-        <t-color-picker enableAlpha type="multiple" @change="onChange" @palette-bar-change="onPaletteBarChange" />
-    </view>
+  <view>
+    <t-color-picker
+      enable-alpha
+      type="multiple"
+      @change="onChange"
+      @palette-bar-change="onPaletteBarChange"
+    />
+  </view>
 </template>
 
 <script>
 import tColorPicker from 'tdesign-uniapp/color-picker/color-picker';
 export default {
-    components: {
-        tColorPicker
+  components: {
+    tColorPicker,
+  },
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {
+    onChange(e) {
+      console.log('change', e.detail);
     },
-    data() {
-        return {};
+    onPaletteBarChange(e) {
+      console.log('onPaletteBarChange', e.detail);
     },
-    methods: {
-        onChange(e) {
-            console.log('change', e.detail);
-        },
-        onPaletteBarChange(e) {
-            console.log('onPaletteBarChange', e.detail);
-        }
-    },
-    created: function () {}
+  },
 };
 </script>
 <style>

@@ -1,13 +1,24 @@
 <template>
-    <view>
-        <t-button size="large" variant="outline" @click="onTriggerClick" block theme="primary">Toggle attach</t-button>
+  <view>
+    <t-button
+      size="large"
+      variant="outline"
+      block
+      theme="primary"
+      @click="onTriggerClick"
+    >
+      Toggle attach
+    </t-button>
 
-        <view v-if="visible">
-            <t-transition visible appear>
-                <view class="block"></view>
-            </t-transition>
-        </view>
+    <view v-if="visible">
+      <t-transition
+        visible
+        appear
+      >
+        <view class="block" />
+      </t-transition>
     </view>
+  </view>
 </template>
 
 <script lang="ts">
@@ -15,28 +26,28 @@
 import tButton from 'tdesign-uniapp/button/button';
 import tTransition from 'tdesign-uniapp/transition/transition';
 export default {
-    components: {
-        tButton,
-        tTransition
+  components: {
+    tButton,
+    tTransition,
+  },
+  data() {
+    return {
+      visible: false,
+    };
+  },
+  created() {},
+  methods: {
+    onTriggerClick() {
+      this.setData({
+        visible: !this.visible,
+      });
     },
-    data() {
-        return {
-            visible: false
-        };
+    onClose() {
+      this.setData({
+        visible: false,
+      });
     },
-    methods: {
-        onTriggerClick() {
-            this.setData({
-                visible: !this.visible
-            });
-        },
-        onClose() {
-            this.setData({
-                visible: false
-            });
-        }
-    },
-    created: function () {}
+  },
 };
 </script>
 <style>

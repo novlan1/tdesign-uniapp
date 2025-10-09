@@ -1,38 +1,41 @@
 <template>
-    <view class="card-theme">
-        <t-swiper
-            :current="current"
-            :autoplay="autoplay"
-            :duration="duration"
-            :interval="interval"
-            @change="onChange"
-            :navigation=""
-            :list="swiperList"
-            :image-props=""
-            previousMargin="34px"
-            nextMargin="34px"
-            t-class-nav="card-theme-nav"
-        />
+  <view class="card-theme">
+    <t-swiper
+      :current="current"
+      :autoplay="autoplay"
+      :duration="duration"
+      :interval="interval"
+      :navigation=""
+      :list="swiperList"
+      :image-props=""
+      previous-margin="34px"
+      next-margin="34px"
+      t-class-nav="card-theme-nav"
+      @change="onChange"
+    />
 
-        <view class="box" style="height: 42px" />
+    <view
+      class="box"
+      style="height: 42px"
+    />
 
-        <t-swiper
-            class="scale-card-theme"
-            :current="current"
-            :autoplay="autoplay"
-            :duration="duration"
-            :interval="interval"
-            @change="onChange"
-            :navigation=""
-            :list="swiperList"
-            :image-props=""
-            previousMargin="34px"
-            nextMargin="34px"
-            t-class-nav="card-theme-nav"
-            t-class-prev-image="scale-candidate"
-            t-class-next-image="scale-candidate"
-        />
-    </view>
+    <t-swiper
+      class="scale-card-theme"
+      :current="current"
+      :autoplay="autoplay"
+      :duration="duration"
+      :interval="interval"
+      :navigation=""
+      :list="swiperList"
+      :image-props=""
+      previous-margin="34px"
+      next-margin="34px"
+      t-class-nav="card-theme-nav"
+      t-class-prev-image="scale-candidate"
+      t-class-next-image="scale-candidate"
+      @change="onChange"
+    />
+  </view>
 </template>
 
 <script>
@@ -40,29 +43,29 @@ import tSwiper from 'tdesign-uniapp/swiper/swiper';
 const imageCdn = 'https://tdesign.gtimg.com/mobile/demos';
 const swiperList = [`${imageCdn}/swiper1.png`, `${imageCdn}/swiper2.png`, `${imageCdn}/swiper1.png`, `${imageCdn}/swiper2.png`, `${imageCdn}/swiper1.png`];
 export default {
-    components: {
-        tSwiper
+  components: {
+    tSwiper,
+  },
+  data() {
+    return {
+      current: 0,
+      autoplay: false,
+      duration: 500,
+      interval: 5000,
+      swiperList,
+      scale: 0,
+      candidate: 0,
+    };
+  },
+  created() {},
+  methods: {
+    onChange(e) {
+      const {
+        detail: { current, source },
+      } = e;
+      console.log(current, source);
     },
-    data() {
-        return {
-            current: 0,
-            autoplay: false,
-            duration: 500,
-            interval: 5000,
-            swiperList,
-            scale: 0,
-            candidate: 0
-        };
-    },
-    methods: {
-        onChange(e) {
-            const {
-                detail: { current, source }
-            } = e;
-            console.log(current, source);
-        }
-    },
-    created: function () {}
+  },
 };
 </script>
 <style>

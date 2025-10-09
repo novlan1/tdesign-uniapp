@@ -1,24 +1,26 @@
 <template>
-    <view>
-        <view>gulp编译错误：</view>
-        <view style="color: red; word-break: break-word">{{ gulpError }}</view>
+  <view>
+    <view>gulp编译错误：</view>
+    <view style="color: red; word-break: break-word">
+      {{ gulpError }}
     </view>
+  </view>
 </template>
 
 <script lang="ts">
 
 export default {
-    data() {
-        return {
-            gulpError: ''
-        };
-    },
-    onLoad({ gulpError }) {
-        this.setData({
-            gulpError
-        });
-    },
-    methods: {}
+  data() {
+    return {
+      gulpError: '',
+    };
+  },
+  onLoad({ gulpError }) {
+    this.setData({
+      gulpError,
+    });
+  },
+  methods: {},
 };
 </script>
 <style lang="less">

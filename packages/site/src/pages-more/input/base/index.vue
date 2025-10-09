@@ -1,26 +1,34 @@
 <template>
-    <view>
-        <t-input label="标签文字" placeholder="请输入文字" />
+  <view>
+    <t-input
+      label="标签文字"
+      placeholder="请输入文字"
+    />
 
-        <t-input placeholder="请输入文字">
-            <view slot="label" class="custom-label">标签文字</view>
-        </t-input>
+    <t-input placeholder="请输入文字">
+      <view
+        slot="label"
+        class="custom-label"
+      >
+        标签文字
+      </view>
+    </t-input>
 
-        <t-input placeholder="请输入文字" />
-    </view>
+    <t-input placeholder="请输入文字" />
+  </view>
 </template>
 
 <script>
 import tInput from 'tdesign-uniapp/input/input';
 export default {
-    components: {
-        tInput
-    },
-    data() {
-        return {};
-    },
-    methods: {},
-    created: function () {}
+  components: {
+    tInput,
+  },
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {},
 };
 </script>
 <style>

@@ -1,25 +1,30 @@
 <template>
-    <view>
-        <t-calendar title="日历标题" :use-popup="false" type="multiple" @select="handleSelect" />
-    </view>
+  <view>
+    <t-calendar
+      title="日历标题"
+      :use-popup="false"
+      type="multiple"
+      @select="handleSelect"
+    />
+  </view>
 </template>
 
 <script>
 import tCalendar from 'tdesign-uniapp/calendar/calendar';
 export default {
-    components: {
-        tCalendar
+  components: {
+    tCalendar,
+  },
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {
+    handleSelect(e) {
+      const { value } = e.detail;
+      console.log(value);
     },
-    data() {
-        return {};
-    },
-    methods: {
-        handleSelect(e) {
-            const { value } = e.detail;
-            console.log(value);
-        }
-    },
-    created: function () {}
+  },
 };
 </script>
 <style>

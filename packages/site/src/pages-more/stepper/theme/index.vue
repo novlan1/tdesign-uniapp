@@ -1,22 +1,28 @@
 <template>
-    <view class="stepper-example">
-        <t-stepper defaultValue="3" theme="filled" />
-        <t-stepper defaultValue="3" theme="outline" />
-        <t-stepper defaultValue="3" />
-    </view>
+  <view class="stepper-example">
+    <t-stepper
+      default-value="3"
+      theme="filled"
+    />
+    <t-stepper
+      default-value="3"
+      theme="outline"
+    />
+    <t-stepper default-value="3" />
+  </view>
 </template>
 
 <script>
 import tStepper from 'tdesign-uniapp/stepper/stepper';
 export default {
-    components: {
-        tStepper
-    },
-    data() {
-        return {};
-    },
-    methods: {},
-    created: function () {}
+  components: {
+    tStepper,
+  },
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {},
 };
 </script>
 <style>

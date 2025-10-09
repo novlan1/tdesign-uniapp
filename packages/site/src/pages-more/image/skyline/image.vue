@@ -1,20 +1,32 @@
 <template>
-    <view class="skyline">
-        <t-navbar class="demo-navbar" title="Image" leftArrow />
-        <scroll-view scroll-y type="list" class="scroll-view">
-            <view class="demo">
-                <view class="demo-title">Image 图片</view>
-                <view class="demo-desc">用于展示效果，主要为上下左右居中裁切、拉伸、平铺等方式。</view>
-                <t-demo title="01 组件类型">
-                    <base />
-                </t-demo>
+  <view class="skyline">
+    <t-navbar
+      class="demo-navbar"
+      title="Image"
+      left-arrow
+    />
+    <scroll-view
+      scroll-y
+      type="list"
+      class="scroll-view"
+    >
+      <view class="demo">
+        <view class="demo-title">
+          Image 图片
+        </view>
+        <view class="demo-desc">
+          用于展示效果，主要为上下左右居中裁切、拉伸、平铺等方式。
+        </view>
+        <t-demo title="01 组件类型">
+          <base>
+        </t-demo>
 
-                <t-demo title="02 组件状态">
-                    <status />
-                </t-demo>
-            </view>
-        </scroll-view>
-    </view>
+        <t-demo title="02 组件状态">
+          <status />
+        </t-demo>
+      </view>
+    </scroll-view>
+  </view>
 </template>
 
 <script lang="ts">
@@ -24,16 +36,16 @@ import tImage from 'tdesign-uniapp/image/image';
 import base from '../base';
 import status from '../status';
 export default {
-    components: {
-        tNavbar,
-        tImage,
-        base,
-        status
-    },
-    data() {
-        return {};
-    },
-    methods: {}
+  components: {
+    tNavbar,
+    tImage,
+    base,
+    status,
+  },
+  data() {
+    return {};
+  },
+  methods: {},
 };
 </script>
 <style lang="less">

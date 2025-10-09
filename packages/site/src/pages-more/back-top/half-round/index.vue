@@ -1,35 +1,40 @@
 <template>
-    <view>
-        <t-back-top :theme="backTopTheme" :text="backTopText" :scroll-top="scrollTop" @to-top="onToTop"></t-back-top>
-    </view>
+  <view>
+    <t-back-top
+      :theme="backTopTheme"
+      :text="backTopText"
+      :scroll-top="scrollTop"
+      @to-top="onToTop"
+    />
+  </view>
 </template>
 
 <script>
 import tBackTop from 'tdesign-uniapp/back-top/back-top';
 export default {
-    components: {
-        tBackTop
+  components: {
+    tBackTop,
+  },
+  props: {
+    scrollTop: {
+      type: Number,
+      default: 0,
     },
-    data() {
-        return {
-            backTopTheme: 'half-round-dark',
-            backTopText: '返回顶部'
-        };
+  },
+  data() {
+    return {
+      backTopTheme: 'half-round-dark',
+      backTopText: '返回顶部',
+    };
+  },
+  created() {},
+  methods: {
+    onToTop(e) {
+      this.$emit('to-top', {
+        detail: e,
+      });
     },
-    props: {
-        scrollTop: {
-            type: Number,
-            default: 0
-        }
-    },
-    methods: {
-        onToTop(e) {
-            this.$emit('to-top', {
-                detail: e
-            });
-        }
-    },
-    created: function () {}
+  },
 };
 </script>
 <style>

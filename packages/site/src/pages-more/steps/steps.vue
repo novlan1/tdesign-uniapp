@@ -1,25 +1,40 @@
 <template>
-    <view class="skyline">
-        <t-navbar title="Steps" left-arrow :capsule="false" />
-        <scroll-view scroll-y type="list" class="scroll-view">
-            <view class="demo">
-                <t-demo-header title="Steps 步骤条" desc="用于任务步骤展示或任务进度展示。" notice="渲染框架支持情况：Skyline、WebView" />
-                <t-demo title="01 组件类型" />
+  <view class="skyline">
+    <t-navbar
+      title="Steps"
+      left-arrow
+      :capsule="false"
+    />
+    <scroll-view
+      scroll-y
+      type="list"
+      class="scroll-view"
+    >
+      <view class="demo">
+        <t-demo-header
+          title="Steps 步骤条"
+          desc="用于任务步骤展示或任务进度展示。"
+          notice="渲染框架支持情况：Skyline、WebView"
+        />
+        <t-demo title="01 组件类型" />
 
-                <horizontal />
+        <horizontal />
 
-                <vertical />
+        <vertical />
 
-                <t-demo title="02 组件状态" desc="选项卡状态" />
+        <t-demo
+          title="02 组件状态"
+          desc="选项卡状态"
+        />
 
-                <status />
+        <status />
 
-                <t-demo title="03 特殊类型" />
+        <t-demo title="03 特殊类型" />
 
-                <special />
-            </view>
-        </scroll-view>
-    </view>
+        <special />
+      </view>
+    </scroll-view>
+  </view>
 </template>
 
 <script lang="ts">
@@ -29,16 +44,16 @@ import vertical from './vertical';
 import special from './special';
 import status from './status';
 export default {
-    components: {
-        horizontal,
-        vertical,
-        special,
-        status
-    },
-    data() {
-        return {};
-    },
-    methods: {}
+  components: {
+    horizontal,
+    vertical,
+    special,
+    status,
+  },
+  data() {
+    return {};
+  },
+  methods: {},
 };
 </script>
 <style lang="less">

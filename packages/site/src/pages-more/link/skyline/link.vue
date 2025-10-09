@@ -1,7 +1,7 @@
 <template>
-    <view>
-        <link />
-    </view>
+  <view>
+    <link>
+  </view>
 </template>
 
 <script lang="ts">
@@ -9,14 +9,14 @@
 import tNavbar from 'tdesign-uniapp/navbar/navbar';
 import link from '../link';
 export default {
-    components: {
-        tNavbar,
-        link
-    },
-    data() {
-        return {};
-    },
-    methods: {}
+  components: {
+    tNavbar,
+    link,
+  },
+  data() {
+    return {};
+  },
+  methods: {},
 };
 </script>
 <style lang="less">
