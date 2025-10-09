@@ -6,9 +6,9 @@
     <t-sticky
       :t-class="_.cls(classPrefix + '__sticky', [placement])"
       :disabled="!sticky"
-      :z-index="stickyProps.zIndex || '1'"
-      :offset-top="stickyProps.offsetTop || 0"
-      :container="stickyProps.container"
+      :z-index="stickyProps?.zIndex || '1'"
+      :offset-top="stickyProps?.offsetTop || 0"
+      :container="stickyProps?.container"
       @scroll="onTouchScroll"
     >
       <view :class="_.cls(classPrefix + '__wrapper', [theme])">
@@ -173,8 +173,20 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'change',
+    'scroll',
+    'error',
+    'click',
+  ],
   watch: {
-    value(name) {
+    value: {
+      handler(e) {
+        this.dataValue = e;
+      },
+      immediate: true,
+    },
+    dataValue(name) {
       if (name !== this.getCurrentName()) {
         this.setCurrentIndexByName(name);
       }
@@ -185,15 +197,13 @@ export default uniComponent({
   },
 
   mounted() {
-    wx.nextTick(() => {
+    this.$nextTick(() => {
       this.setTrack();
     });
     getRect(this, `.${name}`).then((rect) => {
       this.containerWidth = rect.width;
     });
-    this.setData({
-      tabID: getUniqueID(),
-    });
+    this.tabID = getUniqueID();
   },
   data() {
     return {
@@ -212,36 +222,42 @@ export default uniComponent({
       tabID: '',
       placement: 'top',
       _,
+
+      dataValue: this.value,
     };
   },
   methods: {
     trackStyle,
     animate,
     innerAfterLinked(target) {
-      this.children.push(target);
+      // mixin 中已注入
+      // this.children.push(target);
       this.initChildId();
-      target.index = this.children.length - 1;
+      target.dataIndex = this.children.length - 1;
       this.updateTabs();
     },
     nnerAfterUnlinked(target) {
-      this.children = this.children.filter(item => item.index !== target.index);
+      this.children = this.children.filter(item => item.index !== target.dataIndex);
       this.updateTabs(() => this.setTrack());
       this.initChildId();
     },
     initChildId() {
       this.children.forEach((item, index) => {
-        item.setId(`${this.data.tabID}_panel_${index}`);
+        item.setId(`${this.tabID}_panel_${index}`);
       });
     },
     onScroll(e) {
-      const { scrollLeft } = e.detail;
-      this.setData({
-        scrollLeft,
-      });
+      const { scrollLeft } = e;
+      this.scrollLeft = scrollLeft;
     },
     updateTabs(cb) {
       const { children } = this;
-      const tabs = children.map(child => child.data);
+      const tabs = children.map((child) => {
+        const { label, badgeProps, disabled, icon, panel, value, lazy } = child;
+        return {
+          label, badgeProps, disabled, icon, panel, value, lazy,
+        };
+      });
 
       tabs.forEach((item) => {
         if (typeof item.icon === 'string') {
@@ -249,8 +265,10 @@ export default uniComponent({
         }
       });
 
-      this.setData({ tabs }, cb);
-      this.setCurrentIndexByName(this.properties.value);
+      this.tabs = tabs;
+      setTimeout(cb);
+
+      this.setCurrentIndexByName(this.dataValue);
     },
 
     setCurrentIndexByName(name) {
@@ -266,28 +284,27 @@ export default uniComponent({
       const Labels = [];
       this.children.forEach((child, idx) => {
         const isActive = index === idx;
-        if (isActive !== child.data.active || !child.initialized) {
+        if (isActive !== child.active || !child.initialized) {
           child.render(isActive, this);
         }
-        Labels.push(child.data.label);
+        Labels.push(child.label);
       });
 
-      const { currentIndex, currentLabels } = this.data;
+      const { currentIndex, currentLabels } = this;
       if (currentIndex === index && currentLabels.join('') === Labels.join('')) return;
-      this.setData(
-        {
-          currentIndex: index,
-          currentLabels: Labels,
-        },
-        () => {
-          this.setTrack();
-        },
-      );
+
+      this.currentIndex = index;
+      this.currentLabels = Labels;
+
+
+      setTimeout(() => {
+        this.setTrack();
+      });
     },
 
     getCurrentName() {
       if (this.children) {
-        const activeTab = this.children[this.data.currentIndex];
+        const activeTab = this.children[this.currentIndex];
         if (activeTab) {
           return activeTab.getComputedName();
         }
@@ -304,13 +321,13 @@ export default uniComponent({
     },
 
     getTrackSize() {
-      const { bottomLineMode } = this.properties;
+      const { bottomLineMode } = this;
       const targetMap = {
         fixed: `.${prefix}-tabs__track`,
         auto: `.${prefix}-tabs__item--active .${prefix}-tabs__item-inner`,
         full: `.${prefix}-tabs__item--active`,
       };
-      return new Promise<number>((resolve, reject) => {
+      return new Promise((resolve, reject) => {
         if (this.trackWidth) {
           resolve(this.trackWidth);
           return;
@@ -328,7 +345,7 @@ export default uniComponent({
     async setTrack() {
       const { children } = this;
       if (!children) return;
-      const { currentIndex } = this.data;
+      const { currentIndex } = this;
       if (currentIndex <= -1) return;
 
       try {
@@ -348,28 +365,27 @@ export default uniComponent({
         });
 
         if (this.containerWidth) {
-          const offset = this.calcScrollOffset(this.containerWidth, rect.left, rect.width, this.data.scrollLeft);
+          const offset = this.calcScrollOffset(this.containerWidth, rect.left, rect.width, this.scrollLeft);
           const maxOffset = totalSize - this.containerWidth;
-          this.setData({
-            offset: Math.min(Math.max(offset, 0), maxOffset),
-          });
+          this.offset = Math.min(Math.max(offset, 0), maxOffset);
         } else if (!this._hasObserved) {
           this._hasObserved = true;
           getObserver(this, `.${name}`).then(() => this.setTrack());
         }
 
         const lineWidth = await this.getTrackSize();
-        if (this.data.theme === 'line') {
+        if (this.theme === 'line') {
           distance += (rect.width - lineWidth) / 2;
         }
 
         const isInit = this.previousIndex === undefined;
         if (isInit || this.previousIndex !== currentIndex) {
           this.previousIndex = currentIndex;
-          this.setData({ trackOption: { lineWidth, distance, isInit } });
+          this.trackOption = { lineWidth, distance, isInit };
         }
       } catch (err) {
-        this.triggerEvent('error', err);
+        console.warn('err', err);
+        this.$emit('error', err);
       }
     },
 
@@ -380,19 +396,19 @@ export default uniComponent({
     },
 
     onTouchStart(event) {
-      if (!this.properties.swipeable) return;
+      if (!this.swipeable) return;
 
       this.touchStart(event);
     },
 
     onTouchMove(event) {
-      if (!this.properties.swipeable) return;
+      if (!this.swipeable) return;
 
       this.touchMove(event);
     },
 
     onTouchEnd() {
-      if (!this.properties.swipeable) return;
+      if (!this.swipeable) return;
 
       const { direction, deltaX, offsetX } = this;
       const minSwipeDistance = 50;
@@ -405,13 +421,13 @@ export default uniComponent({
     },
 
     onTouchScroll(event) {
-      this._trigger('scroll', event.detail);
+      this._trigger('scroll', event);
     },
 
     changeIndex(index) {
-      const currentTab = this.data.tabs[index];
+      const currentTab = this.tabs[index];
       const { value, label } = currentTab;
-      if (!currentTab?.disabled && index !== this.data.currentIndex) {
+      if (!currentTab?.disabled && index !== this.currentIndex) {
         this._trigger('change', { value, label });
       }
       this._trigger('click', { value, label });
@@ -419,7 +435,7 @@ export default uniComponent({
 
     getAvailableTabIndex(deltaX) {
       const step = deltaX > 0 ? -1 : 1;
-      const { currentIndex, tabs } = this.data;
+      const { currentIndex, tabs } = this;
       const len = tabs.length;
       for (let i = step; currentIndex + step >= 0 && currentIndex + step < len; i += step) {
         const newIndex = currentIndex + i;

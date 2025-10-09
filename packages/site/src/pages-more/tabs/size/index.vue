@@ -59,10 +59,10 @@ export default {
   created() {},
   methods: {
     onTabsChange(event) {
-      console.log(`Change tab, tab-panel value is ${event.detail.value}.`);
+      console.log(`Change tab, tab-panel value is ${event.value}.`);
     },
     onTabsClick(event) {
-      console.log(`Click tab, tab-panel value is ${event.detail.value}.`);
+      console.log(`Click tab, tab-panel value is ${event.value}.`);
     },
   },
 };

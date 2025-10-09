@@ -12,7 +12,7 @@ const props = {
     default: 0,
   },
   zIndex: {
-    type: Number,
+    type: [Number, String],
     default: 99,
   },
 };

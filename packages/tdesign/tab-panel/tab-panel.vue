@@ -48,13 +48,13 @@ export default uniComponent({
   },
   methods: {
     setId(id) {
-      this.setData({ id });
+      this.id = id;
     },
     getComputedName() {
-      if (this.properties.value != null) {
-        return `${this.properties.value}`;
+      if (this.value != null) {
+        return `${this.value}`;
       }
-      return `${this.index}`;
+      return `${this.dataIndex}`;
     },
     update() {
       this.$parent?.updateTabs();
@@ -63,14 +63,12 @@ export default uniComponent({
     render(active, parent) {
       this.initialized = this.initialized || active;
 
-      if (active && !this.data.hasActivated) {
-        this.setData({ hasActivated: true });
+      if (active && !this.hasActivated) {
+        this.hasActivated = true;
       }
 
-      this.setData({
-        active,
-        hide: !parent.data.animation && !active,
-      });
+      this.active = active;
+      this.hide = !parent.animation && !active;
     },
   },
 });
