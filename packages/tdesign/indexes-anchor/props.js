@@ -1,6 +1,7 @@
 const props = {
-    index: {
-        type: null
-    }
+  index: {
+    type: [null, String, Number],
+    default: null,
+  },
 };
 export default props;

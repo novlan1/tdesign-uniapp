@@ -58,13 +58,13 @@ export default {
   methods: {
     toBase() {
       uni.navigateTo({
-        url: '/pages/indexes/base/index',
+        url: '/pages-more/indexes/base/index',
       });
     },
 
     toCustom() {
       uni.navigateTo({
-        url: '/pages/indexes/custom/index',
+        url: '/pages-more/indexes/custom/index',
       });
     },
   },

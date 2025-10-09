@@ -1,28 +1,19 @@
 {
   "pages": [
     {
-      "path": "pages/home/home",
-      "style": {
-        "navigationBarTitleText": "TDesign UniApp"
-      }
+      "path": "pages/home/home"
     },
     {
-      "path": "pages/home/navigate-fail/index",
-      "style": {
-        "navigationBarTitleText": "TDesign UniApp"
-      }
+      "path": "pages/home/navigate-fail/index"
     },
     {
-      "path": "pages-more/result/result-page",
-      "style": {
-        "navigationBarTitleText": "Result Page"
-      }
+      "path": "pages-more/result/result-page"
     },
     {
-      "path": "pages/index/index",
-      "style": {
-        "navigationBarTitleText": "TDesign Uni"
-      }
+      "path": "pages-more/indexes/custom/index"
+    },
+    {
+      "path": "pages-more/indexes/base/index"
     },
     {
       "path": "pages-more/button/button"

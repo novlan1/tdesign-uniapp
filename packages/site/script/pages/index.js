@@ -8,7 +8,7 @@ const { chat } = require('../../src/pages/home/data/chat.json');
 const path = require('path');
 const pagesJson = path.resolve(__dirname, '../../src/pages.json');
 const { writeFileSync, readFileSync, hyphenate } = require('t-comm');
-const BASE_PAGE_NUMBER = 4;
+const { DEFAULT_PAGES } = require('./config');
 
 function main() {
   const list = [
@@ -34,7 +34,7 @@ function main() {
 
   const rawData = readFileSync(pagesJson, true);
   rawData.pages = [
-    ...(rawData.pages || []).slice(0, BASE_PAGE_NUMBER),
+    ...DEFAULT_PAGES,
     ...componentPages,
   ];
   writeFileSync(pagesJson, rawData, true);

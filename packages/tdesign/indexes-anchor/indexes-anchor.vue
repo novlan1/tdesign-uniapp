@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="classPrefix + ' class ' + prefix + '-class'"
+    :class="classPrefix + ' class ' + tClass"
     :style="_._style([style, customStyle])"
   >
     <view
@@ -22,38 +22,67 @@
   </view>
 </template>
 <script>
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import _ from '../common/utils.wxs';
+import { ChildrenMixin, RELATION_MAP } from '../common/relation';
 
 
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-indexes-anchor`;
-let IndexesAnchor = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`];
-    this.properties = props;
-    this.setData({
+
+
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+  ],
+  mixins: [
+    ChildrenMixin(RELATION_MAP.IndexesAnchor),
+  ],
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       anchorStyle: '',
       sticky: false,
       active: false,
-    });
-    this.relations = {
-      '../indexes/indexes': {
-        type: 'parent',
-      },
+      _,
     };
-  }
-};
-IndexesAnchor = __decorate([wxComponent()], IndexesAnchor);
-export default IndexesAnchor;
+  },
+  mounted() {
+
+  },
+  methods: {
+
+  },
+});
+
+
+// let IndexesAnchor = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.externalClasses = [`${prefix}-class`];
+//     this.properties = props;
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//       anchorStyle: '',
+//       sticky: false,
+//       active: false,
+//     });
+//     this.relations = {
+//       '../indexes/indexes': {
+//         type: 'parent',
+//       },
+//     };
+//   }
+// };
+// IndexesAnchor = __decorate([wxComponent()], IndexesAnchor);
+// export default IndexesAnchor;
 </script>
 <style>
 @import './indexes-anchor.css';
