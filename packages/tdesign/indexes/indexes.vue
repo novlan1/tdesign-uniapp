@@ -13,22 +13,22 @@
       <view
         v-for="(item, index) in _indexList"
         :key="index"
-        :class="_.cls(classPrefix + '__sidebar-item', [['active', activeAnchor === item]]) + ' ' + tClassSidebarItem"
+        :class="_.cls(classPrefix + '__sidebar-item', [['active', dataCurrent === item]]) + ' ' + tClassSidebarItem"
         :data-index="index"
         @click.stop="onClick(item, index)"
       >
         <view
           aria-role="button"
-          :aria-label="activeAnchor === item ? '已选中' + item : ''"
+          :aria-label="dataCurrent === item ? '已选中' + item : ''"
         >
           {{ getFirstCharacter(item) }}
         </view>
 
         <view
-          v-if="showTips && activeAnchor === item"
+          v-if="showTips && dataCurrent === item"
           :class="classPrefix + '__sidebar-tips'"
         >
-          {{ activeAnchor }}
+          {{ dataCurrent }}
         </view>
       </view>
     </view>
@@ -98,7 +98,7 @@ export default uniComponent({
       sidebar: null,
       currentTouchAnchor: null,
 
-      // dataCurrent: this.current,
+      dataCurrent: this.current,
     };
   },
   watch: {
@@ -112,14 +112,23 @@ export default uniComponent({
     height(v) {
       this.setHeight(v);
     },
-
-    current(val) {
-      this.activeAnchor = val;
+    stickyOffset() {
+      this.setAnchorByCurrent(this.dataCurrent, 'update', true);
     },
-    activeAnchor(e) {
-      if (e && this.activeAnchor && e !== this.activeAnchor) {
-        this.setAnchorByCurrent(e, 'update');
-      }
+
+    current: {
+      handler(val) {
+        this.dataCurrent = val;
+      },
+      immediate: true,
+    },
+    dataCurrent: {
+      handler(e) {
+        if (e && this.activeAnchor && e !== this.activeAnchor) {
+          this.setAnchorByCurrent(e, 'update');
+        }
+      },
+      immediate: true,
     },
   },
   mounted() {
@@ -169,7 +178,7 @@ export default uniComponent({
           item.totalHeight = (next?.top || Infinity) - item.top;
         });
 
-        const current = this.activeAnchor || this._indexList[0];
+        const current = this.dataCurrent || this._indexList[0];
         this.setAnchorByCurrent(current, 'init');
       });
       this.getSidebarRect();
@@ -209,15 +218,15 @@ export default uniComponent({
       }
     },
 
-    setAnchorByCurrent(current, source) {
+    setAnchorByCurrent(current, source, force) {
       const { stickyOffset } = this;
 
-      if (this.activeAnchor !== null && this.activeAnchor === current) return;
+      if (this.activeAnchor !== null && this.activeAnchor === current && !force) return;
 
       const target = this.groupTop.find(item => item.anchor === current);
 
-      // 与当前小程序逻辑不同
-      this.activeAnchor = current;
+      // 寻求与 小程序 一致逻辑
+      // this.activeAnchor = current;
       if (target) {
         const scrollTop = target.top - stickyOffset;
 

@@ -7,7 +7,7 @@
       />
     </view>
     <t-indexes
-      :current="defaultCurrent"
+      :default-current="defaultCurrent"
       :index-list="indexList"
       :sticky-offset="stickyOffset"
       @select="onSelect"
