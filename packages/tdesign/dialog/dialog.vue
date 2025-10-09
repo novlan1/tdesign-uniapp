@@ -337,9 +337,8 @@ export default uniComponent({
       });
       // this.setData({ ...rect });
     },
-    onTplButtonTap(e) {
+    onTplButtonTap(e, { type, extra }) {
       const evtType = e.type;
-      const { type, extra } = e.target.dataset;
       const button = this[`_${type}`];
       const cbName = `bind${evtType}`;
 
@@ -348,14 +347,14 @@ export default uniComponent({
         return;
       }
 
-      if (typeof button[cbName] === 'function') {
+      if (typeof button?.[cbName] === 'function') {
         const closeFlag = button[cbName](e);
         if (closeFlag) {
           this.close();
         }
       }
 
-      const hasOpenType = !!button.openType;
+      const hasOpenType = !!button?.openType;
       if (!hasOpenType && ['confirm', 'cancel'].includes(type)) {
         this[toCamel(`on-${type}`)]?.(type);
       }
