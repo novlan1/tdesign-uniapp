@@ -1,41 +1,43 @@
 const props = {
-    disabled: {
-        type: Boolean,
-        value: false
-    },
-    externalClasses: {
-        type: Array
-    },
-    keys: {
-        type: Object
-    },
-    label: {
-        type: String,
-        value: ''
-    },
-    multiple: {
-        type: Boolean,
-        value: false
-    },
-    options: {
-        type: Array,
-        value: []
-    },
-    optionsColumns: {
-        type: null,
-        value: 1
-    },
-    placement: {
-        type: String,
-        value: 'left'
-    },
-    value: {
-        type: null,
-        value: void 0
-    },
-    defaultValue: {
-        type: null,
-        value: void 0
-    }
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  externalClasses: {
+    type: Array,
+    default: () => ([]),
+  },
+  keys: {
+    type: [Object, null],
+    default: null,
+  },
+  label: {
+    type: String,
+    default: '',
+  },
+  multiple: {
+    type: Boolean,
+    default: false,
+  },
+  options: {
+    type: Array,
+    default: () => ([]),
+  },
+  optionsColumns: {
+    type: [String, Number],
+    default: 1,
+  },
+  placement: {
+    type: String,
+    default: 'left',
+  },
+  value: {
+    type: [null, String, Number, Array],
+    default: null,
+  },
+  defaultValue: {
+    type: [null, String, Number, Array],
+    default: null,
+  },
 };
 export default props;

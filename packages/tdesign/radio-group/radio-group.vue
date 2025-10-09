@@ -61,6 +61,7 @@ let RadioGroup = class extends SuperComponent {
       prefix,
       classPrefix: name,
       radioOptions: [],
+      _,
     };
     this._ = _;
     this.relations = {

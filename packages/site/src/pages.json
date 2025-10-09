@@ -221,6 +221,12 @@
       "style": {
         "navigationBarTitleText": "PullDownRefresh"
       }
+    },
+    {
+      "path": "pages-more/dropdown-menu/dropdown-menu",
+      "style": {
+        "navigationBarTitleText": "DropdownMenu"
+      }
     }
   ],
   "globalStyle": {

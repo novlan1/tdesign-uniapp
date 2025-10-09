@@ -1,23 +1,23 @@
 const props = {
-    arrowIcon: {
-        type: null,
-        value: 'caret-down-small'
-    },
-    closeOnClickOverlay: {
-        type: Boolean,
-        value: true
-    },
-    duration: {
-        type: null,
-        value: 200
-    },
-    showOverlay: {
-        type: Boolean,
-        value: true
-    },
-    zIndex: {
-        type: Number,
-        value: 11600
-    }
+  arrowIcon: {
+    type: [String, Object],
+    default: 'caret-down-small',
+  },
+  closeOnClickOverlay: {
+    type: Boolean,
+    default: true,
+  },
+  duration: {
+    type: [String, Number],
+    default: 200,
+  },
+  showOverlay: {
+    type: Boolean,
+    default: true,
+  },
+  zIndex: {
+    type: Number,
+    default: 11600,
+  },
 };
 export default props;

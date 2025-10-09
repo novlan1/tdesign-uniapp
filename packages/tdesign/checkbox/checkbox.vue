@@ -155,6 +155,7 @@ let CheckBox = class extends SuperComponent {
       _disabled: false,
       prefix,
       classPrefix: name,
+      _,
     };
 
 

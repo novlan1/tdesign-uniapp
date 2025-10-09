@@ -66,6 +66,7 @@ let CheckBoxGroup = class extends SuperComponent {
       prefix,
       classPrefix: name,
       checkboxOptions: [],
+      _,
     };
     this.properties = props;
 

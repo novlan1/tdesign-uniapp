@@ -132,6 +132,7 @@ let Radio = class extends SuperComponent {
     this.rawData = {
       dataChecked: undefined,
       dataValue: undefined,
+      _,
     };
     this.watch = {
       checked: {

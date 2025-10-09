@@ -1,49 +1,68 @@
 <template>
-    <view>
-        <t-navbar title="DropdownMenu" leftArrow />
-        <view class="demo">
-            <t-demo-header title="DropdownMenu 下拉菜单" desc="菜单呈现数个并列的选项类目，用于整个页面的内容筛选，由菜单面板和菜单选项组成。" notice="渲染框架支持情况：WebView" />
-            <t-demo title="01 组件类型" desc="单选下拉菜单">
-                <single />
-            </t-demo>
+  <view>
+    <t-navbar
+      title="DropdownMenu"
+      left-arrow
+    />
+    <view class="demo">
+      <t-demo-header
+        title="DropdownMenu 下拉菜单"
+        desc="菜单呈现数个并列的选项类目，用于整个页面的内容筛选，由菜单面板和菜单选项组成。"
+        notice="渲染框架支持情况：WebView"
+      />
+      <t-demo
+        title="01 组件类型"
+        desc="单选下拉菜单"
+      >
+        <single />
+      </t-demo>
 
-            <t-demo desc="分栏下拉菜单">
-                <multi />
-            </t-demo>
+      <t-demo desc="分栏下拉菜单">
+        <multi />
+      </t-demo>
 
-            <!-- <t-demo desc="树形下拉菜单">
+      <!-- <t-demo desc="树形下拉菜单">
     <tree />
   </t-demo> -->
 
-            <t-demo title="02 组件状态" desc="禁用状态">
-                <t-dropdown-menu>
-                    <t-dropdown-item disabled label="禁用菜单" />
-                    <t-dropdown-item disabled label="禁用菜单" />
-                </t-dropdown-menu>
-            </t-demo>
+      <t-demo
+        title="02 组件状态"
+        desc="禁用状态"
+      >
+        <t-dropdown-menu>
+          <t-dropdown-item
+            disabled
+            label="禁用菜单"
+          />
+          <t-dropdown-item
+            disabled
+            label="禁用菜单"
+          />
+        </t-dropdown-menu>
+      </t-demo>
 
-            <view style="height: 600rpx"></view>
-        </view>
+      <view style="height: 600rpx" />
     </view>
+  </view>
 </template>
 
 <script lang="ts">
 
 import tDropdownMenu from 'tdesign-uniapp/dropdown-menu/dropdown-menu';
 import tDropdownItem from 'tdesign-uniapp/dropdown-item/dropdown-item';
-import single from './single';
-import multi from './multi';
+import single from './single/index.vue';
+import multi from './multi/index.vue';
 export default {
-    components: {
-        tDropdownMenu,
-        tDropdownItem,
-        single,
-        multi
-    },
-    data() {
-        return {};
-    },
-    methods: {}
+  components: {
+    tDropdownMenu,
+    tDropdownItem,
+    single,
+    multi,
+  },
+  data() {
+    return {};
+  },
+  methods: {},
 };
 </script>
 <style lang="less">
