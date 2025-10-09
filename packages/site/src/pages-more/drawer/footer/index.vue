@@ -11,7 +11,7 @@
     </t-button>
 
     <t-drawer
-      :visible="visible"
+      v-model:visible="visible"
       :placement="placement"
       title="标题"
       :items="sidebar"
@@ -19,16 +19,19 @@
       @overlay-click="overlayClick"
       @item-click="itemClick"
     >
-      <view class="button-host">
-        <t-button
-          slot="footer"
-          size="large="
-          block
-          variant="outline"
-        >
-          操作
-        </t-button>
-      </view>
+      <template
+        #footer
+      >
+        <view class="button-host">
+          <t-button
+            size="large="
+            block
+            variant="outline"
+          >
+            操作
+          </t-button>
+        </view>
+      </template>
     </t-drawer>
   </view>
 </template>
@@ -92,16 +95,14 @@ export default {
   created() {},
   methods: {
     openDrawerBase() {
-      this.setData({
-        visible: true,
-        sidebar: this.baseSidebar,
-      });
+      this.visible = true;
+      this.sidebar = this.baseSidebar;
     },
     itemClick(e) {
-      console.log(e.detail);
+      console.log(e);
     },
     overlayClick(e) {
-      console.log(e.detail);
+      console.log(e);
     },
   },
 };

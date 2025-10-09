@@ -29,13 +29,13 @@
         desc="带标题样式"
         padding
       >
-        <title />
+        <titleDemo />
       </t-demo>
       <t-demo
         desc="带底部插槽样式"
         padding
       >
-        <footer />
+        <footerDemo />
       </t-demo>
     </view>
   </view>
@@ -43,16 +43,16 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import title from './title';
-import iconDrawer from './icon-drawer';
-import footer from './footer';
+import BaseDemo from './base/index.vue';
+import titleDemo from './title/index.vue';
+import iconDrawer from './icon-drawer/index.vue';
+import footerDemo from './footer/index.vue';
 export default {
   components: {
     BaseDemo,
-    title,
+    titleDemo,
     iconDrawer,
-    footer,
+    footerDemo,
   },
   data() {
     return {};

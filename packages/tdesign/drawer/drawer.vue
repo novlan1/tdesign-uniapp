@@ -1,10 +1,10 @@
 <template>
   <view>
     <t-popup
-      v-if="!destroyOnClose || visible"
-      :style="_._style([style, customStyle])"
+      v-if="!destroyOnClose || dataVisible"
+      :custom-style="_._style([style, customStyle])"
       class="class"
-      :visible="visible"
+      :visible="dataVisible"
       :z-index="zIndex"
       :using-custom-navbar="usingCustomNavbar"
       :placement="placement == 'right' ? 'right' : 'left'"
@@ -63,73 +63,127 @@
 <script>
 import tPopup from '../popup/popup';
 import tIcon from '../icon/icon';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
 
 
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-drawer`;
-let Drawer = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.behaviors = [useCustomNavbar];
-    this.externalClasses = [];
-    this.options = {
-      multipleSlots: true,
-    };
-    this.properties = props;
-    this.setData({
+
+
+export default uniComponent({
+  name,
+  mixins: [
+    useCustomNavbar,
+  ],
+  components: {
+    tPopup,
+    tIcon,
+  },
+  props: {
+    ...props,
+  },
+  emits: [
+    'update:visible',
+    'close',
+    'overlay-click',
+    'item-click',
+  ],
+  data() {
+    return {
       classPrefix: name,
-    });
-    this.methods = {
-      visibleChange({
-        detail: e,
-      }) {
-        const {
-          visible: t,
-        } = e;
-        const {
-          showOverlay: r,
-        } = this;
-        this.setData({
-          visible: t,
-        });
-        t || this.$emit('close', {
-          detail: {
-            trigger: 'overlay',
-          },
-        });
-        if (r) {
-          this.$emit('overlay-click', {
-            detail: {
-              visible: t,
-            },
-          });
-        }
-      },
-      itemClick(e) {
-        const {
-          index: t,
-          item: r,
-        } = e.currentTarget.dataset;
-        this.$emit('item-click', {
-          detail: {
-            index: t,
-            item: r,
-          },
-        });
-      },
+      _,
+      dataVisible: this.visible,
     };
-  }
-};
-Drawer = __decorate([wxComponent()], Drawer);
-export default Drawer;
+  },
+  watch: {
+    visible(e) {
+      this.dataVisible = e;
+    },
+  },
+  methods: {
+    // closeOnOverlayClick 为 true 时才能触发 popup 的 visible-change 事件
+    visibleChange(detail) {
+      const { visible } = detail;
+      const { showOverlay } = this;
+
+      this.dataVisible = visible;
+
+      if (!visible) {
+        this.$emit('close', { trigger: 'overlay' });
+      }
+
+      if (showOverlay) {
+        this.$emit('overlay-click', { visible });
+      }
+      this.$emit('update:visible', visible);
+    },
+
+    itemClick(detail) {
+      const { index, item } = detail.currentTarget.dataset;
+
+      this.$emit('item-click', { index, item });
+    },
+  },
+});
+
+// let Drawer = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.behaviors = [useCustomNavbar];
+//     this.externalClasses = [];
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     this.properties = props;
+//     this.setData({
+//       classPrefix: name,
+//     });
+//     this.methods = {
+//       visibleChange({
+//         detail: e,
+//       }) {
+//         const {
+//           visible: t,
+//         } = e;
+//         const {
+//           showOverlay: r,
+//         } = this;
+//         this.setData({
+//           visible: t,
+//         });
+//         t || this.$emit('close', {
+//           detail: {
+//             trigger: 'overlay',
+//           },
+//         });
+//         if (r) {
+//           this.$emit('overlay-click', {
+//             detail: {
+//               visible: t,
+//             },
+//           });
+//         }
+//       },
+//       itemClick(e) {
+//         const {
+//           index: t,
+//           item: r,
+//         } = e.currentTarget.dataset;
+//         this.$emit('item-click', {
+//           detail: {
+//             index: t,
+//             item: r,
+//           },
+//         });
+//       },
+//     };
+//   }
+// };
+// Drawer = __decorate([wxComponent()], Drawer);
+// export default Drawer;
 </script>
 <style>
 @import './drawer.css';

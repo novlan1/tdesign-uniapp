@@ -11,7 +11,7 @@
     </t-button>
 
     <t-drawer
-      :visible="visible"
+      v-model:visible="visible"
       :placement="placement"
       :items="sidebar"
       using-custom-navbar
@@ -73,16 +73,14 @@ export default {
      */
   methods: {
     openDrawerBase() {
-      this.setData({
-        visible: true,
-        sidebar: this.baseSidebar,
-      });
+      this.visible = true;
+      this.sidebar = this.baseSidebar;
     },
     itemClick(e) {
-      console.log(e.detail);
+      console.log(e);
     },
     overlayClick(e) {
-      console.log(e.detail);
+      console.log(e);
     },
   },
 };
