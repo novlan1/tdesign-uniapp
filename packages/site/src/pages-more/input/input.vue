@@ -63,22 +63,20 @@
 
 <script lang="ts">
 
-import tInput from 'tdesign-uniapp/input/input';
-import BaseDemo from './base';
-import suffix from './suffix';
-import prefix from './prefix';
-import layout from './layout';
-import bordered from './bordered';
-import align from './align';
-import maxlength from './maxlength';
-import special from './special';
-import status from './status';
-import custom from './custom';
-import labelDemo from './label';
-import banner from './banner';
+import BaseDemo from './base/index.vue';
+import maxlength from './maxlength/index.vue';
+import suffix from './suffix/index.vue';
+import prefix from './prefix/index.vue';
+import layout from './layout/index.vue';
+import bordered from './bordered/index.vue';
+import align from './align/index.vue';
+import special from './special/index.vue';
+import status from './status/index.vue';
+import custom from './custom/index.vue';
+import labelDemo from './label/index.vue';
+import banner from './banner/index.vue';
 export default {
   components: {
-    tInput,
     BaseDemo,
     suffix,
     prefix,
@@ -107,9 +105,7 @@ export default {
       const { phoneError } = this;
       const isPhoneNumber = /^[1][3,4,5,7,8,9][0-9]{9}$/.test(e.detail.value);
       if (phoneError === isPhoneNumber) {
-        this.setData({
-          phoneError: !isPhoneNumber,
-        });
+        this.phoneError = !isPhoneNumber;
       }
     },
 
@@ -117,9 +113,7 @@ export default {
       const { priceError } = this;
       const isNumber = /^\d+(\.\d+)?$/.test(e.detail.value);
       if (priceError === isNumber) {
-        this.setData({
-          priceError: !isNumber,
-        });
+        this.priceError = !isNumber;
       }
     },
   },

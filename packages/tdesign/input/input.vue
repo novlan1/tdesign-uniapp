@@ -1,7 +1,7 @@
 <template>
   <view
     :style="_._style([style, customStyle])"
-    :class="_.cls(classPrefix, [['border', !borderless]]) + ' ' + classPrefix + '--layout-' + layout + ' class ' + prefix + '-class'"
+    :class="_.cls(classPrefix, [['border', !borderless]]) + ' ' + classPrefix + '--layout-' + layout + ' class ' + tClass"
     aria-describedby
   >
     <view :class="classPrefix + '__wrap--prefix'">
@@ -13,21 +13,21 @@
           name="icon"
         >
           <t-icon
-            :style="style || ''"
-            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-            :prefix="prefix || ''"
-            :name="'close' || ''"
-            :size="22 || ''"
-            :color="color || ''"
-            :aria-hidden="true || ''"
-            :aria-label="ariaLabel || ''"
-            :aria-role="ariaRole || ''"
-            @click="bindclick || ''"
+            :custom-style="_prefixIcon.style || ''"
+            :t-class="tClassPrefixIcon"
+            :prefix="_prefixIcon.prefix"
+            :name="_prefixIcon.name"
+            :size="_prefixIcon.size"
+            :color="_prefixIcon.color"
+            :aria-hidden="true"
+            :aria-label="_prefixIcon.ariaLabel"
+            :aria-role="_prefixIcon.ariaRole"
+            @click="_prefixIcon.click || ''"
           />
         </block>
       </view>
       <view
-        :class="classPrefix + '__label ' + prefix + '-class-label'"
+        :class="classPrefix + '__label ' + tClassLabel"
         aria-hidden
       >
         <slot name="label" />
@@ -39,13 +39,13 @@
     <view :class="classPrefix + '__wrap'">
       <view :class="classPrefix + '__content ' + classPrefix + '--' + status">
         <input
-          :class="getInputClass(classPrefix, suffix, align, disabled) + ' ' + prefix + '-class-input'"
-          :maxlength="allowInputOverMax ? -1 : maxlength"
+          :class="getInputClass(classPrefix, suffix, align, disabled) + ' ' + tClassInput"
+          :maxlength="innerMaxLen"
           :disabled="disabled || readonly"
           :placeholder="placeholder"
           :placeholder-style="placeholderStyle"
           :placeholder-class="_.cls(classPrefix + '__placeholder', [['disabled', disabled]]) + ' ' + placeholderClass"
-          :value="value"
+          :value="dataValue"
           :password="type === 'password'"
           :type="type === 'password' ? 'text' : type"
           :focus="focus"
@@ -87,21 +87,21 @@
             name="icon"
           >
             <t-icon
-              :style="style || ''"
-              :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-              :prefix="prefix || ''"
-              :name="'close' || ''"
-              :size="22 || ''"
-              :color="color || ''"
-              :aria-hidden="true || ''"
-              :aria-label="'清除' || ''"
-              :aria-role="'button' || ''"
-              @click="bindclick || ''"
+              :custom-style="_clearIcon.style || ''"
+              :t-class="tClassClearable"
+              :prefix="_clearIcon.prefix"
+              :name="_clearIcon.name"
+              :size="_clearIcon.size"
+              :color="_clearIcon.color"
+              :aria-hidden="false"
+              :aria-label="_clearIcon.ariaLabel || '清除'"
+              :aria-role="_clearIcon.ariaRole || 'button'"
+              @click="_clearIcon.click || ''"
             />
           </block>
         </view>
         <view
-          :class="classPrefix + '__wrap--suffix ' + prefix + '-class-suffix'"
+          :class="classPrefix + '__wrap--suffix ' + tClassSuffix"
           @tap="onSuffixClick"
         >
           <text v-if="suffix">
@@ -120,23 +120,23 @@
             name="icon"
           >
             <t-icon
-              :style="style || ''"
-              :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-              :prefix="prefix || ''"
-              :name="'close' || ''"
-              :size="22 || ''"
-              :color="color || ''"
-              :aria-hidden="true || ''"
-              :aria-label="'清除' || ''"
-              :aria-role="'button' || ''"
-              @click="bindclick || ''"
+              :custom-style="_suffixIcon.style || ''"
+              :t-class="tClassSuffixIcon"
+              :prefix="_suffixIcon.prefix"
+              :name="_suffixIcon.name"
+              :size="_suffixIcon.size"
+              :color="_suffixIcon.color"
+              :aria-hidden="true"
+              :aria-label="_suffixIcon.ariaLabel"
+              :aria-role="_suffixIcon.ariaRole || 'button'"
+              @click="_suffixIcon.click || ''"
             />
           </block>
         </view>
       </view>
       <view
         v-if="tips && tips.length > 0"
-        :class="classPrefix + '__tips ' + classPrefix + '--' + align + ' ' + prefix + '-class-tips'"
+        :class="classPrefix + '__tips ' + classPrefix + '--' + align + ' ' + tClassTips"
       >
         {{ tips }}
       </view>
@@ -147,192 +147,372 @@
 </template>
 <script>
 import tIcon from '../icon/icon';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import { getCharacterLength, calcIcon } from '../common/utils';
 import { isDef } from '../common/validator';
-import { getInputClass } from './input.wxs';
+import { getInputClass } from './computed.js';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-input`;
-let Input = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.options = {
-      multipleSlots: true,
-    };
-    this.components = {
-      tIcon,
-    };
-    this._ = _;
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-prefix-icon`, `${prefix}-class-label`, `${prefix}-class-input`, `${prefix}-class-clearable`, `${prefix}-class-suffix`, `${prefix}-class-suffix-icon`, `${prefix}-class-tips`];
-    this.behaviors = ['wx://form-field'];
-    this.properties = props;
-    this.setData({
+
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-prefix-icon`,
+    `${prefix}-class-label`,
+    `${prefix}-class-input`,
+    `${prefix}-class-clearable`,
+    `${prefix}-class-suffix`,
+    `${prefix}-class-suffix-icon`,
+    `${prefix}-class-tips`,
+  ],
+  components: {
+    tIcon,
+  },
+  props: {
+    ...props,
+  },
+  emits: [
+    'blur',
+    'change',
+    'clear',
+    'click',
+    'enter',
+    'focus',
+    'keyboardheightchange',
+    'nicknamereview',
+    'validate',
+  ],
+  data() {
+    return {
       prefix,
       classPrefix: name,
       classBasePrefix: prefix,
       showClearIcon: true,
-    });
-    this.lifetimes = {
-      ready() {
-        let e;
-        const {
-          value: t,
-          defaultValue: i,
-        } = this;
-        this.updateValue(null !== (e = null != t ? t : i) && void 0 !== e ? e : '');
-      },
+      _,
+
+      dataValue: this.value,
     };
-    this.observers = {
-      prefixIcon(e) {
-        this.setData({
-          _prefixIcon: calcIcon(e),
-        });
+  },
+  computed: {
+    innerMaxLen() {
+      if (this.allowInputOverMax) {
+        return -1;
+      }
+      if (!this.maxcharacter || this.maxcharacter < 0) {
+        return this.maxlength;
+      }
+      if (!this.dataValue) {
+        return this.maxcharacter;
+      }
+
+      const extra = this.count - this.dataValue.length;
+
+
+      return this.maxcharacter - extra;
+    },
+  },
+  watch: {
+    // value: {
+    //   handler(v) {
+    //     this.dataValue = v;
+    //   },
+    //   immediate: true,
+    // },
+    prefixIcon: {
+      handler(v) {
+        this._prefixIcon = calcIcon(v);
       },
-      suffixIcon(e) {
-        this.setData({
-          _suffixIcon: calcIcon(e),
-        });
+      immediate: true,
+    },
+
+    suffixIcon: {
+      handler(v) {
+        this._suffixIcon = calcIcon(v);
       },
-      clearable(e) {
-        this.setData({
-          _clearIcon: calcIcon(e, 'close-circle-filled'),
-        });
+      immediate: true,
+    },
+
+    clearable: {
+      handler(v) {
+        this._clearIcon = calcIcon(v, 'close-circle-filled');
       },
-      'clearTrigger, clearable, disabled, readonly'() {
-        this.updateClearIconVisible();
-      },
-    };
-    this.methods = {
-      updateValue(e) {
-        const {
-          allowInputOverMax: t,
-          maxcharacter: i,
-          maxlength: r,
-        } = this;
-        if (!t && i && i > 0 && !Number.isNaN(i)) {
-          const {
-            length: t,
-            characters: r,
-          } = getCharacterLength('maxcharacter', e, i);
-          this.setData({
-            value: r,
-            count: t,
-          });
-        } else if (!t && r && r > 0 && !Number.isNaN(r)) {
-          const {
-            length: t,
-            characters: i,
-          } = getCharacterLength('maxlength', e, r);
-          this.setData({
-            value: i,
-            count: t,
-          });
-        } else {
-          this.setData({
-            value: e,
-            count: isDef(e) ? String(e).length : 0,
-          });
-        }
-      },
-      updateClearIconVisible(e = false) {
-        const {
-          clearTrigger: t,
-          disabled: i,
-          readonly: r,
-        } = this;
-        i || r ? this.setData({
-          showClearIcon: false,
-        }) : this.setData({
-          showClearIcon: e || 'always' === t,
-        });
-      },
-      onInput(e) {
-        const {
-          value: t,
-          cursor: i,
-          keyCode: r,
-        } = e.detail;
-        this.updateValue(t);
-        this.$emit('change', {
-          detail: {
-            value: this.value,
-            cursor: i,
-            keyCode: r,
-          },
-        });
-      },
-      onFocus(e) {
-        this.updateClearIconVisible(true);
-        this.$emit('focus', {
-          detail: e.detail,
-        });
-      },
-      onBlur(e) {
-        this.updateClearIconVisible();
-        if ('function' === typeof this.format) {
-          const t = this.format(e.detail.value);
-          this.updateValue(t);
-          return void this.$emit('blur', {
-            detail: {
-              value: this.value,
-              cursor: this.count,
-            },
-          });
-        }
-        this.$emit('blur', {
-          detail: e.detail,
-        });
-      },
-      onConfirm(e) {
-        this.$emit('enter', {
-          detail: e.detail,
-        });
-      },
-      onSuffixClick() {
-        this.$emit('click', {
-          detail: {
-            trigger: 'suffix',
-          },
-        });
-      },
-      onSuffixIconClick() {
-        this.$emit('click', {
-          detail: {
-            trigger: 'suffix-icon',
-          },
-        });
-      },
-      clearInput(e) {
-        this.$emit('clear', {
-          detail: e.detail,
-        });
-        this.setData({
-          value: '',
-        });
-      },
-      onKeyboardHeightChange(e) {
-        this.$emit('keyboardheightchange', {
-          detail: e.detail,
-        });
-      },
-      onNickNameReview(e) {
-        this.$emit('nicknamereview', {
-          detail: e.detail,
-        });
-      },
-    };
-  }
-};
-Input = initTDesign(__decorate([wxComponent()], Input));
-export default Input;
+      immediate: true,
+    },
+
+    clearTrigger: 'updateClearIconVisible',
+    disabled: 'updateClearIconVisible',
+    readonly: 'updateClearIconVisible',
+  },
+  mounted() {
+    const { value, defaultValue } = this;
+    this.updateValue(value ?? defaultValue ?? '');
+
+    this.updateClearIconVisible();
+  },
+  methods: {
+    getInputClass,
+    updateValue(value) {
+      console.log('updateValue', value);
+      const { allowInputOverMax, maxcharacter, maxlength } = this;
+      if (!allowInputOverMax && maxcharacter && maxcharacter > 0 && !Number.isNaN(maxcharacter)) {
+        const { length, characters } = getCharacterLength('maxcharacter', value, maxcharacter);
+        this.dataValue = characters;
+        this.count = length;
+      } else if (!allowInputOverMax && maxlength && maxlength > 0 && !Number.isNaN(maxlength)) {
+        const { length, characters } = getCharacterLength('maxlength', value, maxlength);
+        this.dataValue = characters;
+        this.count = length;
+      } else {
+        this.dataValue = value;
+        this.count = isDef(value) ? String(value).length : 0;
+      }
+    },
+
+    updateClearIconVisible(value = false) {
+      const { clearTrigger, disabled, readonly } = this;
+      if (disabled || readonly) {
+        this.showClearIcon = false;
+        return;
+      }
+      this.showClearIcon = value || clearTrigger === 'always';
+    },
+
+    onInput(e) {
+      const { value, cursor, keyCode } = e.detail;
+      this.updateValue(value);
+      this.$emit('change', { value: this.dataValue, cursor, keyCode });
+    },
+
+    onChange(e) {
+      if (this.type !== 'nickname') return;
+      const { value } = e.detail;
+      this.updateValue(value);
+      this.$emit('change', { value: this.dataValue });
+    },
+
+    onFocus(e) {
+      this.updateClearIconVisible(true);
+      this.$emit('focus', e.detail);
+    },
+
+    onBlur(e) {
+      this.updateClearIconVisible();
+
+      // 失焦时处理 format
+      if (typeof this.format === 'function') {
+        const v = this.format(e.detail.value);
+        this.updateValue(v);
+        this.$emit('blur', { value: this.dataValue, cursor: this.count });
+        return;
+      }
+      this.$emit('blur', e.detail);
+    },
+
+    onConfirm(e) {
+      this.$emit('enter', e.detail);
+    },
+
+    onSuffixClick() {
+      this.$emit('click', { trigger: 'suffix' });
+    },
+
+    onSuffixIconClick() {
+      this.$emit('click', { trigger: 'suffix-icon' });
+    },
+
+    clearInput(e) {
+      this.$emit('clear', e.detail);
+      this.dataValue = '';
+    },
+
+    onKeyboardHeightChange(e) {
+      this.$emit('keyboardheightchange', e.detail);
+    },
+
+    onNickNameReview(e) {
+      this.$emit('nicknamereview', e.detail);
+    },
+  },
+});
+
+
+// let Input = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     this.components = {
+//       tIcon,
+//     };
+//     this._ = _;
+//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-prefix-icon`, `${prefix}-class-label`, `${prefix}-class-input`, `${prefix}-class-clearable`, `${prefix}-class-suffix`, `${prefix}-class-suffix-icon`, `${prefix}-class-tips`];
+//     this.behaviors = ['wx://form-field'];
+//     this.properties = props;
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//       classBasePrefix: prefix,
+//       showClearIcon: true,
+//     });
+//     this.lifetimes = {
+//       ready() {
+//         let e;
+//         const {
+//           value: t,
+//           defaultValue: i,
+//         } = this;
+//         this.updateValue(null !== (e = null != t ? t : i) && void 0 !== e ? e : '');
+//       },
+//     };
+//     this.observers = {
+//       prefixIcon(e) {
+//         this.setData({
+//           _prefixIcon: calcIcon(e),
+//         });
+//       },
+//       suffixIcon(e) {
+//         this.setData({
+//           _suffixIcon: calcIcon(e),
+//         });
+//       },
+//       clearable(e) {
+//         this.setData({
+//           _clearIcon: calcIcon(e, 'close-circle-filled'),
+//         });
+//       },
+//       'clearTrigger, clearable, disabled, readonly'() {
+//         this.updateClearIconVisible();
+//       },
+//     };
+//     this.methods = {
+//       updateValue(e) {
+//         const {
+//           allowInputOverMax: t,
+//           maxcharacter: i,
+//           maxlength: r,
+//         } = this;
+//         if (!t && i && i > 0 && !Number.isNaN(i)) {
+//           const {
+//             length: t,
+//             characters: r,
+//           } = getCharacterLength('maxcharacter', e, i);
+//           this.setData({
+//             value: r,
+//             count: t,
+//           });
+//         } else if (!t && r && r > 0 && !Number.isNaN(r)) {
+//           const {
+//             length: t,
+//             characters: i,
+//           } = getCharacterLength('maxlength', e, r);
+//           this.setData({
+//             value: i,
+//             count: t,
+//           });
+//         } else {
+//           this.setData({
+//             value: e,
+//             count: isDef(e) ? String(e).length : 0,
+//           });
+//         }
+//       },
+//       updateClearIconVisible(e = false) {
+//         const {
+//           clearTrigger: t,
+//           disabled: i,
+//           readonly: r,
+//         } = this;
+//         i || r ? this.setData({
+//           showClearIcon: false,
+//         }) : this.setData({
+//           showClearIcon: e || 'always' === t,
+//         });
+//       },
+//       onInput(e) {
+//         const {
+//           value: t,
+//           cursor: i,
+//           keyCode: r,
+//         } = e.detail;
+//         this.updateValue(t);
+//         this.$emit('change', {
+//           detail: {
+//             value: this.value,
+//             cursor: i,
+//             keyCode: r,
+//           },
+//         });
+//       },
+//       onFocus(e) {
+//         this.updateClearIconVisible(true);
+//         this.$emit('focus', {
+//           detail: e.detail,
+//         });
+//       },
+//       onBlur(e) {
+//         this.updateClearIconVisible();
+//         if ('function' === typeof this.format) {
+//           const t = this.format(e.detail.value);
+//           this.updateValue(t);
+//           return void this.$emit('blur', {
+//             detail: {
+//               value: this.value,
+//               cursor: this.count,
+//             },
+//           });
+//         }
+//         this.$emit('blur', {
+//           detail: e.detail,
+//         });
+//       },
+//       onConfirm(e) {
+//         this.$emit('enter', {
+//           detail: e.detail,
+//         });
+//       },
+//       onSuffixClick() {
+//         this.$emit('click', {
+//           detail: {
+//             trigger: 'suffix',
+//           },
+//         });
+//       },
+//       onSuffixIconClick() {
+//         this.$emit('click', {
+//           detail: {
+//             trigger: 'suffix-icon',
+//           },
+//         });
+//       },
+//       clearInput(e) {
+//         this.$emit('clear', {
+//           detail: e.detail,
+//         });
+//         this.setData({
+//           value: '',
+//         });
+//       },
+//       onKeyboardHeightChange(e) {
+//         this.$emit('keyboardheightchange', {
+//           detail: e.detail,
+//         });
+//       },
+//       onNickNameReview(e) {
+//         this.$emit('nicknamereview', {
+//           detail: e.detail,
+//         });
+//       },
+//     };
+//   }
+// };
+// Input = initTDesign(__decorate([wxComponent()], Input));
+// export default Input;
 </script>
 <style>
 @import './input.css';
