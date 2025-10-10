@@ -1,9 +1,9 @@
 <template>
   <view
     :style="_._style([style, customStyle])"
-    :class="_.cls(classPrefix, [layout, ['readonly', readonly]]) + ' class ' + prefix + '-class'"
+    :class="_.cls(classPrefix, [layout, ['readonly', readonly]]) + ' class ' + tClass"
     :aria-role="ariaRole || readonly ? 'option' : 'button'"
-    :aria-label="ariaLabel || t.getAriaLabel(index, title, content)"
+    :aria-label="ariaLabel || getAriaLabel(index, title, content)"
     :aria-current="curStatus == 'process' ? 'step' : ''"
     @tap="onTap"
   >
@@ -47,13 +47,13 @@
       </view>
     </view>
     <view
-      :class="_.cls(classPrefix + '__content', [layout, ['last', isLastChild]]) + ' ' + prefix + '-class-content'"
+      :class="_.cls(classPrefix + '__content', [layout, ['last', isLastChild]]) + ' ' + tClassContent"
       :aria-hidden="true"
     >
       <slot />
-      <view :class="_.cls(classPrefix + '__title', [curStatus, layout]) + ' ' + prefix + '-class-title'">
+      <view :class="_.cls(classPrefix + '__title', [curStatus, layout]) + ' ' + tClassContent">
         <block v-if="title">
-          {{ _this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle) }}
+          {{ title }}
         </block>
         <slot name="title" />
         <slot
@@ -61,13 +61,13 @@
           name="title-right"
         />
       </view>
-      <view :class="_.cls(classPrefix + '__description', [layout]) + ' ' + prefix + '-class-description'">
+      <view :class="_.cls(classPrefix + '__description', [layout]) + ' ' + tClassDescription">
         <block v-if="content">
           {{ content }}
         </block>
         <slot name="content" />
       </view>
-      <view :class="_.cls(classPrefix + '__extra', [layout]) + ' ' + prefix + '-class-extra'">
+      <view :class="_.cls(classPrefix + '__extra', [layout]) + ' ' + tClassExtra">
         <slot name="extra" />
       </view>
     </view>
@@ -80,32 +80,37 @@
 </template>
 <script>
 import tIcon from '../icon/icon';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { wxComponent, SuperComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import _ from '../common/utils.wxs';
-import * as t from './step-item.wxs';
+import { getAriaLabel } from './computed.js';
+import { ChildrenMixin, RELATION_MAP } from '../common/relation';
 
 
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-steps-item`;
-let StepItem = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.options = {
-      multipleSlots: true,
-    };
-    this.relations = {
-      '../steps/steps': {
-        type: 'parent',
-      },
-    };
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-title`, `${prefix}-class-description`, `${prefix}-class-extra`];
-    this.properties = props;
-    this.setData({
+
+
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-content`,
+    `${prefix}-class-title`,
+    `${prefix}-class-description`,
+    `${prefix}-class-extra`,
+  ],
+  mixins: [ChildrenMixin(RELATION_MAP.StepItem, {
+    indexKey: 'tIndex',
+  })],
+  props: {
+    ...props,
+  },
+  components: {
+    tIcon,
+  },
+  data() {
+    return {
       classPrefix: name,
       prefix,
       index: 0,
@@ -114,57 +119,126 @@ let StepItem = class extends SuperComponent {
       layout: 'vertical',
       isLastChild: false,
       sequence: 'positive',
-    });
-    this.observers = {
-      status(t) {
-        const {
-          curStatus: e,
-        } = this;
-        if ('' !== e && t !== e) {
-          this.setData({
-            curStatus: t,
-          });
-        }
-      },
+      _,
+
+      readonly: false,
+      theme: '',
     };
-    this.methods = {
-      updateStatus({
-        current: t,
-        currentStatus: e,
-        index: s,
-        theme: i,
-        layout: r,
-        items: o,
-        sequence: a,
-      }) {
-        let p = this.status;
-        if ('default' === p) {
-          if (s < Number(t)) {
-            p = 'finish';
-          } else {
-            if (s === Number(t)) {
-              p = e;
-            }
-          }
+  },
+  watch: {
+    status(value) {
+      const { curStatus } = this;
+
+      if (curStatus === '' || value === curStatus) return;
+
+      this.curStatus = value;
+    },
+  },
+  mounted() {
+
+  },
+  methods: {
+    getAriaLabel,
+    updateStatus({ current, currentStatus, index, theme, layout, items, sequence }) {
+      let curStatus = this.status;
+
+      if (curStatus === 'default') {
+        if (index < Number(current)) {
+          curStatus = 'finish';
+        } else if (index === Number(current)) {
+          curStatus = currentStatus;
         }
-        this.setData({
-          curStatus: p,
-          index: s,
-          isDot: 'dot' === i,
-          layout: r,
-          theme: i,
-          sequence: a,
-          isLastChild: s === ('positive' === a ? o.length - 1 : 0),
-        });
-      },
-      onTap() {
-        this.$parent.handleClick(this.index);
-      },
-    };
-  }
-};
-StepItem = __decorate([wxComponent()], StepItem);
-export default StepItem;
+      }
+
+      this.curStatus = curStatus;
+      this.index = index;
+      this.layout = layout;
+      this.theme = theme;
+      this.sequence = sequence;
+      this.isDot = theme === 'dot';
+      this.isLastChild = index === (sequence === 'positive' ? items.length - 1 : 0);
+    },
+
+    onTap() {
+      this[RELATION_MAP.StepItem].handleClick(this.index);
+    },
+  },
+});
+
+
+// let StepItem = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     this.relations = {
+//       '../steps/steps': {
+//         type: 'parent',
+//       },
+//     };
+//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-title`, `${prefix}-class-description`, `${prefix}-class-extra`];
+//     this.properties = props;
+//     this.setData({
+//       classPrefix: name,
+//       prefix,
+//       index: 0,
+//       isDot: false,
+//       curStatus: '',
+//       layout: 'vertical',
+//       isLastChild: false,
+//       sequence: 'positive',
+//     });
+//     this.observers = {
+//       status(t) {
+//         const {
+//           curStatus: e,
+//         } = this;
+//         if ('' !== e && t !== e) {
+//           this.setData({
+//             curStatus: t,
+//           });
+//         }
+//       },
+//     };
+//     this.methods = {
+//       updateStatus({
+//         current: t,
+//         currentStatus: e,
+//         index: s,
+//         theme: i,
+//         layout: r,
+//         items: o,
+//         sequence: a,
+//       }) {
+//         let p = this.status;
+//         if ('default' === p) {
+//           if (s < Number(t)) {
+//             p = 'finish';
+//           } else {
+//             if (s === Number(t)) {
+//               p = e;
+//             }
+//           }
+//         }
+//         this.setData({
+//           curStatus: p,
+//           index: s,
+//           isDot: 'dot' === i,
+//           layout: r,
+//           theme: i,
+//           sequence: a,
+//           isLastChild: s === ('positive' === a ? o.length - 1 : 0),
+//         });
+//       },
+//       onTap() {
+//         this.$parent.handleClick(this.index);
+//       },
+//     };
+//   }
+// };
+// StepItem = __decorate([wxComponent()], StepItem);
+// export default StepItem;
 </script>
 <style>
 @import './step-item.css';

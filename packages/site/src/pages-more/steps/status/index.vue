@@ -9,7 +9,7 @@
         <t-step-item
           v-for="(item, index) in 4"
           :key="index"
-          :title="_.getText(first, index)"
+          :title="getText(first, index)"
           content="辅助信息"
         />
       </t-steps>
@@ -24,7 +24,7 @@
         <t-step-item
           v-for="(item, index) in 4"
           :key="index"
-          :title="_.getText(second, index)"
+          :title="getText(second, index)"
           content="辅助信息"
           icon="cart"
         />
@@ -41,7 +41,7 @@
         <t-step-item
           v-for="(item, index) in 4"
           :key="index"
-          :title="_.getText(third, index)"
+          :title="getText(third, index)"
           content="辅助信息"
         />
       </t-steps>
@@ -52,6 +52,8 @@
 <script>
 import tSteps from 'tdesign-uniapp/steps/steps';
 import tStepItem from 'tdesign-uniapp/step-item/step-item';
+
+
 export default {
   components: {
     tSteps,
@@ -72,19 +74,13 @@ export default {
       return '未完成';
     },
     onFirstChange(e) {
-      this.setData({
-        first: e.detail.current,
-      });
+      this.first = e.current;
     },
     onSecondChange(e) {
-      this.setData({
-        second: e.detail.current,
-      });
+      this.second = e.current;
     },
     onThirdChange(e) {
-      this.setData({
-        third: e.detail.current,
-      });
+      this.third = e.current;
     },
   },
 };

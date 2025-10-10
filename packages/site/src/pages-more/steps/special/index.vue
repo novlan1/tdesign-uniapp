@@ -14,14 +14,17 @@
         <t-step-item
           v-for="(item, index) in count"
           :key="index"
-          :title="_.getText(count - 1, index)"
+          :title="getText(count - 1, index)"
         >
-          <t-icon
-            slot="title-right"
-            name="chevron-right"
-            size="44rpx"
-            color="rgba(0, 0, 0, .4)"
-          />
+          <template
+            #title-right
+          >
+            <t-icon
+              name="chevron-right"
+              size="44rpx"
+              color="rgba(0, 0, 0, .4)"
+            />
+          </template>
         </t-step-item>
       </t-steps>
 
@@ -60,6 +63,8 @@
 import tSteps from 'tdesign-uniapp/steps/steps';
 import tStepItem from 'tdesign-uniapp/step-item/step-item';
 import tIcon from 'tdesign-uniapp/icon/icon';
+
+
 export default {
   components: {
     tSteps,
@@ -79,15 +84,11 @@ export default {
       return '未完成步骤';
     },
     toNext() {
-      this.setData({
-        count: this.count + 1,
-      });
+      this.count = this.count + 1;
     },
     onCascader(e) {
-      const { current } = e.detail;
-      this.setData({
-        count: current + 1,
-      });
+      const { current } = e;
+      this.count = current + 1;
     },
   },
 };

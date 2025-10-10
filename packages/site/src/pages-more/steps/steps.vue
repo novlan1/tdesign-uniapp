@@ -39,10 +39,10 @@
 
 <script lang="ts">
 
-import horizontal from './horizontal';
-import vertical from './vertical';
-import special from './special';
-import status from './status';
+import horizontal from './horizontal/index.vue';
+import vertical from './vertical/index.vue';
+import special from './special/index.vue';
+import status from './status/index.vue';
 export default {
   components: {
     horizontal,
