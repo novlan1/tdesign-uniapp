@@ -8,7 +8,6 @@
     :aria-checked="dataChecked"
     :aria-label="label + content"
     :aria-disabled="_disabled"
-    :tabindex="tabindex"
     @click.stop="handleTap"
   >
     <view :class="_.cls(classPrefix + '__icon', [_placement, ['checked', dataChecked], ['disabled', _disabled]]) + ' ' + tClassIcon">
