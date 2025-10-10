@@ -18,7 +18,7 @@
       </t-demo>
 
       <t-demo desc="带描述开关">
-        <label />
+        <labelDemo />
       </t-demo>
 
       <t-demo desc="自定义颜色开关">
@@ -41,17 +41,15 @@
 
 <script lang="ts">
 
-import tDemo from '../../components/demo-block';
-import BaseDemo from './base';
-import label from './label';
-import color from './color';
-import status from './status';
-import size from './size';
+import BaseDemo from './base/index.vue';
+import labelDemo from './label/index.vue';
+import color from './color/index.vue';
+import status from './status/index.vue';
+import size from './size/index.vue';
 export default {
   components: {
-    tDemo,
     BaseDemo,
-    label,
+    labelDemo,
     color,
     status,
     size,

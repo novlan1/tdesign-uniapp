@@ -1,25 +1,24 @@
 <template>
   <view
     :style="_._style([style, customStyle])"
-    :class="'class ' + prefix + '-class ' + classPrefix"
+    :class="'class ' + tClass + ' ' + classPrefix"
     :aria-checked="checked"
     :aria-disabled="disabled"
     aria-role="switch"
     @tap="handleSwitch"
   >
-    <view :class="_.cls(classPrefix + '__body', [['checked', checked], ['disabled', disabled || loading], size]) + ' ' + prefix + '-class-body'">
+    <view :class="_.cls(classPrefix + '__body', [['checked', checked], ['disabled', disabled || loading], size]) + ' ' + tClassBody">
       <view
         :class="
           _.cls(classPrefix + '__dot', [['checked', checked], ['disabled', disabled], ['plain', label.length != 2 && icon.length != 2 && !loading], size]) +
             ' ' +
-            prefix +
-            '-class-dot'
+            tClassDot
         "
         :aria-hidden="true"
       >
         <view
           v-if="label"
-          :class="_.cls(classPrefix + '__label', [['checked', checked], ['disabled', disabled], size]) + ' ' + prefix + '-class-label'"
+          :class="_.cls(classPrefix + '__label', [['checked', checked], ['disabled', disabled], size]) + ' ' + tClassLabel"
         >
           <t-loading
             v-if="loading"
@@ -42,58 +41,120 @@
 <script>
 import tIcon from '../icon/icon';
 import tLoading from '../loading/loading';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { wxComponent, SuperComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import _ from '../common/utils.wxs';
 
 
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-switch`;
-let Switch = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = ['t-class', 't-class-label', 't-class-body', 't-class-dot'];
-    this.behaviors = ['wx://form-field'];
-    this.properties = props;
-    this.setData({
+
+export default uniComponent({
+  name,
+  controlledProps: [
+    {
+      key: 'value',
+      event: 'change',
+    },
+  ],
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-label`,
+    `${prefix}-class-body`,
+    `${prefix}-class-dot`,
+  ],
+  components: {
+    tIcon,
+    tLoading,
+  },
+  props: {
+    ...props,
+  },
+  emits: ['change'],
+  data() {
+    return {
       prefix,
       classPrefix: name,
       checked: false,
-    });
-    this.controlledProps = [{
-      key: 'value',
-      event: 'change',
-    }];
-    this.observers = {
-      value(e) {
-        const [t] = this.customValue;
-        this.setData({
-          checked: e === t,
-        });
-      },
+      _,
+
+      dataValue: this.value,
     };
-    this.methods = {
-      handleSwitch() {
-        const {
-          loading: e,
-          disabled: t,
-          value: s,
-          customValue: o,
-        } = this;
-        const [i, r] = o;
-        e || t || this._trigger('change', {
-          value: s === i ? r : i,
-        });
+  },
+  watch: {
+    value: {
+      handler(v) {
+        this.dataValue = v;
       },
-    };
-  }
-};
-Switch = __decorate([wxComponent()], Switch);
-export default Switch;
+      immediate: true,
+    },
+    dataValue: {
+      handler(val) {
+        const [activeValue] = this.customValue;
+
+        this.checked = val === activeValue;
+      },
+      immediate: true,
+    },
+  },
+  mounted() {
+
+  },
+  methods: {
+    handleSwitch() {
+      const { loading, disabled, dataValue, customValue } = this;
+      const [activeValue, inactiveValue] = customValue;
+      if (loading || disabled) return;
+
+      this._trigger('change', {
+        value: dataValue === activeValue ? inactiveValue : activeValue,
+      });
+    },
+  },
+});
+
+
+// let Switch = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.externalClasses = ['t-class', 't-class-label', 't-class-body', 't-class-dot'];
+//     this.behaviors = ['wx://form-field'];
+//     this.properties = props;
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//       checked: false,
+//     });
+//     this.controlledProps = [{
+//       key: 'value',
+//       event: 'change',
+//     }];
+//     this.observers = {
+//       value(e) {
+//         const [t] = this.customValue;
+//         this.setData({
+//           checked: e === t,
+//         });
+//       },
+//     };
+//     this.methods = {
+//       handleSwitch() {
+//         const {
+//           loading: e,
+//           disabled: t,
+//           value: s,
+//           customValue: o,
+//         } = this;
+//         const [i, r] = o;
+//         e || t || this._trigger('change', {
+//           value: s === i ? r : i,
+//         });
+//       },
+//     };
+//   }
+// };
+// Switch = __decorate([wxComponent()], Switch);
+// export default Switch;
 </script>
 <style>
 @import './switch.css';

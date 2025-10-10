@@ -1,27 +1,36 @@
 <template>
   <view>
     <t-cell title="大尺寸 32">
-      <t-switch
-        slot="note"
-        :default-value="true"
-        size="large"
-      />
+      <template
+        #note
+      >
+        <t-switch
+          :default-value="true"
+          size="large"
+        />
+      </template>
     </t-cell>
     <t-cell title="中尺寸 28">
-      <t-switch
-        slot="note"
-        :default-value="true"
-      />
+      <template
+        #note
+      >
+        <t-switch
+          :default-value="true"
+        />
+      </template>
     </t-cell>
     <t-cell
       title="小尺寸 24"
       :bordered="false"
     >
-      <t-switch
-        slot="note"
-        :default-value="true"
-        size="small"
-      />
+      <template
+        #note
+      >
+        <t-switch
+          :default-value="true"
+          size="small"
+        />
+      </template>
     </t-cell>
   </view>
 </template>
@@ -41,11 +50,7 @@ export default {
   },
   created() {},
   methods: {
-    handleChange(e) {
-      this.setData({
-        defaultVal: e.detail.value,
-      });
-    },
+
   },
 };
 </script>

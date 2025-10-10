@@ -4,10 +4,13 @@
       title="基础开关"
       :bordered="false"
     >
-      <t-switch
-        slot="note"
-        :default-value="true"
-      />
+      <template
+        #note
+      >
+        <t-switch
+          :default-value="true"
+        />
+      </template>
     </t-cell>
   </view>
 </template>
@@ -27,11 +30,6 @@ export default {
   },
   created() {},
   methods: {
-    handleChange(e) {
-      this.setData({
-        defaultVal: e.detail.value,
-      });
-    },
   },
 };
 </script>

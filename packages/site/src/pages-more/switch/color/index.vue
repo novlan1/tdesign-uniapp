@@ -4,10 +4,13 @@
       title="自定义颜色开关"
       :bordered="false"
     >
-      <t-switch
-        slot="note"
-        :default-value="true"
-      />
+      <template
+        #note
+      >
+        <t-switch
+          :default-value="true"
+        />
+      </template>
     </t-cell>
     <!-- <t-cell title="自定义颜色" bordered="{{false}}">
     <t-switch loading defaultValue="{{true}}" slot="note" />
@@ -36,11 +39,6 @@ export default {
   },
   created() {},
   methods: {
-    handleChange(e) {
-      this.setData({
-        defaultVal: e.detail.value,
-      });
-    },
   },
 };
 </script>

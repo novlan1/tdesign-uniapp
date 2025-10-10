@@ -1,23 +1,29 @@
 <template>
   <view>
     <t-cell title="带文字开关">
-      <t-switch
-        slot="note"
-        :value="defaultVal"
-        :label="['开', '关']"
-        @change="handleChange"
-      />
+      <template
+        #note
+      >
+        <t-switch
+          :value="defaultVal"
+          :label="['开', '关']"
+          @change="handleChange"
+        />
+      </template>
     </t-cell>
 
     <t-cell
       title="带图标开关"
       :bordered="false"
     >
-      <t-switch
-        slot="note"
-        :default-value="true"
-        :icon="['check', 'close']"
-      />
+      <template
+        #note
+      >
+        <t-switch
+          :default-value="true"
+          :icon="['check', 'close']"
+        />
+      </template>
     </t-cell>
   </view>
 </template>
@@ -38,9 +44,7 @@ export default {
   created() {},
   methods: {
     handleChange(e) {
-      this.setData({
-        defaultVal: e.detail.value,
-      });
+      this.defaultVal = e.value;
     },
   },
 };

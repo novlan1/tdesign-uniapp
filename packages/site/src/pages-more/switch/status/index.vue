@@ -6,21 +6,27 @@
 
     <view class="group">
       <t-cell title="加载状态">
-        <t-switch
-          slot="note"
-          :default-value="false"
-          loading
-        />
+        <template
+          #note
+        >
+          <t-switch
+            :default-value="false"
+            loading
+          />
+        </template>
       </t-cell>
       <t-cell
         title="加载状态"
         :bordered="false"
       >
-        <t-switch
-          slot="note"
-          :default-value="true"
-          loading
-        />
+        <template
+          #note
+        >
+          <t-switch
+            :default-value="true"
+            loading
+          />
+        </template>
       </t-cell>
     </view>
 
@@ -30,20 +36,26 @@
 
     <view class="group">
       <t-cell title="禁用状态">
-        <t-switch
-          slot="note"
-          disabled
-        />
+        <template
+          #note
+        >
+          <t-switch
+            disabled
+          />
+        </template>
       </t-cell>
       <t-cell
         title="禁用状态"
         :bordered="false"
       >
-        <t-switch
-          slot="note"
-          :default-value="true"
-          disabled
-        />
+        <template
+          #note
+        >
+          <t-switch
+            :default-value="true"
+            disabled
+          />
+        </template>
       </t-cell>
     </view>
   </view>
