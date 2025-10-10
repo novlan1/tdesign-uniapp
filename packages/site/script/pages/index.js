@@ -28,6 +28,7 @@ function main() {
       const name = hyphenate(item.name);
       const { path } = item;
       return {
+        name,
         path: path ? path.replace(/^\//, '') : `pages-more/${name}/${name}`,
       };
     });
@@ -35,8 +36,15 @@ function main() {
   const rawData = readFileSync(pagesJson, true);
   rawData.pages = [
     ...DEFAULT_PAGES,
-    ...componentPages,
+    ...componentPages.map(item => ({ path: item.path })),
   ];
+  rawData.condition = {
+    current: 0,
+    list: componentPages.map(item => ({
+      name: item.name,
+      pathName: item.path,
+    })),
+  };
   writeFileSync(pagesJson, `${JSON.stringify(rawData, null, 2)}\n`, false);
   console.log('[pages.json] Wrote!');
 }

@@ -14,11 +14,6 @@ export function createApp() {
 
   app.component('t-navbar', TNavbar);
   app.component('t-button', TButton);
-  app.mixin({
-    // options: {
-    // styleIsolation: 'shared',
-    // },
-  });
 
   return {
     app,

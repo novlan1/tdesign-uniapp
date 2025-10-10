@@ -22,12 +22,15 @@
 
 <script>
 import tLoading from 'tdesign-uniapp/loading/loading';
-import tSlider from 'tdesign-uniapp/slider/slider';
+// import tSlider from 'tdesign-uniapp/slider/slider';
 // import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js'
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tLoading,
-    tSlider,
+    // tSlider,
   },
   //   mixins: [SkylineBehavior],
   data() {

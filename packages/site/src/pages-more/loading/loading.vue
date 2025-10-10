@@ -70,6 +70,9 @@ import TextComp from './text/index.vue';
 import DurationDemo from './duration/index.vue';
 import SizeDemo from './size/index.vue';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     BaseComp,
     HorizontalDemo,

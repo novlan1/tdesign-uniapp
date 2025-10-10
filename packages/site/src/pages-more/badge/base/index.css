@@ -1,4 +1,4 @@
-.wrapper {
+:deep(.wrapper) {
     margin-right: 48px;
 }
 

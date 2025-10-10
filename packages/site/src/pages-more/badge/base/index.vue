@@ -6,13 +6,13 @@
     <view class="demo-wrapper">
       <t-badge
         dot
-        class="wrapper"
+        t-class="wrapper"
         content="消息"
       />
       <t-badge
         dot
         :offset="[1, -1]"
-        class="wrapper"
+        t-class="wrapper"
       >
         <t-icon
           name="notification"
@@ -23,7 +23,7 @@
       <t-badge
         dot
         :offset="[1, 1]"
-        class="wrapper"
+        t-class="wrapper"
       >
         <t-button>按钮</t-button>
       </t-badge>
@@ -37,12 +37,12 @@
         count="8"
         content="消息"
         :offset="[4]"
-        class="wrapper"
+        t-class="wrapper"
       />
       <t-badge
         count="2"
         :offset="[2, -2]"
-        class="wrapper"
+        t-class="wrapper"
       >
         <t-icon
           name="notification"
@@ -53,7 +53,7 @@
       <t-badge
         count="8"
         :offset="[2, 2]"
-        class="wrapper"
+        t-class="wrapper"
       >
         <t-button>按钮</t-button>
       </t-badge>
@@ -84,6 +84,9 @@ import tBadge from 'tdesign-uniapp/badge/badge';
 import tIcon from 'tdesign-uniapp/icon/icon';
 import tButton from 'tdesign-uniapp/button/button';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tBadge,
     tIcon,

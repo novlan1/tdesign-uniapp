@@ -1,11 +1,11 @@
 <template>
   <view>
     <t-avatar
-      class="avatar-example"
+      t-class="avatar-example"
       :image="image"
     />
     <t-avatar
-      class="avatar-example"
+      t-class="avatar-example"
       shape="round"
       :image="image"
     />
@@ -15,6 +15,9 @@
 <script>
 import tAvatar from 'tdesign-uniapp/avatar/avatar';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tAvatar,
   },

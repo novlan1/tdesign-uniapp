@@ -18,7 +18,7 @@
         >
           <t-icon
             name="chevron-left"
-            :class="classPrefix + '__left-arrow'"
+            :t-class="classPrefix + '__left-arrow'"
           />
         </view>
         <slot name="left" />

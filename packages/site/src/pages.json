@@ -160,5 +160,178 @@
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8",
     "navigationStyle": "custom"
+  },
+  "condition": {
+    "current": 0,
+    "list": [
+      {
+        "name": "button",
+        "pathName": "pages-more/button/button"
+      },
+      {
+        "name": "divider",
+        "pathName": "pages-more/divider/divider"
+      },
+      {
+        "name": "fab",
+        "pathName": "pages-more/fab/fab"
+      },
+      {
+        "name": "icon",
+        "pathName": "pages-more/icon/icon"
+      },
+      {
+        "name": "link",
+        "pathName": "pages-more/link/link"
+      },
+      {
+        "name": "layout",
+        "pathName": "pages-more/col/col"
+      },
+      {
+        "name": "back-top",
+        "pathName": "pages-more/back-top/back-top"
+      },
+      {
+        "name": "drawer",
+        "pathName": "pages-more/drawer/drawer"
+      },
+      {
+        "name": "indexes",
+        "pathName": "pages-more/indexes/indexes"
+      },
+      {
+        "name": "navbar",
+        "pathName": "pages-more/navbar/navbar"
+      },
+      {
+        "name": "side-bar",
+        "pathName": "pages-more/side-bar/side-bar"
+      },
+      {
+        "name": "steps",
+        "pathName": "pages-more/steps/steps"
+      },
+      {
+        "name": "tab-bar",
+        "pathName": "pages-more/tab-bar/tab-bar"
+      },
+      {
+        "name": "tabs",
+        "pathName": "pages-more/tabs/tabs"
+      },
+      {
+        "name": "checkbox",
+        "pathName": "pages-more/checkbox/checkbox"
+      },
+      {
+        "name": "input",
+        "pathName": "pages-more/input/input"
+      },
+      {
+        "name": "radio",
+        "pathName": "pages-more/radio/radio"
+      },
+      {
+        "name": "switch",
+        "pathName": "pages-more/switch/switch"
+      },
+      {
+        "name": "avatar",
+        "pathName": "pages-more/avatar/avatar"
+      },
+      {
+        "name": "badge",
+        "pathName": "pages-more/badge/badge"
+      },
+      {
+        "name": "cell",
+        "pathName": "pages-more/cell/cell"
+      },
+      {
+        "name": "collapse",
+        "pathName": "pages-more/collapse/collapse"
+      },
+      {
+        "name": "count-down",
+        "pathName": "pages-more/count-down/count-down"
+      },
+      {
+        "name": "empty",
+        "pathName": "pages-more/empty/empty"
+      },
+      {
+        "name": "footer",
+        "pathName": "pages-more/footer/footer"
+      },
+      {
+        "name": "grid",
+        "pathName": "pages-more/grid/grid"
+      },
+      {
+        "name": "image",
+        "pathName": "pages-more/image/image"
+      },
+      {
+        "name": "progress",
+        "pathName": "pages-more/progress/progress"
+      },
+      {
+        "name": "result",
+        "pathName": "pages-more/result/result"
+      },
+      {
+        "name": "skeleton",
+        "pathName": "pages-more/skeleton/skeleton"
+      },
+      {
+        "name": "sticky",
+        "pathName": "pages-more/sticky/sticky"
+      },
+      {
+        "name": "tag",
+        "pathName": "pages-more/tag/tag"
+      },
+      {
+        "name": "action-sheet",
+        "pathName": "pages-more/action-sheet/action-sheet"
+      },
+      {
+        "name": "dialog",
+        "pathName": "pages-more/dialog/dialog"
+      },
+      {
+        "name": "loading",
+        "pathName": "pages-more/loading/loading"
+      },
+      {
+        "name": "message",
+        "pathName": "pages-more/message/message"
+      },
+      {
+        "name": "notice-bar",
+        "pathName": "pages-more/notice-bar/notice-bar"
+      },
+      {
+        "name": "overlay",
+        "pathName": "pages-more/overlay/overlay"
+      },
+      {
+        "name": "popup",
+        "pathName": "pages-more/popup/popup"
+      },
+      {
+        "name": "pull-down-refresh",
+        "pathName": "pages-more/pull-down-refresh/pull-down-refresh"
+      },
+      {
+        "name": "swipe-cell",
+        "pathName": "pages-more/swipe-cell/swipe-cell"
+      },
+      {
+        "name": "toast",
+        "pathName": "pages-more/toast/toast"
+      }
+    ]
   }
 }

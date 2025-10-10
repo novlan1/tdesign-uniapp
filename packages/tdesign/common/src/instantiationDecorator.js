@@ -193,6 +193,8 @@ export const uniComponent = function (info) {
     info.options.virtualHost = true;
   }
   info.options.styleIsolation = 'shared';
+  info.options.multipleSlots = true;
+
   const o = toComponent(info);
   return o;
 };

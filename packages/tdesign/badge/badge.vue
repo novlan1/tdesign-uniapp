@@ -17,10 +17,21 @@
       ]"
       :aria-hidden="true"
     >
+      <!-- #ifdef H5 -->
+
       <slot
         v-if="!content"
         :class="classPrefix + '__content-slot'"
       />
+      <!-- #endif -->
+
+      <!-- 小程序下在 slot 下加 :class 属性，会导致渲染失败 -->
+      <!-- #ifndef H5 -->
+      <slot
+        v-if="!content"
+      />
+      <!-- #endif -->
+
       <text
         v-else
         :class="classPrefix + '__content-text'"
