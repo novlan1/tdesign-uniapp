@@ -159,14 +159,14 @@
                 :app-parameter="_cancel.appParameter"
                 :show-message-card="_cancel.showMessageCard"
                 :aria-label="_cancel.ariaLabel"
-                @click="onTplButtonTap($event, { type: 'action', extra: index })"
-                @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
+                @click="onCancel($event, { type: 'action', extra: index })"
+                @getuserinfo="onCancel($event, { type: 'action', extra: index })"
+                @contact="onCancel($event, { type: 'action', extra: index })"
+                @getphonenumber="onCancel($event, { type: 'action', extra: index })"
+                @error="onCancel($event, { type: 'action', extra: index })"
+                @opensetting="onCancel($event, { type: 'action', extra: index })"
+                @launchapp="onCancel($event, { type: 'action', extra: index })"
+                @agreeprivacyauthorization="onCancel($event, { type: 'action', extra: index })"
               >
                 <slot v-if="_cancel.useDefaultSlot || false" />
               </t-button>
@@ -358,7 +358,7 @@ export default uniComponent({
         this[toCamel(`on-${type}`)]?.(type);
       }
 
-      if (evtType !== 'tap') {
+      if (evtType !== 'click') {
         const success = e.detail?.errMsg?.indexOf('ok') > -1;
         this.$emit(success ? 'open-type-event' : 'open-type-error-event', e.detail);
       }

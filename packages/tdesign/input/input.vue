@@ -77,7 +77,7 @@
           @nicknamereview="onNickNameReview"
         >
         <view
-          v-if="_clearIcon && value.length > 0 && showClearIcon"
+          v-if="_clearIcon && dataValue?.length && showClearIcon"
           :class="classPrefix + '__wrap--clearable-icon'"
           @tap="clearInput"
         >

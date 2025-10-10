@@ -167,7 +167,8 @@ export default {
       this[key] = true;
       this.dialogKey = key;
     },
-    closeDialog() {
+    closeDialog(e) {
+      console.log('close: ', e);
       const { dialogKey } = this;
       this[dialogKey] = false;
     },
