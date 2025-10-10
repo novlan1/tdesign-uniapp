@@ -80,11 +80,7 @@ export default {
     return {};
   },
   methods: {
-    toNavigation(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { target } = e.target.dataset;
+    toNavigation(e, { target }) {
       uni.navigateTo({
         url: `./${target}/index`,
       });

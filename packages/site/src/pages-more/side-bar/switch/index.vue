@@ -51,13 +51,16 @@
                 t-class-left="cell"
                 :title="cargo.label + index"
               >
-                <t-image
-                  slot="image"
-                  shape="round"
-                  :src="cargo.image"
-                  lazy
-                  t-class="image"
-                />
+                <template
+                  #image
+                >
+                  <t-image
+                    shape="round"
+                    :src="cargo.image"
+                    lazy
+                    t-class="image"
+                  />
+                </template>
               </t-cell>
             </block>
           </t-cell-group>
@@ -73,6 +76,7 @@ import tSideBarItem from 'tdesign-uniapp/side-bar-item/side-bar-item';
 import tCellGroup from 'tdesign-uniapp/cell-group/cell-group';
 import tCell from 'tdesign-uniapp/cell/cell';
 import tImage from 'tdesign-uniapp/image/image';
+
 const image = 'https://tdesign.gtimg.com/mobile/demos/example2.png';
 const items = new Array(12).fill(
   {
@@ -82,6 +86,7 @@ const items = new Array(12).fill(
   0,
   12,
 );
+
 export default {
   components: {
     tSideBar,
@@ -153,19 +158,15 @@ export default {
       query.select('.custom-navbar').boundingClientRect();
       query.exec((res) => {
         const { height = 0 } = res[0] || {};
-        this.setData({
-          navbarHeight: height,
-        });
+        this.navbarHeight = height;
       });
     },
 
     onSideBarChange(e) {
-      const { value } = e.detail;
-      console.log('---', value);
-      this.setData({
-        sideBarIndex: value,
-        scrollTop: 0,
-      });
+      const { value } = e;
+      console.log('change: ', value);
+      this.sideBarIndex = value;
+      this.scrollTop = 0;
     },
   },
 };

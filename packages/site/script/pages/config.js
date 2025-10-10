@@ -14,6 +14,18 @@ const DEFAULT_PAGES = [
   {
     path: 'pages-more/indexes/base/index',
   },
+  {
+    path: 'pages-more/side-bar/base/index',
+  },
+  {
+    path: 'pages-more/side-bar/switch/index',
+  },
+  {
+    path: 'pages-more/side-bar/with-icon/index',
+  },
+  {
+    path: 'pages-more/side-bar/custom/index',
+  },
 ];
 
 module.exports = {

@@ -53,7 +53,7 @@
                 t-class-image="image"
                 :text="cargo.label"
                 :image="cargo.image"
-                :image-props=""
+                :image-props="{ shape: 'round', lazy: true }"
               />
             </block>
           </t-grid>
@@ -138,27 +138,30 @@ export default {
       },
     };
   },
-  onLoad() {
-    const query = uni.createSelectorQuery().in(this);
-    const { sideBarIndex } = this;
-    query.selectAll('.title').boundingClientRect();
-    query.select('.custom-navbar').boundingClientRect();
-    query.exec((res) => {
-      const [rects, { height: navbarHeight = 0 }] = res;
-      this.offsetTopList = rects.map(item => item.top - navbarHeight);
-      this.setData({
-        navbarHeight,
-        scrollTop: this.offsetTopList[sideBarIndex],
-      });
-    });
+  mounted() {
+    setTimeout(() => {
+      this.getCustomNavbarHeight();
+    }, 30);
   },
   methods: {
-    onSideBarChange(e) {
-      const { value } = e.detail;
-      this.setData({
-        sideBarIndex: value,
-        scrollTop: this.offsetTopList[value],
+    getCustomNavbarHeight() {
+      const query = uni.createSelectorQuery().in(this);
+      const { sideBarIndex } = this;
+      query.selectAll('.title').boundingClientRect();
+      query.select('.custom-navbar').boundingClientRect();
+      query.exec((res) => {
+        const [rects, { height: navbarHeight = 0 }] = res;
+        this.offsetTopList = rects.map(item => item.top - navbarHeight);
+
+        this.navbarHeight = navbarHeight;
+        this.scrollTop = this.offsetTopList[sideBarIndex];
       });
+    },
+    onSideBarChange(e) {
+      const { value } = e;
+
+      this.sideBarIndex = value;
+      this.scrollTop = this.offsetTopList[value];
     },
 
     onScroll(e) {
@@ -188,9 +191,7 @@ export default {
       };
       const newIndex = findNearestIndex(this.offsetTopList, scrollTop);
       if (newIndex !== this.sideBarIndex) {
-        this.setData({
-          sideBarIndex: newIndex,
-        });
+        this.sideBarIndex = newIndex;
       }
     },
   },

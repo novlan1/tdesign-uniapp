@@ -59,7 +59,7 @@
             :aria-hidden="!!iconData.ariaHidden"
             :aria-label="iconData.ariaLabel"
             :aria-role="iconData.ariaRole"
-            @click="'handleClose' || ''"
+            @click="iconData.click || ''"
           />
         </block>
         <view

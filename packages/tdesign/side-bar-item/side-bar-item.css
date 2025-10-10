@@ -52,7 +52,9 @@
 .t-side-bar-item__suffix::after {
     border-top-right-radius: var(--td-side-bar-border-radius, 18rpx);
 }
-.t-side-bar-item--disabled {
+.t-side-bar-item--disabled
+{
+    --td-badge-content-text-color: var(--td-side-bar-disabled-color, var(--td-text-color-disabled, var(--td-font-gray-4, rgba(0, 0, 0, 0.26))));
     color: var(--td-side-bar-disabled-color, var(--td-text-color-disabled, var(--td-font-gray-4, rgba(0, 0, 0, 0.26))));
 }
 .t-side-bar-item__line {

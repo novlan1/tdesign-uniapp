@@ -1,14 +1,13 @@
 <template>
   <view class="card-theme">
-    <!-- :navigation="" TODO: -->
-    <!-- :image-props="" -->
-
     <t-swiper
       :current="current"
       :autoplay="autoplay"
       :duration="duration"
       :interval="interval"
       :list="swiperList"
+      :navigation="{ type: 'dots' }"
+      :image-props="{ shape: 'round' }"
       previous-margin="34px"
       next-margin="34px"
       t-class-nav="card-theme-nav"
@@ -20,9 +19,6 @@
       style="height: 42px"
     />
 
-    <!-- :navigation="" TODO: -->
-    <!-- :image-props="" -->
-
     <t-swiper
       class="scale-card-theme"
       :current="current"
@@ -30,6 +26,8 @@
       :duration="duration"
       :interval="interval"
       :list="swiperList"
+      :navigation="{ type: 'dots' }"
+      :image-props="{ shape: 'round' }"
       previous-margin="34px"
       next-margin="34px"
       t-class-nav="card-theme-nav"

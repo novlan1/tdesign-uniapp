@@ -52,7 +52,7 @@
                 t-class-image="image"
                 :text="cargo.label"
                 :image="cargo.image"
-                :image-props=""
+                :image-props="{ shape: 'round', lazy: true }"
               />
             </block>
           </t-grid>
@@ -67,12 +67,14 @@ import tSideBar from 'tdesign-uniapp/side-bar/side-bar';
 import tSideBarItem from 'tdesign-uniapp/side-bar-item/side-bar-item';
 import tGrid from 'tdesign-uniapp/grid/grid';
 import tGridItem from 'tdesign-uniapp/grid-item/grid-item';
+
 const image = 'https://tdesign.gtimg.com/mobile/demos/example2.png';
 const items = new Array(12).fill()
   .map((_, index) => ({
     label: index % 3 === 2 ? '最多六个文字' : '标题文字',
     image,
   }));
+
 export default {
   components: {
     tSideBar,
@@ -132,27 +134,31 @@ export default {
       },
     };
   },
-  onLoad() {
-    const query = uni.createSelectorQuery().in(this);
-    const { sideBarIndex } = this;
-    query.selectAll('.title').boundingClientRect();
-    query.select('.custom-navbar').boundingClientRect();
-    query.exec((res) => {
-      const [rects, { height: navbarHeight }] = res;
-      this.offsetTopList = rects.map(item => item.top - navbarHeight);
-      this.setData({
-        navbarHeight,
-        scrollTop: this.offsetTopList[sideBarIndex],
-      });
-    });
+  mounted() {
+    setTimeout(() => {
+      this.getCustomNavbarHeight();
+    }, 30);
   },
   methods: {
-    onSideBarChange(e) {
-      const { value } = e.detail;
-      this.setData({
-        sideBarIndex: value,
-        scrollTop: this.offsetTopList[value],
+    getCustomNavbarHeight() {
+      const query = uni.createSelectorQuery().in(this);
+      const { sideBarIndex } = this;
+      query.selectAll('.title').boundingClientRect();
+      query.select('.custom-navbar').boundingClientRect();
+      query.exec((res) => {
+        const [rects, { height: navbarHeight }] = res;
+        this.offsetTopList = rects.map(item => item.top - navbarHeight);
+
+        this.navbarHeight = navbarHeight;
+        this.scrollTop = this.offsetTopList[sideBarIndex];
       });
+    },
+    onSideBarChange(e) {
+      const { value } = e;
+      console.log('change: ', value);
+
+      this.sideBarIndex = value;
+      this.scrollTop = this.offsetTopList[value];
     },
 
     onScroll(e) {
@@ -182,9 +188,7 @@ export default {
       };
       const newIndex = findNearestIndex(this.offsetTopList, scrollTop);
       if (newIndex !== this.sideBarIndex) {
-        this.setData({
-          sideBarIndex: newIndex,
-        });
+        this.sideBarIndex = newIndex;
       }
     },
   },

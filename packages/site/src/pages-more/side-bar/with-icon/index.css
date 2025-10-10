@@ -29,13 +29,13 @@ page .round-image {
     color: var(--td-text-color-primary);
 }
 
-.side-bar-wrapper .image {
+.side-bar-wrapper :deep(.image) {
     width: 96rpx;
     height: 96rpx;
     position: relative;
 }
 
-.side-bar-wrapper .image::before {
+.side-bar-wrapper :deep(.image)::before {
     content: ' ';
     position: absolute;
     top: 0;
