@@ -140,7 +140,7 @@ export default uniComponent({
       }
     },
 
-    updateValue({ value, checked, checkAll, item, indeterminate }) {
+    updateValue({ trigger, value, checked, checkAll, item, indeterminate }) {
       let { dataValue: newValue } = this;
       const { max } = this;
       const keySet = new Set(this.getChildren().map(item => item.value));
@@ -170,7 +170,9 @@ export default uniComponent({
         newValue.splice(index, 1);
       }
 
-      this._trigger('change', { value: newValue, context: item });
+      if (trigger !== 'init') {
+        this._trigger('change', { value: newValue, context: item });
+      }
     },
 
     initWithOptions() {

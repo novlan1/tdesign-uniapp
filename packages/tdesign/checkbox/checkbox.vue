@@ -182,9 +182,13 @@ export default uniComponent({
 
       data.dataChecked = this.dataChecked || checkedFromParent;
       if (this.dataChecked) {
-        // TODO
         parent.updateValue({
-          value: dataValue, checked, checkAll, item, indeterminate: dataIndeterminate,
+          value: dataValue,
+          checked,
+          checkAll,
+          item,
+          indeterminate: dataIndeterminate,
+          trigger: 'init',
         });
       }
 
