@@ -4,6 +4,6 @@
     margin: 0 32rpx 32rpx;
 }
 
-.external-class {
+:deep(.external-class) {
     border-radius: 0 !important;
 }

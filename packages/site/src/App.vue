@@ -7,5 +7,3 @@ onShow(() => {
 onHide(() => {
 });
 </script>
-<style lang="less" src="./style/app.less">
-</style>

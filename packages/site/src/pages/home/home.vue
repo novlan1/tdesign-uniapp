@@ -1,5 +1,7 @@
 <template>
-  <!-- <TNavbar title="TDesign UI" /> -->
+  <!-- #ifndef H5 -->
+  <TNavbar title="TDesign UI" />
+  <!-- #endif -->
   <view class="main">
     <view class="title-wrap">
       <image
@@ -48,7 +50,7 @@
 
 <script lang="ts" setup>
 import TFooter from 'tdesign-uniapp/footer/footer';
-// import TNavbar from 'tdesign-uniapp/navbar/navbar';
+import TNavbar from 'tdesign-uniapp/navbar/navbar';
 import { useTheme } from 'tdesign-uniapp/mixins/theme-change';
 
 import { ref } from 'vue';

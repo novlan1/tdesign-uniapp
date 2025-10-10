@@ -4,6 +4,7 @@ import DemoBlock from './components/demo-block/index.vue';
 import DemoHeader from './components/demo-header/index.vue';
 import TNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import TButton from 'tdesign-uniapp/button/button.vue';
+import './style/app.less';
 
 export function createApp() {
   const app = createSSRApp(App);
@@ -13,6 +14,11 @@ export function createApp() {
 
   app.component('t-navbar', TNavbar);
   app.component('t-button', TButton);
+  app.mixin({
+    // options: {
+    // styleIsolation: 'shared',
+    // },
+  });
 
   return {
     app,
