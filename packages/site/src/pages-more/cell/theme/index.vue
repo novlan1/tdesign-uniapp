@@ -26,12 +26,10 @@
 <script>
 import tCellGroup from 'tdesign-uniapp/cell-group/cell-group';
 import tCell from 'tdesign-uniapp/cell/cell';
-import tIcon from 'tdesign-uniapp/icon/icon';
 export default {
   components: {
     tCellGroup,
     tCell,
-    tIcon,
   },
   data() {
     return {};

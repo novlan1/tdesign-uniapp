@@ -56,14 +56,12 @@
 <script>
 import tCell from 'tdesign-uniapp/cell/cell';
 import tBadge from 'tdesign-uniapp/badge/badge';
-// import tSwitch from 'tdesign-uniapp/switch/switch';
-// import tIcon from 'tdesign-uniapp/icon/icon';
+import tSwitch from 'tdesign-uniapp/switch/switch';
 export default {
   components: {
     tCell,
     tBadge,
-    // tSwitch,
-    // tIcon,
+    tSwitch,
   },
   data() {
     return {};

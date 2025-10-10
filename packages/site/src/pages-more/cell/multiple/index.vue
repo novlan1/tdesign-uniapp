@@ -91,16 +91,13 @@
 <script>
 import tCell from 'tdesign-uniapp/cell/cell';
 import tBadge from 'tdesign-uniapp/badge/badge';
-// import tIcon from 'tdesign-uniapp/icon/icon';
-// TODO: after add switch
-// import tSwitch from 'tdesign-uniapp/switch/switch';
+import tSwitch from 'tdesign-uniapp/switch/switch';
 
 export default {
   components: {
     tCell,
     tBadge,
-    // tIcon,
-    // tSwitch,
+    tSwitch,
   },
   data() {
     return {};
