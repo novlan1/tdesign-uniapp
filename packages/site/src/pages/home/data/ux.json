@@ -13,11 +13,13 @@
       },
       {
         "name": "DropdownMenu",
-        "label": "下拉菜单"
+        "label": "下拉菜单",
+        "hide": true
       },
       {
         "name": "Guide",
-        "label": "引导"
+        "label": "引导",
+        "hide": true
       },
       {
         "name": "Loading",

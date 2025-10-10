@@ -54,7 +54,9 @@ import TIcon from 'tdesign-uniapp/icon/icon';
 
 const itemHeight = 56 * 2;
 const childBoxHeight = ref(0);
-
+defineOptions({
+  styleIsolation: 'shared',
+});
 
 const props = withDefaults(defineProps<{
   defaultOpen?: boolean;

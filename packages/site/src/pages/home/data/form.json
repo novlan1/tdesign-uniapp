@@ -5,11 +5,13 @@
     "childArr": [
       {
         "name": "Calendar",
-        "label": "日历"
+        "label": "日历",
+        "hide": true
       },
       {
         "name": "Cascader",
-        "label": "级联选择器"
+        "label": "级联选择器",
+        "hide": true
       },
       {
         "name": "Checkbox",
@@ -17,11 +19,13 @@
       },
       {
         "name": "ColorPicker",
-        "label": "颜色选择器"
+        "label": "颜色选择器",
+        "hide": true
       },
       {
         "name": "DateTimePicker",
-        "label": "时间选择器"
+        "label": "时间选择器",
+        "hide": true
       },
       {
         "name": "Input",
@@ -29,7 +33,8 @@
       },
       {
         "name": "Picker",
-        "label": "选择器"
+        "label": "选择器",
+        "hide": true
       },
       {
         "name": "Radio",
@@ -37,19 +42,23 @@
       },
       {
         "name": "Rate",
-        "label": "评分"
+        "label": "评分",
+        "hide": true
       },
       {
         "name": "Search",
-        "label": "搜索框"
+        "label": "搜索框",
+        "hide": true
       },
       {
         "name": "Slider",
-        "label": "滑动选择器"
+        "label": "滑动选择器",
+        "hide": true
       },
       {
         "name": "Stepper",
-        "label": "步进器"
+        "label": "步进器",
+        "hide": true
       },
       {
         "name": "Switch",
@@ -57,15 +66,18 @@
       },
       {
         "name": "Textarea",
-        "label": "多行文本框"
+        "label": "多行文本框",
+        "hide": true
       },
       {
         "name": "TreeSelect",
-        "label": "树形选择器"
+        "label": "树形选择器",
+        "hide": true
       },
       {
         "name": "Upload",
-        "label": "上传"
+        "label": "上传",
+        "hide": true
       }
     ]
   },
