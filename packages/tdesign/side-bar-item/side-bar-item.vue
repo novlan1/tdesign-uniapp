@@ -110,6 +110,12 @@ export default uniComponent({
       },
       immediate: true,
     },
+    disabled: {
+      handler() {
+        this.updateActive(this.value);
+      },
+      immediate: true,
+    },
   },
   mounted() {
 
@@ -120,7 +126,7 @@ export default uniComponent({
       this.updateActive(parent.dataValue);
     },
     updateActive(value) {
-      const active = value === this.value;
+      const active = value === this.value && !this.disabled;
       this.active = active;
     },
     handleClick() {
