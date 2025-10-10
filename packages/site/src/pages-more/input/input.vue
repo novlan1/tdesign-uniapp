@@ -101,21 +101,6 @@ export default {
     };
   },
   methods: {
-    onPhoneInput(e: any) {
-      const { phoneError } = this;
-      const isPhoneNumber = /^[1][3,4,5,7,8,9][0-9]{9}$/.test(e.detail.value);
-      if (phoneError === isPhoneNumber) {
-        this.phoneError = !isPhoneNumber;
-      }
-    },
-
-    onPriceInput(e: any) {
-      const { priceError } = this;
-      const isNumber = /^\d+(\.\d+)?$/.test(e.detail.value);
-      if (priceError === isNumber) {
-        this.priceError = !isNumber;
-      }
-    },
   },
 };
 </script>

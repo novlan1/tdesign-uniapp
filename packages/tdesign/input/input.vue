@@ -82,23 +82,19 @@
           @tap="clearInput"
         >
           <!-- parse <template is="icon" :data="tClass: prefix + '-class-clearable', ariaRole: 'button', ariaLabel: '清除', ..._clearIcon"/> -->
-          <block
-            v-if="false"
-            name="icon"
-          >
-            <t-icon
-              :custom-style="_clearIcon.style || ''"
-              :t-class="tClassClearable"
-              :prefix="_clearIcon.prefix"
-              :name="_clearIcon.name"
-              :size="_clearIcon.size"
-              :color="_clearIcon.color"
-              :aria-hidden="false"
-              :aria-label="_clearIcon.ariaLabel || '清除'"
-              :aria-role="_clearIcon.ariaRole || 'button'"
-              @click="_clearIcon.click || ''"
-            />
-          </block>
+
+          <t-icon
+            :custom-style="_clearIcon.style || ''"
+            :t-class="tClassClearable"
+            :prefix="_clearIcon.prefix"
+            :name="_clearIcon.name"
+            :size="_clearIcon.size"
+            :color="_clearIcon.color"
+            :aria-hidden="false"
+            :aria-label="_clearIcon.ariaLabel || '清除'"
+            :aria-role="_clearIcon.ariaRole || 'button'"
+            @click="_clearIcon.click || ''"
+          />
         </view>
         <view
           :class="classPrefix + '__wrap--suffix ' + tClassSuffix"
@@ -196,25 +192,11 @@ export default uniComponent({
       _,
 
       dataValue: this.value,
+      rawValue: '',
+      innerMaxLen: -1,
     };
   },
   computed: {
-    innerMaxLen() {
-      if (this.allowInputOverMax) {
-        return -1;
-      }
-      if (!this.maxcharacter || this.maxcharacter < 0) {
-        return this.maxlength;
-      }
-      if (!this.dataValue) {
-        return this.maxcharacter;
-      }
-
-      const extra = this.count - this.dataValue.length;
-
-
-      return this.maxcharacter - extra;
-    },
   },
   watch: {
     // value: {
@@ -247,6 +229,12 @@ export default uniComponent({
     clearTrigger: 'updateClearIconVisible',
     disabled: 'updateClearIconVisible',
     readonly: 'updateClearIconVisible',
+
+    count: 'updateInnerMaxLen',
+    dataValue: 'updateInnerMaxLen',
+    allowInputOverMax: 'updateInnerMaxLen',
+    maxcharacter: 'updateInnerMaxLen',
+    maxlength: 'updateInnerMaxLen',
   },
   mounted() {
     const { value, defaultValue } = this;
@@ -257,7 +245,8 @@ export default uniComponent({
   methods: {
     getInputClass,
     updateValue(value) {
-      console.log('updateValue', value);
+      this.rawValue = value;
+
       const { allowInputOverMax, maxcharacter, maxlength } = this;
       if (!allowInputOverMax && maxcharacter && maxcharacter > 0 && !Number.isNaN(maxcharacter)) {
         const { length, characters } = getCharacterLength('maxcharacter', value, maxcharacter);
@@ -271,6 +260,39 @@ export default uniComponent({
         this.dataValue = value;
         this.count = isDef(value) ? String(value).length : 0;
       }
+      // #ifdef H5
+      this.updateInnerMaxLen();
+      // #endif
+    },
+    updateInnerMaxLen() {
+      // #ifdef H5
+      this.innerMaxLen = this.getInnerMaxLen();
+      // #endif
+      // #ifndef H5
+      this.innerMaxLen = this.allowInputOverMax ? -1 : this.maxlength;
+      // #endif
+    },
+    getInnerMaxLen() {
+      if (this.allowInputOverMax) {
+        return -1;
+      }
+      if (!this.maxcharacter || this.maxcharacter < 0) {
+        return this.maxlength;
+      }
+      if (!this.dataValue) {
+        return this.maxcharacter;
+      }
+
+
+      const { length: realCount } = getCharacterLength('maxcharacter', this.rawValue, Infinity);
+
+      if (realCount >= this.maxcharacter) {
+        return this.dataValue.length;
+      }
+
+      const extra = this.count - this.dataValue.length;
+
+      return this.maxcharacter - extra;
     },
 
     updateClearIconVisible(value = false) {

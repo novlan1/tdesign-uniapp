@@ -1,11 +1,10 @@
 <template>
   <view>
-    <!-- :suffix-icon="" TODO: -->
-
     <t-input
       label="标签文字"
       layout="vertical"
       placeholder="请输入文字"
+      :suffix-icon="{ name: 'info-circle-filled', ariaLabel: '提示' }"
     />
   </view>
 </template>

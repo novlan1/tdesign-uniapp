@@ -1,4 +1,4 @@
-.input-example {
+.input-example--bordered {
     --td-input-vertical-padding: 24rpx;
     background-color: var(--bg-color-demo);
     padding: 32rpx 32rpx 16rpx;

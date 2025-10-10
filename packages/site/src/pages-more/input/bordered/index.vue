@@ -1,15 +1,14 @@
 <template>
-  <view class="input-example">
+  <view class="input-example--bordered">
     <view class="input-example__label">
       标签文字
     </view>
 
-    <!-- :suffix-icon="" TODO: -->
-
     <t-input
       placeholder="请输入文字"
       :borderless="true"
-      :style="style"
+      :custom-style="style"
+      :suffix-icon="{ name: 'info-circle-filled', ariaLabel: '提示' }"
     />
   </view>
 </template>

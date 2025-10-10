@@ -1,5 +1,5 @@
 <template>
-  <view class="input-example">
+  <view class="input-example--banner">
     <t-input
       :style="style"
       label="标签文字"

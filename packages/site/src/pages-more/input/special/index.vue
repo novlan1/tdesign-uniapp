@@ -1,29 +1,32 @@
 <template>
   <view>
-    <!-- :suffix-icon="" TODO: -->
     <t-input
       label="输入密码"
       type="password"
       :value="textPassword"
+      :suffix-icon="{ name: 'browse-off', ariaLabel: '密码' }"
     />
 
     <t-input
       placeholder="输入验证码"
       label="验证码"
     >
-      <view
-        slot="suffix"
-        class="suffix"
+      <template
+        #suffix
       >
-        <view class="suffix--line" />
-        <image
-          class="image"
-          src="https://wwcdn.weixin.qq.com/node/wework/images/202010241547.ac6876be9c.png"
-          mode="heightFix"
-          aria-role="img"
-          aria-label="验证码"
-        />
-      </view>
+        <view
+          class="suffix"
+        >
+          <view class="suffix--line" />
+          <image
+            class="image"
+            src="https://wwcdn.weixin.qq.com/node/wework/images/202010241547.ac6876be9c.png"
+            mode="heightFix"
+            aria-role="img"
+            aria-label="验证码"
+          />
+        </view>
+      </template>
     </t-input>
 
     <t-input
@@ -34,18 +37,21 @@
       :tips="phoneError ? '手机号输入不正确' : ''"
       @change="onPhoneInput"
     >
-      <view
-        slot="suffix"
-        style="display: flex; align-items: center"
+      <template
+        #suffix
       >
-        <view class="suffix--line" />
         <view
-          class="verify"
-          aria-role="button"
+          style="display: flex; align-items: center"
         >
-          发送验证码
+          <view class="suffix--line" />
+          <view
+            class="verify"
+            aria-role="button"
+          >
+            发送验证码
+          </view>
         </view>
-      </view>
+      </template>
     </t-input>
 
     <t-input
@@ -95,20 +101,16 @@ export default {
   methods: {
     onPhoneInput(e) {
       const { phoneError } = this;
-      const isPhoneNumber = /^[1][3,4,5,7,8,9][0-9]{9}$/.test(e.detail.value);
+      const isPhoneNumber = /^[1][3,4,5,7,8,9][0-9]{9}$/.test(e.value);
       if (phoneError === isPhoneNumber) {
-        this.setData({
-          phoneError: !isPhoneNumber,
-        });
+        this.phoneError = !isPhoneNumber;
       }
     },
     onPriceInput(e) {
       const { priceError } = this;
-      const isNumber = /^\d+(\.\d+)?$/.test(e.detail.value);
+      const isNumber = /^\d+(\.\d+)?$/.test(e.value);
       if (priceError === isNumber) {
-        this.setData({
-          priceError: !isNumber,
-        });
+        this.priceError = !isNumber;
       }
     },
   },
