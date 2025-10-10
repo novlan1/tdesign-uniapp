@@ -231,7 +231,6 @@ export default uniComponent({
 
     memoInitialData() {
       this.initialData = {
-        // TODO:
         // ...this.properties,
         // ...this.data,
       };

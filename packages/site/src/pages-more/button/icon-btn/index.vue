@@ -39,14 +39,14 @@
 <script>
 import tButton from 'tdesign-uniapp/button/button';
 import tLoading from 'tdesign-uniapp/loading/loading';
-// import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js'
+import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js';
 
 export default {
   components: {
     tButton,
     tLoading,
   },
-  // mixins: [SkylineBehavior],
+  mixins: [SkylineBehavior],
   data() {
     return {
       skylineRender: '',

@@ -262,239 +262,234 @@
       <view :class="'class ' + prefix + '-class ' + classPrefix">
         <view :class="prefix + '-class-popover ' + classPrefix + '__container ' + (title || body ? classPrefix + '__container--' + modeType : '')">
           <!-- parse <template is="content" :data="prefix, classPrefix, title, body, steps, current, modeType, hideSkip, ...buttonProps"/> -->
-          <block
-            v-if="false"
-            name="content"
-          >
-            <slot
-              v-if="!title && !body"
-              :name="'content-' + current"
-            />
-            <block v-else>
-              <view :class="prefix + '-class-tooltip'">
-                <view
-                  v-if="title"
-                  :class="prefix + '-class-title ' + classPrefix + '__title--' + modeType"
-                >
-                  {{ title }}
-                </view>
-                <slot
-                  v-else
-                  :name="'title-' + current"
-                />
-                <view
-                  v-if="body"
-                  :class="prefix + '-class-body ' + classPrefix + '__body--' + modeType"
-                >
-                  {{ body }}
-                </view>
-                <slot
-                  v-else
-                  :name="'body-' + current"
-                />
-              </view>
+          <slot
+            v-if="!title && !body"
+            :name="'content-' + current"
+          />
+          <block v-else>
+            <view :class="prefix + '-class-tooltip'">
               <view
-                v-if="current !== -1"
-                :class="prefix + '-class-footer ' + classPrefix + '__footer ' + classPrefix + '__footer--' + modeType"
+                v-if="title"
+                :class="prefix + '-class-title ' + classPrefix + '__title--' + modeType"
               >
-                <!-- parse <template is="button" v-if="current < steps.length - 1 && !hideSkip" :data="...skipButton"/> -->
-                <block
-                  v-if="current < steps.length - 1 && !hideSkip"
-                  name="button"
-                >
-                  <t-button
-                    :t-id="tId || ''"
-                    :style="style || ''"
-                    :block="true || false"
-                    :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-                    :t-class="prefix + '-class-action'"
-                    :disabled="disabled || false"
-                    :data-type="'action'"
-                    :data-extra="index"
-                    :custom-dataset="customDataset"
-                    :content="content || ''"
-                    :icon="icon || ''"
-                    :loading="loading || false"
-                    :loading-props="loadingProps || null"
-                    :theme="'primary' || 'default'"
-                    :ghost="ghost || false"
-                    :shape="shape || 'rectangle'"
-                    :size="size || 'medium'"
-                    :variant="variant || 'base'"
-                    :open-type="openType || ''"
-                    :hover-class="hoverClass || ''"
-                    :hover-stop-propagation="hoverStopPropagation || false"
-                    :hover-start-time="hoverStartTime || 20"
-                    :hover-stay-time="hoverStayTime || 70"
-                    :lang="lang || 'en'"
-                    :session-from="sessionFrom || ''"
-                    :send-message-title="sendMessageTitle || ''"
-                    :send-message-path="sendMessagePath || ''"
-                    :send-message-img="sendMessageImg || ''"
-                    :app-parameter="appParameter || ''"
-                    :show-message-card="showMessageCard || false"
-                    :aria-label="ariaLabel || ''"
-                    @click="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
-                  >
-                    <slot v-if="true || false" />
-                  </t-button>
-                </block>
-                <!-- parse <template is="button" v-else-if="current === steps.length - 1 && !hideBack" :data="...backButton"/> -->
-                <block
-                  v-else-if="current === steps.length - 1 && !hideBack"
-                  name="button"
-                >
-                  <t-button
-                    :t-id="tId || ''"
-                    :style="style || ''"
-                    :block="true || false"
-                    :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-                    :t-class="prefix + '-class-action'"
-                    :disabled="disabled || false"
-                    :data-type="'action'"
-                    :data-extra="index"
-                    :custom-dataset="customDataset"
-                    :content="content || ''"
-                    :icon="icon || ''"
-                    :loading="loading || false"
-                    :loading-props="loadingProps || null"
-                    :theme="'primary' || 'default'"
-                    :ghost="ghost || false"
-                    :shape="shape || 'rectangle'"
-                    :size="size || 'medium'"
-                    :variant="variant || 'base'"
-                    :open-type="openType || ''"
-                    :hover-class="hoverClass || ''"
-                    :hover-stop-propagation="hoverStopPropagation || false"
-                    :hover-start-time="hoverStartTime || 20"
-                    :hover-stay-time="hoverStayTime || 70"
-                    :lang="lang || 'en'"
-                    :session-from="sessionFrom || ''"
-                    :send-message-title="sendMessageTitle || ''"
-                    :send-message-path="sendMessagePath || ''"
-                    :send-message-img="sendMessageImg || ''"
-                    :app-parameter="appParameter || ''"
-                    :show-message-card="showMessageCard || false"
-                    :aria-label="ariaLabel || ''"
-                    @click="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
-                  >
-                    <slot v-if="true || false" />
-                  </t-button>
-                </block>
-                <!-- parse <template is="button" v-if="current < steps.length - 1" :data="...nextButton"/> -->
-                <block
-                  v-if="current < steps.length - 1"
-                  name="button"
-                >
-                  <t-button
-                    :t-id="tId || ''"
-                    :style="style || ''"
-                    :block="true || false"
-                    :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-                    :t-class="prefix + '-class-action'"
-                    :disabled="disabled || false"
-                    :data-type="'action'"
-                    :data-extra="index"
-                    :custom-dataset="customDataset"
-                    :content="content || ''"
-                    :icon="icon || ''"
-                    :loading="loading || false"
-                    :loading-props="loadingProps || null"
-                    :theme="'primary' || 'default'"
-                    :ghost="ghost || false"
-                    :shape="shape || 'rectangle'"
-                    :size="size || 'medium'"
-                    :variant="variant || 'base'"
-                    :open-type="openType || ''"
-                    :hover-class="hoverClass || ''"
-                    :hover-stop-propagation="hoverStopPropagation || false"
-                    :hover-start-time="hoverStartTime || 20"
-                    :hover-stay-time="hoverStayTime || 70"
-                    :lang="lang || 'en'"
-                    :session-from="sessionFrom || ''"
-                    :send-message-title="sendMessageTitle || ''"
-                    :send-message-path="sendMessagePath || ''"
-                    :send-message-img="sendMessageImg || ''"
-                    :app-parameter="appParameter || ''"
-                    :show-message-card="showMessageCard || false"
-                    :aria-label="ariaLabel || ''"
-                    @click="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
-                  >
-                    <slot v-if="true || false" />
-                  </t-button>
-                </block>
-                <!-- parse <template is="button" v-else :data="...finishButton"/> -->
-                <block
-                  v-else
-                  name="button"
-                >
-                  <t-button
-                    :t-id="tId || ''"
-                    :style="style || ''"
-                    :block="true || false"
-                    :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-                    :t-class="prefix + '-class-action'"
-                    :disabled="disabled || false"
-                    :data-type="'action'"
-                    :data-extra="index"
-                    :custom-dataset="customDataset"
-                    :content="content || ''"
-                    :icon="icon || ''"
-                    :loading="loading || false"
-                    :loading-props="loadingProps || null"
-                    :theme="'primary' || 'default'"
-                    :ghost="ghost || false"
-                    :shape="shape || 'rectangle'"
-                    :size="size || 'medium'"
-                    :variant="variant || 'base'"
-                    :open-type="openType || ''"
-                    :hover-class="hoverClass || ''"
-                    :hover-stop-propagation="hoverStopPropagation || false"
-                    :hover-start-time="hoverStartTime || 20"
-                    :hover-stay-time="hoverStayTime || 70"
-                    :lang="lang || 'en'"
-                    :session-from="sessionFrom || ''"
-                    :send-message-title="sendMessageTitle || ''"
-                    :send-message-path="sendMessagePath || ''"
-                    :send-message-img="sendMessageImg || ''"
-                    :app-parameter="appParameter || ''"
-                    :show-message-card="showMessageCard || false"
-                    :aria-label="ariaLabel || ''"
-                    @click="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
-                  >
-                    <slot v-if="true || false" />
-                  </t-button>
-                </block>
+                {{ title }}
               </view>
-            </block>
+              <slot
+                v-else
+                :name="'title-' + current"
+              />
+              <view
+                v-if="body"
+                :class="prefix + '-class-body ' + classPrefix + '__body--' + modeType"
+              >
+                {{ body }}
+              </view>
+              <slot
+                v-else
+                :name="'body-' + current"
+              />
+            </view>
+            <view
+              v-if="current !== -1"
+              :class="prefix + '-class-footer ' + classPrefix + '__footer ' + classPrefix + '__footer--' + modeType"
+            >
+              <!-- parse <template is="button" v-if="current < steps.length - 1 && !hideSkip" :data="...skipButton"/> -->
+              <block
+                v-if="current < steps.length - 1 && !hideSkip"
+                name="button"
+              >
+                <t-button
+                  :t-id="tId || ''"
+                  :style="style || ''"
+                  :block="true || false"
+                  :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
+                  :t-class="prefix + '-class-action'"
+                  :disabled="disabled || false"
+                  :data-type="'action'"
+                  :data-extra="index"
+                  :custom-dataset="customDataset"
+                  :content="content || ''"
+                  :icon="icon || ''"
+                  :loading="loading || false"
+                  :loading-props="loadingProps || null"
+                  :theme="'primary' || 'default'"
+                  :ghost="ghost || false"
+                  :shape="shape || 'rectangle'"
+                  :size="size || 'medium'"
+                  :variant="variant || 'base'"
+                  :open-type="openType || ''"
+                  :hover-class="hoverClass || ''"
+                  :hover-stop-propagation="hoverStopPropagation || false"
+                  :hover-start-time="hoverStartTime || 20"
+                  :hover-stay-time="hoverStayTime || 70"
+                  :lang="lang || 'en'"
+                  :session-from="sessionFrom || ''"
+                  :send-message-title="sendMessageTitle || ''"
+                  :send-message-path="sendMessagePath || ''"
+                  :send-message-img="sendMessageImg || ''"
+                  :app-parameter="appParameter || ''"
+                  :show-message-card="showMessageCard || false"
+                  :aria-label="ariaLabel || ''"
+                  @click="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @contact="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @error="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
+                >
+                  <slot v-if="true || false" />
+                </t-button>
+              </block>
+              <!-- parse <template is="button" v-else-if="current === steps.length - 1 && !hideBack" :data="...backButton"/> -->
+              <block
+                v-else-if="current === steps.length - 1 && !hideBack"
+                name="button"
+              >
+                <t-button
+                  :t-id="tId || ''"
+                  :style="style || ''"
+                  :block="true || false"
+                  :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
+                  :t-class="prefix + '-class-action'"
+                  :disabled="disabled || false"
+                  :data-type="'action'"
+                  :data-extra="index"
+                  :custom-dataset="customDataset"
+                  :content="content || ''"
+                  :icon="icon || ''"
+                  :loading="loading || false"
+                  :loading-props="loadingProps || null"
+                  :theme="'primary' || 'default'"
+                  :ghost="ghost || false"
+                  :shape="shape || 'rectangle'"
+                  :size="size || 'medium'"
+                  :variant="variant || 'base'"
+                  :open-type="openType || ''"
+                  :hover-class="hoverClass || ''"
+                  :hover-stop-propagation="hoverStopPropagation || false"
+                  :hover-start-time="hoverStartTime || 20"
+                  :hover-stay-time="hoverStayTime || 70"
+                  :lang="lang || 'en'"
+                  :session-from="sessionFrom || ''"
+                  :send-message-title="sendMessageTitle || ''"
+                  :send-message-path="sendMessagePath || ''"
+                  :send-message-img="sendMessageImg || ''"
+                  :app-parameter="appParameter || ''"
+                  :show-message-card="showMessageCard || false"
+                  :aria-label="ariaLabel || ''"
+                  @click="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @contact="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @error="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
+                >
+                  <slot v-if="true || false" />
+                </t-button>
+              </block>
+              <!-- parse <template is="button" v-if="current < steps.length - 1" :data="...nextButton"/> -->
+              <block
+                v-if="current < steps.length - 1"
+                name="button"
+              >
+                <t-button
+                  :t-id="tId || ''"
+                  :style="style || ''"
+                  :block="true || false"
+                  :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
+                  :t-class="prefix + '-class-action'"
+                  :disabled="disabled || false"
+                  :data-type="'action'"
+                  :data-extra="index"
+                  :custom-dataset="customDataset"
+                  :content="content || ''"
+                  :icon="icon || ''"
+                  :loading="loading || false"
+                  :loading-props="loadingProps || null"
+                  :theme="'primary' || 'default'"
+                  :ghost="ghost || false"
+                  :shape="shape || 'rectangle'"
+                  :size="size || 'medium'"
+                  :variant="variant || 'base'"
+                  :open-type="openType || ''"
+                  :hover-class="hoverClass || ''"
+                  :hover-stop-propagation="hoverStopPropagation || false"
+                  :hover-start-time="hoverStartTime || 20"
+                  :hover-stay-time="hoverStayTime || 70"
+                  :lang="lang || 'en'"
+                  :session-from="sessionFrom || ''"
+                  :send-message-title="sendMessageTitle || ''"
+                  :send-message-path="sendMessagePath || ''"
+                  :send-message-img="sendMessageImg || ''"
+                  :app-parameter="appParameter || ''"
+                  :show-message-card="showMessageCard || false"
+                  :aria-label="ariaLabel || ''"
+                  @click="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @contact="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @error="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
+                >
+                  <slot v-if="true || false" />
+                </t-button>
+              </block>
+              <!-- parse <template is="button" v-else :data="...finishButton"/> -->
+              <block
+                v-else
+                name="button"
+              >
+                <t-button
+                  :t-id="tId || ''"
+                  :style="style || ''"
+                  :block="true || false"
+                  :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
+                  :t-class="prefix + '-class-action'"
+                  :disabled="disabled || false"
+                  :data-type="'action'"
+                  :data-extra="index"
+                  :custom-dataset="customDataset"
+                  :content="content || ''"
+                  :icon="icon || ''"
+                  :loading="loading || false"
+                  :loading-props="loadingProps || null"
+                  :theme="'primary' || 'default'"
+                  :ghost="ghost || false"
+                  :shape="shape || 'rectangle'"
+                  :size="size || 'medium'"
+                  :variant="variant || 'base'"
+                  :open-type="openType || ''"
+                  :hover-class="hoverClass || ''"
+                  :hover-stop-propagation="hoverStopPropagation || false"
+                  :hover-start-time="hoverStartTime || 20"
+                  :hover-stay-time="hoverStayTime || 70"
+                  :lang="lang || 'en'"
+                  :session-from="sessionFrom || ''"
+                  :send-message-title="sendMessageTitle || ''"
+                  :send-message-path="sendMessagePath || ''"
+                  :send-message-img="sendMessageImg || ''"
+                  :app-parameter="appParameter || ''"
+                  :show-message-card="showMessageCard || false"
+                  :aria-label="ariaLabel || ''"
+                  @click="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @contact="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @error="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
+                  @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
+                >
+                  <slot v-if="true || false" />
+                </t-button>
+              </block>
+            </view>
           </block>
         </view>
       </view>

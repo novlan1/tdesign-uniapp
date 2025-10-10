@@ -136,7 +136,6 @@ export const toComponent = function (e) {
           // this[e] = o[t];
           this[tDataKey] = o[t];
           // e.props[key].default = o[t];
-          // TODO: to double check
           // this.setData({
           //   [e]: o[t],
           // });
@@ -153,7 +152,6 @@ export const toComponent = function (e) {
         if (this._selfControlled) {
           const tDataKey = getInnerControlledValue(key);
           this[tDataKey] = t[key];
-          // TODO: to double check
           // this.setData({
           //   [key]: t[key],
           // });

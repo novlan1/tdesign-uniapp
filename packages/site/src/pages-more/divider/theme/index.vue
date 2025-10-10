@@ -26,19 +26,19 @@
 
 <script>
 import tDivider from 'tdesign-uniapp/divider/divider';
-// TODO: check skyline exists
-// import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js'
+import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js';
+
 export default {
   components: {
     tDivider,
   },
+  mixins: [SkylineBehavior],
   data() {
     return {
       skylineRender: false,
     };
   },
   created() {},
-  // mixins: [SkylineBehavior],
   methods: {},
 };
 </script>

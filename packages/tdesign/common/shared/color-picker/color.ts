@@ -1,4 +1,3 @@
-// TODO: check tinycolor2 esm 引入方式
 import tinyColor from 'tinycolor2';
 import { cmykInputToColor, rgb2cmyk } from './cmyk';
 import { parseGradientString, GradientColors, GradientColorPoint, isGradientColor } from './gradient';

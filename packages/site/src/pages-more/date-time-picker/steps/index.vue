@@ -9,14 +9,13 @@
       @click="showPicker"
     />
 
-    <!-- TODO: -->
-    <!-- :steps="" -->
     <t-date-time-picker
       title="选择时间"
       :visible="visible"
       :value="value"
       format="HH:mm:ss"
       :mode="['null', 'second']"
+      :steps="{ minute: 5 }"
       @change="onConfirm"
       @pick="onColumnChange"
       @cancel="hidePicker"

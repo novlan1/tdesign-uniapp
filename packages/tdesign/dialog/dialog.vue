@@ -173,7 +173,6 @@
             </template>
             <slot name="cancel-btn" />
             <template v-if="_confirm">
-              <!-- TODO: 改成 v-bind？ -->
               <!-- parse <template is="button" :data="type: 'confirm', theme: 'primary', ..._confirm"/> -->
               <!-- <template name="button"> -->
               <t-button

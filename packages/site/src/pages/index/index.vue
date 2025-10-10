@@ -18,7 +18,6 @@ import componentData from './config.json';
 
 const clickComponentItem = (item) => {
   uni.navigateTo({
-    // TODO: 改成 index.vue，方便使用者引入
     url: `/pages-more/${item.name}/${item.name}`,
   });
 };

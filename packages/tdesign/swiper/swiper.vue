@@ -35,30 +35,25 @@
         @tap="onTap"
       >
         <!-- parse <template is="image" :data="tClass: _this.getImageClass(prefix, navCurrent, index, list), style: 'height: ' + _.addUnit(height), src: _.isObject(item) ? item.value : item, mode: 'aspectFill', dataset: index, ...imageProps, bindload: 'onImageLoad'"/> -->
-        <block
-          v-if="false"
-          name="image"
-        >
-          <t-image
-            :t-class="_.cls(classPrefix + '__image', [util.getImageSize(column)]) + ' ' + prefix + '-class-image'"
-            :t-class-load="tClassLoad"
-            :style="'height: ' + _.addUnit(height) || ''"
-            :custom-style="customStyle || ''"
-            :height="height || ''"
-            :width="width || ''"
-            :error="error || 'default'"
-            :lazy="lazy || false"
-            :loading="count || 'default'"
-            :shape="'round' || 'square'"
-            :src="image || ''"
-            :mode="'widthFix' || 'scaleToFill'"
-            :webp="webp || false"
-            :show-menu-by-longpress="showMenuByLongpress || false"
-            :data-custom="index || null"
-            @error="binderror($event, { custom: index || null })"
-            @load="'onImageLoad';"
-          />
-        </block>
+        <t-image
+          :t-class="_.cls(classPrefix + '__image', [util.getImageSize(column)]) + ' ' + prefix + '-class-image'"
+          :t-class-load="tClassLoad"
+          :style="'height: ' + _.addUnit(height) || ''"
+          :custom-style="customStyle || ''"
+          :height="height || ''"
+          :width="width || ''"
+          :error="error || 'default'"
+          :lazy="lazy || false"
+          :loading="count || 'default'"
+          :shape="'round' || 'square'"
+          :src="image || ''"
+          :mode="'widthFix' || 'scaleToFill'"
+          :webp="webp || false"
+          :show-menu-by-longpress="showMenuByLongpress || false"
+          :data-custom="index || null"
+          @error="binderror($event, { custom: index || null })"
+          @load="'onImageLoad';"
+        />
       </swiper-item>
     </swiper>
     <t-swiper-nav

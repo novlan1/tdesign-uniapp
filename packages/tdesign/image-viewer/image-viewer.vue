@@ -87,23 +87,18 @@
         >
           <slot name="delete-btn" />
           <!-- parse <template is="icon" :data="..._deleteBtn"/> -->
-          <block
-            v-if="false"
-            name="icon"
-          >
-            <t-icon
-              :style="style || ''"
-              :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-              :prefix="prefix || ''"
-              :name="'close' || ''"
-              :size="22 || ''"
-              :color="color || ''"
-              :aria-hidden="true || ''"
-              :aria-label="ariaLabel || ''"
-              :aria-role="ariaRole || ''"
-              @click="bindclick || ''"
-            />
-          </block>
+          <t-icon
+            :style="style || ''"
+            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
+            :prefix="prefix || ''"
+            :name="'close' || ''"
+            :size="22 || ''"
+            :color="color || ''"
+            :aria-hidden="true || ''"
+            :aria-label="ariaLabel || ''"
+            :aria-role="ariaRole || ''"
+            @click="bindclick || ''"
+          />
         </view>
       </view>
     </block>

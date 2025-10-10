@@ -1,12 +1,12 @@
 <template>
   <view>
-    <!-- :navigation="" TODO: -->
     <t-swiper
       :current="current"
       :autoplay="autoplay"
       :duration="duration"
       :interval="interval"
       :list="swiperList"
+      :navigation="{ type: 'dots' }"
       @click="onTap"
       @change="onChange"
       @image-load="onImageLoad"

@@ -94,6 +94,7 @@ import tBadge from 'tdesign-uniapp/badge/badge';
 // import tIcon from 'tdesign-uniapp/icon/icon';
 // TODO: after add switch
 // import tSwitch from 'tdesign-uniapp/switch/switch';
+
 export default {
   components: {
     tCell,

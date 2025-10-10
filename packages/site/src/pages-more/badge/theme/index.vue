@@ -86,7 +86,8 @@ import tBadge from 'tdesign-uniapp/badge/badge';
 import tCell from 'tdesign-uniapp/cell/cell';
 import tIcon from 'tdesign-uniapp/icon/icon';
 import tButton from 'tdesign-uniapp/button/button';
-// import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js'
+import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js';
+
 export default {
   components: {
     tBadge,
@@ -94,7 +95,7 @@ export default {
     tIcon,
     tButton,
   },
-  //   mixins: [SkylineBehavior],
+  mixins: [SkylineBehavior],
   data() {
     return {
       skylineRender: false,
