@@ -38,7 +38,7 @@ export default {
      */
   methods: {
     onChange(event) {
-      console.log('radio', event.detail);
+      console.log('radio', event);
     },
   },
 };

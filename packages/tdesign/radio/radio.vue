@@ -2,7 +2,7 @@
   <view
     :id="tId"
     :style="_._style([style, customStyle])"
-    :class="_.cls(classPrefix, [_placement, ['block', block]]) + ' class ' + prefix + '-class'"
+    :class="_.cls(classPrefix, [_placement, ['block', block]]) + ' class ' + tClass"
     :disabled="_disabled"
     aria-role="radio"
     :aria-checked="dataChecked"
@@ -11,7 +11,7 @@
     :tabindex="tabindex"
     @click.stop="handleTap"
   >
-    <view :class="_.cls(classPrefix + '__icon', [_placement, ['checked', dataChecked], ['disabled', _disabled]]) + ' ' + prefix + '-class-icon'">
+    <view :class="_.cls(classPrefix + '__icon', [_placement, ['checked', dataChecked], ['disabled', _disabled]]) + ' ' + tClassIcon">
       <slot
         v-if="slotIcon"
         name="icon"
@@ -58,8 +58,7 @@
             ['checked', dataChecked]
           ]) +
             ' ' +
-            prefix +
-            '-class-label'
+            tClassLabel
         "
         :style="'-webkit-line-clamp:' + maxLabelRow"
       >
@@ -76,8 +75,7 @@
             ['checked', dataChecked]
           ]) +
             ' ' +
-            prefix +
-            '-class-content'
+            tClassContent
         "
         :style="'-webkit-line-clamp:' + maxContentRow"
       >
@@ -89,87 +87,52 @@
     </view>
     <view
       v-if="!borderless"
-      :class="_.cls(classPrefix + '__border', [_placement]) + ' ' + prefix + '-class-border'"
+      :class="_.cls(classPrefix + '__border', [_placement]) + ' ' + tClassBorder"
     />
   </view>
 </template>
 <script>
 import tIcon from '../icon/icon';
-import { __decorate } from '../miniprogram_npm/tslib';
-import config from '../common/config';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import Props from './props';
+import { prefix } from '../common/config';
+import { uniComponent } from '../common/src/index';
+import props from './props';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
+import { ChildrenMixin, RELATION_MAP } from '../common/relation';
 
 
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-radio`;
-let Radio = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.components = {
-      tIcon,
-    };
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-label`, `${prefix}-class-icon`, `${prefix}-class-content`, `${prefix}-class-border`];
-    this.behaviors = ['wx://form-field'];
-    this._ = _;
-    this.name = 'TRadio';
-    this.relations = {
-      '../radio-group/radio-group': {
-        type: 'ancestor',
-        linked(e) {
-          // if (e.data.borderless) {
-          //   this.setData({
-          //     borderless: true
-          //   });
-          // }
-        },
-      },
-    };
-    this.rawData = {
-      dataChecked: undefined,
-      dataValue: undefined,
-      _,
-    };
-    this.watch = {
-      checked: {
-        handler(val) {
-          this.dataChecked = val;
-        },
-        immediate: true,
-      },
-      value: {
-        handler(val) {
-          this.dataValue = val;
-        },
-        immediate: true,
-      },
-    };
-    this.options = {
-      multipleSlots: true,
-    };
-    this.lifetimes = {
-      attached() {
-        this.init();
-      },
-    };
-    this.properties = Object.assign(Object.assign({}, Props), {
-      borderless: {
-        type: Boolean,
-        value: false,
-      },
-      tId: {
-        type: String,
-      },
-    });
-    this.controlledProps = [{
+
+export default uniComponent({
+  name,
+  controlledProps: [
+    {
       key: 'checked',
       event: 'change',
-    }];
-    this.setData({
+    },
+  ],
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-label`,
+    `${prefix}-class-icon`,
+    `${prefix}-class-content`,
+    `${prefix}-class-border`,
+  ],
+  mixins: [ChildrenMixin(RELATION_MAP.Radio)],
+  components: {
+    tIcon,
+  },
+  props: {
+    ...props,
+    borderless: {
+      type: Boolean,
+      default: false,
+    },
+    tId: {
+      type: String,
+    },
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       customIcon: false,
@@ -179,76 +142,217 @@ let Radio = class extends SuperComponent {
       _placement: '',
       _disabled: false,
       _readonly: false,
-    });
-    this.observers = {
-      disabled(e) {
-        this.setData({
-          _disabled: e,
-        });
-      },
-      readonly(e) {
-        this.setData({
-          _readonly: e,
-        });
-      },
+      _,
+
+      dataChecked: this.checked,
     };
-    this.methods = {
-      handleTap(e) {
-        const {
-          _disabled: t,
-          _readonly: a,
-          contentDisabled: o,
-        } = this;
-        const {
-          target: s,
-        } = e.currentTarget.dataset;
-        t || a || 'text' === s && o || this.doChange();
+  },
+  watch: {
+    checked: {
+      handler(v) {
+        this.dataChecked = v;
       },
-      doChange() {
-        let e;
-        const {
-          dataValue: t,
-          dataChecked: a,
-          allowUncheck: o,
-        } = this;
-        const s = Boolean(o || (null === (e = this[this.relationParentName]) || void 0 === e ? void 0 : e.allowUncheck));
-        this[this.relationParentName]
-          ? this[this.relationParentName].updateValue(a && s ? null : t)
-          : this._trigger('change', {
-            checked: !s || !a,
-          });
+      immediate: true,
+    },
+    disabled: {
+      handler(v) {
+        this._disabled = v;
       },
-      init() {
-        let e;
-        let t;
-        let a;
-        let o;
-        const {
-          icon: s,
-        } = this;
-        const i = Array.isArray((null === (e = this[this.relationParentName]) || void 0 === e ? void 0 : e.icon) || s);
-        this.setData({
-          customIcon: i,
-          slotIcon: 'slot' === s,
-          iconVal: i ? (null === (t = this[this.relationParentName]) || void 0 === t ? void 0 : t.icon) || s : [],
-          _placement: this.placement || (null === (o = null === (a = this[this.relationParentName]) || void 0 === a ? void 0 : a.data) || void 0 === o ? void 0 : o.placement) || 'left',
-        });
+      immediate: true,
+    },
+    readonly: {
+      handler(v) {
+        this._readonly = v;
       },
-      setDisabled(e) {
-        this.setData({
-          _disabled: this.disabled || e,
-        });
-      },
-      setReadonly(e) {
-        this.setData({
-          _readonly: this.readonly || e,
-        });
-      },
-    };
-  }
-};
-Radio = initTDesign(__decorate([wxComponent()], Radio));
-export default Radio;
+      immediate: true,
+    },
+  },
+  mounted() {
+    this.init();
+  },
+  methods: {
+    handleTap(e) {
+      const { _disabled, _readonly, contentDisabled } = this;
+      const { target } = e.currentTarget.dataset;
+
+      if (_disabled || _readonly || (target === 'text' && contentDisabled)) return;
+
+      this.doChange();
+    },
+    doChange() {
+      const { value, dataChecked, allowUncheck } = this;
+
+      const isAllowUncheck = Boolean(allowUncheck || this[RELATION_MAP.Radio]?.allowUncheck);
+
+      if (this[RELATION_MAP.Radio]) {
+        this[RELATION_MAP.Radio].updateValue(dataChecked && isAllowUncheck ? null : value);
+      } else {
+        this._trigger('change', { checked: isAllowUncheck ? !dataChecked : true });
+      }
+    },
+    init() {
+      const { icon } = this;
+      const isIdArr = Array.isArray(this[RELATION_MAP.Radio]?.icon || icon);
+
+      this.customIcon = isIdArr;
+      this.slotIcon = icon === 'slot';
+      this.iconVal = isIdArr ? this[RELATION_MAP.Radio]?.icon || icon : [];
+      this._placement = this.placement || this[RELATION_MAP.Radio]?.placement || 'left';
+    },
+
+    setDisabled(disabled) {
+      this._disabled = this.disabled || disabled;
+    },
+
+    setReadonly(readonly) {
+      this._readonly = this.readonly || readonly;
+    },
+  },
+});
+
+
+// let Radio = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.components = {
+//       tIcon,
+//     };
+//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-label`, `${prefix}-class-icon`, `${prefix}-class-content`, `${prefix}-class-border`];
+//     this.behaviors = ['wx://form-field'];
+//     this._ = _;
+//     this.name = 'TRadio';
+//     this.relations = {
+//       '../radio-group/radio-group': {
+//         type: 'ancestor',
+//         linked(e) {
+//           // if (e.data.borderless) {
+//           //   this.setData({
+//           //     borderless: true
+//           //   });
+//           // }
+//         },
+//       },
+//     };
+//     this.rawData = {
+//       dataChecked: undefined,
+//       dataValue: undefined,
+//       _,
+//     };
+//     this.watch = {
+//       checked: {
+//         handler(val) {
+//           this.dataChecked = val;
+//         },
+//         immediate: true,
+//       },
+//       value: {
+//         handler(val) {
+//           this.dataValue = val;
+//         },
+//         immediate: true,
+//       },
+//     };
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     this.lifetimes = {
+//       attached() {
+//         this.init();
+//       },
+//     };
+//     this.properties = Object.assign(Object.assign({}, Props), {
+//       borderless: {
+//         type: Boolean,
+//         value: false,
+//       },
+//       tId: {
+//         type: String,
+//       },
+//     });
+//     this.controlledProps = [{
+//       key: 'checked',
+//       event: 'change',
+//     }];
+//     this.setData({
+//       prefix,
+//       classPrefix: name,
+//       customIcon: false,
+//       slotIcon: false,
+//       optionLinked: false,
+//       iconVal: [],
+//       _placement: '',
+//       _disabled: false,
+//       _readonly: false,
+//     });
+//     this.observers = {
+//       disabled(e) {
+//         this.setData({
+//           _disabled: e,
+//         });
+//       },
+//       readonly(e) {
+//         this.setData({
+//           _readonly: e,
+//         });
+//       },
+//     };
+//     this.methods = {
+//       handleTap(e) {
+//         const {
+//           _disabled: t,
+//           _readonly: a,
+//           contentDisabled: o,
+//         } = this;
+//         const {
+//           target: s,
+//         } = e.currentTarget.dataset;
+//         t || a || 'text' === s && o || this.doChange();
+//       },
+//       doChange() {
+//         let e;
+//         const {
+//           dataValue: t,
+//           dataChecked: a,
+//           allowUncheck: o,
+//         } = this;
+//         const s = Boolean(o || (null === (e = this[this.relationParentName]) || void 0 === e ? void 0 : e.allowUncheck));
+//         this[this.relationParentName]
+//           ? this[this.relationParentName].updateValue(a && s ? null : t)
+//           : this._trigger('change', {
+//             checked: !s || !a,
+//           });
+//       },
+//       init() {
+//         let e;
+//         let t;
+//         let a;
+//         let o;
+//         const {
+//           icon: s,
+//         } = this;
+//         const i = Array.isArray((null === (e = this[this.relationParentName]) || void 0 === e ? void 0 : e.icon) || s);
+//         this.setData({
+//           customIcon: i,
+//           slotIcon: 'slot' === s,
+//           iconVal: i ? (null === (t = this[this.relationParentName]) || void 0 === t ? void 0 : t.icon) || s : [],
+//           _placement: this.placement || (null === (o = null === (a = this[this.relationParentName]) || void 0 === a ? void 0 : a.data) || void 0 === o ? void 0 : o.placement) || 'left',
+//         });
+//       },
+//       setDisabled(e) {
+//         this.setData({
+//           _disabled: this.disabled || e,
+//         });
+//       },
+//       setReadonly(e) {
+//         this.setData({
+//           _readonly: this.readonly || e,
+//         });
+//       },
+//     };
+//   }
+// };
+// Radio = initTDesign(__decorate([wxComponent()], Radio));
+// export default Radio;
 </script>
 <style>
 @import './radio.css';

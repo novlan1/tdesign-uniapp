@@ -40,7 +40,7 @@ export default {
   methods: {
     handleChange(e) {
       console.log('handleChange', e);
-      this.checked = e.detail.checked;
+      this.checked = e.checked;
     },
   },
 };

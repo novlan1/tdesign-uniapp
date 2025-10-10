@@ -68,22 +68,22 @@
 
 <script lang="ts">
 
-import horizontal from './horizontal';
-import BaseDemo from './base';
-// import align from './align';
-// import card from './card';
-// import status from './status';
-// import theme from './theme';
-// import special from './special';
+import BaseDemo from './base/index.vue';
+import horizontal from './horizontal/index.vue';
+import align from './align/index.vue';
+import card from './card/index.vue';
+import status from './status/index.vue';
+import theme from './theme/index.vue';
+import special from './special/index.vue';
 export default {
   components: {
     horizontal,
     BaseDemo,
-    // align,
-    // card,
-    // status,
-    // theme,
-    // special,
+    align,
+    card,
+    status,
+    theme,
+    special,
   },
   data() {
     return {};

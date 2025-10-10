@@ -79,14 +79,10 @@ export default {
   created() {},
   methods: {
     onChange(e) {
-      this.setData({
-        value: e.detail.value,
-      });
+      this.value = e.value;
     },
     onChange1(e) {
-      this.setData({
-        value1: e.detail.value,
-      });
+      this.value1 = e.value;
     },
   },
 };

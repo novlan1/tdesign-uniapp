@@ -11,11 +11,10 @@
 
 <script>
 import tRadioGroup from 'tdesign-uniapp/radio-group/radio-group';
-import tRadio from 'tdesign-uniapp/radio/radio';
+
 export default {
   components: {
     tRadioGroup,
-    tRadio,
   },
   data() {
     return {
@@ -45,7 +44,7 @@ export default {
   methods: {
     onChange(event) {
       console.log('[onChange]', event);
-      const { value } = event.detail;
+      const { value } = event;
       this.current = value;
       console.log('[current]', this.current);
     },
