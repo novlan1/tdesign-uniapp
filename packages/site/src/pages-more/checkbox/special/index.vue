@@ -7,10 +7,10 @@
       <view
         v-for="(item, index) in 3"
         :key="index"
-        :class="'card ' + (_.contain(value, index) ? 'card--active' : '')"
+        :class="'card ' + (contain(value, index) ? 'card--active' : '')"
       >
         <t-icon
-          v-if="_.contain(value, index)"
+          v-if="contain(value, index)"
           name="check"
           t-class="card__icon"
           :aria-hidden="true"
@@ -41,10 +41,10 @@
       <view
         v-for="(item, index) in 3"
         :key="index"
-        :class="'card ' + (_.contain(value1, index) ? 'card--active' : '')"
+        :class="'card ' + (contain(value1, index) ? 'card--active' : '')"
       >
         <t-icon
-          v-if="_.contain(value1, index)"
+          v-if="contain(value1, index)"
           name="check"
           t-class="card__icon"
           :aria-hidden="true"
@@ -82,14 +82,10 @@ export default {
       return arr.indexOf(key) > -1;
     },
     onChange(e) {
-      this.setData({
-        value: e.detail.value,
-      });
+      this.value = e.value;
     },
     onChange1(e) {
-      this.setData({
-        value1: e.detail.value,
-      });
+      this.value1 = e.value;
     },
   },
 };

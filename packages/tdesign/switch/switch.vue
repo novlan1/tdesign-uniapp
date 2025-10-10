@@ -78,7 +78,7 @@ export default uniComponent({
       checked: false,
       _,
 
-      dataValue: this.value,
+      dataValue: this.value ?? this.defaultValue,
     };
   },
   watch: {

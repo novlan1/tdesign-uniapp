@@ -39,9 +39,7 @@ export default {
      */
   methods: {
     changeChecked(e) {
-      this.setData({
-        checked: e.detail.checked,
-      });
+      this.checked = e.checked;
     },
   },
 };

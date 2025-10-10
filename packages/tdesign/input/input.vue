@@ -191,7 +191,8 @@ export default uniComponent({
       showClearIcon: true,
       _,
 
-      dataValue: this.value,
+      dataValue: this.value ?? this.defaultValue,
+
       rawValue: '',
       innerMaxLen: -1,
     };

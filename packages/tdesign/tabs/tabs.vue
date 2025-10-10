@@ -223,7 +223,7 @@ export default uniComponent({
       placement: 'top',
       _,
 
-      dataValue: this.value,
+      dataValue: this.value ?? this.defaultValue,
     };
   },
   methods: {

@@ -143,7 +143,7 @@ export default uniComponent({
       _readonly: false,
       _,
 
-      dataChecked: this.checked,
+      dataChecked: this.checked ?? this.defaultChecked,
     };
   },
   watch: {

@@ -95,7 +95,7 @@ export default uniComponent({
     return {
       classPrefix: name,
       _,
-      dataVisible: this.visible,
+      dataVisible: this.visible ?? this.defaultVisible,
     };
   },
   watch: {

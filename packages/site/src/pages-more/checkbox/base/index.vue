@@ -10,11 +10,10 @@
 
 <script>
 import tCheckboxGroup from 'tdesign-uniapp/checkbox-group/checkbox-group';
-import tCheckbox from 'tdesign-uniapp/checkbox/checkbox';
+
 export default {
   components: {
     tCheckboxGroup,
-    tCheckbox,
   },
   data() {
     return {
@@ -45,12 +44,9 @@ export default {
   created() {},
   methods: {
     handleGroupChange(event) {
-      console.log('group', event.detail.value);
-      const { value } = event.detail;
+      console.log('change: ', event);
+      const { value } = event;
       this.current = value;
-    //   this.setData({
-    //     current: event.detail.value,
-    //   });
     },
   },
 };

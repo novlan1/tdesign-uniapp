@@ -41,7 +41,8 @@ export default uniComponent({
       classPrefix: name,
       prefix,
       _,
-      dataValue: this.value,
+
+      dataValue: this.value ?? this.defaultValue,
     };
   },
   watch: {

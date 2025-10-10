@@ -40,7 +40,7 @@ export default uniComponent({
       classPrefix: name,
       _,
       border: false,
-      dataValue: this.value,
+      dataValue: this.value ?? this.defaultValue,
     };
   },
   watch: {

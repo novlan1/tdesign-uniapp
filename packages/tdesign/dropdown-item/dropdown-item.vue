@@ -175,7 +175,9 @@ export default uniComponent({
       valueAlias: 'value',
       computedLabel: '',
       firstCheckedValue: '',
-      dataValue: this.value,
+
+      dataValue: this.value ?? this.defaultValue,
+
       wrapperVisible: false,
       _,
     };

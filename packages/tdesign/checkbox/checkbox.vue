@@ -2,16 +2,15 @@
   <view
     :id="tId"
     :style="_._style([style, customStyle])"
-    :class="_.cls(classPrefix, [placement, theme, ['checked', dataChecked], ['block', block]]) + ' class ' + prefix + '-class'"
+    :class="_.cls(classPrefix, [placement, theme, ['checked', dataChecked], ['block', block]]) + ' class ' + tClass"
     aria-role="checkbox"
-    :aria-checked="dataChecked ? (indeterminate ? 'mixed' : true) : false"
+    :aria-checked="dataChecked ? (dataIndeterminate ? 'mixed' : true) : false"
     :aria-disabled="_disabled ? true : false"
-    :tabindex="tabindex"
     @click.stop="handleTap"
   >
     <view
       v-if="theme == 'default'"
-      :class="_.cls(classPrefix + '__icon', [placement, ['checked', dataChecked], ['disabled', _disabled]]) + ' ' + prefix + '-class-icon'"
+      :class="_.cls(classPrefix + '__icon', [placement, ['checked', dataChecked], ['disabled', _disabled]]) + ' ' + tClassIcon"
     >
       <slot
         v-if="icon === 'slot'"
@@ -22,7 +21,7 @@
         :class="classPrefix + '__icon'"
       >
         <image
-          :src="dataChecked ? (indeterminate && icon[2] ? icon[2] : icon[0]) : icon[1]"
+          :src="dataChecked ? (dataIndeterminate && icon[2] ? icon[2] : icon[0]) : icon[1]"
           :class="classPrefix + '__icon-image'"
           webp
         />
@@ -30,12 +29,12 @@
       <block v-else>
         <t-icon
           v-if="dataChecked && (icon == 'circle' || icon == 'rectangle')"
-          :name="indeterminate ? 'minus-' + icon + '-filled' : 'check-' + icon + '-filled'"
+          :name="dataIndeterminate ? 'minus-' + icon + '-filled' : 'check-' + icon + '-filled'"
           :class="_.cls(classPrefix + '__icon-wrapper', [])"
         />
         <t-icon
           v-if="dataChecked && icon == 'line'"
-          :name="indeterminate ? 'minus-' + icon + '-filled' : 'check'"
+          :name="dataIndeterminate ? 'minus-' + icon + '-filled' : 'check'"
           :class="_.cls(classPrefix + '__icon-wrapper', [])"
         />
         <view
@@ -60,8 +59,7 @@
             ['checked', dataChecked]
           ]) +
             ' ' +
-            prefix +
-            '-class-label'
+            tClassLabel
         "
         :style="'-webkit-line-clamp:' + maxLabelRow"
       >
@@ -72,7 +70,7 @@
         <slot name="label" />
       </view>
       <view
-        :class="_.cls(classPrefix + '__description', [['disabled', _disabled]]) + ' ' + prefix + '-class-content'"
+        :class="_.cls(classPrefix + '__description', [['disabled', _disabled]]) + ' ' + tClassContent"
         :style="'-webkit-line-clamp:' + maxContentRow"
       >
         <block v-if="content">
@@ -82,146 +80,270 @@
       </view>
     </view>
     <view
-      v-if="theme == 'default' && !borderless"
-      :class="_.cls(classPrefix + '__border', [placement]) + ' ' + prefix + '-class-border'"
+      v-if="theme == 'default' && !dataBorderless"
+      :class="_.cls(classPrefix + '__border', [placement]) + ' ' + tClassBorder"
     />
   </view>
 </template>
 <script>
 import tIcon from '../icon/icon';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
-import Props from './props';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
+import props from './props';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
+import { ChildrenMixin, RELATION_MAP } from '../common/relation';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-checkbox`;
-let CheckBox = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-label`, `${prefix}-class-icon`, `${prefix}-class-content`, `${prefix}-class-border`];
-    // this.behaviors = ["wx://form-field"];
-    this.name = 'TCheckbox';
-    this.components = {
-      tIcon,
-    };
-    this._ = _;
-    this.relations = {
-      '../checkbox-group/checkbox-group': {
-        type: 'ancestor',
-        linked(e) {
-          const {
-            value: t,
-            disabled: s,
-            borderless: a,
-          } = e.data;
-          const i = new Set(t);
-          const o = i.has(this.value);
-          const c = {
-            _disabled: null == this.disabled ? s : this.disabled,
-          };
-          if (a) {
-            c.borderless = true;
-          }
-          c.checked = this.checked || o;
-          if (this.checked) {
-            e.updateValue(this);
-          }
-          if (this.checkAll) {
-            c.checked = i.size > 0;
-          }
-          this.setData(c);
-        },
-      },
-    };
-    this.options = {
-      multipleSlots: true,
-    };
-    this.properties = Object.assign(Object.assign({}, Props), {
-      theme: {
-        type: String,
-        value: 'default',
-      },
-      tId: {
-        type: String,
-      },
-    });
-    this.rawData = {
-      dataChecked: false,
-      _disabled: false,
-      prefix,
-      classPrefix: name,
-      _,
-    };
 
 
-    this.watch = {
-      checked: {
-        handler(val) {
-          this.dataChecked = val;
-        },
-        immediate: true,
-      },
-      disabled(e) {
-        this.setData({
-          _disabled: e,
-        });
-      },
-    };
-    this.controlledProps = [{
+export default uniComponent({
+  name,
+  controlledProps: [
+    {
       key: 'checked',
       event: 'change',
-    }];
-    this.methods = {
-      handleTap(e) {
-        const {
-          _disabled: t,
-          readonly: s,
-          contentDisabled: a,
-        } = this;
-        const {
-          target: i,
-        } = e.currentTarget.dataset;
-        if (t || s || 'text' === i && a) {
-          return;
-        }
-        const {
-          value: o,
-          label: c,
-        } = this;
-        const d = !this.dataChecked;
-        const r = this[this.relationParentName];
-        r ? r.updateValue(Object.assign(Object.assign({}, this), {
-          checked: d,
-          item: {
-            label: c,
-            value: o,
-            checked: d,
-          },
-        })) : this._trigger('change', {
-          context: {
-            value: o,
-            label: c,
-          },
-          checked: d,
-        });
-      },
-      setDisabled(e) {
-        this.setData({
-          _disabled: this.disabled || e,
-        });
-      },
-    };
-  }
-};
-CheckBox = initTDesign(__decorate([wxComponent()], CheckBox));
+    },
+  ],
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-label`,
+    `${prefix}-class-icon`,
+    `${prefix}-class-content`,
+    `${prefix}-class-border`,
+  ],
+  mixins: [ChildrenMixin(RELATION_MAP.Checkbox)],
+  components: {
+    tIcon,
+  },
+  props: {
+    ...props,
+    theme: {
+      type: String,
+      default: 'default',
+    },
+    tId: {
+      type: String,
+    },
+  },
+  data() {
+    return {
+      prefix,
+      classPrefix: name,
+      _disabled: false,
+      _,
 
-console.log('[CheckBox Comp]', CheckBox);
-export default CheckBox;
+      dataBorderless: this.borderless,
+      dataIndeterminate: this.indeterminate,
+      dataChecked: this.checked ?? this.defaultChecked,
+    };
+  },
+  watch: {
+    borderless: {
+      handler(v) {
+        this.dataBorderless = v;
+      },
+      immediate: true,
+    },
+    indeterminate: {
+      handler(v) {
+        this.dataIndeterminate = v;
+      },
+      immediate: true,
+    },
+    checked: {
+      handler(v) {
+        this.dataChecked = v;
+      },
+      immediate: true,
+    },
+    disabled: {
+      handler(v) {
+        this._disabled = v;
+      },
+      immediate: true,
+    },
+  },
+  mounted() {
+
+  },
+  methods: {
+    innerAfterLinked() {
+      const parent = this[RELATION_MAP.Checkbox];
+      const { value, disabled, borderless } = parent;
+      const { dataValue, checked, checkAll, item, dataIndeterminate } = this;
+      const valueSet = new Set(value);
+      const checkedFromParent = valueSet.has(this.value);
+      const data = {
+        _disabled: this.disabled == null ? disabled : this.disabled,
+      };
+
+      data.dataBorderless = !!(this.borderless ?? borderless);
+
+      data.dataChecked = this.dataChecked || checkedFromParent;
+      if (this.dataChecked) {
+        // TODO
+        parent.updateValue({
+          value: dataValue, checked, checkAll, item, indeterminate: dataIndeterminate,
+        });
+      }
+
+      if (this.checkAll) {
+        data.dataChecked = valueSet.size > 0;
+        // data.indeterminate =
+      }
+
+      Object.keys(data).forEach((key) => {
+        this[key] = data[key];
+      });
+    },
+    handleTap(e) {
+      const { _disabled, readonly, contentDisabled } = this;
+      const { target } = e.currentTarget.dataset;
+
+      if (_disabled || readonly || (target === 'text' && contentDisabled)) return;
+
+      const { value, label, checkAll, dataIndeterminate } = this;
+      const checked = !this.dataChecked;
+      const parent = this[RELATION_MAP.Checkbox];
+
+
+      if (parent) {
+        // TODO
+        parent.updateValue({ value, checkAll, indeterminate: dataIndeterminate, checked, item: { label, value, checked } });
+      } else {
+        this._trigger('change', { context: { value, label }, checked });
+      }
+    },
+
+    setDisabled(disabled) {
+      this._disabled = this.disabled || disabled;
+    },
+  },
+});
+
+// let CheckBox = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-label`, `${prefix}-class-icon`, `${prefix}-class-content`, `${prefix}-class-border`];
+//     // this.behaviors = ["wx://form-field"];
+//     this.name = 'TCheckbox';
+//     this.components = {
+//       tIcon,
+//     };
+//     this._ = _;
+//     this.relations = {
+//       '../checkbox-group/checkbox-group': {
+//         type: 'ancestor',
+//         linked(e) {
+//           const {
+//             value: t,
+//             disabled: s,
+//             borderless: a,
+//           } = e.data;
+//           const i = new Set(t);
+//           const o = i.has(this.value);
+//           const c = {
+//             _disabled: null == this.disabled ? s : this.disabled,
+//           };
+//           if (a) {
+//             c.borderless = true;
+//           }
+//           c.checked = this.checked || o;
+//           if (this.checked) {
+//             e.updateValue(this);
+//           }
+//           if (this.checkAll) {
+//             c.checked = i.size > 0;
+//           }
+//           this.setData(c);
+//         },
+//       },
+//     };
+//     this.options = {
+//       multipleSlots: true,
+//     };
+//     this.properties = Object.assign(Object.assign({}, Props), {
+//       theme: {
+//         type: String,
+//         value: 'default',
+//       },
+//       tId: {
+//         type: String,
+//       },
+//     });
+//     this.rawData = {
+//       dataChecked: false,
+//       _disabled: false,
+//       prefix,
+//       classPrefix: name,
+//       _,
+//     };
+
+
+//     this.watch = {
+//       checked: {
+//         handler(val) {
+//           this.dataChecked = val;
+//         },
+//         immediate: true,
+//       },
+//       disabled(e) {
+//         this.setData({
+//           _disabled: e,
+//         });
+//       },
+//     };
+//     this.controlledProps = [{
+//       key: 'checked',
+//       event: 'change',
+//     }];
+//     this.methods = {
+//       handleTap(e) {
+//         const {
+//           _disabled: t,
+//           readonly: s,
+//           contentDisabled: a,
+//         } = this;
+//         const {
+//           target: i,
+//         } = e.currentTarget.dataset;
+//         if (t || s || 'text' === i && a) {
+//           return;
+//         }
+//         const {
+//           value: o,
+//           label: c,
+//         } = this;
+//         const d = !this.dataChecked;
+//         const r = this[this.relationParentName];
+//         r ? r.updateValue(Object.assign(Object.assign({}, this), {
+//           checked: d,
+//           item: {
+//             label: c,
+//             value: o,
+//             checked: d,
+//           },
+//         })) : this._trigger('change', {
+//           context: {
+//             value: o,
+//             label: c,
+//           },
+//           checked: d,
+//         });
+//       },
+//       setDisabled(e) {
+//         this.setData({
+//           _disabled: this.disabled || e,
+//         });
+//       },
+//     };
+//   }
+// };
+// CheckBox = initTDesign(__decorate([wxComponent()], CheckBox));
+
+//
+// export default CheckBox;
 </script>
 <style>
 @import './checkbox.css';

@@ -51,7 +51,7 @@ export default {
      */
   methods: {
     onChange(event) {
-      console.log('checkbox', event.detail.value);
+      console.log('checkbox', event.value);
     },
   },
 };

@@ -41,10 +41,8 @@ export default {
   created() {},
   methods: {
     onCheckAllChange(event) {
-      console.log('checkbox', event.detail.value);
-      this.setData({
-        checkAllValues: event.detail,
-      });
+      console.log('change: ', event);
+      this.checkAllValues = event.value;
     },
   },
 };
