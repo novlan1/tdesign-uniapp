@@ -3,9 +3,13 @@
 目录
 
 ```bash
-- package
-  - tdesign    # npm 包 
-  - site       # 文档/示例
+- packages
+  - tdesign          # npm 包 
+    - button
+      - _example     # 示例
+      - button.vue   # 组件
+      - button.less  # 样式
+  - site             # 文档工程
 ```
 
 示例开发

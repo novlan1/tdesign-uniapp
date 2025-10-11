@@ -4,7 +4,7 @@
       :class="className + ' class ' + prefix + '-class'"
       :style="_._style([style, customStyle])"
       :target="navigatorProps.target"
-      :url="!disabled && navigatorProps.url"
+      :url="!disabled ? (navigatorProps.url || '') : ''"
       :open-type="navigatorProps.openType || 'navigate'"
       :delta="navigatorProps.delta"
       :app-id="navigatorProps.appId"
@@ -161,7 +161,7 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped>
-@import './link.css';
+<style scoped lang="less">
+@import './link.less';
 
 </style>

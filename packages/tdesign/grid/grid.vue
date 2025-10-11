@@ -85,70 +85,7 @@ export default uniComponent({
     },
   },
 });
-
-// let Grid = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = ['t-class'];
-//     this.relations = {
-//       '../grid-item/grid-item': {
-//         type: 'descendant',
-//       },
-//     };
-//     this.properties = props;
-//     this._ = _;
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       contentStyle: '',
-//     });
-//     this.observers = {
-//       'column,hover,align,gutter,border'() {
-//         this.updateContentStyle();
-//         this.doForChild(t => t.updateStyle?.());
-//       },
-//     };
-//     this.lifetimes = {
-//       attached() {
-//         this.updateContentStyle();
-//       },
-//     };
-//     this.methods = {
-//       doForChild(t) {
-//         this.children?.forEach(t);
-//       },
-//       updateContentStyle() {
-//         const t = [];
-//         const e = this.getContentMargin();
-//         if (e) {
-//           t.push(e);
-//         }
-//         this.setData({
-//           contentStyle: t.join(';'),
-//         });
-//       },
-//       getContentMargin() {
-//         const {
-//           gutter: t,
-//         } = this;
-//         let {
-//           border: e,
-//         } = this;
-//         if (!e) {
-//           return `margin-left:-${t}rpx; margin-top:-${t}rpx`;
-//         }
-//         isObject(e) || (e = {});
-//         const {
-//           width: r = 2,
-//         } = e;
-//         return `margin-left:-${r}rpx; margin-top:-${r}rpx`;
-//       },
-//     };
-//   }
-// };
-// Grid = initTDesign(__decorate([wxComponent()], Grid));
-// export default Grid;
 </script>
-<style scoped>
-@import './grid.css';
+<style scoped lang="less">
+@import './grid.less';
 </style>

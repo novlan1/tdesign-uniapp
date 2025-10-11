@@ -272,67 +272,7 @@ export default uniComponent({
     },
   },
 });
-
-
-// let GridItem = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-image`, `${prefix}-class-text`, `${prefix}-class-description`];
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     this.relations = {
-//       '../grid/grid': {
-//         type: 'ancestor',
-//         linked(t) {
-//           this[RELATION_MAP.GridItem] = t;
-//           this.updateStyle();
-//           this.setData({
-//             column: t.data.column,
-//           });
-//         },
-//       },
-//     };
-//     this = props;
-//     this._ = _;
-//     this.components = {
-//       tImage,
-//       tIcon,
-//       tBadge,
-//     };
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       gridItemStyle: '',
-//       gridItemWrapperStyle: '',
-//       gridItemContentStyle: '',
-//       align: 'center',
-//       column: 0,
-//       describedbyID: '',
-//       // badgeProps: {},
-//     });
-//     this.observers = {
-//       icon(t) {
-//         const e = setIcon('icon', t, '');
-//         this.setData(Object.assign({}, e));
-//       },
-//     };
-//     this.lifetimes = {
-//       ready() {
-//         this.setData({
-//           describedbyID: getUniqueID(),
-//         });
-//       },
-//     };
-//     this.methods = {
-
-//     };
-//   }
-// };
-// GridItem = initTDesign(__decorate([wxComponent()], GridItem));
-// export default GridItem;
 </script>
-<style scoped>
-@import './grid-item.css';
-
+<style scoped lang="less">
+@import './grid-item.less';
 </style>

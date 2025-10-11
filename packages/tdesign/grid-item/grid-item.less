@@ -58,6 +58,8 @@
     &--left {
       justify-self: flex-start;
       align-items: flex-start;
+      width: 100%;
+      box-sizing: border-box;
 
       .@{prefix}-grid-item__words {
         text-align: left;
@@ -105,7 +107,7 @@
       }
     }
 
-    &--icon {
+    :deep(&--icon) {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -149,7 +151,7 @@
     }
   }
 
-  &__icon {
+  :deep(&__icon) {
     font-size: @grid-item-icon-font-size;
   }
 }
