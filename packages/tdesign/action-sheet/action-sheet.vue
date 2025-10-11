@@ -8,6 +8,7 @@
       :visible="dataVisible"
       placement="bottom"
       :using-custom-navbar="dataUsingCustomNavbar"
+      :custom-navbar-height="customNavbarHeight"
       :show-overlay="dataShowOverlay"
       :z-index="dataPopupProps?.zIndex || defaultPopUpzIndex"
       :overlay-props="dataPopupProps?.overlayProps || defaultPopUpProps"

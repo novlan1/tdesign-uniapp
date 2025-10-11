@@ -6,6 +6,7 @@
       :visible="visible && dataVisible"
       placement="bottom"
       :using-custom-navbar="usingCustomNavbar || popupProps.usingCustomNavbar"
+      :custom-navbar-height="customNavbarHeight ?? popupProps.usingCustomNavbar"
       :z-index="popupProps.zIndex || defaultPopUpzIndex"
       :overlay-props="popupProps.overlayProps || defaultPopUpProps"
       @visible-change="onPopupChange"

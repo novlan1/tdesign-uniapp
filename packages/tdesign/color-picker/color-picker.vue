@@ -5,6 +5,7 @@
       class="class"
       :visible="visible"
       :using-custom-navbar="popupProps.usingCustomNavbar || false"
+      :custom-navbar-height="popupProps.customNavbarHeight"
       :show-overlay="popupProps.showOverlay || true"
       :z-index="popupProps.zIndex || 11500"
       :overlay-props="popupProps.overlayProps || defaultOverlayProps"

@@ -15,6 +15,24 @@ export function createApp() {
   app.component('t-navbar', TNavbar);
   app.component('t-button', TButton);
 
+  app.mixin({
+    computed: {
+      isH5() {
+        let result = false;
+        // #ifdef H5
+        result = true;
+        // #endif
+        return result;
+      },
+      isMP() {
+        let result = false;
+        // #ifdef MP
+        result = true;
+        // #endif
+        return result;
+      },
+    },
+  });
   return {
     app,
   };

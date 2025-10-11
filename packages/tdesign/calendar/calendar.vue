@@ -5,6 +5,7 @@
       class="class"
       :visible="visible"
       :using-custom-navbar="usingCustomNavbar"
+      :custom-navbar-height="customNavbarHeight"
       placement="bottom"
       @visible-change="onVisibleChange"
     >

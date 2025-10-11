@@ -1,5 +1,67 @@
 <template>
-  <DraggableTemplate
+  <t-draggable
+    v-if="draggable"
+    id="draggable"
+    ref="draggable"
+    :custom-style="_._style(['right: 16px; bottom: 32px;', style, customStyle, moveStyle])"
+    :direction="draggable === true ? 'all' : draggable"
+    :t-class="tClass"
+    @start="onStart"
+    @move="onMove"
+    @end="onEnd"
+  >
+    <slot v-if="!buttonData.content && !buttonData.icon" />
+    <!-- parse <template v-else is="button" :data="useDefaultSlot: true, ...buttonData"/> -->
+    <block
+      v-else
+      name="button"
+    >
+      <t-button
+        :t-id="buttonData.tId"
+        :custom-style="buttonData.style || ''"
+        :block="buttonData.block"
+        :class="getActionClass(classPrefix, buttonData.buttonLayout) || ''"
+        :t-class="prefix + '-class-action'"
+        :disabled="buttonData.disabled"
+        :data-type="'action'"
+        :data-extra="buttonData.index"
+        :custom-dataset="buttonData.customDataset"
+        :content="buttonData.content"
+        :icon="buttonData.icon"
+        :loading="buttonData.loading"
+        :loading-props="buttonData.loadingProps"
+        :theme="buttonData.theme"
+        :ghost="buttonData.ghost"
+        :shape="buttonData.shape"
+        :size="buttonData.size"
+        :variant="buttonData.variant"
+        :open-type="buttonData.openType"
+        :hover-class="buttonData.hoverClass"
+        :hover-stop-propagation="buttonData.hoverStopPropagation"
+        :hover-start-time="buttonData.hoverStartTime"
+        :hover-stay-time="buttonData.hoverStayTime"
+        :lang="buttonData.lang"
+        :session-from="buttonData.sessionFrom"
+        :send-message-title="buttonData.sendMessageTitle"
+        :send-message-path="buttonData.sendMessagePath"
+        :send-message-img="buttonData.sendMessageImg"
+        :app-parameter="buttonData.appParameter"
+        :show-message-card="buttonData.showMessageCard"
+        :aria-label="buttonData.ariaLabel"
+        @tap="onTplButtonTap"
+        @getuserinfo="onTplButtonTap"
+        @contact="onTplButtonTap"
+        @getphonenumber="onTplButtonTap"
+        @error="onTplButtonTap"
+        @opensetting="onTplButtonTap"
+        @launchapp="onTplButtonTap"
+        @agreeprivacyauthorization="onTplButtonTap"
+      >
+        <slot v-if="true || false" />
+      </t-button>
+    </block>
+  </t-draggable>
+  <!-- <DraggableTemplate
     v-if="draggable"
     ref="draggableTemplate"
     :prefix="prefix"
@@ -16,8 +78,61 @@
     <template #default>
       <slot />
     </template>
-  </DraggableTemplate>
-  <ViewTemplate
+  </DraggableTemplate> -->
+  <view
+    v-else
+    :class="[classPrefix + ' class ', tClass]"
+    :style="_._style(['right: 16px; bottom: 32px;', style, customStyle])"
+  >
+    <slot v-if="!buttonData?.content && !buttonData?.icon" />
+    <!-- parse <template v-else is="button" :data="useDefaultSlot: true, ...buttonData"/> -->
+    <t-button
+      v-else
+      :t-id="buttonData.tId"
+      :custom-style="buttonData.style || ''"
+      :block="buttonData.block"
+      :class="getActionClass(classPrefix, buttonLayout) || ''"
+      :t-class="prefix + '-class-action'"
+      :disabled="buttonData.disabled"
+      :data-type="'action'"
+      :data-extra="buttonData.index"
+      :custom-dataset="buttonData.customDataset"
+      :content="buttonData.content"
+      :icon="buttonData.icon"
+      :loading="buttonData.loading"
+      :loading-props="buttonData.loadingProps"
+      :theme="buttonData.theme"
+      :ghost="buttonData.ghost"
+      :shape="buttonData.shape"
+      :size="buttonData.size"
+      :variant="buttonData.variant"
+      :open-type="buttonData.openType"
+      :hover-class="buttonData.hoverClass"
+      :hover-stop-propagation="buttonData.hoverStopPropagation"
+      :hover-start-time="buttonData.hoverStartTime"
+      :hover-stay-time="buttonData.hoverStayTime"
+      :lang="buttonData.lang"
+      :session-from="buttonData.sessionFrom"
+      :send-message-title="buttonData.sendMessageTitle"
+      :send-message-path="buttonData.sendMessagePath"
+      :send-message-img="buttonData.sendMessageImg"
+      :app-parameter="buttonData.appParameter"
+      :show-message-card="buttonData.showMessageCard"
+      :aria-label="buttonData.ariaLabel"
+      @tap="onTplButtonTap"
+      @getuserinfo="onTplButtonTap"
+      @contact="onTplButtonTap"
+      @getphonenumber="onTplButtonTap"
+      @error="onTplButtonTap"
+      @opensetting="onTplButtonTap"
+      @launchapp="onTplButtonTap"
+      @agreeprivacyauthorization="onTplButtonTap"
+    >
+      <slot />
+    </t-button>
+  </view>
+
+  <!-- <ViewTemplate
     v-else
     :prefix="prefix"
     :class-prefix="classPrefix"
@@ -28,7 +143,7 @@
     <template #default>
       <slot />
     </template>
-  </ViewTemplate>
+  </ViewTemplate> -->
 </template>
 
 <script>
@@ -40,8 +155,8 @@ import props from './props';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import { unitConvert, getWindowInfo } from '../common/utils';
 import _ from '../common/utils.wxs';
-import DraggableTemplate from './template/draggable.vue';
-import ViewTemplate from './template/view.vue';
+// import DraggableTemplate from './template/draggable.vue';
+// import ViewTemplate from './template/view.vue';
 
 const name = `${prefix}-fab`;
 
@@ -56,8 +171,8 @@ export default uniComponent({
   name,
   mixins: [useCustomNavbar],
   components: {
-    DraggableTemplate,
-    ViewTemplate,
+    // DraggableTemplate,
+    // ViewTemplate,
     tButton,
     tDraggable,
   },
@@ -145,6 +260,9 @@ export default uniComponent({
           insChild?.computedRect();
         }
       });
+    },
+    getActionClass(a, b) {
+      return `${a}-${b}`;
     },
   },
 });

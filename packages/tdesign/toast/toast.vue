@@ -49,6 +49,7 @@
       :z-index="(overlayProps && overlayProps.zIndex) || 11000"
       :duration="(overlayProps && overlayProps.duration) || 300"
       :using-custom-navbar="(overlayProps && overlayProps.usingCustomNavbar) || usingCustomNavbar"
+      :custom-navbar-height="(overlayProps && overlayProps.customNavbarHeight) || customNavbarHeight"
       :background-color="dataPreventScrollThrough ? 'transparent' : (overlayProps && overlayProps.backgroundColor) || ''"
       :prevent-scroll-through="dataPreventScrollThrough || (overlayProps && overlayProps.preventScrollThrough)"
     />

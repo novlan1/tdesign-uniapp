@@ -192,7 +192,11 @@ export const uniComponent = function (info) {
   if (canUseVirtualHost()) {
     info.options.virtualHost = true;
   }
-  info.options.styleIsolation = 'shared';
+
+  if (!info.options.styleIsolation) {
+    info.options.styleIsolation = 'shared';
+  }
+
   info.options.multipleSlots = true;
 
   const o = toComponent(info);

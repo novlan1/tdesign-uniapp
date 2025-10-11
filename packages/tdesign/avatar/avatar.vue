@@ -80,7 +80,7 @@ import tIcon from '../icon/icon';
 import tBadge from '../badge/badge';
 import tImage from '../image/image';
 import { uniComponent } from '../common/src/index';
-import config from '../common/config';
+import { prefix } from '../common/config';
 import avatarProps from './props';
 import { setIcon, systemInfo } from '../common/utils';
 import _ from '../common/utils.wxs';
@@ -88,10 +88,9 @@ import { utils } from './avatar.wxs';
 import { ChildrenMixin, RELATION_MAP } from '../common/relation';
 
 
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-avatar`;
+
+
 export default uniComponent({
   name,
   externalClasses: [

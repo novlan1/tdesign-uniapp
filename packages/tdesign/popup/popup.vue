@@ -34,6 +34,7 @@
       id="popup-overlay"
       :visible="visible"
       :using-custom-navbar="usingCustomNavbar"
+      :custom-navbar-height="customNavbarHeight"
       :z-index="(overlayProps && overlayProps.zIndex) || 11000"
       :duration="(overlayProps && overlayProps.duration) || 300"
       :background-color="(overlayProps && overlayProps.backgroundColor) || ''"

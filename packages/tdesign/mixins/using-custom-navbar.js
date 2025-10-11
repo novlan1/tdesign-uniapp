@@ -1,36 +1,36 @@
 import { systemInfo } from '../common/utils';
 const useCustomNavbarBehavior = {
-    data() {
-        return {
-            distanceTop: 0
-        };
+  data() {
+    return {
+      distanceTop: 0,
+    };
+  },
+  props: {
+    usingCustomNavbar: {
+      type: Boolean,
+      default: false,
     },
-    props: {
-        usingCustomNavbar: {
-            type: Boolean,
-            value: false
-        },
-        customNavbarHeight: {
-            type: Number,
-            value: 0
-        }
+    customNavbarHeight: {
+      type: Number,
+      default: 0,
     },
-    lifetimes: {
-        attached() {
-            if (this.usingCustomNavbar) {
-                this.calculateCustomNavbarDistanceTop();
-            }
-        }
-    },
-    methods: {
-        calculateCustomNavbarDistanceTop() {
-            const { statusBarHeight: t } = systemInfo;
-            const a = uni.getMenuButtonBoundingClientRect();
-            const e = a.top + a.bottom - t;
-            this.setData({
-                distanceTop: Math.max(e, this.customNavbarHeight + t)
-            });
-        }
+  },
+  created() {
+    if (this.usingCustomNavbar) {
+      this.calculateCustomNavbarDistanceTop();
     }
+  },
+  methods: {
+    calculateCustomNavbarDistanceTop() {
+      const { statusBarHeight } = systemInfo;
+      let distance = 0;
+      // #ifndef H5
+      const menuButton = wx.getMenuButtonBoundingClientRect();
+      distance = menuButton.top + menuButton.bottom - statusBarHeight;
+      // #endif
+
+      this.distanceTop = Math.max(distance, this.customNavbarHeight + statusBarHeight);
+    },
+  },
 };
 export default useCustomNavbarBehavior;

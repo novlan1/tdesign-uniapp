@@ -4,6 +4,7 @@
       v-if="modeType === 'popover'"
       :visible="visible"
       :using-custom-navbar="usingCustomNavbar"
+      :custom-navbar-height="customNavbarHeight"
       background-color="transparent"
       :z-index="zIndex"
     >
@@ -256,6 +257,7 @@
       :visible="visible"
       :show-overlay="!nonOverlay"
       :using-custom-navbar="usingCustomNavbar"
+      :custom-navbar-height="customNavbarHeight"
       :z-index="zIndex"
       placement="center"
     >

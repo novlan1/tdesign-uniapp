@@ -7,6 +7,7 @@
       :visible="dataVisible"
       :z-index="zIndex"
       :using-custom-navbar="usingCustomNavbar"
+      :custom-navbar-height="customNavbarHeight"
       :placement="placement == 'right' ? 'right' : 'left'"
       :show-overlay="showOverlay"
       :close-on-overlay-click="closeOnOverlayClick"
