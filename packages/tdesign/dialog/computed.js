@@ -3,10 +3,10 @@ export const getTypeof = function (obj) {
 };
 
 export const getActionClass = function (prefix, buttonLayout) {
-  var cls = [prefix + '__button', prefix + '__button--action'];
+  const cls = [`${prefix}__button`, `${prefix}__button--action`];
 
   if (buttonLayout) {
-    cls.push(prefix + '__button--' + buttonLayout);
+    cls.push(`${prefix}__button--${buttonLayout}`);
   }
 
   return cls.join(' ');

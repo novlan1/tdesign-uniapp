@@ -38,7 +38,7 @@ import { prefix } from '../common/config';
 import props from './props';
 import { isSameSecond, parseFormat, parseTimeData, TimeDataUnit } from './utils';
 import _ from '../common/utils.wxs';
-import { format as formatUtil } from './count-down.wxs';
+import { format as formatUtil } from './computed.js';
 
 
 const name = `${prefix}-count-down`;
@@ -157,46 +157,7 @@ export default uniComponent({
     },
   },
 });
-
-// let CountDown = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-count`, `${prefix}-class-split`];
-//     this = props;
-//     this._ = _;
-//     this.components = {
-//       tIcon,
-//     };
-//     this.observers = {
-//       time() {
-//         this.reset();
-//       },
-//     };
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       timeDataUnit: TimeDataUnit,
-//       timeData: parseTimeData(0),
-//       formattedTime: '0',
-//     });
-//     this.timeoutId = null;
-//     this.isInitialTime = false;
-//     this.lifetimes = {
-//       detached() {
-//         if (this.timeoutId) {
-//           clearTimeout(this.timeoutId);
-//           this.timeoutId = null;
-//         }
-//       },
-//     };
-//     this.methods = {
-
-//     };
-//   }
-// };
-// CountDown = initTDesign(__decorate([wxComponent()], CountDown));
-// export default CountDown;
 </script>
-<style scoped>
-@import './count-down.css';
+<style scoped lang="less">
+@import './count-down.less';
 </style>

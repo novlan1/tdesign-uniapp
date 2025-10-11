@@ -237,7 +237,7 @@ import { toCamel } from '../common/utils';
 import { isObject } from '../common/validator';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
-import { getActionClass } from './dialog.wxs';
+import { getActionClass } from './computed.js';
 import { getFunctionalMixin } from '../common/functional/mixin';
 
 
@@ -334,7 +334,6 @@ export default uniComponent({
       Object.keys(rect).forEach((key) => {
         this[key] = rect[key];
       });
-      // this.setData({ ...rect });
     },
     onTplButtonTap(e, { type, extra }) {
       const evtType = e.type;
@@ -394,7 +393,6 @@ export default uniComponent({
     },
 
     close() {
-      // this.setData({ visible: false });
       this.dataVisible = false;
     },
 
@@ -427,183 +425,7 @@ export default uniComponent({
     },
   },
 });
-
-// let Dialog = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.behaviors = [useCustomNavbar];
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     this._ = _;
-//     this.components = {
-//       tPopup,
-//       tIcon,
-//       tButton,
-//     };
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-confirm`, `${prefix}-class-cancel`, `${prefix}-class-action`];
-//     this.properties = props;
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       buttonVariant: 'text',
-//     });
-//     this.observers = {
-//       'confirmBtn, cancelBtn'(t, e) {
-//         const {
-//           prefix: o,
-//           classPrefix: i,
-//           buttonLayout: n,
-//         } = this;
-//         const s = {
-//           buttonVariant: 'text',
-//         };
-//         const r = [t, e].some(t => isObject(t) && t.variant && 'text' !== t.variant);
-//         const a = {
-//           confirm: t,
-//           cancel: e,
-//         };
-//         const c = [`${i}__button`];
-//         const l = [];
-//         if (r) {
-//           s.buttonVariant = 'base';
-//           c.push(`${i}__button--${n}`);
-//         } else {
-//           c.push(`${i}__button--text`);
-//           l.push(`${i}-button`);
-//         }
-//         Object.keys(a).forEach((t) => {
-//           const e = a[t];
-//           const n = {
-//             block: true,
-//             rootClass: [...c, `${i}__button--${t}`],
-//             tClass: [...l, `${o}-class-${t}`],
-//             variant: s.buttonVariant,
-//             openType: '',
-//           };
-//           if ('cancel' === t && 'base' === s.buttonVariant) {
-//             n.theme = 'light';
-//           }
-//           s[`_${t}`] = 'string' === typeof e ? Object.assign(Object.assign({}, n), {
-//             content: e,
-//           }) : e && 'object' === typeof e ? Object.assign(Object.assign({}, n), e) : null;
-//         });
-//         this.setData(Object.assign({}, s));
-//       },
-//     };
-//     this.methods = {
-//       getActionClass,
-//       onTplButtonTap(t) {
-//         let e;
-//         let o;
-//         let i;
-//         const n = t.type;
-//         const {
-//           type: s,
-//           extra: r,
-//         } = t.target.dataset;
-//         const a = this[`_${s}`];
-//         const c = `bind${n}`;
-//         if ('action' === s) {
-//           return void this.onActionTap(r);
-//         }
-//         if ('function' === typeof a[c]) {
-//           if (a[c](t)) {
-//             this.close();
-//           }
-//         }
-//         if (!a.openType && ['confirm', 'cancel'].includes(s)) {
-//           null === (e = this[toCamel(`on-${s}`)]) || void 0 === e || e.call(this, s);
-//         }
-//         if ('tap' !== n) {
-//           const e = (null === (i = null === (o = t.detail) || void 0 === o ? void 0 : o.errMsg) || void 0 === i ? void 0 : i.indexOf('ok')) > -1;
-//           this.$emit(e ? 'open-type-event' : 'open-type-error-event', {
-//             detail: t.detail,
-//           });
-//         }
-//       },
-//       onConfirm() {
-//         this.$emit('confirm');
-//         if (this._onConfirm) {
-//           this._onConfirm({
-//             trigger: 'confirm',
-//           });
-//           this.close();
-//         }
-//       },
-//       onCancel() {
-//         const t = {
-//           trigger: 'cancel',
-//         };
-//         this.$emit('cancel');
-//         this.$emit('close', {
-//           detail: t,
-//         });
-//         if (this._onCancel) {
-//           this._onCancel(t);
-//           this.close();
-//         }
-//       },
-//       onClose() {
-//         let t;
-//         const e = {
-//           trigger: 'close-btn',
-//         };
-//         this.$emit('close', {
-//           detail: e,
-//         });
-//         null === (t = this._onCancel) || void 0 === t || t.call(this, e);
-//         this.close();
-//       },
-//       close() {
-//         this.setData({
-//           visible: false,
-//         });
-//       },
-//       overlayClick() {
-//         let t;
-//         this.$emit('overlay-click');
-//         if (this.closeOnOverlayClick) {
-//           const e = {
-//             trigger: 'overlay',
-//           };
-//           this.$emit('close', {
-//             detail: e,
-//           });
-//           null === (t = this._onCancel) || void 0 === t || t.call(this, e);
-//           this.close();
-//         }
-//       },
-//       onActionTap(t) {
-//         this.$emit('action', {
-//           detail: {
-//             index: t,
-//           },
-//         });
-//         if (this._onAction) {
-//           this._onAction({
-//             index: t,
-//           });
-//           this.close();
-//         }
-//       },
-//       openValueCBHandle(t) {
-//         this.$emit('open-type-event', {
-//           detail: t.detail,
-//         });
-//       },
-//       openValueErrCBHandle(t) {
-//         this.$emit('open-type-error-event', {
-//           detail: t.detail,
-//         });
-//       },
-//     };
-//   }
-// };
-// Dialog = initTDesign(__decorate([wxComponent()], Dialog));
-// export default Dialog;
 </script>
-<style scoped>
-@import './dialog.css';
-
+<style scoped lang="less">
+@import './dialog.less';
 </style>
