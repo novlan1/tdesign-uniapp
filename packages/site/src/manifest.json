@@ -41,6 +41,9 @@
         }
     },
     "quickapp": {},
+    "h5": {
+        "darkmode": true
+    },
     "mp-weixin": {
         "appid": "wx9713aa2e5d67f6bd",
         "darkmode": true,
@@ -49,13 +52,19 @@
         },
         "usingComponents": true
     },
+    "mp-qq": {
+        "darkmode": true
+    },
     "mp-alipay": {
+        "darkmode": true,
         "usingComponents": true
     },
     "mp-baidu": {
+        "darkmode": true,
         "usingComponents": true
     },
     "mp-toutiao": {
+        "darkmode": true,
         "usingComponents": true
     },
     "uniStatistics": {
