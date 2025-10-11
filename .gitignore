@@ -20,3 +20,4 @@ dist
 *.sln
 *.sw?
 packages/site/src/_tdesign
+packages/site/src/pages-more

@@ -4,6 +4,8 @@ const config = {
   targetDir: path.resolve(__dirname, '../../src/_tdesign'),
   sourceDir: path.resolve(__dirname, '../../../tdesign'),
   sourceGlob: path.resolve(__dirname, '../../../tdesign/**/*'),
+
+  demoDir: path.resolve(__dirname, '../../src/pages-more'),
 };
 
 

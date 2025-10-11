@@ -11,8 +11,9 @@ function main() {
     if (event !== 'unlink' && history?.[0]) {
       const filePath = history[0];
       const relativePath = path.relative(base, filePath);
-      copy(relativePath, filePath);
-      console.log('[Wrote] done!', filePath);
+
+      const { relativeTargetByCwd, relativeSourceByCwd } = copy(relativePath, filePath);
+      console.log(`[Wrote] done! \nFrom ${relativeSourceByCwd} to ${relativeTargetByCwd}`);
     }
   });
 }

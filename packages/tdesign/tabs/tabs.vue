@@ -266,7 +266,9 @@ export default uniComponent({
       });
 
       this.tabs = tabs;
-      setTimeout(cb);
+      if (typeof cb === 'function') {
+        setTimeout(cb);
+      }
 
       this.setCurrentIndexByName(this.dataValue);
     },

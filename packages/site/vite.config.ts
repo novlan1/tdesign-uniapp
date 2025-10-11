@@ -9,7 +9,7 @@ const baseAlias = {
   'tdesign-site': path.resolve(__dirname),
   'tdesign-uniapp': isH5
     ? path.resolve(__dirname, '../tdesign')
-    : path.resolve(__dirname, './src/_log/tdesign'),
+    : path.resolve(__dirname, './src/_tdesign'),
 };
 
 // https://vitejs.dev/config/
