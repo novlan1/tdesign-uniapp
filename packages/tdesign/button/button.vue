@@ -99,7 +99,6 @@ export default uniComponent({
       className: '',
       classPrefix: name,
       _icon: undefined,
-      // loadingProps: {},
     };
   },
   emits: [
@@ -192,6 +191,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped>
-@import './button.css';
+<style scoped lang="less">
+@import './button.less';
 </style>

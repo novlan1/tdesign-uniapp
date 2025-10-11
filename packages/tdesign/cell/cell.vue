@@ -216,51 +216,7 @@ export default uniComponent({
     },
   },
 });
-
-
-// let Cell = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-title`, `${prefix}-class-description`, `${prefix}-class-note`, `${prefix}-class-hover`, `${prefix}-class-image`, `${prefix}-class-left`, `${prefix}-class-left-icon`, `${prefix}-class-center`, `${prefix}-class-right`, `${prefix}-class-right-icon`];
-//     // this.relations = {
-//     //   "../cell-group/cell-group": {
-//     //     type: "parent"
-//     //   }
-//     // };
-//     this.components = {
-//       tIcon,
-//       tImage,
-//     };
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     this.properties = props;
-//     this._ = _;
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       _arrow: {},
-//       isLastChild: false,
-//     });
-//     this.observers = {
-//       leftIcon(e) {
-//         this.setIcon('_leftIcon', e, '');
-//       },
-//       rightIcon(e) {
-//         this.setIcon('_rightIcon', e, '');
-//       },
-//       arrow(e) {
-//         this.setIcon('_arrow', e, 'chevron-right');
-//       },
-//     };
-//     this.methods = {
-
-//     };
-//   }
-// };
-// Cell = initTDesign(__decorate([wxComponent()], Cell));
-// export default Cell;
 </script>
-<style scoped>
-@import './cell.css';
+<style scoped lang="less">
+@import './cell.less';
 </style>

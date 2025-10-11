@@ -59,36 +59,7 @@ export default uniComponent({
     },
   },
 });
-
-// let CellGroup = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-title`];
-//     // this.relations = {
-//     //   "../cell/cell": {
-//     //     type: "child",
-//     //     linked() {
-//     //       this.updateLastChid();
-//     //     },
-//     //     unlinked() {
-//     //       this.updateLastChid();
-//     //     }
-//     //   }
-//     // };
-//     this.properties = props;
-//     this._ = _;
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//     });
-//     this.methods = {
-
-//     };
-//   }
-// };
-// CellGroup = initTDesign(__decorate([wxComponent()], CellGroup));
-// export default CellGroup;
 </script>
-<style scoped>
-@import './cell-group.css';
+<style scoped lang="less">
+@import './cell-group.less';
 </style>
