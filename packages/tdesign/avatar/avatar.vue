@@ -163,58 +163,8 @@ export default uniComponent({
   },
 });
 
-// let Avatar = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-image`, `${prefix}-class-icon`, `${prefix}-class-alt`, `${prefix}-class-content`];
-//     this.properties = avatarProps;
-
-//     this._ = _;
-//     this.components = {
-//       tIcon,
-//       tBadge,
-//       tImage,
-//     };
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       isShow: true,
-//       zIndex: 0,
-//       systemInfo,
-//       utils,
-//       badgeProps: {},
-//     });
-//     this.relations = {
-//       '../avatar-group/avatar-group': {
-//         type: 'ancestor',
-//         linked(t) {
-//           this.parent = t;
-//           this.setData({
-//             shape: this.shape || t.data.shape || 'circle',
-//             size: this.size || t.data.size,
-//             bordered: true,
-//           });
-//         },
-//       },
-//     };
-//     this.observers = {
-//       icon(t) {
-//         const s = setIcon('icon', t, '');
-//         this.setData(Object.assign({}, s));
-//       },
-//     };
-//     this.methods = {
-
-//     };
-//   }
-// };
-// Avatar = initTDesign(__decorate([wxComponent()], Avatar));
-// export default Avatar;
 </script>
-<style scoped>
-@import './avatar.css';
+<style scoped lang="less">
+@import './avatar.less';
 
 </style>

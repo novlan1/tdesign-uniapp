@@ -16,6 +16,10 @@ function cpLess(file) {
   if (fs.existsSync(path.dirname(targetPath))) {
     writeFileSync(targetPath, readFileSync(file));
   }
+
+  // if (fs.existsSync(path.resolve(config.target, componentName, 'props.d.ts'))) {
+  //   fs.unlinkSync(path.resolve(config.target, componentName, 'props.d.ts'));
+  // }
 }
 
 function main() {
