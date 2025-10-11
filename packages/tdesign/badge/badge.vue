@@ -11,10 +11,7 @@
   >
     <view
       :id="labelID"
-      :class="[
-        classPrefix + '__content ',
-        tClassContent,
-      ]"
+      :class="_.cls(classPrefix + '__content', [['empty', !content && !hasChild]]) + ' ' + tClassContent"
       :aria-hidden="true"
     >
       <!-- #ifdef H5 -->
@@ -94,6 +91,11 @@ export default uniComponent({
       descriptionID: '',
       _,
     };
+  },
+  computed: {
+    hasChild() {
+      return !!this.$slots?.default;
+    },
   },
   mounted() {
     const e = getUniqueID();
