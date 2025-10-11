@@ -71,56 +71,7 @@ export default uniComponent({
     },
   },
 });
-
-// let SideBar = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`];
-//     this.children = [];
-//     this.relations = {
-//       [relationsPath]: {
-//         type: 'child',
-//         linked(e) {
-//           this.children.push(e);
-//         },
-//         unlinked(e) {
-//           const i = this.children.findIndex(i => i === e);
-//           this.children.splice(i, 1);
-//         },
-//       },
-//     };
-//     this.controlledProps = [{
-//       key: 'value',
-//       event: 'change',
-//     }];
-//     this.properties = props;
-//     this.observers = {
-//       value(e) {
-//         this.$children.forEach((i) => {
-//           i.updateActive(e);
-//         });
-//       },
-//     };
-//     this.setData({
-//       classPrefix: name,
-//       prefix,
-//     });
-//     this.methods = {
-//       doChange({
-//         value: e,
-//         label: i,
-//       }) {
-//         this._trigger('change', {
-//           value: e,
-//           label: i,
-//         });
-//       },
-//     };
-//   }
-// };
-// SideBar = __decorate([wxComponent()], SideBar);
-// export default SideBar;
 </script>
-<style scoped>
-@import './side-bar.css';
+<style scoped lang="less">
+@import './side-bar.less';
 </style>

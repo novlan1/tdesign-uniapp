@@ -138,69 +138,8 @@ export default uniComponent({
   },
 });
 
-
-// let SideBarItem = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`];
-//     // this = Object.assign(Object.assign({}, props), {
-//     //   tId: {
-//     //     type: String,
-//     //   },
-//     // });
-//     this.relations = {
-//       '../side-bar/side-bar': {
-//         type: 'parent',
-//         linked(e) {
-//           this.parent = e;
-//           this.updateActive(e.data.value);
-//         },
-//       },
-//     };
-//     this.observers = {
-//       icon(e) {
-//         this.setData({
-//           _icon: 'string' === typeof e ? {
-//             name: e,
-//           } : e,
-//         });
-//       },
-//     };
-//     this.setData({
-//       classPrefix: name,
-//       prefix,
-//       active: false,
-//       isPre: false,
-//       isNext: false,
-//     });
-//     this.methods = {
-//       updateActive(e) {
-//         const t = e === this.value;
-//         this.setData({
-//           active: t,
-//         });
-//       },
-//       handleClick() {
-//         let e;
-//         if (this.disabled) {
-//           return;
-//         }
-//         const {
-//           value: t,
-//           label: i,
-//         } = this;
-//         null === (e = this.parent) || void 0 === e || e.doChange({
-//           value: t,
-//           label: i,
-//         });
-//       },
-//     };
-//   }
-// };
-// SideBarItem = __decorate([wxComponent()], SideBarItem);
-// export default SideBarItem;
 </script>
-<style scoped>
-@import './side-bar-item.css';
+<style scoped lang="less">
+@import './side-bar-item.less';
 
 </style>
