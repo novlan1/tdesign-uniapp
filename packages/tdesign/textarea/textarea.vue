@@ -13,7 +13,7 @@
       <textarea
         :class="classPrefix + '__wrapper-inner ' + (disabled ? prefix + '-is-disabled' : '') + ' ' + tClassTextarea"
         :style="textareaStyle(autosize)"
-        :maxlength="innerMaxLen"
+        :maxlength="allowInputOverMax ? -1 : maxlength"
         :disabled="disabled || readonly"
         :placeholder="placeholder"
         :placeholder-class="classPrefix + '__placeholder ' + placeholderClass"
@@ -56,7 +56,7 @@ import props from './props';
 import { getCharacterLength } from '../common/utils';
 import _ from '../common/utils.wxs';
 import { textareaStyle } from './computed.js';
-import { getInnerMaxLen } from '../input/utils';
+// import { getInnerMaxLen } from '../input/utils';
 
 
 const name = `${prefix}-textarea`;
@@ -80,8 +80,8 @@ export default uniComponent({
       _,
 
       dataValue: this.value ?? this.defaultValue ?? '',
-      innerMaxLen: -1,
-      rawValue: '',
+      // innerMaxLen: -1,
+      // rawValue: '',
     };
   },
   watch: {
@@ -89,11 +89,11 @@ export default uniComponent({
       this.updateValue(val);
     },
 
-    count: 'updateInnerMaxLen',
-    dataValue: 'updateInnerMaxLen',
-    allowInputOverMax: 'updateInnerMaxLen',
-    maxcharacter: 'updateInnerMaxLen',
-    maxlength: 'updateInnerMaxLen',
+    // count: 'updateInnerMaxLen',
+    // dataValue: 'updateInnerMaxLen',
+    // allowInputOverMax: 'updateInnerMaxLen',
+    // maxcharacter: 'updateInnerMaxLen',
+    // maxlength: 'updateInnerMaxLen',
   },
   mounted() {
     const { value, defaultValue } = this;
@@ -111,11 +111,14 @@ export default uniComponent({
       const { maxcharacter, maxlength } = this;
       const { value, count } = this.calculateValue(val, maxcharacter, maxlength);
 
-      this.rawValue = val;
+      this.dataValue = val;
 
       console.log('updateValue.value', { value, count });
-      this.dataValue = value;
-      this.count = count;
+      this.$nextTick(() => {
+        this.dataValue = value;
+        this.count = count;
+      });
+      // this.updateInnerMaxLen();
     },
 
     calculateValue(value, maxcharacter, maxlength) {
@@ -173,27 +176,27 @@ export default uniComponent({
       this.$emit('keyboardheightchange', e.detail);
     },
 
-    updateInnerMaxLen() {
-      this.innerMaxLen = this.getInnerMaxLen();
-    },
-    getInnerMaxLen() {
-      const {
-        allowInputOverMax,
-        maxcharacter,
-        maxlength,
-        dataValue,
-        rawValue,
-        count,
-      } = this;
-      return getInnerMaxLen({
-        allowInputOverMax,
-        maxcharacter,
-        maxlength,
-        dataValue,
-        rawValue,
-        count,
-      });
-    },
+    // updateInnerMaxLen() {
+    //   this.innerMaxLen = this.getInnerMaxLen();
+    // },
+    // getInnerMaxLen() {
+    //   const {
+    //     allowInputOverMax,
+    //     maxcharacter,
+    //     maxlength,
+    //     dataValue,
+    //     rawValue,
+    //     count,
+    //   } = this;
+    //   return getInnerMaxLen({
+    //     allowInputOverMax,
+    //     maxcharacter,
+    //     maxlength,
+    //     dataValue,
+    //     rawValue,
+    //     count,
+    //   });
+    // },
   },
 });
 </script>

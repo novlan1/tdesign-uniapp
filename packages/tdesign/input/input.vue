@@ -40,7 +40,7 @@
       <view :class="classPrefix + '__content ' + classPrefix + '--' + status">
         <input
           :class="getInputClass(classPrefix, suffix, align, disabled) + ' ' + tClassInput"
-          :maxlength="innerMaxLen"
+          :maxlength="allowInputOverMax ? -1 : maxlength"
           :disabled="disabled || readonly"
           :placeholder="placeholder"
           :placeholder-style="placeholderStyle"
@@ -150,7 +150,7 @@ import { getCharacterLength, calcIcon } from '../common/utils';
 import { isDef } from '../common/validator';
 import { getInputClass } from './computed.js';
 import _ from '../common/utils.wxs';
-import { getInnerMaxLen } from './utils';
+// import { getInnerMaxLen } from './utils';
 
 const name = `${prefix}-input`;
 
@@ -193,8 +193,8 @@ export default uniComponent({
 
       dataValue: this.value ?? this.defaultValue,
 
-      rawValue: '',
-      innerMaxLen: -1,
+      // rawValue: '',
+      // innerMaxLen: -1,
     };
   },
   computed: {
@@ -225,11 +225,11 @@ export default uniComponent({
     disabled: 'updateClearIconVisible',
     readonly: 'updateClearIconVisible',
 
-    count: 'updateInnerMaxLen',
-    dataValue: 'updateInnerMaxLen',
-    allowInputOverMax: 'updateInnerMaxLen',
-    maxcharacter: 'updateInnerMaxLen',
-    maxlength: 'updateInnerMaxLen',
+    // count: 'updateInnerMaxLen',
+    // dataValue: 'updateInnerMaxLen',
+    // allowInputOverMax: 'updateInnerMaxLen',
+    // maxcharacter: 'updateInnerMaxLen',
+    // maxlength: 'updateInnerMaxLen',
   },
   mounted() {
     const { value, defaultValue } = this;
@@ -240,46 +240,53 @@ export default uniComponent({
   methods: {
     getInputClass,
     updateValue(value) {
-      this.rawValue = value;
+      // this.rawValue = value;
+      this.dataValue = value;
 
       const { allowInputOverMax, maxcharacter, maxlength } = this;
       if (!allowInputOverMax && maxcharacter && maxcharacter > 0 && !Number.isNaN(maxcharacter)) {
         const { length, characters } = getCharacterLength('maxcharacter', value, maxcharacter);
-        this.dataValue = characters;
+        this.$nextTick(() => {
+          this.dataValue = characters;
+        });
         this.count = length;
       } else if (!allowInputOverMax && maxlength && maxlength > 0 && !Number.isNaN(maxlength)) {
         const { length, characters } = getCharacterLength('maxlength', value, maxlength);
-        this.dataValue = characters;
+        this.$nextTick(() => {
+          this.dataValue = characters;
+        });
         this.count = length;
       } else {
+        this.$nextTick(() => {
+          this.dataValue = value;
+        });
         this.dataValue = value;
         this.count = isDef(value) ? String(value).length : 0;
       }
-      // #ifdef H5
-      this.updateInnerMaxLen();
-      // #endif
+
+      // this.updateInnerMaxLen();
     },
-    updateInnerMaxLen() {
-      this.innerMaxLen = this.getInnerMaxLen();
-    },
-    getInnerMaxLen() {
-      const {
-        allowInputOverMax,
-        maxcharacter,
-        maxlength,
-        dataValue,
-        rawValue,
-        count,
-      } = this;
-      return getInnerMaxLen({
-        allowInputOverMax,
-        maxcharacter,
-        maxlength,
-        dataValue,
-        rawValue,
-        count,
-      });
-    },
+    // updateInnerMaxLen() {
+    // this.innerMaxLen = this.getInnerMaxLen();
+    // },
+    // getInnerMaxLen() {
+    //   const {
+    //     allowInputOverMax,
+    //     maxcharacter,
+    //     maxlength,
+    //     dataValue,
+    //     rawValue,
+    //     count,
+    //   } = this;
+    //   return getInnerMaxLen({
+    //     allowInputOverMax,
+    //     maxcharacter,
+    //     maxlength,
+    //     dataValue,
+    //     rawValue,
+    //     count,
+    //   });
+    // },
 
     updateClearIconVisible(value = false) {
       const { clearTrigger, disabled, readonly } = this;
