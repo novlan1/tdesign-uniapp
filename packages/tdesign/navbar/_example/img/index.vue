@@ -19,12 +19,18 @@
 
 <script lang="ts" setup>
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import tImage from 'tdesign-uniapp/image/image';
+import tImage from 'tdesign-uniapp/image/image.vue';
 import { useTheme } from 'tdesign-uniapp/mixins/theme-change';
 
 
 const { theme } = useTheme();
+
+defineOptions({
+  options: {
+    styleIsolation: 'shared',
+  },
+});
 </script>
-<style>
+<style scoped>
 @import './index.css';
 </style>
