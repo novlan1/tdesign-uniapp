@@ -24,13 +24,11 @@
   </view>
 </template>
 <script>
-// import { __awaiter, __decorate } from '../miniprogram_npm/tslib';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
 import { styles, addUnit, getRect } from '../common/utils';
 import _ from '../common/utils.wxs';
-// import { initTDesign } from '../common/runtime';
 
 
 const name = `${prefix}-icon`;
