@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import tInput from 'tdesign-uniapp/input/input';
+import tInput from 'tdesign-uniapp/input/input.vue';
 export default {
   components: {
     tInput,

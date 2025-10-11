@@ -68,30 +68,7 @@ export default uniComponent({
 
   },
 });
-
-
-// let IndexesAnchor = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`];
-//     this.properties = props;
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       anchorStyle: '',
-//       sticky: false,
-//       active: false,
-//     });
-//     this.relations = {
-//       '../indexes/indexes': {
-//         type: 'parent',
-//       },
-//     };
-//   }
-// };
-// IndexesAnchor = __decorate([wxComponent()], IndexesAnchor);
-// export default IndexesAnchor;
 </script>
-<style scoped>
-@import './indexes-anchor.css';
+<style scoped lang="less">
+@import './indexes-anchor.less';
 </style>

@@ -1,7 +1,7 @@
 <template>
   <view class="input-example--banner">
     <t-input
-      :style="style"
+      :custom-style="style"
       label="标签文字"
       placeholder="请输入文字"
       borderless
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import tInput from 'tdesign-uniapp/input/input';
+import tInput from 'tdesign-uniapp/input/input.vue';
 export default {
   components: {
     tInput,
