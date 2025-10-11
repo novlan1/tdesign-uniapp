@@ -129,63 +129,7 @@ export default uniComponent({
     },
   },
 });
-
-// let Drawer = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.behaviors = [useCustomNavbar];
-//     this.externalClasses = [];
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     this.properties = props;
-//     this.setData({
-//       classPrefix: name,
-//     });
-//     this.methods = {
-//       visibleChange({
-//         detail: e,
-//       }) {
-//         const {
-//           visible: t,
-//         } = e;
-//         const {
-//           showOverlay: r,
-//         } = this;
-//         this.setData({
-//           visible: t,
-//         });
-//         t || this.$emit('close', {
-//           detail: {
-//             trigger: 'overlay',
-//           },
-//         });
-//         if (r) {
-//           this.$emit('overlay-click', {
-//             detail: {
-//               visible: t,
-//             },
-//           });
-//         }
-//       },
-//       itemClick(e) {
-//         const {
-//           index: t,
-//           item: r,
-//         } = e.currentTarget.dataset;
-//         this.$emit('item-click', {
-//           detail: {
-//             index: t,
-//             item: r,
-//           },
-//         });
-//       },
-//     };
-//   }
-// };
-// Drawer = __decorate([wxComponent()], Drawer);
-// export default Drawer;
 </script>
-<style scoped>
-@import './drawer.css';
+<style scoped lang="less">
+@import './drawer.less';
 </style>
