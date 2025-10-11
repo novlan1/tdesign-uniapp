@@ -247,6 +247,6 @@ let Rate = class extends SuperComponent {
 Rate = __decorate([wxComponent()], Rate);
 export default Rate;
 </script>
-<style>
+<style scoped>
 @import './rate.css';
 </style>

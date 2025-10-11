@@ -596,7 +596,7 @@ export default uniComponent({
 // Message = initTDesign(__decorate([wxComponent()], Message));
 // export default Message;
 </script>
-<style>
+<style scoped>
 @import './message-item.css';
 
 </style>

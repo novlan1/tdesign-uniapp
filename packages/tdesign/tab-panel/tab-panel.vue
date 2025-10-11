@@ -128,6 +128,6 @@ export default uniComponent({
 // TabPanel = __decorate([wxComponent()], TabPanel);
 // export default TabPanel;
 </script>
-<style>
+<style scoped>
 @import './tab-panel.css';
 </style>

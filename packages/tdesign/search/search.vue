@@ -275,6 +275,6 @@ let Search = class extends SuperComponent {
 Search = __decorate([wxComponent()], Search);
 export default Search;
 </script>
-<style>
+<style scoped>
 @import './search.css';
 </style>

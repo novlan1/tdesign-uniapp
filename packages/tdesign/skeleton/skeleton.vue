@@ -306,6 +306,6 @@ export default uniComponent({
 // Skeleton = initTDesign(__decorate([wxComponent()], Skeleton));
 // export default Skeleton;
 </script>
-<style>
+<style scoped>
 @import './skeleton.css';
 </style>

@@ -253,6 +253,6 @@ export default uniComponent({
 // Sticky = __decorate([wxComponent()], Sticky);
 // export default Sticky;
 </script>
-<style>
+<style scoped>
 @import './sticky.css';
 </style>

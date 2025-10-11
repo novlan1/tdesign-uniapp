@@ -456,7 +456,7 @@ export default uniComponent({
 // ActionSheet = initTDesign(__decorate([wxComponent()], ActionSheet));
 // export default ActionSheet;
 </script>
-<style>
+<style scoped>
 @import './action-sheet.css';
 
 </style>

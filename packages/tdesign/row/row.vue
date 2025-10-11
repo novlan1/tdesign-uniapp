@@ -55,6 +55,6 @@ export default uniComponent({
 });
 
 </script>
-<style>
+<style scoped>
 @import './row.css';
 </style>

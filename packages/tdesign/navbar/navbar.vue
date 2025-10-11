@@ -437,6 +437,6 @@ export default uniComponent({
 // Navbar = initTDesign(__decorate([wxComponent()], Navbar));
 // export default Navbar;
 </script>
-<style>
+<style scoped>
 @import './navbar.css';
 </style>

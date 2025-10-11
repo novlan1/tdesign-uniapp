@@ -346,6 +346,6 @@ export default uniComponent({
 // RadioGroup = initTDesign(__decorate([wxComponent()], RadioGroup));
 // export default RadioGroup;
 </script>
-<style>
+<style scoped>
 @import './radio-group.css';
 </style>

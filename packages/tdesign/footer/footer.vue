@@ -110,6 +110,6 @@ export default uniComponent({
 // Footer = initTDesign(__decorate([wxComponent()], Footer));
 // export default Footer;
 </script>
-<style>
+<style scoped>
 @import './footer.css';
 </style>

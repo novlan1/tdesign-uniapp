@@ -115,6 +115,6 @@ let SwiperNav = class extends SuperComponent {
 SwiperNav = __decorate([wxComponent()], SwiperNav);
 export default SwiperNav;
 </script>
-<style>
+<style scoped>
 @import './swiper-nav.css';
 </style>

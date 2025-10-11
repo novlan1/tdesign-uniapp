@@ -73,6 +73,6 @@
   </view>
 </template>
 
-<style>
+<style scoped>
 @import './grid.css';
 </style>

@@ -293,6 +293,6 @@ export default uniComponent({
 // Textarea = __decorate([wxComponent()], Textarea);
 // export default Textarea;
 </script>
-<style>
+<style scoped>
 @import './textarea.css';
 </style>

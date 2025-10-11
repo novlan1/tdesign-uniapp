@@ -92,6 +92,6 @@ export default uniComponent({
 // IndexesAnchor = __decorate([wxComponent()], IndexesAnchor);
 // export default IndexesAnchor;
 </script>
-<style>
+<style scoped>
 @import './indexes-anchor.css';
 </style>

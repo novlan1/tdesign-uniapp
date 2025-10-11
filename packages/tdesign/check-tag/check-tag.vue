@@ -215,7 +215,7 @@ export default uniComponent({
 // CheckTag = __decorate([wxComponent()], CheckTag);
 // export default CheckTag;
 </script>
-<style>
+<style scoped>
 @import './check-tag.css';
 
 </style>

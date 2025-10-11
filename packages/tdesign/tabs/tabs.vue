@@ -750,7 +750,7 @@ export default uniComponent({
 // Tabs = __decorate([wxComponent()], Tabs);
 // export default Tabs;
 </script>
-<style>
+<style scoped>
 @import './tabs.css';
 
 </style>

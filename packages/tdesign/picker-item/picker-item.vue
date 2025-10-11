@@ -225,6 +225,6 @@ PickerItem = initTDesign(__decorate([wxComponent()], PickerItem));
 
 export default PickerItem;
 </script>
-<style>
+<style scoped>
 @import './picker-item.css';
 </style>

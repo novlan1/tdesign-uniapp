@@ -281,6 +281,6 @@ let TreeSelect = class extends SuperComponent {
 TreeSelect = __decorate([wxComponent()], TreeSelect);
 export default TreeSelect;
 </script>
-<style>
+<style scoped>
 @import './tree-select.css';
 </style>

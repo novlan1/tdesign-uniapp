@@ -145,7 +145,7 @@ export default uniComponent({
 // default_1 = initTDesign(__decorate([wxComponent()], default_1));
 // export default default_1;
 </script>
-<style>
+<style scoped>
 @import './empty.css';
 
 </style>

@@ -198,6 +198,6 @@ export default uniComponent({
 // Icon = initTDesign(__decorate([wxComponent()], Icon));
 // export default Icon;
 </script>
-<style>
+<style scoped>
 @import './icon.css';
 </style>

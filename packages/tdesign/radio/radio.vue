@@ -353,6 +353,6 @@ export default uniComponent({
 // Radio = initTDesign(__decorate([wxComponent()], Radio));
 // export default Radio;
 </script>
-<style>
+<style scoped>
 @import './radio.css';
 </style>

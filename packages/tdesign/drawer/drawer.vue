@@ -186,6 +186,6 @@ export default uniComponent({
 // Drawer = __decorate([wxComponent()], Drawer);
 // export default Drawer;
 </script>
-<style>
+<style scoped>
 @import './drawer.css';
 </style>

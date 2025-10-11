@@ -21,6 +21,6 @@
   </view>
 </template>
 
-<style>
+<style scoped>
 @import './icon.css';
 </style>

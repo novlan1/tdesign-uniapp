@@ -197,6 +197,6 @@ export default uniComponent({
 // CountDown = initTDesign(__decorate([wxComponent()], CountDown));
 // export default CountDown;
 </script>
-<style>
+<style scoped>
 @import './count-down.css';
 </style>

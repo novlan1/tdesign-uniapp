@@ -269,6 +269,6 @@ Picker = initTDesign(__decorate([wxComponent()], Picker));
 
 export default Picker;
 </script>
-<style>
+<style scoped>
 @import './picker.css';
 </style>

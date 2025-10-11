@@ -36,6 +36,6 @@ let ScrollView = class extends SuperComponent {
 ScrollView = __decorate([wxComponent()], ScrollView);
 export default ScrollView;
 </script>
-<style>
+<style scoped>
 @import './scroll-view.css';
 </style>

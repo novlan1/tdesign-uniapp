@@ -472,6 +472,6 @@ let DateTimePicker = class extends SuperComponent {
 DateTimePicker = __decorate([wxComponent()], DateTimePicker);
 export default DateTimePicker;
 </script>
-<style>
+<style scoped>
 @import './date-time-picker.css';
 </style>

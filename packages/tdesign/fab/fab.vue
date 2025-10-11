@@ -267,6 +267,6 @@ export default uniComponent({
   },
 });
 </script>
-<style>
+<style scoped>
 @import './fab.css';
 </style>

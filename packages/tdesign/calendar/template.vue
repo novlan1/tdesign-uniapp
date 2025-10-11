@@ -261,7 +261,7 @@ import _ from '../common/utils.wxs';
 import * as _this from './calendar.wxs';
 
 </script>
-<style>
+<style scoped>
 @import './template.css';
 
 </style>

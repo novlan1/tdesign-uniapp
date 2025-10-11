@@ -134,6 +134,6 @@ import _ from '../common/utils.wxs';
 
 </script>
 
-<style>
+<style scoped>
 @import './template.css';
 </style>

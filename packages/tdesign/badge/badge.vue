@@ -147,6 +147,6 @@ export default uniComponent({
 // Badge = initTDesign(__decorate([wxComponent()], Badge));
 // export default Badge;
 </script>
-<style>
+<style scoped>
 @import './badge.css';
 </style>

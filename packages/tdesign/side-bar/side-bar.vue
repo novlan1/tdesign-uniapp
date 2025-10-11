@@ -121,6 +121,6 @@ export default uniComponent({
 // SideBar = __decorate([wxComponent()], SideBar);
 // export default SideBar;
 </script>
-<style>
+<style scoped>
 @import './side-bar.css';
 </style>

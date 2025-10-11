@@ -739,6 +739,6 @@ let Upload = class extends SuperComponent {
 Upload = __decorate([wxComponent()], Upload);
 export default Upload;
 </script>
-<style>
+<style scoped>
 @import './upload.css';
 </style>

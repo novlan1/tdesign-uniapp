@@ -240,7 +240,7 @@
   </view>
 </template>
 
-<style>
+<style scoped>
 @import './content.css';
 
 </style>

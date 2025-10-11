@@ -182,7 +182,7 @@ export default uniComponent({
 // BackTop = __decorate([wxComponent()], BackTop);
 // export default BackTop;
 </script>
-<style>
+<style scoped>
 @import './back-top.css';
 
 </style>

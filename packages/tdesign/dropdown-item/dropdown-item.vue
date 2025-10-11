@@ -468,6 +468,6 @@ export default uniComponent({
 // DropdownMenuItem = __decorate([wxComponent()], DropdownMenuItem);
 // export default DropdownMenuItem;
 </script>
-<style>
+<style scoped>
 @import './dropdown-item.css';
 </style>

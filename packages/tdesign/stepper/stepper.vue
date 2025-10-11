@@ -230,6 +230,6 @@ let Stepper = class extends SuperComponent {
 Stepper = __decorate([wxComponent()], Stepper);
 export default Stepper;
 </script>
-<style>
+<style scoped>
 @import './stepper.css';
 </style>

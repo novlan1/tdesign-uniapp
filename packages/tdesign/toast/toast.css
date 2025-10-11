@@ -48,11 +48,11 @@
     justify-content: center;
     align-items: center;
 }
-.t-toast__icon--row {
+:deep(.t-toast__icon--row) {
     display: flex;
     font-size: var(--td-toast-row-icon-size, 48rpx);
 }
-.t-toast__icon--column {
+:deep(.t-toast__icon--column) {
     font-size: var(--td-toast-column-icon-size, 64rpx);
 }
 .t-toast__text {

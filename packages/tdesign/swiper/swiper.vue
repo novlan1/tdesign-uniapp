@@ -208,7 +208,7 @@ let Swiper = class extends SuperComponent {
 Swiper = __decorate([wxComponent()], Swiper);
 export default Swiper;
 </script>
-<style>
+<style scoped>
 @import './swiper.css';
 
 </style>

@@ -156,6 +156,6 @@ export default uniComponent({
 // Switch = __decorate([wxComponent()], Switch);
 // export default Switch;
 </script>
-<style>
+<style scoped>
 @import './switch.css';
 </style>

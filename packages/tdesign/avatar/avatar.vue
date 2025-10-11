@@ -214,7 +214,7 @@ export default uniComponent({
 // Avatar = initTDesign(__decorate([wxComponent()], Avatar));
 // export default Avatar;
 </script>
-<style>
+<style scoped>
 @import './avatar.css';
 
 </style>

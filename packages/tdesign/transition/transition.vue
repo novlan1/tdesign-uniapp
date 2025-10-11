@@ -30,6 +30,6 @@ let Transition = class extends SuperComponent {
 Transition = __decorate([wxComponent()], Transition);
 export default Transition;
 </script>
-<style>
+<style scoped>
 @import './transition.css';
 </style>

@@ -169,6 +169,6 @@ export default uniComponent({
 // Tabbar = __decorate([wxComponent()], Tabbar);
 // export default Tabbar;
 </script>
-<style>
+<style scoped>
 @import './tab-bar.css';
 </style>

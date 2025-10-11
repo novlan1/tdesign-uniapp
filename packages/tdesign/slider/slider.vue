@@ -621,6 +621,6 @@ let Slider = class extends SuperComponent {
 Slider = initTDesign(__decorate([wxComponent()], Slider));
 export default Slider;
 </script>
-<style>
+<style scoped>
 @import './slider.css';
 </style>

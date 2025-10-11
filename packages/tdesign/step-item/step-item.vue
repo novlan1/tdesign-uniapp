@@ -240,6 +240,6 @@ export default uniComponent({
 // StepItem = __decorate([wxComponent()], StepItem);
 // export default StepItem;
 </script>
-<style>
+<style scoped>
 @import './step-item.css';
 </style>

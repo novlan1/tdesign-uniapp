@@ -603,7 +603,7 @@ export default uniComponent({
 // Dialog = initTDesign(__decorate([wxComponent()], Dialog));
 // export default Dialog;
 </script>
-<style>
+<style scoped>
 @import './dialog.css';
 
 </style>

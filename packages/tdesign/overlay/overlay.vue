@@ -123,6 +123,6 @@ export default uniComponent({
 // Overlay = initTDesign(__decorate([wxComponent()], Overlay));
 // export default Overlay;
 </script>
-<style>
+<style scoped>
 @import './overlay.css';
 </style>

@@ -261,6 +261,6 @@ export default uniComponent({
 // Cell = initTDesign(__decorate([wxComponent()], Cell));
 // export default Cell;
 </script>
-<style>
+<style scoped>
 @import './cell.css';
 </style>

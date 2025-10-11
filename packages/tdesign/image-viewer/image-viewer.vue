@@ -309,7 +309,7 @@ let ImageViewer = class extends SuperComponent {
 ImageViewer = initTDesign(__decorate([wxComponent()], ImageViewer));
 export default ImageViewer;
 </script>
-<style>
+<style scoped>
 @import './image-viewer.css';
 
 </style>

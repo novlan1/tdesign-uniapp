@@ -332,7 +332,7 @@ export default uniComponent({
 // GridItem = initTDesign(__decorate([wxComponent()], GridItem));
 // export default GridItem;
 </script>
-<style>
+<style scoped>
 @import './grid-item.css';
 
 </style>

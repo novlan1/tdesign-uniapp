@@ -34,6 +34,6 @@
   </view>
 </template>
 
-<style>
+<style scoped>
 @import './list.css';
 </style>

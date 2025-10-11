@@ -89,6 +89,6 @@ export default uniComponent({
 // CellGroup = initTDesign(__decorate([wxComponent()], CellGroup));
 // export default CellGroup;
 </script>
-<style>
+<style scoped>
 @import './cell-group.css';
 </style>

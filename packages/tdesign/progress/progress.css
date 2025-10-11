@@ -30,7 +30,7 @@
     justify-content: space-between;
     align-items: center;
 }
-.t-progress--thin .t-progress__icon {
+.t-progress--thin :deep(.t-progress__icon) {
     font-size: calc(var(--td-font-size-base, 28rpx) + 2px);
 }
 .t-progress--plump {
@@ -107,19 +107,19 @@
 .t-progress--status--success .t-progress__inner {
     background: var(--td-progress-inner-bg-color-success, var(--td-success-color, var(--td-success-color-5, #2ba471)));
 }
-.t-progress--status--success .t-progress__icon {
+.t-progress--status--success :deep(.t-progress__icon) {
     color: var(--td-success-color, var(--td-success-color-5, #2ba471));
 }
 .t-progress--status--warning .t-progress__inner {
     background: var(--td-progress-inner-bg-color-warning, var(--td-warning-color, var(--td-warning-color-5, #e37318)));
 }
-.t-progress--status--warning .t-progress__icon {
+.t-progress--status--warning :deep(.t-progress__icon) {
     color: var(--td-warning-color, var(--td-warning-color-5, #e37318));
 }
 .t-progress--status--error .t-progress__inner {
     background: var(--td-progress-inner-bg-color-error, var(--td-error-color, var(--td-error-color-6, #d54941)));
 }
-.t-progress--status--error .t-progress__icon {
+.t-progress--status--error :deep(.t-progress__icon) {
     color: var(--td-error-color, var(--td-error-color-6, #d54941));
 }
 @keyframes progress-active-animation {

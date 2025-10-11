@@ -179,6 +179,6 @@ export default uniComponent({
 // console.log('default_1', default_1);
 // export default default_1;
 </script>
-<style>
+<style scoped>
 @import './result.css';
 </style>

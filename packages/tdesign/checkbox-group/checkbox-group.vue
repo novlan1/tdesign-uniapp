@@ -439,6 +439,6 @@ export default uniComponent({
 //
 // export default CheckBoxGroup;
 </script>
-<style>
+<style scoped>
 @import './checkbox-group.css';
 </style>

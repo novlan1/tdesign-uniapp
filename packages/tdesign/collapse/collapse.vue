@@ -123,6 +123,6 @@ export default uniComponent({
 
 // export default Collapse;
 </script>
-<style>
+<style scoped>
 @import './collapse.css';
 </style>

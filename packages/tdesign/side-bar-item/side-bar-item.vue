@@ -200,7 +200,7 @@ export default uniComponent({
 // SideBarItem = __decorate([wxComponent()], SideBarItem);
 // export default SideBarItem;
 </script>
-<style>
+<style scoped>
 @import './side-bar-item.css';
 
 </style>

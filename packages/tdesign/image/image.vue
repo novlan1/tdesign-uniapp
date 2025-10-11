@@ -194,6 +194,6 @@ export default uniComponent({
   },
 });
 </script>
-<style>
+<style scoped>
 @import './image.css';
 </style>

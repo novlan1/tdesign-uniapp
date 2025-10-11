@@ -485,6 +485,6 @@ let Cascader = class extends SuperComponent {
 Cascader = __decorate([wxComponent()], Cascader);
 export default Cascader;
 </script>
-<style>
+<style scoped>
 @import './cascader.css';
 </style>

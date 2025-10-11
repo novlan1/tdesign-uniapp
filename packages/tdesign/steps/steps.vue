@@ -173,6 +173,6 @@ export default uniComponent({
 // Steps = __decorate([wxComponent()], Steps);
 // export default Steps;
 </script>
-<style>
+<style scoped>
 @import './steps.css';
 </style>

@@ -525,7 +525,7 @@ export default uniComponent({
 // NoticeBar = initTDesign(__decorate([wxComponent()], NoticeBar));
 // export default NoticeBar;
 </script>
-<style>
+<style scoped>
 @import './notice-bar.css';
 
 </style>

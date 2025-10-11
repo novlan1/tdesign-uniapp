@@ -52,6 +52,6 @@
   </view>
 </template>
 
-<style>
+<style scoped>
 @import './button.css';
 </style>

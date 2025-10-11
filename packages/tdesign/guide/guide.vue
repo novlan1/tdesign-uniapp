@@ -836,7 +836,7 @@ let Guide = class extends SuperComponent {
 Guide = __decorate([wxComponent()], Guide);
 export default Guide;
 </script>
-<style>
+<style scoped>
 @import './guide.css';
 
 </style>

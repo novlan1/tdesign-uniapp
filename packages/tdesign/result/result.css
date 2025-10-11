@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: center;
 }
-.t-result__icon {
+:deep(.t-result__icon) {
     font-size: 160rpx;
 }
 .t-result__title {

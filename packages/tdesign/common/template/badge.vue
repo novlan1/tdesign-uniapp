@@ -28,6 +28,6 @@
   </view>
 </template>
 
-<style>
+<style scoped>
 @import './badge.css';
 </style>

@@ -295,7 +295,7 @@ export default uniComponent({
 
 // export default Toast;
 </script>
-<style>
+<style scoped>
 @import './toast.css';
 
 </style>

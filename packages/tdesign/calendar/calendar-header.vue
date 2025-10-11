@@ -63,6 +63,6 @@
 <!-- template. ignore -->
 <!-- <script module="_" lang="wxs" src="@/common/utils.wxs"></script> -->
 
-<style>
+<style scoped>
 @import './calendar-header.css';
 </style>

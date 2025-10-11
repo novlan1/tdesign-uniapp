@@ -853,7 +853,7 @@ let Calendar = class extends SuperComponent {
 Calendar = __decorate([wxComponent()], Calendar);
 export default Calendar;
 </script>
-<style>
+<style scoped>
 @import './calendar.css';
 
 </style>

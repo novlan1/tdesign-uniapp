@@ -149,6 +149,6 @@ export default uniComponent({
 // Grid = initTDesign(__decorate([wxComponent()], Grid));
 // export default Grid;
 </script>
-<style>
+<style scoped>
 @import './grid.css';
 </style>

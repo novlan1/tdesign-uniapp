@@ -586,6 +586,6 @@ export default uniComponent({
 // Indexes = __decorate([wxComponent()], Indexes);
 // export default Indexes;
 </script>
-<style>
+<style scoped>
 @import './indexes.css';
 </style>

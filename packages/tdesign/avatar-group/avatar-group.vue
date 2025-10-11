@@ -155,6 +155,6 @@ export default uniComponent({
 // AvatarGroup = initTDesign(__decorate([wxComponent()], AvatarGroup));
 // export default AvatarGroup;
 </script>
-<style>
+<style scoped>
 @import './avatar-group.css';
 </style>

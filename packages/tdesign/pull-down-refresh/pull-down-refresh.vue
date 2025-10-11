@@ -603,6 +603,6 @@ export default uniComponent({
 // PullDownRefresh = __decorate([wxComponent()], PullDownRefresh);
 // export default PullDownRefresh;
 </script>
-<style>
+<style scoped>
 @import './pull-down-refresh.css';
 </style>

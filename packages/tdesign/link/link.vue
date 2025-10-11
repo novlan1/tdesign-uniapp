@@ -161,7 +161,7 @@ export default uniComponent({
   },
 });
 </script>
-<style>
+<style scoped>
 @import './link.css';
 
 </style>

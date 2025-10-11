@@ -243,7 +243,7 @@ export default uniComponent({
 // Tag = initTDesign(__decorate([wxComponent()], Tag));
 // export default Tag;
 </script>
-<style>
+<style scoped>
 @import './tag.css';
 
 </style>

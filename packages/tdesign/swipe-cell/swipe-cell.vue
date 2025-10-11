@@ -319,7 +319,7 @@ export default uniComponent({
 // SwiperCell = __decorate([wxComponent()], SwiperCell);
 // export default SwiperCell;
 </script>
-<style>
+<style scoped>
 @import './swipe-cell.css';
 
 </style>

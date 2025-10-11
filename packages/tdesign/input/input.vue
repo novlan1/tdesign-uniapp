@@ -537,7 +537,7 @@ export default uniComponent({
 // Input = initTDesign(__decorate([wxComponent()], Input));
 // export default Input;
 </script>
-<style>
+<style scoped>
 @import './input.css';
 
 </style>

@@ -708,6 +708,6 @@ let ColorPicker = class extends SuperComponent {
 ColorPicker = __decorate([wxComponent()], ColorPicker);
 export default ColorPicker;
 </script>
-<style>
+<style scoped>
 @import './color-picker.css';
 </style>

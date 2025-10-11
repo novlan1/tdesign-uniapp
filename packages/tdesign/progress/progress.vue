@@ -325,7 +325,7 @@ export default uniComponent({
 // Progress = initTDesign(__decorate([wxComponent()], Progress));
 // export default Progress;
 </script>
-<style>
+<style scoped>
 @import './progress.css';
 
 </style>
