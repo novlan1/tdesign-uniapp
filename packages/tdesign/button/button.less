@@ -140,7 +140,7 @@
     height: @@height;
     line-height: @@height;
 
-    & .@{button}__icon {
+    & :deep(.@{button}__icon) {
       font-size: @@iconSize;
     }
   }
@@ -513,12 +513,12 @@
     .ghost-theme(default);
   }
 
-  &__loading + &__content:not(:empty),
-  &__icon + &__content:not(:empty) {
+  :deep(&__loading) + &__content:not(:empty),
+  :deep(&__icon) + &__content:not(:empty) {
     margin-left: 8rpx;
   }
 
-  &__icon {
+  :deep(&__icon) {
     border-radius: @button-icon-border-radius;
   }
 
@@ -625,7 +625,7 @@
     cursor: not-allowed;
   }
 
-  &__loading {
+  :deep(&__loading) {
     &--wrapper {
       display: flex;
       align-items: center;

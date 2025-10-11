@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import tFab from 'tdesign-uniapp/fab/fab';
+import tFab from 'tdesign-uniapp/fab/fab.vue';
 export default {
   components: {
     tFab,

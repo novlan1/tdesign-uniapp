@@ -61,24 +61,7 @@
       </t-button>
     </block>
   </t-draggable>
-  <!-- <DraggableTemplate
-    v-if="draggable"
-    ref="draggableTemplate"
-    :prefix="prefix"
-    :class-prefix="classPrefix"
-    :custom-style="_._style([style, customStyle])"
-    :move-style="moveStyle"
-    :draggable="draggable"
-    :button-data="buttonData"
-    @start="onStart"
-    @move="onMove"
-    @end="onEnd"
-    @click="onTplButtonTap"
-  >
-    <template #default>
-      <slot />
-    </template>
-  </DraggableTemplate> -->
+
   <view
     v-else
     :class="[classPrefix + ' class ', tClass]"
@@ -91,7 +74,7 @@
       :t-id="buttonData.tId"
       :custom-style="buttonData.style || ''"
       :block="buttonData.block"
-      :class="getActionClass(classPrefix, buttonLayout) || ''"
+      :class="getActionClass(classPrefix, buttonData.buttonLayout) || ''"
       :t-class="prefix + '-class-action'"
       :disabled="buttonData.disabled"
       :data-type="'action'"
@@ -131,19 +114,6 @@
       <slot />
     </t-button>
   </view>
-
-  <!-- <ViewTemplate
-    v-else
-    :prefix="prefix"
-    :class-prefix="classPrefix"
-    :custom-style="_._style([style, customStyle])"
-    :button-data="buttonData"
-    @click="onTplButtonTap"
-  >
-    <template #default>
-      <slot />
-    </template>
-  </ViewTemplate> -->
 </template>
 
 <script>
@@ -155,8 +125,6 @@ import props from './props';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import { unitConvert, getWindowInfo } from '../common/utils';
 import _ from '../common/utils.wxs';
-// import DraggableTemplate from './template/draggable.vue';
-// import ViewTemplate from './template/view.vue';
 
 const name = `${prefix}-fab`;
 
@@ -171,8 +139,6 @@ export default uniComponent({
   name,
   mixins: [useCustomNavbar],
   components: {
-    // DraggableTemplate,
-    // ViewTemplate,
     tButton,
     tDraggable,
   },
@@ -237,7 +203,7 @@ export default uniComponent({
       const right = Math.max(0, Math.min(x, maxX));
       const bottom = Math.max(0, unitConvert(yBounds[1]), Math.min(y, maxY));
 
-      console.log('maxX', { maxX, maxY, yBounds, right, bottom });
+
       this.moveStyle = `right: ${right}px; bottom: ${bottom}px;`;
     },
     onEnd(t) {
@@ -250,7 +216,7 @@ export default uniComponent({
 
       setTimeout(() => {
         const insChild = this.$refs.draggableTemplate?.$refs?.draggable;
-        console.log('insChild', insChild, this.$refs);
+
 
         // button 更新时，重新获取其尺寸
         if (this?.yBounds?.[1]) {
@@ -267,6 +233,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped>
-@import './fab.css';
+<style scoped lang="less">
+@import './fab.less';
 </style>

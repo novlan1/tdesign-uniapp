@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import tButton from 'tdesign-uniapp/button/button';
+import tButton from 'tdesign-uniapp/button/button.vue';
 export default {
   components: {
     tButton,
@@ -36,6 +36,6 @@ export default {
   methods: {},
 };
 </script>
-<style>
+<style scoped>
 @import './index.css';
 </style>

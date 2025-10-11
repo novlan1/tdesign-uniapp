@@ -32,6 +32,6 @@ export default {
   methods: {},
 };
 </script>
-<style>
+<style scoped>
 @import './index.css';
 </style>

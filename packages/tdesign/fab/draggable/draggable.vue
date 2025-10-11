@@ -37,7 +37,6 @@ export default uniComponent({
   },
   methods: {
     onTouchStart(e) {
-      console.log('direction', this.direction);
       const { systemInfo } = this;
       if (this.direction === 'none') return;
       this.startX = e.touches[0].clientX + systemInfo.windowWidth - this.rect.right;
@@ -47,12 +46,12 @@ export default uniComponent({
 
     onTouchMove(e) {
       const { systemInfo } = this;
-      console.log('direction', this.direction, { systemInfo });
+
       if (this.direction === 'none') return;
       let x = this.startX - e.touches[0].clientX; // x轴移动偏移量
       let y = this.startY - e.touches[0].clientY; // y轴移动偏移量
 
-      console.log('onTouchMove.x', { x, y });
+
       if (this.direction === 'vertical') {
         x = systemInfo.windowWidth - this.rect.right;
       }
@@ -80,6 +79,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped>
-@import './draggable.css';
+<style scoped lang="less">
+@import './draggable.less';
 </style>

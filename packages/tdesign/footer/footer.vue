@@ -92,24 +92,7 @@ export default uniComponent({
   methods: {
   },
 });
-
-
-// let Footer = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`];
-//     this.properties = props;
-//     this.components = { tImage };
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       _,
-//     });
-//   }
-// };
-// Footer = initTDesign(__decorate([wxComponent()], Footer));
-// export default Footer;
 </script>
-<style scoped>
-@import './footer.css';
+<style scoped lang="less">
+@import './footer.less';
 </style>

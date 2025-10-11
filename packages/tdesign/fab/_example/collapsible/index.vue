@@ -52,8 +52,8 @@
 </template>
 
 <script>
-import tFab from 'tdesign-uniapp/fab/fab';
-import tIcon from 'tdesign-uniapp/icon/icon';
+import tFab from 'tdesign-uniapp/fab/fab.vue';
+import tIcon from 'tdesign-uniapp/icon/icon.vue';
 import pageScrollMixin from 'tdesign-uniapp/mixins/page-scroll';
 export default {
   components: {

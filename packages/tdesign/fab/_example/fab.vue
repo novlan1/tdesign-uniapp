@@ -103,8 +103,8 @@
 
 <script lang="ts">
 
-import tButton from 'tdesign-uniapp/button/button';
-import tSkeleton from 'tdesign-uniapp/skeleton/skeleton';
+import tButton from 'tdesign-uniapp/button/button.vue';
+import tSkeleton from 'tdesign-uniapp/skeleton/skeleton.vue';
 import BaseDemo from './base/index.vue';
 import advance from './advance/index.vue';
 import draggable from './draggable/index.vue';

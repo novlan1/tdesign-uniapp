@@ -119,33 +119,7 @@ export default uniComponent({
 
   },
 });
-
-// let default_1 = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-description`, `${prefix}-class-image`];
-//     this.properties = props;
-//     this._ = _;
-//     this.components = { tIcon, tImage };
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//     });
-//     this.observers = {
-//       icon(e) {
-//         const o = setIcon('icon', e, '');
-//         this.setData(Object.assign({}, o));
-//       },
-//     };
-//   }
-// };
-// default_1 = initTDesign(__decorate([wxComponent()], default_1));
-// export default default_1;
 </script>
-<style scoped>
-@import './empty.css';
-
+<style scoped lang="less">
+@import './empty.less';
 </style>
