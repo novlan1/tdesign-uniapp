@@ -59,6 +59,7 @@ import props from './props';
 import { calcIcon } from '../common/utils';
 import _ from '../common/utils.wxs';
 import { ParentMixin, RELATION_MAP } from '../common/relation';
+import { parseEventDynamicCode } from '../common/event/dynamic';
 
 
 const name = `${prefix}-dropdown-menu`;
@@ -109,6 +110,7 @@ export default uniComponent({
     this.getAllItems();
   },
   methods: {
+    parseEventDynamicCode,
     toggle(index) {
       const { activeIdx, duration } = this;
       const prevItem = this.children[activeIdx];

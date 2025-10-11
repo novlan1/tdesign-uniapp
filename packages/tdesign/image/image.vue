@@ -95,6 +95,12 @@ import _ from '../common/utils.wxs';
 const name = `${prefix}-image`;
 export default uniComponent({
   name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-load`,
+    `${prefix}-class-image`,
+    `${prefix}-class-error`,
+  ],
   components: {
     tLoading,
     tIcon,

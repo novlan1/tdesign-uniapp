@@ -15,6 +15,7 @@
       :placement="placement"
       :items="sidebar"
       using-custom-navbar
+      :custom-navbar-height="isH5 ? 48 : 0"
       @overlay-click="overlayClick"
       @item-click="itemClick"
     />

@@ -123,6 +123,7 @@ import props from './props';
 import { unitConvert, getRect } from '../common/utils';
 import _ from '../common/utils.wxs';
 import * as utils from './rate.wxs';
+import { parseEventDynamicCode } from '../common/event/dynamic';
 
 const {
   prefix: prefix,

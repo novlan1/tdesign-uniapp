@@ -48,19 +48,19 @@
 import tOverlay from '../overlay/overlay';
 import tIcon from '../icon/icon';
 import { uniComponent } from '../common/src/index';
-import config from '../common/config';
+import { prefix } from '../common/config';
 import props from './props';
 import { transitionMixins } from '../mixins/transition';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
 import popup from './popup.wxs';
+import { parseEventDynamicCode } from '../common/event/dynamic';
 
 delete props.visible;
 
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-popup`;
+
+
 export default uniComponent({
   name,
   externalClasses: [
@@ -84,6 +84,7 @@ export default uniComponent({
     };
   },
   methods: {
+    parseEventDynamicCode,
     handleOverlayClick() {
       const { closeOnOverlayClick } = this;
       if (closeOnOverlayClick) {

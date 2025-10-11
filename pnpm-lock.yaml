@@ -101,6 +101,9 @@ importers:
       '@dcloudio/uni-mp-baidu':
         specifier: 3.0.0-4030620241128001
         version: 3.0.0-4030620241128001(postcss@8.5.6)(rollup@4.46.2)(vue@3.5.18(typescript@5.1.6))
+      '@dcloudio/uni-mp-compiler':
+        specifier: 3.0.0-4030620241128001
+        version: 3.0.0-4030620241128001(postcss@8.5.6)(rollup@4.46.2)(vue@3.5.18(typescript@5.1.6))
       '@dcloudio/uni-mp-jd':
         specifier: 3.0.0-4030620241128001
         version: 3.0.0-4030620241128001(postcss@8.5.6)(rollup@4.46.2)(vue@3.5.18(typescript@5.1.6))
