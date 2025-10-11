@@ -44,6 +44,7 @@ export default {
     tCellGroup,
     tCell,
   },
+  onPageScroll() {},
   data() {
     return {
       defaultCurrent: 'B',
@@ -140,6 +141,6 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 @import './index.css';
 </style>

@@ -81,6 +81,7 @@ export default {
   options: {
     styleIsolation: 'shared',
   },
+  onPageScroll() {},
   components: {
     tIndexes,
     tIndexesAnchor,
@@ -125,6 +126,6 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 @import './index.css';
 </style>
