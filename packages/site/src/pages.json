@@ -82,6 +82,9 @@
       "path": "pages-more/switch/switch"
     },
     {
+      "path": "pages-more/textarea/textarea"
+    },
+    {
       "path": "pages-more/avatar/avatar"
     },
     {
@@ -238,6 +241,10 @@
       {
         "name": "switch",
         "pathName": "pages-more/switch/switch"
+      },
+      {
+        "name": "textarea",
+        "pathName": "pages-more/textarea/textarea"
       },
       {
         "name": "avatar",

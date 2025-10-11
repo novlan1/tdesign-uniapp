@@ -3,6 +3,6 @@
     border-radius: 18rpx;
 }
 
-.external-class {
+:deep(.external-class) {
     height: 312rpx;
 }

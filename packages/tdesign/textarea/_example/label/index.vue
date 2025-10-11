@@ -12,6 +12,9 @@
 <script>
 import tTextarea from 'tdesign-uniapp/textarea/textarea';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tTextarea,
   },
@@ -22,6 +25,6 @@ export default {
   methods: {},
 };
 </script>
-<style>
+<style scoped>
 @import './index.css';
 </style>

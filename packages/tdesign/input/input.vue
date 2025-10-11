@@ -150,7 +150,7 @@ import { getCharacterLength, calcIcon } from '../common/utils';
 import { isDef } from '../common/validator';
 import { getInputClass } from './computed.js';
 import _ from '../common/utils.wxs';
-
+import { getInnerMaxLen } from './utils';
 
 const name = `${prefix}-input`;
 
@@ -260,34 +260,25 @@ export default uniComponent({
       // #endif
     },
     updateInnerMaxLen() {
-      // #ifdef H5
       this.innerMaxLen = this.getInnerMaxLen();
-      // #endif
-      // #ifndef H5
-      this.innerMaxLen = this.allowInputOverMax ? -1 : this.maxlength;
-      // #endif
     },
     getInnerMaxLen() {
-      if (this.allowInputOverMax) {
-        return -1;
-      }
-      if (!this.maxcharacter || this.maxcharacter < 0) {
-        return this.maxlength;
-      }
-      if (!this.dataValue) {
-        return this.maxcharacter;
-      }
-
-
-      const { length: realCount } = getCharacterLength('maxcharacter', this.rawValue, Infinity);
-
-      if (realCount >= this.maxcharacter) {
-        return this.dataValue.length;
-      }
-
-      const extra = this.count - this.dataValue.length;
-
-      return this.maxcharacter - extra;
+      const {
+        allowInputOverMax,
+        maxcharacter,
+        maxlength,
+        dataValue,
+        rawValue,
+        count,
+      } = this;
+      return getInnerMaxLen({
+        allowInputOverMax,
+        maxcharacter,
+        maxlength,
+        dataValue,
+        rawValue,
+        count,
+      });
     },
 
     updateClearIconVisible(value = false) {

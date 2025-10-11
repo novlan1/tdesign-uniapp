@@ -3,7 +3,7 @@
     background-color: var(--bg-color-demo);
 }
 
-.external-class {
+:deep(.external-class){
     padding-top: 24rpx !important;
     padding-bottom: 24rpx !important;
 }

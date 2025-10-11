@@ -66,8 +66,7 @@
       },
       {
         "name": "Textarea",
-        "label": "多行文本框",
-        "hide": true
+        "label": "多行文本框"
       },
       {
         "name": "TreeSelect",

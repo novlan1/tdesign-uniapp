@@ -13,12 +13,12 @@
       <textarea
         :class="classPrefix + '__wrapper-inner ' + (disabled ? prefix + '-is-disabled' : '') + ' ' + tClassTextarea"
         :style="textareaStyle(autosize)"
-        :maxlength="allowInputOverMax ? -1 : maxlength"
+        :maxlength="innerMaxLen"
         :disabled="disabled || readonly"
         :placeholder="placeholder"
         :placeholder-class="classPrefix + '__placeholder ' + placeholderClass"
         :placeholder-style="placeholderStyle"
-        :value="value"
+        :value="dataValue"
         :auto-height="!!autosize"
         :auto-focus="autofocus"
         :fixed="fixed"
@@ -56,6 +56,7 @@ import props from './props';
 import { getCharacterLength } from '../common/utils';
 import _ from '../common/utils.wxs';
 import { textareaStyle } from './computed.js';
+import { getInnerMaxLen } from '../input/utils';
 
 
 const name = `${prefix}-textarea`;
@@ -77,38 +78,47 @@ export default uniComponent({
       classPrefix: name,
       count: 0,
       _,
+
+      dataValue: this.value ?? this.defaultValue ?? '',
+      innerMaxLen: -1,
     };
   },
   watch: {
     value(val) {
-      this.updateCount(val ?? this.properties.defaultValue);
+      this.updateValue(val);
     },
+
+    count: 'updateInnerMaxLen',
+    dataValue: 'updateInnerMaxLen',
+    allowInputOverMax: 'updateInnerMaxLen',
+    maxcharacter: 'updateInnerMaxLen',
+    maxlength: 'updateInnerMaxLen',
   },
   mounted() {
-    const { value, defaultValue } = this.properties;
+    const { value, defaultValue } = this;
     this.updateValue(value ?? defaultValue ?? '');
   },
   methods: {
     textareaStyle,
     updateCount(val) {
-      const { maxcharacter, maxlength } = this.properties;
+      const { maxcharacter, maxlength } = this;
       const { count } = this.calculateValue(val, maxcharacter, maxlength);
-      this.setData({
-        count,
-      });
+      this.count = count;
     },
 
     updateValue(val) {
-      const { maxcharacter, maxlength } = this.properties;
+      const { maxcharacter, maxlength } = this;
       const { value, count } = this.calculateValue(val, maxcharacter, maxlength);
-      this.setData({
-        value,
-        count,
-      });
+
+      this.rawValue = val;
+
+      console.log('updateValue.value', { value, count });
+      this.dataValue = value;
+      this.count = count;
     },
 
     calculateValue(value, maxcharacter, maxlength) {
-      const { allowInputOverMax } = this.properties;
+      const { allowInputOverMax } = this;
       if (maxcharacter > 0 && !Number.isNaN(maxcharacter)) {
         const { length, characters } = getCharacterLength(
           'maxcharacter',
@@ -136,163 +146,56 @@ export default uniComponent({
     onInput(event) {
       const { value, cursor } = event.detail;
       this.updateValue(value);
-      this.triggerEvent('change', { value: this.data.value, cursor });
+      this.$emit('change', { value: this.dataValue, cursor });
     },
     onFocus(event) {
-      this.triggerEvent('focus', {
+      this.$emit('focus', {
         ...event.detail,
       });
     },
     onBlur(event) {
-      this.triggerEvent('blur', {
+      this.$emit('blur', {
         ...event.detail,
       });
     },
     onConfirm(event) {
-      this.triggerEvent('enter', {
+      this.$emit('enter', {
         ...event.detail,
       });
     },
     onLineChange(event) {
-      this.triggerEvent('line-change', {
+      this.$emit('line-change', {
         ...event.detail,
       });
     },
     onKeyboardHeightChange(e) {
-      this.triggerEvent('keyboardheightchange', e.detail);
+      this.$emit('keyboardheightchange', e.detail);
+    },
+
+    updateInnerMaxLen() {
+      this.innerMaxLen = this.getInnerMaxLen();
+    },
+    getInnerMaxLen() {
+      const {
+        allowInputOverMax,
+        maxcharacter,
+        maxlength,
+        dataValue,
+        rawValue,
+        count,
+      } = this;
+      return getInnerMaxLen({
+        allowInputOverMax,
+        maxcharacter,
+        maxlength,
+        dataValue,
+        rawValue,
+        count,
+      });
     },
   },
 });
-
-// let Textarea = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     this.behaviors = ['wx://form-field'];
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-textarea`, `${prefix}-class-label`, `${prefix}-class-indicator`];
-//     this.properties = props;
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       count: 0,
-//     });
-//     this.observers = {
-//       value(e) {
-//         this.updateCount(null != e ? e : this.defaultValue);
-//       },
-//     };
-//     this.lifetimes = {
-//       ready() {
-//         let e;
-//         const {
-//           value: t,
-//           defaultValue: a,
-//         } = this;
-//         this.updateValue(null !== (e = null != t ? t : a) && void 0 !== e ? e : '');
-//       },
-//     };
-//     this.methods = {
-//       updateCount(e) {
-//         const {
-//           maxcharacter: t,
-//           maxlength: a,
-//         } = this;
-//         const {
-//           count: r,
-//         } = this.calculateValue(e, t, a);
-//         this.setData({
-//           count: r,
-//         });
-//       },
-//       updateValue(e) {
-//         const {
-//           maxcharacter: t,
-//           maxlength: a,
-//         } = this;
-//         const {
-//           value: r,
-//           count: s,
-//         } = this.calculateValue(e, t, a);
-//         this.setData({
-//           value: r,
-//           count: s,
-//         });
-//       },
-//       calculateValue(e, t, a) {
-//         const {
-//           allowInputOverMax: r,
-//         } = this;
-//         if (t > 0 && !Number.isNaN(t)) {
-//           const {
-//             length: a,
-//             characters: s,
-//           } = getCharacterLength('maxcharacter', e, r ? 1 / 0 : t);
-//           return {
-//             value: s,
-//             count: a,
-//           };
-//         }
-//         if (a > 0 && !Number.isNaN(a)) {
-//           const {
-//             length: t,
-//             characters: s,
-//           } = getCharacterLength('maxlength', e, r ? 1 / 0 : a);
-//           return {
-//             value: s,
-//             count: t,
-//           };
-//         }
-//         return {
-//           value: e,
-//           count: e ? String(e).length : 0,
-//         };
-//       },
-//       onInput(e) {
-//         const {
-//           value: t,
-//           cursor: a,
-//         } = e.detail;
-//         this.updateValue(t);
-//         this.$emit('change', {
-//           detail: {
-//             value: this.value,
-//             cursor: a,
-//           },
-//         });
-//       },
-//       onFocus(e) {
-//         this.$emit('focus', {
-//           detail: Object.assign({}, e.detail),
-//         });
-//       },
-//       onBlur(e) {
-//         this.$emit('blur', {
-//           detail: Object.assign({}, e.detail),
-//         });
-//       },
-//       onConfirm(e) {
-//         this.$emit('enter', {
-//           detail: Object.assign({}, e.detail),
-//         });
-//       },
-//       onLineChange(e) {
-//         this.$emit('line-change', {
-//           detail: Object.assign({}, e.detail),
-//         });
-//       },
-//       onKeyboardHeightChange(e) {
-//         this.$emit('keyboardheightchange', {
-//           detail: e.detail,
-//         });
-//       },
-//     };
-//   }
-// };
-// Textarea = __decorate([wxComponent()], Textarea);
-// export default Textarea;
 </script>
-<style scoped>
-@import './textarea.css';
+<style scoped lang="less">
+@import './textarea.less';
 </style>

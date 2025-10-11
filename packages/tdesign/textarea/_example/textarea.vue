@@ -67,9 +67,9 @@
 import BaseDemo from './base';
 import labelDemo from './label';
 import autosize from './autosize';
+import maxlength from './maxlength';
 import disabled from './disabled';
 import maxcharacter from './maxcharacter';
-import maxlength from './maxlength';
 import card from './card';
 import custom from './custom';
 export default {
@@ -78,8 +78,8 @@ export default {
     labelDemo,
     autosize,
     disabled,
-    maxcharacter,
     maxlength,
+    maxcharacter,
     card,
     custom,
   },
