@@ -1,6 +1,7 @@
 {
   "name": "tdesign-uniapp",
   "version": "0.0.1",
+  "author": "novlan1",
   "scripts": {
     "dev:custom": "uni -p",
     "dev:h5": "uni",

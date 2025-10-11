@@ -7,27 +7,18 @@ const isH5 = process.env.UNI_PLATFORM === 'h5';
 
 const baseAlias = {
   'tdesign-site': path.resolve(__dirname),
+  'tdesign-uniapp': isH5
+    ? path.resolve(__dirname, '../tdesign')
+    : path.resolve(__dirname, './src/_log/tdesign'),
 };
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [uni(),
-    // {
-    //   name: 'custom-watcher',
-    //   configureServer(server) {
-    //     chokidar.watch('../').on('change', (path) => {
-    //       console.log('1111', path);
-    //       server.ws.send({ type: 'full-reload' }); // 触发刷新
-    //     });
-    //   },
-    // },
+  plugins: [
+    uni(),
   ],
   resolve: {
-    alias: isH5 ? {
-      // 不使用 workspace，而使用 alias，解决修改组件后必须重启才能生效
-      ...baseAlias,
-      'tdesign-uniapp': path.resolve(__dirname, '../tdesign'),       // 根目录别名
-    } : {
+    alias: {
       ...baseAlias,
     },
   },

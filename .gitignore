@@ -19,4 +19,4 @@ dist
 *.njsproj
 *.sln
 *.sw?
-packages/site/src/_log/
+packages/site/src/_tdesign
