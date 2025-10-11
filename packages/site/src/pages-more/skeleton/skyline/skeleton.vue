@@ -58,7 +58,7 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import tSkeleton from 'tdesign-uniapp/skeleton/skeleton';
 import theme from '../theme';
 import grid from '../grid';

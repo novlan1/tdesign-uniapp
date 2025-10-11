@@ -46,7 +46,7 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import yearMonthDate from '../year-month-date';
 import yearMonth from '../year-month';
 import time from '../time';

@@ -49,7 +49,7 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import baseDemo from '../base/index.vue';
 import search from '../search/index.vue';
 import backHome from '../back-home/index.vue';

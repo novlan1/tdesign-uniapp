@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import base from '../base';
 import size from '../size';
 import iconBtn from '../icon-btn';

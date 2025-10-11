@@ -49,7 +49,7 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import tButton from 'tdesign-uniapp/button/button';
 import theme from '../theme';
 import description from '../description';

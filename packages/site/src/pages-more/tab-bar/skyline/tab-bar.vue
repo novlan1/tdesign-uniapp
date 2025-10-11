@@ -62,7 +62,7 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import textOnly from '../text-only';
 import iconOnly from '../icon-only';
 import base from '../base';

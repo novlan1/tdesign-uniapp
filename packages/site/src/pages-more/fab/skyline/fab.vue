@@ -74,7 +74,7 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import tButton from 'tdesign-uniapp/button/button';
 import base from '../base';
 import advance from '../advance';

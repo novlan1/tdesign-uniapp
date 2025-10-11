@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import baseComp from '../base';
 export default {
   components: {

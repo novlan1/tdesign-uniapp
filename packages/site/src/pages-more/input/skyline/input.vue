@@ -71,7 +71,7 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import tInput from 'tdesign-uniapp/input/input';
 import base from '../base';
 import suffix from '../suffix';

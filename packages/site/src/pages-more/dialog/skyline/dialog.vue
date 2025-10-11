@@ -74,7 +74,7 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import baseDemo from '../base/index.vue';
 import confirm from '../confirm/index.vue';
 import withInput from '../with-input/index.vue';

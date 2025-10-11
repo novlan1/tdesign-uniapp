@@ -6,7 +6,7 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import demoAvatar from '../avatar.vue';
 export default {
   components: {

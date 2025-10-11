@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import tImage from 'tdesign-uniapp/image/image';
 import { useTheme } from 'tdesign-uniapp/mixins/theme-change';
 

@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import tIcon from 'tdesign-uniapp/icon/icon';
 export default {
   components: {

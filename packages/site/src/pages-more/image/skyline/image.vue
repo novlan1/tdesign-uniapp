@@ -31,7 +31,7 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import tImage from 'tdesign-uniapp/image/image';
 import base from '../base';
 import status from '../status';

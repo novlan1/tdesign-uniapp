@@ -104,7 +104,7 @@
   </view>
 </template>
 <script>
-import tIcon from '../icon/icon';
+import tIcon from '../icon/icon.vue';
 import { uniComponent } from '../common/src/index';
 import { getRect, getAnimationFrame, calcIcon } from '../common/utils';
 import props from './props';

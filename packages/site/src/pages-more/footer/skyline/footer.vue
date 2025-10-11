@@ -34,7 +34,7 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import BaseDemo from '../base/index.vue';
 import LinkDemo from '../link/index.vue';
 import LogoDemo from '../logo/index.vue';

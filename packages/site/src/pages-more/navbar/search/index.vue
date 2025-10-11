@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
+import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import tSearch from 'tdesign-uniapp/search/search';
 export default {
   components: {
