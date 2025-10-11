@@ -74,6 +74,9 @@ const items = new Array(12).fill()
     image,
   }));
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tSideBar,
     tSideBarItem,

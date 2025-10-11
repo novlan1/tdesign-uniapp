@@ -51,6 +51,9 @@
 import tGrid from 'tdesign-uniapp/grid/grid';
 import tGridItem from 'tdesign-uniapp/grid-item/grid-item';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tGrid,
     tGridItem,

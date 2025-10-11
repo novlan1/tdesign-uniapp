@@ -65,6 +65,9 @@ import tRadioGroup from 'tdesign-uniapp/radio-group/radio-group';
 import tRadio from 'tdesign-uniapp/radio/radio';
 import tIcon from 'tdesign-uniapp/icon/icon';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tRadioGroup,
     tRadio,

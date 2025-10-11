@@ -78,6 +78,9 @@ const list = [
   },
 ];
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tIndexes,
     tIndexesAnchor,

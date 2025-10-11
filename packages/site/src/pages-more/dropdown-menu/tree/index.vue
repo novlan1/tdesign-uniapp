@@ -58,7 +58,7 @@ export default {
   created() {},
   methods: {
     handleTreeSelect(e) {
-      this.doubleColumnsTree.value = e.detail.value;
+      this.doubleColumnsTree.value = e.value;
     },
   },
 };

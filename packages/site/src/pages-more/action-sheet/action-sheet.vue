@@ -53,6 +53,9 @@ import status from './status/index.vue';
 import grid from './grid/index.vue';
 import align from './align/index.vue';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     // tToast,
     list,

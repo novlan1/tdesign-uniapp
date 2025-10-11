@@ -14,6 +14,9 @@
 <script>
 import tNoticeBar from 'tdesign-uniapp/notice-bar/notice-bar';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tNoticeBar,
   },

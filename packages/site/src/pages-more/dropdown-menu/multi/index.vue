@@ -80,7 +80,7 @@ export default {
   created() {},
   methods: {
     handleMultipleSelect(e) {
-      this.multipleSelect.value = e.detail.value;
+      this.multipleSelect.value = e.value;
     },
   },
 };

@@ -23,6 +23,9 @@
 <script>
 import tAvatar from 'tdesign-uniapp/avatar/avatar';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tAvatar,
   },

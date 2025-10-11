@@ -29,6 +29,9 @@
 import tCheckboxGroup from 'tdesign-uniapp/checkbox-group/checkbox-group';
 import tCheckbox from 'tdesign-uniapp/checkbox/checkbox';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tCheckboxGroup,
     tCheckbox,

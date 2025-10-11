@@ -66,7 +66,7 @@ export default {
   created() {},
   methods: {
     onChange(e) {
-      this.product.value = e.detail.value;
+      this.product.value = e.value;
     },
   },
 };

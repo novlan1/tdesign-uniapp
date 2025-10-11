@@ -21,6 +21,9 @@
 <script>
 import tResult from 'tdesign-uniapp/result/result';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tResult,
   },

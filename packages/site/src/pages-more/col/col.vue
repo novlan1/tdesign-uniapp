@@ -28,6 +28,9 @@
 import BaseDemo from './base/index.vue';
 import OffsetDemo from './offset/index.vue';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     BaseDemo,
     OffsetDemo,

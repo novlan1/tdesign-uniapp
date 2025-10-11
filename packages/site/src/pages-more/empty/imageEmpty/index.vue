@@ -13,6 +13,9 @@
 import tEmpty from 'tdesign-uniapp/empty/empty';
 
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tEmpty,
   },

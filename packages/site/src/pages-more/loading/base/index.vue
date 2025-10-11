@@ -37,12 +37,12 @@ import tLoading from 'tdesign-uniapp/loading/loading';
 import tImage from 'tdesign-uniapp/image/image';
 import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tLoading,
     tImage,
-  },
-  options: {
-    styleIsolation: 'shared',
   },
   mixins: [SkylineBehavior],
   data() {

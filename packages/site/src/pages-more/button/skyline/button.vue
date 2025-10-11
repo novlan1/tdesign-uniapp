@@ -78,6 +78,9 @@ import shape from '../shape';
 import theme from '../theme';
 import disabled from '../disabled';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tNavbar,
     base,

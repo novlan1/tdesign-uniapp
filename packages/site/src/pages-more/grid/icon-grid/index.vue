@@ -43,6 +43,9 @@ import tGrid from 'tdesign-uniapp/grid/grid';
 import tGridItem from 'tdesign-uniapp/grid-item/grid-item';
 import tButton from 'tdesign-uniapp/button/button';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tGrid,
     tGridItem,

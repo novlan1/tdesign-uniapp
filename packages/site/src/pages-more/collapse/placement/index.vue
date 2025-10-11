@@ -32,7 +32,7 @@ export default {
   created() {},
   methods: {
     handleChange(e) {
-      this.activeValues = e.detail.value;
+      this.activeValues = e.value;
     },
   },
 };

@@ -25,6 +25,9 @@
 import tRadioGroup from 'tdesign-uniapp/radio-group/radio-group';
 import tRadio from 'tdesign-uniapp/radio/radio';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tRadioGroup,
     tRadio,
