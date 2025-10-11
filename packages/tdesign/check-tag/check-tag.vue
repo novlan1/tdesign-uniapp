@@ -140,82 +140,8 @@ export default uniComponent({
   },
 });
 
-
-// let CheckTag = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       className: '',
-//     });
-//     this.components = {
-//       tIcon,
-//     };
-//     this._ = _;
-//     this.properties = props;
-//     this.externalClasses = [`${prefix}-class`];
-//     this.controlledProps = [{
-//       key: 'checked',
-//       event: 'change',
-//     }];
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     this.lifetimes = {
-//       attached() {
-//         this.setClass();
-//       },
-//     };
-//     this.observers = {
-//       'size, disabled, checked'() {
-//         this.setClass();
-//       },
-//       icon(e) {
-//         this.setData({
-//           _icon: calcIcon(e),
-//         });
-//       },
-//     };
-//     this.methods = {
-//       setClass() {
-//         const {
-//           classPrefix: e,
-//         } = this;
-//         const {
-//           size: s,
-//           variant: t,
-//           disabled: i,
-//           checked: a,
-//           shape: c,
-//         } = this;
-//         const o = classNames([e, `${e}--checkable`, i ? `${e}--disabled` : '', a ? `${e}--checked` : '', `${e}--${a ? 'primary' : 'default'}`, `${e}--${s}`, `${e}--${t}`, `${e}--${c}`]);
-//         this.setData({
-//           className: o,
-//         });
-//       },
-//       onClick() {
-//         if (this.disabled) {
-//           return;
-//         }
-//         const {
-//           checked: e,
-//         } = this;
-//         this._trigger('click');
-//         this._trigger('change', {
-//           checked: !e,
-//         });
-//       },
-//       onClose(e) {
-//         this.disabled || this._trigger('close', e);
-//       },
-//     };
-//   }
-// };
-// CheckTag = __decorate([wxComponent()], CheckTag);
-// export default CheckTag;
 </script>
-<style scoped>
-@import './check-tag.css';
+<style scoped lang="less">
+@import './check-tag.less';
 
 </style>

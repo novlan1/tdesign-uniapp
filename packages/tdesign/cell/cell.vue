@@ -4,7 +4,7 @@
     :class="[
       'class ' ,
       tClass,
-      _.cls(classPrefix, [['borderless', !bordered || isLastChild]])
+      _.cls(classPrefix, [['bordered', bordered || isLastChild]])
     ]"
     :hover-class="hover ? classPrefix + '--hover' : ''"
     hover-stay-time="70"
