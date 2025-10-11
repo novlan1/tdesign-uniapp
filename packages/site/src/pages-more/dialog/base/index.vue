@@ -98,6 +98,9 @@
 import tButton from 'tdesign-uniapp/button/button';
 import tDialog from 'tdesign-uniapp/dialog/dialog';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tButton,
     tDialog,

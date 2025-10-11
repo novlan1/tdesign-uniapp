@@ -38,8 +38,7 @@
               <t-grid-item
                 v-for="(item, index) in gridThemeItems[0]"
                 :key="index"
-                :t-class="classPrefix + '__grid-item'"
-                :class="classPrefix + '__square'"
+                :t-class="classPrefix + '__grid-item ' + classPrefix + '__square'"
                 :data-index="index"
                 :icon="{ name: item.icon, color: item.color }"
                 :text="item.label || ''"
@@ -116,7 +115,7 @@
               <t-icon
                 v-if="item.icon"
                 :name="item.icon"
-                :class="classPrefix + '__list-item-icon'"
+                :t-class="classPrefix + '__list-item-icon'"
                 size="48rpx"
               />
               <view :class="classPrefix + '__list-item-text'">
@@ -125,7 +124,7 @@
               <t-icon
                 v-if="item.suffixIcon"
                 :name="item.suffixIcon"
-                :class="classPrefix + '__list-item-icon ' + classPrefix + '__list-item-icon--suffix'"
+                :t-class="classPrefix + '__list-item-icon ' + classPrefix + '__list-item-icon--suffix'"
                 size="48rpx"
               />
             </view>

@@ -34,7 +34,6 @@
     <block
       v-if="_closable"
       name="icon"
-      @click.stop.prevent="handleClose"
     >
       <t-icon
         :custom-style="_closable.style || ''"

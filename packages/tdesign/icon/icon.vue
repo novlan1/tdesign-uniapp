@@ -5,7 +5,7 @@
     :aria-hidden="ariaHidden"
     :aria-label="ariaLabel"
     :aria-role="ariaRole"
-    @tap="onTap"
+    @click="onTap"
   >
     <view
       v-if="isImage"
