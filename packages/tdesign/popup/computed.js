@@ -1,7 +1,7 @@
 function getPopupStyles(zIndex, distanceTop, placement) {
-  var zIndexStyle = zIndex ? 'z-index:' + zIndex + ';' : '';
+  let zIndexStyle = zIndex ? `z-index:${zIndex};` : '';
   if ((placement === 'top' || placement === 'left' || placement === 'right') && distanceTop) {
-    zIndexStyle = zIndexStyle + 'top:' + distanceTop + 'px;' + '--td-popup-distance-top:' + distanceTop + 'px;';
+    zIndexStyle = `${zIndexStyle}top:${distanceTop}px;` + `--td-popup-distance-top:${distanceTop}px;`;
   }
   return zIndexStyle;
 }
@@ -13,6 +13,6 @@ function onContentTouchMove(e) {
 }
 
 export default {
-  getPopupStyles: getPopupStyles,
-  onContentTouchMove: onContentTouchMove,
+  getPopupStyles,
+  onContentTouchMove,
 };

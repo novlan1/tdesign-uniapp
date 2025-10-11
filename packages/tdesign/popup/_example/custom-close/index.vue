@@ -33,6 +33,9 @@ import tPopup from 'tdesign-uniapp/popup/popup';
 import tIcon from 'tdesign-uniapp/icon/icon';
 import tButton from 'tdesign-uniapp/button/button';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tPopup,
     tIcon,

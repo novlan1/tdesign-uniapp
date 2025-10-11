@@ -6,7 +6,7 @@
     border-radius: 16rpx;
 }
 
-.close-btn {
+:deep(.close-btn) {
     position: absolute;
     left: 50%;
     margin-left: -32rpx;

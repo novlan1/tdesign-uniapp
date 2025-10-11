@@ -53,7 +53,7 @@ import props from './props';
 import { transitionMixins } from '../mixins/transition';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
-import popup from './popup.wxs';
+import popup from './computed.js';
 import { parseEventDynamicCode } from '../common/event/dynamic';
 
 delete props.visible;
@@ -98,63 +98,7 @@ export default uniComponent({
   },
 });
 
-
-// let Popup = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`];
-//     this.mixins = [transition(), useCustomNavbar];
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     this.components = {
-//       tOverlay,
-//       tIcon,
-//     };
-//     this.properties = props;
-//     // this._ = _;
-//     // this._wxs = {
-//     //   _,
-//     //   popup
-//     // }
-//     this.rawData = { popup, _ };
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//     });
-//     this.methods = {
-//       handleOverlayClick() {
-//         const {
-//           closeOnOverlayClick: e,
-//         } = this;
-//         if (e) {
-//           this.$emit('visible-change', {
-//             detail: {
-//               visible: false,
-//               trigger: 'overlay',
-//             },
-//           });
-//         }
-//       },
-//       handleClose() {
-//         this.$emit('visible-change', {
-//           detail: {
-//             visible: false,
-//             trigger: 'close-btn',
-//           },
-//         });
-//       },
-//     };
-//   }
-// };
-// Popup = initTDesign(__decorate([wxComponent()], Popup));
-// Popup = {
-//   ...Popup,
-//   mixins: [transitionMixins, useCustomNavbar],
-// };
-
-// export default Popup;
 </script>
-<style scoped>
-@import './popup.css';
+<style scoped lang="less">
+@import './popup.less';
 </style>

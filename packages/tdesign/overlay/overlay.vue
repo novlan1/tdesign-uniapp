@@ -81,48 +81,7 @@ export default uniComponent({
     noop() {},
   },
 });
-
-// let Overlay = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.properties = props;
-//     this._ = _;
-//     this.mixins = [transition(), useCustomNavbar];
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       computedStyle: '',
-//       _zIndex: 11000,
-//     });
-//     this.observers = {
-//       backgroundColor(o) {
-//         this.setData({
-//           computedStyle: o ? `background-color: ${o};` : '',
-//         });
-//       },
-//       zIndex(o) {
-//         if (0 !== o) {
-//           this.setData({
-//             _zIndex: o,
-//           });
-//         }
-//       },
-//     };
-//     this.methods = {
-//       handleClick() {
-//         this.$emit('click', {
-//           detail: {
-//             visible: !this.visible,
-//           },
-//         });
-//       },
-//       noop() {},
-//     };
-//   }
-// };
-// Overlay = initTDesign(__decorate([wxComponent()], Overlay));
-// export default Overlay;
 </script>
-<style scoped>
-@import './overlay.css';
+<style scoped lang="less">
+@import './overlay.less';
 </style>
