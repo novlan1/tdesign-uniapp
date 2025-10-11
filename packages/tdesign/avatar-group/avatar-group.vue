@@ -13,8 +13,8 @@
       @tap="onCollapsedItemClick"
     >
       <t-avatar
-        :t-class-image="prefix + '-avatar--border ' + prefix + '-avatar--border-' + size + ' ' + prefix + '-class-image'"
-        :t-class-content="prefix + '-class-content'"
+        :t-class-image="prefix + '-avatar--border ' + prefix + '-avatar--border-' + size + ' ' + tClassImage"
+        :t-class-content="tClassContent"
         :size="size"
         :shape="shape"
         :icon="collapseAvatar ? '' : 'user-add'"
@@ -77,7 +77,7 @@ export default uniComponent({
       const direction = cascading.split('-')[0];
       const classList = [
         name,
-        `${prefix}-class`,
+        this.tClass,
         `${name}-offset-${direction}`,
         `${name}-offset-${direction}-${size.indexOf('px') > -1 ? 'medium' : size || 'medium'}`,
       ];
@@ -103,58 +103,7 @@ export default uniComponent({
     },
   },
 });
-
-// let AvatarGroup = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-image`];
-//     // this = avatarGroupProps;
-//     this.properties = avatarGroupProps;
-//     this._ = _;
-//     this.components = {
-//       tAvatar,
-//     };
-
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       hasChild: true,
-//       length: 0,
-//       className: '',
-//       size: 'medium',
-//     });
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     this.relations = {
-//       '../avatar/avatar': {
-//         type: 'descendant',
-//       },
-//     };
-//     this.lifetimes = {
-//       attached() {
-//         this.setClass();
-//       },
-//       ready() {
-//         this.setData({
-//           length: this.$children.length,
-//         });
-//         this.handleMax();
-//       },
-//     };
-//     this.observers = {
-//       'cascading, size'() {
-//         this.setClass();
-//       },
-//     };
-//     this.methods = {
-
-//     };
-//   }
-// };
-// AvatarGroup = initTDesign(__decorate([wxComponent()], AvatarGroup));
-// export default AvatarGroup;
 </script>
-<style scoped>
-@import './avatar-group.css';
+<style scoped lang="less">
+@import './avatar-group.less';
 </style>

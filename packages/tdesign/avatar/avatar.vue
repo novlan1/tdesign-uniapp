@@ -84,7 +84,7 @@ import { prefix } from '../common/config';
 import avatarProps from './props';
 import { setIcon, systemInfo } from '../common/utils';
 import _ from '../common/utils.wxs';
-import { utils } from './avatar.wxs';
+import { utils } from './computed.js';
 import { ChildrenMixin, RELATION_MAP } from '../common/relation';
 
 

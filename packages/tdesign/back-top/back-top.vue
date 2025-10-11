@@ -114,75 +114,7 @@ export default uniComponent({
     };
   },
 });
-
-// let BackTop = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-icon`, `${prefix}-class-text`];
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     this.properties = props;
-//     this.relations = {
-//       '../pull-down-refresh/pull-down-refresh': {
-//         type: 'ancestor',
-//       },
-//     };
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       _icon: null,
-//       hidden: true,
-//     });
-//     this.observers = {
-//       icon() {
-//         this.setIcon();
-//       },
-//       scrollTop(o) {
-//         const {
-//           visibilityHeight: t,
-//         } = this;
-//         this.setData({
-//           hidden: o < t,
-//         });
-//       },
-//     };
-//     this.lifetimes = {
-//       ready() {
-//         const {
-//           icon: o,
-//         } = this;
-//         this.setIcon(o);
-//       },
-//     };
-//     this.methods = {
-//       setIcon(o) {
-//         this.setData({
-//           _icon: calcIcon(o, 'backtop'),
-//         });
-//       },
-//       toTop() {
-//         let o;
-//         this.$emit('to-top');
-//         if (this.$parent) {
-//           null === (o = this.$parent) || void 0 === o || o.setScrollTop(0);
-//           this.setData({
-//             hidden: true,
-//           });
-//         } else {
-//           uni.pageScrollTo({
-//             scrollTop: 0,
-//             duration: 300,
-//           });
-//         }
-//       },
-//     };
-//   }
-// };
-// BackTop = __decorate([wxComponent()], BackTop);
-// export default BackTop;
 </script>
-<style scoped>
-@import './back-top.css';
-
+<style scoped lang="less">
+@import './back-top.less';
 </style>

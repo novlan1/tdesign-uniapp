@@ -13,12 +13,14 @@ function cpLess(file) {
   const componentName = path.basename(file, '.less');
   const targetPath = path.resolve(config.target, componentName, `${componentName}.less`);
 
+  // for copy less of tdesign-miniprogram
   if (fs.existsSync(path.dirname(targetPath))) {
     writeFileSync(targetPath, readFileSync(file));
   }
 
-  // if (fs.existsSync(path.resolve(config.target, componentName, 'props.d.ts'))) {
-  //   fs.unlinkSync(path.resolve(config.target, componentName, 'props.d.ts'));
+  // for delete useless files
+  // if (fs.existsSync(path.resolve(config.target, componentName, 'type.js'))) {
+  //   fs.unlinkSync(path.resolve(config.target, componentName, 'type.js'));
   // }
 }
 

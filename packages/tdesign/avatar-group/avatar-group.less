@@ -9,7 +9,7 @@
 @avatar-group-init-zIndex: 50;
 
 .generate-z-index(@n, @i: 1) when (@i =< @n) {
-  & .@{prefix}-avatar__wrapper:nth-child(@{i}) {
+  & :deep(.@{prefix}-avatar__wrapper):nth-child(@{i}) {
     z-index: calc(var(--td-avatar-group-init-z-index, @avatar-group-init-zIndex) - @i);
   }
 
@@ -23,7 +23,7 @@
 
   &-offset-left,
   &-offset-right {
-    & .@{prefix}-avatar__wrapper {
+    & :deep(.@{prefix}-avatar__wrapper) {
       padding: @avatar-group-line-spacing 0;
     }
 

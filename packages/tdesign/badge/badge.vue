@@ -68,7 +68,7 @@ import {
   getBadgeOuterClass,
   getBadgeInnerClass,
   isShowBadge,
-} from './badge.wxs';
+} from './computed.js';
 
 
 const name = `${prefix}-badge`;
@@ -108,45 +108,7 @@ export default uniComponent({
     isShowBadge,
   },
 });
-
-// let Badge = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-count`, `${prefix}-class-content`];
-//     this.properties = props;
-//     this._ = _;
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       value: '',
-//       labelID: '',
-//       descriptionID: '',
-//       _,
-//     });
-//     this.lifetimes = {
-//       ready() {
-//         const e = getUniqueID();
-//         this.setData({
-//           labelID: `${e}_label`,
-//           descriptionID: `${e}_description`,
-//         });
-//       },
-//     };
-//     this.methods = {
-//       getBadgeValue,
-//       getBadgeStyles,
-//       getBadgeOuterClass,
-//       getBadgeInnerClass,
-//       isShowBadge,
-//     };
-//   }
-// };
-// Badge = initTDesign(__decorate([wxComponent()], Badge));
-// export default Badge;
 </script>
-<style scoped>
-@import './badge.css';
+<style scoped lang="less">
+@import './badge.less';
 </style>
