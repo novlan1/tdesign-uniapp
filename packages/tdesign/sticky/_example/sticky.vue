@@ -41,6 +41,7 @@ import BaseDemo from './base/index.vue';
 import offset from './offset/index.vue';
 import container from './container/index.vue';
 export default {
+  onPageScroll() {},
   components: {
     BaseDemo,
     offset,
@@ -68,6 +69,6 @@ export default {
   },
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import './sticky.less';
 </style>

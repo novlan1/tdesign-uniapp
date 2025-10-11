@@ -1,27 +1,27 @@
 import utils from '../common/utils.wxs';
 
-var STATUS = ['success', 'error', 'warning'];
-var STATUS_TEXT = ['success', 'error', 'warning', 'active'];
+const STATUS = ['success', 'error', 'warning'];
+const STATUS_TEXT = ['success', 'error', 'warning', 'active'];
 
-var PRO_THEME = {
+const PRO_THEME = {
   LINE: 'line',
   PLUMP: 'plump',
   CIRCLE: 'circle',
 };
 
-var STATUS_COLOR = {
+const STATUS_COLOR = {
   success: '#00a870',
   error: '#e34d59',
   warning: '#ed7b2f',
 };
 
-var LINE_STATUS_ICON = {
+const LINE_STATUS_ICON = {
   success: 'check-circle-filled',
   error: 'error-circle-filled',
   warning: 'error-circle-filled',
 };
 
-var CIRCLE_STATUS_ICON = {
+const CIRCLE_STATUS_ICON = {
   success: 'check',
   error: 'close',
   warning: 'error',
@@ -56,7 +56,7 @@ function getAndroidAriaLabel(status) {
 }
 
 function getCircleStyle(size, strokeWidth) {
-  var styles = {
+  const styles = {
     '--td-progress-stroke-circle-width': utils.addUnit(strokeWidth),
   };
 

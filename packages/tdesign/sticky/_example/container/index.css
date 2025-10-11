@@ -4,7 +4,7 @@
     background-color: var(--bg-color-demo-secondary);
 }
 
-.external-class {
+:deep(.external-class) {
     width: 208rpx;
     margin-left: 512rpx;
 }

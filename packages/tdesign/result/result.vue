@@ -120,65 +120,7 @@ export default uniComponent({
     },
   },
 });
-
-// let default_1 = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     // console.log('this', this, this.setData);
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-image`, `${prefix}-class-title`, `${prefix}-class-description`];
-//     // this.setData = setData.bind(this);
-//     this.classPrefix = name;
-//     this._ = _;
-
-//     this.prefix = prefix;
-//     this.properties = props;
-//     this.components = {
-//       tIcon,
-//       tImage,
-//     };
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//     });
-//     this.data = function () {
-//       return {
-//         classPrefix: name,
-//       };
-//     };
-//     this.lifetimes = {
-//       ready() {
-//         this.initIcon();
-//       },
-//     };
-//     this.observers = {
-//       'icon, theme'() {
-//         this.initIcon();
-//       },
-//     };
-//     this.methods = {
-//       // setData,
-//       initIcon() {
-//         const {
-//           icon: e,
-//           theme: o,
-//         } = this;
-//         this.setData({
-//           _icon: calcIcon(e, THEME_ICON[o]),
-//         });
-//       },
-//     };
-//   }
-// };
-// default_1 = initTDesign(__decorate([wxComponent()], default_1));
-// default_1.data = function () {
-//   return {};
-// };
-// console.log('default_1', default_1);
-// export default default_1;
 </script>
-<style scoped>
-@import './result.css';
+<style scoped lang="less">
+@import './result.less';
 </style>

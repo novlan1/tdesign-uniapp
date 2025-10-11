@@ -171,7 +171,7 @@ import {
   getCircleStyle,
   getIOSAriaLabel,
   getAndroidAriaLabel,
-} from './progress.wxs';
+} from './computed.js';
 
 
 const name = `${prefix}-progress`;
@@ -252,80 +252,7 @@ export default uniComponent({
 
   },
 });
-
-
-// let Progress = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-bar`, `${prefix}-class-label`];
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     this.properties = props;
-//     this._ = _;
-//     this.components = {
-//       tIcon,
-//     };
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       colorBar: '',
-//       heightBar: '',
-//       computedStatus: '',
-//       computedProgress: 0,
-//       isIOS: false,
-//       STATUS,
-//       STATUS_TEXT,
-//       PRO_THEME,
-
-//       STATUS_COLOR,
-//       LINE_STATUS_ICON,
-//       CIRCLE_STATUS_ICON,
-
-//       getCircleStyle,
-//       getIOSAriaLabel,
-//       getAndroidAriaLabel,
-//     });
-//     this.observers = {
-//       percentage(o) {
-//         o = Math.max(0, Math.min(o, 100));
-//         this.setData({
-//           computedStatus: 100 === o ? 'success' : '',
-//           computedProgress: o,
-//         });
-//       },
-//       color(o) {
-//         this.setData({
-//           colorBar: getBackgroundColor(o),
-//           colorCircle: 'object' === typeof o ? '' : o,
-//         });
-//       },
-//       strokeWidth(o) {
-//         if (!o) {
-//           return '';
-//         }
-//         this.setData({
-//           heightBar: unitConvert(o),
-//         });
-//       },
-//       trackColor(o) {
-//         this.setData({
-//           bgColorBar: o,
-//         });
-//       },
-//     };
-//   }
-//   attached() {
-//     const o = isIOSValidator();
-//     this.setData({
-//       isIOS: o,
-//     });
-//   }
-// };
-// Progress = initTDesign(__decorate([wxComponent()], Progress));
-// export default Progress;
 </script>
-<style scoped>
-@import './progress.css';
-
+<style scoped lang="less">
+@import './progress.less';
 </style>

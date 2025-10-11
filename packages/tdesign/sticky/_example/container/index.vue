@@ -19,6 +19,9 @@
 import tSticky from 'tdesign-uniapp/sticky/sticky';
 import tButton from 'tdesign-uniapp/button/button';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tSticky,
     tButton,
@@ -47,6 +50,6 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 @import './index.css';
 </style>
