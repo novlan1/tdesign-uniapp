@@ -55,6 +55,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped>
-@import './row.css';
+<style scoped lang="less">
+@import './row.less';
 </style>

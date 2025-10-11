@@ -42,6 +42,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped>
-@import './col.css';
+<style scoped lang="less">
+@import './col.less';
 </style>

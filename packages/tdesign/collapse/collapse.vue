@@ -87,42 +87,7 @@ export default uniComponent({
     },
   },
 });
-
-
-// let Collapse = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`];
-//     this.relations = {
-//       '../collapse-panel/collapse-panel': {
-//         type: 'descendant',
-//       },
-//     };
-//     this.name = 'TCollapse';
-//     this.controlledProps = [{
-//       key: 'value',
-//       event: 'change',
-//     }];
-//     this.properties = props;
-//     this._ = _;
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//     });
-//     this.observers = {
-//       'value,expandMutex'() {
-//         this.updateExpanded();
-//       },
-//     };
-//     this.methods = {
-
-//     };
-//   }
-// };
-// Collapse = initTDesign(__decorate([wxComponent()], Collapse));
-
-// export default Collapse;
 </script>
-<style scoped>
-@import './collapse.css';
+<style scoped lang="less">
+@import './collapse.less';
 </style>

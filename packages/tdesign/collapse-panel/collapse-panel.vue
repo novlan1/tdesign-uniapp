@@ -197,76 +197,7 @@ export default uniComponent({
   },
 });
 
-
-// let CollapsePanel = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-header`];
-//     this.options = {
-//       multipleSlots: true,
-//     };
-//     this.components = {
-//       tCell,
-//     };
-//     this.relationCallbacks = {
-//       mounted() {
-//         const {
-//           value: t,
-//           expandIcon: a,
-//           disabled: s,
-//         } = this[this.relationParentName];
-//         this.setData({
-//           ultimateExpandIcon: null == this.expandIcon ? a : this.expandIcon,
-//           ultimateDisabled: null == this.disabled ? s : this.disabled,
-//         });
-//         this.updateExpanded(t);
-//       },
-//     };
-//     this.relations = {
-//       '../collapse/collapse': {
-//         type: 'ancestor',
-//         // linked(e) {
-//         //   const {
-//         //     value: t,
-//         //     expandIcon: a,
-//         //     disabled: s
-//         //   } = e.properties;
-//         //   this.setData({
-//         //     ultimateExpandIcon: null == this.expandIcon ? a : this.expandIcon,
-//         //     ultimateDisabled: null == this.disabled ? s : this.disabled
-//         //   });
-//         //   this.updateExpanded(t);
-//         // }
-//       },
-//     };
-//     this.name = 'TCollapsePanel';
-//     this.properties = props;
-//     this._ = _;
-//     this.setData({
-//       prefix,
-//       expanded: false,
-//       classPrefix: name,
-//       classBasePrefix: prefix,
-//       ultimateExpandIcon: false,
-//       ultimateDisabled: false,
-//     });
-//     this.observers = {
-//       disabled(e) {
-//         this.setData({
-//           ultimateDisabled: !!e,
-//         });
-//       },
-//     };
-//     this.methods = {
-
-//     };
-//   }
-// };
-// CollapsePanel = initTDesign(__decorate([wxComponent()], CollapsePanel));
-
-
-// export default CollapsePanel;
 </script>
-<style scoped>
-@import './collapse-panel.css';
+<style scoped lang="less">
+@import './collapse-panel.less';
 </style>
