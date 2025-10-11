@@ -23,7 +23,7 @@
       aria-role="button"
       :aria-expanded="activeIdx === index"
       aria-haspopup="menu"
-      @tap="handleToggle"
+      @click="handleToggle(index)"
     >
       <view :class="classPrefix + '__title ' + prefix + '-class-label'">
         {{ item.label }}
@@ -120,18 +120,11 @@ export default uniComponent({
 
       if (activeIdx !== -1) {
         prevItem.$emit('close');
-        prevItem.show = true;
+        prevItem.show = false;
 
-        // prevItem.setData(
-        //   {
-        //     show: false,
-        //   },
-        //   () => {
         setTimeout(() => {
           prevItem.$emit('closed');
         }, duration);
-        //   },
-        // );
       }
 
       if (index == null || activeIdx === index) {
@@ -141,20 +134,13 @@ export default uniComponent({
         this.activeIdx = index;
 
         currItem.show = true;
-        // currItem.setData(
-        //   {
-        //     show: true,
-        //   },
-        //   () => {
+
         setTimeout(() => {
           currItem.$emit('opened');
         }, duration);
-        //   },
-        // );
       }
     },
     getAllItems() {
-      console.log('cccc', this.children);
       const menus = this.children?.map(data => ({
         label: data.label || data.computedLabel,
         disabled: data.disabled,
@@ -162,9 +148,7 @@ export default uniComponent({
 
       this.menus = menus;
     },
-    handleToggle(e) {
-      const { index } = e.currentTarget.dataset;
-
+    handleToggle(index) {
       this.toggle(index);
     },
 

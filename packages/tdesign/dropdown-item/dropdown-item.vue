@@ -31,9 +31,8 @@
           :scroll-into-view="'id_' + dataValue"
         >
           <t-radio-group
-            :class="classPrefix + '__radio ' + tClassColumn"
-            :t-class="classPrefix + '__radio-group'"
-            :style="'grid-template-columns: repeat(' + optionsColumns + ', 1fr)'"
+            :t-class="classPrefix + '__radio ' + classPrefix + '__radio-group ' + tClassColumn"
+            :custom-style="'grid-template-columns: repeat(' + optionsColumns + ', 1fr)'"
             :value="dataValue"
             @change="handleRadioChange"
           >
@@ -46,8 +45,7 @@
                 :placement="placement"
                 tabindex="0"
                 icon="line"
-                :class="classPrefix + '__radio-item ' + tClassColumnItem"
-                t-class="radio"
+                :t-class="classPrefix + '__radio-item radio ' + tClassColumnItem"
                 :t-class-label="tClassColumnItemLabel"
                 :value="item[valueAlias]"
                 :label="item[labelAlias]"
@@ -63,9 +61,8 @@
           :scroll-into-view="'id_' + firstCheckedValue"
         >
           <t-checkbox-group
-            :class="classPrefix + '__checkbox ' + tClassColumn"
-            :t-class="classPrefix + '__checkbox-group'"
-            :style="'grid-template-columns: repeat(' + optionsColumns + ', 1fr)'"
+            :t-class="classPrefix + '__checkbox ' + classPrefix + '__checkbox-group ' + tClassColumn"
+            :custom-style="'grid-template-columns: repeat(' + optionsColumns + ', 1fr)'"
             :value="dataValue ? dataValue : []"
             @change="handleRadioChange"
           >
@@ -76,7 +73,7 @@
             >
               <t-checkbox
                 tabindex="0"
-                :class="classPrefix + '__checkbox-item ' + tClassColumnItem"
+                :t-class="classPrefix + '__checkbox-item ' + tClassColumnItem"
                 theme="tag"
                 :value="item[valueAlias]"
                 :label="item[labelAlias]"
@@ -92,7 +89,7 @@
         <block v-if="multiple">
           <t-button
             block
-            :class="classPrefix + '__footer-btn ' + classPrefix + '__reset-btn'"
+            :t-class="classPrefix + '__footer-btn ' + classPrefix + '__reset-btn'"
             theme="light"
             content="重置"
             :disabled="dataValue.length == 0"
@@ -100,7 +97,7 @@
           />
           <t-button
             block
-            :class="classPrefix + '__footer-btn ' + classPrefix + '__confirm-btn'"
+            :t-class="classPrefix + '__footer-btn ' + classPrefix + '__confirm-btn'"
             theme="primary"
             content="确定"
             :disabled="dataValue.length == 0"
@@ -198,7 +195,6 @@ export default uniComponent({
     },
     dataValue: {
       handler(v) {
-        console.log('dataValue.v', v);
         const { options, labelAlias, valueAlias } = this;
 
         if (this.multiple) {
