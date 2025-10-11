@@ -28,26 +28,18 @@ export default {
   created() {},
   methods: {
     changeHandle(e) {
-      const { value } = e.detail;
-      this.setData({
-        value,
-      });
+      const { value } = e;
+      this.value = value;
     },
     focusHandle() {
-      this.setData({
-        actionText: '取消',
-      });
+      this.actionText = '取消';
     },
     blurHandle() {
-      this.setData({
-        actionText: '',
-      });
+      this.actionText = '';
     },
     actionHandle() {
-      this.setData({
-        value: '',
-        actionText: '',
-      });
+      this.actionText = '';
+      this.value = '';
     },
   },
 };

@@ -26,7 +26,13 @@ export function getInnerMaxLen({
     return dataValue.length;
   }
 
-  const extra = count - dataValue.length;
+  const { length: computedCount } = getCharacterLength(
+    'maxcharacter',
+    rawValue,
+    allowInputOverMax ? Infinity : maxcharacter,
+  );
+
+  const extra = (count ?? computedCount) - dataValue.length;
 
   return maxcharacter - extra;
 }

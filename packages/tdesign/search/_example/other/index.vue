@@ -22,7 +22,7 @@ export default {
   },
   created() {},
   methods: {
-    onChange({ detail }) {
+    onChange(detail) {
       console.log(`modelValue: ${detail.value}`);
     },
   },

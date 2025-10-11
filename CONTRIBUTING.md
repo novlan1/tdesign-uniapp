@@ -21,3 +21,9 @@ npm run dev
 # 微信小程序
 npm run dev:mp
 ```
+
+基础知识要求
+
+- 熟悉 Vue3
+- 熟悉微信小程序
+- 熟悉 uni-app

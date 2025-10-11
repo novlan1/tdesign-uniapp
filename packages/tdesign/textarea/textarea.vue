@@ -81,6 +81,7 @@ export default uniComponent({
 
       dataValue: this.value ?? this.defaultValue ?? '',
       innerMaxLen: -1,
+      rawValue: '',
     };
   },
   watch: {

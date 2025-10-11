@@ -79,6 +79,9 @@
       "path": "pages-more/radio/radio"
     },
     {
+      "path": "pages-more/search/search"
+    },
+    {
       "path": "pages-more/switch/switch"
     },
     {
@@ -237,6 +240,10 @@
       {
         "name": "radio",
         "pathName": "pages-more/radio/radio"
+      },
+      {
+        "name": "search",
+        "pathName": "pages-more/search/search"
       },
       {
         "name": "switch",

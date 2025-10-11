@@ -47,8 +47,7 @@
       },
       {
         "name": "Search",
-        "label": "搜索框",
-        "hide": true
+        "label": "搜索框"
       },
       {
         "name": "Slider",
