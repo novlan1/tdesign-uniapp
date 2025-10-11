@@ -5,14 +5,14 @@
       theme="circular"
       size="40rpx"
       text="加载中..."
-      class="wrapper"
+      t-class="wrapper"
     />
     <t-loading
       theme="spinner"
       size="40rpx"
       text="加载中..."
       inherit-color
-      class="wrapper"
+      t-class="wrapper"
     />
   </view>
 </template>
@@ -21,6 +21,9 @@
 import tLoading from 'tdesign-uniapp/loading/loading';
 // import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js'
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tLoading,
   },

@@ -87,6 +87,6 @@ export default {
   },
 };
 </script>
-<style>
-@import './index.css';
+<style lang="less" scoped>
+@import './index.less';
 </style>

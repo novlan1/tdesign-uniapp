@@ -12,7 +12,7 @@
       @duration-end="() => visible = false"
     />
 
-    <view class="message-example">
+    <view class="message-example--base">
       <t-button
         t-class="external-class"
         theme="primary"
@@ -87,6 +87,9 @@ import tButton from 'tdesign-uniapp/button/button';
 import tMessage from 'tdesign-uniapp/message/message';
 import Message from 'tdesign-uniapp/message/index';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tButton,
     tMessage,

@@ -4,7 +4,7 @@
       :theme="skylineRender ? 'spinner' : 'circular'"
       size="64rpx"
       text="加载中..."
-      class="large"
+      t-class="large"
     />
 
     <view class="demo-desc">
@@ -15,7 +15,7 @@
       :theme="skylineRender ? 'spinner' : 'circular'"
       size="56rpx"
       text="加载中..."
-      class="middle"
+      t-class="middle"
     />
 
     <view class="demo-desc">

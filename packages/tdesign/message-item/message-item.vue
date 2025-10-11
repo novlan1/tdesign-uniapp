@@ -47,7 +47,7 @@
       </view>
       <t-link
         v-if="_link && _link.content"
-        :class="classPrefix + '__link ' + prefix + '-class-link'"
+        :t-class="classPrefix + '__link ' + prefix + '-class-link'"
         :style="_._style([_link.style, _link.customStyle])"
         :disabled="_link.disabled || false"
         :hover="_link.hover || true"
@@ -229,7 +229,7 @@ export default uniComponent({
     },
 
     resetData(cb) {
-      const { initialData } = this;
+      const { initialData = {} } = this;
       Object.keys(initialData).forEach((key) => {
         this[key] = initialData[key];
       });

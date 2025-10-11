@@ -9,7 +9,7 @@
     />
     <view class="slider-container">
       <t-slider
-        class="slider-class"
+        t-class="slider-class"
         :value="duration"
         :min="100"
         :max="1500"

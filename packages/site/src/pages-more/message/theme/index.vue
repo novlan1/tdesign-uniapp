@@ -5,7 +5,7 @@
       ref="t-message"
     />
 
-    <view class="message-example">
+    <view class="message-example--theme">
       <t-button
         t-class="external-class"
         theme="primary"

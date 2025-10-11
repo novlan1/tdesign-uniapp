@@ -31,6 +31,9 @@
 import tPopup from 'tdesign-uniapp/popup/popup';
 import tButton from 'tdesign-uniapp/button/button';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tPopup,
     tButton,
@@ -98,6 +101,6 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 @import './index.css';
 </style>
