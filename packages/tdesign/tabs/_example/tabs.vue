@@ -60,6 +60,7 @@ import withBadge from './with-badge/index.vue';
 import theme from './theme/index.vue';
 import withContent from './with-content/index.vue';
 export default {
+  onPageScroll() {},
   components: {
     BaseDemo,
     scroll,
