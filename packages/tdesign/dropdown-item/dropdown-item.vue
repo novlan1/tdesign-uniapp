@@ -268,7 +268,7 @@ export default uniComponent({
     },
 
     handleRadioChange(e) {
-      const { value } = e.detail;
+      const { value } = e;
 
       this._trigger('change', { value });
 
@@ -296,7 +296,7 @@ export default uniComponent({
     handleConfirm() {
       this._trigger('confirm', { value: this.dataValue });
       this.closeDropdown();
-      // 在关闭popup后才自动滚动到首个选项
+      // 在关闭 popup 后才自动滚动到首个选项
       // this.firstCheckedValue = this.firstCheckedValue;
     },
 
@@ -306,168 +306,7 @@ export default uniComponent({
   },
 });
 
-// let DropdownMenuItem = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.options = {
-//       multipleSlots: true
-//     };
-//     this.externalClasses = [`${prefix}-class`, `${prefix}-class-content`, `${prefix}-class-column`, `${prefix}-class-column-item`, `${prefix}-class-column-item-label`, `${prefix}-class-footer`];
-//     this.properties = props;;
-//     this.setData({
-//       prefix: prefix,
-//       classPrefix: name,
-//       show: false,
-//       top: 0,
-//       maskHeight: 0,
-//       initValue: null,
-//       hasChanged: false,
-//       duration: menuProps.duration.value,
-//       zIndex: menuProps.zIndex.value,
-//       overlay: menuProps.showOverlay.value,
-//       labelAlias: "label",
-//       valueAlias: "value",
-//       computedLabel: "",
-//       firstCheckedValue: ""
-//     });
-//     this.relations = {
-//       "../dropdown-menu/dropdown-menu": {
-//         type: "parent",
-//         linked(e) {
-//           const {
-//             zIndex: t,
-//             duration: a,
-//             showOverlay: s
-//           } = e.properties;
-//           this.setData({
-//             zIndex: t,
-//             duration: a,
-//             showOverlay: s
-//           });
-//         }
-//       }
-//     };
-//     this.controlledProps = [{
-//       key: "value",
-//       event: "change"
-//     }];
-//     this.observers = {
-//       keys(e) {
-//         this.setData({
-//           labelAlias: e.label || "label",
-//           valueAlias: e.value || "value"
-//         });
-//       },
-//       value(e) {
-//         const {
-//           options: t,
-//           labelAlias: a,
-//           valueAlias: s
-//         } = this;
-//         if (this.multiple && !Array.isArray(e)) {
-//           throw TypeError("应传入数组类型的 value");
-//         }
-//         const o = t.find(t => t[s] === e);
-//         if (o) {
-//           this.setData({
-//             computedLabel: o[a]
-//           });
-//         }
-//       },
-//       "label, computedLabel, disabled"() {
-//         var e;
-//         null === (e = this.$parent) || void 0 === e || e.getAllItems();
-//       },
-//       show(e) {
-//         if (e) {
-//           this.getParentBottom(() => {
-//             this.setData({
-//               wrapperVisible: true
-//             });
-//           });
-//         }
-//       }
-//     };
-//     this.methods = {
-//       closeDropdown() {
-//         var e;
-//         null === (e = this.$parent) || void 0 === e || e.setData({
-//           activeIdx: -1
-//         });
-//         this.setData({
-//           show: false
-//         });
-//         this.$emit("close");
-//       },
-//       getParentBottom(e) {
-//         getRect(this.$parent, `#${prefix}-bar`).then(t => {
-//           this.setData({
-//             top: t.bottom,
-//             maskHeight: t.top
-//           }, e);
-//         });
-//       },
-//       handleTreeClick(e) {
-//         const {
-//           level: t,
-//           value: a
-//         } = e.currentTarget.dataset;
-//         const {
-//           value: s
-//         } = this;
-//         s[t] = a;
-//         this._trigger("change", {
-//           value: s
-//         });
-//       },
-//       handleRadioChange(e) {
-//         const {
-//           value: t
-//         } = e.detail;
-//         this._trigger("change", {
-//           value: t
-//         });
-//         if (this.multiple) {
-//           const e = this.options.find(e => t.includes(e.value));
-//           if (e) {
-//             this.firstCheckedValue = e.value;
-//           }
-//         } else {
-//           this.closeDropdown();
-//         }
-//       },
-//       handleMaskClick() {
-//         var e;
-//         if (null === (e = this.$parent) || void 0 === e ? void 0 : e.properties.closeOnClickOverlay) {
-//           this.closeDropdown();
-//         }
-//       },
-//       handleReset() {
-//         this._trigger("change", {
-//           value: []
-//         });
-//         this._trigger("reset");
-//       },
-//       handleConfirm() {
-//         this._trigger("confirm", {
-//           value: this.value
-//         });
-//         this.closeDropdown();
-//         this.setData({
-//           firstCheckedValue: this.firstCheckedValue
-//         });
-//       },
-//       onLeaved() {
-//         this.setData({
-//           wrapperVisible: false
-//         });
-//       }
-//     };
-//   }
-// };
-// DropdownMenuItem = __decorate([wxComponent()], DropdownMenuItem);
-// export default DropdownMenuItem;
 </script>
-<style scoped>
-@import './dropdown-item.css';
+<style scoped lang="less">
+@import './dropdown-item.less';
 </style>

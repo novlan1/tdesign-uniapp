@@ -49,8 +49,8 @@
 </template>
 
 <script lang="ts" setup>
-import TFooter from 'tdesign-uniapp/footer/footer';
-import TNavbar from 'tdesign-uniapp/navbar/navbar';
+import TFooter from 'tdesign-uniapp/footer/footer.vue';
+import TNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import { useTheme } from 'tdesign-uniapp/mixins/theme-change';
 
 import { ref } from 'vue';
@@ -178,4 +178,4 @@ const goSkyline = () => {
 };
 
 </script>
-<style lang="less" src="./home.less"></style>
+<style lang="less" scoped src="./home.less"></style>

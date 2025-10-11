@@ -130,6 +130,9 @@
       "path": "pages-more/dialog/dialog"
     },
     {
+      "path": "pages-more/dropdown-menu/dropdown-menu"
+    },
+    {
       "path": "pages-more/loading/loading"
     },
     {
@@ -299,6 +302,10 @@
       {
         "name": "dialog",
         "pathName": "pages-more/dialog/dialog"
+      },
+      {
+        "name": "dropdown-menu",
+        "pathName": "pages-more/dropdown-menu/dropdown-menu"
       },
       {
         "name": "loading",

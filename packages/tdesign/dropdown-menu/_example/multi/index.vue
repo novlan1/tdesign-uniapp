@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import tDropdownMenu from 'tdesign-uniapp/dropdown-menu/dropdown-menu';
-import tDropdownItem from 'tdesign-uniapp/dropdown-item/dropdown-item';
+import tDropdownMenu from 'tdesign-uniapp/dropdown-menu/dropdown-menu.vue';
+import tDropdownItem from 'tdesign-uniapp/dropdown-item/dropdown-item.vue';
 const chineseNumber = '一二三四五六七八九十'.split('');
 const singleSelectOptions = new Array(8).fill(null)
   .map((_, i) => ({

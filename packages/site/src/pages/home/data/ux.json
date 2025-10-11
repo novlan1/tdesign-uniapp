@@ -13,8 +13,7 @@
       },
       {
         "name": "DropdownMenu",
-        "label": "下拉菜单",
-        "hide": true
+        "label": "下拉菜单"
       },
       {
         "name": "Guide",

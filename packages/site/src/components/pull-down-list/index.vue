@@ -1,12 +1,9 @@
 <template>
   <view
     class="pullDownList"
-    :class="[
-      tClass,
-      {
-        'actived': childBoxHeight > 0
-      }
-    ]"
+    :class="[tClass, {
+      'actived': childBoxHeight > 0
+    }]"
   >
     <view
       v-if="!!childArr.length"
@@ -50,7 +47,7 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue';
-import TIcon from 'tdesign-uniapp/icon/icon';
+import TIcon from 'tdesign-uniapp/icon/icon.vue';
 
 const itemHeight = 56 * 2;
 const childBoxHeight = ref(0);
@@ -87,4 +84,4 @@ const clickChild = (item) => {
 };
 
 </script>
-<style lang="less" src="./index.less"></style>
+<style lang="less" src="./index.less" scoped></style>
