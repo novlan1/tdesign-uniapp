@@ -112,50 +112,7 @@ export default uniComponent({
     },
   },
 });
-
-
-// let Switch = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = ['t-class', 't-class-label', 't-class-body', 't-class-dot'];
-//     this.behaviors = ['wx://form-field'];
-//     this.properties = props;
-//     this.setData({
-//       prefix,
-//       classPrefix: name,
-//       checked: false,
-//     });
-//     this.controlledProps = [{
-//       key: 'value',
-//       event: 'change',
-//     }];
-//     this.observers = {
-//       value(e) {
-//         const [t] = this.customValue;
-//         this.setData({
-//           checked: e === t,
-//         });
-//       },
-//     };
-//     this.methods = {
-//       handleSwitch() {
-//         const {
-//           loading: e,
-//           disabled: t,
-//           value: s,
-//           customValue: o,
-//         } = this;
-//         const [i, r] = o;
-//         e || t || this._trigger('change', {
-//           value: s === i ? r : i,
-//         });
-//       },
-//     };
-//   }
-// };
-// Switch = __decorate([wxComponent()], Switch);
-// export default Switch;
 </script>
-<style scoped>
-@import './switch.css';
+<style scoped lang="less">
+@import './switch.less';
 </style>

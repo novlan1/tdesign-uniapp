@@ -8,28 +8,41 @@
   </view>
 </template>
 <script>
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
+import { uniComponent } from '../common/src/index';
 import transition from '../mixins/transition';
-import config from '../common/config';
+import { prefix } from '../common/config';
 import _ from '../common/utils.wxs';
 
 
-const { prefix: prefix } = config;
 const name = `${prefix}-transition`;
-let Transition = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`];
-    this.behaviors = [transition()];
-    this.setData({
+
+
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+  ],
+  mixins: [transition()],
+  props: {
+  },
+  data() {
+    return {
       classPrefix: name,
-    });
-  }
-};
-Transition = __decorate([wxComponent()], Transition);
-export default Transition;
+      _,
+    };
+  },
+  watch: {
+
+  },
+  mounted() {
+
+  },
+  methods: {
+
+  },
+});
+
 </script>
-<style scoped>
-@import './transition.css';
+<style scoped lang="less">
+@import './transition.less';
 </style>

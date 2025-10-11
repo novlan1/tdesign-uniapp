@@ -72,62 +72,7 @@ export default uniComponent({
     },
   },
 });
-
-// let TabPanel = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`];
-//     this.relations = {
-//       "../tabs/tabs": {
-//         type: "ancestor"
-//       }
-//     };
-//     this.options = {
-//       multipleSlots: true
-//     };
-//     this.properties = props;;
-//     this.setData({
-//       prefix: prefix,
-//       classPrefix: name,
-//       active: false,
-//       hide: true,
-//       id: "",
-//       hasActivated: false
-//     });
-//     this.observers = {
-//       "label, badgeProps, disabled, icon, panel, value, lazy"() {
-//         this.update();
-//       }
-//     };
-//   }
-//   setId(e) {
-//     this.setData({
-//       id: e
-//     });
-//   }
-//   getComputedName() {
-//     return null != this.value ? `${this.value}` : `${this.index}`;
-//   }
-//   update() {
-//     var e;
-//     null === (e = this.$parent) || void 0 === e || e.updateTabs();
-//   }
-//   render(e, t) {
-//     this.initialized = this.initialized || e;
-//     if (e && !this.hasActivated) {
-//       this.setData({
-//         hasActivated: true
-//       });
-//     }
-//     this.setData({
-//       active: e,
-//       hide: !t.data.animation && !e
-//     });
-//   }
-// };
-// TabPanel = __decorate([wxComponent()], TabPanel);
-// export default TabPanel;
 </script>
-<style scoped>
-@import './tab-panel.css';
+<style scoped lang="less">
+@import './tab-panel.less';
 </style>

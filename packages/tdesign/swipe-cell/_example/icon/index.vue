@@ -38,7 +38,7 @@
             @tap="onEdit"
           >
             <t-icon
-              class="padding-bottom"
+              t-class="padding-bottom"
               name="edit"
               size="32rpx"
             />
@@ -49,7 +49,7 @@
             @tap="onDelete"
           >
             <t-icon
-              class="padding-bottom"
+              t-class="padding-bottom"
               name="delete"
               size="32rpx"
             />
@@ -66,6 +66,9 @@ import tSwipeCell from 'tdesign-uniapp/swipe-cell/swipe-cell';
 import tCell from 'tdesign-uniapp/cell/cell';
 import tIcon from 'tdesign-uniapp/icon/icon';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tSwipeCell,
     tCell,

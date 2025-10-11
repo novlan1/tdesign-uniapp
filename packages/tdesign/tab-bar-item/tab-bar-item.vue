@@ -1,7 +1,7 @@
 <template>
   <view
     :style="_._style([style, customStyle])"
-    :class="_.cls(classPrefix, [['split', split], ['text-only', !icon], ['crowded', crowded], shape]) + ' class ' + prefix + '-class'"
+    :class="_.cls(classPrefix, [['split', split], ['text-only', !icon], ['crowded', crowded], shape]) + ' class ' + tClass"
   >
     <view
       :class="_.cls(classPrefix + '__content', [['checked', isChecked], theme])"
@@ -47,6 +47,8 @@
               @click="_icon.click || ''"
             />
           </block>
+          <!-- 避免被 badge 组件识别为空，t-badge__content:not(:empty) -->
+          <view v-else />
         </t-badge>
         <!-- parse <template v-else-if="(!!icon)" is="icon" :data="ariaHidden: !iconOnly, size: iconOnly ? 24 : 20, ..._icon"/> -->
         <block
@@ -122,6 +124,7 @@ const classPrefix = `${prefix}-tab-bar-item`;
 
 export default uniComponent({
   name: classPrefix,
+  externalClasses: [`${prefix}-class`],
   mixins: [ChildrenMixin(RELATION_MAP.TabBarItem)],
   components: {
     tIcon,
@@ -207,121 +210,8 @@ export default uniComponent({
     },
   },
 });
-
-// let TabBarItem = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`];
-//     this.parent = null;
-//     this.relations = {
-//       "../tab-bar/tab-bar": {
-//         type: "ancestor",
-//         linked(t) {
-//           const {
-//             theme: e,
-//             split: a,
-//             shape: s
-//           } = t.data;
-//           this.setData({
-//             theme: e,
-//             split: a,
-//             shape: s,
-//             currentName: this.value ? this.value : t.initName()
-//           });
-//           t.updateChildren();
-//         }
-//       }
-//     };
-//     this.options = {
-//       multipleSlots: true
-//     };
-//     this.setData({
-//       prefix: prefix,
-//       classPrefix: classPrefix,
-//       isSpread: false,
-//       isChecked: false,
-//       hasChildren: false,
-//       currentName: "",
-//       split: true,
-//       iconOnly: false,
-//       theme: "",
-//       crowded: false,
-//       shape: "normal"
-//     });
-//     this.properties = props;;
-//     this.observers = {
-//       subTabBar(t) {
-//         this.setData({
-//           hasChildren: t.length > 0
-//         });
-//       },
-//       icon(t) {
-//         this.setData({
-//           _icon: calcIcon(t)
-//         });
-//       }
-//     };
-//     this.lifetimes = {
-//       attached() {
-//         return __awaiter(this, void 0, void 0, function* () {
-//           const t = yield getRect(this, `.${classPrefix}__text`);
-//           this.setData({
-//             iconOnly: 0 === t.height
-//           });
-//         });
-//       }
-//     };
-//     this.methods = {
-//       showSpread() {
-//         this.setData({
-//           isSpread: true
-//         });
-//       },
-//       toggle() {
-//         const {
-//           currentName: t,
-//           hasChildren: e,
-//           isSpread: a
-//         } = this;
-//         if (e) {
-//           this.setData({
-//             isSpread: !a
-//           });
-//         }
-//         this.$parent.updateValue(t);
-//         this.$parent.changeOtherSpread(t);
-//       },
-//       selectChild(t) {
-//         const {
-//           value: e
-//         } = t.target.dataset;
-//         this.$parent.updateValue(e);
-//         this.setData({
-//           isSpread: false
-//         });
-//       },
-//       checkActive(t) {
-//         const {
-//           currentName: e,
-//           subTabBar: a
-//         } = this;
-//         const s = (null == a ? void 0 : a.some(e => e.value === t)) || e === t;
-//         this.setData({
-//           isChecked: s
-//         });
-//       },
-//       closeSpread() {
-//         this.setData({
-//           isSpread: false
-//         });
-//       }
-//     };
-//   }
-// };
-// TabBarItem = __decorate([wxComponent()], TabBarItem);
-// export default TabBarItem;
 </script>
-<style scoped>
-@import './tab-bar-item.css';
+<style scoped lang="less">
+@import './tab-bar-item.less';
 
 </style>

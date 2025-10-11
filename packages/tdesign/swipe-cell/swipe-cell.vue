@@ -200,21 +200,17 @@ export default uniComponent({
 
     onSkipMove() {
       this.skipMove = true;
-      // this.setData({ skipMove: true });
     },
 
     catchMove() {
       this.skipMove = false;
-      // this.setData({ skipMove: false });
     },
 
     open() {
-      // this.setData({ opened: true });
       this.dataOpened = true;
     },
 
     close() {
-      // this.setData({ opened: false });
       this.dataOpened = false;
     },
 
@@ -231,95 +227,8 @@ export default uniComponent({
     },
   },
 });
-
-// let SwiperCell = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`];
-//     this.options = {
-//       multipleSlots: true
-//     };
-//     this.properties = props;;
-//     this.setData({
-//       prefix: prefix,
-//       wrapperStyle: "",
-//       closed: true,
-//       classPrefix: name,
-//       skipMove: false
-//     });
-//     this.observers = {
-//       "left, right"() {
-//         this.setSwipeWidth();
-//       }
-//     };
-//     this.lifetimes = {
-//       attached() {
-//         ARRAY.push(this);
-//       },
-//       ready() {
-//         this.setSwipeWidth();
-//       },
-//       detached() {
-//         ARRAY = ARRAY.filter(e => e !== this);
-//       }
-//     };
-//   }
-//   setSwipeWidth() {
-//     Promise.all([getRect(this, `${ContainerClass}__left`), getRect(this, `${ContainerClass}__right`)]).then(([e, t]) => {
-//       0 !== e.width || 0 !== t.width || this._hasObserved || (this._hasObserved = true, getObserver(this, `.${name}`).then(() => {
-//         this.setSwipeWidth();
-//       }));
-//       this.setData({
-//         leftWidth: e.width,
-//         rightWidth: t.width
-//       });
-//     });
-//   }
-//   skipMove() {
-//     this.skipMove || this.setData({
-//       skipMove: true
-//     });
-//   }
-//   catchMove() {
-//     if (this.skipMove) {
-//       this.setData({
-//         skipMove: false
-//       });
-//     }
-//   }
-//   open() {
-//     this.setData({
-//       opened: true
-//     });
-//   }
-//   close() {
-//     this.setData({
-//       opened: false
-//     });
-//   }
-//   closeOther() {
-//     ARRAY.filter(e => e !== this).forEach(e => e.close());
-//   }
-//   onTap() {
-//     this.close();
-//   }
-//   onActionTap(e) {
-//     const {
-//       currentTarget: {
-//         dataset: {
-//           action: t
-//         }
-//       }
-//     } = e;
-//     this.$emit("click", {
-//       detail: t
-//     });
-//   }
-// };
-// SwiperCell = __decorate([wxComponent()], SwiperCell);
-// export default SwiperCell;
 </script>
-<style scoped>
-@import './swipe-cell.css';
+<style scoped lang="less">
+@import './swipe-cell.less';
 
 </style>
