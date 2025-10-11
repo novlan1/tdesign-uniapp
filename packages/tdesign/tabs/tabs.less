@@ -160,7 +160,7 @@
     }
   }
 
-  &__badge {
+  :deep(&__badge) {
     &--active {
       --td-badge-content-text-color: @tab-item-active-color;
     }
@@ -170,7 +170,7 @@
     }
   }
 
-  &__icon {
+  :deep(&__icon) {
     font-size: @tab-icon-size;
     margin-right: calc(@spacer / 4);
   }
