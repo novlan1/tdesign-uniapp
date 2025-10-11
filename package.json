@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": "true",
   "scripts": {
-    "dev": "pnpm --filter=\"./packages/site\" dev:h5",
-    "dev:mp-weixin": "pnpm --filter=\"./packages/site\" dev:mp-weixin",
-    "dev:mp": "concurrently \"npm run watch\" \"npm run dev:mp-weixin\"",
+    "dev": "concurrently \"npm run watch\" \"pnpm --filter=\"./packages/site\" dev:h5\"",
+    "dev:mp-weixin": "concurrently \"npm run watch\" \"pnpm --filter=\"./packages/site\" dev:mp-weixin\"",
+    "dev:mp": "npm run dev:mp-weixin",
     "build": "pnpm --filter=\"./packages/site\" build:h5",
     "build:mp": "pnpm --filter=\"./packages/site\" build:mp-weixin",
     "build:mp-weixin": "npm run build:mp",

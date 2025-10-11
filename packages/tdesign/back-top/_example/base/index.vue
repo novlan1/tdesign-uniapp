@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import tBackTop from 'tdesign-uniapp/back-top/back-top';
+import tBackTop from 'tdesign-uniapp/back-top/back-top.vue';
 export default {
   components: {
     tBackTop,
