@@ -365,6 +365,7 @@ export default uniComponent({
     hide(trigger) {
       this.dataVisible = false;
       this.$emit('close', { trigger });
+      this.$emit('update:visible', false);
     },
     onVisibleChange() {
       this.hide('overlay');

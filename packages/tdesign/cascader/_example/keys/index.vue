@@ -8,8 +8,8 @@
     />
 
     <t-cascader
+      v-model:visible="visible"
       class="demo"
-      :visible="visible"
       :keys="keys"
       :options="options"
       title="请选择地址"

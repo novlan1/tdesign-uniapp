@@ -8,7 +8,7 @@
     />
 
     <t-cascader
-      :visible="visible"
+      v-model:visible="visible"
       :options="options"
       title="请选择地址"
       :sub-titles="subTitles"

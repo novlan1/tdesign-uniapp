@@ -8,9 +8,9 @@
     />
 
     <t-cascader
+      v-model:visible="visible"
       :close-btn="false"
       :check-strictly="true"
-      :visible="visible"
       :value="value"
       :options="options"
       title="请选择地址"
