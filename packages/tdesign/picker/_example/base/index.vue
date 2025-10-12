@@ -73,14 +73,12 @@
 </template>
 
 <script>
-import tCellGroup from 'tdesign-uniapp/cell-group/cell-group';
 import tCell from 'tdesign-uniapp/cell/cell';
 import tPicker from 'tdesign-uniapp/picker/picker';
 import tPickerItem from 'tdesign-uniapp/picker-item/picker-item';
 import tTag from 'tdesign-uniapp/tag/tag';
 export default {
   components: {
-    tCellGroup,
     tCell,
     tPicker,
     tPickerItem,
@@ -173,30 +171,20 @@ export default {
   },
   created() {},
   methods: {
-    onColumnChange(e, _dataset) {
-      /* ---处理dataset begin--- */
-    //   this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      console.log('picker pick:', e);
+    onColumnChange(e, { key }) {
+      console.log('picker pick:', { e, key });
     },
-    onPickerChange(e, _dataset) {
-      /* ---处理dataset begin--- */
-      /* ---处理dataset end--- */
-      console.log('picker change:', e, _dataset);
-      const { key } = _dataset;
-      const { value } = e.detail;
+    onPickerChange(e, { key }) {
+      console.log('picker change:', { e, key });
+      const { value } = e;
       this[`${key}Visible`] = false;
       this[`${key}Value`] = value;
       this[`${key}Text`] = value.join(' ');
     },
-    onPickerCancel(e, _dataset) {
-      /* ---处理dataset begin--- */
-    //   this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-    //   const { key } = e.currentTarget.dataset;
+    onPickerCancel(e, { key }) {
       console.log(e, '取消');
-      console.log('picker1 cancel:');
-      const { key } = _dataset;
+      console.log('picker cancel: ', { e, key });
+
       this[`${key}Visible`] = false;
     },
     onCityPicker() {

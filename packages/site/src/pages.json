@@ -76,6 +76,9 @@
       "path": "pages-more/input/input"
     },
     {
+      "path": "pages-more/picker/picker"
+    },
+    {
       "path": "pages-more/radio/radio"
     },
     {
@@ -236,6 +239,10 @@
       {
         "name": "input",
         "pathName": "pages-more/input/input"
+      },
+      {
+        "name": "picker",
+        "pathName": "pages-more/picker/picker"
       },
       {
         "name": "radio",

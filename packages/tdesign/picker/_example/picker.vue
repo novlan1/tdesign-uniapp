@@ -23,21 +23,24 @@
       >
         <with-title />
       </t-demo>
+
+      <!-- <areaDemo /> -->
+      <!-- <withoutPopup /> -->
     </view>
   </view>
 </template>
 
 <script lang="ts">
 
-import BaseDemo from './base';
-// import withTitle from './with-title';
-// import area from './area';
-// import withoutPopup from './without-popup';
+import BaseDemo from './base/index.vue';
+import withTitle from './with-title/index.vue';
+// import areaDemo from './area/index.vue';
+// import withoutPopup from './without-popup/index.vue';
 export default {
   components: {
     BaseDemo,
-    // withTitle,
-    // area,
+    withTitle,
+    // areaDemo,
     // withoutPopup,
   },
   data() {
@@ -46,6 +49,6 @@ export default {
   methods: {},
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import './picker.less';
 </style>

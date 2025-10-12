@@ -1,10 +1,11 @@
 const props = {
-    format: {
-        type: null
-    },
-    options: {
-        type: Array,
-        default: []
-    }
+  format: {
+    type: [null, Function],
+    default: null,
+  },
+  options: {
+    type: Array,
+    default: () => [],
+  },
 };
 export default props;

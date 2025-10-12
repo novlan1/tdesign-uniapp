@@ -59,35 +59,20 @@ export default {
   },
   created() {},
   methods: {
-    onColumnChange(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
+    onColumnChange(e) {
       console.log('picker pick:', e);
     },
-    onPickerChange(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { key } = e.currentTarget.dataset;
-      const { value } = e.detail;
-      console.log('picker change:', e.detail);
-      this.setData({
-        [`${key}Visible`]: false,
-        [`${key}Value`]: value,
-        [`${key}Text`]: value.join(' '),
-      });
+    onPickerChange(e, { key }) {
+      const { value } = e;
+      console.log('picker change:', e);
+      this[`${key}Visible`] = false;
+      this[`${key}Value`] = value;
+      this[`${key}Text`] = value.join(' ');
     },
-    onPickerCancel(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { key } = e.currentTarget.dataset;
+    onPickerCancel(e, { key }) {
       console.log(e, '取消');
       console.log('picker1 cancel:');
-      this.setData({
-        [`${key}Visible`]: false,
-      });
+      this[`${key}Visible`] = false;
     },
   },
 };

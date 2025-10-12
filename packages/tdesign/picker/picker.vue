@@ -5,61 +5,16 @@
       class="class"
       :visible="visible && dataVisible"
       placement="bottom"
-      :using-custom-navbar="usingCustomNavbar || popupProps.usingCustomNavbar"
-      :custom-navbar-height="customNavbarHeight ?? popupProps.usingCustomNavbar"
-      :z-index="popupProps.zIndex || defaultPopUpzIndex"
-      :overlay-props="popupProps.overlayProps || defaultPopUpProps"
+      :using-custom-navbar="usingCustomNavbar || popupProps?.usingCustomNavbar"
+      :custom-navbar-height="customNavbarHeight ?? popupProps?.usingCustomNavbar"
+      :z-index="popupProps?.zIndex || defaultPopUpzIndex"
+      :overlay-props="popupProps?.overlayProps || defaultPopUpProps"
       @visible-change="onPopupChange"
     >
-      <!-- parse <include src="./template.wxml"/> -->
-      <view
-        slot="content"
-        :style="_._style([style, customStyle])"
-        :class="classPrefix + ' ' + prefix + '-class'"
-      >
+      <template #content>
         <view
-          v-if="header"
-          :class="classPrefix + '__toolbar'"
-        >
-          <view
-            v-if="cancelBtn"
-            :class="classPrefix + '__cancel ' + prefix + '-class-cancel'"
-            @tap="onCancel"
-          >
-            {{ cancelBtn }}
-          </view>
-          <view :class="classPrefix + '__title ' + prefix + '-class-title'">
-            {{ title }}
-          </view>
-          <view
-            v-if="confirmBtn"
-            :class="classPrefix + '__confirm ' + prefix + '-class-confirm'"
-            @tap="onConfirm"
-          >
-            {{ confirmBtn }}
-          </view>
-        </view>
-        <slot name="header" />
-        <slot name="content" />
-        <view :class="_.cls(classPrefix + '__main', [])">
-          <slot />
-          <view :class="classPrefix + '__mask ' + classPrefix + '__mask--top'" />
-          <view :class="classPrefix + '__mask ' + classPrefix + '__mask--bottom'" />
-          <view
-            :class="classPrefix + '__indicator'"
-            :style="'height: ' + pickItemHeight + 'px'"
-          />
-        </view>
-        <slot name="footer" />
-      </view>
-    </t-popup>
-    <block v-else>
-      <!-- parse <include src="./template.wxml"/> -->
-      <block>
-        <view
-          slot="content"
           :style="_._style([style, customStyle])"
-          :class="classPrefix + ' ' + prefix + '-class'"
+          :class="classPrefix + ' ' + tClass"
         >
           <view
             v-if="header"
@@ -67,17 +22,17 @@
           >
             <view
               v-if="cancelBtn"
-              :class="classPrefix + '__cancel ' + prefix + '-class-cancel'"
+              :class="classPrefix + '__cancel ' + tClassCancel"
               @tap="onCancel"
             >
               {{ cancelBtn }}
             </view>
-            <view :class="classPrefix + '__title ' + prefix + '-class-title'">
+            <view :class="classPrefix + '__title ' + tClassTitle">
               {{ title }}
             </view>
             <view
               v-if="confirmBtn"
-              :class="classPrefix + '__confirm ' + prefix + '-class-confirm'"
+              :class="classPrefix + '__confirm ' + tClassConfirm"
               @tap="onConfirm"
             >
               {{ confirmBtn }}
@@ -96,179 +51,201 @@
           </view>
           <slot name="footer" />
         </view>
-      </block>
+      </template>
+    </t-popup>
+
+    <block v-else>
+      <view
+        :style="_._style([style, customStyle])"
+        :class="classPrefix + ' ' + tClass"
+      >
+        <view
+          v-if="header"
+          :class="classPrefix + '__toolbar'"
+        >
+          <view
+            v-if="cancelBtn"
+            :class="classPrefix + '__cancel ' + tClassCancel"
+            @tap="onCancel"
+          >
+            {{ cancelBtn }}
+          </view>
+          <view :class="classPrefix + '__title ' + tClassTitle">
+            {{ title }}
+          </view>
+          <view
+            v-if="confirmBtn"
+            :class="classPrefix + '__confirm ' + tClassConfirm"
+            @tap="onConfirm"
+          >
+            {{ confirmBtn }}
+          </view>
+        </view>
+        <slot name="header" />
+        <slot name="content" />
+        <view :class="_.cls(classPrefix + '__main', [])">
+          <slot />
+          <view :class="classPrefix + '__mask ' + classPrefix + '__mask--top'" />
+          <view :class="classPrefix + '__mask ' + classPrefix + '__mask--bottom'" />
+          <view
+            :class="classPrefix + '__indicator'"
+            :style="'height: ' + pickItemHeight + 'px'"
+          />
+        </view>
+        <slot name="footer" />
+      </view>
     </block>
   </view>
 </template>
 <script>
 import tPopup from '../popup/popup';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
+import { uniComponent } from '../common/src/index';
 import { rpx2px } from '../common/utils';
-import config from '../common/config';
+import { prefix } from '../common/config';
 import props from './props';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
+import { ParentMixin, RELATION_MAP } from '../common/relation';
 
-
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-picker`;
-let Picker = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.components = {
-      tPopup,
-    };
-    this.name = 'TPicker';
-    this.mixins = [useCustomNavbar];
-    this.properties = props;
-    this._ = _;
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-confirm`, `${prefix}-class-cancel`, `${prefix}-class-title`];
-    this.options = {
-      multipleSlots: true,
-    };
-    this.relations = {
-      '../picker-item/picker-item': {
-        type: 'child',
-        linked() {
-          // this.updateChildren();
-        },
-      },
-    };
-    this.observers = {
-      'value'() {
-        this.updateChildren();
-      },
-    };
-    this.watch = {
-      visible: {
-        handler(value) {
-          this.dataVisible = value;
-          setTimeout(() => {
-            this.updateChildren();
-          }, 30);
-        },
-      },
-    };
-    this.lifetimes = {
-      attached() {
-        this.setData({
-          pickItemHeight: rpx2px(this.itemHeight),
-        });
-      },
-    };
-    this.setData({
+
+
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-confirm`,
+    `${prefix}-class-cancel`,
+    `${prefix}-class-title`,
+  ],
+  components: {
+    tPopup,
+  },
+  mixins: [
+    ParentMixin(RELATION_MAP.PickerItem),
+    useCustomNavbar,
+  ],
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       defaultPopUpProps: {},
       defaultPopUpzIndex: 11500,
       pickItemHeight: 0,
-    });
-    this.methods = {
-      updateChildren() {
-        const {
-          pickItemHeight: e,
-        } = this;
-        const {
-          value: t,
-          defaultValue: i,
-        } = this;
+      _,
 
-        this.children?.forEach((s, r) => {
-          let l;
-          let n;
-          s.setData({
-            value: null !== (n = null !== (l = null == t ? void 0 : t[r]) && void 0 !== l ? l : null == i ? void 0 : i[r]) && void 0 !== n ? n : '',
-            columnIndex: r,
-            pickItemHeight: e,
-          });
-          s.update();
-        });
-      },
-      getSelectedValue() {
-        return [this.children.map(e => e._selectedValue), this.children.map(e => e._selectedLabel)];
-      },
-      getColumnIndexes() {
-        return this.children.map((e, t) => ({
-          column: t,
-          index: e._selectedIndex,
-        }));
-      },
-      onConfirm() {
-        const [e, t] = this.getSelectedValue();
-        const i = this.getColumnIndexes();
-        this.close('confirm-btn');
-        this.$emit('confirm', {
-          detail: {
-            value: e,
-            label: t,
-            columns: i,
-          },
-        });
-        if (JSON.stringify(this.value) !== JSON.stringify(e)) {
-          this.$emit('change', {
-            detail: {
-              value: e,
-              label: t,
-              columns: i,
-            },
-          });
-        }
-      },
-      triggerColumnChange({
-        column: e,
-        index: t,
-      }) {
-        const [i, s] = this.getSelectedValue();
-        this.$emit('pick', {
-          detail: {
-            value: i,
-            label: s,
-            column: e,
-            index: t,
-          },
-        });
-      },
-      onCancel() {
-        this.close('cancel-btn');
-        this.$emit('cancel');
-      },
-      onPopupChange(e) {
-        const {
-          visible: t,
-        } = e.detail;
-        this.close('overlay');
-        this.$emit('visible-change', {
-          detail: {
-            visible: t,
-          },
-        });
-      },
-      close(e) {
-        if (this.autoClose) {
-          this.setData({
-            dataVisible: false,
-          });
-        }
-        this.$emit('close', {
-          detail: {
-            trigger: e,
-          },
-        });
-      },
+      dataValue: this.value ?? this.defaultValue,
+      dataVisible: this.visible,
     };
-  }
-  ready() {
-    this.children.map((e, t) => e.columnIndex = t);
-  }
-};
-Picker = initTDesign(__decorate([wxComponent()], Picker));
+  },
+  watch: {
+    value: {
+      handler(value) {
+        this.dataValue = value;
+      },
+      immediate: true,
+    },
+    visible: {
+      handler(v) {
+        this.dataVisible = v;
+      },
+      immediate: true,
+    },
+    dataVisible: {
+      handler() {
+        this.updateChildren();
+        setTimeout(() => {
+          this.updateChildren();
+        });
+      },
+      immediate: true,
+    },
+    dataValue: {
+      handler() {
+        this.updateChildren();
+      },
+      immediate: true,
+    },
+  },
+  mounted() {
+    this.children?.map((column, index) => (column.columnIndex = index));
 
-export default Picker;
+    this.pickItemHeight = rpx2px(this.itemHeight);
+    setTimeout(() => {
+      this.updateChildren();
+    });
+  },
+  methods: {
+    afterInnerLinked() {
+      this.updateChildren();
+    },
+    updateChildren() {
+      const { pickItemHeight } = this;
+      const { value, defaultValue } = this;
+
+      this.children?.forEach((child, index) => {
+        child.value = value?.[index] ?? defaultValue?.[index] ?? '';
+        child.columnIndex = index;
+        child.pickItemHeight = pickItemHeight;
+
+        child.update();
+      });
+    },
+
+    getSelectedValue() {
+      const value = this.children?.map(item => item._selectedValue);
+      const label = this.children?.map(item => item._selectedLabel);
+      return [value, label];
+    },
+
+    getColumnIndexes() {
+      const columns = this.children?.map((pickerColumn, columnIndex) => ({
+        column: columnIndex,
+        index: pickerColumn._selectedIndex,
+      }));
+      return columns;
+    },
+
+    onConfirm() {
+      const [value, label] = this.getSelectedValue();
+      const columns = this.getColumnIndexes();
+
+      this.close('confirm-btn');
+      this.$emit('confirm', { value, label, columns });
+
+      if (JSON.stringify(this.dataValue) === JSON.stringify(value)) return;
+      this.$emit('change', { value, label, columns });
+    },
+
+    triggerColumnChange({ column, index }) {
+      const [value, label] = this.getSelectedValue();
+      this.$emit('pick', { value, label, column, index });
+    },
+
+    onCancel() {
+      this.close('cancel-btn');
+      this.$emit('cancel');
+    },
+
+    onPopupChange(e) {
+      const { visible } = e;
+
+      this.close('overlay');
+      this.$emit('visible-change', { visible });
+    },
+
+    close(trigger) {
+      if (this.autoClose) {
+        this.dataVisible = false;
+      }
+      this.$emit('close', { trigger });
+    },
+  },
+});
 </script>
-<style scoped>
-@import './picker.css';
+<style scoped lang="less">
+@import './picker.less';
 </style>

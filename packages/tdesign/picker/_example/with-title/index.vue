@@ -99,47 +99,28 @@ export default {
   },
   created() {},
   methods: {
-    onColumnChange(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      console.log('picker pick:', e);
+    onColumnChange(e, { key }) {
+      console.log('picker pick:', { e, key });
     },
-    onPickerChange(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { key } = e.currentTarget.dataset;
-      const { value } = e.detail;
+    onPickerChange(e, { key }) {
+      const { value } = e;
       console.log('picker change:', e.detail);
-      this.setData({
-        [`${key}Visible`]: false,
-        [`${key}Value`]: value,
-        [`${key}Text`]: value.join(' '),
-      });
+
+      this[`${key}Visible`] = false;
+      this[`${key}Value`] = value;
+      this[`${key}Text`] = value.join(' ');
     },
-    onPickerCancel(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { key } = e.currentTarget.dataset;
-      console.log(e, '取消');
-      console.log('picker1 cancel:');
-      this.setData({
-        [`${key}Visible`]: false,
-      });
+    onPickerCancel(e, { key }) {
+      console.log('picker1 cancel:', e, key);
+      this[`${key}Visible`] = false;
     },
     onTitlePicker() {
-      this.setData({
-        cityVisible: true,
-        cityTitle: '选择城市',
-      });
+      this.cityVisible = true;
+      this.cityTitle =  '选择城市';
     },
     onWithoutTitlePicker() {
-      this.setData({
-        city2Visible: true,
-        city2Title: '',
-      });
+      this.city2Visible = true;
+      this.city2Title = '';
     },
   },
 };

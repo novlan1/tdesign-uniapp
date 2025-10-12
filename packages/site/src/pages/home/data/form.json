@@ -33,8 +33,7 @@
       },
       {
         "name": "Picker",
-        "label": "选择器",
-        "hide": true
+        "label": "选择器"
       },
       {
         "name": "Radio",

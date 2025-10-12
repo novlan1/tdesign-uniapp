@@ -150,30 +150,24 @@ export default {
     init() {
       const { provinces } = this;
       const { cities, counties } = this.getCities(provinces[0].value);
-      this.setData({
-        cities,
-        counties,
-      });
+      this.cities = cities;
+      this.counties = counties;
     },
 
     onColumnChange(e) {
-      console.log('pick:', e.detail);
-      const { column, index } = e.detail;
+      console.log('pick:', e);
+      const { column, index } = e;
       const { provinces, cities } = this;
       if (column === 0) {
         // 更改省份
         const { cities, counties } = this.getCities(provinces[index].value);
-        this.setData({
-          cities,
-          counties,
-        });
+        this.cities = cities;
+        this.counties = counties;
       }
       if (column === 1) {
         // 更改城市
         const counties = this.getCounties(cities[index].value);
-        this.setData({
-          counties,
-        });
+        this.counties = counties;
       }
       if (column === 2) {
         // 更改区县
@@ -194,20 +188,16 @@ export default {
     },
 
     onPickerChange(e) {
-      const { value, label } = e.detail;
-      console.log('picker confirm:', e.detail);
-      this.setData({
-        areaVisible: false,
-        areaValue: value,
-        areaText: label.join(' '),
-      });
+      const { value, label } = e;
+      console.log('picker confirm:', e);
+      this.areaVisible = false;
+      this.areaValue = value;
+      this.areaText =  label.join(' ');
     },
 
     onPickerCancel(e) {
-      console.log('picker cancel', e.detail);
-      this.setData({
-        areaVisible: false,
-      });
+      console.log('picker cancel', e);
+      this.areaVisible = false;
       if (this.areaValue.length) {
         return;
       }
@@ -215,9 +205,7 @@ export default {
     },
 
     onAreaPicker() {
-      this.setData({
-        areaVisible: true,
-      });
+      this.areaVisible = true;
     },
   },
 };
