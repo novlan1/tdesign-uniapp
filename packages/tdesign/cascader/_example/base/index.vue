@@ -193,19 +193,17 @@ export default {
   created() {},
   methods: {
     showCascader() {
-      this.setData({
-        visible: true,
-      });
+      this.visible = true;
     },
     onPick(e) {
-      console.log(e.detail);
+      console.log('pick: ', e);
     },
     onChange(e) {
-      const { selectedOptions, value } = e.detail;
-      this.setData({
-        value,
-        note: selectedOptions.map(item => item.label).join('/'),
-      });
+      console.log('change: ', e);
+      const { selectedOptions, value } = e;
+      this.value = value;
+      this.note =  selectedOptions.map(item => item.label).join('/');
+      this.visible = false;
     },
   },
 };

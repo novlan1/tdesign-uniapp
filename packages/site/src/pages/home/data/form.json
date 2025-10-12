@@ -10,8 +10,7 @@
       },
       {
         "name": "Cascader",
-        "label": "级联选择器",
-        "hide": true
+        "label": "级联选择器"
       },
       {
         "name": "Checkbox",

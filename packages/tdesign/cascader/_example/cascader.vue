@@ -45,16 +45,16 @@
 <script>
 import BaseDemo from './base';
 import themeTab from './theme-tab';
-import keys from './keys';
 import withValue from './with-value';
+import keys from './keys';
 import withTitle from './with-title';
 import checkStrictly from './check-strictly';
 export default {
   components: {
     BaseDemo,
     themeTab,
-    keys,
     withValue,
+    keys,
     withTitle,
     checkStrictly,
   },

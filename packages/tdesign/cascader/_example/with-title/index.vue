@@ -192,15 +192,11 @@ export default {
   created() {},
   methods: {
     showCascader() {
-      this.setData({
-        visible: true,
-      });
+      this.visible = true;
     },
     onChange(e) {
-      const { selectedOptions } = e.detail;
-      this.setData({
-        note: selectedOptions.map(item => item.label).join('/'),
-      });
+      const { selectedOptions } = e;
+      this.note = selectedOptions.map(item => item.label).join('/');
     },
   },
 };

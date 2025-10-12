@@ -17,12 +17,15 @@
       @change="onChange"
       @pick="onPick"
     >
-      <text
-        slot="close-btn"
-        class="confirm-btn"
+      <template
+        #close-btn
       >
-        确定
-      </text>
+        <text
+          class="confirm-btn"
+        >
+          确定
+        </text>
+      </template>
     </t-cascader>
   </view>
 </template>
@@ -202,20 +205,17 @@ export default {
   created() {},
   methods: {
     showCascader() {
-      this.setData({
-        visible: true,
-      });
+      this.visible = true;
     },
     onPick(e) {
-      console.log(e.detail);
+      console.log(e);
     },
     onChange(e) {
-      const { selectedOptions, value } = e.detail;
-      console.log(value);
-      this.setData({
-        value,
-        note: selectedOptions.map(item => item.label).join('/'),
-      });
+      const { selectedOptions, value } = e;
+      console.log('change', value);
+      this.value = value;
+      this.note = selectedOptions.map(item => item.label).join('/');
+      this.visible = false;
     },
   },
 };

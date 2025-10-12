@@ -70,6 +70,9 @@
       "path": "pages-more/tabs/tabs"
     },
     {
+      "path": "pages-more/cascader/cascader"
+    },
+    {
       "path": "pages-more/checkbox/checkbox"
     },
     {
@@ -231,6 +234,10 @@
       {
         "name": "tabs",
         "pathName": "pages-more/tabs/tabs"
+      },
+      {
+        "name": "cascader",
+        "pathName": "pages-more/cascader/cascader"
       },
       {
         "name": "checkbox",
