@@ -81,18 +81,21 @@ export default uniComponent({
         this.dataValue = v;
       },
       immediate: true,
+      deep: true,
     },
     dataValue: {
-      handler() {
+      handler(v) {
         this.updateChildren();
       },
       immediate: true,
+      deep: true,
     },
     options: {
       handler() {
         this.initWithOptions();
       },
       immediate: true,
+      deep: true,
     },
     disabled: {
       handler(v) {

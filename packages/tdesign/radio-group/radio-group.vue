@@ -78,6 +78,7 @@ export default uniComponent({
         this.dataValue = v;
       },
       immediate: true,
+      deep: true,
     },
     dataValue: {
       handler(v) {
@@ -86,12 +87,14 @@ export default uniComponent({
         });
       },
       immediate: true,
+      deep: true,
     },
     options: {
       handler() {
         this.initWithOptions();
       },
       immediate: true,
+      deep: true,
     },
     disabled: {
       handler(v) {

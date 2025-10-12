@@ -67,8 +67,7 @@
       },
       {
         "name": "TreeSelect",
-        "label": "树形选择器",
-        "hide": true
+        "label": "树形选择器"
       },
       {
         "name": "Upload",

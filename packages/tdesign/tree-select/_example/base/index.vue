@@ -39,9 +39,8 @@ export default {
   created() {},
   methods: {
     onChange(e) {
-      this.setData({
-        value: e.detail.value,
-      });
+      console.log('change: ', e);
+      this.value = e.value;
     },
   },
 };

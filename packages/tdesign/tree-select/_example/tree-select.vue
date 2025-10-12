@@ -33,13 +33,13 @@
 
 <script>
 import BaseDemo from './base';
-import normal from './normal';
 import multiple from './multiple';
+import normal from './normal';
 export default {
   components: {
     BaseDemo,
-    normal,
     multiple,
+    normal,
   },
   data() {
     return {};

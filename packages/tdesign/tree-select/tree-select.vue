@@ -6,8 +6,8 @@
     <t-scroll-view
       v-for="(item, level) in treeOptions"
       :key="level"
-      :class="_.cls(classPrefix + '__column', [_this.getTreeClass(leafLevel - level, treeOptions.length)]) + ' ' + prefix + '-class'"
-      :scroll-into-view="scrollIntoView && scrollIntoView[level] ? '.scroll-into-view >>> #scroll-to-' + scrollIntoView[level] : ''"
+      :class="_.cls(classPrefix + '__column', [getTreeClass(leafLevel - level, treeOptions.length)]) + ' ' + prefix + '-class'"
+      :scroll-into-view="scrollIntoView && scrollIntoView[level] ? 'scroll-to-' + scrollIntoView[level] : ''"
     >
       <t-side-bar
         v-if="level == 0"
@@ -22,15 +22,14 @@
           :value="item.value"
           :disabled="item.disabled"
           :t-id="'scroll-to-' + item.value"
-          class="scroll-into-view"
-          :t-class="prefix + '-class-left-item'"
+          :t-class="'scroll-into-view '+prefix + '-class-left-item'"
         />
       </t-side-bar>
 
       <block v-else-if="level != leafLevel">
         <view
           v-for="(item, index) in treeOptions[level]"
-          :key="index"
+          :key="`view-${level}-${index}`"
           :data-level="level"
           :data-value="item.value"
           :class="
@@ -52,17 +51,17 @@
 
       <t-radio-group
         v-else-if="!multiple"
-        :class="classPrefix + '__radio ' + prefix + '-class-right-column'"
+        :t-class="classPrefix + '__radio ' + prefix + '-class-right-column'"
         :data-level="level"
         data-type="single"
         :value="innerValue[level]"
-        @change="handleChange($event, { level, type: 'single' })"
+        @change="({value}) => handleChange({ value, level, type: 'single' })"
       >
         <t-radio
           v-for="(item, index) in treeOptions[level]"
-          :key="index"
+          :key="`radio-${innerValue[level-1]}-${level}-${index}`"
           :t-id="'scroll-to-' + item.value"
-          :class="'scroll-into-view ' + classPrefix + '__radio-item ' + prefix + '-class-right-item'"
+          :t-class="'scroll-into-view ' + classPrefix + '__radio-item ' + prefix + '-class-right-item'"
           :t-class-label="prefix + '-class-right-item-label'"
           icon="line"
           :value="item.value"
@@ -77,17 +76,17 @@
 
       <t-checkbox-group
         v-else
-        :class="classPrefix + '__checkbox ' + prefix + '-class-right-column'"
+        :t-class="classPrefix + '__checkbox ' + prefix + '-class-right-column'"
         :value="innerValue[level] || []"
         :data-level="level"
         data-type="multiple"
-        @change="handleChange($event, { level, type: 'multiple' })"
+        @change="({context}) => handleChange({ context, value: context.value, level, type: 'multiple' })"
       >
         <t-checkbox
           v-for="(item, index) in treeOptions[level]"
-          :key="index"
+          :key="`checkbox-${innerValue[level-1]}-${level}-${index}`"
           :t-id="'scroll-to-' + item.value"
-          :class="'scroll-into-view ' + prefix + '-class-right-item'"
+          :t-class="'scroll-into-view ' + prefix + '-class-right-item'"
           :t-class-label="prefix + '-class-right-item-label'"
           placement="right"
           icon="line"
@@ -111,176 +110,189 @@ import tCheckboxGroup from '../checkbox-group/checkbox-group';
 import tSideBar from '../side-bar/side-bar';
 import tSideBarItem from '../side-bar-item/side-bar-item';
 import tScrollView from '../scroll-view/scroll-view';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
+
+import { uniComponent } from '../common/src/index';
 import { isDef } from '../common/validator';
-import config from '../common/config';
+import { prefix } from '../common/config';
 import { getTreeDepth } from '../common/utils';
 import props from './props';
 import _ from '../common/utils.wxs';
-import * as _this from './index.wxs';
+import { getTreeClass } from './computed.js';
 
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-tree-select`;
-let TreeSelect = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-left-column`, `${prefix}-class-left-item`, `${prefix}-class-middle-item`, `${prefix}-class-right-column`, `${prefix}-class-right-item`, `${prefix}-class-right-item-label`];
-    this.options = {
-      multipleSlots: true,
-    };
-    this.setData({
+
+export default uniComponent({
+  name,
+  controlledProps: [
+    {
+      key: 'value',
+      event: 'change',
+    },
+  ],
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-left-column`,
+    `${prefix}-class-left-item`,
+    `${prefix}-class-middle-item`,
+    `${prefix}-class-right-column`,
+    `${prefix}-class-right-item`,
+    `${prefix}-class-right-item-label`,
+  ],
+  components: {
+    tRadio,
+    tRadioGroup,
+    tCheckbox,
+    tCheckboxGroup,
+    tSideBar,
+    tSideBarItem,
+    tScrollView,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       scrollIntoView: null,
-    });
-    this.properties = props;
-    this.controlledProps = [{
-      key: 'value',
-      event: 'change',
-    }];
-    this.observers = {
-      'value, customValue, options, keys, multiple'() {
+      _,
+
+      innerValue: this.value ?? this.defaultValue,
+    };
+  },
+  watch: {
+    value: {
+      handler() {
         this.buildTreeOptions();
       },
-    };
-    this.lifetimes = {
-      ready() {
-        this.getScrollIntoView('init');
+      deep: true,
+      immediate: true,
+    },
+    options: {
+      handler() {
+        this.buildTreeOptions();
       },
-    };
-    this.methods = {
-      buildTreeOptions() {
-        let e;
-        let l;
-        const {
-          options: t,
-          value: i,
-          customValue: o,
-          multiple: n,
-          keys: s,
-        } = this;
-        if (!t.length) {
-          return;
-        }
-        const r = [];
-        let a = -1;
-        let c = {
-          children: t,
-        };
-        for (; null == c ? void 0 : c.children;) {
-          a += 1;
-          const t = c.children.map(e => ({
-            label: e[(null == s ? void 0 : s.label) || 'label'],
-            value: e[(null == s ? void 0 : s.value) || 'value'],
-            disabled: e[(null == s ? void 0 : s.disabled) || 'disabled'],
-            children: e[(null == s ? void 0 : s.children) || 'children'],
-          }));
-          r.push(t);
-          const n = null !== (e = null == o ? void 0 : o[a]) && void 0 !== e ? e : null == i ? void 0 : i[a];
-          c = n && null !== (l = t.find(e => e.value === n)) && void 0 !== l ? l : t[0];
-        }
-        const u = getTreeDepth(t, null == s ? void 0 : s.children);
-        for (; r.length < u;) {
-          r.push([]);
-          a += 1;
-        }
-        const d = Math.max(0, a);
-        const p = o || r.map((e, l) => {
-          let t;
-          let o;
-          let s;
-          const a = l === r.length - 1 && n ? [null === (t = e[0]) || void 0 === t ? void 0 : t.value] : null === (o = e[0]) || void 0 === o ? void 0 : o.value;
-          return null !== (s = null == i ? void 0 : i[l]) && void 0 !== s ? s : a;
+      deep: true,
+      immediate: true,
+    },
+    keys: {
+      handler() {
+        this.buildTreeOptions();
+      },
+      deep: true,
+      immediate: true,
+    },
+    multiple: 'buildTreeOptions',
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.getScrollIntoView('init');
+    });
+  },
+  methods: {
+    getTreeClass,
+    buildTreeOptions() {
+      const { options, innerValue: value, customValue, multiple, keys } = this;
+
+      if (!options.length) return;
+
+      const treeOptions = [];
+
+      let level = -1;
+      let currentNode = { children: options };
+
+      while (currentNode?.children) {
+        level += 1;
+        const currentLevelOptions = currentNode.children.map(item => ({
+          label: item[keys?.label || 'label'],
+          value: item[keys?.value || 'value'],
+          disabled: item[keys?.disabled || 'disabled'],
+          children: item[keys?.children || 'children'],
+        }));
+
+        treeOptions.push(currentLevelOptions);
+
+        const currentValue = customValue?.[level] ?? value?.[level];
+        currentNode = currentValue
+          ? currentLevelOptions.find(child => child.value === currentValue) ?? currentLevelOptions[0]
+          : currentLevelOptions[0];
+      }
+
+      const depth = getTreeDepth(options, keys?.children);
+
+      // 补齐 treeOptions 长度到 depth
+      while (treeOptions.length < depth) {
+        treeOptions.push([]);
+        level += 1;
+      }
+
+      const leafLevel = Math.max(0, level);
+      const innerValue = customValue
+        || treeOptions.map((levelOptions, idx) => {
+          const isLastLevel = idx === treeOptions.length - 1;
+          const defaultValue = isLastLevel && multiple ? [levelOptions[0]?.value] : levelOptions[0]?.value;
+          return value?.[idx] ?? defaultValue;
         });
-        this.setData({
-          innerValue: p,
-          leafLevel: d,
-          treeOptions: r,
-        });
-      },
-      getScrollIntoView(e) {
-        const {
-          value: l,
-          customValue: t,
-          scrollIntoView: i,
-        } = this;
-        if ('init' === e) {
-          const e = t || l;
-          const i = Array.isArray(e) ? e.map(e => (Array.isArray(e) ? e[0] : e)) : [e];
-          this.setData({
-            scrollIntoView: i,
-          });
-        } else {
-          if (null === i) {
-            return;
-          }
-          this.setData({
-            scrollIntoView: null,
-          });
+
+      this.innerValue = innerValue;
+      this.leafLevel = leafLevel;
+      this.treeOptions = treeOptions;
+    },
+
+    getScrollIntoView(status) {
+      const { innerValue: value, customValue, scrollIntoView } = this;
+      if (status === 'init') {
+        const _value = customValue || value;
+        const scrollIntoView = Array.isArray(_value)
+          ? _value.map(item => (Array.isArray(item) ? item[0] : item))
+          : [_value];
+        // setTimeout(() => {
+        this.scrollIntoView = scrollIntoView;
+        // }, 1000);
+      } else {
+        if (scrollIntoView === null) return;
+        this.scrollIntoView = null;
+      }
+    },
+
+    onRootChange(e) {
+      const { innerValue } = this;
+      const { value: itemValue } = e;
+
+      this.getScrollIntoView('none');
+      innerValue[0] = itemValue;
+
+      this._trigger('change', { value: innerValue, level: 0 });
+    },
+
+    handleTreeClick(e) {
+      const { level, value: itemValue } = e.currentTarget.dataset;
+      const { innerValue } = this;
+
+      innerValue[level] = itemValue;
+      this.getScrollIntoView('none');
+      this._trigger('change', { value: innerValue, level: 1 });
+    },
+
+    handleChange({ level, type, value }) {
+      const { innerValue } = this;
+
+      if (type === 'multiple') {
+        if (!isDef(innerValue[level])) {
+          innerValue[level] = [];
         }
-      },
-      onRootChange(e) {
-        const {
-          innerValue: l,
-        } = this;
-        const {
-          value: t,
-        } = e.detail;
-        this.getScrollIntoView('none');
-        l[0] = t;
-        this._trigger('change', {
-          value: l,
-          level: 0,
-        });
-      },
-      handleTreeClick(e) {
-        const {
-          level: l,
-          value: t,
-        } = e.currentTarget.dataset;
-        const {
-          innerValue: i,
-        } = this;
-        i[l] = t;
-        this.getScrollIntoView('none');
-        this._trigger('change', {
-          value: i,
-          level: 1,
-        });
-      },
-      handleChange(e) {
-        const {
-          innerValue: l,
-        } = this;
-        const {
-          level: t,
-          type: i,
-        } = e.target.dataset;
-        const {
-          value: o,
-        } = 'multiple' === i ? e.detail.context : e.detail;
-        if ('multiple' === i) {
-          isDef(l[t]) || (l[t] = []);
-          const e = l[t].indexOf(o);
-          -1 === e ? l[t].push(o) : l[t].splice(e, 1);
-        } else {
-          l[t] = o;
-        }
-        this.getScrollIntoView('none');
-        this._trigger('change', {
-          value: l,
-          level: t,
-        });
-      },
-    };
-  }
-};
-TreeSelect = __decorate([wxComponent()], TreeSelect);
-export default TreeSelect;
+        const index = innerValue[level].indexOf(value);
+        index === -1 ? innerValue[level].push(value) : innerValue[level].splice(index, 1);
+      } else {
+        innerValue[level] = value;
+      }
+
+      this.getScrollIntoView('none');
+      this._trigger('change', { value: innerValue, level });
+    },
+  },
+});
 </script>
-<style scoped>
-@import './tree-select.css';
+<style scoped lang="less">
+@import './tree-select.less';
 </style>

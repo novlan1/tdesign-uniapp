@@ -1,7 +1,7 @@
 <template>
   <view>
     <scroll-view
-      :class="'class ' + prefix + '-class'"
+      :class="'class ' + tClass"
       type="list"
       scroll-y
       enhanced
@@ -14,28 +14,55 @@
 </template>
 
 <script>
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
-import { canUseProxyScrollView } from '../common/version';
-const {
-  prefix: prefix,
-} = config;
-let ScrollView = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`];
-    this.behaviors = canUseProxyScrollView() ? ['wx://proxy-scroll-view'] : [];
-    // this = {
-    //   scrollIntoView: {
-    //     type: String,
-    //   },
-    // };
-  }
-};
-ScrollView = __decorate([wxComponent()], ScrollView);
-export default ScrollView;
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
+// import { canUseProxyScrollView } from '../common/version';
+
+
+const name = `${prefix}-scroll-view`;
+
+
+export default uniComponent({
+  name,
+  externalClasses: [`${prefix}-class`],
+  props: {
+    scrollIntoView: {
+      type: [String, Number, null],
+      default: null,
+    },
+  },
+  data() {
+    return {
+
+    };
+  },
+  watch: {
+
+  },
+  mounted() {
+
+  },
+  methods: {
+
+  },
+});
+
+
+// let ScrollView = class extends SuperComponent {
+//   constructor() {
+//     super(...arguments);
+//     this.externalClasses = [`${prefix}-class`];
+//     this.behaviors = canUseProxyScrollView() ? ['wx://proxy-scroll-view'] : [];
+//     // this = {
+//     //   scrollIntoView: {
+//     //     type: String,
+//     //   },
+//     // };
+//   }
+// };
+// ScrollView = __decorate([wxComponent()], ScrollView);
+// export default ScrollView;
 </script>
-<style scoped>
-@import './scroll-view.css';
+<style scoped lang="less">
+@import './scroll-view.less';
 </style>

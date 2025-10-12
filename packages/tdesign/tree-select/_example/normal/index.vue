@@ -135,9 +135,7 @@ export default {
   created() {},
   methods: {
     onChange(e) {
-      this.setData({
-        value: e.detail.value,
-      });
+      this.value = e.value;
     },
   },
 };

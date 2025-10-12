@@ -94,6 +94,9 @@
       "path": "pages-more/textarea/textarea"
     },
     {
+      "path": "pages-more/tree-select/tree-select"
+    },
+    {
       "path": "pages-more/avatar/avatar"
     },
     {
@@ -266,6 +269,10 @@
       {
         "name": "textarea",
         "pathName": "pages-more/textarea/textarea"
+      },
+      {
+        "name": "tree-select",
+        "pathName": "pages-more/tree-select/tree-select"
       },
       {
         "name": "avatar",
