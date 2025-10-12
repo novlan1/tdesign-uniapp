@@ -12,8 +12,8 @@
 
     <!-- 年月 -->
     <t-date-time-picker
+      v-model:visible="monthVisible"
       title="选择日期"
-      :visible="monthVisible"
       mode="month"
       :value="month"
       format="YYYY-MM"
@@ -46,37 +46,27 @@ export default {
     };
   },
   methods: {
-    showPicker(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { mode } = e.currentTarget.dataset;
-      this.setData({
-        mode,
-        [`${mode}Visible`]: true,
-      });
+    showPicker(e, { mode }) {
+      this.mode = mode;
+      this[`${mode}Visible`] = true;
     },
 
     hidePicker() {
       const { mode } = this;
-      this.setData({
-        [`${mode}Visible`]: false,
-      });
+      this[`${mode}Visible`] = false;
     },
 
     onConfirm(e) {
-      const { value } = e.detail;
+      const { value } = e;
       const { mode } = this;
       console.log('confirm', value);
-      this.setData({
-        [mode]: value,
-        [`${mode}Text`]: value,
-      });
+      this[mode] = value;
+      this[`${mode}Text`] = value;
       this.hidePicker();
     },
 
     onColumnChange(e) {
-      console.log('pick', e.detail.value);
+      console.log('pick', e.value);
     },
   },
 };

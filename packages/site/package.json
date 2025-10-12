@@ -52,6 +52,7 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-4030620241128001",
     "@dcloudio/uni-mp-xhs": "3.0.0-4030620241128001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4030620241128001",
+    "dayjs": "^1.11.18",
     "t-comm": "^2.0.26",
     "tdesign-uniapp": "workspace:*",
     "vue": "^3.4.21",

@@ -10,8 +10,8 @@
     />
 
     <t-date-time-picker
+      v-model:visible="visible"
       title="选择时间"
-      :visible="visible"
       :value="value"
       format="HH:mm:ss"
       :mode="['null', 'second']"
@@ -41,26 +41,20 @@ export default {
   created() {},
   methods: {
     showPicker() {
-      this.setData({
-        visible: true,
-      });
+      this.visible = true;
     },
     hidePicker() {
-      this.setData({
-        visible: false,
-      });
+      this.visible = false;
     },
     onConfirm(e) {
-      const { value } = e.detail;
+      const { value } = e;
       console.log('confirm', value);
-      this.setData({
-        value,
-        text: value,
-      });
+      this.value = value;
+      this.text = value;
       this.hidePicker();
     },
     onColumnChange(e) {
-      console.log('pick', e.detail.value);
+      console.log('pick', e.value);
     },
   },
 };

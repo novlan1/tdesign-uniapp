@@ -10,17 +10,24 @@
         desc="用于选择一个时间点或者一个时间段。"
         notice="渲染框架支持情况：WebView"
       />
+
       <t-demo
         title="01 组件类型"
         desc="年月日选择器"
       />
+
       <year-month-date />
+
       <t-demo desc="年月选择器" />
+
       <year-month />
+
       <!-- <t-demo desc="月日选择器" /> -->
-      <time />
+
+      <timeDemo />
 
       <t-demo desc="年月日时分秒选择器" />
+
       <date-all />
 
       <t-demo
@@ -41,7 +48,7 @@
 
 import yearMonthDate from './year-month-date';
 import yearMonth from './year-month';
-import time from './time';
+import timeDemo from './time';
 import dateAll from './date-all';
 import steps from './steps';
 import withoutPopup from './without-popup';
@@ -49,7 +56,7 @@ export default {
   components: {
     yearMonthDate,
     yearMonth,
-    time,
+    timeDemo,
     dateAll,
     steps,
     withoutPopup,

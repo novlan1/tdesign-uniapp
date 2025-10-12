@@ -13,10 +13,10 @@
 
     <!-- 年月日 -->
     <t-date-time-picker
+      v-model:visible="dateVisible"
       auto-close
       title="选择日期"
       show-week
-      :visible="dateVisible"
       mode="date"
       :default-value="date"
       format="YYYY-MM-DD ddd"
@@ -94,15 +94,9 @@ export default {
     };
   },
   methods: {
-    showPicker(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { mode } = e.currentTarget.dataset;
-      this.setData({
-        mode,
-        [`${mode}Visible`]: true,
-      });
+    showPicker(e, { mode }) {
+      this.mode = mode;
+      this[`${mode}Visible`] = true;
     },
 
     handleClose(e) {
@@ -110,17 +104,15 @@ export default {
     },
 
     onConfirm(e) {
-      const { value } = e.detail;
+      const { value } = e;
       const { mode } = this;
       console.log('confirm', value);
-      this.setData({
-        [mode]: value,
-        [`${mode}Text`]: value,
-      });
+      this[mode] = value;
+      this[`${mode}Text`] = value;
     },
 
     onColumnChange(e) {
-      console.log('pick', e.detail.value);
+      console.log('pick', e.value);
     },
 
     hidePicker() {

@@ -28,8 +28,8 @@
 
     <!-- 时分 -->
     <t-date-time-picker
+      v-model:visible="secondVisible"
       title="选择时间"
-      :visible="secondVisible"
       :mode="['null', 'second']"
       :value="second"
       format="HH:mm:ss"
@@ -40,8 +40,8 @@
 
     <!-- 时分 -->
     <t-date-time-picker
+      v-model:visible="minuteVisible"
       title="选择时间"
-      :visible="minuteVisible"
       :mode="['null', 'minute']"
       :start="start"
       :value="minute"
@@ -75,34 +75,24 @@ export default {
   },
   created() {},
   methods: {
-    showPicker(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { mode } = e.currentTarget.dataset;
-      this.setData({
-        mode,
-        [`${mode}Visible`]: true,
-      });
+    showPicker(e, { mode }) {
+      this.mode = mode;
+      this[`${mode}Visible`] = true;
     },
     hidePicker() {
       const { mode } = this;
-      this.setData({
-        [`${mode}Visible`]: false,
-      });
+      this[`${mode}Visible`] = false;
     },
     onConfirm(e) {
-      const { value } = e.detail;
+      const { value } = e;
       const { mode } = this;
       console.log('confirm', value);
-      this.setData({
-        [mode]: value,
-        [`${mode}Text`]: value,
-      });
+      this[mode] = value;
+      this[`${mode}Text`] = value;
       this.hidePicker();
     },
     onColumnChange(e) {
-      console.log('pick', e.detail.value);
+      console.log('pick', e.value);
     },
   },
 };

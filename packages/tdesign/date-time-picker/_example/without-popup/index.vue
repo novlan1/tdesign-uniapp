@@ -37,24 +37,20 @@ export default {
   methods: {
     hidePicker() {
       const { mode } = this;
-      this.setData({
-        [`${mode}Visible`]: false,
-      });
+      this[`${mode}Visible`] = false;
     },
 
     onConfirm(e) {
-      const { value } = e.detail;
+      const { value } = e;
       const { mode } = this;
       console.log('confirm', value);
-      this.setData({
-        [mode]: value,
-        [`${mode}Text`]: value,
-      });
+      this[mode] = value;
+      this[`${mode}Text`] = value;
       this.hidePicker();
     },
 
     onColumnChange(e) {
-      console.log('pick', e.detail.value);
+      console.log('pick', e.value);
     },
   },
 };

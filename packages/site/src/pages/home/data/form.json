@@ -22,8 +22,7 @@
       },
       {
         "name": "DateTimePicker",
-        "label": "时间选择器",
-        "hide": true
+        "label": "时间选择器"
       },
       {
         "name": "Input",

@@ -79,6 +79,9 @@
       "path": "pages-more/checkbox/checkbox"
     },
     {
+      "path": "pages-more/date-time-picker/date-time-picker"
+    },
+    {
       "path": "pages-more/input/input"
     },
     {
@@ -252,6 +255,10 @@
       {
         "name": "checkbox",
         "pathName": "pages-more/checkbox/checkbox"
+      },
+      {
+        "name": "date-time-picker",
+        "pathName": "pages-more/date-time-picker/date-time-picker"
       },
       {
         "name": "input",
