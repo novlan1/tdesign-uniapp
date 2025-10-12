@@ -10,525 +10,51 @@
       @visible-change="onVisibleChange"
     >
       <!-- parse <include src="./template.wxml"/> -->
-      <block>
-        <view
-          :class="_.cls(classPrefix, [['popup', usePopup]]) + ' ' + classPrefix + '-switch-mode--' + switchMode + ' class ' + prefix + '-class'"
-          :style="_._style([style, customStyle])"
-        >
-          <view
-            :class="classPrefix + '__title'"
-            tabindex="0"
-          >
-            <slot name="title" />
-            <text v-if="title || realLocalText.title">
-              {{ title || realLocalText.title }}
-            </text>
-          </view>
-          <t-icon
-            v-if="usePopup"
-            name="close"
-            :class="classPrefix + '__close-btn'"
-            size="48rpx"
-            aria-role="button"
-            aria-label="关闭"
-            @click="handleClose"
-          />
-          <!-- parse <template v-if="switchMode !== 'none'" is="calendar-header" :data="classPrefix: classPrefix + '-header', switchMode, ...actionButtons, title: _this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle)"/> -->
-          <block
-            v-if="switchMode !== 'none'"
-            name="calendar-header"
-          >
-            <view
-              :id="tId"
-              :class="'class' + ' ' + (classPrefix)+' '+(switchMode !== 'none' ? classPrefix + '__with-action' : '')"
-            >
-              <view
-                v-if="switchMode !== 'none'"
-                :class="classPrefix + '-header' + '__action'"
-              >
-                <view
-                  v-if="switchMode === 'year-month'"
-                  :class="_.cls(classPrefix + '-header' + '__icon', [['disabled', preYearBtnDisable]])"
-                  :data-disabled="preYearBtnDisable"
-                  data-type="pre-year"
-                  @tap="handleSwitchModeChange"
-                >
-                  <t-icon name="chevron-left-double" />
-                </view>
-                <view
-                  :class="_.cls(classPrefix + '-header' + '__icon', [['disabled', prevMonthBtnDisable]])"
-                  :data-disabled="prevMonthBtnDisable"
-                  data-type="pre-month"
-                  @tap="handleSwitchModeChange"
-                >
-                  <t-icon name="chevron-left" />
-                </view>
-              </view>
-              <view :class="classPrefix + '-header' + '__title'">
-                {{ _this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle) }}
-              </view>
-              <view
-                v-if="switchMode !== 'none'"
-                :class="classPrefix + '-header' + '__action'"
-              >
-                <view
-                  :class="_.cls(classPrefix + '-header' + '__icon', [['disabled', nextMonthBtnDisable]])"
-                  :data-disabled="nextMonthBtnDisable"
-                  data-type="next-month"
-                  @tap="handleSwitchModeChange"
-                >
-                  <t-icon name="chevron-right" />
-                </view>
-                <view
-                  v-if="switchMode === 'year-month'"
-                  :class="_.cls(classPrefix + '-header' + '__icon', [['disabled', nextYearBtnDisable]])"
-                  :data-disabled="nextYearBtnDisable"
-                  data-type="next-year"
-                  @tap="handleSwitchModeChange"
-                >
-                  <t-icon name="chevron-right-double" />
-                </view>
-              </view>
-            </view>
-          </block>
-          <view
-            aria-hidden
-            :class="classPrefix + '__days'"
-          >
-            <view
-              v-for="(item, index) in days"
-              :key="index"
-              :class="classPrefix + '__days-item'"
-            >
-              {{ item }}
-            </view>
-          </view>
-          <scroll-view
-            :class="classPrefix + '__months'"
-            :scroll-into-view="scrollIntoView"
-            scroll-y
-            enhanced
-            :show-scrollbar="false"
-            @scroll="onScroll"
-          >
-            <block
-              v-for="(item, index) in switchMode === 'none' ? months : currentMonth"
-              :key="index"
-            >
-              <!-- parse <template v-if="switchMode === 'none'" is="calendar-header" :data="class: classPrefix + '__month', classPrefix: classPrefix + '-header', tId: 'year_' + item.year + '_month_' + item.month, switchMode, ...actionButtons, title: _this.getMonthTitle(item.year, realLocalText.months[item.month], realLocalText.monthTitle)"/> -->
-              <block
-                v-if="switchMode === 'none'"
-                name="calendar-header"
-              >
-                <view
-                  :id="'year_' + item.year + '_month_' + item.month"
-                  :class="'class' +' '+(classPrefix)+' '+(switchMode !== 'none' ? classPrefix + '__with-action' : '')"
-                >
-                  <view
-                    v-if="switchMode !== 'none'"
-                    :class="classPrefix + '-header' + '-header' + '__action'"
-                  >
-                    <view
-                      v-if="switchMode === 'year-month'"
-                      :class="_.cls(classPrefix + '-header' + '-header' + '__icon', [['disabled', preYearBtnDisable]])"
-                      :data-disabled="preYearBtnDisable"
-                      data-type="pre-year"
-                      @tap="handleSwitchModeChange"
-                    >
-                      <t-icon name="chevron-left-double" />
-                    </view>
-                    <view
-                      :class="_.cls(classPrefix + '-header' + '-header' + '__icon', [['disabled', prevMonthBtnDisable]])"
-                      :data-disabled="prevMonthBtnDisable"
-                      data-type="pre-month"
-                      @tap="handleSwitchModeChange"
-                    >
-                      <t-icon name="chevron-left" />
-                    </view>
-                  </view>
-                  <view :class="classPrefix + '-header' + '-header' + '__title'">
-                    {{ _this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle) }}
-                  </view>
-                  <view
-                    v-if="switchMode !== 'none'"
-                    :class="classPrefix + '-header' + '-header' + '__action'"
-                  >
-                    <view
-                      :class="_.cls(classPrefix + '-header' + '-header' + '__icon', [['disabled', nextMonthBtnDisable]])"
-                      :data-disabled="nextMonthBtnDisable"
-                      data-type="next-month"
-                      @tap="handleSwitchModeChange"
-                    >
-                      <t-icon name="chevron-right" />
-                    </view>
-                    <view
-                      v-if="switchMode === 'year-month'"
-                      :class="_.cls(classPrefix + '-header' + '-header' + '__icon', [['disabled', nextYearBtnDisable]])"
-                      :data-disabled="nextYearBtnDisable"
-                      data-type="next-year"
-                      @tap="handleSwitchModeChange"
-                    >
-                      <t-icon name="chevron-right-double" />
-                    </view>
-                  </view>
-                </view>
-              </block>
-
-              <view :class="classPrefix + '__dates'">
-                <view
-                  v-for="(item, index1) in (item.weekdayOfFirstDay - firstDayOfWeek + 7) % 7"
-                  :key="index1"
-                />
-                <block
-                  v-for="(dateItem, dateIndex) in item.months"
-                  :key="dateIndex"
-                >
-                  <view
-                    :class="classPrefix + '__dates-item ' + dateItem.className + ' ' + classPrefix + '__dates-item--' + dateItem.type"
-                    :data-year="item.year"
-                    :data-month="item.month"
-                    :data-date="dateItem"
-                    aria-role="button"
-                    :aria-label="_this.getDateLabel(item, dateItem)"
-                    :aria-disabled="dateItem.type === 'disabled'"
-                    @tap="handleSelect"
-                  >
-                    <view
-                      v-if="dateItem.prefix"
-                      :class="classPrefix + '__dates-item-prefix'"
-                    >
-                      {{ dateItem.prefix }}
-                    </view>
-                    {{ dateItem.day }}
-                    <view
-                      v-if="dateItem.suffix"
-                      :class="classPrefix + '__dates-item-suffix ' + classPrefix + '__dates-item-suffix--' + dateItem.type"
-                    >
-                      {{ dateItem.suffix }}
-                    </view>
-                  </view>
-                </block>
-              </view>
-            </block>
-          </scroll-view>
-          <view
-            v-if="innerConfirmBtn != null && usePopup"
-            :class="classPrefix + '__footer'"
-          >
-            <slot
-              v-if="innerConfirmBtn === 'slot'"
-              name="confirm-btn"
-            />
-            <block v-else-if="innerConfirmBtn">
-              <!-- parse <template is="button" :data="block: true,  theme: 'primary', rootClass: 't-calendar__confirm-btn', content: realLocalText.confirm, ...innerConfirmBtn"/> -->
-              <t-button
-                :t-id="tId || ''"
-                :style="style || ''"
-                :block="true || false"
-                :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-                :t-class="prefix + '-class-action'"
-                :disabled="disabled || false"
-                :data-type="'action'"
-                :data-extra="index"
-                :custom-dataset="customDataset"
-                :content="realLocalText.confirm || ''"
-                :icon="icon || ''"
-                :loading="loading || false"
-                :loading-props="loadingProps || null"
-                :theme="'primary' || 'default'"
-                :ghost="ghost || false"
-                :shape="shape || 'rectangle'"
-                :size="size || 'medium'"
-                :variant="variant || 'base'"
-                :open-type="openType || ''"
-                :hover-class="hoverClass || ''"
-                :hover-stop-propagation="hoverStopPropagation || false"
-                :hover-start-time="hoverStartTime || 20"
-                :hover-stay-time="hoverStayTime || 70"
-                :lang="lang || 'en'"
-                :session-from="sessionFrom || ''"
-                :send-message-title="sendMessageTitle || ''"
-                :send-message-path="sendMessagePath || ''"
-                :send-message-img="sendMessageImg || ''"
-                :app-parameter="appParameter || ''"
-                :show-message-card="showMessageCard || false"
-                :aria-label="ariaLabel || ''"
-                @click="onTplButtonTap($event, { type: 'action', extra: index })"
-                @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
-              >
-                <slot v-if="true || false" />
-              </t-button>
-            </block>
-          </view>
-        </view>
-      </block>
+      <CalendarTemplate
+        :class-prefix="classPrefix"
+        :use-popup="usePopup"
+        :switch-mode="switchMode"
+        :t-class="tClass"
+        :custom-style="_._style([style, customStyle])"
+        :title="title"
+        :real-local-text="realLocalText"
+        :months="months"
+        :current-month="currentMonth"
+        :action-buttons="actionButtons"
+        :days="days"
+        :scroll-into-view="scrollIntoView"
+        :first-day-of-week="firstDayOfWeek"
+        :inner-confirm-btn="innerConfirmBtn"
+        @scroll="onScroll"
+        @close="handleClose"
+        @select="handleSelect"
+        @clickButton="onTplButtonTap"
+        @handleSwitchModeChange="handleSwitchModeChange"
+      />
     </t-popup>
     <block v-else>
       <!-- parse <include src="./template.wxml"/> -->
-      <block>
-        <view
-          :class="_.cls(classPrefix, [['popup', usePopup]]) + ' ' + classPrefix + '-switch-mode--' + switchMode + ' class ' + prefix + '-class'"
-          :style="_._style([style, customStyle])"
-        >
-          <view
-            :class="classPrefix + '__title'"
-            tabindex="0"
-          >
-            <slot name="title" />
-            <text v-if="title || realLocalText.title">
-              {{ title || realLocalText.title }}
-            </text>
-          </view>
-          <t-icon
-            v-if="usePopup"
-            name="close"
-            :class="classPrefix + '__close-btn'"
-            size="48rpx"
-            aria-role="button"
-            aria-label="关闭"
-            @click="handleClose"
-          />
-          <!-- parse <template v-if="switchMode !== 'none'" is="calendar-header" :data="classPrefix: classPrefix + '-header', switchMode, ...actionButtons, title: _this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle)"/> -->
-          <block
-            v-if="switchMode !== 'none'"
-            name="calendar-header"
-          >
-            <view
-              :id="tId"
-              :class="'class' +' '+(classPrefix)+' '+(switchMode !== 'none' ? classPrefix + '__with-action' : '')"
-            >
-              <view
-                v-if="switchMode !== 'none'"
-                :class="classPrefix + '-header' + '__action'"
-              >
-                <view
-                  v-if="switchMode === 'year-month'"
-                  :class="_.cls(classPrefix + '-header' + '__icon', [['disabled', preYearBtnDisable]])"
-                  :data-disabled="preYearBtnDisable"
-                  data-type="pre-year"
-                  @tap="handleSwitchModeChange"
-                >
-                  <t-icon name="chevron-left-double" />
-                </view>
-                <view
-                  :class="_.cls(classPrefix + '-header' + '__icon', [['disabled', prevMonthBtnDisable]])"
-                  :data-disabled="prevMonthBtnDisable"
-                  data-type="pre-month"
-                  @tap="handleSwitchModeChange"
-                >
-                  <t-icon name="chevron-left" />
-                </view>
-              </view>
-              <view :class="classPrefix + '-header' + '__title'">
-                {{ _this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle) }}
-              </view>
-              <view
-                v-if="switchMode !== 'none'"
-                :class="classPrefix + '-header' + '__action'"
-              >
-                <view
-                  :class="_.cls(classPrefix + '-header' + '__icon', [['disabled', nextMonthBtnDisable]])"
-                  :data-disabled="nextMonthBtnDisable"
-                  data-type="next-month"
-                  @tap="handleSwitchModeChange"
-                >
-                  <t-icon name="chevron-right" />
-                </view>
-                <view
-                  v-if="switchMode === 'year-month'"
-                  :class="_.cls(classPrefix + '-header' + '__icon', [['disabled', nextYearBtnDisable]])"
-                  :data-disabled="nextYearBtnDisable"
-                  data-type="next-year"
-                  @tap="handleSwitchModeChange"
-                >
-                  <t-icon name="chevron-right-double" />
-                </view>
-              </view>
-            </view>
-          </block>
-          <view
-            aria-hidden
-            :class="classPrefix + '__days'"
-          >
-            <view
-              v-for="(item, index) in days"
-              :key="index"
-              :class="classPrefix + '__days-item'"
-            >
-              {{ item }}
-            </view>
-          </view>
-          <scroll-view
-            :class="classPrefix + '__months'"
-            :scroll-into-view="scrollIntoView"
-            scroll-y
-            enhanced
-            :show-scrollbar="false"
-            @scroll="onScroll"
-          >
-            <block
-              v-for="(item, index) in switchMode === 'none' ? months : currentMonth"
-              :key="index"
-            >
-              <!-- parse <template v-if="switchMode === 'none'" is="calendar-header" :data="class: classPrefix + '__month', classPrefix: classPrefix + '-header', tId: 'year_' + item.year + '_month_' + item.month, switchMode, ...actionButtons, title: _this.getMonthTitle(item.year, realLocalText.months[item.month], realLocalText.monthTitle)"/> -->
-              <block
-                v-if="switchMode === 'none'"
-                name="calendar-header"
-              >
-                <view
-                  :id="'year_' + item.year + '_month_' + item.month"
-                  :class="'class' +' '+(classPrefix)+' '+(switchMode !== 'none' ? classPrefix + '__with-action' : '')"
-                >
-                  <view
-                    v-if="switchMode !== 'none'"
-                    :class="classPrefix + '-header' + '-header' + '__action'"
-                  >
-                    <view
-                      v-if="switchMode === 'year-month'"
-                      :class="_.cls(classPrefix + '-header' + '-header' + '__icon', [['disabled', preYearBtnDisable]])"
-                      :data-disabled="preYearBtnDisable"
-                      data-type="pre-year"
-                      @tap="handleSwitchModeChange"
-                    >
-                      <t-icon name="chevron-left-double" />
-                    </view>
-                    <view
-                      :class="_.cls(classPrefix + '-header' + '-header' + '__icon', [['disabled', prevMonthBtnDisable]])"
-                      :data-disabled="prevMonthBtnDisable"
-                      data-type="pre-month"
-                      @tap="handleSwitchModeChange"
-                    >
-                      <t-icon name="chevron-left" />
-                    </view>
-                  </view>
-                  <view :class="classPrefix + '-header' + '-header' + '__title'">
-                    {{ _this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle) }}
-                  </view>
-                  <view
-                    v-if="switchMode !== 'none'"
-                    :class="classPrefix + '-header' + '-header' + '__action'"
-                  >
-                    <view
-                      :class="_.cls(classPrefix + '-header' + '-header' + '__icon', [['disabled', nextMonthBtnDisable]])"
-                      :data-disabled="nextMonthBtnDisable"
-                      data-type="next-month"
-                      @tap="handleSwitchModeChange"
-                    >
-                      <t-icon name="chevron-right" />
-                    </view>
-                    <view
-                      v-if="switchMode === 'year-month'"
-                      :class="_.cls(classPrefix + '-header' + '-header' + '__icon', [['disabled', nextYearBtnDisable]])"
-                      :data-disabled="nextYearBtnDisable"
-                      data-type="next-year"
-                      @tap="handleSwitchModeChange"
-                    >
-                      <t-icon name="chevron-right-double" />
-                    </view>
-                  </view>
-                </view>
-              </block>
-
-              <view :class="classPrefix + '__dates'">
-                <view
-                  v-for="(item, index1) in (item.weekdayOfFirstDay - firstDayOfWeek + 7) % 7"
-                  :key="index1"
-                />
-                <block
-                  v-for="(dateItem, dateIndex) in item.months"
-                  :key="dateIndex"
-                >
-                  <view
-                    :class="classPrefix + '__dates-item ' + dateItem.className + ' ' + classPrefix + '__dates-item--' + dateItem.type"
-                    :data-year="item.year"
-                    :data-month="item.month"
-                    :data-date="dateItem"
-                    aria-role="button"
-                    :aria-label="_this.getDateLabel(item, dateItem)"
-                    :aria-disabled="dateItem.type === 'disabled'"
-                    @tap="handleSelect"
-                  >
-                    <view
-                      v-if="dateItem.prefix"
-                      :class="classPrefix + '__dates-item-prefix'"
-                    >
-                      {{ dateItem.prefix }}
-                    </view>
-                    {{ dateItem.day }}
-                    <view
-                      v-if="dateItem.suffix"
-                      :class="classPrefix + '__dates-item-suffix ' + classPrefix + '__dates-item-suffix--' + dateItem.type"
-                    >
-                      {{ dateItem.suffix }}
-                    </view>
-                  </view>
-                </block>
-              </view>
-            </block>
-          </scroll-view>
-          <view
-            v-if="innerConfirmBtn != null && usePopup"
-            :class="classPrefix + '__footer'"
-          >
-            <slot
-              v-if="innerConfirmBtn === 'slot'"
-              name="confirm-btn"
-            />
-            <block v-else-if="innerConfirmBtn">
-              <!-- parse <template is="button" :data="block: true,  theme: 'primary', rootClass: 't-calendar__confirm-btn', content: realLocalText.confirm, ...innerConfirmBtn"/> -->
-              <t-button
-                :t-id="tId || ''"
-                :style="style || ''"
-                :block="true || false"
-                :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-                :t-class="prefix + '-class-action'"
-                :disabled="disabled || false"
-                :data-type="'action'"
-                :data-extra="index"
-                :custom-dataset="customDataset"
-                :content="realLocalText.confirm || ''"
-                :icon="icon || ''"
-                :loading="loading || false"
-                :loading-props="loadingProps || null"
-                :theme="'primary' || 'default'"
-                :ghost="ghost || false"
-                :shape="shape || 'rectangle'"
-                :size="size || 'medium'"
-                :variant="variant || 'base'"
-                :open-type="openType || ''"
-                :hover-class="hoverClass || ''"
-                :hover-stop-propagation="hoverStopPropagation || false"
-                :hover-start-time="hoverStartTime || 20"
-                :hover-stay-time="hoverStayTime || 70"
-                :lang="lang || 'en'"
-                :session-from="sessionFrom || ''"
-                :send-message-title="sendMessageTitle || ''"
-                :send-message-path="sendMessagePath || ''"
-                :send-message-img="sendMessageImg || ''"
-                :app-parameter="appParameter || ''"
-                :show-message-card="showMessageCard || false"
-                :aria-label="ariaLabel || ''"
-                @click="onTplButtonTap($event, { type: 'action', extra: index })"
-                @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
-              >
-                <slot v-if="true || false" />
-              </t-button>
-            </block>
-          </view>
-        </view>
-      </block>
+      <CalendarTemplate
+        :class-prefix="classPrefix"
+        :use-popup="usePopup"
+        :switch-mode="switchMode"
+        :t-class="tClass"
+        :custom-style="_._style([style, customStyle])"
+        :title="title"
+        :real-local-text="realLocalText"
+        :months="months"
+        :current-month="currentMonth"
+        :action-buttons="actionButtons"
+        :days="days"
+        :scroll-into-view="scrollIntoView"
+        :first-day-of-week="firstDayOfWeek"
+        :inner-confirm-btn="innerConfirmBtn"
+        @scroll="onScroll"
+        @close="handleClose"
+        @select="handleSelect"
+        @clickButton="onTplButtonTap"
+        @handleSwitchModeChange="handleSwitchModeChange"
+      />
     </block>
   </view>
 </template>
@@ -536,20 +62,25 @@
 import tPopup from '../popup/popup';
 import tButton from '../button/button';
 import tIcon from '../icon/icon';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import CalendarTemplate from './template.vue';
+
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import TCalendar from '../common/shared/calendar/index';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import { getPrevMonth, getPrevYear, getNextMonth, getNextYear } from './utils';
 import _ from '../common/utils.wxs';
-import * as _this from './calendar.wxs';
+import {
+  getMonthTitle,
+  getDateLabel,
+  isDateSelected,
+} from './computed.js';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-calendar`;
+
+
 const defaultLocaleText = {
   title: '请选择日期',
   weekdays: ['日', '一', '二', '三', '四', '五', '六'],
@@ -558,16 +89,33 @@ const defaultLocaleText = {
   confirm: '确认',
 };
 
-let Calendar = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.behaviors = [useCustomNavbar];
-    this.externalClasses = [`${prefix}-class`];
-    this.options = {
-      multipleSlots: true,
-    };
-    this.properties = props;
-    this.setData({
+export default uniComponent({
+  name,
+  controlledProps: [
+    {
+      key: 'value',
+      event: 'confirm',
+    },
+    {
+      key: 'value',
+      event: 'change',
+    },
+  ],
+  externalClasses: [
+    `${prefix}-class`,
+  ],
+  mixins: [useCustomNavbar],
+  components: {
+    tPopup,
+    tButton,
+    tIcon,
+    CalendarTemplate,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       months: [],
@@ -581,279 +129,316 @@ let Calendar = class extends SuperComponent {
         nextMonthBtnDisable: false,
         nextYearBtnDisable: false,
       },
-    });
-    this.controlledProps = [{
-      key: 'value',
-      event: 'confirm',
-    }, {
-      key: 'value',
-      event: 'change',
-    }];
-    this.lifetimes = {
-      created() {
-        this.base = new TCalendar(this);
-      },
-      ready() {
-        const t = Object.assign(Object.assign({}, defaultLocaleText), this.localeText);
-        this.initialValue();
-        this.setData({
-          days: this.base.getDays(t.weekdays),
-          realLocalText: t,
-        });
-        this.calcMonths();
-        this.updateCurrentMonth();
-        this.usePopup || this.scrollIntoView();
-      },
+      _,
+
+      dataVisible: this.visible,
+      dataValue: this.value ?? this.defaultValue,
     };
-    this.observers = {
-      type(t) {
-        this.base.type = t;
+  },
+  watch: {
+    type: {
+      handler(v) {
+        this.base.type = v;
       },
-      confirmBtn(t) {
-        if ('string' === typeof t) {
-          this.setData({
-            innerConfirmBtn: 'slot' === t ? 'slot' : {
-              content: t,
-            },
-          });
-        } else {
-          if ('object' === typeof t) {
-            this.setData({
-              innerConfirmBtn: t,
-            });
-          }
+      // immediate: true,
+    },
+
+    confirmBtn: {
+      handler(v) {
+        if (typeof v === 'string') {
+        // this.setData({
+          this.innerConfirmBtn = v === 'slot' ? 'slot' : { content: v };
+        //  });
+        } else if (typeof v === 'object') {
+        // this.setData({
+          this.innerConfirmBtn = v;
+        //  });
         }
       },
-      'firstDayOfWeek,minDate,maxDate'(t, e, a) {
-        if (t) {
-          this.base.firstDayOfWeek = t;
-        }
-        if (e) {
-          this.base.minDate = e;
-        }
-        if (a) {
-          this.base.maxDate = a;
-        }
+      immediate: true,
+    },
+
+    firstDayOfWeek: 'onWatchMinMaxDate',
+    minDate: 'onWatchMinMaxDate',
+    maxDate: 'onWatchMinMaxDate',
+
+    value: {
+      handler(v) {
+        this.dataValue = v;
+      },
+      immediate: true,
+      deep: true,
+    },
+
+    visible: {
+      handler(v) {
+        this.dataVisible = v;
+      },
+      immediate: true,
+    },
+
+    dataValue: {
+      handler(v) {
+        this.base.value = v;
         this.calcMonths();
+        this.updateCurrentMonth(v);
       },
-      value(t) {
-        this.base.value = t;
-        this.calcMonths();
-        this.updateCurrentMonth();
-      },
-      visible(t) {
-        if (t) {
-          this.scrollIntoView();
-          this.base.value = this.value;
+      // immediate: true,
+      deep: true,
+    },
+
+    dataVisible: {
+      handler(v) {
+        if (v) {
+          this.onScrollIntoView();
+          this.base.value = this.dataValue;
           this.calcMonths();
         }
       },
-      format(t) {
-        const {
-          usePopup: e,
-          visible: a,
-        } = this;
-        this.base.format = t;
-        e && !a || this.calcMonths();
-      },
-    };
-    this.methods = {
-      initialValue() {
-        const {
-          value: t,
-          type: e,
-          minDate: a,
-        } = this;
-        if (!t) {
-          const t = new Date();
-          const n = a || new Date(t.getFullYear(), t.getMonth(), t.getDate()).getTime();
-          const s = 'single' === e ? n : [n];
-          if ('range' === e) {
-            s[1] = n + 86400000;
-          }
-          this.setData({
-            value: s,
-          });
-          this.base.value = s;
-        }
-      },
-      scrollIntoView() {
-        const {
-          value: t,
-        } = this;
-        if (!t) {
-          return;
-        }
-        const e = new Date(Array.isArray(t) ? t[0] : t);
-        if (e) {
-          this.setData({
-            scrollIntoView: `year_${e.getFullYear()}_month_${e.getMonth()}`,
-          });
-        }
-      },
-      getCurrentYearAndMonth(t) {
-        const e = new Date(t);
-        return {
-          year: e.getFullYear(),
-          month: e.getMonth(),
-        };
-      },
-      updateActionButton(t) {
-        const e = this.getCurrentYearAndMonth(this.base.minDate);
-        const a = this.getCurrentYearAndMonth(this.base.maxDate);
-        const n = new Date(e.year, e.month, 1).getTime();
-        const s = new Date(a.year, a.month, 1).getTime();
-        const r = getPrevYear(t).getTime();
-        const i = getPrevMonth(t).getTime();
-        const o = getNextMonth(t).getTime();
-        const h = getNextYear(t).getTime();
-        const l = r < n || i < n;
-        const c = i < n;
-        const m = o > s || h > s;
-        const u = o > s;
-        this.setData({
-          actionButtons: {
-            preYearBtnDisable: l,
-            prevMonthBtnDisable: c,
-            nextYearBtnDisable: m,
-            nextMonthBtnDisable: u,
-          },
-        });
-      },
-      updateCurrentMonth() {
-        if ('none' !== this.switchMode) {
-          this.calcCurrentMonth();
-        }
-      },
-      calcCurrentMonth(t) {
-        const e = t || this.getCurrentDate();
-        const {
-          year: a,
-          month: n,
-        } = this.getCurrentYearAndMonth(e);
-        const s = this.months.filter(t => t.year === a && t.month === n);
-        this.updateActionButton(e);
-        this.setData({
-          currentMonth: s.length > 0 ? s : [this.months[0]],
-        });
-      },
-      calcMonths() {
-        const t = this.base.getMonths();
-        this.setData({
-          months: t,
-        });
-      },
-      close(t) {
-        if (this.autoClose) {
-          this.setData({
-            visible: false,
-          });
-        }
-        this.$emit('close', {
-          detail: {
-            trigger: t,
-          },
-        });
-      },
-      onVisibleChange() {
-        this.close('overlay');
-      },
-      handleClose() {
-        this.close('close-btn');
-      },
-      handleSelect(t) {
-        const {
-          date: e,
-          year: a,
-          month: n,
-        } = t.currentTarget.dataset;
-        if ('disabled' === e.type) {
-          return;
-        }
-        const s = this.base.select({
-          cellType: e.type,
-          year: a,
-          month: n,
-          date: e.day,
-        });
-        const r = this.toTime(s);
-        this.calcMonths();
-        this.updateCurrentMonth();
-        if (null == this.confirmBtn) {
-          'single' !== this.type && 2 !== s.length || (this.setData({
-            visible: false,
-          }), this._trigger('change', {
-            value: r,
-          }));
-        }
-        this.$emit('select', {
-          detail: {
-            value: r,
-          },
-        });
-      },
-      onTplButtonTap() {
-        const t = this.base.getTrimValue();
-        const e = this.toTime(t);
-        this.close('confirm-btn');
-        this._trigger('confirm', {
-          value: e,
-        });
-      },
-      toTime: t => (t ? Array.isArray(t) ? t.map(t => t.getTime()) : t.getTime() : null),
-      onScroll(t) {
-        this.$emit('scroll', {
-          detail: t.detail,
-        });
-      },
-      getCurrentDate() {
-        let t;
-        let e;
-        let a = Array.isArray(this.base.value) ? this.base.value[0] : this.base.value;
-        if (this.currentMonth.length > 0) {
-          const n = null === (t = this.currentMonth[0]) || void 0 === t ? void 0 : t.year;
-          const s = null === (e = this.currentMonth[0]) || void 0 === e ? void 0 : e.month;
-          a = new Date(n, s, 1).getTime();
-        }
-        return a;
-      },
-      handleSwitchModeChange(t) {
-        const {
-          type: e,
-          disabled: a,
-        } = t.currentTarget.dataset;
-        if (a) {
-          return;
-        }
-        const n = this.getCurrentDate();
-        const s = {
-          'pre-year': () => getPrevYear(n),
-          'pre-month': () => getPrevMonth(n),
-          'next-month': () => getNextMonth(n),
-          'next-year': () => getNextYear(n),
-        }[e]();
-        if (!s) {
-          return;
-        }
-        const {
-          year: r,
-          month: i,
-        } = this.getCurrentYearAndMonth(s);
-        this.$emit('panel-change', {
-          detail: {
-            year: r,
-            month: i + 1,
-          },
-        });
-        this.calcCurrentMonth(s);
-      },
-    };
-  }
-};
-Calendar = __decorate([wxComponent()], Calendar);
-export default Calendar;
-</script>
-<style scoped>
-@import './calendar.css';
+      immediate: true,
+    },
+    format: {
+      handler(v) {
+        const { usePopup, dataVisible: visible } = this;
 
+        if (this.base) {
+          this.base.format = v;
+        }
+
+        if (!usePopup || visible) {
+          this.calcMonths();
+        }
+      },
+      immediate: true,
+    },
+  },
+  created() {
+    const values = Object.keys(props).reduce((acc, key) => ({
+      ...acc,
+      [key]: this[key],
+    }));
+    this.base = new TCalendar(values);
+  },
+
+  mounted() {
+    const realLocalText = { ...defaultLocaleText, ...this.localeText };
+    this.initialValue();
+    this.onWatchMinMaxDate();
+    // this.setData({
+    this.days = this.base.getDays(realLocalText.weekdays);
+    this.realLocalText = realLocalText;
+    // });
+
+    this.calcMonths();
+    this.updateCurrentMonth();
+
+    if (!this.usePopup) {
+      this.onScrollIntoView();
+    }
+  },
+  methods: {
+    getMonthTitle,
+    getDateLabel,
+    isDateSelected,
+    initialValue() {
+      const { dataValue: value, type, minDate } = this;
+
+      if (!value) {
+        const today = new Date();
+        const now = minDate || new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime(); // 获取 0 点的时间戳
+        const initialValue = type === 'single' ? now : [now];
+
+        if (type === 'range') {
+          initialValue[1] = now + 24 * 3600 * 1000; // 第二天
+        }
+
+        // this.setData({
+        this.dataValue = initialValue;
+        // });
+        this.base.value = initialValue;
+      }
+    },
+
+    onScrollIntoView() {
+      const { dataValue: value } = this;
+
+      if (!value) return;
+
+      const date = new Date(Array.isArray(value) ? value[0] : value);
+
+      if (date) {
+        // this.setData({
+        this.scrollIntoView = `year_${date.getFullYear()}_month_${date.getMonth()}`;
+        // });
+      }
+    },
+
+    getCurrentYearAndMonth(v) {
+      const date = new Date(v);
+      return { year: date.getFullYear(), month: date.getMonth() };
+    },
+
+    updateActionButton(value) {
+      const _min = this.getCurrentYearAndMonth(this.base.minDate);
+      const _max = this.getCurrentYearAndMonth(this.base.maxDate);
+
+      const _minTimestamp = new Date(_min.year, _min.month, 1).getTime();
+      const _maxTimestamp = new Date(_max.year, _max.month, 1).getTime();
+
+      const _prevYearTimestamp = getPrevYear(value).getTime();
+      const _prevMonthTimestamp = getPrevMonth(value).getTime();
+      const _nextMonthTimestamp = getNextMonth(value).getTime();
+      const _nextYearTimestamp = getNextYear(value).getTime();
+
+      const preYearBtnDisable = _prevYearTimestamp < _minTimestamp || _prevMonthTimestamp < _minTimestamp;
+      const prevMonthBtnDisable = _prevMonthTimestamp < _minTimestamp;
+      const nextYearBtnDisable = _nextMonthTimestamp > _maxTimestamp || _nextYearTimestamp > _maxTimestamp;
+      const nextMonthBtnDisable = _nextMonthTimestamp > _maxTimestamp;
+
+      // this.setData({
+      this.actionButtons = {
+        preYearBtnDisable,
+        prevMonthBtnDisable,
+        nextYearBtnDisable,
+        nextMonthBtnDisable,
+      };
+      // });
+    },
+
+    updateCurrentMonth(newValue) {
+      if (this.switchMode === 'none') return;
+      this.calcCurrentMonth(newValue);
+    },
+
+    calcCurrentMonth(newValue) {
+      const date = newValue || this.getCurrentDate();
+      const { year, month } = this.getCurrentYearAndMonth(date);
+      const currentMonth = this.months.filter(item => item.year === year && item.month === month);
+
+      this.updateActionButton(date);
+
+      // this.setData({
+      this.currentMonth = currentMonth.length > 0 ? currentMonth : [this.months[0]];
+      // });
+    },
+
+    calcMonths() {
+      if (!this.base) return;
+
+      const months = this.base.getMonths();
+
+      // this.setData({
+      this.months = months;
+      // });
+    },
+
+    close(trigger) {
+      if (this.autoClose) {
+        this.$emit('update:visible', false);
+        // this.setData({
+        this.dataVisible = false;
+        // });
+      }
+      this.$emit('close', { trigger });
+    },
+
+    onVisibleChange() {
+      this.close('overlay');
+    },
+
+    handleClose() {
+      this.close('close-btn');
+    },
+
+    handleSelect(e) {
+      const { readonly } = this;
+      const { date, year, month } = e.currentTarget.dataset;
+
+      if (date.type === 'disabled' || readonly) return;
+
+      const rawValue = this.base.select({ cellType: date.type, year, month, date: date.day });
+
+      const value = this.toTime(rawValue);
+
+      this.calcMonths();
+      this.updateCurrentMonth();
+
+      if (this.confirmBtn == null) {
+        // 不显示确认按钮，则选择完即关闭 popup
+        if (this.type === 'single' || rawValue.length === 2) {
+          // this.setData({
+          this.dataVisible = false;
+          // });
+          this._trigger('change', { value }); // 受控
+        }
+      }
+
+      this.$emit('select', { value });
+    },
+
+    onTplButtonTap() {
+      const rawValue = this.base.getTrimValue();
+      const value = this.toTime(rawValue);
+
+      this.close('confirm-btn');
+      this._trigger('confirm', { value });
+    },
+
+    toTime(val) {
+      if (!val) return null;
+      if (Array.isArray(val)) {
+        return val.map(item => item.getTime());
+      }
+      return val.getTime();
+    },
+
+    onScroll(e) {
+      this.$emit('scroll', e.detail);
+    },
+
+    getCurrentDate() {
+      let time = Array.isArray(this.base.value) ? this.base.value[0] : this.base.value;
+
+      if (this.currentMonth.length > 0) {
+        const year = this.currentMonth[0]?.year;
+        const month = this.currentMonth[0]?.month;
+        time = new Date(year, month, 1).getTime();
+      }
+
+      return time;
+    },
+
+    handleSwitchModeChange(e) {
+      const { type, disabled } = e.currentTarget.dataset;
+      if (disabled) return;
+
+      const date = this.getCurrentDate();
+
+      const funcMap = {
+        'pre-year': () => getPrevYear(date),
+        'pre-month': () => getPrevMonth(date),
+        'next-month': () => getNextMonth(date),
+        'next-year': () => getNextYear(date),
+      };
+      const newValue = funcMap[type]();
+      if (!newValue) return;
+
+      const { year, month } = this.getCurrentYearAndMonth(newValue);
+      this.$emit('panel-change', { year, month: month + 1 });
+
+      this.calcCurrentMonth(newValue);
+    },
+
+    onWatchMinMaxDate() {
+      const { firstDayOfWeek, minDate, maxDate } = this;
+      firstDayOfWeek && (this.base.firstDayOfWeek = firstDayOfWeek);
+      minDate && (this.base.minDate = minDate);
+      maxDate && (this.base.maxDate = maxDate);
+      this.calcMonths();
+    },
+  },
+});
+</script>
+<style scoped lang="less">
+@import './calendar.less';
 </style>

@@ -1,7 +1,7 @@
 <template>
   <view>
     <t-calendar
-      :visible="visible"
+      v-model:visible="visible"
       :value="value"
       type="multiple"
       @confirm="handleConfirm"
@@ -11,18 +11,21 @@
       title="多个选择日历"
       @click="handleCalendar"
     >
-      <view
-        slot="note"
-        class="custom-class-note"
+      <template
+        #note
       >
-        {{ formatTimestamp(value) }}
-      </view>
+        <view
+          class="custom-class-note"
+        >
+          {{ formatTimestamp(value) }}
+        </view>
+      </template>
     </t-cell>
   </view>
 </template>
 <script>
-import tCell from 'tdesign-uniapp/cell/cell';
-import tCalendar from 'tdesign-uniapp/calendar/calendar';
+import tCell from 'tdesign-uniapp/cell/cell.vue';
+import tCalendar from 'tdesign-uniapp/calendar/calendar.vue';
 import { formatTimestamp } from '../computed';
 
 
@@ -41,16 +44,12 @@ export default {
   methods: {
     formatTimestamp,
     handleCalendar() {
-      this.setData({
-        visible: true,
-      });
+      this.visible = true;
     },
     handleConfirm(e) {
-      const { value } = e.detail;
-      this.setData({
-        value,
-      });
-      console.log(e.detail.value);
+      const { value } = e;
+      this.value = value;
+      console.log(e.value);
     },
   },
 };

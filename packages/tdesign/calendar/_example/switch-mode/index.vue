@@ -1,7 +1,7 @@
 <template>
   <view>
     <t-calendar
-      :visible="visible"
+      v-model:visible="visible"
       :value="value"
       switch-mode="year-month"
       :min-date="minDate"
@@ -39,18 +39,14 @@ export default {
   methods: {
     formatTimestamp,
     handleCalendar() {
-      this.setData({
-        visible: true,
-      });
+      this.visible = true;
     },
     handleConfirm(e) {
-      this.setData({
-        value: e.detail.value,
-      });
-      console.log(e.detail.value);
+      this.value = e.value;
+      console.log(e.value);
     },
     handlePanelChange(e) {
-      const { year, month } = e.detail;
+      const { year, month } = e;
       console.log('year: ', year, 'month: ', month);
     },
   },

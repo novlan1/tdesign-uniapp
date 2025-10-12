@@ -1,7 +1,7 @@
 <template>
   <view>
     <t-calendar
-      :visible="visible"
+      v-model:visible="visible"
       :value="value"
       @confirm="handleConfirm"
       @close="onClose"
@@ -35,18 +35,14 @@ export default {
   methods: {
     formatTimestamp,
     handleCalendar() {
-      this.setData({
-        visible: true,
-      });
+      this.visible = true;
     },
     handleConfirm(e) {
-      const { value } = e.detail;
+      const { value } = e;
       console.log(value);
-      this.setData({
-        value,
-      });
+      this.value = value;
     },
-    onClose({ detail }) {
+    onClose(detail) {
       console.log(detail.trigger);
     },
   },

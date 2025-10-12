@@ -1,7 +1,7 @@
 <template>
   <view>
     <t-calendar
-      :visible="visible"
+      v-model:visible="visible"
       :value="value"
       :min-date="minDate"
       :max-date="maxDate"
@@ -38,15 +38,11 @@ export default {
   methods: {
     formatTimestamp,
     handleCalendar() {
-      this.setData({
-        visible: true,
-      });
+      this.visible = true;
     },
     handleConfirm(e) {
-      const { value } = e.detail;
-      this.setData({
-        value,
-      });
+      const { value } = e;
+      this.value = value;
       console.log(value);
     },
   },

@@ -5,8 +5,7 @@
     "childArr": [
       {
         "name": "Calendar",
-        "label": "日历",
-        "hide": true
+        "label": "日历"
       },
       {
         "name": "Cascader",

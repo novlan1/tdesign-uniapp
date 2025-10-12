@@ -70,6 +70,9 @@
       "path": "pages-more/tabs/tabs"
     },
     {
+      "path": "pages-more/calendar/calendar"
+    },
+    {
       "path": "pages-more/cascader/cascader"
     },
     {
@@ -237,6 +240,10 @@
       {
         "name": "tabs",
         "pathName": "pages-more/tabs/tabs"
+      },
+      {
+        "name": "calendar",
+        "pathName": "pages-more/calendar/calendar"
       },
       {
         "name": "cascader",

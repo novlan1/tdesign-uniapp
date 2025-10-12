@@ -12,7 +12,7 @@
       <t-side-bar
         v-if="level == 0"
         :value="innerValue[level]"
-        :t-class="classPrefix + '-column ' + prefix + '-class-left-column'"
+        :t-class="classPrefix + '-column ' + tClassLeftColumn"
         @change="onRootChange"
       >
         <t-side-bar-item
@@ -22,7 +22,7 @@
           :value="sidebarItem.value"
           :disabled="sidebarItem.disabled"
           :t-id="'scroll-to-' + sidebarItem.value"
-          :t-class="'scroll-into-view '+prefix + '-class-left-item'"
+          :t-class="'scroll-into-view ' + tClassLeftItem"
         />
       </t-side-bar>
 
@@ -38,8 +38,8 @@
               ['disabled', treeItem.disabled]
             ]) +
               ' ' +
-              prefix +
-              '-class-middle-item scroll-into-view'
+              tClassMiddleItem +
+              ' scroll-into-view'
           "
           @tap="handleTreeClick"
         >
@@ -51,7 +51,7 @@
 
       <t-radio-group
         v-else-if="!multiple"
-        :t-class="classPrefix + '__radio ' + prefix + '-class-right-column'"
+        :t-class="classPrefix + '__radio ' + tClassRightColumn"
         :data-level="level"
         data-type="single"
         :value="innerValue[level]"
@@ -61,8 +61,8 @@
           v-for="(treeItem, index) in treeOptions[level]"
           :key="`radio-${innerValue[level-1]}-${level}-${index}`"
           :t-id="'scroll-to-' + treeItem.value"
-          :t-class="'scroll-into-view ' + classPrefix + '__radio-item ' + prefix + '-class-right-item'"
-          :t-class-label="prefix + '-class-right-item-label'"
+          :t-class="'scroll-into-view ' + classPrefix + '__radio-item ' + tClassRightItem"
+          :t-class-label="tClassRightItemLabel"
           icon="line"
           :value="treeItem.value"
           :disabled="treeItem.disabled"
@@ -76,7 +76,7 @@
 
       <t-checkbox-group
         v-else
-        :t-class="classPrefix + '__checkbox ' + prefix + '-class-right-column'"
+        :t-class="classPrefix + '__checkbox ' + tClassRightColumn"
         :value="innerValue[level] || []"
         :data-level="level"
         data-type="multiple"
@@ -86,8 +86,8 @@
           v-for="(treeItem, index) in treeOptions[level]"
           :key="`checkbox-${innerValue[level-1]}-${level}-${index}`"
           :t-id="'scroll-to-' + treeItem.value"
-          :t-class="'scroll-into-view ' + prefix + '-class-right-item'"
-          :t-class-label="prefix + '-class-right-item-label'"
+          :t-class="'scroll-into-view ' + tClassRightItem"
+          :t-class-label="tClassRightItemLabel"
           placement="right"
           icon="line"
           :max-label-row="1"

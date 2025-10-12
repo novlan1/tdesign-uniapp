@@ -1,3 +1,5 @@
+import { getDate } from 'tdesign-uniapp/common/runtime/wxs-polyfill';
+
 function getDateByTimestamp(val) {
   const date = getDate(val);
   const month = date.getMonth() + 1;
@@ -9,7 +11,7 @@ export function formatTimestamp(val) {
   if (!val) return '';
 
   let i = 0;
-  if (val.constructor && val.constructor == 'Array') {
+  if (Array.isArray(val)) {
     let _str = '';
     for (let len = val.length; i < len; i++) {
       _str += `${getDateByTimestamp(val[i])}、`;

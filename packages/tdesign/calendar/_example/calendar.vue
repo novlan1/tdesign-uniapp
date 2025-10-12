@@ -54,22 +54,22 @@
 <script>
 import BaseDemo from './base';
 import multiple from './multiple';
-import range from './range';
 import customText from './custom-text';
-import customRange from './custom-range';
-import localText from './local-text';
-import withoutPopup from './without-popup';
 import switchMode from './switch-mode';
+import range from './range';
+import localText from './local-text';
+import customRange from './custom-range';
+import withoutPopup from './without-popup';
 export default {
   components: {
     BaseDemo,
     multiple,
-    range,
     customText,
-    customRange,
-    localText,
-    withoutPopup,
     switchMode,
+    range,
+    localText,
+    customRange,
+    withoutPopup,
   },
   data() {
     return {};

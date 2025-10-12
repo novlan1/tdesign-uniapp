@@ -1,7 +1,7 @@
 <template>
   <view
-    :class="_.cls(classPrefix, [['popup', usePopup]]) + ' ' + classPrefix + '-switch-mode--' + switchMode + ' class ' + prefix + '-class'"
-    :style="_._style([style, customStyle])"
+    :class="utils.cls(classPrefix, [['popup', usePopup]]) + ' ' + classPrefix + '-switch-mode--' + switchMode + ' class ' + tClass"
+    :style="customStyle"
   >
     <view
       :class="classPrefix + '__title'"
@@ -12,10 +12,10 @@
         {{ title || realLocalText.title }}
       </text>
     </view>
-    <t-icon
+    <TIcon
       v-if="usePopup"
       name="close"
-      :class="classPrefix + '__close-btn'"
+      :t-class="classPrefix + '__close-btn'"
       size="48rpx"
       aria-role="button"
       aria-label="关闭"
@@ -26,58 +26,16 @@
       v-if="switchMode !== 'none'"
       name="calendar-header"
     >
-      <view
-        :id="tId"
-        :class="(class)+' '+(classPrefix)+' '+(switchMode !== 'none' ? classPrefix + '__with-action' : '')"
-      >
-        <view
-          v-if="switchMode !== 'none'"
-          :class="classPrefix + '-header' + '__action'"
-        >
-          <view
-            v-if="switchMode === 'year-month'"
-            :class="_.cls(classPrefix + '-header' + '__icon', [['disabled', preYearBtnDisable]])"
-            :data-disabled="preYearBtnDisable"
-            data-type="pre-year"
-            @tap="handleSwitchModeChange"
-          >
-            <t-icon name="chevron-left-double" />
-          </view>
-          <view
-            :class="_.cls(classPrefix + '-header' + '__icon', [['disabled', prevMonthBtnDisable]])"
-            :data-disabled="prevMonthBtnDisable"
-            data-type="pre-month"
-            @tap="handleSwitchModeChange"
-          >
-            <t-icon name="chevron-left" />
-          </view>
-        </view>
-        <view :class="classPrefix + '-header' + '__title'">
-          {{ _this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle) }}
-        </view>
-        <view
-          v-if="switchMode !== 'none'"
-          :class="classPrefix + '-header' + '__action'"
-        >
-          <view
-            :class="_.cls(classPrefix + '-header' + '__icon', [['disabled', nextMonthBtnDisable]])"
-            :data-disabled="nextMonthBtnDisable"
-            data-type="next-month"
-            @tap="handleSwitchModeChange"
-          >
-            <t-icon name="chevron-right" />
-          </view>
-          <view
-            v-if="switchMode === 'year-month'"
-            :class="_.cls(classPrefix + '-header' + '__icon', [['disabled', nextYearBtnDisable]])"
-            :data-disabled="nextYearBtnDisable"
-            data-type="next-year"
-            @tap="handleSwitchModeChange"
-          >
-            <t-icon name="chevron-right-double" />
-          </view>
-        </view>
-      </view>
+      <CalendarHeader
+        :class-prefix="classPrefix + '-header'"
+        :switch-mode="switchMode"
+        :title="getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle)"
+        :pre-year-btn-disable="actionButtons.preYearBtnDisable"
+        :prev-month-btn-disable="actionButtons.prevMonthBtnDisable"
+        :next-year-btn-disable="actionButtons.nextYearBtnDisable"
+        :next-month-btn-disable="actionButtons.nextMonthBtnDisable"
+        @handleSwitchModeChange="handleSwitchModeChange"
+      />
     </block>
     <view
       aria-hidden
@@ -108,58 +66,18 @@
           v-if="switchMode === 'none'"
           name="calendar-header"
         >
-          <view
-            :id="'year_' + item.year + '_month_' + item.month"
-            :class="(class)+' '+(classPrefix)+' '+(switchMode !== 'none' ? classPrefix + '__with-action' : '')"
-          >
-            <view
-              v-if="switchMode !== 'none'"
-              :class="classPrefix + '-header' + '-header' + '__action'"
-            >
-              <view
-                v-if="switchMode === 'year-month'"
-                :class="_.cls(classPrefix + '-header' + '-header' + '__icon', [['disabled', preYearBtnDisable]])"
-                :data-disabled="preYearBtnDisable"
-                data-type="pre-year"
-                @tap="handleSwitchModeChange"
-              >
-                <t-icon name="chevron-left-double" />
-              </view>
-              <view
-                :class="_.cls(classPrefix + '-header' + '-header' + '__icon', [['disabled', prevMonthBtnDisable]])"
-                :data-disabled="prevMonthBtnDisable"
-                data-type="pre-month"
-                @tap="handleSwitchModeChange"
-              >
-                <t-icon name="chevron-left" />
-              </view>
-            </view>
-            <view :class="classPrefix + '-header' + '-header' + '__title'">
-              {{ _this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle) }}
-            </view>
-            <view
-              v-if="switchMode !== 'none'"
-              :class="classPrefix + '-header' + '-header' + '__action'"
-            >
-              <view
-                :class="_.cls(classPrefix + '-header' + '-header' + '__icon', [['disabled', nextMonthBtnDisable]])"
-                :data-disabled="nextMonthBtnDisable"
-                data-type="next-month"
-                @tap="handleSwitchModeChange"
-              >
-                <t-icon name="chevron-right" />
-              </view>
-              <view
-                v-if="switchMode === 'year-month'"
-                :class="_.cls(classPrefix + '-header' + '-header' + '__icon', [['disabled', nextYearBtnDisable]])"
-                :data-disabled="nextYearBtnDisable"
-                data-type="next-year"
-                @tap="handleSwitchModeChange"
-              >
-                <t-icon name="chevron-right-double" />
-              </view>
-            </view>
-          </view>
+          <CalendarHeader
+            :t-class="classPrefix + '__month'"
+            :class-prefix="classPrefix + '-header'"
+            :switch-mode="switchMode"
+            :t-id="'year_' + item.year + '_month_' + item.month"
+            :title="getMonthTitle(item.year, realLocalText.months[item.month], realLocalText.monthTitle)"
+            :pre-year-btn-disable="actionButtons.preYearBtnDisable"
+            :prev-month-btn-disable="actionButtons.prevMonthBtnDisable"
+            :next-year-btn-disable="actionButtons.nextYearBtnDisable"
+            :next-month-btn-disable="actionButtons.nextMonthBtnDisable"
+            @handleSwitchModeChange="handleSwitchModeChange"
+          />
         </block>
 
         <view :class="classPrefix + '__dates'">
@@ -177,7 +95,7 @@
               :data-month="item.month"
               :data-date="dateItem"
               aria-role="button"
-              :aria-label="_this.getDateLabel(item, dateItem)"
+              :aria-label="getDateLabel(item, dateItem)"
               :aria-disabled="dateItem.type === 'disabled'"
               @tap="handleSelect"
             >
@@ -210,37 +128,37 @@
       <block v-else-if="innerConfirmBtn">
         <!-- parse <template is="button" :data="block: true,  theme: 'primary', rootClass: 't-calendar__confirm-btn', content: realLocalText.confirm, ...innerConfirmBtn"/> -->
         <t-button
-          :t-id="tId || ''"
-          :style="style || ''"
-          :block="true || false"
-          :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-          :t-class="prefix + '-class-action'"
-          :disabled="disabled || false"
+          :t-id="innerConfirmBtn.tId"
+          :custom-style="innerConfirmBtn.style"
+          :block="innerConfirmBtn.block ?? true"
+          :t-class="innerConfirmBtn.tClass ?? prefix + '-class-action'"
+          :class="prefix + '-calendar__confirm-btn'"
+          :disabled="innerConfirmBtn.disabled"
           :data-type="'action'"
-          :data-extra="index"
-          :custom-dataset="customDataset"
-          :content="realLocalText.confirm || ''"
-          :icon="icon || ''"
-          :loading="loading || false"
-          :loading-props="loadingProps || null"
-          :theme="'primary' || 'default'"
-          :ghost="ghost || false"
-          :shape="shape || 'rectangle'"
-          :size="size || 'medium'"
-          :variant="variant || 'base'"
-          :open-type="openType || ''"
-          :hover-class="hoverClass || ''"
-          :hover-stop-propagation="hoverStopPropagation || false"
-          :hover-start-time="hoverStartTime || 20"
-          :hover-stay-time="hoverStayTime || 70"
-          :lang="lang || 'en'"
-          :session-from="sessionFrom || ''"
-          :send-message-title="sendMessageTitle || ''"
-          :send-message-path="sendMessagePath || ''"
-          :send-message-img="sendMessageImg || ''"
-          :app-parameter="appParameter || ''"
-          :show-message-card="showMessageCard || false"
-          :aria-label="ariaLabel || ''"
+          :data-extra="innerConfirmBtn.dataExtra"
+          :custom-dataset="innerConfirmBtn.customDataset"
+          :content="innerConfirmBtn.content || realLocalText.confirm"
+          :icon="innerConfirmBtn.icon"
+          :loading="innerConfirmBtn.loading"
+          :loading-props="innerConfirmBtn.loadingProps"
+          :theme="innerConfirmBtn.theme ?? 'primary'"
+          :ghost="innerConfirmBtn.ghost"
+          :shape="innerConfirmBtn.shape"
+          :size="innerConfirmBtn.size"
+          :variant="innerConfirmBtn.variant"
+          :open-type="innerConfirmBtn.openType"
+          :hover-class="innerConfirmBtn.hoverClass"
+          :hover-stop-propagation="innerConfirmBtn.hoverStopPropagation"
+          :hover-start-time="innerConfirmBtn.hoverStartTime"
+          :hover-stay-time="innerConfirmBtn.hoverStayTime"
+          :lang="innerConfirmBtn.lang"
+          :session-from="innerConfirmBtn.sessionFrom"
+          :send-message-title="innerConfirmBtn.sendMessageTitle"
+          :send-message-path="innerConfirmBtn.sendMessagePath"
+          :send-message-img="innerConfirmBtn.sendMessageImg"
+          :app-parameter="innerConfirmBtn.appParameter"
+          :show-message-card="innerConfirmBtn.showMessageCard"
+          :aria-label="innerConfirmBtn.ariaLabel"
           @click="onTplButtonTap"
           @getuserinfo="onTplButtonTap"
           @contact="onTplButtonTap"
@@ -250,18 +168,76 @@
           @launchapp="onTplButtonTap"
           @agreeprivacyauthorization="onTplButtonTap"
         >
-          <slot v-if="true || false" />
+          <slot v-if="innerConfirmBtn.useDefaultSlot" />
         </t-button>
       </block>
     </view>
   </view>
 </template>
 <script>
-import _ from '../common/utils.wxs';
-import * as _this from './calendar.wxs';
+import TIcon from '../icon/icon.vue';
+import utils from '../common/utils.wxs';
+import {
+  getDateLabel,
+  getMonthTitle,
+} from './computed.js';
+import CalendarHeader from './calendar-header.vue';
+import { prefix } from '../common/config';
+import props from './template.props';
+
+
+export default {
+  name: 'TCalendarContent',
+  options: {
+    styleIsolation: 'shared',
+  },
+  components: {
+    CalendarHeader,
+    TIcon,
+  },
+  props: {
+    ...props,
+  },
+  emits: [
+    'clickButton',
+    'close',
+    'scroll',
+    'select',
+    'handleSwitchModeChange',
+  ],
+  data() {
+    return {
+      prefix,
+      utils,
+    };
+  },
+  watch: {
+  },
+  mounted() {
+
+  },
+  methods: {
+    getDateLabel,
+    getMonthTitle,
+    onTplButtonTap() {
+      this.$emit('clickButton');
+    },
+    handleSelect(...args) {
+      this.$emit('select', ...args);
+    },
+    handleClose() {
+      this.$emit('close');
+    },
+    onScroll(...args) {
+      this.$emit('scroll', ...args);
+    },
+    handleSwitchModeChange(...args) {
+      this.$emit('handleSwitchModeChange', ...args);
+    },
+  },
+};
 
 </script>
-<style scoped>
-@import './template.css';
-
+<style scoped lang="less">
+@import './calendar.less';
 </style>

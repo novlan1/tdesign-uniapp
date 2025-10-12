@@ -12,7 +12,7 @@
       带双行描述的日历
     </view>
     <t-calendar
-      :visible="visible"
+      v-model:visible="visible"
       :value="type === 'single' ? singleValue : value"
       :min-date="minDate"
       :max-date="maxDate"
@@ -80,32 +80,19 @@ export default {
   created() {},
   methods: {
     formatTimestamp,
-    handleCalendar(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { type } = e.currentTarget.dataset;
-      this.setData({
-        type,
-        visible: true,
-      });
+    handleCalendar(e, { type }) {
+      this.type = type;
+      console.log('type', type);
+      this.visible = true;
     },
-    handleConfirm(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { type } = e.currentTarget.dataset;
-      const { value } = e.detail;
+    handleConfirm(e, { type }) {
+      const { value } = e;
       if (type === 'single') {
-        this.setData({
-          singleValue: value,
-        });
+        this.singleValue = value;
       } else {
-        this.setData({
-          value,
-        });
+        this.value = value;
       }
-      console.log(e.detail.value);
+      console.log(e.value);
     },
   },
 };

@@ -164,6 +164,9 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'click',
+  ],
   data() {
     return {
       prefix,
