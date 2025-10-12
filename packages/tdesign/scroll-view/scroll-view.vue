@@ -1,16 +1,14 @@
 <template>
-  <view>
-    <scroll-view
-      :class="'class ' + tClass"
-      type="list"
-      scroll-y
-      enhanced
-      :show-scrollbar="false"
-      :scroll-into-view="scrollIntoView"
-    >
-      <slot />
-    </scroll-view>
-  </view>
+  <scroll-view
+    :class="'class ' + tClass"
+    type="list"
+    scroll-y
+    enhanced
+    :show-scrollbar="false"
+    :scroll-into-view="scrollIntoView"
+  >
+    <slot />
+  </scroll-view>
 </template>
 
 <script>

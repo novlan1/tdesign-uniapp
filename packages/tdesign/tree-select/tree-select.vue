@@ -6,7 +6,7 @@
     <t-scroll-view
       v-for="(item, level) in treeOptions"
       :key="level"
-      :class="_.cls(classPrefix + '__column', [getTreeClass(leafLevel - level, treeOptions.length)]) + ' ' + prefix + '-class'"
+      :t-class="getScrollViewTClass(level)"
       :scroll-into-view="scrollIntoView && scrollIntoView[level] ? 'scroll-to-' + scrollIntoView[level] : ''"
     >
       <t-side-bar
@@ -16,26 +16,26 @@
         @change="onRootChange"
       >
         <t-side-bar-item
-          v-for="(item, index) in treeOptions[level]"
-          :key="index"
-          :label="item.label"
-          :value="item.value"
-          :disabled="item.disabled"
-          :t-id="'scroll-to-' + item.value"
+          v-for="(sidebarItem, sidebarIndex) in treeOptions[level]"
+          :key="sidebarIndex"
+          :label="sidebarItem.label"
+          :value="sidebarItem.value"
+          :disabled="sidebarItem.disabled"
+          :t-id="'scroll-to-' + sidebarItem.value"
           :t-class="'scroll-into-view '+prefix + '-class-left-item'"
         />
       </t-side-bar>
 
       <block v-else-if="level != leafLevel">
         <view
-          v-for="(item, index) in treeOptions[level]"
+          v-for="(treeItem, index) in treeOptions[level]"
           :key="`view-${level}-${index}`"
           :data-level="level"
-          :data-value="item.value"
+          :data-value="treeItem.value"
           :class="
             _.cls(classPrefix + '__item', [
-              ['active', item.value === innerValue[level]],
-              ['disabled', item.disabled]
+              ['active', treeItem.value === innerValue[level]],
+              ['disabled', treeItem.disabled]
             ]) +
               ' ' +
               prefix +
@@ -43,8 +43,8 @@
           "
           @tap="handleTreeClick"
         >
-          <view :id="'scroll-to-' + item.value">
-            {{ item.label }}
+          <view :id="'scroll-to-' + treeItem.value">
+            {{ treeItem.label }}
           </view>
         </view>
       </block>
@@ -58,19 +58,19 @@
         @change="({value}) => handleChange({ value, level, type: 'single' })"
       >
         <t-radio
-          v-for="(item, index) in treeOptions[level]"
+          v-for="(treeItem, index) in treeOptions[level]"
           :key="`radio-${innerValue[level-1]}-${level}-${index}`"
-          :t-id="'scroll-to-' + item.value"
+          :t-id="'scroll-to-' + treeItem.value"
           :t-class="'scroll-into-view ' + classPrefix + '__radio-item ' + prefix + '-class-right-item'"
           :t-class-label="prefix + '-class-right-item-label'"
           icon="line"
-          :value="item.value"
-          :disabled="item.disabled"
+          :value="treeItem.value"
+          :disabled="treeItem.disabled"
           :max-label-row="1"
           borderless
           placement="right"
         >
-          {{ item.label }}
+          {{ treeItem.label }}
         </t-radio>
       </t-radio-group>
 
@@ -83,19 +83,19 @@
         @change="({context}) => handleChange({ context, value: context.value, level, type: 'multiple' })"
       >
         <t-checkbox
-          v-for="(item, index) in treeOptions[level]"
+          v-for="(treeItem, index) in treeOptions[level]"
           :key="`checkbox-${innerValue[level-1]}-${level}-${index}`"
-          :t-id="'scroll-to-' + item.value"
+          :t-id="'scroll-to-' + treeItem.value"
           :t-class="'scroll-into-view ' + prefix + '-class-right-item'"
           :t-class-label="prefix + '-class-right-item-label'"
           placement="right"
           icon="line"
           :max-label-row="1"
-          :value="item.value"
-          :disabled="item.disabled"
+          :value="treeItem.value"
+          :disabled="treeItem.disabled"
           borderless
         >
-          {{ item.label }}
+          {{ treeItem.label }}
         </t-checkbox>
       </t-checkbox-group>
     </t-scroll-view>
@@ -109,7 +109,7 @@ import tCheckbox from '../checkbox/checkbox';
 import tCheckboxGroup from '../checkbox-group/checkbox-group';
 import tSideBar from '../side-bar/side-bar';
 import tSideBarItem from '../side-bar-item/side-bar-item';
-import tScrollView from '../scroll-view/scroll-view';
+import tScrollView from '../scroll-view/scroll-view.vue';
 
 import { uniComponent } from '../common/src/index';
 import { isDef } from '../common/validator';
@@ -159,6 +159,9 @@ export default uniComponent({
 
       innerValue: this.value ?? this.defaultValue,
     };
+  },
+  computed: {
+
   },
   watch: {
     value: {
@@ -289,6 +292,16 @@ export default uniComponent({
 
       this.getScrollIntoView('none');
       this._trigger('change', { value: innerValue, level });
+    },
+
+    getScrollViewTClass(level) {
+      let result = '';
+      result = this.getScrollViewRealClass(level);
+      return result;
+    },
+    getScrollViewRealClass(level) {
+      const { classPrefix, leafLevel, treeOptions, tClass } = this;
+      return `${_.cls(`${classPrefix}__column`, [getTreeClass(leafLevel - level, treeOptions.length)])} ${tClass}`;
     },
   },
 });
