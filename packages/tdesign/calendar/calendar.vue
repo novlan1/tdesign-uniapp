@@ -133,6 +133,7 @@ export default uniComponent({
 
       dataVisible: this.visible,
       dataValue: this.value ?? this.defaultValue,
+      days: [],
     };
   },
   watch: {
