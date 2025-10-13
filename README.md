@@ -42,7 +42,7 @@ https://novlan1.github.io/tdesign-uniapp/
 
 <img src="./packages/site/docs/img/github-pages.png" width="260" />
 
-<img width="260" src="https://mike-1255355338.cos.ap-guangzhou.myqcloud.com/article/2025/10/own_mike_5nFZmp27arnbwnjQ.png" />
+<img src="./packages/site/docs/img/tdesign-uniapp-mp.png" width="260" />
 
 ## 注意
 
