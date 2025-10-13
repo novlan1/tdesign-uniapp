@@ -8,13 +8,19 @@ TDesign 在 uni-app 的适配方案。
 
 ### NPM 方式
 
-1. Install `tdesign-uniapp`
+1. 安装 `tdesign-uniapp`
 
 ```bash
 pnpm i tdesign-uniapp
 ```
 
-2. Import in Your Pages/Components
+2. `main.ts` 中引入样式文件
+
+```ts
+import 'tdesign-uniapp/common/style/theme/_index.less';
+```
+
+3. 文件中使用
 
 ```vue
 <template>
@@ -34,12 +40,14 @@ import TLoading from 'tdesign-uniapp/loading/loading';
 
 https://novlan1.github.io/tdesign-uniapp/
 
-<img src="./packages/site/docs/img/github-pages.png" width="300" />
+<img src="./packages/site/docs/img/github-pages.png" width="260" />
+
+<img width="260" src="https://mike-1255355338.cos.ap-guangzhou.myqcloud.com/article/2025/10/own_mike_5nFZmp27arnbwnjQ.png" />
 
 ## 注意
 
-1. 提供的是源码，Vue2 下需配置 transpileDependencies
-2. 理论上同时支持 Vue2 和 Vue3，有不符合预期的欢迎反馈
+1. 提供的是源码，Vue2 下需配置 `transpileDependencies`
+2. 理论上同时支持 Vue2 和 Vue3，有不符合预期的可以提 `issue`
 
 ## FAQ
 

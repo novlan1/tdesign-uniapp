@@ -36,7 +36,13 @@ npm i tdesign-uniapp -S --production
 
 ## 使用组件
 
-以按钮组件为例，只需要在文件中引入按钮对应的自定义组件即可
+`main.ts` 中引入样式文件
+
+```ts
+import 'tdesign-uniapp/common/style/theme/_index.less';
+```
+
+然后在文件中引入自定义组件
 
 ```js
 import TButton from 'tdesign-uniapp/button/button.vue';
