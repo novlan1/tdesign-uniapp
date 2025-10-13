@@ -97,6 +97,9 @@
       "path": "pages-more/slider/slider"
     },
     {
+      "path": "pages-more/stepper/stepper"
+    },
+    {
       "path": "pages-more/switch/switch"
     },
     {
@@ -285,6 +288,10 @@
       {
         "name": "slider",
         "pathName": "pages-more/slider/slider"
+      },
+      {
+        "name": "stepper",
+        "pathName": "pages-more/stepper/stepper"
       },
       {
         "name": "switch",

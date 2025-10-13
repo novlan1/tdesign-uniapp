@@ -51,8 +51,7 @@
       },
       {
         "name": "Stepper",
-        "label": "步进器",
-        "hide": true
+        "label": "步进器"
       },
       {
         "name": "Switch",

@@ -1,7 +1,7 @@
 <template>
   <view
     :style="_._style([style, customStyle])"
-    :class="classPrefix + ' ' + classPrefix + '--' + size + ' class ' + prefix + '-class'"
+    :class="classPrefix + ' ' + classPrefix + '--' + size + ' class ' + tClass"
   >
     <view
       :class="
@@ -17,8 +17,7 @@
           ' ' +
           (disabled || disableMinus || currentValue <= min ? classPrefix + '--' + theme + '-disabled' : '') +
           ' ' +
-          prefix +
-          '-class-minus'
+          tClassMinus
       "
       :aria-label="'减少' + step"
       aria-role="button"
@@ -30,13 +29,13 @@
     <view :class="classPrefix + '__input--' + theme + ' ' + (disabled || disableInput ? classPrefix + '--' + theme + '-disabled' : '')">
       <input
         :style="inputWidth ? 'width:' + inputWidth + 'px;' : ''"
-        :class="classPrefix + '__input ' + classPrefix + '__input--' + size + ' ' + prefix + '-class-input'"
+        :class="classPrefix + '__input ' + classPrefix + '__input--' + size + ' ' + tClassInput"
         :disabled="disabled || disableInput"
         :type="integer ? 'number' : 'digit'"
         :value="currentValue"
-        @input.stop.prevent="handleInput"
-        @focus.stop.prevent="handleFocus"
-        @blur.stop.prevent="handleBlur"
+        @input="handleInput"
+        @focus="handleFocus"
+        @blur="handleBlur"
       >
     </view>
     <view
@@ -53,8 +52,7 @@
           ' ' +
           (disabled || disablePlus || currentValue >= max ? classPrefix + '--' + theme + '-disabled' : '') +
           ' ' +
-          prefix +
-          '-class-plus'
+          tClassPlus
       "
       :aria-label="'增加' + step"
       aria-role="button"
@@ -66,170 +64,174 @@
   </view>
 </template>
 <script>
-import tCell from '../cell/cell';
+// import tCell from '../cell/cell';
 import tIcon from '../icon/icon';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import _ from '../common/utils.wxs';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-stepper`;
-let Stepper = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-input`, `${prefix}-class-minus`, `${prefix}-class-plus`];
-    // this = Object.assign({}, props);
-    this.controlledProps = [{
+
+
+export default uniComponent({
+  name,
+  controlledProps: [
+    {
       key: 'value',
       event: 'change',
-    }];
-    this.observers = {
-      value(e) {
-        this.preValue = Number(e);
-        this.setData({
-          currentValue: this.format(Number(e)),
-        });
-      },
-    };
-    this.setData({
+    },
+  ],
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-input`,
+    `${prefix}-class-minus`,
+    `${prefix}-class-plus`,
+  ],
+  components: {
+    // tCell,
+    tIcon,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       currentValue: 0,
       classPrefix: name,
       prefix,
-    });
-    this.lifetimes = {
-      attached() {
-        const {
-          value: e,
-          min: t,
-        } = this;
-        this.setData({
-          currentValue: e ? Number(e) : t,
-        });
-      },
+      _,
+      disablePlus: false,
+      disableMinus: false,
     };
-    this.methods = {
-      isDisabled(e) {
-        const {
-          min: t,
-          max: s,
-          disabled: r,
-        } = this;
-        const {
-          currentValue: i,
-        } = this;
-        return !!r || 'minus' === e && i <= t || 'plus' === e && i >= s;
-      },
-      getLen(e) {
-        const t = e.toString();
-        return -1 === t.indexOf('.') ? 0 : t.split('.')[1].length;
-      },
-      add(e, t) {
-        const s = Math.max(this.getLen(e), this.getLen(t));
-        const r = Math.pow(10, s);
-        return Math.round(e * r + t * r) / r;
-      },
-      format(e) {
-        const {
-          min: t,
-          max: s,
-          step: r,
-        } = this;
-        const i = Math.max(this.getLen(r), this.getLen(e));
-        return Math.max(Math.min(s, e, Number.MAX_SAFE_INTEGER), t, Number.MIN_SAFE_INTEGER).toFixed(i);
-      },
-      setValue(e) {
-        e = this.format(e);
-        if (this.preValue !== e) {
-          this.preValue = e;
-          this._trigger('change', {
-            value: Number(e),
-          });
-        }
-      },
-      minusValue() {
-        if (this.isDisabled('minus')) {
-          this.$emit('overlimit', {
-            detail: {
-              type: 'minus',
-            },
-          });
-          return false;
-        }
-        const {
-          currentValue: e,
-          step: t,
-        } = this;
-        this.setValue(this.add(e, -t));
-      },
-      plusValue() {
-        if (this.isDisabled('plus')) {
-          this.$emit('overlimit', {
-            detail: {
-              type: 'plus',
-            },
-          });
-          return false;
-        }
-        const {
-          currentValue: e,
-          step: t,
-        } = this;
-        this.setValue(this.add(e, t));
-      },
-      filterIllegalChar(e) {
-        const t = String(e).replace(/[^0-9.]/g, '');
-        const s = t.indexOf('.');
-        return this.integer && -1 !== s ? t.split('.')[0] : this.integer || -1 === s || s === t.lastIndexOf('.') ? t : t.split('.', 2).join('.');
-      },
-      handleFocus(e) {
-        const {
-          value: t,
-        } = e.detail;
-        this.$emit('focus', {
-          detail: {
-            value: t,
-          },
-        });
-      },
-      handleInput(e) {
-        const {
-          value: t,
-        } = e.detail;
-        if ('' === t) {
-          return;
-        }
-        const s = this.filterIllegalChar(t);
-        this.setData({
-          currentValue: s,
-        });
-        this.$emit('input', {
-          detail: {
-            value: s,
-          },
-        });
-      },
-      handleBlur(e) {
-        const {
-          value: t,
-        } = e.detail;
-        const s = this.format(t);
-        this.setValue(s);
-        this.$emit('blur', {
-          detail: {
-            value: s,
-          },
-        });
-      },
-    };
-  }
-};
-Stepper = __decorate([wxComponent()], Stepper);
-export default Stepper;
+  },
+  watch: {
+    value(v) {
+      this.preValue = Number(v);
+      this.updateCurrentValue(this.format(this.preValue));
+    },
+  },
+  mounted() {
+    const { value, defaultValue, min } = this;
+    const cur = value ?? defaultValue;
+
+    this.updateCurrentValue(cur ? Number(cur) : min);
+  },
+  methods: {
+    isDisabled(type) {
+      const { min, max, disabled } = this;
+      const { currentValue } = this;
+      if (disabled) {
+        return true;
+      }
+      if (type === 'minus' && currentValue <= min) {
+        return true;
+      }
+      if (type === 'plus' && currentValue >= max) {
+        return true;
+      }
+      return false;
+    },
+
+    getLen(num) {
+      const numStr = num.toString();
+      return numStr.indexOf('.') === -1 ? 0 : numStr.split('.')[1].length;
+    },
+
+    add(a, b) {
+      const maxLen = Math.max(this.getLen(a), this.getLen(b));
+      const base = 10 ** maxLen;
+      return Math.round(a * base + b * base) / base;
+    },
+
+    format(value) {
+      const { min, max, step } = this;
+      const len = Math.max(this.getLen(step), this.getLen(value));
+      // 超过边界取边界值
+      return Math.max(Math.min(max, value, Number.MAX_SAFE_INTEGER), min, Number.MIN_SAFE_INTEGER).toFixed(len);
+    },
+
+    setValue(value) {
+      const newValue = Number(this.format(value));
+
+      this.updateCurrentValue(newValue);
+
+      if (this.preValue === newValue) return;
+
+      this.preValue = newValue;
+      this._trigger('change', { value: newValue });
+    },
+
+    minusValue() {
+      if (this.isDisabled('minus')) {
+        this.$emit('overlimit', { type: 'minus' });
+        return false;
+      }
+      const { currentValue, step } = this;
+      this.setValue(this.add(currentValue, -step));
+    },
+
+    plusValue() {
+      if (this.isDisabled('plus')) {
+        this.$emit('overlimit', { type: 'plus' });
+        return false;
+      }
+      const { currentValue, step } = this;
+      this.setValue(this.add(currentValue, step));
+    },
+
+    filterIllegalChar(value) {
+      const v = String(value).replace(/[^0-9.]/g, '');
+      const indexOfDot = v.indexOf('.');
+      if (this.integer && indexOfDot !== -1) {
+        return v.split('.')[0];
+      }
+
+      if (!this.integer && indexOfDot !== -1 && indexOfDot !== v.lastIndexOf('.')) {
+        return v.split('.', 2).join('.');
+      }
+
+      return v;
+    },
+
+    updateCurrentValue(value) {
+      this.currentValue = value;
+    },
+
+    handleFocus(e) {
+      const { value } = e.detail;
+
+      this.$emit('focus', { value });
+    },
+
+    handleInput(e) {
+      const { value } = e.detail;
+      // 允许输入空值
+      if (value === '') {
+        return;
+      }
+
+      const formatted = this.filterIllegalChar(value);
+      const newValue = this.format(formatted);
+
+      this.updateCurrentValue(this.integer ? newValue : formatted);
+
+      if (this.integer || /\.\d+/.test(formatted)) {
+        this.setValue(formatted);
+      }
+    },
+
+    handleBlur(e) {
+      const { value: rawValue } = e.detail;
+      const value = this.format(rawValue);
+
+      this.setValue(value);
+      this.$emit('blur', { value });
+    },
+  },
+});
 </script>
-<style scoped>
-@import './stepper.css';
+<style scoped lang="less">
+@import './stepper.less';
 </style>
