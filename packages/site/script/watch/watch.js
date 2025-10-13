@@ -5,14 +5,14 @@ const { copy } = require('./core');
 
 
 function main() {
-  watch(config.sourceGlob, (e) => {
+  watch(config.sourceGlob, async (e) => {
     const { event, history, base } = e || {};
 
     if (event !== 'unlink' && history?.[0]) {
       const filePath = history[0];
       const relativePath = path.relative(base, filePath);
 
-      const { relativeTargetByCwd, relativeSourceByCwd } = copy({
+      const { relativeTargetByCwd, relativeSourceByCwd } = await copy({
         relativePath,
         filePath,
         config,

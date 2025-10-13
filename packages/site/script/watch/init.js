@@ -2,23 +2,27 @@ const path = require('path');
 const glob = require('glob');
 const { config } = require('./config');
 const { copy } = require('./core');
+const { deleteFolder } = require('t-comm');
 
 
-function main() {
+async function main() {
+  deleteFolder(config.targetDir);
+  deleteFolder(config.rawTargetDir);
+  deleteFolder(config.demoDir);
+
   const list = glob.sync(config.sourceGlob, {
     ignore: '**/node_modules/**/*',
     nodir: true,
   });
 
-  list.forEach((item) => {
+  for (const item of list) {
     const relativePath = path.relative(config.sourceDir, item);
-    console.log('[Wrote] ', relativePath);
-    copy({
+    await copy({
       relativePath,
       filePath: item,
       config,
     });
-  });
+  }
   console.log(`[Wrote] done! Length is ${list.length}!`);
 }
 
