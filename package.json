@@ -15,7 +15,7 @@
     "watch": "node packages/site/script/watch/watch.js",
     "prepare": "npm run init",
     "release:prepare": "node packages/site/script/release/prepare.js",
-    "publish": "cd packages/site/npm_dist && npm publish"
+    "publish": "cd npm_dist && npm publish"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.4.19",

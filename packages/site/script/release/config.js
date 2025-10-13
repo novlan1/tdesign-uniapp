@@ -1,7 +1,7 @@
 const path = require('path');
 
 const config = {
-  targetDir: path.resolve(__dirname, '../../npm_dist'),
+  targetDir: path.resolve(__dirname, '../../../../npm_dist'),
   sourceDir: path.resolve(__dirname, '../../../tdesign'),
   sourceGlob: path.resolve(__dirname, '../../../tdesign/**/*'),
 
