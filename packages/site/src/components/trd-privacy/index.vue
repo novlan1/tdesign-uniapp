@@ -122,9 +122,11 @@ defineExpose({
 
 const onReady = () => {
   const TIMIShowPrivacy = uni.getStorageSync('TIMIShowPrivacy');
+  // #ifdef MP-WEIXIN
   if (!TIMIShowPrivacy) {
     win.value = true;
   }
+  // #endif
 };
 onMounted(() => {
   onReady();
