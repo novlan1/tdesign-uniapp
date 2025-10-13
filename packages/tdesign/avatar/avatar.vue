@@ -164,7 +164,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped lang="less">
-@import './avatar.less';
-
+<style scoped>
+@import './avatar.css';
 </style>

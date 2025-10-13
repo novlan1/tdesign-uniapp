@@ -246,6 +246,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './picker.less';
+<style scoped >
+@import './picker.css';
 </style>

@@ -473,6 +473,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './cascader.less';
+<style scoped >
+@import './cascader.css';
 </style>

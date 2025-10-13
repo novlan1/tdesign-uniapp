@@ -130,6 +130,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './drawer.less';
+<style scoped >
+@import './drawer.css';
 </style>

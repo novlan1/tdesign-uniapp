@@ -99,6 +99,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped lang="less">
-@import './popup.less';
+<style scoped >
+@import './popup.css';
 </style>

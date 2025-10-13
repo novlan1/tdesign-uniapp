@@ -223,6 +223,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './picker-item.less';
+<style scoped >
+@import './picker-item.css';
 </style>

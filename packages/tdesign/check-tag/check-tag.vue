@@ -141,7 +141,7 @@ export default uniComponent({
 });
 
 </script>
-<style scoped lang="less">
-@import './check-tag.less';
+<style scoped >
+@import './check-tag.css';
 
 </style>

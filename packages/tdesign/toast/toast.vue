@@ -189,6 +189,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped lang="less">
-@import './toast.less';
+<style scoped >
+@import './toast.css';
 </style>

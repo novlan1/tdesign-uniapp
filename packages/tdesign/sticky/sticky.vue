@@ -136,6 +136,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped lang="less">
-@import './sticky.less';
+<style scoped >
+@import './sticky.css';
 </style>

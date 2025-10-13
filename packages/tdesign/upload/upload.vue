@@ -873,6 +873,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './upload.less';
+<style scoped >
+@import './upload.css';
 </style>

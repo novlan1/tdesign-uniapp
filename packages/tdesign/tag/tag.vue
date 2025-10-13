@@ -154,7 +154,7 @@ export default uniComponent({
 });
 
 </script>
-<style scoped lang="less">
-@import './tag.less';
+<style scoped >
+@import './tag.css';
 
 </style>

@@ -211,7 +211,7 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './tab-bar-item.less';
+<style scoped >
+@import './tab-bar-item.css';
 
 </style>

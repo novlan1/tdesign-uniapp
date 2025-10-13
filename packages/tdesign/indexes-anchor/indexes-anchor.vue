@@ -69,6 +69,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './indexes-anchor.less';
+<style scoped >
+@import './indexes-anchor.css';
 </style>

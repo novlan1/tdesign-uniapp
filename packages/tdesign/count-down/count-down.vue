@@ -158,6 +158,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './count-down.less';
+<style scoped >
+@import './count-down.css';
 </style>

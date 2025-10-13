@@ -284,6 +284,6 @@ export default uniComponent({
 
 
 </script>
-<style scoped lang="less">
-@import './search.less';
+<style scoped >
+@import './search.css';
 </style>

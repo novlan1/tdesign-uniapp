@@ -376,6 +376,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './message-item.less';
+<style scoped >
+@import './message-item.css';
 </style>

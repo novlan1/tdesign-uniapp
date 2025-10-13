@@ -60,6 +60,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './cell-group.less';
+<style scoped >
+@import './cell-group.css';
 </style>

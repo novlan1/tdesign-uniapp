@@ -198,6 +198,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped lang="less">
-@import './collapse-panel.less';
+<style scoped >
+@import './collapse-panel.css';
 </style>

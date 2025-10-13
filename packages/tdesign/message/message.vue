@@ -269,6 +269,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './message.less';
+<style scoped >
+@import './message.css';
 </style>

@@ -139,7 +139,7 @@ export default uniComponent({
 });
 
 </script>
-<style scoped lang="less">
-@import './side-bar-item.less';
+<style scoped >
+@import './side-bar-item.css';
 
 </style>

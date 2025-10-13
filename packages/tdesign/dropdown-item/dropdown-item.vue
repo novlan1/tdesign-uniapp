@@ -303,6 +303,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped lang="less">
-@import './dropdown-item.less';
+<style scoped >
+@import './dropdown-item.css';
 </style>

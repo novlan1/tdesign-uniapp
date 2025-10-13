@@ -156,6 +156,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './dropdown-menu.less';
+<style scoped >
+@import './dropdown-menu.css';
 </style>

@@ -276,6 +276,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './grid-item.less';
+<style scoped >
+@import './grid-item.css';
 </style>

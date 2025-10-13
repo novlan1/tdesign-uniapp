@@ -43,6 +43,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped lang="less">
-@import './transition.less';
+<style scoped >
+@import './transition.css';
 </style>

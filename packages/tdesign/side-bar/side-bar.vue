@@ -72,6 +72,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './side-bar.less';
+<style scoped >
+@import './side-bar.css';
 </style>

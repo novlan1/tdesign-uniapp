@@ -454,7 +454,7 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './tabs.less';
+<style scoped >
+@import './tabs.css';
 
 </style>

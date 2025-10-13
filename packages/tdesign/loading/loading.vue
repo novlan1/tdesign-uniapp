@@ -152,5 +152,5 @@ export default uniComponent({
 });
 
 </script>
-<style src="./loading.less" lang="less" scoped>
+<style src="./loading.css"  scoped>
 </style>

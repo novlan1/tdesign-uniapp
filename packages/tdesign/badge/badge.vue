@@ -111,6 +111,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './badge.less';
+<style scoped >
+@import './badge.css';
 </style>

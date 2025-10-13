@@ -161,7 +161,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './link.less';
-
+<style scoped>
+@import './link.css';
 </style>

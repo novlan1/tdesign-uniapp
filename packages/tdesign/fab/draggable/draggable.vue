@@ -79,6 +79,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './draggable.less';
+<style scoped >
+@import './draggable.css';
 </style>

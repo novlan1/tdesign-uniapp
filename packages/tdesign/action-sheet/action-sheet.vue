@@ -297,6 +297,6 @@ export default uniComponent({
 });
 </script>
 
-<style scoped lang="less">
-@import './action-sheet.less';
+<style scoped>
+@import './action-sheet.css';
 </style>

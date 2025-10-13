@@ -253,6 +253,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './progress.less';
+<style scoped >
+@import './progress.css';
 </style>

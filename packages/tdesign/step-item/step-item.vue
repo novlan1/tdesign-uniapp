@@ -166,6 +166,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped lang="less">
-@import './step-item.less';
+<style scoped >
+@import './step-item.css';
 </style>

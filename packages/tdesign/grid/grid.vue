@@ -86,6 +86,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './grid.less';
+<style scoped >
+@import './grid.css';
 </style>

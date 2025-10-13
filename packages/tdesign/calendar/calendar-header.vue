@@ -93,6 +93,6 @@ export default {
 
 </script>
 
-<style scoped lang="less">
-@import './calendar.less';
+<style scoped >
+@import './calendar.css';
 </style>

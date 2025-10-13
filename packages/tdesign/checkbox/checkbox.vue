@@ -226,6 +226,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './checkbox.less';
+<style scoped >
+@import './checkbox.css';
 </style>

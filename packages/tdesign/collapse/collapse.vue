@@ -88,6 +88,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './collapse.less';
+<style scoped >
+@import './collapse.css';
 </style>

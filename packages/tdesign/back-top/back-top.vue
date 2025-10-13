@@ -115,6 +115,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './back-top.less';
+<style scoped>
+@import './back-top.css';
 </style>

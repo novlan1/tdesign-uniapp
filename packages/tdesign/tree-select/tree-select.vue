@@ -306,6 +306,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './tree-select.less';
+<style scoped >
+@import './tree-select.css';
 </style>

@@ -82,6 +82,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './overlay.less';
+<style scoped >
+@import './overlay.css';
 </style>

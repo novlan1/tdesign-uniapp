@@ -700,6 +700,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './slider.less';
+<style scoped >
+@import './slider.css';
 </style>

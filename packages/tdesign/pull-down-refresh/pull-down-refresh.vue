@@ -338,6 +338,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './pull-down-refresh.less';
+<style scoped >
+@import './pull-down-refresh.css';
 </style>

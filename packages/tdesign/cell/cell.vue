@@ -220,6 +220,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './cell.less';
+<style scoped >
+@import './cell.css';
 </style>

@@ -113,6 +113,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './switch.less';
+<style scoped >
+@import './switch.css';
 </style>

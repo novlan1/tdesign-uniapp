@@ -166,6 +166,6 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
-@import './color-picker.less';
+<style scoped >
+@import './color-picker.css';
 </style>

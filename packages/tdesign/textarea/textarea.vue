@@ -200,6 +200,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './textarea.less';
+<style scoped >
+@import './textarea.css';
 </style>

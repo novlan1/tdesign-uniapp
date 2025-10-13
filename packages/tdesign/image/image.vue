@@ -194,6 +194,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './image.less';
+<style scoped >
+@import './image.css';
 </style>

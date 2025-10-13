@@ -180,6 +180,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './radio-group.less';
+<style scoped >
+@import './radio-group.css';
 </style>

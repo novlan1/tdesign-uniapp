@@ -345,6 +345,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './indexes.less';
+<style scoped >
+@import './indexes.css';
 </style>

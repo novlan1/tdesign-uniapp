@@ -115,6 +115,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './icon.less';
+<style scoped >
+@import './icon.css';
 </style>

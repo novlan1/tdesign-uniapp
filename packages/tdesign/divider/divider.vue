@@ -67,6 +67,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './divider.less';
+<style scoped >
+@import './divider.css';
 </style>

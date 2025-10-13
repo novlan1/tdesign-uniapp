@@ -233,6 +233,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './fab.less';
+<style scoped >
+@import './fab.css';
 </style>

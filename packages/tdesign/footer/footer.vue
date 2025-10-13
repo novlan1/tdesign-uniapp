@@ -93,6 +93,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './footer.less';
+<style scoped >
+@import './footer.css';
 </style>

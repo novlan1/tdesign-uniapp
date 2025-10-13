@@ -121,6 +121,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './result.less';
+<style scoped >
+@import './result.css';
 </style>

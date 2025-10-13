@@ -426,6 +426,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './dialog.less';
+<style scoped >
+@import './dialog.css';
 </style>

@@ -356,7 +356,7 @@ export default uniComponent({
 });
 
 </script>
-<style scoped lang="less">
-@import './input.less';
+<style scoped >
+@import './input.css';
 
 </style>

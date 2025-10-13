@@ -107,6 +107,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './steps.less';
+<style scoped >
+@import './steps.css';
 </style>

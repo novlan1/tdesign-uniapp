@@ -263,6 +263,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped lang="less">
-@import './navbar.less';
+<style scoped>
+@import './navbar.css';
 </style>
