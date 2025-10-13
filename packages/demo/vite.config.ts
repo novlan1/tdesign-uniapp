@@ -5,6 +5,7 @@ import uni from '@dcloudio/vite-plugin-uni';
 
 const baseAlias = {
   'tdesign-site': path.resolve(__dirname),
+  packages: path.resolve(__dirname, '../'),
   'tdesign-uniapp-raw': path.resolve(__dirname, './src/_tdesign-raw'),
   'tdesign-uniapp': path.resolve(__dirname, './src/_tdesign'),
 };

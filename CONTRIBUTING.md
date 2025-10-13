@@ -10,6 +10,7 @@
       - button.vue   # 组件
       - button.less  # 样式
   - site             # 文档工程
+  - demo             # 示例工程
 ```
 
 开发

@@ -40,9 +40,9 @@ import TLoading from 'tdesign-uniapp/loading/loading';
 
 https://novlan1.github.io/tdesign-uniapp/
 
-<img src="./packages/site/docs/img/github-pages.png" width="260" />
+<img src="./packages/demo/docs/img/github-pages.png" width="260" />
 
-<img src="./packages/site/docs/img/tdesign-uniapp-mp.png" width="260" />
+<img src="./packages/demo/docs/img/tdesign-uniapp-mp.png" width="260" />
 
 ## 注意
 

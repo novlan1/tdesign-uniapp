@@ -9,7 +9,7 @@
         "packages/tdesign/*"
       ],
       "tdesign-site/*": [
-        "packages/site/*"
+        "packages/demo/*"
       ]
     },
     "lib": [

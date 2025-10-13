@@ -25,7 +25,7 @@
 <script>
 import tButton from 'tdesign-uniapp/button/button';
 import tDrawer from 'tdesign-uniapp/drawer/drawer';
-import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js';
+import SkylineBehavior from 'packages/demo/src/mixins/skyline.js';
 
 export default {
   components: {

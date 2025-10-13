@@ -81,7 +81,7 @@ importers:
         specifier: ^1.0.24
         version: 1.8.27(typescript@5.1.6)
 
-  packages/site:
+  packages/demo:
     dependencies:
       '@dcloudio/uni-app':
         specifier: 3.0.0-4030620241128001

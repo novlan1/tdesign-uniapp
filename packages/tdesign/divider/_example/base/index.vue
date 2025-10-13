@@ -38,7 +38,7 @@
 
 <script>
 import tDivider from 'tdesign-uniapp/divider/divider';
-import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js';
+import SkylineBehavior from 'packages/demo/src/mixins/skyline.js';
 
 export default {
   components: {
