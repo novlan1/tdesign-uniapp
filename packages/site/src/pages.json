@@ -103,6 +103,9 @@
       "path": "pages-more/tree-select/tree-select"
     },
     {
+      "path": "pages-more/upload/upload"
+    },
+    {
       "path": "pages-more/avatar/avatar"
     },
     {
@@ -287,6 +290,10 @@
       {
         "name": "tree-select",
         "pathName": "pages-more/tree-select/tree-select"
+      },
+      {
+        "name": "upload",
+        "pathName": "pages-more/upload/upload"
       },
       {
         "name": "avatar",

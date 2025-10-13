@@ -1,7 +1,6 @@
 <template>
   <view class="wrapper">
     <t-upload
-      disabled
       :media-type="['video', 'image']"
       :files="originFiles"
       :grid-config="gridConfig"
@@ -41,18 +40,14 @@ export default {
   created() {},
   methods: {
     handleSuccess(e) {
-      const { files } = e.detail;
-      this.setData({
-        originFiles: files,
-      });
+      const { files } = e;
+      this.originFiles = files;
     },
     handleRemove(e) {
-      const { index } = e.detail;
+      const { index } = e;
       const { originFiles } = this;
       originFiles.splice(index, 1);
-      this.setData({
-        originFiles,
-      });
+      this.originFiles = originFiles;
     },
   },
 };

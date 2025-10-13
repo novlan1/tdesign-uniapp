@@ -44,22 +44,6 @@ export default uniComponent({
 
   },
 });
-
-
-// let ScrollView = class extends SuperComponent {
-//   constructor() {
-//     super(...arguments);
-//     this.externalClasses = [`${prefix}-class`];
-//     this.behaviors = canUseProxyScrollView() ? ['wx://proxy-scroll-view'] : [];
-//     // this = {
-//     //   scrollIntoView: {
-//     //     type: String,
-//     //   },
-//     // };
-//   }
-// };
-// ScrollView = __decorate([wxComponent()], ScrollView);
-// export default ScrollView;
 </script>
 <style scoped lang="less">
 @import './scroll-view.less';

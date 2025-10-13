@@ -9,12 +9,17 @@
         title="Upload 上传"
         notice="渲染框架支持情况：WebView"
       >
-        <view slot="desc">
-          用于相册读取或拉起拍照的图片上传功能。
-          <text style="color: var(--td-brand-color)">
-            （为避免涉及用户隐私，Upload 组件示例均为禁用态，使用时请自行取消禁用态，以便正常使用上传功能。）
-          </text>
-        </view>
+        <template
+          #desc
+        >
+          <view>
+            用于相册读取或拉起拍照的图片上传功能。
+            <text style="color: var(--td-brand-color)">
+              <!-- （为避免涉及用户隐私，Upload 组件示例均为禁用态，使用时请自行取消禁用态，以便正常使用上传功能。） -->
+              （以下上传仅为示意）
+            </text>
+          </view>
+        </template>
       </t-demo-header>
       <t-demo
         title="01 组件类型"
@@ -60,6 +65,7 @@
           <status />
         </view>
       </t-demo>
+      <!-- #ifdef MP-WEIXIN -->
       <t-demo
         title=""
         desc="从聊天记录上选"
@@ -71,6 +77,7 @@
           <messageFile />
         </view>
       </t-demo>
+      <!-- #endif -->
     </view>
   </view>
 </template>

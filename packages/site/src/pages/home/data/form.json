@@ -69,8 +69,7 @@
       },
       {
         "name": "Upload",
-        "label": "上传",
-        "hide": true
+        "label": "上传"
       }
     ]
   },

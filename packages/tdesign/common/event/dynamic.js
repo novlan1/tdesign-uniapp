@@ -3,8 +3,8 @@
  * 比如：<view bindtap="{{openId==undefined?'denglu':'hy_to'}}">立即</view>
  * @param {*} exp
  */
-export function parseEventDynamicCode(e, exp) {
+export function parseEventDynamicCode(e, exp, ...args) {
   if (typeof(this[exp]) === 'function') {
-    this[exp](e);
+    this[exp](e, ...args);
   }
 }
