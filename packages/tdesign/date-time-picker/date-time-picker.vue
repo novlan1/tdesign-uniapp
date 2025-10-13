@@ -52,8 +52,8 @@ import { uniComponent } from '../common/src/index';
 import props from './props';
 import dayjsLocaleMap from './locale/dayjs';
 import _ from '../common/utils.wxs';
-import dayjs from 'dayjs';
-import localeData from 'dayjs/plugin/localeData';
+import dayjs from '../npm/dayjs/esm/index.js';
+import localeData from '../npm/dayjs/esm/plugin/localeData';
 
 // const dayjs = require('dayjs');
 // const localeData = require('dayjs/plugin/localeData');
