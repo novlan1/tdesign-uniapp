@@ -4,7 +4,7 @@ name: Deploy GitHub Pages
 on:
   push:
     branches:
-      - master
+      - develop
 
 # 任务
 jobs:
