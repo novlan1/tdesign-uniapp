@@ -1,8 +1,9 @@
-const { config } = require('./config');
 const fs = require('fs');
 const path = require('path');
 
-function copy(relativePath, filePath) {
+function copy({
+  relativePath, filePath, config,
+}) {
   const isDemo = relativePath.split(path.sep)[1] === '_example';
   let targetPath = path.resolve(config.targetDir, relativePath);
   if (isDemo) {

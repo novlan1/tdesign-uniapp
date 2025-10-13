@@ -12,7 +12,11 @@ function main() {
       const filePath = history[0];
       const relativePath = path.relative(base, filePath);
 
-      const { relativeTargetByCwd, relativeSourceByCwd } = copy(relativePath, filePath);
+      const { relativeTargetByCwd, relativeSourceByCwd } = copy({
+        relativePath,
+        filePath,
+        config,
+      });
       console.log(`[Wrote] done! \nFrom ${relativeSourceByCwd} to ${relativeTargetByCwd}`);
     }
   });
