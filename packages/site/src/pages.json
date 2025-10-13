@@ -79,6 +79,9 @@
       "path": "pages-more/checkbox/checkbox"
     },
     {
+      "path": "pages-more/color-picker/color-picker"
+    },
+    {
       "path": "pages-more/date-time-picker/date-time-picker"
     },
     {
@@ -267,6 +270,10 @@
       {
         "name": "checkbox",
         "pathName": "pages-more/checkbox/checkbox"
+      },
+      {
+        "name": "color-picker",
+        "pathName": "pages-more/color-picker/color-picker"
       },
       {
         "name": "date-time-picker",

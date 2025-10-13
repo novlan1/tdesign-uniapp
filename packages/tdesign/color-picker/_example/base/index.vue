@@ -1,6 +1,6 @@
 <template>
   <view>
-    <t-color-picker />
+    <t-color-picker @change="onChange" />
   </view>
 </template>
 
@@ -14,7 +14,11 @@ export default {
     return {};
   },
   created() {},
-  methods: {},
+  methods: {
+    onChange(...args) {
+      console.log('change:', ...args);
+    },
+  },
 };
 </script>
 <style>

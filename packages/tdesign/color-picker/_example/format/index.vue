@@ -55,15 +55,13 @@ export default {
   created() {},
   methods: {
     onChange(e) {
-      console.log('change', e.detail);
+      console.log('change', e);
     },
     onPaletteBarChange(e) {
-      console.log('onPaletteBarChange', e.detail);
+      console.log('onPaletteBarChange', e);
     },
     clickFormat(e) {
-      this.setData({
-        curFormat: e.target.dataset.format,
-      });
+      this.curFormat = e.target.dataset.format;
     },
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <view
     :class="classPrefix + '__panel'"
-    :style="_._style([style, customStyle])"
+    :style="customStyle"
   >
     <view :class="classPrefix + '__body ' + classPrefix + '__body--' + type">
       <view
@@ -16,7 +16,7 @@
         <view
           :class="classPrefix + '__thumb'"
           :tab-index="0"
-          :style="_._style(saturationThumbStyle)"
+          :style="utils._style(saturationThumbStyle)"
         />
       </view>
       <view
@@ -35,7 +35,7 @@
               <view :class="classPrefix + '__rail'" />
               <view
                 :class="classPrefix + '__thumb'"
-                :style="_._style(hueSliderStyle)"
+                :style="utils._style(hueSliderStyle)"
               />
             </view>
           </view>
@@ -62,7 +62,7 @@
               />
               <view
                 :class="classPrefix + '__thumb'"
-                :style="_._style(alphaSliderStyle)"
+                :style="utils._style(alphaSliderStyle)"
               />
             </view>
           </view>
@@ -130,10 +130,42 @@
 </template>
 
 <script>
-import _ from '../common/utils.wxs';
+import utils from '../common/utils.wxs';
+import props from './template.props';
 
+
+export default {
+  props: {
+    ...props,
+  },
+  emits: [
+    'onTouchStart',
+    'onTouchMove',
+    'onTouchEnd',
+    'clickSwatch',
+  ],
+  data() {
+    return {
+      utils,
+    };
+  },
+  methods: {
+    onTouchStart(...args) {
+      this.$emit('onTouchStart', ...args);
+    },
+    onTouchMove(...args) {
+      this.$emit('onTouchMove', ...args);
+    },
+    onTouchEnd(...args) {
+      this.$emit('onTouchEnd', ...args);
+    },
+    clickSwatch(...args) {
+      this.$emit('clickSwatch', ...args);
+    },
+  },
+};
 </script>
 
-<style scoped>
-@import './template.css';
+<style scoped lang="less">
+@import './color-picker.less';
 </style>

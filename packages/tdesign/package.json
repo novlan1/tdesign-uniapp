@@ -37,7 +37,6 @@
   },
   "dependencies": {
     "tinycolor2": "^1.4.2",
-    "tslib": "^2.8.1",
     "dayjs": "^1.10.7"
   },
   "devDependencies": {

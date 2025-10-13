@@ -1,7 +1,7 @@
 <template>
   <view>
     <t-color-picker
-      :visible="visible"
+      v-model:visible="visible"
       use-popup
       enable-alpha
       type="multiple"
@@ -38,15 +38,13 @@ export default {
   created() {},
   methods: {
     onChange(e) {
-      console.log('change', e.detail);
+      console.log('change', e);
     },
     handlePopup() {
-      this.setData({
-        visible: true,
-      });
+      this.visible = true;
     },
     onPaletteBarChange(e) {
-      console.log('onPaletteBarChange', e.detail);
+      console.log('onPaletteBarChange', e);
     },
   },
 };

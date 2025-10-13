@@ -1,6 +1,6 @@
 import tinyColor from 'tinycolor2';
 import { cmykInputToColor, rgb2cmyk } from './cmyk';
-import { parseGradientString, GradientColors, GradientColorPoint, isGradientColor } from './gradient';
+import { parseGradientString, type GradientColors, type GradientColorPoint, isGradientColor } from './gradient';
 
 export interface ColorObject {
   alpha: number;

@@ -17,8 +17,7 @@
       },
       {
         "name": "ColorPicker",
-        "label": "颜色选择器",
-        "hide": true
+        "label": "颜色选择器"
       },
       {
         "name": "DateTimePicker",
