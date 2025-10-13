@@ -17,7 +17,7 @@
   </a>
 </p>
 
-[TDesign](https://github.com/Tencent/tdesign) 适配 uniapp 的组件库。
+[TDesign](https://github.com/Tencent/tdesign) 适配 [uniapp](https://uniapp.dcloud.net.cn/) 的组件库。
 
 ## 预览
 
@@ -31,7 +31,7 @@
 ### 使用 NPM
 
 ```bash
-npm i tdesign-uniapp -S --production
+npm i tdesign-uniapp -s
 ```
 
 ## 使用组件
@@ -39,7 +39,7 @@ npm i tdesign-uniapp -S --production
 `main.ts` 中引入样式文件
 
 ```ts
-import 'tdesign-uniapp/common/style/theme/_index.less';
+import 'tdesign-uniapp/common/style/theme/index.css';
 ```
 
 然后在文件中引入自定义组件
@@ -70,6 +70,8 @@ npm run dev:mp
 ## 反馈
 
 有任何问题，建议通过 [Github issues](https://github.com/novlan1/tdesign-uniapp/issues) 反馈或扫码加入用户微信群。
+
+<img width="260" src="https://mike-1255355338.cos.ap-guangzhou.myqcloud.com/article/2025/10/own_mike_tTcWreX2yj4Ztb2R.png" />
 
 ## 开源协议
 

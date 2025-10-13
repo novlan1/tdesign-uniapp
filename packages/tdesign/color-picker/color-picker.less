@@ -1,6 +1,8 @@
 @import '../common/style/base.less';
 
-@color-picker-panel-width: var(--td-color-picker-panel-width, 750rpx);
+// 防止转成 px 后，尺寸没铺满
+// width: 750rpx => 100%
+@color-picker-panel-width: var(--td-color-picker-panel-width, 100%);
 @color-picker-panel-padding: var(--td-color-picker-panel-padding, 32rpx);
 @color-picker-panel-radius: var(--td-color-picker-panel-radius, 24rpx);
 @color-picker-panel-background: var(--td-color-picker-background, #fff);
