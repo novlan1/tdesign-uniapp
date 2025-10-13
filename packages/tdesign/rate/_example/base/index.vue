@@ -25,10 +25,8 @@ export default {
   created() {},
   methods: {
     onChange(e) {
-      const { value } = e.detail;
-      this.setData({
-        value,
-      });
+      const { value } = e;
+      this.value = value;
     },
   },
 };

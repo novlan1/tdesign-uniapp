@@ -91,6 +91,9 @@
       "path": "pages-more/radio/radio"
     },
     {
+      "path": "pages-more/rate/rate"
+    },
+    {
       "path": "pages-more/search/search"
     },
     {
@@ -280,6 +283,10 @@
       {
         "name": "radio",
         "pathName": "pages-more/radio/radio"
+      },
+      {
+        "name": "rate",
+        "pathName": "pages-more/rate/rate"
       },
       {
         "name": "search",

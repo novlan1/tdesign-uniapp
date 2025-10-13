@@ -4,13 +4,13 @@
     :style="_._style([style, customStyle])"
   >
     <view
-      :class="classPrefix + '__wrapper ' + prefix + '-class'"
+      :class="classPrefix + '__wrapper ' + tClass"
       :style="'font-size:' + utils.regSize(size)"
       aria-role="slider"
       :aria-valuemax="count"
       :aria-valuemin="0"
-      :aria-valuenow="value"
-      :aria-valuetext="utils.getText(texts, value, defaultTexts)"
+      :aria-valuenow="dataValue"
+      :aria-valuetext="utils.getText(texts, dataValue, defaultTexts)"
       @touchstart="parseEventDynamicCode($event, !disabled ? 'onTouchStart' : '')"
       @touchmove="parseEventDynamicCode($event, !disabled ? 'onTouchMove' : '')"
       @tap="onTap"
@@ -20,37 +20,36 @@
       <t-icon
         v-for="(item, index) in count"
         :key="index"
-        :class="classPrefix + '__icon ' + utils.getIconClass(classPrefix + '__icon', defaultValue, value, index, allowHalf, disabled, scaleIndex)"
-        :style="'margin-right: ' + (count - index > 1 ? _.addUnit(gap) : 0) + '; ' + utils.getColor(color)"
-        :t-class="prefix + '-class-icon'"
-        :name="utils.getIconName(defaultValue, value, index, icon)"
+        :t-class="classPrefix + '__icon ' + utils.getIconClass(classPrefix + '__icon', defaultValue, dataValue, index, allowHalf, disabled, scaleIndex) + ' ' + tClassIcon"
+        :custom-style="'margin-right: ' + (count - index > 1 ? _.addUnit(gap) : 0) + '; ' + utils.getColor(color)"
+        :name="utils.getIconName(defaultValue, dataValue, index, icon)"
         :size="size"
         :prefix="iconPrefix"
       />
     </view>
     <text
       v-if="showText"
-      :class="_.cls(classPrefix + '__text', [['active', value > 0]]) + ' ' + prefix + '-class-text'"
+      :class="_.cls(classPrefix + '__text', [['active', dataValue > 0]]) + ' ' + tClassText"
       :aria-hidden="true"
     >
-      {{ utils.getText(texts, value, defaultTexts) }}
+      {{ utils.getText(texts, dataValue, defaultTexts) }}
     </text>
     <text
       v-if="isVisibleToScreenReader"
       :class="
         _.cls(classPrefix + '__text', [
-          ['active', value > 0],
+          ['active', dataValue > 0],
           ['sr-only', isVisibleToScreenReader]
         ]) +
           ' ' +
-          prefix +
-          '-class-text'
+          tClassText
       "
       aria-role="alert"
       aria-live="assertive"
     >
-      {{ value + '星' }} {{ utils.getText(texts, value, defaultTexts) }}
+      {{ dataValue + '星' }} {{ utils.getText(texts, dataValue, defaultTexts) }}
     </text>
+    <!-- TODO -->
     <view
       v-if="tipsVisible && placement"
       :class="_.cls(classPrefix + '__tips', [placement])"
@@ -60,55 +59,55 @@
       <block v-if="actionType == 'tap'">
         <view
           v-if="allowHalf"
-          :class="_.cls(classPrefix + '__tips-item', [['active', utils.ceil(value) - 0.5 == value]])"
-          :data-value="utils.ceil(value) - 0.5"
+          :class="_.cls(classPrefix + '__tips-item', [['active', utils.ceil(dataValue) - 0.5 == dataValue]])"
+          :data-value="utils.ceil(dataValue) - 0.5"
           @tap="onSelect"
         >
           <t-icon
-            :class="classPrefix + '__icon ' + classPrefix + '__icon--selected-half'"
-            :name="utils.getIconName(defaultValue, value, index, icon)"
+            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--selected-half'"
+            :name="utils.getIconName(defaultValue, dataValue, index, icon)"
             :size="size"
-            :style="utils.getColor(color)"
+            :custom-style="utils.getColor(color)"
           />
           <view :class="classPrefix + '__tips-text'">
-            {{ utils.ceil(value) - 0.5 }}
+            {{ utils.ceil(dataValue) - 0.5 }}
           </view>
         </view>
         <view
-          :class="_.cls(classPrefix + '__tips-item', [['active', utils.ceil(value) == value]])"
-          :data-value="utils.ceil(value)"
+          :class="_.cls(classPrefix + '__tips-item', [['active', utils.ceil(dataValue) == dataValue]])"
+          :data-value="utils.ceil(dataValue)"
           @tap="onSelect"
         >
           <t-icon
-            :class="_.cls(classPrefix + '__icon', ['selected'])"
+            :t-class="_.cls(classPrefix + '__icon', ['selected'])"
             :name="utils.getIconName(defaultValue, 0, 0, icon)"
             :size="size"
-            :style="utils.getColor(color)"
+            :custom-style="utils.getColor(color)"
           />
           <view :class="classPrefix + '__tips-text'">
-            {{ utils.ceil(value) }}
+            {{ utils.ceil(dataValue) }}
           </view>
         </view>
       </block>
       <view
         v-else
-        :class="_.cls(classPrefix + '__tips-item', [['active', utils.ceil(value) == value && actionType == 'tap']])"
-        :data-value="utils.ceil(value)"
+        :class="_.cls(classPrefix + '__tips-item', [['active', utils.ceil(dataValue) == dataValue && actionType == 'tap']])"
+        :data-value="utils.ceil(dataValue)"
         @tap="onSelect"
       >
         <t-icon
-          :class="
+          :t-class="
             _.cls(classPrefix + '__icon', [
-              ['selected', utils.ceil(value) == value],
-              ['selected-half', utils.ceil(value) != value]
+              ['selected', utils.ceil(dataValue) == dataValue],
+              ['selected-half', utils.ceil(dataValue) != dataValue]
             ])
           "
           :name="utils.getIconName(defaultValue, 0, 0, icon)"
           :size="size"
-          :style="utils.getColor(color)"
+          :custom-style="utils.getColor(color)"
         />
         <view :class="classPrefix + '__tips-text'">
-          {{ value }}
+          {{ dataValue }}
         </view>
       </view>
     </view>
@@ -116,29 +115,39 @@
 </template>
 <script>
 import tIcon from '../icon/icon';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import { unitConvert, getRect } from '../common/utils';
 import _ from '../common/utils.wxs';
-import * as utils from './rate.wxs';
+import utils from './computed.js';
 import { parseEventDynamicCode } from '../common/event/dynamic';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-rate`;
-let Rate = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-icon`, `${prefix}-class-text`];
-    this.properties = props;
-    this.controlledProps = [{
+
+
+export default uniComponent({
+  name,
+  controlledProps: [
+    {
       key: 'value',
       event: 'change',
-    }];
-    this.setData({
+    },
+  ],
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-icon`,
+    `${prefix}-class-text`,
+  ],
+  components: {
+    tIcon,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       defaultTexts: ['极差', '失望', '一般', '满意', '惊喜'],
@@ -147,106 +156,113 @@ let Rate = class extends SuperComponent {
       actionType: '',
       scaleIndex: -1,
       isVisibleToScreenReader: false,
-    });
-    this.methods = {
-      onTouch(e, t) {
-        const {
-          count: i,
-          allowHalf: s,
-          gap: o,
-          value: a,
-          size: n,
-        } = this;
-        const [r] = e.changedTouches;
-        const c = unitConvert(o);
-        getRect(this, `.${name}__wrapper`).then((e) => {
-          const {
-            width: p,
-            left: h,
-          } = e;
-          const l = (p - (i - 1) * c) / i;
-          const d = (r.pageX - h + c) / (l + c);
-          const u = d % 1;
-          const m = d - u;
-          let T = u <= 0.5 && s ? m + 0.5 : m + 1;
-          T > i ? T = i : T < 0 && (T = 0);
-          const x = Math.ceil(T - 1) * (unitConvert(o) + unitConvert(n)) + 0.5 * unitConvert(n);
-          this.setData({
-            tipsVisible: true,
-            actionType: t,
-            scaleIndex: Math.ceil(T),
-            tipsLeft: Math.max(x, 0),
-          });
-          if (T !== a) {
-            this._trigger('change', {
-              value: T,
-            });
-          }
-          if (this.touchEnd) {
-            this.hideTips();
-          }
-        });
-      },
-      onTap(e) {
-        const {
-          disabled: t,
-        } = this;
-        t || this.onTouch(e, 'tap');
-      },
-      onTouchStart() {
-        this.touchEnd = false;
-      },
-      onTouchMove(e) {
-        this.onTouch(e, 'move');
-        this.showAlertText();
-      },
-      onTouchEnd() {
-        this.touchEnd = true;
-        this.hideTips();
-      },
-      hideTips() {
-        if ('move' === this.actionType) {
-          this.setData({
-            tipsVisible: false,
-            scaleIndex: -1,
-          });
-        }
-      },
-      onSelect(e) {
-        const {
-          value: t,
-        } = e.currentTarget.dataset;
-        const {
-          actionType: i,
-        } = this;
-        if ('move' !== i) {
-          this._trigger('change', {
-            value: t,
-          });
-          setTimeout(() => this.setData({
-            tipsVisible: false,
-            scaleIndex: -1,
-          }), 300);
-        }
-      },
-      showAlertText() {
-        if (true !== this.isVisibleToScreenReader) {
-          this.setData({
-            isVisibleToScreenReader: true,
-          });
-          setTimeout(() => {
-            this.setData({
-              isVisibleToScreenReader: false,
-            });
-          }, 2000);
-        }
-      },
+
+      _,
+      utils,
+      dataValue: this.value ?? this.defaultValue,
     };
-  }
-};
-Rate = __decorate([wxComponent()], Rate);
-export default Rate;
+  },
+  watch: {
+    value: {
+      handler(v) {
+        this.dataValue = v;
+      },
+      immediate: true,
+    },
+  },
+  mounted() {
+
+  },
+  methods: {
+    parseEventDynamicCode,
+    onTouch(e, eventType) {
+      const { count, allowHalf, gap, dataValue: currentValue, size } = this;
+      const [touch] = e.changedTouches;
+      const margin = unitConvert(gap);
+      getRect(this, `.${name}__wrapper`).then((rect) => {
+        const { width, left } = rect;
+        const starWidth = (width - (count - 1) * margin) / count;
+        const offsetX = touch.pageX - left;
+        const num = (offsetX + margin) / (starWidth + margin);
+        const remainder = num % 1;
+        const integral = num - remainder;
+        let value = remainder <= 0.5 && allowHalf ? integral + 0.5 : integral + 1;
+
+        if (value > count) {
+          value = count;
+        } else if (value < 0) {
+          value = 0;
+        }
+
+        const tipsLeft = Math.ceil(value - 1) * (unitConvert(gap) + unitConvert(size)) + unitConvert(size) * 0.5;
+        this.tipsVisible = true;
+        this.actionType = eventType;
+        this.scaleIndex = Math.ceil(value);
+        this.tipsLeft = Math.max(tipsLeft, 0);
+
+        if (value !== currentValue) {
+          this.innerTrigger(value);
+        }
+
+        if (this.touchEnd) {
+          this.hideTips();
+        }
+      });
+    },
+    innerTrigger(value) {
+      this._trigger('change', { value });
+      if (this._selfControlled) {
+        this.currentValue = value;
+      }
+    },
+    onTap(e) {
+      const { disabled } = this;
+      if (disabled) return;
+      this.onTouch(e, 'tap');
+    },
+    onTouchStart() {
+      this.touchEnd = false;
+    },
+    onTouchMove(e) {
+      this.onTouch(e, 'move');
+      this.showAlertText();
+    },
+    onTouchEnd() {
+      this.touchEnd = true;
+      this.hideTips();
+    },
+    hideTips() {
+      if (this.actionType === 'move') {
+        this.tipsVisible = false;
+        this.scaleIndex = -1;
+      }
+    },
+    onSelect(e) {
+      const { value } = e.currentTarget.dataset;
+      const { actionType } = this;
+
+      if (actionType === 'move') return;
+
+      this.innerTrigger(value);
+
+      setTimeout(() => {
+        this.tipsVisible = false;
+        this.scaleIndex = -1;
+      }, 300);
+    },
+    // 旁白模式: 变更数值时显示告警文案
+    showAlertText() {
+      if (this.isVisibleToScreenReader === true) return;
+      this.isVisibleToScreenReader = true;
+
+      setTimeout(() => {
+        this.isVisibleToScreenReader = false;
+      }, 2e3);
+    },
+  },
+});
+
 </script>
-<style scoped>
-@import './rate.css';
+<style scoped lang="less">
+@import './rate.less';
 </style>

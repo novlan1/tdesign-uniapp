@@ -38,8 +38,7 @@
       },
       {
         "name": "Rate",
-        "label": "评分",
-        "hide": true
+        "label": "评分"
       },
       {
         "name": "Search",

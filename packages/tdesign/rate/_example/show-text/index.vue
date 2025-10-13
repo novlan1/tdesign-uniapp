@@ -54,15 +54,9 @@ export default {
   },
   created() {},
   methods: {
-    onChange(e, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { index } = e.currentTarget.dataset;
-      const { value } = e.detail;
-      this.setData({
-        [`value[${index}]`]: value,
-      });
+    onChange(e, { index }) {
+      const { value } = e;
+      this.value[index] = value;
     },
   },
 };
