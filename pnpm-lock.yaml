@@ -194,13 +194,6 @@ importers:
         version: 1.8.27(typescript@5.1.6)
 
   packages/tdesign:
-    dependencies:
-      dayjs:
-        specifier: ^1.10.7
-        version: 1.11.18
-      tinycolor2:
-        specifier: ^1.4.2
-        version: 1.6.0
     devDependencies:
       '@dcloudio/types':
         specifier: ^3.4.8

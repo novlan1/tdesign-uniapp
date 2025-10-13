@@ -35,10 +35,7 @@
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
     "type-check": "vue-tsc --noEmit"
   },
-  "dependencies": {
-    "tinycolor2": "^1.4.2",
-    "dayjs": "^1.10.7"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@dcloudio/uni-app": "3.0.0-4030620241128001",
     "@dcloudio/uni-app-harmony": "3.0.0-4030620241128001",
