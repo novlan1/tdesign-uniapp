@@ -30,22 +30,6 @@ import TLoading from 'tdesign-uniapp/loading/loading';
 
 敬请期待
 
-## 原理
-
-编译时处理 + 运行时 polyfill。
-
-编译时处理：
-
-1. wxml/js/wxss/json 等文件合成 vue 文件
-2. 处理小程序与 uni-app 语法差异部分
-
-运行时处理：
-
-1. setData
-2. 生命周期
-3. data、props 等等
-4. polyfill undefined `getRegExp` method
-
 ## 预览
 
 https://novlan1.github.io/tdesign-uniapp/
