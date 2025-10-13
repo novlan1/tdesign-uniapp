@@ -22,11 +22,11 @@
       </t-demo>
 
       <t-demo desc="带数值滑动选择器">
-        <label />
+        <labelDemo />
       </t-demo>
 
       <t-demo desc="起始非零滑动选择器">
-        <max />
+        <maxDemo />
       </t-demo>
 
       <t-demo desc="带刻度滑动选择器">
@@ -57,20 +57,20 @@
 <script lang="ts">
 
 import BaseDemo from './base';
-import label from './label';
-import max from './max';
-import step from './step';
 import range from './range';
+import labelDemo from './label';
+import maxDemo from './max';
+import step from './step';
 import disabled from './disabled';
 import capsule from './capsule';
 import vertical from './vertical';
 export default {
   components: {
     BaseDemo,
-    label,
-    max,
-    step,
     range,
+    labelDemo,
+    maxDemo,
+    step,
     disabled,
     capsule,
     vertical,

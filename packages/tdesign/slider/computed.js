@@ -1,6 +1,6 @@
 import { getRegExp } from '../common/runtime/wxs-polyfill';
 
-var REGEXP = getRegExp('[$][{value}]{7}');
+const REGEXP = getRegExp('[$][{value}]{7}');
 
 export function getValue(label, value) {
   if (label && label === 'true') return value;

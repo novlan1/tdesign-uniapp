@@ -20,7 +20,7 @@ export default {
   created() {},
   methods: {
     handleChange(e) {
-      console.log(e.detail.value);
+      console.log(e.value);
     },
   },
 };

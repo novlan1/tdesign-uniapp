@@ -47,8 +47,7 @@
       },
       {
         "name": "Slider",
-        "label": "滑动选择器",
-        "hide": true
+        "label": "滑动选择器"
       },
       {
         "name": "Stepper",

@@ -37,9 +37,7 @@ export default {
   created() {},
   methods: {
     handleChange(e) {
-      this.setData({
-        value: e.detail.value,
-      });
+      this.value = e.value;
     },
   },
 };

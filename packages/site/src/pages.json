@@ -94,6 +94,9 @@
       "path": "pages-more/search/search"
     },
     {
+      "path": "pages-more/slider/slider"
+    },
+    {
       "path": "pages-more/switch/switch"
     },
     {
@@ -278,6 +281,10 @@
       {
         "name": "search",
         "pathName": "pages-more/search/search"
+      },
+      {
+        "name": "slider",
+        "pathName": "pages-more/slider/slider"
       },
       {
         "name": "switch",

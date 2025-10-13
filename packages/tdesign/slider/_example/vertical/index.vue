@@ -74,14 +74,10 @@ export default {
   created() {},
   methods: {
     handleSingleChange(e) {
-      this.setData({
-        singlevalue: e.detail.value,
-      });
+      this.singlevalue = e.value;
     },
     handleCapsuleChange(e) {
-      this.setData({
-        capsuleValue: e.detail.value,
-      });
+      this.capsuleValue = e.value;
     },
   },
 };
