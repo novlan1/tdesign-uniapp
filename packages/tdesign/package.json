@@ -2,6 +2,14 @@
   "name": "tdesign-uniapp",
   "version": "0.0.1",
   "author": "novlan1",
+  "title": "tdesign-uniapp",
+  "description": "TDesign Component for uniapp",
+  "keywords": [
+    "tdesign",
+    "miniprogram",
+    "uniapp",
+    "vue"
+  ],
   "scripts": {
     "dev:custom": "uni -p",
     "dev:h5": "uni",
@@ -81,5 +89,6 @@
     "typescript": "5.1",
     "vite": "5.2.8",
     "vue-tsc": "^1.0.24"
-  }
+  },
+  "license": "MIT"
 }
