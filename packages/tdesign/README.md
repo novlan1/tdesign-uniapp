@@ -69,7 +69,7 @@ npm run dev:mp
 
 ## 反馈
 
-有任何问题，建议通过 [Github issues](https://github.com/novlan1/tdesign-uniapp/issues) 反馈或扫码加入用户微信群。
+有任何问题，建议通过 [Github issues](https://github.com/novlan1/tdesign-uniapp/issues) 反馈或扫码加入用户QQ群。
 
 <img width="260" src="https://mike-1255355338.cos.ap-guangzhou.myqcloud.com/article/2025/10/own_mike_tTcWreX2yj4Ztb2R.png" />
 
