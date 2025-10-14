@@ -27,11 +27,11 @@ function getDocsRoutes(docs: any[], type: string): RouteRecordRaw[] {
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/uniapp/overview',
+    redirect: '/tdesign-uniapp/overview',
   },
   {
     path: '/:catchAll(.*)',
-    redirect: '/uniapp/overview',
+    redirect: '/tdesign-uniapp/overview',
   },
   ...getDocsRoutes(docs, 'document'),
   ...getDocsRoutes(docs, 'component'),
