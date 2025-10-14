@@ -189,7 +189,7 @@ function customRender({ source, file, md }) {
   }
 
   // 移动端路由地址
-  const prefix = 'development' === process.env.NODE_ENV ? `http://localhost:11111/tdesign-uniapp` : `https://novlan1.github.io/tdesign-uniapp`;
+  const prefix = 'development' === process.env.NODE_ENV ? `http://localhost:11111/tdesign-uniapp/mobile` : `https://novlan1.github.io/tdesign-uniapp/mobile`;
   mdSegment.mobileUrl = `${prefix}#/pages-more/${componentName}/${componentName}`;
 
   // 设计指南内容 不展示 design Tab 则不解析
