@@ -43,6 +43,15 @@ import TLoading from 'tdesign-uniapp/loading/loading';
 
 敬请期待
 
+## 支持平台
+
+目前支持
+
+1. H5
+2. 微信小程序
+
+其他平台陆续支持中，欢迎共建。
+
 ## 开发
 
 ```bash
