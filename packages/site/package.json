@@ -16,6 +16,7 @@
     "dev": "cross-env NODE_ENV=development vite",
     "dev:debug": "cross-env NODE_ENV=development vite --debug",
     "site": "vite build",
+    "build": "npm run site",
     "site:preview": "vite build --mode preview",
     "postsite:preview": "cp _site/index.html _site/404.html"
   },

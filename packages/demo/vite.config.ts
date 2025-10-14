@@ -19,7 +19,7 @@ export default defineConfig({
       ...baseAlias,
     },
   },
-  base: process.env.VITE_DEMO_BASE || 'tdesign-uniapp',
+  base: process.env.VITE_DEMO_BASE || '/tdesign-uniapp/mobile',
   server: {
     port: 11111,
     hmr: true,

@@ -3,14 +3,14 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
-import changelog2Json from './web/plugins/changelog-to-json';
+// import changelog2Json from './web/plugins/changelog-to-json';
 import tdocPlugin from './web/plugins/plugin-tdoc';
 
 const resolvePath = r => path.resolve(__dirname, r);
 
 const publicPathMap = {
   preview: '/',
-  production: '/uniapp/',
+  production: '/tdesign-uniapp/',
 };
 
 const isCustomElement = tag => tag.startsWith('td-');
@@ -43,7 +43,7 @@ export default ({ mode }) => defineConfig({
     https: false as any,
   },
   build: {
-    outDir: '../_site',
+    outDir: './dist',
     rollupOptions: {
       input: {
         sites: 'index.html',
@@ -62,7 +62,7 @@ export default ({ mode }) => defineConfig({
       isCustomElement,
     }),
     tdocPlugin(),
-    changelog2Json(),
+    // changelog2Json(),
     disableTreeShakingPlugin(['style/', 'toast/']),
   ],
 });

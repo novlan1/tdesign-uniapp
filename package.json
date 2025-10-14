@@ -3,11 +3,11 @@
   "version": "0.1.1",
   "private": "true",
   "scripts": {
-    "dev": "concurrently \"npm run watch\" \"pnpm --filter=\"./packages/demo\" dev:h5\"",
+    "dev": "concurrently \"npm run watch\" \"pnpm --filter=\"./packages/demo\" dev:h5\" \"pnpm --filter=\"./packages/site\" dev\"",
     "dev:mp-weixin": "concurrently \"npm run watch\" \"pnpm --filter=\"./packages/demo\" dev:mp-weixin\"",
     "dev:mp": "npm run dev:mp-weixin",
     "dev:mp:pure": "pnpm --filter=\"./packages/demo\" dev:mp-weixin",
-    "build": "pnpm --filter=\"./packages/demo\" build:h5",
+    "build": "pnpm --filter=\"./packages/site\" build && pnpm --filter=\"./packages/demo\" build:h5",
     "build:mp": "pnpm --filter=\"./packages/demo\" build:mp-weixin",
     "build:mp-weixin": "npm run build:mp",
     "type-check": "vue-tsc --noEmit",
