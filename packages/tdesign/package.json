@@ -10,6 +10,14 @@
     "uniapp",
     "vue"
   ],
+  "homepage": "https://novlan1.github.io/tdesign-uniapp/",
+  "bugs": {
+    "url": "https://github.com/novlan1/tdesign-uniapp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/novlan1/tdesign-uniapp.git"
+  },
   "scripts": {
     "dev:custom": "uni -p",
     "dev:h5": "uni",

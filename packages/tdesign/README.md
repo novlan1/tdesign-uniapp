@@ -19,6 +19,10 @@
 
 [TDesign](https://github.com/Tencent/tdesign) 适配 [uniapp](https://uniapp.dcloud.net.cn/) 的组件库。
 
+## 文档
+
+[https://novlan1.github.io/tdesign-uniapp/](https://novlan1.github.io/tdesign-uniapp/)
+
 ## 预览
 
 小程序组件示例小程序，请使用微信扫码预览 ↓
@@ -31,7 +35,7 @@
 ### 使用 NPM
 
 ```bash
-npm i tdesign-uniapp -s
+npm i tdesign-uniapp
 ```
 
 ## 使用组件
