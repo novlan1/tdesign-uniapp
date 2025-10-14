@@ -59,5 +59,14 @@ export default {
 };
 </script>
 <style scoped>
-@import './index.css';
+.button-example {
+    margin: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-example:after {
+    content: '';
+    flex: auto;
+}
 </style>

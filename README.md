@@ -17,7 +17,7 @@ pnpm i tdesign-uniapp
 2. `main.ts` 中引入样式文件
 
 ```ts
-import 'tdesign-uniapp/common/style/theme/_index.less';
+import 'tdesign-uniapp/common/style/theme/index.css';
 ```
 
 3. 文件中使用
