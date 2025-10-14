@@ -10,7 +10,7 @@ isComponent: true
 
 ### 引入组件
 
-在 `app.json` 或 `page.json` 中引入组件：
+可在 `main.ts` 或在需要使用的页面或组件中引入。
 
 ```json
 "usingComponents": {

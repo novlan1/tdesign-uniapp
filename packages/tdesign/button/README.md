@@ -8,22 +8,11 @@ isComponent: true
 
 ## 引入
 
-全局引入，在 miniprogram 根目录下的`app.json`中配置，局部引入，在需要引入的页面或组件的`index.json`中配置。
+可在 `main.ts` 或在需要使用的页面或组件中引入。
 
-```json
-"usingComponents": {
-  "t-button": "tdesign-miniprogram/button/button"
-}
+```js
+import TButton from 'tdesign-uniapp/button/button.vue';
 ```
-
-## 代码演示
-
-<a href="https://developers.weixin.qq.com/s/F1cSo7mm75SS" title="在开发者工具中预览效果" target="_blank" rel="noopener noreferrer"> 在开发者工具中预览效果 </a>
-
-<blockquote style="background-color: #d9e1ff; font-size: 15px; line-height: 26px;margin: 16px 0 0;padding: 16px; border-radius: 6px; color: #0052d9" >
-<p>Tips: 请确保开发者工具为打开状态。导入开发者工具后，依次执行：npm i > 构建npm包 > 勾选 "将JS编译成ES5"</p>
-</blockquote>
-
 
 ### 01 组件类型
 

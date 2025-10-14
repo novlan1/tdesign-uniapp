@@ -8,12 +8,10 @@ isComponent: true
 
 ## 引入
 
-全局引入，在 miniprogram 根目录下的`app.json`中配置，局部引入，在需要引入的页面或组件的`index.json`中配置。
+可在 `main.ts` 或在需要使用的页面或组件中引入。
 
-```json
-"usingComponents": {
-  "t-slider": "tdesign-miniprogram/slider/slider"
-}
+```js
+import TSlider from 'tdesign-uniapp/slider/slider.vue';
 ```
 
 ## 代码演示

@@ -9,12 +9,10 @@ isComponent: true
 
 ## 引入
 
-全局引入，在 miniprogram 根目录下的`app.json`中配置，局部引入，在需要引入的页面或组件的`index.json`中配置。
+可在 `main.ts` 或在需要使用的页面或组件中引入。
 
-```json
-"usingComponents": {
-  "t-icon": "tdesign-miniprogram/icon/icon"
-}
+```js
+import TIcon from 'tdesign-uniapp/icon/icon.vue';
 ```
 
 ## 常见问题
@@ -28,14 +26,6 @@ isComponent: true
     告警属于开发者工具的 bug，可以忽略，具体可以看 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/font/wx.loadFontFace.html" target="_blank">官网文档</a>
   </p>
 </details>
-
-## 代码演示
-
-<a href="https://developers.weixin.qq.com/s/wMINibmJ7WSQ" title="在开发者工具中预览效果" target="_blank" rel="noopener noreferrer"> 在开发者工具中预览效果 </a>
-
-<blockquote style="background-color: #d9e1ff; font-size: 15px; line-height: 26px;margin: 16px 0 0;padding: 16px; border-radius: 6px; color: #0052d9" >
-<p>Tips: 请确保开发者工具为打开状态。导入开发者工具后，依次执行：npm i > 构建npm包 > 勾选 "将JS编译成ES5"</p>
-</blockquote>
 
 
 ### 基础组件图标
@@ -84,16 +74,6 @@ isComponent: true
 ### 图片链接
 
 {{ iconImage }}
-
-### 全部图标
-
-<div style="background: #ecf2fe; display: flex; align-items: center; line-height: 20px; padding: 14px 24px; border-radius: 3px; color: #555a65;margin:16px 0">
-  <svg fill="none" viewBox="0 0 16 16" width="16px" height="16px" style="margin-right: 5px">
-    <path fill="#0052d9" d="M8 15A7 7 0 108 1a7 7 0 000 14zM7.4 4h1.2v1.2H7.4V4zm.1 2.5h1V12h-1V6.5z" fillOpacity="0.9"></path>
-  </svg>
- <p style="flex: 1">大部分图标在 1.8.0 版本中新增，如果发现引入组件库后，部分图标无法使用，请检查安装的组件库`tdesign-miniprogram`的版本。支持中文英文搜索，如果觉得可以再增加其他关键词提示，欢迎到 <a href="https://github.com/Tencent/tdesign-icons/blob/develop/packages/view/src/manifest.js" target="_blank" > 图标仓库</a> 提交PR，帮我们一起补充。
- </p>
-</div>
 
 <td-icons-view framework-content/>
 
