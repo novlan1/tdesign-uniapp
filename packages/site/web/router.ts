@@ -1,4 +1,9 @@
-import { type RouteRecordRaw, createRouter, createWebHistory, type RouterOptions } from 'vue-router';
+import {
+  type RouteRecordRaw,
+  createRouter,
+  // createWebHistory,
+  createWebHashHistory,
+  type RouterOptions } from 'vue-router';
 import config from '../docs.config';
 import { sortDocs } from './utils';
 
@@ -41,7 +46,8 @@ const routes: Array<RouteRecordRaw> = [
 
 const routerConfig: RouterOptions = {
   routes,
-  history: createWebHistory('/'),
+  // history: createWebHistory('/'),
+  history: createWebHashHistory(),
 };
 
 const router = createRouter(routerConfig);
