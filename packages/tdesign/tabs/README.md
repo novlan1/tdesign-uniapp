@@ -51,9 +51,6 @@ import TTabsPanel from 'tdesign-uniapp/tabs-panel/tabs-panel.vue';
 
 <!-- 横向选项卡支持超过屏幕滑动 -->
 
-<img src="https://tdesign.gtimg.com/miniprogram/readme/tabs-3.png" width="375px" height="50%">
-
-
 ### 受控用法
 
 ```html

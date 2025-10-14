@@ -40,7 +40,7 @@ import TActionSheet from 'tdesign-uniapp/action-sheet/action-sheet.vue';
 ### 支持指令调用
 
 ```javascript
-import ActionSheet, { ActionSheetTheme } from 'tdesign-miniprogram/action-sheet/index';
+import ActionSheet, { ActionSheetTheme } from 'tdesign-uniapp/action-sheet/index';
 
 // 指令调用不同于组件引用不需要传入visible
 const basicListOption: ActionSheetShowOption = {

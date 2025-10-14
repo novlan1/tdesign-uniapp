@@ -19,13 +19,9 @@ import TCellGroup from 'tdesign-uniapp/cell-group/cell-group.vue';
 
 单行单元格
 
-<img src="https://tdesign.gtimg.com/miniprogram/readme/cell-1.png" width="375px" height="50%">
-
 {{ base }}
 
 多行单元格
-
-<img src="https://tdesign.gtimg.com/miniprogram/readme/cell-2.png" width="375px" height="50%">
 
 {{ multiple }}
 
