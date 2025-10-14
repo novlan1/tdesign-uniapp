@@ -220,6 +220,7 @@ export const PACKAGE_JSON_CONTENT = JSON.stringify(
       '@dcloudio/uni-quickapp-webview': '3.0.0-4070620250821001',
       'tdesign-uniapp': orgPkg.version,
       vue: '^3.4.21',
+      'vue-router': '4.5.1',
     },
     devDependencies: {
       '@dcloudio/types': '^3.4.8',

@@ -24,6 +24,11 @@
       >
       <input
         type="hidden"
+        name="project[files][src/App.vue]"
+        :value="APP_VUE_CONTENT"
+      >
+      <input
+        type="hidden"
         name="project[files][src/pages.json]"
         :value="PAGES_JSON_CONTENT"
       >
