@@ -7,7 +7,7 @@ const args = process.argv.slice(2);
 
 const DEPLOY_CONFIG = {
   publishBash: './node_modules/t-comm/bin/publish.sh',
-  distDir: path.resolve(process.cwd(), './packages/site/dist'),
+  distDir: './packages/site/dist/',
   hostTargetDir: '/usr/share/nginx/html/tdesign-uniapp/',
   hostName: args[0] || process.env.HOST_NAME,
   hostPwd: args[1] || process.env.HOST_PWD,

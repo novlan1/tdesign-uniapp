@@ -33,7 +33,7 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm run build && echo '' > packages/demo/dist/build/h5/.nojekyll 
+        run: pnpm run build && echo '' > ./packages/site/dist/mobile/.nojekyll 
         
       - name: Deploy Mine Cloud
         run: node packages/demo/script/deploy/mine-doc.js ${{ secrets.HOST_NAME }} ${{ secrets.HOST_PWD }}
