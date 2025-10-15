@@ -68,5 +68,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.bigger {
+    --td-tab-font-size: 32rpx;
+}
 </style>

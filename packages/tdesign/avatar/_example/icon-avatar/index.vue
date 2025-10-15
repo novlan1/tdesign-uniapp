@@ -28,5 +28,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.avatar-example:not(:last-child) {
+    margin-right: 64rpx;
+}
 </style>

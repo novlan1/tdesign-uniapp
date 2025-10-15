@@ -26,5 +26,7 @@ export default {
 };
 </script>
 <style scoped>
-@import './index.css';
+:deep(.external-class) {
+    height: 256rpx;
+}
 </style>

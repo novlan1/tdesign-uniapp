@@ -58,5 +58,19 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.label {
+    display: flex;
+    align-items: center;
+    width: 718rpx;
+    padding-left: 32rpx;
+}
+
+.label-class {
+    flex-grow: 1;
+}
+
+.wrapper {
+    background: var(--bg-color-demo);
+    padding: 0 12rpx;
+}
 </style>

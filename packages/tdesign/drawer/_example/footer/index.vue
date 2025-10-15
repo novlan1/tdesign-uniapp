@@ -109,5 +109,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.button-host {
+    margin: 20rpx 32rpx 0;
+}
 </style>

@@ -44,5 +44,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.block {
+    height: 32rpx;
+}
 </style>

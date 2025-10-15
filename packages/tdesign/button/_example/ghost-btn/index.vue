@@ -37,5 +37,10 @@ export default {
 };
 </script>
 <style scoped>
-@import './index.css';
+.button-example {
+    display: flex;
+    justify-content: space-between;
+    background-color: #181818;
+    padding: 32rpx;
+}
 </style>

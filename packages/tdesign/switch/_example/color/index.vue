@@ -43,5 +43,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.custom-color {
+    --td-switch-checked-color: #00a870;
+}
 </style>

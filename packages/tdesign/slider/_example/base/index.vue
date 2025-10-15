@@ -26,5 +26,8 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.wrapper {
+    background: var(--bg-color-demo);
+    padding: 0 12rpx;
+}
 </style>

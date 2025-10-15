@@ -30,5 +30,11 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.link-example {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 96rpx;
+    background-color: var(--bg-color-demo);
+}
 </style>

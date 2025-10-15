@@ -138,5 +138,8 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+
+.custom-tabs {
+    margin-bottom: 32rpx;
+}
 </style>

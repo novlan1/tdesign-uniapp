@@ -37,5 +37,12 @@ export default {
 };
 </script>
 <style scoped>
-@import './index.css';
+.search-box {
+    --td-search-height: 32px;
+    width: 252px;
+}
+
+page {
+    --td-search-font-size: 18px;
+}
 </style>

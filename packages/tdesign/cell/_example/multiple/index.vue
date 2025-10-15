@@ -107,5 +107,10 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.avatar {
+    width: 96rpx;
+    height: 96rpx;
+    border-radius: 50%;
+    overflow: hidden;
+}
 </style>

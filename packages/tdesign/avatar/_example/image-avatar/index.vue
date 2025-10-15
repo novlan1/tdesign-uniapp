@@ -31,5 +31,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+:deep(.avatar-example) {
+    margin-right: 64rpx;
+}
 </style>

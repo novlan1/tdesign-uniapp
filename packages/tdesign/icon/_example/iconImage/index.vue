@@ -43,5 +43,16 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.demo__list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 16rpx 32rpx;
+}
+
+.demo__card {
+    flex: 0 0 25%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
 </style>

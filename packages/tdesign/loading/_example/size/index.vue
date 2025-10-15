@@ -48,5 +48,15 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.large {
+    --td-loading-text-font-size: 32rpx;
+}
+
+.middle {
+    --td-loading-text-font-size: 28rpx;
+}
+
+.loading-size-demo .demo-desc {
+    margin: 48rpx 0 32rpx;
+}
 </style>

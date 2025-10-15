@@ -31,5 +31,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.custom-class {
+    --td-input-align-items: start;
+}
 </style>

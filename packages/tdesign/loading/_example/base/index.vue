@@ -55,5 +55,12 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.loading-container-flex {
+    display: flex;
+    align-items: center;
+}
+
+:deep(.wrapper) {
+    margin-right: 40px;
+}
 </style>

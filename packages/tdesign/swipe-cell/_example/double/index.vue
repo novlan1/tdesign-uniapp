@@ -50,5 +50,20 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 120rpx;
+    height: 100%;
+    color: white;
+}
+
+.favor-btn {
+    background-color: var(--td-brand-color, #0052d9);
+}
+
+.delete-btn {
+    background-color: #e34d59;
+}
 </style>

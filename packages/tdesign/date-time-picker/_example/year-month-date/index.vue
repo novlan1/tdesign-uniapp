@@ -122,5 +122,11 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+:deep(.panel-item) {
+    margin-bottom: 32rpx;
+}
+
+:deep(.panel-item::after) {
+    border: 0;
+}
 </style>

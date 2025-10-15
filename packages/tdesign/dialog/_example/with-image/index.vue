@@ -215,5 +215,17 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.wrapper {
+    margin-bottom: 32rpx;
+}
+
+.dialog-image {
+    width: 100%;
+    height: 160px;
+}
+
+.image-host {
+    display: block;
+    margin-top: 48rpx;
+}
 </style>

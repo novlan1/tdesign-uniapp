@@ -63,5 +63,20 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.block {
+    display: block;
+    margin-bottom: 32rpx;
+}
+
+:deep(.grid-item__image) {
+    --td-button-medium-icon-font-size: 48rpx;
+
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--td-bg-color-secondarycontainer);
+    border-radius: 12rpx;
+}
 </style>

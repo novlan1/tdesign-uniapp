@@ -49,5 +49,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.is-holiday:not(.t-calendar__dates-item--selected) {
+    color: #e34d59 !important;
+}
 </style>

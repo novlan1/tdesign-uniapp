@@ -106,5 +106,21 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.demo {
+    padding: 0 32rpx 48rpx;
+}
+
+.demo:last-child {
+    padding-bottom: 0;
+}
+
+.demo-desc {
+    font-size: 14px;
+    color: var(--td-text-color-secondary);
+    margin-bottom: 32rpx;
+}
+
+.demo .margin-16:not(:last-child) {
+    margin-right: 32rpx;
+}
 </style>

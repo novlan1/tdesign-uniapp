@@ -29,5 +29,16 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.input-example--bordered {
+    --td-input-vertical-padding: 24rpx;
+    background-color: var(--bg-color-demo);
+    padding: 32rpx 32rpx 16rpx;
+}
+
+.input-example__label {
+    color: var(--td-text-color-primary);
+    font-size: 24rpx;
+    line-height: 40rpx;
+    margin: 0 8rpx 16rpx;
+}
 </style>

@@ -31,5 +31,12 @@ export default {
 };
 </script>
 <style scoped>
-@import './index.css';
+.textarea-example {
+    margin: 0 32rpx;
+    border-radius: 18rpx;
+}
+
+:deep(.external-class) {
+    height: 312rpx;
+}
 </style>

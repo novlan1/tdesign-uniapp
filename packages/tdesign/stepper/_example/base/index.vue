@@ -21,5 +21,8 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.stepper-example {
+    padding: 32rpx;
+    background-color: var(--bg-color-demo);
+}
 </style>

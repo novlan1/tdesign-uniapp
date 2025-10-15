@@ -38,5 +38,10 @@ export default {
 };
 </script>
 <style scoped>
-@import './index.css';
+.button-example {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin: 0 32rpx;
+}
 </style>

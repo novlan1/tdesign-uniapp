@@ -78,5 +78,8 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.wrapper {
+    --td-skeleton-row-spacing: 20rpx;
+    margin-top: 32rpx;
+}
 </style>

@@ -50,5 +50,13 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.slider-container {
+    display: flex;
+    align-items: center;
+    width: 718rpx;
+}
+
+.slider-class {
+    flex-grow: 1;
+}
 </style>

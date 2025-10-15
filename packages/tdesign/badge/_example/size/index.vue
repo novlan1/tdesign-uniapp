@@ -41,5 +41,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.block {
+    padding: 32rpx 32rpx 48rpx;
+}
 </style>

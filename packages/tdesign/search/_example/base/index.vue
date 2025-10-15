@@ -37,5 +37,12 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.example-search {
+    background-color: var(--bg-color-demo);
+    padding: 16rpx 32rpx;
+}
+
+.example-search:not(:last-child) {
+    margin-bottom: 32rpx;
+}
 </style>

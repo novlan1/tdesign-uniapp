@@ -7,6 +7,9 @@
   "[vue]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
   "cSpell.words": [
     "wecom",
     "backtop",
@@ -26,7 +29,8 @@
     "quickapp",
     "msdk",
     "wzyd",
-    "ebus"
+    "ebus",
+    "uniapp"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always",

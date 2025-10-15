@@ -29,5 +29,8 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.example-search {
+    background-color: var(--bg-color-demo);
+    padding: 16rpx 32rpx;
+}
 </style>

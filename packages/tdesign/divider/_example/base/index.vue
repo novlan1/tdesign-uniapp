@@ -53,5 +53,18 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.divider-demo__title {
+    font-size: 28rpx;
+    color: var(--bg-color-demo-desc);
+    padding: 16rpx 32rpx;
+    line-height: 40rpx;
+}
+
+.divider-wrapper {
+    display: flex;
+    align-items: center;
+    font-size: 28rpx;
+    color: var(--td-text-color-primary);
+    padding-left: 32rpx;
+}
 </style>

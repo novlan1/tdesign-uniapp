@@ -51,5 +51,12 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.button-group {
+    display: flex;
+    justify-content: center;
+}
+
+.button-group .space {
+    width: 32rpx;
+}
 </style>

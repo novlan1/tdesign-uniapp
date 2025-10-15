@@ -102,5 +102,35 @@ export default {
 };
 </script>
 <style scoped>
-@import './index.css';
+.block {
+    color: var(--td-text-color-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.block--top,
+.block--bottom {
+    width: 100vw;
+    height: 240px;
+}
+
+.block--left,
+.block--right {
+    width: 280px;
+    height: 100%;
+}
+
+.block--center {
+    width: 240px;
+    height: 240px;
+}
+
+.wrapper {
+    margin-bottom: 32rpx;
+}
+
+.wrapper:last-child {
+    margin-bottom: 0;
+}
 </style>

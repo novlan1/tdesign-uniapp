@@ -47,5 +47,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.demo-section__content {
+    margin-bottom: 96rpx;
+}
 </style>

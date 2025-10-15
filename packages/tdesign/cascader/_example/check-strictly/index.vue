@@ -221,5 +221,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.confirm-btn {
+    color: #0052d9;
+}
 </style>

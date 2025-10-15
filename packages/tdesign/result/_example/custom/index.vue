@@ -35,5 +35,8 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+:deep(.external-class-image) {
+    width: 100px;
+    height: 80px;
+}
 </style>

@@ -95,5 +95,9 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.block {
+    background-color: var(--bg-color-demo);
+    padding: 32rpx 0;
+    margin: 32rpx 0 48rpx;
+}
 </style>

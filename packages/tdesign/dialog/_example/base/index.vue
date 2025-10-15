@@ -135,5 +135,24 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.wrapper {
+    margin-bottom: 32rpx;
+}
+
+.long-content {
+    height: 576rpx;
+    margin-top: 16rpx;
+    font-size: 32rpx;
+    color: #888;
+}
+
+.long-content .content-container {
+    white-space: pre-line;
+}
+
+.long-content ::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
 </style>

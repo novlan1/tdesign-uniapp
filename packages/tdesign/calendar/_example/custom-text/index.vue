@@ -98,5 +98,12 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.demo-desc {
+    margin-top: 32rpx;
+    margin-bottom: 32rpx;
+}
+
+:deep(.is-holiday:not(.t-calendar__dates-item--selected)) {
+    color: #e34d59 !important;
+}
 </style>

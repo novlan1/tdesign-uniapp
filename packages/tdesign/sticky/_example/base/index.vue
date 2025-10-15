@@ -37,5 +37,7 @@ export default {
 };
 </script>
 <style scoped>
-@import './index.css';
+:deep(.external-class) {
+    width: 208rpx;
+}
 </style>

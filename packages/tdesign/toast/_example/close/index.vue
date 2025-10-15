@@ -62,5 +62,8 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.toast-example {
+    text-align: center;
+    display: flex;
+}
 </style>

@@ -24,5 +24,7 @@ export default {
 };
 </script>
 <style scoped>
-@import './index.css';
+.button-example {
+    margin: 32rpx;
+}
 </style>

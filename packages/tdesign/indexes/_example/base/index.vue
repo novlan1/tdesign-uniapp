@@ -142,5 +142,11 @@ export default {
 };
 </script>
 <style scoped>
-@import './index.css';
+/* #ifdef H5 */
+.wrap {
+  height: 100%;
+  overflow: auto;
+}
+/* #endif */
+
 </style>

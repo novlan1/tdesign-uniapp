@@ -209,5 +209,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+page .demo {
+    --td-cascader-active-color: green;
+}
 </style>

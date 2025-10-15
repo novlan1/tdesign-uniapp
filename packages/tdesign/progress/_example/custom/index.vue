@@ -27,5 +27,11 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.external-class-label {
+    color: #d504d9;
+}
+
+.external-class-bar {
+    border-radius: 20rpx;
+}
 </style>

@@ -197,5 +197,16 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.mb-16 {
+    margin-bottom: 32rpx;
+}
+
+.label-suffix {
+    --td-tag-small-height: 32rpx;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12rpx;
+}
 </style>

@@ -1,3 +1,4 @@
+// 拷贝 less 文件
 const glob = require('glob');
 const path = require('path');
 const fs = require('fs');

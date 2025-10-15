@@ -49,5 +49,11 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.box {
+    padding: 32rpx;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: var(--td-bg-color-container, #fff);
+}
 </style>

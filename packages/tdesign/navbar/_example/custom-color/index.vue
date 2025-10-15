@@ -24,5 +24,8 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.custom-navbar {
+    --td-navbar-color: #fff;
+    --td-navbar-bg-color: #0052d9;
+}
 </style>

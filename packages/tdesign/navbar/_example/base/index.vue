@@ -40,5 +40,4 @@ export default {
 };
 </script>
 <style scoped>
-@import './index.css';
 </style>

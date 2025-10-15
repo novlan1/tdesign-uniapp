@@ -154,5 +154,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.wrapper:not(:last-child) {
+    margin-bottom: 32rpx;
+}
 </style>

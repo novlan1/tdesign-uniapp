@@ -29,5 +29,8 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+:deep(.t-empty__image) {
+    width: 240rpx !important;
+    height: 240rpx !important;
+}
 </style>

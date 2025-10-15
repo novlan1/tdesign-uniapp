@@ -36,5 +36,26 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.demo-rate {
+    background-color: var(--bg-color-demo);
+    color: var(--td-text-color-primary);
+    padding: 32rpx;
+    margin-top: 32rpx;
+    margin-bottom: 32rpx;
+}
+
+.rate-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.desc {
+    text-align: center;
+    margin-top: 24rpx;
+}
+
+.desc--active {
+    color: #ed7b2f;
+    font-weight: 600;
+}
 </style>

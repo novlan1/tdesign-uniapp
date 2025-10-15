@@ -158,5 +158,16 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.demo-count-down {
+    padding-bottom: 32rpx;
+}
+
+.demo-count-down-desc {
+    color: var(--td-text-color-secondary);
+    font-size: 28rpx;
+}
+
+.demo-count-down-content {
+    margin: 24rpx 0;
+}
 </style>

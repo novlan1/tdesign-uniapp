@@ -28,5 +28,12 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+ :deep(.external-class) {
+    opacity: 1;
+    background: var(--td-bg-color-secondarycontainer, #f3f3f3);
+}
+
+ :deep(.external-class-prefix-icon) {
+    color: var(--td-text-color-primary);
+}
 </style>

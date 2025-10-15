@@ -69,5 +69,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.panel-item {
+    margin-bottom: 32rpx;
+}
 </style>

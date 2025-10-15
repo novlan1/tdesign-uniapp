@@ -83,5 +83,13 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.demo-desc {
+    margin-top: 24rpx;
+    margin-bottom: 16rpx;
+}
+
+.wrapper {
+    background: var(--bg-color-demo);
+    padding-top: 40rpx;
+}
 </style>

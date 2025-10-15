@@ -126,5 +126,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.mb-16 {
+    margin-bottom: 32rpx;
+}
 </style>

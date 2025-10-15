@@ -40,5 +40,11 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.box {
+    display: flex;
+}
+
+.wrapper {
+    margin-right: 64px;
+}
 </style>

@@ -97,5 +97,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.wrapper {
+    margin-bottom: 32rpx;
+}
 </style>

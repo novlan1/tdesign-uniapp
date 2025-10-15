@@ -100,5 +100,15 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+:deep(.wrapper) {
+    margin-right: 48px;
+}
+
+.demo-wrapper {
+    display: flex;
+    margin-left: 32rpx;
+    margin-top: 28px;
+    margin-bottom: 24px;
+    align-items: center;
+}
 </style>

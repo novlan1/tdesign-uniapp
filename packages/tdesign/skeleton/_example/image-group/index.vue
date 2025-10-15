@@ -36,5 +36,9 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32rpx;
+}
 </style>

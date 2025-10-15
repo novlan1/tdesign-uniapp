@@ -98,5 +98,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.panel-item {
+    margin: 32rpx 0;
+}
 </style>

@@ -61,5 +61,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.inline {
+    display: inline;
+}
 </style>

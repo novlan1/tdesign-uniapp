@@ -77,5 +77,11 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.group {
+    margin-top: 32rpx;
+}
+
+.group + .demo-desc {
+    margin-top: 48rpx;
+}
 </style>

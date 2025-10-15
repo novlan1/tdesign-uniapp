@@ -63,5 +63,17 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.group {
+    display: flex;
+    align-items: center;
+    margin-top: 32rpx;
+}
+
+.group-avatar {
+    margin-right: 24rpx;
+}
+
+.group-content {
+    width: 566rpx;
+}
 </style>

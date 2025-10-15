@@ -95,5 +95,23 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.tr {
+    display: flex;
+}
+
+.col {
+    margin: 0 32rpx;
+    flex: 1;
+}
+
+.tr + .tr {
+    margin-top: 48rpx;
+}
+
+.text {
+    font-size: 28rpx;
+    color: var(--td-text-color-secondary);
+    line-height: 44rpx;
+    margin-bottom: 32rpx;
+}
 </style>

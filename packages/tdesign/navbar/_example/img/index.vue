@@ -32,5 +32,8 @@ defineOptions({
 });
 </script>
 <style scoped>
-@import './index.css';
+.custom-image {
+    height: 24px;
+    width: 87px;
+}
 </style>

@@ -49,5 +49,21 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.demo__list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 16rpx 32rpx;
+}
+
+.demo__card {
+    flex: 0 0 25%;
+    text-align: center;
+    margin-bottom: 30rpx;
+    color: var(--td-text-color-primary);
+}
+
+.demo__card-name {
+    font-size: 24rpx;
+    color: #999;
+}
 </style>

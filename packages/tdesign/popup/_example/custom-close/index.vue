@@ -86,5 +86,18 @@ export default {
 };
 </script>
 <style scoped>
-@import './index.css';
+.block {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    background: var(--td-bg-color-container);
+    border-radius: 16rpx;
+}
+
+:deep(.close-btn) {
+    position: absolute;
+    left: 50%;
+    margin-left: -32rpx;
+    bottom: calc(-1 * (48rpx + 64rpx));
+}
 </style>

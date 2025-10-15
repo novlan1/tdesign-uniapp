@@ -37,5 +37,8 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.wrapper {
+    padding: 40rpx 12rpx 0;
+    background: var(--bg-color-demo);
+}
 </style>

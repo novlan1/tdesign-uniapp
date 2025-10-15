@@ -54,5 +54,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.extra {
+    --td-input-align-items: start;
+}
 </style>

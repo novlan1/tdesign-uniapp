@@ -25,5 +25,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.input-example--banner {
+    margin: 0 32rpx;
+}
 </style>

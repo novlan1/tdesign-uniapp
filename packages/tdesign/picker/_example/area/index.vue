@@ -211,5 +211,4 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
 </style>

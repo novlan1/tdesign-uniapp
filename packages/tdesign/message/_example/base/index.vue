@@ -180,5 +180,11 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.message-example--base {
+    margin: 32rpx;
+}
+
+.external-class {
+    margin: 0 0 32rpx 0;
+}
 </style>

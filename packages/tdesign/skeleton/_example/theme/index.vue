@@ -53,5 +53,15 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.demo-section__desc {
+    font-size: 28rpx;
+    color: var(--td-text-color-placeholder);
+    margin-top: 16rpx;
+    line-height: 44rpx;
+}
+
+.demo-section__content {
+    margin-top: 32rpx;
+    margin-bottom: 48rpx;
+}
 </style>

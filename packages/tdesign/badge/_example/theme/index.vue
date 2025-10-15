@@ -109,5 +109,15 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.demo-wrapper {
+    display: flex;
+    margin-left: 32rpx;
+    margin-top: 28px;
+    margin-bottom: 24px;
+    align-items: center;
+}
+
+.t-class-cell {
+    overflow: hidden;
+}
 </style>

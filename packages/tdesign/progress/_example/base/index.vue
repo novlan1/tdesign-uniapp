@@ -65,5 +65,7 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.demo-wrapper {
+    padding: 0 32rpx;
+}
 </style>

@@ -55,5 +55,10 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.custom-class-note {
+    width: 360rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 </style>

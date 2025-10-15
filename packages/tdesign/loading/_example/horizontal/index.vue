@@ -38,5 +38,14 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.loading-container-flex {
+    display: flex;
+    align-items: center;
+    color: #000;
+}
+
+.wrapper {
+    display: flex;
+    margin-right: 64px;
+}
 </style>

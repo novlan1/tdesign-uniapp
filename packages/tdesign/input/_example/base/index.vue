@@ -35,5 +35,14 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.custom-label {
+    display: inline-flex;
+}
+
+.custom-label::after {
+    content: '*';
+    color: red;
+    font-size: 32rpx;
+    margin-left: 4rpx;
+}
 </style>

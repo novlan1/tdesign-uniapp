@@ -58,5 +58,13 @@ export default {
 };
 </script>
 <style scoped>
-@import './index.css';
+.button-example {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 32rpx 32rpx;
+}
+
+:deep(.external-class) {
+    border-radius: 0 !important;
+}
 </style>

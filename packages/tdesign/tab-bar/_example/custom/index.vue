@@ -60,5 +60,11 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.wrapper {
+    --td-tab-bar-border-color: var(--td-border-level-1-color, #e7e7e7);
+    --td-tab-bar-bg-color: var(--td-bg-color-secondarycontainer, #f3f3f3);
+    --td-tab-bar-hover-color: #ddd;
+    --td-tab-bar-item-color: var(--td-text-color-primary, rgba(0, 0, 0, 0.9));
+    --td-tab-bar-item-active-color: var(--td-brand-color, #0052d9);
+}
 </style>

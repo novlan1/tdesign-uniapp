@@ -43,5 +43,10 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.stepper-example {
+    padding: 32rpx;
+    display: flex;
+    background-color: var(--bg-color-demo);
+    justify-content: space-between;
+}
 </style>

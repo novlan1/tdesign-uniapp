@@ -44,5 +44,11 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.demo {
+    margin-left: 32rpx;
+}
+
+.demo .margin-16:not(:last-child) {
+    margin-right: 32rpx;
+}
 </style>

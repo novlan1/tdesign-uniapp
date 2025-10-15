@@ -176,5 +176,11 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.demo-desc {
+    margin: 0 0 32rpx;
+}
+
+.wrapper {
+    margin-bottom: 32rpx;
+}
 </style>

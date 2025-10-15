@@ -36,5 +36,20 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.dark {
+    background-color: #0052d9;
+}
+
+.light {
+    background-color: #366ef4;
+}
+
+.dark,
+.light {
+    color: #fff;
+    font-size: 28rpx;
+    line-height: 96rpx;
+    margin-bottom: 32rpx;
+    text-align: center;
+}
 </style>

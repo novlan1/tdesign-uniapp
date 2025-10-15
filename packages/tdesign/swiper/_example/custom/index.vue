@@ -50,5 +50,8 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.img {
+    width: 100%;
+    height: 100%;
+}
 </style>

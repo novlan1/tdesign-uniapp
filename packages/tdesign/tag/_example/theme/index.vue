@@ -160,5 +160,15 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.block {
+    margin: 0 32rpx;
+}
+
+.block + .block {
+    margin-top: 48rpx;
+}
+
+.block .margin-16:not(:last-child) {
+    margin-right: 32rpx;
+}
 </style>

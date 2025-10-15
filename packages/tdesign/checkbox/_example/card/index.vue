@@ -45,5 +45,9 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.theme-card {
+    border-radius: 24rpx;
+    margin: 32rpx;
+    overflow: hidden;
+}
 </style>
