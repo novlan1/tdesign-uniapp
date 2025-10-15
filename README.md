@@ -34,7 +34,7 @@ import TLoading from 'tdesign-uniapp/loading/loading';
 
 ### UNI_MODULES 方式
 
-敬请期待
+已上传[插件](https://ext.dcloud.net.cn/plugin?id=25431)。
 
 ## 预览
 
