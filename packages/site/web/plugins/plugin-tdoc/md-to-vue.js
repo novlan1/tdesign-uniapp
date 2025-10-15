@@ -55,11 +55,6 @@ export default function mdToVue(options) {
               <iframe src="${mdSegment.mobileUrl}" frameborder="0" width="100%" height="100%" style="border-radius: 0 0 6px 6px;"></iframe>
             </td-doc-phone>
 
-            <td-contributors
-              platform="mobile"
-              framework="uniapp"
-              component-name="${mdSegment.componentName}"
-            ></td-contributors>
           </div>
           <div v-show="tab === 'api'" name="API">${mdSegment.apiMd}</div>
           <div v-show="tab === 'design'" name="DESIGN">${mdSegment.designMd}</div>
