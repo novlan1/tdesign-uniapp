@@ -34,6 +34,7 @@
     "@vue/runtime-core": "^3.4.21",
     "@vue/tsconfig": "^0.7.0",
     "concurrently": "^9.2.1",
+    "dotenv": "^17.2.3",
     "eslint": "8.57.1",
     "eslint-config-light": "latest",
     "eslint-config-light-vue3": "latest",
@@ -47,6 +48,7 @@
     "eslint-plugin-react-hooks": "4.2.0",
     "eslint-plugin-tailwindcss": "3.18.0",
     "eslint-plugin-vue": "9.14.0",
+    "t-comm": "^2.0.26",
     "typescript": "5.1",
     "vite": "5.2.8",
     "vue-tsc": "^1.0.24"

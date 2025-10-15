@@ -34,6 +34,7 @@ jobs:
 
       - name: Build
         run: pnpm run build && echo '' > packages/demo/dist/build/h5/.nojekyll
+        run: node packages/demo/script/deploy/mine-doc.js ${{ secrets.HOST_NAME }} ${{ secrets.HOST_PWD }}
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
