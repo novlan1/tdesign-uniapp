@@ -86,8 +86,8 @@ Minimum base library version `^2.12.0`
 
 ### Correspondence between component and basic library versions
 
-| 组件   | API                                                                                                                                        | 最低基础库 | 描述 |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | ---- |
+| 组件   | API  | 最低基础库 | 描述 |
+| -- | -- | -- | -- | 
 | Upload | [wx.previewMedia](https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.previewMedia.html)                                   | 2.12.0     | -    |
 | Upload | [wx.chooseMedia](https://developers.weixin.qq.com/miniprogram/dev/api/media/video/wx.chooseMedia.html)                                     | 2.10.0     | -    |
 | Upload | [wx.chooseMessageFile](https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.chooseMessageFile.html)                         | 2.5.0      | -    |

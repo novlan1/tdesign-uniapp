@@ -106,7 +106,7 @@ ant = dark | @@theme-color, @@theme-light-color | -
 ant = dark | @text-color-anti, @@theme-color | - 
 ant = light | @@theme-light-color, @@theme-color | - 
 ant) {
-  @themes: default | primary, success, warning, dange | - 
+ @themes: default | primary, success, warning, dange | - 
 --td-tag-danger-color | @error-color | - 
 --td-tag-danger-light-color | @error-color-1 | - 
 --td-tag-default-color | @bg-color-component | - 
@@ -146,4 +146,4 @@ ant = dark | @@theme-color, @@theme-light-color | -
 ant = dark | @text-color-anti, @@theme-color | - 
 ant = light | @@theme-light-color, @@theme-color | - 
 ant) {
-  @themes: default | primary, success, warning, dange | -
+ @themes: default | primary, success, warning, dange | -

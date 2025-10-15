@@ -16,7 +16,7 @@ disabled | Boolean | undefined | make upload to be disabled | N
 draggable | Boolean / Object | - | Typescript：`boolean \| {vibrate?: boolean; collisionVibrate?: boolean}` | N
 files | Array | - | Typescript：`Array<UploadFile>` `interface UploadFile { url: string; name?: string; size?: number; type?: 'image' \| 'video'; percent?: number; status: 'loading' \| 'reload' \| 'failed' \| 'done' }`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/upload/type.ts) | N
 default-files | Array | undefined | uncontrolled property。Typescript：`Array<UploadFile>` `interface UploadFile { url: string; name?: string; size?: number; type?: 'image' \| 'video'; percent?: number; status: 'loading' \| 'reload' \| 'failed' \| 'done' }`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/upload/type.ts) | N
-grid-config | Object | - | Typescript：`{column?: number;  width?: number; height?: number;}` | N
+grid-config | Object | - | Typescript：`{column?: number; width?: number; height?: number;}` | N
 gutter | Number | 16 | \- | N
 image-props | Object | - | Typescript：`ImageProps`，[Image API Documents](./image?tab=api)。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/upload/type.ts) | N
 max | Number | 0 | max count of files limit | N
@@ -32,14 +32,14 @@ transition | Object | { backTransition: true, duration: 300, timingFunction: 'ea
 
 name | params | description
 -- | -- | --
-add | `(files: MediaContext)` | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/upload/type.ts)。<br/>`type MediaContext = VideoContext[] \| ImageContext[]`<br/><br/>`interface VideoContext { name?: string; type?: string; url?: string; duration?: number; size?: number; width?: number; height?: number; thumb: string; progress: number }`<br/><br/>`interface ImageContext { name: string; type: string; url: string;  size: number; width: number; height: number; progress: number  }`<br/>
+add | `(files: MediaContext)` | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/upload/type.ts)。<br/>`type MediaContext = VideoContext[] \| ImageContext[]`<br/><br/>`interface VideoContext { name?: string; type?: string; url?: string; duration?: number; size?: number; width?: number; height?: number; thumb: string; progress: number }`<br/><br/>`interface ImageContext { name: string; type: string; url: string; size: number; width: number; height: number; progress: number }`<br/>
 click | `(index: number; file: VideoContext \| ImageContext)` | \-
 complete | \- | \-
-drop | `(files: MediaContext) ` | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/upload/type.ts)。<br/>`type MediaContext = VideoContext[] \| ImageContext[]; interface VideoContext { name?: string; type?: string; url?: string; duration?: number; size?: number; width?: number; height?: number; thumb: string; progress: number }; interface ImageContext { name: string; type: string; url: string;  size: number; width: number; height: number; progress: number}`<br/>
+drop | `(files: MediaContext) ` | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/upload/type.ts)。<br/>`type MediaContext = VideoContext[] \| ImageContext[]; interface VideoContext { name?: string; type?: string; url?: string; duration?: number; size?: number; width?: number; height?: number; thumb: string; progress: number }; interface ImageContext { name: string; type: string; url: string; size: number; width: number; height: number; progress: number}`<br/>
 fail | \- | \-
 remove | `(index: number; file: UploadFile)` | \-
 select-change | `(files: MediaContext[]; currentSelectedFiles: MediaContext[])` | \-
-success | `(files: MediaContext)` | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/upload/type.ts)。<br/>`type MediaContext = VideoContext[] \| ImageContext[]`<br/><br/>`interface VideoContext { name?: string; type?: string; url?: string; duration?: number; size?: number; width?: number; height?: number; thumb: string; progress: number }`<br/><br/>`interface ImageContext { name: string; type: string; url: string;  size: number; width: number; height: number; progress: number  }`<br/>
+success | `(files: MediaContext)` | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/upload/type.ts)。<br/>`type MediaContext = VideoContext[] \| ImageContext[]`<br/><br/>`interface VideoContext { name?: string; type?: string; url?: string; duration?: number; size?: number; width?: number; height?: number; thumb: string; progress: number }`<br/><br/>`interface ImageContext { name: string; type: string; url: string; size: number; width: number; height: number; progress: number }`<br/>
 
 ### CSS Variables
 
