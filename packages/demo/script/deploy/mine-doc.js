@@ -6,7 +6,7 @@ require('./local.env')();
 const args = process.argv.slice(2);
 
 const DEPLOY_CONFIG = {
-  publishBash: './node_modules/t-comm/bin/publish.sh',
+  publishBash: path.resolve(__dirname, './publish.sh'),
   distDir: './packages/site/dist/',
   hostTargetDir: '/usr/share/nginx/html/tdesign-uniapp/',
   hostName: args[0] || process.env.HOST_NAME,
