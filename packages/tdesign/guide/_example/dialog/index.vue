@@ -89,10 +89,10 @@
 </template>
 
 <script>
-import tGuide from 'tdesign-uniapp/guide/guide';
-import tInput from 'tdesign-uniapp/input/input';
-import tButton from 'tdesign-uniapp/button/button';
-import tImage from 'tdesign-uniapp/image/image';
+import tGuide from 'tdesign-uniapp/guide/guide.vue';
+import tInput from 'tdesign-uniapp/input/input.vue';
+import tButton from 'tdesign-uniapp/button/button.vue';
+import tImage from 'tdesign-uniapp/image/image.vue';
 export default {
   components: {
     tGuide,

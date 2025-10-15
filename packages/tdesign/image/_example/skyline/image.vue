@@ -32,7 +32,7 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import tImage from 'tdesign-uniapp/image/image';
+import tImage from 'tdesign-uniapp/image/image.vue';
 import base from '../base';
 import status from '../status';
 export default {

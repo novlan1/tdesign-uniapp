@@ -28,7 +28,7 @@ import 'tdesign-uniapp/common/style/theme/index.css';
 </template>
 
 <script lang="ts" setup>
-import TLoading from 'tdesign-uniapp/loading/loading';
+import TLoading from 'tdesign-uniapp/loading/loading.vue';
 </script>
 ```
 

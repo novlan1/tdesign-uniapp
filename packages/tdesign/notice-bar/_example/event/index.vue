@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import tNoticeBar from 'tdesign-uniapp/notice-bar/notice-bar';
-import tLink from 'tdesign-uniapp/link/link';
+import tNoticeBar from 'tdesign-uniapp/notice-bar/notice-bar.vue';
+import tLink from 'tdesign-uniapp/link/link.vue';
 export default {
   components: {
     tNoticeBar,

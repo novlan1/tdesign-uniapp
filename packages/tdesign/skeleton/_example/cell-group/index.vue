@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import tSkeleton from 'tdesign-uniapp/skeleton/skeleton';
+import tSkeleton from 'tdesign-uniapp/skeleton/skeleton.vue';
 export default {
   components: {
     tSkeleton,

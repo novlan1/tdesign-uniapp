@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import tButton from 'tdesign-uniapp/button/button';
-import tActionSheet from 'tdesign-uniapp/action-sheet/action-sheet';
+import tButton from 'tdesign-uniapp/button/button.vue';
+import tActionSheet from 'tdesign-uniapp/action-sheet/action-sheet.vue';
 import ActionSheet, { ActionSheetTheme } from 'tdesign-uniapp/action-sheet/index';
 const firstGrid = [
   {
@@ -97,14 +97,8 @@ export default {
       });
     },
     handleSelected(e) {
-      /* ---处理dataset begin--- */
-      // this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
       console.log(e);
     },
   },
 };
 </script>
-<style>
-@import './index.css';
-</style>

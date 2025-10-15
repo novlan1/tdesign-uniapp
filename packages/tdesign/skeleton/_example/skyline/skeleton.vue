@@ -59,7 +59,7 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import tSkeleton from 'tdesign-uniapp/skeleton/skeleton';
+import tSkeleton from 'tdesign-uniapp/skeleton/skeleton.vue';
 import theme from '../theme';
 import grid from '../grid';
 import cellGroup from '../cell-group';

@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import tCellGroup from 'tdesign-uniapp/cell-group/cell-group';
-import tCell from 'tdesign-uniapp/cell/cell';
-import tPicker from 'tdesign-uniapp/picker/picker';
-import tPickerItem from 'tdesign-uniapp/picker-item/picker-item';
+import tCellGroup from 'tdesign-uniapp/cell-group/cell-group.vue';
+import tCell from 'tdesign-uniapp/cell/cell.vue';
+import tPicker from 'tdesign-uniapp/picker/picker.vue';
+import tPickerItem from 'tdesign-uniapp/picker-item/picker-item.vue';
 const areaList = {
   provinces: {
     110000: '北京市',

@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import tIcon from 'tdesign-uniapp/icon/icon';
+import tIcon from 'tdesign-uniapp/icon/icon.vue';
 export default {
   components: {
     tIcon,

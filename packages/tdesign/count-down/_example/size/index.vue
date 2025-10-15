@@ -143,7 +143,7 @@
 </template>
 
 <script>
-import tCountDown from 'tdesign-uniapp/count-down/count-down';
+import tCountDown from 'tdesign-uniapp/count-down/count-down.vue';
 export default {
   components: {
     tCountDown,

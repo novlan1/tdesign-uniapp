@@ -68,9 +68,9 @@
 </template>
 
 <script>
-import tSwiper from 'tdesign-uniapp/swiper/swiper';
-import tSwitch from 'tdesign-uniapp/switch/switch';
-import tSlider from 'tdesign-uniapp/slider/slider';
+import tSwiper from 'tdesign-uniapp/swiper/swiper.vue';
+import tSwitch from 'tdesign-uniapp/switch/switch.vue';
+import tSlider from 'tdesign-uniapp/slider/slider.vue';
 const imageCdn = 'https://tdesign.gtimg.com/mobile/demos';
 const swiperList = [
   {

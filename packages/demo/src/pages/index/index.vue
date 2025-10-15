@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-// import TLoading from 'tdesign-uniapp/loading/loading';
+// import TLoading from 'tdesign-uniapp/loading/loading.vue';
 import componentData from './config.json';
 
 const clickComponentItem = (item) => {

@@ -62,9 +62,9 @@
 </template>
 
 <script>
-import tSwipeCell from 'tdesign-uniapp/swipe-cell/swipe-cell';
-import tCell from 'tdesign-uniapp/cell/cell';
-import tIcon from 'tdesign-uniapp/icon/icon';
+import tSwipeCell from 'tdesign-uniapp/swipe-cell/swipe-cell.vue';
+import tCell from 'tdesign-uniapp/cell/cell.vue';
+import tIcon from 'tdesign-uniapp/icon/icon.vue';
 export default {
   options: {
     styleIsolation: 'shared',

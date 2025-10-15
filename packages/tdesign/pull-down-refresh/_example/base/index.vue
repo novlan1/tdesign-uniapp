@@ -64,9 +64,9 @@
 </template>
 
 <script>
-import tPullDownRefresh from 'tdesign-uniapp/pull-down-refresh/pull-down-refresh';
-import tSkeleton from 'tdesign-uniapp/skeleton/skeleton';
-import tBackTop from 'tdesign-uniapp/back-top/back-top';
+import tPullDownRefresh from 'tdesign-uniapp/pull-down-refresh/pull-down-refresh.vue';
+import tSkeleton from 'tdesign-uniapp/skeleton/skeleton.vue';
+import tBackTop from 'tdesign-uniapp/back-top/back-top.vue';
 export default {
   components: {
     tPullDownRefresh,

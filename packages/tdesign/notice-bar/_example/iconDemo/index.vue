@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import tNoticeBar from 'tdesign-uniapp/notice-bar/notice-bar';
-import tIcon from 'tdesign-uniapp/icon/icon';
+import tNoticeBar from 'tdesign-uniapp/notice-bar/notice-bar.vue';
+import tIcon from 'tdesign-uniapp/icon/icon.vue';
 export default {
   components: {
     tNoticeBar,

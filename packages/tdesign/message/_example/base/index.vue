@@ -83,8 +83,8 @@
 </template>
 
 <script>
-import tButton from 'tdesign-uniapp/button/button';
-import tMessage from 'tdesign-uniapp/message/message';
+import tButton from 'tdesign-uniapp/button/button.vue';
+import tMessage from 'tdesign-uniapp/message/message.vue';
 import Message from 'tdesign-uniapp/message/index';
 export default {
   options: {

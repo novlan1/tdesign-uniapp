@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import tAvatar from 'tdesign-uniapp/avatar/avatar';
+import tAvatar from 'tdesign-uniapp/avatar/avatar.vue';
 export default {
   options: {
     styleIsolation: 'shared',

@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import tSticky from 'tdesign-uniapp/sticky/sticky';
-import tButton from 'tdesign-uniapp/button/button';
+import tSticky from 'tdesign-uniapp/sticky/sticky.vue';
+import tButton from 'tdesign-uniapp/button/button.vue';
 export default {
   options: {
     styleIsolation: 'shared',

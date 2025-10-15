@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import tLink from 'tdesign-uniapp/link/link';
+import tLink from 'tdesign-uniapp/link/link.vue';
 export default {
   components: {
     tLink,

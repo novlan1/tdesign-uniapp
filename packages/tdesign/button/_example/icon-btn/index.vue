@@ -37,8 +37,8 @@
 </template>
 
 <script>
-import tButton from 'tdesign-uniapp/button/button';
-import tLoading from 'tdesign-uniapp/loading/loading';
+import tButton from 'tdesign-uniapp/button/button.vue';
+import tLoading from 'tdesign-uniapp/loading/loading.vue';
 import SkylineBehavior from 'packages/demo/src/mixins/skyline.js';
 
 export default {

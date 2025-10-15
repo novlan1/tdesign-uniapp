@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import tPicker from 'tdesign-uniapp/picker/picker';
-import tPickerItem from 'tdesign-uniapp/picker-item/picker-item';
+import tPicker from 'tdesign-uniapp/picker/picker.vue';
+import tPickerItem from 'tdesign-uniapp/picker-item/picker-item.vue';
 export default {
   components: {
     tPicker,

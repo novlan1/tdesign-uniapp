@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import tRate from 'tdesign-uniapp/rate/rate';
+import tRate from 'tdesign-uniapp/rate/rate.vue';
 export default {
   components: {
     tRate,

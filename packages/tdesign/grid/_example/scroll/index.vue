@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import tGrid from 'tdesign-uniapp/grid/grid';
-import tGridItem from 'tdesign-uniapp/grid-item/grid-item';
+import tGrid from 'tdesign-uniapp/grid/grid.vue';
+import tGridItem from 'tdesign-uniapp/grid-item/grid-item.vue';
 export default {
   options: {
     styleIsolation: 'shared',

@@ -30,8 +30,8 @@
 
 <script lang="ts">
 
-import tButton from 'tdesign-uniapp/button/button';
-import tResult from 'tdesign-uniapp/result/result';
+import tButton from 'tdesign-uniapp/button/button.vue';
+import tResult from 'tdesign-uniapp/result/result.vue';
 export default {
   components: {
     tButton,

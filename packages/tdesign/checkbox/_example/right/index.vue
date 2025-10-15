@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import tCheckbox from 'tdesign-uniapp/checkbox/checkbox';
+import tCheckbox from 'tdesign-uniapp/checkbox/checkbox.vue';
 export default {
   components: {
     tCheckbox,

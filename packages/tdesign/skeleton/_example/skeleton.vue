@@ -50,7 +50,7 @@
 
 <script lang="ts">
 
-// import tSkeleton from 'tdesign-uniapp/skeleton/skeleton';
+// import tSkeleton from 'tdesign-uniapp/skeleton/skeleton.vue';
 import theme from './theme/index.vue';
 import grid from './grid/index.vue';
 import cellGroup from './cell-group/index.vue';

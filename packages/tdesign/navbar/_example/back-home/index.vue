@@ -35,7 +35,7 @@
 
 <script>
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import tIcon from 'tdesign-uniapp/icon/icon';
+import tIcon from 'tdesign-uniapp/icon/icon.vue';
 export default {
   components: {
     tNavbar,

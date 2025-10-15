@@ -18,8 +18,8 @@
   </view>
 </template>
 <script>
-import tCell from 'tdesign-uniapp/cell/cell';
-import tCalendar from 'tdesign-uniapp/calendar/calendar';
+import tCell from 'tdesign-uniapp/cell/cell.vue';
+import tCalendar from 'tdesign-uniapp/calendar/calendar.vue';
 import { formatTimestamp } from '../computed';
 
 export default {

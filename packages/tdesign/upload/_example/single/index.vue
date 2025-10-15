@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import tUpload from 'tdesign-uniapp/upload/upload';
+import tUpload from 'tdesign-uniapp/upload/upload.vue';
 export default {
   components: {
     tUpload,

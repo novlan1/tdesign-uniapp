@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import tRadioGroup from 'tdesign-uniapp/radio-group/radio-group';
-import tRadio from 'tdesign-uniapp/radio/radio';
+import tRadioGroup from 'tdesign-uniapp/radio-group/radio-group.vue';
+import tRadio from 'tdesign-uniapp/radio/radio.vue';
 export default {
   options: {
     styleIsolation: 'shared',

@@ -60,9 +60,9 @@
 </template>
 
 <script>
-import tSteps from 'tdesign-uniapp/steps/steps';
-import tStepItem from 'tdesign-uniapp/step-item/step-item';
-import tIcon from 'tdesign-uniapp/icon/icon';
+import tSteps from 'tdesign-uniapp/steps/steps.vue';
+import tStepItem from 'tdesign-uniapp/step-item/step-item.vue';
+import tIcon from 'tdesign-uniapp/icon/icon.vue';
 
 
 export default {

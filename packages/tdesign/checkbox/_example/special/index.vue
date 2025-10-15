@@ -61,9 +61,9 @@
   </view>
 </template>
 <script>
-import tCheckboxGroup from 'tdesign-uniapp/checkbox-group/checkbox-group';
-import tCheckbox from 'tdesign-uniapp/checkbox/checkbox';
-import tIcon from 'tdesign-uniapp/icon/icon';
+import tCheckboxGroup from 'tdesign-uniapp/checkbox-group/checkbox-group.vue';
+import tCheckbox from 'tdesign-uniapp/checkbox/checkbox.vue';
+import tIcon from 'tdesign-uniapp/icon/icon.vue';
 export default {
   options: {
     styleIsolation: 'shared',

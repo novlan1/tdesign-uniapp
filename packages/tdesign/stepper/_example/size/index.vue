@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import tCell from 'tdesign-uniapp/cell/cell';
-import tStepper from 'tdesign-uniapp/stepper/stepper';
+import tCell from 'tdesign-uniapp/cell/cell.vue';
+import tStepper from 'tdesign-uniapp/stepper/stepper.vue';
 export default {
   components: {
     tCell,

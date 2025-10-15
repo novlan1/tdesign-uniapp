@@ -68,9 +68,9 @@
 </template>
 
 <script>
-import tButton from 'tdesign-uniapp/button/button';
-import tInput from 'tdesign-uniapp/input/input';
-import tDialog from 'tdesign-uniapp/dialog/dialog';
+import tButton from 'tdesign-uniapp/button/button.vue';
+import tInput from 'tdesign-uniapp/input/input.vue';
+import tDialog from 'tdesign-uniapp/dialog/dialog.vue';
 export default {
   components: {
     tButton,

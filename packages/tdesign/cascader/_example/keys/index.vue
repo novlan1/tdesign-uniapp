@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import tCell from 'tdesign-uniapp/cell/cell';
-import tCascader from 'tdesign-uniapp/cascader/cascader';
+import tCell from 'tdesign-uniapp/cell/cell.vue';
+import tCascader from 'tdesign-uniapp/cascader/cascader.vue';
 const data = {
   areaList: [
     {

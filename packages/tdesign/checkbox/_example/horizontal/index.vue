@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import tCheckboxGroup from 'tdesign-uniapp/checkbox-group/checkbox-group';
-import tCheckbox from 'tdesign-uniapp/checkbox/checkbox';
+import tCheckboxGroup from 'tdesign-uniapp/checkbox-group/checkbox-group.vue';
+import tCheckbox from 'tdesign-uniapp/checkbox/checkbox.vue';
 export default {
   options: {
     styleIsolation: 'shared',

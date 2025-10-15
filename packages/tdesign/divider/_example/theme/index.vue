@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import tDivider from 'tdesign-uniapp/divider/divider';
+import tDivider from 'tdesign-uniapp/divider/divider.vue';
 import SkylineBehavior from 'packages/demo/src/mixins/skyline.js';
 
 export default {

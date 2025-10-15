@@ -64,10 +64,10 @@
 </template>
 
 <script>
-import tSideBar from 'tdesign-uniapp/side-bar/side-bar';
-import tSideBarItem from 'tdesign-uniapp/side-bar-item/side-bar-item';
-import tGrid from 'tdesign-uniapp/grid/grid';
-import tGridItem from 'tdesign-uniapp/grid-item/grid-item';
+import tSideBar from 'tdesign-uniapp/side-bar/side-bar.vue';
+import tSideBarItem from 'tdesign-uniapp/side-bar-item/side-bar-item.vue';
+import tGrid from 'tdesign-uniapp/grid/grid.vue';
+import tGridItem from 'tdesign-uniapp/grid-item/grid-item.vue';
 const image = 'https://tdesign.gtimg.com/mobile/demos/example2.png';
 const items = new Array(12).fill()
   .map((_, index) => ({

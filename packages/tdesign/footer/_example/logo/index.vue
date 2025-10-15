@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import tFooter from 'tdesign-uniapp/footer/footer';
+import tFooter from 'tdesign-uniapp/footer/footer.vue';
 import { ref } from 'vue';
 import { useTheme } from 'tdesign-uniapp/mixins/theme-change';
 

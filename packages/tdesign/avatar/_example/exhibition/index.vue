@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import tAvatar from 'tdesign-uniapp/avatar/avatar';
-import tAvatarGroup from 'tdesign-uniapp/avatar-group/avatar-group';
+import tAvatar from 'tdesign-uniapp/avatar/avatar.vue';
+import tAvatarGroup from 'tdesign-uniapp/avatar-group/avatar-group.vue';
 export default {
   components: {
     tAvatar,

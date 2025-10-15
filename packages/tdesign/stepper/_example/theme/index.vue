@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import tStepper from 'tdesign-uniapp/stepper/stepper';
+import tStepper from 'tdesign-uniapp/stepper/stepper.vue';
 export default {
   components: {
     tStepper,

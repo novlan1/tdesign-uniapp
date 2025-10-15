@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import tAvatar from 'tdesign-uniapp/avatar/avatar';
+import tAvatar from 'tdesign-uniapp/avatar/avatar.vue';
 export default {
   options: {
     styleIsolation: 'shared',
@@ -39,5 +39,13 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.avatar-example:not(:last-child) {
+  margin-right: 64rpx;
+}
+
+:deep(.external-class-content) {
+  color: #fff;
+  background-color: var(--td-brand-color, #0052d9);
+  font-weight: 400;
+}
 </style>

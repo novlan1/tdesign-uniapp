@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import tTag from 'tdesign-uniapp/tag/tag';
+import tTag from 'tdesign-uniapp/tag/tag.vue';
 export default {
   components: {
     tTag,

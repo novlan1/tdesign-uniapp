@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import tTag from 'tdesign-uniapp/tag/tag';
+import tTag from 'tdesign-uniapp/tag/tag.vue';
 import SkylineBehavior from 'packages/demo/src/mixins/skyline.js';
 
 export default {

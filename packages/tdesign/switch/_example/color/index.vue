@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import tCell from 'tdesign-uniapp/cell/cell';
-import tSwitch from 'tdesign-uniapp/switch/switch';
+import tCell from 'tdesign-uniapp/cell/cell.vue';
+import tSwitch from 'tdesign-uniapp/switch/switch.vue';
 export default {
   components: {
     tCell,

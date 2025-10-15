@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import tProgress from 'tdesign-uniapp/progress/progress';
+import tProgress from 'tdesign-uniapp/progress/progress.vue';
 // import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js'
 export default {
   components: {

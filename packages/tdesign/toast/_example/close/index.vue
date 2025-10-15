@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import tToast from 'tdesign-uniapp/toast/toast';
+import tToast from 'tdesign-uniapp/toast/toast.vue';
 import Toast, { hideToast } from 'tdesign-uniapp/toast/index';
-import tButton from 'tdesign-uniapp/button/button';
+import tButton from 'tdesign-uniapp/button/button.vue';
 
 
 export default {

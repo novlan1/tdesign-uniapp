@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import tCheckTag from 'tdesign-uniapp/check-tag/check-tag';
+import tCheckTag from 'tdesign-uniapp/check-tag/check-tag.vue';
 export default {
   components: {
     tCheckTag,

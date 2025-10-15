@@ -47,7 +47,7 @@
 
 <script lang="ts">
 
-// import tToast from 'tdesign-uniapp/toast/toast';
+// import tToast from 'tdesign-uniapp/toast/toast.vue';
 import list from './list/index.vue';
 import status from './status/index.vue';
 import grid from './grid/index.vue';

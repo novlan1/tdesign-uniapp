@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import tRadioGroup from 'tdesign-uniapp/radio-group/radio-group';
+import tRadioGroup from 'tdesign-uniapp/radio-group/radio-group.vue';
 
 export default {
   components: {

@@ -73,10 +73,10 @@
 </template>
 
 <script>
-import tCell from 'tdesign-uniapp/cell/cell';
-import tPicker from 'tdesign-uniapp/picker/picker';
-import tPickerItem from 'tdesign-uniapp/picker-item/picker-item';
-import tTag from 'tdesign-uniapp/tag/tag';
+import tCell from 'tdesign-uniapp/cell/cell.vue';
+import tPicker from 'tdesign-uniapp/picker/picker.vue';
+import tPickerItem from 'tdesign-uniapp/picker-item/picker-item.vue';
+import tTag from 'tdesign-uniapp/tag/tag.vue';
 export default {
   components: {
     tCell,

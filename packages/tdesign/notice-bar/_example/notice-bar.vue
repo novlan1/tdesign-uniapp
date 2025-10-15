@@ -52,7 +52,7 @@
 
 <script lang="ts">
 
-// import tNoticeBar from 'tdesign-uniapp/notice-bar/notice-bar';
+// import tNoticeBar from 'tdesign-uniapp/notice-bar/notice-bar.vue';
 import BaseDemo from './base/index.vue';
 import iconDemo from './iconDemo/index.vue';
 import suffixIcon from './suffixIcon/index.vue';

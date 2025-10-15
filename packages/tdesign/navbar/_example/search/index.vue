@@ -23,7 +23,7 @@
 
 <script>
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import tSearch from 'tdesign-uniapp/search/search';
+import tSearch from 'tdesign-uniapp/search/search.vue';
 export default {
   components: {
     tNavbar,

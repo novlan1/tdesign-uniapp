@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import tCheckboxGroup from 'tdesign-uniapp/checkbox-group/checkbox-group';
+import tCheckboxGroup from 'tdesign-uniapp/checkbox-group/checkbox-group.vue';
 export default {
   components: {
     tCheckboxGroup,

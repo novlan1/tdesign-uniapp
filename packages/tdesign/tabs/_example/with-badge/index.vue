@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import tTabs from 'tdesign-uniapp/tabs/tabs';
-import tTabPanel from 'tdesign-uniapp/tab-panel/tab-panel';
+import tTabs from 'tdesign-uniapp/tabs/tabs.vue';
+import tTabPanel from 'tdesign-uniapp/tab-panel/tab-panel.vue';
 export default {
   components: {
     tTabs,

@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import tCol from 'tdesign-uniapp/col/col';
-import tRow from 'tdesign-uniapp/row/row';
+import tCol from 'tdesign-uniapp/col/col.vue';
+import tRow from 'tdesign-uniapp/row/row.vue';
 export default {
   components: {
     tCol,

@@ -65,14 +65,10 @@ export default {
       });
     },
     handleSelected(e) {
-      /* ---处理dataset begin--- */
-      // this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
       console.log(e);
     },
   },
 };
 </script>
 <style>
-@import './index.css';
 </style>

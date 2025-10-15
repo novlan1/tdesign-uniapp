@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import tSearch from 'tdesign-uniapp/search/search';
+import tSearch from 'tdesign-uniapp/search/search.vue';
 export default {
   components: {
     tSearch,

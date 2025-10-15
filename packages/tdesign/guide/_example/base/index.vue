@@ -58,9 +58,9 @@
 </template>
 
 <script>
-import tGuide from 'tdesign-uniapp/guide/guide';
-import tInput from 'tdesign-uniapp/input/input';
-import tButton from 'tdesign-uniapp/button/button';
+import tGuide from 'tdesign-uniapp/guide/guide.vue';
+import tInput from 'tdesign-uniapp/input/input.vue';
+import tButton from 'tdesign-uniapp/button/button.vue';
 export default {
   components: {
     tGuide,

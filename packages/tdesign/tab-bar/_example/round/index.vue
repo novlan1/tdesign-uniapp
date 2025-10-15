@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import tTabBar from 'tdesign-uniapp/tab-bar/tab-bar';
-import tTabBarItem from 'tdesign-uniapp/tab-bar-item/tab-bar-item';
+import tTabBar from 'tdesign-uniapp/tab-bar/tab-bar.vue';
+import tTabBarItem from 'tdesign-uniapp/tab-bar-item/tab-bar-item.vue';
 export default {
   components: {
     tTabBar,

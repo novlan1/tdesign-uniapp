@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import tEmpty from 'tdesign-uniapp/empty/empty';
+import tEmpty from 'tdesign-uniapp/empty/empty.vue';
 
 export default {
   options: {

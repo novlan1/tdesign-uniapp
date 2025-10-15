@@ -33,10 +33,10 @@
 </template>
 
 <script>
-import tIndexes from 'tdesign-uniapp/indexes/indexes';
-import tIndexesAnchor from 'tdesign-uniapp/indexes-anchor/indexes-anchor';
-import tCellGroup from 'tdesign-uniapp/cell-group/cell-group';
-import tCell from 'tdesign-uniapp/cell/cell';
+import tIndexes from 'tdesign-uniapp/indexes/indexes.vue';
+import tIndexesAnchor from 'tdesign-uniapp/indexes-anchor/indexes-anchor.vue';
+import tCellGroup from 'tdesign-uniapp/cell-group/cell-group.vue';
+import tCell from 'tdesign-uniapp/cell/cell.vue';
 export default {
   components: {
     tIndexes,

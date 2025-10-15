@@ -141,8 +141,8 @@
 
 <script lang="ts">
 
-import tButton from 'tdesign-uniapp/button/button';
-import tPopup from 'tdesign-uniapp/popup/popup';
+import tButton from 'tdesign-uniapp/button/button.vue';
+import tPopup from 'tdesign-uniapp/popup/popup.vue';
 import BaseDemo from './base';
 import noMask from './no-mask';
 import dialog from './dialog';

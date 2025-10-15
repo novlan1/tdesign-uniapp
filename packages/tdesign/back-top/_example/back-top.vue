@@ -101,8 +101,8 @@
 
 <script lang="ts">
 
-import tButton from 'tdesign-uniapp/button/button';
-import tSkeleton from 'tdesign-uniapp/skeleton/skeleton';
+import tButton from 'tdesign-uniapp/button/button.vue';
+import tSkeleton from 'tdesign-uniapp/skeleton/skeleton.vue';
 import BaseDemo from './base/index.vue';
 import halfRound from './half-round/index.vue';
 export default {

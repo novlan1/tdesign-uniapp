@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import tLoading from 'tdesign-uniapp/loading/loading';
+import tLoading from 'tdesign-uniapp/loading/loading.vue';
 // import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js'
 export default {
   options: {

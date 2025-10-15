@@ -71,11 +71,11 @@
 </template>
 
 <script>
-import tSideBar from 'tdesign-uniapp/side-bar/side-bar';
-import tSideBarItem from 'tdesign-uniapp/side-bar-item/side-bar-item';
-import tCellGroup from 'tdesign-uniapp/cell-group/cell-group';
-import tCell from 'tdesign-uniapp/cell/cell';
-import tImage from 'tdesign-uniapp/image/image';
+import tSideBar from 'tdesign-uniapp/side-bar/side-bar.vue';
+import tSideBarItem from 'tdesign-uniapp/side-bar-item/side-bar-item.vue';
+import tCellGroup from 'tdesign-uniapp/cell-group/cell-group.vue';
+import tCell from 'tdesign-uniapp/cell/cell.vue';
+import tImage from 'tdesign-uniapp/image/image.vue';
 
 const image = 'https://tdesign.gtimg.com/mobile/demos/example2.png';
 const items = new Array(12).fill(

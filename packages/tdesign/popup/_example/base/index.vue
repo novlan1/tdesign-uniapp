@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import tPopup from 'tdesign-uniapp/popup/popup';
-import tButton from 'tdesign-uniapp/button/button';
+import tPopup from 'tdesign-uniapp/popup/popup.vue';
+import tButton from 'tdesign-uniapp/button/button.vue';
 export default {
   options: {
     styleIsolation: 'shared',

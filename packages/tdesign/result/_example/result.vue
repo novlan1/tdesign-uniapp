@@ -42,7 +42,7 @@
 
 <script lang="ts">
 
-import tButton from 'tdesign-uniapp/button/button';
+import tButton from 'tdesign-uniapp/button/button.vue';
 import theme from './theme/index.vue';
 import description from './description/index.vue';
 import custom from './custom/index.vue';

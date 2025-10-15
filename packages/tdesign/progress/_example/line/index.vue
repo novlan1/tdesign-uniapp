@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import tProgress from 'tdesign-uniapp/progress/progress';
+import tProgress from 'tdesign-uniapp/progress/progress.vue';
 export default {
   components: {
     tProgress,

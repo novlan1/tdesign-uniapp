@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import tEmpty from 'tdesign-uniapp/empty/empty';
-import tButton from 'tdesign-uniapp/button/button';
+import tEmpty from 'tdesign-uniapp/empty/empty.vue';
+import tButton from 'tdesign-uniapp/button/button.vue';
 
 
 export default {

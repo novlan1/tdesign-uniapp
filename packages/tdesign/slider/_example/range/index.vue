@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import tSlider from 'tdesign-uniapp/slider/slider';
+import tSlider from 'tdesign-uniapp/slider/slider.vue';
 export default {
   components: {
     tSlider,
