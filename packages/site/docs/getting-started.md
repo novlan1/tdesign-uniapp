@@ -15,19 +15,23 @@ UniApp 组件示例小程序，请使用微信扫码预览 ↓
 
 ### NPM 方式
 
-1. 安装 `tdesign-uniapp`
-
 ```bash
 npm i tdesign-uniapp -s
 ```
 
-2. `main.ts` 中引入样式文件
+### UNI_MODULES 方式
+
+已上传[插件](https://ext.dcloud.net.cn/plugin?id=25431)到 DCloud 插件市场，请打开插件详情页并点击`使用 HBuilderX 导入插件`。
+
+## 使用
+
+1. `main.ts` 中引入样式文件
 
 ```js
 import 'tdesign-uniapp/common/style/theme/index.css';
 ```
 
-3. 文件中使用
+2. 在文件中使用
 
 ```html
 <template>
@@ -38,10 +42,6 @@ import 'tdesign-uniapp/common/style/theme/index.css';
 import TLoading from 'tdesign-uniapp/loading/loading.vue';
 </script>
 ```
-
-### UNI_MODULES 方式
-
-已上传[插件](https://ext.dcloud.net.cn/plugin?id=25431)。
 
 ## 支持平台
 
@@ -69,9 +69,9 @@ npm run dev:mp
 
 ## 小程序基础库版本
 
-最低基础库版本`^2.12.0`
+- 微信小程序：最低基础库版本`^2.12.0`
 
-### 组件与小程序基础库版本对应关系
+### 组件与微信小程序基础库版本对应关系
 
 | 组件   | API | 最低基础库 | 描述 |
 | -- | -- | -- | -- | 
