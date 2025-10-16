@@ -4,23 +4,27 @@
 
 TDesign 在 uni-app 的适配方案。
 
-## Usage
+## 安装
 
 ### NPM 方式
-
-1. 安装 `tdesign-uniapp`
 
 ```bash
 pnpm i tdesign-uniapp
 ```
 
-2. `main.ts` 中引入样式文件
+### UNI_MODULES 方式
+
+已上传[插件](https://ext.dcloud.net.cn/plugin?id=25431)到 DCloud 插件市场，请打开插件详情页并点击`使用 HBuilderX 导入插件`。
+
+## 使用
+
+1. `main.ts` 中引入样式文件
 
 ```ts
 import 'tdesign-uniapp/common/style/theme/index.css';
 ```
 
-3. 文件中使用
+2. 在文件中使用
 
 ```vue
 <template>
@@ -31,10 +35,6 @@ import 'tdesign-uniapp/common/style/theme/index.css';
 import TLoading from 'tdesign-uniapp/loading/loading.vue';
 </script>
 ```
-
-### UNI_MODULES 方式
-
-已上传[插件](https://ext.dcloud.net.cn/plugin?id=25431)。
 
 ## 预览
 

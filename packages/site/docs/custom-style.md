@@ -14,7 +14,7 @@ TDesign UniApp 提供了 4 种方式用于样式覆盖
 
 ### 开启 virtualHost
 
-在基础库版本高于 2.19.2 的情况下，TDesign 会默认开启 `virtualHost` 属性。
+在微信小程序基础库版本高于 2.19.2 的情况下，TDesign 会默认开启 `virtualHost` 属性。
 
 此时 `custom-style` 和 `style` 的效果是一致的，任选其一即可：
 
