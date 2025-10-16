@@ -85,6 +85,11 @@ const name = `${prefix}-button`;
 
 export default uniComponent({
   name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-icon`,
+    `${prefix}-class-loading`,
+  ],
   components: {
     tIcon,
     tLoading,
@@ -191,6 +196,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './button.css';
 </style>

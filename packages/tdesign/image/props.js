@@ -43,21 +43,5 @@ const props = {
     type: [String, Number],
     default: '',
   },
-  tClass: {
-    type: String,
-    default: '',
-  },
-  tClassLoad: {
-    type: String,
-    default: '',
-  },
-  tClassImage: {
-    type: String,
-    default: '',
-  },
-  tClassError: {
-    type: String,
-    default: '',
-  },
 };
 export default props;

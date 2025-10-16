@@ -28,14 +28,6 @@ const props = {
     default: () => ([]),
   },
 
-  tClass: {
-    type: String,
-    default: '',
-  },
-  tClassButton: {
-    type: String,
-    default: '',
-  },
   customStyle: {
     type: String,
     default: '',

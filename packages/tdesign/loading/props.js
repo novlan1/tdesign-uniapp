@@ -48,22 +48,5 @@ const props = {
     type: String,
     default: 'circular',
   },
-
-  extraClass: {
-    type: String,
-    default: '',
-  },
-  tClass: {
-    type: String,
-    default: '',
-  },
-  tClassText: {
-    type: String,
-    default: '',
-  },
-  tClassIndicator: {
-    type: String,
-    default: '',
-  },
 };
 export default props;

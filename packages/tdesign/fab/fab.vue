@@ -21,7 +21,7 @@
         :custom-style="buttonData.style || ''"
         :block="buttonData.block"
         :class="getActionClass(classPrefix, buttonData.buttonLayout) || ''"
-        :t-class="prefix + '-class-action'"
+        :t-class="buttonData.tClass"
         :disabled="buttonData.disabled"
         :data-type="'action'"
         :data-extra="buttonData.index"
@@ -75,7 +75,7 @@
       :custom-style="buttonData.style || ''"
       :block="buttonData.block"
       :class="getActionClass(classPrefix, buttonData.buttonLayout) || ''"
-      :t-class="prefix + '-class-action'"
+      :t-class="buttonData.tClass"
       :disabled="buttonData.disabled"
       :data-type="'action'"
       :data-extra="buttonData.index"
@@ -137,6 +137,7 @@ const baseButtonProps = {
 
 export default uniComponent({
   name,
+  externalClasses: [`${prefix}-class`, `${prefix}-class-button`],
   mixins: [useCustomNavbar],
   components: {
     tButton,
@@ -233,6 +234,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './fab.css';
 </style>
