@@ -337,7 +337,7 @@ export default uniComponent({
             // });
           })
           .catch((err) => {
-
+            console.warn('err', err);
           });
       });
     },
