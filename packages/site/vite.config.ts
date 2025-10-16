@@ -1,7 +1,8 @@
 import * as path from 'path';
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import { removeLastSlash } from 't-comm/es/slash/slash';
 
 // import changelog2Json from './web/plugins/changelog-to-json';
 import tdocPlugin from './web/plugins/plugin-tdoc';
@@ -27,42 +28,67 @@ const disableTreeShakingPlugin = paths => ({
   },
 });
 
-export default ({ mode }) => defineConfig({
-  base: publicPathMap[mode],
-  root: '.',
-  resolve: {
-    alias: {
-      '@': resolvePath('../tdesign'),
-      '@docs': resolvePath('./docs'),
-    },
-  },
-  server: {
-    host: '0.0.0.0',
-    port: 18000,
-    open: '/',
-    https: false as any,
-  },
-  build: {
-    outDir: './dist',
-    rollupOptions: {
-      input: {
-        sites: 'index.html',
+const root: string = process.cwd();
+const ENV_PREFIX = ['VITE_', 'VUE_APP'];
+
+export default ({ mode }) => {
+  const env = loadEnv(mode, root, ENV_PREFIX);
+  const vueAppBase = env.VUE_APP_PUBLICPATH;
+  const experimentalConfig = vueAppBase ? {
+    experimental: {
+      renderBuiltUrl(filename: string, { hostId, hostType, type }: {
+        hostId: string;
+        hostType: string;
+        type: string;
+      }) {
+        console.log('[experimental] ', hostType, hostId, type, filename);
+
+        return `${removeLastSlash(vueAppBase)}/${filename}`;
       },
     },
-  },
-  plugins: [
-    vue({
-      template: {
-        compilerOptions: {
-          isCustomElement,
+  } : {};
+
+
+  const result = defineConfig({
+    base: publicPathMap[mode],
+    ...experimentalConfig,
+    root: '.',
+    resolve: {
+      alias: {
+        '@': resolvePath('../tdesign'),
+        '@docs': resolvePath('./docs'),
+      },
+    },
+    server: {
+      host: '0.0.0.0',
+      port: 18000,
+      open: '/',
+      https: false as any,
+    },
+    build: {
+      outDir: './dist',
+      rollupOptions: {
+        input: {
+          sites: 'index.html',
         },
       },
-    }),
-    vueJsx({
-      isCustomElement,
-    }),
-    tdocPlugin(),
-    // changelog2Json(),
-    disableTreeShakingPlugin(['style/', 'toast/']),
-  ],
-});
+    },
+    plugins: [
+      vue({
+        template: {
+          compilerOptions: {
+            isCustomElement,
+          },
+        },
+      }),
+      vueJsx({
+        isCustomElement,
+      }),
+      tdocPlugin(),
+      // changelog2Json(),
+      disableTreeShakingPlugin(['style/', 'toast/']),
+    ],
+  });
+
+  return result;
+};

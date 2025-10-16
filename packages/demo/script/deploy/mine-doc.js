@@ -1,6 +1,7 @@
 const path = require('path');
 
 const { execCommand } = require('t-comm');
+const { uploadCdn } = require('./cdn');
 
 require('./local.env')();
 const args = process.argv.slice(2);
@@ -17,6 +18,10 @@ const DEPLOY_CONFIG = {
 
 async function main() {
   console.log('[DEPLOY_CONFIG]', DEPLOY_CONFIG);
+  await uploadCdn({
+    secretId: args[2],
+    secretKey: args[3],
+  });
 
   if (!DEPLOY_CONFIG.hostPwd || !DEPLOY_CONFIG.hostName) {
     throw new Error('缺少环境变量');
