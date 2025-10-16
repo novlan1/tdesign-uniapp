@@ -462,6 +462,12 @@ export default uniComponent({
 
     async init() {
       if (this.__inited) return;
+      await this.getInitialInfo();
+      this.__inited = true;
+      this.bus.emit('initial');
+    },
+
+    async getInitialInfo() {
       const line = await getRect(this, '#sliderLine');
       const { blockSize } = this;
       const { theme, vertical } = this;
@@ -481,8 +487,6 @@ export default uniComponent({
       this.maxRange = maxRange;
       this.initialLeft = initialLeft;
       this.initialRight = initialRight;
-      this.__inited = true;
-      this.bus.emit('initial');
     },
 
     stepValue(value) {
@@ -497,7 +501,8 @@ export default uniComponent({
     },
 
     // 点击滑动条的事件
-    onSingleLineTap(e) {
+    async onSingleLineTap(e) {
+      await this.getInitialInfo();
       const { disabled } = this;
       if (disabled) return;
       const isSingleLineTap = this.identifier[0] === -1; // 区分点击滑动条和单游标的滑动
@@ -505,14 +510,16 @@ export default uniComponent({
         const [touch] = e.changedTouches;
         this.identifier[0] = touch.identifier;
       }
-      const value = this.getSingleChangeValue(e);
+      const value = await this.getSingleChangeValue(e);
+
       if (isSingleLineTap) {
         this.identifier[0] = -1;
       }
       this.triggerValue(value);
     },
 
-    getSingleChangeValue(e) {
+    async getSingleChangeValue(e) {
+      // await this.getInitialInfo();
       const { min, max, theme, vertical } = this;
       const { initialLeft, maxRange, blockSize } = this;
       const touch = e.changedTouches.find(item => item.identifier === this.identifier[0]);
@@ -522,11 +529,9 @@ export default uniComponent({
       if ((theme) === 'capsule') {
         offset = Number(blockSize);
         if (vertical) {
-          offset *= 2;
         }
-        offset += 6;
+        offset += 3;
       } else if (vertical) {
-        offset = Number(blockSize);
       }
 
       const currentLeft = pagePosition - initialLeft - offset;
@@ -610,7 +615,8 @@ export default uniComponent({
       });
     },
 
-    onTouchStart(e) {
+    async onTouchStart(e) {
+      await this.getInitialInfo();
       this.$emit('dragstart', { e });
       const [touch] = e.changedTouches;
       if (e.currentTarget.id === 'rightDot') {
@@ -621,7 +627,7 @@ export default uniComponent({
     },
 
     onTouchMoveLeft(e) {
-      const { disabled, theme, vertical } = this;
+      const { disabled, theme } = this;
       const { initialLeft, _value, blockSize } = this;
       if (disabled) return;
 
@@ -629,10 +635,7 @@ export default uniComponent({
       const pagePosition = this.getPagePosition(touch);
       let offset = 0;
       if ((theme) === 'capsule') {
-        offset += Number(blockSize);
-      }
-      if (vertical) {
-        offset += Number(blockSize) + 6;
+        offset = Number(blockSize) + 3;
       }
       const currentLeft = pagePosition - initialLeft - offset;
 
@@ -645,15 +648,16 @@ export default uniComponent({
     },
 
     onTouchMoveRight(e) {
-      const { disabled, vertical } = this;
-      const { initialRight, _value, blockSize } = this;
+      const { disabled, vertical, theme } = this;
+      const { initialRight, _value } = this;
       if (disabled) return;
 
       const touch = e.changedTouches.find(item => item.identifier === this.identifier[1]);
       const pagePosition = this.getPagePosition(touch);
       let offset = 0;
-      if (vertical) {
-        offset += Number(blockSize) / 2 + 6;
+      if ((theme) === 'capsule') {
+        offset -= 3;
+      } else if (vertical) {
       }
       const currentRight = -(pagePosition - initialRight - offset);
 
@@ -693,13 +697,13 @@ export default uniComponent({
     },
 
     getPagePosition(touch) {
-      const { pageX, pageY } = touch;
+      const { clientX, clientY } = touch;
       const { vertical } = this;
-      return vertical ? pageY : pageX;
+      return vertical ? clientY : clientX;
     },
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './slider.css';
 </style>
