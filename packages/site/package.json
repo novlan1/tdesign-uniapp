@@ -37,11 +37,9 @@
     "dayjs": "^1.10.7",
     "lodash-es": "^4.17.21",
     "tdesign-icons-vue-next": "^0.4.1",
-    "tdesign-site-components-uniapp": "^0.17.1",
     "tinycolor2": "^1.6.0",
     "validator": "^13.5.1"
   },
-  "peerDependencies": {},
   "devDependencies": {
     "@babel/core": ">=7.13.0 <8.0.0",
     "@babel/helper-module-imports": "7.22.5",
@@ -122,6 +120,7 @@
     "rollup-plugin-vue": "^6.0.0",
     "rollup-pluginutils": "^2.8.2",
     "tdesign-publish-cli": "^0.0.12",
+    "tdesign-site-components-uniapp": "^0.17.2",
     "tdesign-theme-generator": "^1.1.0",
     "tslib": "^2.3.1",
     "typescript": "~4.7.2",
