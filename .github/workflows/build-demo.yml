@@ -37,9 +37,12 @@ jobs:
         
       - name: Install expect
         run: sudo apt-get update && sudo apt-get install -y expect
+
+      - name: Upload CDN
+        run: node packages/demo/script/deploy/cdn.js ${{ secrets.COS_SECRET_ID }} ${{ secrets.COS_SECRET_KEY }}
         
       - name: Deploy Mine Cloud
-        run: node packages/demo/script/deploy/mine-doc.js ${{ secrets.HOST_NAME }} ${{ secrets.HOST_PWD }} ${{ secrets.COS_SECRET_ID }} ${{ secrets.COS_SECRET_KEY }}
+        run: node packages/demo/script/deploy/mine-doc.js ${{ secrets.HOST_NAME }} ${{ secrets.HOST_PWD }}
         shell: bash
 
       - name: Deploy

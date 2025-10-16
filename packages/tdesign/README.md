@@ -21,7 +21,7 @@
 
 ## 文档
 
-[https://novlan1.github.io/tdesign-uniapp/](https://novlan1.github.io/tdesign-uniapp/)
+[https://uwayfly.com/tdesign-uniapp/](https://uwayfly.com/tdesign-uniapp/)
 
 ## 预览
 

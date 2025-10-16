@@ -1,21 +1,21 @@
 const { uploadCOSFileAndPurgeUrlCache } = require('t-comm');
 const glob = require('glob');
 const path = require('path');
+const fs = require('fs');
 
 require('./local.env')();
+const args = process.argv.slice(2);
 
 
 const COS_CONFIG = {
   bucket: 'mike-1255355338',
   region: 'ap-guangzhou',
-
+  secretId: args[0] || process.env.COS_SECRET_ID,
+  secretKey: args[1] || process.env.COS_SECRET_KEY,
 };
 
 
-async function uploadCdn({
-  secretId,
-  secretKey,
-}) {
+async function uploadCdn() {
   const list = glob.sync('./packages/site/dist/**/*', {
     ignore: '**/*.html',
     nodir: true,
@@ -31,23 +31,23 @@ async function uploadCdn({
     };
   });
 
-  await uploadCOSFileAndPurgeUrlCache({
-    ...COS_CONFIG,
-    secretId: secretId || process.env.COS_SECRET_ID,
-    secretKey: secretKey || process.env.COS_SECRET_KEY,
+  for (const item of files) {
+    uploadCOSFileAndPurgeUrlCache({
+      ...COS_CONFIG,
 
-    files,
+      files: [item],
 
-    area: 'mainland',
-    useEO: false,
-  }).then((res) => {
-    console.log('[uploadResult] res: ', res);
-  })
-    .catch(() => {});
+      area: 'mainland',
+      useEO: false,
+    }).then((res) => {
+      console.log('[uploadResult] res: ', res);
+
+      fs.unlinkSync(item.path);
+    })
+      .catch((e) => {
+        console.log('uploadCOSFileAndPurgeUrlCache.err: ', e);
+      });
+  }
 }
-
-module.exports = {
-  uploadCdn,
-};
 
 uploadCdn();
