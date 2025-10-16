@@ -175,8 +175,7 @@ export default uniComponent({
     },
 
     dataValue: {
-      handler(v) {
-        console.log('watch.dataValue', v);
+      handler() {
         // this.updateInnerMaxLen();
         this.updateClearIconVisible();
       },
@@ -199,7 +198,7 @@ export default uniComponent({
         this.showClearIcon = false;
         return;
       }
-      console.log('value', value, clearTrigger);
+
       this.showClearIcon = value || String(clearTrigger) === 'always';
     },
 
@@ -215,7 +214,7 @@ export default uniComponent({
         value = characters;
       }
 
-      console.log('onInput.value', value);
+
       this.$nextTick(() => {
         this.dataValue = value;
         this.$emit('change', { value });
@@ -284,6 +283,6 @@ export default uniComponent({
 
 
 </script>
-<style scoped >
+<style scoped>
 @import './search.css';
 </style>

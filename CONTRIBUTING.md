@@ -16,6 +16,9 @@
 开发
 
 ```bash
+# 组件派发
+npm run init
+
 # H5
 npm run dev
 

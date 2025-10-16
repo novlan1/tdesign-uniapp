@@ -194,12 +194,11 @@ let ImageViewer = class extends SuperComponent {
         });
       },
       calcImageDisplayStyle(e, t) {
-        console.log('calcImageDisplayStyle', { e, t });
         const {
           windowWidth: s,
           windowHeight: i,
         } = uni.getWindowInfo();
-        console.log('window', { s, i });
+
         const a = e / t;
         if (e < s && t < i) {
           return {
@@ -235,7 +234,6 @@ let ImageViewer = class extends SuperComponent {
         };
       },
       onImageLoadSuccess(e, { index: i }) {
-        console.log('onImageLoadSuccess', { e, i });
         const {
           detail: {
             width: t,
@@ -256,7 +254,7 @@ let ImageViewer = class extends SuperComponent {
         this.loadedImageIndexes.includes(i) || this.setData({
           loadedImageIndexes: [...this.loadedImageIndexes, i],
         });
-        console.log('imagesStyle', { n });
+
         this.setData({
           swiperStyle: Object.assign(Object.assign({}, r), {
             [i]: {

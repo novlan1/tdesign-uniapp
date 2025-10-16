@@ -322,11 +322,10 @@ export default uniComponent({
         }, duration);
       }
       const wrapID = id ? `#${id}` : `#${name}`;
-      console.log('wrapID', wrapID);
+
       setTimeout(() => {
         getRect(this, wrapID)
           .then((wrapRect) => {
-            console.log('wrapRect', wrapRect);
             this.height = wrapRect.height;
             setTimeout(() => {
               this.fadeClass = '';
@@ -338,7 +337,7 @@ export default uniComponent({
             // });
           })
           .catch((err) => {
-            console.warn('err', err);
+
           });
       });
     },
@@ -376,6 +375,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './message-item.css';
 </style>
