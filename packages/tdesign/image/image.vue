@@ -140,6 +140,7 @@ export default uniComponent({
       } = this;
 
       const lower = compareVersion(version, '2.10.3') < 0;
+      // #ifdef MP-WEIXIN
       if ('heightFix' === mode && lower) {
         getRect(this, `#${tId || 'image'}`).then((e) => {
           const {
@@ -153,6 +154,7 @@ export default uniComponent({
 
           });
       }
+      // #endif
       this.isLoading = false;
       this.isFailed = false;
       this.$emit('load', {
@@ -194,6 +196,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './image.css';
 </style>
