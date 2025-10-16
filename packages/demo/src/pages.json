@@ -191,6 +191,9 @@
     },
     {
       "path": "pages-more/toast/toast"
+    },
+    {
+      "path": "pages-more/swiper/swiper"
     }
   ],
   "globalStyle": {
@@ -422,6 +425,10 @@
       {
         "name": "toast",
         "pathName": "pages-more/toast/toast"
+      },
+      {
+        "name": "swiper",
+        "pathName": "pages-more/swiper/swiper"
       }
     ]
   }

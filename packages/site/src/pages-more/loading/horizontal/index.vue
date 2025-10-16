@@ -1,0 +1,51 @@
+<template>
+  <view class="loading-container-flex">
+    <t-loading
+      v-if="!skylineRender"
+      theme="circular"
+      size="40rpx"
+      text="加载中..."
+      t-class="wrapper"
+    />
+    <t-loading
+      theme="spinner"
+      size="40rpx"
+      text="加载中..."
+      inherit-color
+      t-class="wrapper"
+    />
+  </view>
+</template>
+
+<script>
+import tLoading from 'tdesign-uniapp/loading/loading.vue';
+// import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js'
+export default {
+  options: {
+    styleIsolation: 'shared',
+  },
+  components: {
+    tLoading,
+  },
+  data() {
+    return {
+      skylineRender: '',
+    };
+  },
+  created() {},
+  // mixins: [SkylineBehavior],
+  methods: {},
+};
+</script>
+<style>
+.loading-container-flex {
+    display: flex;
+    align-items: center;
+    color: #000;
+}
+
+.wrapper {
+    display: flex;
+    margin-right: 64px;
+}
+</style>
