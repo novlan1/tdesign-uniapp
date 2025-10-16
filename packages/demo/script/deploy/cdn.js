@@ -49,5 +49,3 @@ async function uploadCdn({
 module.exports = {
   uploadCdn,
 };
-
-uploadCdn();
