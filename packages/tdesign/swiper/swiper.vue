@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="'class ' + prefix + '-class ' + classPrefix"
+    :class="classPrefix + ' class ' + tClass"
     :style="_._style([style, customStyle])"
   >
     <swiper
@@ -12,53 +12,48 @@
       :circular="loop"
       :vertical="direction == 'vertical'"
       :easing-function="easingFunction"
-      :previous-margin="previousMargin"
-      :next-margin="nextMargin"
+      :previous-margin="_.addUnit(previousMargin)"
+      :next-margin="_.addUnit(nextMargin)"
       :snap-to-edge="snapToEdge"
       :display-multiple-items="displayMultipleItems"
       :style="'height: ' + _.addUnit(height)"
       @change="onChange"
+      @animationfinish="onAnimationFinish"
     >
       <swiper-item
         v-for="(item, index) in list"
         :key="index"
         :class="
           _.cls(classPrefix + '__item', [
-            ['preview', _this.isPrev(navCurrent, index, list)],
-            ['next', _this.isNext(navCurrent, index, list)]
+            ['preview', isPrev(navCurrent, index, list)],
+            ['next', isNext(navCurrent, index, list)]
           ])
         "
         :data-index="index"
         :aria-hidden="navCurrent !== index"
         aria-role="image"
         :aria-label="_.isObject(item) ? item.ariaLabel : ''"
-        @tap="onTap"
+        @tap="onTap($event, { index })"
       >
         <!-- parse <template is="image" :data="tClass: _this.getImageClass(prefix, navCurrent, index, list), style: 'height: ' + _.addUnit(height), src: _.isObject(item) ? item.value : item, mode: 'aspectFill', dataset: index, ...imageProps, bindload: 'onImageLoad'"/> -->
         <t-image
-          :t-class="_.cls(classPrefix + '__image', [util.getImageSize(column)]) + ' ' + prefix + '-class-image'"
-          :t-class-load="tClassLoad"
-          :style="'height: ' + _.addUnit(height) || ''"
-          :custom-style="customStyle || ''"
-          :height="height || ''"
-          :width="width || ''"
-          :error="error || 'default'"
-          :lazy="lazy || false"
-          :loading="count || 'default'"
-          :shape="'round' || 'square'"
-          :src="image || ''"
-          :mode="'widthFix' || 'scaleToFill'"
-          :webp="webp || false"
-          :show-menu-by-longpress="showMenuByLongpress || false"
-          :data-custom="index || null"
-          @error="binderror($event, { custom: index || null })"
-          @load="'onImageLoad';"
+          :t-class="getImageClass(prefix, navCurrent, index, list, tClassImage, tClassPrevImage, tClassNextImage)"
+          :custom-style="'height: ' + _.addUnit(height) || ''"
+          :error="imageProps.error || 'default'"
+          :lazy="imageProps.lazy || false"
+          :loading="imageProps.loading || 'default'"
+          :shape="imageProps.shape || 'square'"
+          :src="_.isObject(item) ? item.value : item"
+          :mode="imageProps.mode || 'aspectFill'"
+          :webp="imageProps.webp || false"
+          :show-menu-by-longpress="imageProps.showMenuByLongpress || false"
+          @load="onImageLoad($event, { custom: index || null })"
         />
       </swiper-item>
     </swiper>
     <t-swiper-nav
       v-if="navigation"
-      :t-class="prefix + '-class-nav'"
+      :t-class="tClassNav"
       :type="navigation.type || 'dots'"
       :current="navCurrent || 0"
       :total="list.length || 0"
@@ -75,140 +70,128 @@
 <script>
 import tSwiperNav from '../swiper-nav/swiper-nav';
 import tImage from '../image/image';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
 import _ from '../common/utils.wxs';
-import * as _this from './index.wxs';
+import { isPrev, isNext, getImageClass } from './computed.js';
+import { ParentMixin, RELATION_MAP } from '../common/relation';
 
-
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-swiper`;
-let Swiper = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-nav`, `${prefix}-class-image`, `${prefix}-class-prev-image`, `${prefix}-class-next-image`];
-    this.options = {
-      multipleSlots: true,
-    };
-    this.properties = props;
-    this.observers = {
-      navCurrent(t) {
-        this.updateNav(t);
-      },
-    };
-    this.$nav = null;
-    this.relations = {
-      '../swiper-nav/swiper-nav': {
-        type: 'child',
-      },
-    };
-    this.setData({
+
+export default uniComponent({
+  name,
+  externalClasses: [`${prefix}-class`, `${prefix}-class-nav`, `${prefix}-class-image`, `${prefix}-class-prev-image`, `${prefix}-class-next-image`],
+  mixins: [ParentMixin(RELATION_MAP.SwiperNav)],
+  components: {
+    tSwiperNav,
+    tImage,
+  },
+  options: {
+    multipleSlots: true,
+  },
+  props: {
+    ...props,
+  },
+  emits: [
+    'click',
+    'change',
+    'animationfinish',
+    'image-load',
+  ],
+  data() {
+    return {
       prefix,
       classPrefix: name,
-    });
-    this.lifetimes = {
-      ready() {
-        const {
-          current: t,
-        } = this;
-        this.setData({
-          navCurrent: t,
-        });
-      },
+      _,
+      navCurrent: 0,
     };
-    this.methods = {
-      updateNav(t) {
-        let e;
-        if (this.navigation) {
-          return;
-        }
-        const i = null === (e = this.getRelationNodes('./swiper-nav')) || void 0 === e ? void 0 : e[0];
-        if (!i) {
-          return;
-        }
-        const {
-          direction: r,
-          paginationPosition: n,
-          list: s,
-        } = this;
-        i.setData({
-          current: t,
-          total: s.length,
-          direction: r,
-          paginationPosition: n,
-        });
-      },
-      onTap(t) {
-        const {
-          index: e,
-        } = t.currentTarget.dataset;
-        this.$emit('click', {
-          detail: {
-            index: e,
-          },
-        });
-      },
-      onChange(t) {
-        const {
-          current: e,
-          source: i,
-        } = t.detail;
-        this.setData({
-          navCurrent: e,
-        });
-        this.$emit('change', {
-          detail: {
-            current: e,
-            source: i,
-          },
-        });
-      },
-      onNavBtnChange(t) {
-        const {
-          dir: e,
-          source: i,
-        } = t.detail;
-        this.doNavBtnChange(e, i);
-      },
-      doNavBtnChange(t, e) {
-        const {
-          current: i,
-          list: r,
-          loop: n,
-        } = this;
-        const s = r.length;
-        let o = 'next' === t ? i + 1 : i - 1;
-        o = n ? 'next' === t ? (i + 1) % s : (i - 1 + s) % s : o < 0 || o >= s ? i : o;
-        if (o !== i) {
-          this.setData({
-            current: o,
-          });
-          this.$emit('change', {
-            detail: {
-              current: o,
-              source: e,
-            },
-          });
-        }
-      },
-      onImageLoad(t) {
-        this.$emit('image-load', {
-          detail: {
-            index: t.target.dataset.custom,
-          },
-        });
-      },
-    };
-  }
-};
-Swiper = __decorate([wxComponent()], Swiper);
-export default Swiper;
+  },
+  watch: {
+    navCurrent(t) {
+      this.updateNav(t);
+    },
+  },
+
+  mounted() {
+    this.navCurrent = this.current;
+  },
+
+  methods: {
+    isPrev,
+    isNext,
+    getImageClass,
+    getImageSize(column) {
+      if (column >= 5) return 'small';
+      if (column === 4) return 'middle';
+    },
+
+    updateNav(currentValue) {
+      if (this.navigation) return;
+      const $nav = this.getRelationNodes('./swiper-nav')?.[0];
+      if (!$nav) return;
+      const { direction, paginationPosition, list } = this;
+
+      this.current = currentValue;
+      this.total = list.length;
+      this.direction = direction;
+      this.paginationPosition = paginationPosition;
+    },
+
+    onTap(e, dataset) {
+      const { index } = dataset;
+      this.$emit('click', { index });
+    },
+
+    onChange(e) {
+      const { current, source } = e.detail;
+
+      if (!source) return;
+
+      this.navCurrent = current;
+      this.triggerSource = source;
+
+      this.$emit('change', { current, source });
+    },
+
+    onAnimationFinish(e) {
+      const { current, source } = e.detail;
+
+      this.$emit('animationfinish', { current, source: source || this.triggerSource });
+    },
+
+    onNavBtnChange(e) {
+      const { dir, source } = e;
+
+      this.doNavBtnChange(dir, source);
+    },
+
+    doNavBtnChange(dir, source) {
+      const { current, list, loop, navCurrent } = this;
+      const count = list.length;
+      let nextPos = dir === 'next' ? current + 1 : current - 1;
+
+      if (loop) {
+        nextPos = dir === 'next' ? (current + 1) % count : (current - 1 + count) % count;
+      } else {
+        nextPos = nextPos < 0 || nextPos >= count ? current : nextPos;
+      }
+
+      if (nextPos === navCurrent) return;
+
+      this.navCurrent = nextPos;
+      this.triggerSource = source;
+
+      this.$emit('change', { current: nextPos, source });
+    },
+
+    onImageLoad(e, dataset) {
+      this.$emit('image-load', { index: dataset.custom });
+    },
+  },
+});
+
 </script>
 <style scoped>
 @import './swiper.css';
-
 </style>

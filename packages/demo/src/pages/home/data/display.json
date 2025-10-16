@@ -68,8 +68,7 @@
       },
       {
         "name": "Swiper",
-        "label": "轮播图",
-        "hide": true
+        "label": "轮播图"
       },
       {
         "name": "Tag",

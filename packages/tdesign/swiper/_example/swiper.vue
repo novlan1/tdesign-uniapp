@@ -9,7 +9,6 @@
       <t-demo-header
         title="Swiper 轮播图"
         desc="用于循环轮播一组图片或内容，也可以滑动进行切换，轮播动效时间可以设置。"
-        notice="渲染框架支持情况：WebView"
       />
       <view class="demo-section">
         <t-demo
@@ -59,12 +58,12 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import fraction from './fraction';
-import navBtn from './nav-btn';
-import custom from './custom';
-import cards from './cards';
-import vertical from './vertical';
+import BaseDemo from './base/index.vue';
+import fraction from './fraction/index.vue';
+import navBtn from './nav-btn/index.vue';
+import custom from './custom/index.vue';
+import cards from './cards/index.vue';
+import vertical from './vertical/index.vue';
 export default {
   components: {
     BaseDemo,

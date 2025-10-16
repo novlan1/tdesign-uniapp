@@ -91,6 +91,9 @@ const swiperList = [
   },
 ];
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tSwiper,
     tSwitch,
@@ -111,31 +114,19 @@ export default {
   },
   created() {},
   methods: {
-    onChange(e) {
-      const {
-        detail: { current, source },
-      } = e;
-      console.log(current, source);
-    },
     onAutoplayChange(e) {
-      this.setData({
-        autoplay: e.detail.value,
-      });
+      this.autoplay = e.value;
     },
     onIntervalChange(e) {
-      this.setData({
-        interval: e.detail.value,
-      });
+      this.interval = e.value;
     },
     onDurationChange(e) {
-      this.setData({
-        duration: e.detail.value,
-      });
+      this.duration = e.value;
     },
   },
 };
 </script>
-<style>
+<style lang="less">
 .swiper-box {
     margin: 0 32rpx 32rpx;
     border-radius: 16rpx;
@@ -148,12 +139,11 @@ export default {
     height: 100%;
 }
 
-.swiper-switch {
-    margin: 22rpx 0;
-}
-
-.swiper-switch .t-switch__label {
+:deep(.swiper-switch) {
+  margin: 22rpx 0;
+  .t-switch__label {
     display: none;
+  }
 }
 
 .cell {
@@ -175,7 +165,7 @@ export default {
     width: 68rpx;
 }
 
-.cell .swiper-slider {
+.cell :deep(.swiper-slider) {
     margin: 32rpx 0;
 }
 
@@ -188,7 +178,7 @@ export default {
     border-radius: 0;
 }
 
-.external-class-bar {
+:deep(.external-class-bar) {
     margin: 0 !important;
 }
 </style>

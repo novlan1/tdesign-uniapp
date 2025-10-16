@@ -2,7 +2,7 @@
   <view>
     <view
       v-if="showControls"
-      :class="'class ' + prefix + '-class ' + classPrefix + '__btn'"
+      :class="classPrefix + '__btn ' + 'class ' + tClass"
       :style="_._style([style, customStyle])"
     >
       <view
@@ -10,14 +10,14 @@
         data-dir="prev"
         aria-role="button"
         aria-label="上一张"
-        @tap="nav"
+        @tap="nav($event, { dir: 'prev'})"
       />
       <view
         :class="classPrefix + '__btn--next'"
         data-dir="next"
         aria-role="button"
         aria-label="下一张"
-        @tap="nav"
+        @tap="nav($event, { dir: 'next'})"
       />
     </view>
     <view
@@ -41,79 +41,45 @@
   </view>
 </template>
 <script>
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
-import config from '../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
+import props from './props';
 import _ from '../common/utils.wxs';
+import { ChildrenMixin, RELATION_MAP } from '../common/relation';
 
-const {
-  prefix: prefix,
-} = config;
 const name = `${prefix}-swiper-nav`;
-let SwiperNav = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`];
-    // this = {
-    //   current: {
-    //     type: Number,
-    //     value: 0,
-    //   },
-    //   total: {
-    //     type: Number,
-    //     value: 0,
-    //   },
-    //   type: {
-    //     type: String,
-    //     value: 'dots',
-    //   },
-    //   minShowNum: {
-    //     type: Number,
-    //     value: 2,
-    //   },
-    //   showControls: {
-    //     type: Boolean,
-    //     value: false,
-    //   },
-    //   direction: {
-    //     type: String,
-    //     value: 'horizontal',
-    //   },
-    //   paginationPosition: {
-    //     type: String,
-    //     value: 'bottom',
-    //   },
-    // };
-    this.relations = {
-      '../swiper/swiper': {
-        type: 'parent',
-      },
-    };
-    this.setData({
+
+export default uniComponent({
+  name,
+  externalClasses: [`${prefix}-class`],
+  mixins: [ChildrenMixin(RELATION_MAP.SwiperNav)],
+  components: { },
+  props: {
+    ...props,
+  },
+  emits: [
+    'nav-btn-change',
+  ],
+  data() {
+    return {
       prefix,
       classPrefix: name,
-    });
-    this.methods = {
-      nav(e) {
-        let t;
-        const {
-          dir: r,
-        } = e.target.dataset;
-        this.$emit('nav-btn-change', {
-          detail: {
-            dir: r,
-            source: 'nav',
-          },
-        });
-        if (this.$parent) {
-          null === (t = this.$parent) || void 0 === t || t.doNavBtnChange(r, 'nav');
-        }
-      },
+      _,
     };
-  }
-};
-SwiperNav = __decorate([wxComponent()], SwiperNav);
-export default SwiperNav;
+  },
+
+  methods: {
+    nav(e, dataset) {
+      const { dir } = dataset;
+      const source = 'nav';
+      this.$emit('nav-btn-change', { dir, source });
+      const parent = this[RELATION_MAP.SwiperNav];
+      if (parent) {
+        parent.doNavBtnChange(dir, source);
+      }
+    },
+  },
+});
 </script>
 <style scoped>
 @import './swiper-nav.css';
