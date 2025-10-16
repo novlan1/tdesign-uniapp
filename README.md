@@ -38,7 +38,7 @@ import TLoading from 'tdesign-uniapp/loading/loading.vue';
 
 ## 预览
 
-https://novlan1.github.io/tdesign-uniapp/
+https://uwayfly.com/tdesign-uniapp/
 
 <img src="./packages/demo/docs/img/github-pages.png" width="260" />
 
