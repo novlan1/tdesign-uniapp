@@ -447,14 +447,14 @@ export const docs = [
         path: '/components/sticky',
         component: () => import('@/sticky/README.md'),
       },
-      // {
-      //   title: 'Swiper 轮播图',
-      //   titleEn: 'Swiper',
-      //   name: 'swiper',
-      //   meta: { docType: 'data' },
-      //   path: '/components/swiper',
-      //   component: () => import('@/swiper/README.md'),
-      // },
+      {
+        title: 'Swiper 轮播图',
+        titleEn: 'Swiper',
+        name: 'swiper',
+        meta: { docType: 'data' },
+        path: '/components/swiper',
+        component: () => import('@/swiper/README.md'),
+      },
       {
         title: 'Tag 标签',
         titleEn: 'Tag',

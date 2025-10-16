@@ -157,6 +157,9 @@
       "path": "pages-more/sticky/sticky"
     },
     {
+      "path": "pages-more/swiper/swiper"
+    },
+    {
       "path": "pages-more/tag/tag"
     },
     {
@@ -191,9 +194,6 @@
     },
     {
       "path": "pages-more/toast/toast"
-    },
-    {
-      "path": "pages-more/swiper/swiper"
     }
   ],
   "globalStyle": {
@@ -379,6 +379,10 @@
         "pathName": "pages-more/sticky/sticky"
       },
       {
+        "name": "swiper",
+        "pathName": "pages-more/swiper/swiper"
+      },
+      {
         "name": "tag",
         "pathName": "pages-more/tag/tag"
       },
@@ -425,10 +429,6 @@
       {
         "name": "toast",
         "pathName": "pages-more/toast/toast"
-      },
-      {
-        "name": "swiper",
-        "pathName": "pages-more/swiper/swiper"
       }
     ]
   }
