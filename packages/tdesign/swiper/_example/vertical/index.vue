@@ -111,26 +111,14 @@ export default {
   },
   created() {},
   methods: {
-    onChange(e) {
-      const {
-        detail: { current, source },
-      } = e;
-      console.log(current, source);
-    },
     onAutoplayChange(e) {
-      this.setData({
-        autoplay: e.detail.value,
-      });
+      this.autoplay = e.value;
     },
     onIntervalChange(e) {
-      this.setData({
-        interval: e.detail.value,
-      });
+      this.interval = e.value;
     },
     onDurationChange(e) {
-      this.setData({
-        duration: e.detail.value,
-      });
+      this.duration = e.value;
     },
   },
 };

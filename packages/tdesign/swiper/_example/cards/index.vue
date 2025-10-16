@@ -60,9 +60,7 @@ export default {
   created() {},
   methods: {
     onChange(e) {
-      const {
-        detail: { current, source },
-      } = e;
+      const { current, source } = e;
       console.log(current, source);
     },
   },

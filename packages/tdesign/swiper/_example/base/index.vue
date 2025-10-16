@@ -34,15 +34,15 @@ export default {
   created() {},
   methods: {
     onTap(e) {
-      const { index } = e.detail;
+      const { index } = e;
       console.log(index);
     },
     onChange(e) {
-      const { current, source } = e.detail;
+      const { current, source } = e;
       console.log(current, source);
     },
     onImageLoad(e) {
-      console.log(e.detail.index);
+      console.log(e.index);
     },
   },
 };
