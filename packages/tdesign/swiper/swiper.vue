@@ -18,6 +18,7 @@
       :display-multiple-items="displayMultipleItems"
       :style="'height: ' + _.addUnit(height)"
       @change="onChange"
+      @animationfinish="onAnimationFinish"
     >
       <swiper-item
         v-for="(item, index) in list"
