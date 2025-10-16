@@ -473,8 +473,8 @@ importers:
         specifier: ^0.0.12
         version: 0.0.12(@types/node@18.8.0)
       tdesign-site-components-uniapp:
-        specifier: ^0.17.2
-        version: 0.17.2
+        specifier: 0.17.3
+        version: 0.17.3
       tdesign-theme-generator:
         specifier: ^1.1.0
         version: 1.1.8
@@ -8592,8 +8592,8 @@ packages:
     resolution: {integrity: sha512-eRmrOCUqR/55AAZ8dqUGV8+TU1qzljGoiU9TsFOroHcNe4T1u/dYwEBfg39NsupWUoO/v67XeUDlKyTjUHkO2w==}
     hasBin: true
 
-  tdesign-site-components-uniapp@0.17.2:
-    resolution: {integrity: sha512-OPSWifeW381tyf0BqBkx3zbRZ6H07mEbiPL+laqmbmgti9jQ65hPXYkSZr8IvvJ15TekKOCsI+bfOoyGmA+kAA==}
+  tdesign-site-components-uniapp@0.17.3:
+    resolution: {integrity: sha512-546PkObWpA9uxgS5ANUkPUAcKDCjxj9dms+Sp5QOz3MH90REeeWtB4eVUYNWO+orFxghFCr3QxFoV9maAdb8NQ==}
 
   tdesign-theme-generator@1.1.8:
     resolution: {integrity: sha512-tbxqPf+weA1cb+rOXhs9dhRf/UayL7Uf8JTNqtkkR5bIbx434+2iVav9yi02F+rjC66ZPhcqSYvJnfPYDxvPiA==}
@@ -19795,7 +19795,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  tdesign-site-components-uniapp@0.17.2:
+  tdesign-site-components-uniapp@0.17.3:
     dependencies:
       '@popperjs/core': 2.11.8
       hybrids: 8.2.2
