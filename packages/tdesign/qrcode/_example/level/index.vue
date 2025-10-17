@@ -1,22 +1,31 @@
 <template>
   <view>
-    <t-slider 
-      :value="value" 
-      :min="0" 
-      :max="3" 
-      :step="1" 
-      :marks="marks" 
-      @change="handleSliderChange" 
+    <t-slider
+      :value="value"
+      :min="0"
+      :max="3"
+      :step="1"
+      :marks="marks"
+      @change="handleSliderChange"
     />
     <view class="qrcode-content">
-      <t-qrcode value="https://tdesign.gtimg.com/site/tdesign-logo.png" :level="currentLevel" status="active" />
+      <TQrcode
+        value="https://tdesign.gtimg.com/site/tdesign-logo.png"
+        :level="currentLevel"
+        status="active"
+      />
     </view>
   </view>
 </template>
 
 <script>
+import TQrcode from 'tdesign-uniapp/qrcode/qrcode.vue';
+
 export default {
   name: 'QRCodeLevel',
+  components: {
+    TQrcode,
+  },
   data() {
     return {
       value: 1,

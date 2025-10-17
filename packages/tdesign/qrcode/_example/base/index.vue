@@ -3,8 +3,13 @@
 </template>
 
 <script>
+import TQrcode from 'tdesign-uniapp/qrcode/qrcode.vue';
+
 export default {
   name: 'QRCodeBase',
+  components: {
+    TQrcode,
+  },
 };
 </script>
 

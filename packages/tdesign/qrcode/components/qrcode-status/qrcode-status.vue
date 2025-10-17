@@ -57,5 +57,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import './qrcode-status.less';
+@import './qrcode-status.css';
 </style>

@@ -9,8 +9,13 @@
 </template>
 
 <script>
+import TQrcode from 'tdesign-uniapp/qrcode/qrcode.vue';
+
 export default {
   name: 'QRCodeColor',
+  components: {
+    TQrcode,
+  },
 };
 </script>
 

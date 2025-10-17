@@ -14,8 +14,13 @@
 </template>
 
 <script>
+import TQrcode from 'tdesign-uniapp/qrcode/qrcode.vue';
+
 export default {
   name: 'QRCodeStatus',
+  components: {
+    TQrcode,
+  },
   methods: {
     handleRefresh() {
       console.log('Click Refresh');

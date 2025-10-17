@@ -187,5 +187,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import './qrcode-canvas.less';
+@import './qrcode-canvas.css';
 </style>

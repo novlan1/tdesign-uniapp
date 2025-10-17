@@ -124,5 +124,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import './qrcode.less';
+@import './qrcode.css';
 </style>
