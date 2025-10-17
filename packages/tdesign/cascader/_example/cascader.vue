@@ -65,5 +65,4 @@ export default {
 };
 </script>
 <style>
-@import './cascader.css';
 </style>

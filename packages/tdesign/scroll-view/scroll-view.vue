@@ -45,6 +45,5 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
-@import './scroll-view.css';
+<style scoped>
 </style>

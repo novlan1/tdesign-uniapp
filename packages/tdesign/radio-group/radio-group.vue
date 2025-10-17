@@ -180,6 +180,5 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
-@import './radio-group.css';
+<style scoped>
 </style>
