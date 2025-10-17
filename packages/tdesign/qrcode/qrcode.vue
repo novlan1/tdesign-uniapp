@@ -1,0 +1,128 @@
+<template>
+  <view
+    :style="`${_._style([style, customStyle])}; width:${size}px; height: ${size}px; background-color: ${bgColor};`"
+    :class="`${classPrefix} ${borderless ? prefix + '-' + 'borderless' : ''} class ${prefix}-class`"
+  >
+    <qrcode-canvas
+      ref="qrcodeCanvas"
+      :class="`${prefix}-class-canvas`"
+      :size="size"
+      :value="value"
+      :level="level"
+      :color="color"
+      :bg-color="bgColor"
+      :icon="icon"
+      :icon-size="iconSize"
+      @drawError="handleDrawError"
+      @drawCompleted="handleDrawCompleted"
+    />
+
+    <view v-if="showMask && canvasReady" :class="`${prefix}-mask`">
+      <qrcode-status
+        :status="status"
+        :status-render="statusRender"
+        @refresh="handleRefresh"
+      >
+        <template #statusRender>
+          <slot name="statusRender" />
+        </template>
+      </qrcode-status>
+    </view>
+  </view>
+</template>
+
+<script>
+import QrcodeCanvas from './components/qrcode-canvas/qrcode-canvas.vue';
+import QrcodeStatus from './components/qrcode-status/qrcode-status.vue';
+import config from '../common/config';
+import props from './props';
+import _ from '../common/utils.wxs';
+
+const { prefix } = config;
+const name = `${prefix}-qrcode`;
+
+export default {
+  name: 'TQrcode',
+  components: {
+    QrcodeCanvas,
+    QrcodeStatus,
+  },
+  props: {
+    ...props,
+    // 样式
+    style: {
+      type: String,
+      default: '',
+    },
+    // 自定义样式
+    customStyle: {
+      type: String,
+      default: '',
+    },
+  },
+  data() {
+    return {
+      prefix,
+      _,
+      showMask: false,
+      classPrefix: name,
+      canvasReady: false,
+      canvasNode: null,
+    };
+  },
+  watch: {
+    status: {
+      handler(newVal) {
+        this.showMask = newVal !== 'active';
+      },
+      immediate: true,
+    },
+  },
+  mounted() {
+    this.initCanvas();
+  },
+  methods: {
+    async initCanvas() {
+      // 获取 canvas 实例
+      const canvasComp = this.$refs.qrcodeCanvas;
+      if (canvasComp) {
+        const canvas = await canvasComp.getCanvasNode();
+        this.canvasNode = canvas;
+      }
+    },
+    handleDrawCompleted() {
+      this.canvasReady = true;
+    },
+    handleDrawError(err) {
+      console.error('二维码绘制失败', err);
+    },
+    handleRefresh() {
+      this.$emit('refresh');
+    },
+    // 二维码下载方法
+    async handleDownload() {
+      if (!this.canvasNode) {
+        console.error('未找到 canvas 节点');
+        return;
+      }
+
+      // 注意：此方法在非小程序环境需要适配
+      if (typeof wx !== 'undefined' && wx.canvasToTempFilePath) {
+        wx.canvasToTempFilePath({
+          canvas: this.canvasNode,
+          success: (res) => {
+            wx.saveImageToPhotosAlbum({ filePath: res.tempFilePath });
+          },
+          fail: (err) => {
+            console.error('canvasToTempFilePath failed', err);
+          },
+        });
+      }
+    },
+  },
+};
+</script>
+
+<style lang="less" scoped>
+@import './qrcode.less';
+</style>
