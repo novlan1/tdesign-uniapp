@@ -1,12 +1,24 @@
 <template>
-  <canvas
-    :id="canvasId"
-    ref="qrcodeCanvas"
-    :canvas-id="canvasId"
-    type="2d"
-    class="t-qrcode__canvas class"
-    :style="`width: ${size}px; height: ${size}px;`"
-  />
+  <view class="t-qrcode__canvas-wrapper">
+    <canvas
+      :id="canvasId"
+      ref="qrcodeCanvas"
+      :canvas-id="canvasId"
+      type="2d"
+      class="t-qrcode__canvas class"
+      :style="`width: ${size}px; height: ${size}px;`"
+    />
+    <!-- 预加载图标图片 -->
+    <image
+      v-if="icon"
+      ref="iconImage"
+      :src="icon"
+      mode="aspectFit"
+      style="display: none; width: 0; height: 0;"
+      @load="handleIconLoad"
+      @error="handleIconError"
+    />
+  </view>
 </template>
 
 <script>
@@ -27,6 +39,8 @@ export default {
       canvasId: `qrcode-canvas-${Math.random().toString(36)
         .slice(2, 11)}`,
       isWeb: false,
+      iconLoaded: false, // 图标是否加载完成
+      iconLoadError: false, // 图标加载是否失败
     };
   },
   computed: {
@@ -43,7 +57,14 @@ export default {
       this.renderQRCode();
     },
     icon() {
-      this.renderQRCode();
+      // 重置图标加载状态
+      this.iconLoaded = false;
+      this.iconLoadError = false;
+      // 如果没有图标，直接重新渲染
+      if (!this.icon) {
+        this.renderQRCode();
+      }
+      // 否则等待图标加载完成后再渲染（由 handleIconLoad 触发）
     },
     size() {
       this.renderQRCode();
@@ -100,7 +121,8 @@ export default {
       }
 
       if (canvasElement) {
-        const ctx = canvasElement.getContext('2d');
+        // 添加 willReadFrequently 属性以优化性能并消除警告
+        const ctx = canvasElement.getContext('2d', { willReadFrequently: true });
         this.canvas = canvasElement;
         this.ctx = ctx;
         await this.renderQRCode();
@@ -123,7 +145,8 @@ export default {
             }
 
             const canvas = res[0].node;
-            const ctx = canvas.getContext('2d');
+            // 小程序环境也添加 willReadFrequently 属性
+            const ctx = canvas.getContext('2d', { willReadFrequently: true });
             this.canvas = canvas;
             this.ctx = ctx;
 
@@ -218,20 +241,18 @@ export default {
     async drawIcon(ctx, qrData) {
       const { calculatedImageSettings, margin } = qrData;
 
-      if (!calculatedImageSettings) {
+      if (!calculatedImageSettings || !this.iconLoaded || this.iconLoadError) {
         return;
       }
 
       try {
-        // 创建图片对象
-        const img = this.createImageObject();
+        // 获取预加载的图片元素
+        const img = await this.getIconImage();
 
-        // 等待图片加载
-        await new Promise((resolve, reject) => {
-          img.onload = resolve;
-          img.onerror = reject;
-          img.src = this.icon;
-        });
+        if (!img) {
+          console.error('无法获取图标图片');
+          return;
+        }
 
         // 设置透明度
         if (calculatedImageSettings.opacity !== null && calculatedImageSettings.opacity !== undefined) {
@@ -250,8 +271,55 @@ export default {
         // 恢复透明度
         ctx.globalAlpha = 1;
       } catch (err) {
-        console.error('图标加载失败:', err);
+        console.error('图标绘制失败:', err);
       }
+    },
+
+    // 获取图标图片对象
+    async getIconImage() {
+      // #ifdef MP
+      // 小程序环境：使用 canvas.createImage
+      if (this.canvas && this.canvas.createImage) {
+        const img = this.canvas.createImage();
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+          img.src = this.icon;
+        });
+        return img;
+      }
+      return null;
+      // #endif
+
+      // #ifndef MP
+      // eslint-disable-next-line no-unreachable
+      // H5 环境：创建 Image 对象
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = this.icon;
+      });
+      return img;
+      // #endif
+    },
+
+    // 图标加载成功
+    handleIconLoad() {
+      this.iconLoaded = true;
+      this.iconLoadError = false;
+      // 图标加载完成后重新渲染二维码
+      this.renderQRCode();
+    },
+
+    // 图标加载失败
+    handleIconError(err) {
+      this.iconLoaded = false;
+      this.iconLoadError = true;
+      console.error('图标加载失败:', err);
+      // 即使图标加载失败，也渲染二维码（不带图标）
+      this.renderQRCode();
     },
 
     // 创建图片对象

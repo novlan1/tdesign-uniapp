@@ -1,6 +1,6 @@
 <template>
   <view
-    :style="`${_._style([style, customStyle])}; width:${size}px; height: ${size}px; background-color: ${bgColor};`"
+    :style="`${_._style([style, customStyle])}; width:${containerSize}px; height: ${containerSize}px; background-color: ${bgColor};`"
     :class="`${classPrefix} ${borderless ? prefix + '-' + 'borderless' : ''} class ${prefix}-class`"
   >
     <qrcode-canvas
@@ -69,6 +69,13 @@ export default {
       canvasReady: false,
       canvasNode: null,
     };
+  },
+  computed: {
+    // 容器尺寸 = Canvas 尺寸 + padding * 2
+    // padding 为 12px，所以容器需要额外 24px
+    containerSize() {
+      return this.size + 24;
+    },
   },
   watch: {
     status: {
