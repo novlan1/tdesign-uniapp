@@ -17,7 +17,6 @@ const props = {
   },
   items: {
     type: Array,
-    required: true,
     default: () => ([]),
   },
   popupProps: {

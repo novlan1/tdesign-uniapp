@@ -18,7 +18,8 @@
     ],
     "types": [
       "@dcloudio/types",
-      "node"
+      "node",
+      "miniprogram-api-typings"
     ],
     "noImplicitAny": false,
   },

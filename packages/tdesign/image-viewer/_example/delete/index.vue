@@ -10,7 +10,10 @@
       带操作图片预览
     </t-button>
 
-    <t-action-sheet id="t-action-sheet" />
+    <t-action-sheet
+      id="t-action-sheet"
+      ref="t-action-sheet"
+    />
 
     <t-image-viewer
       using-custom-navbar
@@ -19,6 +22,7 @@
       :show-index="showIndex"
       :visible="visible"
       :images="images"
+      :custom-navbar-height="isH5 ? 48 : 0"
       @change="onChange"
       @delete="onDelete"
       @close="onClose"
@@ -56,11 +60,11 @@ export default {
       this.deleteBtn = true;
     },
     onChange(e) {
-      const { index } = e.detail;
+      const { index } = e;
       console.log(index);
     },
     onDelete(e) {
-      const { index } = e.detail;
+      const { index } = e;
       console.log(index);
       ActionSheet.show({
         context: this,
@@ -75,7 +79,7 @@ export default {
       });
     },
     onClose(e) {
-      const { trigger } = e.detail;
+      const { trigger } = e;
       console.log(trigger);
       this.visible = false;
     },

@@ -41,8 +41,7 @@
       },
       {
         "name": "ImageViewer",
-        "label": "图片预览",
-        "hide": true
+        "label": "图片预览"
       },
       {
         "name": "Progress",
