@@ -1,8 +1,15 @@
 <template>
   <view class="skyline">
-    <t-navbar class="demo-navbar" title="QRCode" :leftArrow="true" />
+    <t-navbar
+      class="demo-navbar"
+      title="QRCode"
+      :left-arrow="true"
+    />
     <view class="demo">
-      <t-demo-header title="QRCode 二维码" notice="渲染框架支持情况：WebView">
+      <t-demo-header
+        title="QRCode 二维码"
+        notice="渲染框架支持情况：WebView"
+      >
         <template #desc>
           <view>
             能够将文本转换生成二维码的组件，支持自定义配色和 Logo 配置。<text style="color: var(--td-brand-color)">
@@ -12,32 +19,53 @@
         </template>
       </t-demo-header>
 
-      <t-demo title="01 组件类型" desc="基本用法" :padding="true">
+      <t-demo
+        title="01 组件类型"
+        desc="基本用法"
+        :padding="true"
+      >
         <BaseDemo />
       </t-demo>
 
-      <t-demo desc="带 Icon 的二维码" :padding="true">
-        <icon />
+      <t-demo
+        desc="带 Icon 的二维码"
+        :padding="true"
+      >
+        <Icon />
       </t-demo>
 
-      <t-demo desc="无边框的二维码" :padding="true">
-        <borderless />
+      <t-demo
+        desc="无边框的二维码"
+        :padding="true"
+      >
+        <Borderless />
       </t-demo>
 
       <t-demo desc="二维码纠错等级">
-        <level />
+        <Level />
       </t-demo>
 
-      <t-demo title="02 组件状态" desc="active" :padding="true">
-        <status />
+      <t-demo
+        title="02 组件状态"
+        desc="active"
+        :padding="true"
+      >
+        <Status />
       </t-demo>
 
-      <t-demo title="03 组件样式" desc="二维码颜色" :padding="true">
-        <color />
+      <t-demo
+        title="03 组件样式"
+        desc="二维码颜色"
+        :padding="true"
+      >
+        <Color />
       </t-demo>
 
-      <t-demo desc="二维码尺寸" :padding="true">
-        <size />
+      <t-demo
+        desc="二维码尺寸"
+        :padding="true"
+      >
+        <Size />
       </t-demo>
     </view>
   </view>
