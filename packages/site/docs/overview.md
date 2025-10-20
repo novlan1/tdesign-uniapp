@@ -152,6 +152,13 @@ spline: explain
       <p class="name">DateTimePicker 日期选择器</p>
     </a>
   </div>
+   <div class="image-wrapper">
+    <a class="item" href="#/components/input">
+      <img class="__light__" src="https://tdesign.gtimg.com/site/mobile/doc-form.png" />
+      <img class="__dark__" src="https://tdesign.gtimg.com/site/mobile/doc-form-dark.png" />
+      <p class="name">Form 表单</p>
+    </a>
+  </div>
   <div class="image-wrapper">
     <a class="item" href="#/components/input">
       <img class="__light__" src="https://tdesign.gtimg.com/site/mobile/doc-input.png" />

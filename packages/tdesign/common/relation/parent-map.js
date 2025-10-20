@@ -19,4 +19,6 @@ export const RELATION_MAP = {
 
   Col: 'Row',
   BackTop: 'PullDownRefresh',
+
+  FormItem: 'Form',
 };

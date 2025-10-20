@@ -154,6 +154,13 @@ spline: explain
     </a>
   </div>
   <div class="image-wrapper">
+    <a class="item" href="#/components/form-en">
+      <img class="__light__" src="https://tdesign.gtimg.com/site/mobile/doc-input.png" />
+      <img class="__dark__" src="https://tdesign.gtimg.com/site/mobile/doc-input-dark.png" />
+      <p class="name">Form</p>
+    </a>
+  </div>
+  <div class="image-wrapper">
     <a class="item" href="#/components/input-en">
       <img class="__light__" src="https://tdesign.gtimg.com/site/mobile/doc-input.png" />
       <img class="__dark__" src="https://tdesign.gtimg.com/site/mobile/doc-input-dark.png" />

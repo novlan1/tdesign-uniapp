@@ -85,6 +85,9 @@
       "path": "pages-more/date-time-picker/date-time-picker"
     },
     {
+      "path": "pages-more/form/form"
+    },
+    {
       "path": "pages-more/input/input"
     },
     {
@@ -284,6 +287,10 @@
       {
         "name": "date-time-picker",
         "pathName": "pages-more/date-time-picker/date-time-picker"
+      },
+      {
+        "name": "form",
+        "pathName": "pages-more/form/form"
       },
       {
         "name": "input",
