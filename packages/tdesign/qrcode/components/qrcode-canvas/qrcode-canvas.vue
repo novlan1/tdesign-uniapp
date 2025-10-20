@@ -171,7 +171,6 @@ export default {
 
         // 计算缩放比例
         const scale = (this.size / qrData.numCells) * pixelRatio;
-        console.log('scale:', scale);
 
         // 重置变换矩阵并应用缩放
         ctx.setTransform(1, 0, 0, 1, 0, 0);

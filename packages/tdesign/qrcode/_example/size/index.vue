@@ -22,7 +22,7 @@
       </t-button>
     </view>
     <view class="qrcode-container">
-      <TQrcode
+      <t-qrcode
         :size="size"
         value="https://tdesign.tencent.com/"
       />
@@ -31,11 +31,13 @@
 </template>
 
 <script>
+import TButton from 'tdesign-uniapp/button/button.vue';
 import TQrcode from 'tdesign-uniapp/qrcode/qrcode.vue';
 
 export default {
   name: 'QRCodeSize',
   components: {
+    TButton,
     TQrcode,
   },
   data() {

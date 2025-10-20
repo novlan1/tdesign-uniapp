@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import tIcon from '../../../icon/icon';
+import tLoading from '../../../loading/loading';
 import props from './props';
 import config from '../../../common/config';
 
@@ -34,6 +36,10 @@ const name = `${prefix}-qrcode`;
 
 export default {
   name: 'QrcodeStatus',
+  components: {
+    tIcon,
+    tLoading,
+  },
   props: {
     ...props,
   },
