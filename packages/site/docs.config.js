@@ -399,14 +399,14 @@ export const docs = [
         path: '/components/grid',
         component: () => import('@/grid/README.md'),
       },
-      // {
-      //   title: 'ImageViewer 图片预览',
-      //   titleEn: 'ImageViewer',
-      //   name: 'image-viewer',
-      //   meta: { docType: 'data' },
-      //   path: '/components/image-viewer',
-      //   component: () => import('@/image-viewer/README.md'),
-      // },
+      {
+        title: 'ImageViewer 图片预览',
+        titleEn: 'ImageViewer',
+        name: 'image-viewer',
+        meta: { docType: 'data' },
+        path: '/components/image-viewer',
+        component: () => import('@/image-viewer/README.md'),
+      },
       {
         title: 'Progress 进度条',
         titleEn: 'Progress',
