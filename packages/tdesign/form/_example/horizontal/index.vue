@@ -97,12 +97,15 @@
         content-align="right"
       >
         <t-input
+          ref="input"
           :value="formData.place"
           borderless
           align="right"
           placeholder="请选择籍贯"
-          @tap="showCascader"
+          :readonly="!isH5"
+          @click="showCascader"
         />
+
         <t-cascader
           :visible="visibleCascader"
           :value="address"
@@ -158,7 +161,7 @@
         name="photo"
       >
         <t-upload
-          class="my-upload"
+          t-class="upload"
           :files="formData.photo"
           multiple
           :max="6"
@@ -516,13 +519,14 @@ export default {
       this.formData.visibleCascader = e.value;
     },
     onChangeCascader(e) {
-      const { options } = e;
-      const placeText = options?.map(item => item.label).join('/');
+      const { selectedOptions } = e;
+      const placeText = selectedOptions?.map(item => item.label).join('/');
       this.formData.place = placeText;
       this.visibleCascader = false;
     },
     showCascader() {
       this.visibleCascader = true;
+      uni.hideKeyboard();
     },
     onChangeStepper(e) {
       this.formData.age = e.value;
@@ -552,7 +556,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 :deep(.box) {
     width: 100%;
     display: flex;
@@ -560,6 +564,10 @@ export default {
 }
 
 .form {
+}
+
+:deep(.upload) {
+    width: 100%;
 }
 
 /* .upload {
@@ -595,4 +603,5 @@ export default {
 .button-group :deep(.t-button:not(:last-child)) {
     margin-right: 32rpx;
 }
+
 </style>

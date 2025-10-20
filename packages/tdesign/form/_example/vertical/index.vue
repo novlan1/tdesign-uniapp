@@ -94,7 +94,7 @@
           :value="formData.place"
           borderless
           placeholder="请选择籍贯"
-          @tap="showCascader"
+          @focus="showCascader"
         />
         <t-cascader
           :visible="visibleCascader"
@@ -507,13 +507,17 @@ export default {
       this.formData.visibleCascader = e.value;
     },
     onChangeCascader(e) {
-      const { options } = e;
-      const placeText = options?.map(item => item.label).join('/');
+      const { selectedOptions } = e;
+      const placeText = selectedOptions?.map(item => item.label).join('/');
       this.formData.place = placeText;
       this.visibleCascader = false;
     },
     showCascader() {
       this.visibleCascader = true;
+
+      setTimeout(() => {
+        uni.hideKeyboard();
+      });
     },
     onChangeStepper(e) {
       this.formData.age = e.value;
@@ -543,16 +547,22 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 :deep(.box) {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.textarea {
+:deep(.textarea) {
     height: 200rpx;
     width: 100%;
+    --textarea-vertical-padding: 0;
+    --td-textarea-horizontal-padding: 0;
+    padding:0 !important;
+}
+:deep(.textarea .t-textarea) {
+    padding: 0 !important;
 }
 
 .button-group {

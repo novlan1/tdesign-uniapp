@@ -43,10 +43,10 @@
       </text>
     </view>
     <view
-      :class="classPrefix + '__controls ' + classPrefix + '__controls--' + dataContentAlign + ' ' + tClassControls"
+      :class="classPrefix + '__controls ' + tClassControls"
       :style="contentStyle"
     >
-      <view :class="classPrefix + '__controls-content'">
+      <view :class="classPrefix + '__controls-content ' + classPrefix + '__controls-content--' + dataContentAlign">
         <slot />
         <view
           v-if="false"

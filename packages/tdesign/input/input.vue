@@ -37,7 +37,10 @@
       </view>
     </view>
     <view :class="classPrefix + '__wrap'">
-      <view :class="classPrefix + '__content ' + classPrefix + '--' + status">
+      <view
+        :class="classPrefix + '__content ' + classPrefix + '--' + status"
+        @click="onClick"
+      >
         <input
           :class="getInputClass(classPrefix, suffix, align, disabled) + ' ' + tClassInput"
           :maxlength="allowInputOverMax ? -1 : maxlength"
@@ -225,6 +228,12 @@ export default uniComponent({
     disabled: 'updateClearIconVisible',
     readonly: 'updateClearIconVisible',
 
+    value: {
+      handler(v) {
+        this.dataValue = v;
+      },
+    },
+
     // count: 'updateInnerMaxLen',
     // dataValue: 'updateInnerMaxLen',
     // allowInputOverMax: 'updateInnerMaxLen',
@@ -352,11 +361,15 @@ export default uniComponent({
     onNickNameReview(e) {
       this.$emit('nicknamereview', e.detail);
     },
+
+    onClick() {
+      this.$emit('click', { trigger: 'input' });
+    },
   },
 });
 
 </script>
-<style scoped >
+<style scoped>
 @import './input.css';
 
 </style>
