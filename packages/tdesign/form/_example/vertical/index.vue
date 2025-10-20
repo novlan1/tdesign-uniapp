@@ -94,7 +94,8 @@
           :value="formData.place"
           borderless
           placeholder="请选择籍贯"
-          @focus="showCascader"
+          :readonly="true"
+          @click="showCascader"
         />
         <t-cascader
           :visible="visibleCascader"
@@ -514,10 +515,7 @@ export default {
     },
     showCascader() {
       this.visibleCascader = true;
-
-      setTimeout(() => {
-        uni.hideKeyboard();
-      });
+      uni.hideKeyboard();
     },
     onChangeStepper(e) {
       this.formData.age = e.value;
