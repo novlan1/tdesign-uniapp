@@ -47,9 +47,9 @@ import TLoading from 'tdesign-uniapp/loading/loading.vue';
 
 在 `pages.json` 配置 [easycom](https://uniapp.dcloud.net.cn/collocation/pages.html#easycom)，可实现自动导入。
 
-### CI 模式
+### CLI 模式
 
-使用 CI 模式，即使用 `node_modules` 下的 `tdesign-uniapp` 时，配置如下。
+使用 CLI 模式，即使用 `node_modules` 下的 `tdesign-uniapp` 时，配置如下。
 
 ```json
 {
@@ -79,10 +79,14 @@ import TLoading from 'tdesign-uniapp/loading/loading.vue';
 
 ## 支持平台
 
-目前支持
+目前不支持 `nvue`。
+
+支持平台
 
 1. H5
 2. 微信小程序
+3. iOS
+4. 安卓
 
 其他平台陆续支持中，欢迎共建。
 
