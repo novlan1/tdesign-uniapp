@@ -41,6 +41,7 @@ export default uniComponent({
       _,
       border: false,
       dataValue: this.value ?? this.defaultValue,
+      mounted: false,
     };
   },
   watch: {
@@ -52,20 +53,39 @@ export default uniComponent({
     },
     dataValue: {
       handler() {
-        this.updateExpanded();
+        this.waitUntilMounted(this.updateExpanded);
       },
       immediate: true,
       deep: true,
     },
     expandMutex: {
       handler() {
-        this.updateExpanded();
+        this.waitUntilMounted(this.updateExpanded);
       },
       immediate: true,
     },
 
   },
+  mounted() {
+    let interval = 0;
+    // #ifdef APP-PLUS
+    interval = 33;
+    // #endif
+    setTimeout(() => {
+      this.mounted = true;
+    }, interval);
+  },
   methods: {
+    waitUntilMounted(cb) {
+      if (this.mounted) {
+        cb.call(this);
+        return;
+      }
+      setTimeout(() => {
+        cb.call(this);
+      }, 33);
+    },
+
     updateExpanded() {
       this.children?.forEach((e) => {
         e.updateExpanded(this.dataValue);
@@ -88,6 +108,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './collapse.css';
 </style>

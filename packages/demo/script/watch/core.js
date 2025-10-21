@@ -9,12 +9,14 @@ async function copy({
   const isDemo = relativePath.split(path.sep)[1] === '_example';
   const isCommon = relativePath.split(path.sep)[0] === 'common';
   let targetPath = path.resolve(config.targetDir, relativePath);
-  let targetPathInApp;
+  let targetPathInApp = path.resolve(config.appDir, 'uni_modules/tdesign-uniapp/components', relativePath);
   const rawTargetPath = path.resolve(config.rawTargetDir, relativePath);
+  const rawTargetPathInApp = path.resolve(config.rawTargetDirInApp, relativePath);
 
   if (isCommon) {
     fs.mkdirSync(path.dirname(rawTargetPath), { recursive: true });
     fs.copyFileSync(filePath, rawTargetPath);
+    fs.copyFileSync(filePath, rawTargetPathInApp);
   }
 
 
