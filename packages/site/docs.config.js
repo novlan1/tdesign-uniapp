@@ -463,14 +463,14 @@ export const docs = [
         path: '/components/tag',
         component: () => import('@/tag/README.md'),
       },
-      // {
-      //   title: 'Watermark 水印',
-      //   titleEn: 'Watermark',
-      //   name: 'watermark',
-      //   meta: { docType: 'data' },
-      //   path: '/components/watermark',
-      //   component: () => import('@/watermark/README.md'),
-      // },
+      {
+        title: 'Watermark 水印',
+        titleEn: 'Watermark',
+        name: 'watermark',
+        meta: { docType: 'data' },
+        path: '/components/watermark',
+        component: () => import('@/watermark/README.md'),
+      },
     ],
   },
   {
@@ -578,10 +578,10 @@ export const docs = [
   },
 ];
 
-const enDocs = docs.map(doc => ({
+const enDocs = docs.map((doc) => ({
   ...doc,
   title: doc.titleEn,
-  children: doc?.children?.map(child => ({
+  children: doc?.children?.map((child) => ({
     title: child.titleEn,
     name: `${child.name}-en`,
     path: `${child.path}-en`,

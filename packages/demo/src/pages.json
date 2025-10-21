@@ -160,6 +160,9 @@
       "path": "pages-more/tag/tag"
     },
     {
+      "path": "pages-more/watermark/watermark"
+    },
+    {
       "path": "pages-more/action-sheet/action-sheet"
     },
     {
@@ -378,6 +381,10 @@
       {
         "name": "tag",
         "pathName": "pages-more/tag/tag"
+      },
+      {
+        "name": "watermark",
+        "pathName": "pages-more/watermark/watermark"
       },
       {
         "name": "action-sheet",

@@ -77,8 +77,7 @@
       },
       {
         "name": "Watermark",
-        "label": "水印",
-        "hide": true
+        "label": "水印"
       }
     ]
   },
