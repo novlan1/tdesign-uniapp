@@ -9,6 +9,7 @@ async function copy({
   const isDemo = relativePath.split(path.sep)[1] === '_example';
   const isCommon = relativePath.split(path.sep)[0] === 'common';
   let targetPath = path.resolve(config.targetDir, relativePath);
+  let targetPathInApp;
   const rawTargetPath = path.resolve(config.rawTargetDir, relativePath);
 
   if (isCommon) {
@@ -19,9 +20,13 @@ async function copy({
 
   if (isDemo) {
     targetPath = path.resolve(config.demoDir, relativePath.replace(`${path.sep}_example`, ''));
+    targetPathInApp = path.resolve(config.appPagesMoreDir, relativePath.replace(`${path.sep}_example`, ''));
   }
 
   fs.mkdirSync(path.dirname(targetPath), { recursive: true });
+  if (targetPathInApp) {
+    fs.mkdirSync(path.dirname(targetPathInApp), { recursive: true });
+  }
 
   let lessResult = false;
   if (!filePath.includes('_example')) {
@@ -30,6 +35,9 @@ async function copy({
 
   if (!lessResult) {
     fs.copyFileSync(filePath, targetPath);
+    if (targetPathInApp) {
+      fs.copyFileSync(filePath, targetPathInApp);
+    }
   }
 
   return {

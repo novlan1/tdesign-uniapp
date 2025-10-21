@@ -8,6 +8,14 @@ const config = {
   sourceGlob: path.resolve(__dirname, '../../../tdesign/**/*'),
 
   demoDir: path.resolve(__dirname, '../../src/pages-more'),
+
+  demoRealDir: path.resolve(__dirname, '../../'),
+
+  demoPagesGlob: path.resolve(__dirname, '../../src/pages/**/*'),
+  demoComponentsGlob: path.resolve(__dirname, '../../src/components/**/*'),
+
+  appPagesMoreDir: path.resolve(__dirname, '../../../tdesign-app/pages-more'),
+  appDir: path.resolve(__dirname, '../../../tdesign-app'),
 };
 
 
