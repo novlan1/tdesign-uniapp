@@ -1,28 +1,26 @@
 <template>
   <view class="container">
     <view class="button-group">
-      <t-button
+      <TButton
         class="button"
         variant="text"
         :disabled="size <= minSize"
-        :data-step="-10"
-        @tap="changeSize"
+        @click="() => changeSize(-10)"
       >
         - Smaller
-      </t-button>
+      </TButton>
       <view class="line" />
-      <t-button
+      <TButton
         class="button"
         variant="text"
         :disabled="size >= maxSize"
-        :data-step="10"
-        @tap="changeSize"
+        @click="() => changeSize(10)"
       >
         + Larger
-      </t-button>
+      </TButton>
     </view>
     <view class="qrcode-container">
-      <t-qrcode
+      <TQrcode
         :size="size"
         value="https://tdesign.tencent.com/"
       />
@@ -48,8 +46,7 @@ export default {
     };
   },
   methods: {
-    changeSize(e) {
-      const { step } = e.currentTarget.dataset;
+    changeSize(step) {
       const newSize = this.size + step;
       if (newSize >= this.minSize && newSize <= this.maxSize) {
         this.size = newSize;

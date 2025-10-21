@@ -63,6 +63,11 @@ export default {
       this.renderQRCode();
     },
   },
+  created() {
+    // 小程序不能使用响应式的this.canvas
+    this._canvas = null;
+    this._ctx = null;
+  },
   mounted() {
     // 判断是否为小程序环境，否则默认为 H5
     // #ifdef MP
@@ -155,8 +160,8 @@ export default {
             const canvas = res[0].node;
             // 小程序环境也添加 willReadFrequently 属性
             const ctx = canvas.getContext('2d', { willReadFrequently: true });
-            this.canvas = canvas;
-            this.ctx = ctx;
+            this._canvas = canvas;
+            this._ctx = ctx;
 
             await this.renderQRCode();
           });
@@ -164,12 +169,11 @@ export default {
     },
 
     async renderQRCode() {
-      if (!this.canvas || !this.ctx) {
+      const canvas = this._canvas || this.canvas;
+      const ctx = this._ctx || this.ctx;
+      if (!canvas || !ctx) {
         return;
       }
-
-      const { canvas } = this;
-      const { ctx } = this;
 
       const sizeProp = this.getSizeProp(this.iconSize);
 
@@ -196,28 +200,37 @@ export default {
 
         // #ifdef MP
         // 小程序环境：获取真实的设备像素比并设置 Canvas 尺寸
-        const systemInfo = uni.getSystemInfoSync();
-        pixelRatio = systemInfo.pixelRatio || 1;
+        // 使用 getWindowInfo 替代已废弃的 getSystemInfoSync
+        const windowInfo = uni.getWindowInfo();
+        pixelRatio = windowInfo.pixelRatio || 1;
         const canvasSize = this.size * pixelRatio;
         canvas.width = canvasSize;
         canvas.height = canvasSize;
+        // 小程序环境：scale 计算方式（参考 TS 实现）
+        const scale = canvasSize / qrData.numCells;
         // #endif
 
         // #ifndef MP
         // eslint-disable-next-line no-unreachable
-        // H5 环境：Canvas 尺寸已在 initH5Canvas 中设置，获取 pixelRatio
+        // H5 环境：每次渲染时重新设置 Canvas 尺寸（因为 size 可能变化）
         pixelRatio = window.devicePixelRatio || 1;
-        // #endif
+        const canvasSize = this.size * pixelRatio;
 
-        // 计算缩放比例
-        // 关键：基于逻辑尺寸（this.size）而不是物理尺寸（canvas.width）
-        // 因为 canvas.width 已经乘以了 pixelRatio，所以 scale 也需要相应调整
-        const scale = this.size / qrData.numCells;
+        // 重新设置 Canvas 物理尺寸（会重置 canvas 状态）
+        canvas.width = canvasSize;
+        canvas.height = canvasSize;
+
+        // 重新设置 Canvas 显示尺寸
+        canvas.style.width = `${this.size}px`;
+        canvas.style.height = `${this.size}px`;
+
+        // H5 环境：scale 计算方式（基于物理尺寸）
+        const scale = canvasSize / qrData.numCells;
+        // #endif
 
         // 重置变换矩阵并应用缩放
         ctx.setTransform(1, 0, 0, 1, 0, 0);
-        // 同时应用逻辑缩放和设备像素比缩放
-        ctx.scale(scale * pixelRatio, scale * pixelRatio);
+        ctx.scale(scale, scale);
 
         // 绘制背景
         ctx.fillStyle = this.actualBgColor;
@@ -248,7 +261,7 @@ export default {
 
         // 绘制中心图标
         if (this.icon && qrData.calculatedImageSettings) {
-          await this.drawIcon(ctx, qrData, pixelRatio);
+          await this.drawIcon(qrData, pixelRatio);
         }
 
         this.$emit('drawCompleted');
@@ -258,7 +271,8 @@ export default {
       }
     },
 
-    async drawIcon(ctx, qrData, pixelRatio) {
+    async drawIcon(qrData, pixelRatio) {
+      const ctx = this._ctx || this.ctx;
       const { calculatedImageSettings, margin } = qrData;
 
       if (!calculatedImageSettings) {
@@ -281,7 +295,11 @@ export default {
         if (calculatedImageSettings.opacity !== null && calculatedImageSettings.opacity !== undefined) {
           ctx.globalAlpha = calculatedImageSettings.opacity;
         }
-        ctx.scale(1 / pixelRatio, 1 / pixelRatio);
+
+        // #ifndef MP
+        ctx.scale(1 / pixelRatio, 1 / pixelRatio); // H5 环境：需要调整缩放
+        // #endif
+
         // 绘制图标
         ctx.drawImage(
           img,
@@ -301,35 +319,39 @@ export default {
     // 加载图标图片
     // 参考 TSX (H5) 和 TS (小程序) 的实现
     async loadIconImage() {
-      if (!this.icon) {
+      const canvas = this._canvas || this.canvas;
+      if (!this.icon || !canvas) {
         return null;
       }
 
       // #ifdef MP
       // 小程序环境：使用 canvas.createImage
-      if (this.canvas && this.canvas.createImage) {
-        const img = this.canvas.createImage();
-        await new Promise((resolve, reject) => {
-          img.onload = resolve;
-          img.onerror = reject;
+      if (canvas.createImage) {
+        return new Promise((resolve, reject) => {
+          const img = canvas.createImage();
+          // 必须先设置 onload 和 onerror，再设置 src
+          img.onload = () => resolve(img);
+          img.onerror = (err) => {
+            console.error('创建图片对象失败:', err);
+            reject(err);
+          };
           img.src = this.icon;
         });
-        return img;
       }
-      return null;
       // #endif
 
       // #ifndef MP
-      // eslint-disable-next-line no-unreachable
       // H5 环境：创建 Image 对象（参考 TSX 实现）
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = reject;
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => resolve(img);
+        img.onerror = (err) => {
+          console.error('图标加载失败:', err);
+          reject(err);
+        };
         img.src = this.icon;
       });
-      return img;
       // #endif
     },
 
