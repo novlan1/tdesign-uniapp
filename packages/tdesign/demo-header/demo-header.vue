@@ -14,10 +14,10 @@
   </div>
 </template>
 <script>
-import TNoticeBar from 'tdesign-uniapp/notice-bar/notice-bar.vue';
+import TNoticeBar from '../notice-bar/notice-bar.vue';
 
 export default {
-  name: 'DemoHeader',
+  name: 'TDemoHeader',
   components: {
     TNoticeBar,
   },
@@ -42,5 +42,5 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped src="./index.less">
+<style scoped src="./index.css">
 </style>

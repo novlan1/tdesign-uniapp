@@ -88,7 +88,6 @@
   </view>
 </template>
 <script lang="ts" setup>
-import TButton from 'tdesign-uniapp/button/button.vue';
 import { ref, onMounted } from 'vue';
 
 defineProps<{

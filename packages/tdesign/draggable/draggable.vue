@@ -10,11 +10,11 @@
   </view>
 </template>
 <script>
-import { uniComponent } from '../../common/src/index';
-import { prefix } from '../../common/config';
+import { uniComponent } from '../common/src/index';
+import { prefix } from '../common/config';
 import props from './props';
-import { getRect, getWindowInfo } from '../../common/utils';
-import _ from '../../common/utils.wxs';
+import { getRect, getWindowInfo } from '../common/utils';
+import _ from '../common/utils.wxs';
 
 
 const name = `${prefix}-draggable`;
@@ -79,6 +79,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './draggable.css';
 </style>

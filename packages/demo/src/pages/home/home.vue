@@ -49,8 +49,6 @@
 </template>
 
 <script lang="ts" setup>
-import TFooter from 'tdesign-uniapp/footer/footer.vue';
-import TNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import { useTheme } from 'tdesign-uniapp/mixins/theme-change';
 
 import { ref } from 'vue';

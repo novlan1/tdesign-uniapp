@@ -19,14 +19,10 @@
 </template>
 
 <script>
-import TSlider from 'tdesign-uniapp/slider/slider.vue';
-import TQrcode from 'tdesign-uniapp/qrcode/qrcode.vue';
 
 export default {
   name: 'QRCodeLevel',
   components: {
-    TSlider,
-    TQrcode,
   },
   data() {
     return {

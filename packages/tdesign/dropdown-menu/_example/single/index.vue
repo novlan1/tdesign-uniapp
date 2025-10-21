@@ -17,12 +17,8 @@
 </template>
 
 <script>
-import tDropdownMenu from 'tdesign-uniapp/dropdown-menu/dropdown-menu.vue';
-import tDropdownItem from 'tdesign-uniapp/dropdown-item/dropdown-item.vue';
 export default {
   components: {
-    tDropdownMenu,
-    tDropdownItem,
   },
   data() {
     return {

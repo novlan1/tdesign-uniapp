@@ -20,8 +20,6 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue';
-import TButton from 'tdesign-uniapp/button/button.vue';
-import TIcon from 'tdesign-uniapp/icon/icon.vue';
 
 const failImage = ref('error-circle-filled');
 

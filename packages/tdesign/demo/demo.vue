@@ -57,11 +57,11 @@
   </view>
 </template>
 <script>
-import TButton from 'tdesign-uniapp/button/button.vue';
+import TButton from '../button/button.vue';
 
 
 export default {
-  name: 'DemoBlock',
+  name: 'TDemo',
   components: {
     TButton,
   },
@@ -90,5 +90,5 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped src="./index.less">
+<style scoped src="./index.css">
 </style>
