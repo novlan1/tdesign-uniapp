@@ -12,7 +12,7 @@ const options = {
 };
 
 // 处理流程
-async function processLess(inputFile, rawOutputFile) {
+async function processLess(inputFile, rawOutputFile, rawOutputFileInApp) {
   if (!inputFile.endsWith('.less')) return;
 
   try {
@@ -33,15 +33,24 @@ async function processLess(inputFile, rawOutputFile) {
     ]).process(cssResult.css, { from: undefined });
 
 
-    const filename = `${path
-      .basename(rawOutputFile, path.extname(rawOutputFile))
-      .replace(/^_/, '')}.css`;
+    const getOutputFile = (rawOutputFile) => {
+      const filename = `${path
+        .basename(rawOutputFile, path.extname(rawOutputFile))
+        .replace(/^_/, '')}.css`;
 
-    const outputFile = path.resolve(path.dirname(rawOutputFile), filename);
-    console.log('filename', filename);
+      const outputFile = path.resolve(path.dirname(rawOutputFile), filename);
+      console.log('filename', filename);
 
-    fs.writeFileSync(outputFile, postcssResult.css);
-    console.log(`✅ 转换完成: ${outputFile}`);
+      return outputFile;
+    };
+
+
+    if (rawOutputFileInApp) {
+      const outputFile = getOutputFile(rawOutputFileInApp);
+
+      fs.writeFileSync(outputFile, postcssResult.css);
+      console.log(`✅ 转换完成: ${outputFile}`);
+    }
     return true;
   } catch (err) {
     console.error('❌ 处理失败:', err);

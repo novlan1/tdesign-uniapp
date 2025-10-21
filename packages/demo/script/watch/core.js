@@ -15,6 +15,7 @@ async function copy({
 
   if (isCommon) {
     fs.mkdirSync(path.dirname(rawTargetPath), { recursive: true });
+    fs.mkdirSync(path.dirname(rawTargetPathInApp), { recursive: true });
     fs.copyFileSync(filePath, rawTargetPath);
     fs.copyFileSync(filePath, rawTargetPathInApp);
   }
@@ -32,7 +33,7 @@ async function copy({
 
   let lessResult = false;
   if (!filePath.includes('_example')) {
-    lessResult = await processLess(filePath, targetPath);
+    lessResult = await processLess(filePath, targetPath, targetPathInApp);
   }
 
   if (!lessResult) {
