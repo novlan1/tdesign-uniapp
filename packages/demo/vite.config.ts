@@ -4,10 +4,10 @@ import uni from '@dcloudio/vite-plugin-uni';
 
 
 const baseAlias = {
-  'tdesign-site': path.resolve(__dirname),
-  packages: path.resolve(__dirname, '../'),
-  'tdesign-uniapp-raw': path.resolve(__dirname, './src/_tdesign-raw'),
-  'tdesign-uniapp': path.resolve(__dirname, './src/_tdesign'),
+  'tdesign-site': path.resolve(__dirname).replace(/\\/g, '/'),
+  packages: path.resolve(__dirname, '../').replace(/\\/g, '/'),
+  'tdesign-uniapp-raw': path.resolve(__dirname, './src/_tdesign-raw').replace(/\\/g, '/'),
+  'tdesign-uniapp': path.resolve(__dirname, './src/_tdesign').replace(/\\/g, '/'),
 };
 const ENV_PREFIX = ['VITE_', 'VUE_APP'];
 const root: string = process.cwd();
