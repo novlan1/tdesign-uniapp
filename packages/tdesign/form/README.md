@@ -6,6 +6,15 @@ isComponent: true
 toc: false
 ---
 
+## 引入
+
+可在 `main.ts` 或在需要使用的页面或组件中引入。
+
+```js
+import TForm from 'tdesign-uniapp/form/form.vue';
+import TFormItem from 'tdesign-uniapp/form-item/form-item.vue';
+```
+
 ### 01 组件类型
 
 基础表单
