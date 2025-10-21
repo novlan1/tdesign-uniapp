@@ -43,12 +43,50 @@ import TLoading from 'tdesign-uniapp/loading/loading.vue';
 </script>
 ```
 
+## 自动导入
+
+在 `pages.json` 配置 [easycom](https://uniapp.dcloud.net.cn/collocation/pages.html#easycom)，可实现自动导入。
+
+### CLI 模式
+
+使用 CLI 模式，即使用 `node_modules` 下的 `tdesign-uniapp` 时，配置如下。
+
+```json
+{
+  "easycom": {
+    "custom": {
+      "^t-(.*)": "tdesign-uniapp/$1/$1.vue"
+    }
+  }
+}
+```
+
+### uni_modules
+
+使用 `uni_modules` 下的 `tdesign-uniapp` 时，配置如下。
+
+```json
+{
+  "easycom": {
+    "custom": {
+      "^t-(.*)": "@/uni_modules/tdesign-uniapp/components/$1/$1.vue"
+    }
+  }
+}
+```
+
+也可以使用我们提供的 [auto-import-resolver](https://www.npmjs.com/package/tdesign-uniapp-auto-import-resolver)，但是这种工具在小程序等平台下可能存在兼容性问题（uni-app 自身编译问题），不推荐使用。
+
 ## 支持平台
 
-目前支持
+目前不支持 `nvue`。
+
+支持平台
 
 1. H5
 2. 微信小程序
+3. iOS
+4. 安卓
 
 其他平台陆续支持中，欢迎共建。
 

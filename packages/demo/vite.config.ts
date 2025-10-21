@@ -1,6 +1,9 @@
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import uni from '@dcloudio/vite-plugin-uni';
+// import AutoImport from 'unplugin-auto-import/vite';
+// import Components from 'unplugin-vue-components/vite';
+// import { TDesignResolver } from 'tdesign-uniapp-auto-import-resolver';
 
 
 const baseAlias = {
@@ -20,6 +23,18 @@ export default ({ mode }) => {
   const result = defineConfig({
     plugins: [
       uni(),
+
+      // auto-import 有兼容性问题，可尝试打开，并去掉 pages.json 中的 easycom 配置
+      // AutoImport({
+      //   resolvers: [TDesignResolver({
+      //     library: 'uniapp',
+      //   })],
+      // }),
+      // Components({
+      //   resolvers: [TDesignResolver({
+      //     library: 'uniapp',
+      //   })],
+      // }),
     ],
     resolve: {
       alias: {

@@ -118,7 +118,7 @@
 
 <script>
 import tButton from '../button/button';
-import tDraggable from './draggable/draggable';
+import TDraggable from '../draggable/draggable.vue';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
@@ -141,7 +141,7 @@ export default uniComponent({
   mixins: [useCustomNavbar],
   components: {
     tButton,
-    tDraggable,
+    TDraggable,
   },
   props: {
     ...props,

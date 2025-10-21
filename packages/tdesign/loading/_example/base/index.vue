@@ -35,7 +35,7 @@
 <script>
 import tLoading from 'tdesign-uniapp/loading/loading.vue';
 import tImage from 'tdesign-uniapp/image/image.vue';
-import SkylineBehavior from 'packages/demo/src/mixins/skyline.js';
+import SkylineBehavior from 'tdesign-uniapp/mixins/skyline.js';
 export default {
   options: {
     styleIsolation: 'shared',

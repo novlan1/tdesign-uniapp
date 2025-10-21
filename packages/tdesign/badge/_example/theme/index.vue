@@ -86,7 +86,7 @@ import tBadge from 'tdesign-uniapp/badge/badge.vue';
 import tCell from 'tdesign-uniapp/cell/cell.vue';
 import tIcon from 'tdesign-uniapp/icon/icon.vue';
 import tButton from 'tdesign-uniapp/button/button.vue';
-import SkylineBehavior from 'packages/demo/src/mixins/skyline.js';
+import SkylineBehavior from 'tdesign-uniapp/mixins/skyline.js';
 
 export default {
   components: {

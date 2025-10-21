@@ -15,7 +15,7 @@
     />
     <t-image-viewer
       using-custom-navbar
-      :custom-navbar-height="isH5 ? 48 : 0"
+      :custom-navbar-height="gCustomNavbarHeight"
       :delete-btn="deleteBtn"
       :close-btn="closeBtn"
       :show-index="showIndex"

@@ -6,8 +6,8 @@
     <canvas
       :id="canvasId"
       ref="qrcodeCanvas"
-      :canvas-id="canvasId"
       type="2d"
+      :canvas-id="canvasId"
       class="t-qrcode__canvas class"
       :style="`width: ${size}px; height: ${size}px;`"
     />
@@ -57,7 +57,13 @@ export default uniComponent({
       this.renderQRCode();
     },
     size() {
-      this.renderQRCode();
+      let interval = 0;
+      // #ifdef APP-PLUS
+      interval = 33;
+      // #endif
+      setTimeout(() => {
+        this.renderQRCode();
+      }, interval);
     },
     iconSize() {
       this.renderQRCode();
@@ -93,11 +99,11 @@ export default uniComponent({
     async initCanvas() {
       await this.$nextTick();
 
-      // #ifdef MP
+      // #ifndef H5
       this.initMiniProgramCanvas();
       // #endif
 
-      // #ifndef MP
+      // #ifdef H5
       this.initH5Canvas();
       // #endif
     },
@@ -166,9 +172,20 @@ export default uniComponent({
 
             const canvas = res[0].node;
             // 小程序环境也添加 willReadFrequently 属性
-            const ctx = canvas.getContext('2d', { willReadFrequently: true });
-            this._canvas = canvas;
-            this._ctx = ctx;
+            try {
+              let ctx;
+              // #ifdef MP-WEIXIN
+              ctx = canvas.getContext('2d', { willReadFrequently: true });
+              // #endif
+              if (!ctx) {
+                ctx = uni.createCanvasContext(this.canvasId, this);
+              }
+              this._canvas = canvas;
+              this._ctx = ctx;
+            } catch (e) {
+              console.warn('获取 ctx 失败', e);
+            }
+
 
             await this.renderQRCode();
           });
@@ -207,7 +224,7 @@ export default uniComponent({
         let canvasSize;
         let scale;
 
-        // #ifdef MP
+        // #ifndef H5
         // 小程序环境：获取真实的设备像素比并设置 Canvas 尺寸
         // 使用 getWindowInfo 替代已废弃的 getSystemInfoSync
         const windowInfo = uni.getWindowInfo();
@@ -217,9 +234,12 @@ export default uniComponent({
         canvas.height = canvasSize;
         // 小程序环境：scale 计算方式（参考 TS 实现）
         scale = canvasSize / qrData.numCells;
+        // #ifdef APP-PLUS
+        scale /= pixelRatio;
+        // #endif
         // #endif
 
-        // #ifndef MP
+        // #ifdef H5
         // H5 环境：每次渲染时重新设置 Canvas 尺寸（因为 size 可能变化）
         pixelRatio = window.devicePixelRatio || 1;
         canvasSize = this.size * pixelRatio;
@@ -272,6 +292,10 @@ export default uniComponent({
           await this.drawIcon(qrData, pixelRatio);
         }
 
+        // #ifdef APP-PLUS
+        ctx.draw();
+        // #endif
+
         this.$emit('drawCompleted');
       } catch (err) {
         console.error('二维码绘制失败:', err);
@@ -304,7 +328,7 @@ export default uniComponent({
           ctx.globalAlpha = calculatedImageSettings.opacity;
         }
 
-        // #ifndef MP
+        // #ifdef H5
         ctx.scale(1 / pixelRatio, 1 / pixelRatio); // H5 环境：需要调整缩放
         // #endif
 
@@ -328,6 +352,7 @@ export default uniComponent({
     // 参考 TSX (H5) 和 TS (小程序) 的实现
     async loadIconImage() {
       const canvas = this._canvas || this.canvas;
+      let result = Promise.reject(null);
       if (!this.icon || !canvas) {
         return null;
       }
@@ -335,7 +360,7 @@ export default uniComponent({
       // #ifdef MP
       // 小程序环境：使用 canvas.createImage
       if (canvas.createImage) {
-        return new Promise((resolve, reject) => {
+        result =  new Promise((resolve, reject) => {
           const img = canvas.createImage();
           // 必须先设置 onload 和 onerror，再设置 src
           img.onload = () => resolve(img);
@@ -348,9 +373,21 @@ export default uniComponent({
       }
       // #endif
 
-      // #ifndef MP
+      // #ifdef APP-PLUS
+      result = new Promise((resolve) => {
+        uni.getImageInfo({
+          src: this.icon,
+          success: (res) => {
+            const imgPath = res.path; // 本地临时路径
+            resolve(imgPath);
+          },
+        });
+      });
+      // #endif
+
+      // #ifdef H5
       // H5 环境：创建 Image 对象（参考 TSX 实现）
-      return new Promise((resolve, reject) => {
+      result = new Promise((resolve, reject) => {
         const img = new Image();
         img.crossOrigin = 'anonymous';
         img.onload = () => resolve(img);
@@ -361,6 +398,8 @@ export default uniComponent({
         img.src = this.icon;
       });
       // #endif
+
+      return result;
     },
 
     getSizeProp(iconSize) {
@@ -380,7 +419,7 @@ export default uniComponent({
     // 暴露 canvas 节点给父组件
     getCanvasNode() {
       let result;
-      // #ifdef MP
+      // #ifndef H5
       result = new Promise((resolve) => {
         if (typeof uni !== 'undefined' && uni.createSelectorQuery) {
           const query = uni.createSelectorQuery().in(this);
@@ -396,7 +435,7 @@ export default uniComponent({
       });
       // #endif
 
-      // #ifndef MP
+      // #ifdef H5
       result = Promise.resolve(document.querySelector(`#${this.canvasId}`));
       // #endif
 

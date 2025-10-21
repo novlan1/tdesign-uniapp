@@ -15,7 +15,7 @@
       :placement="placement"
       :items="sidebar"
       using-custom-navbar
-      :custom-navbar-height="isH5 ? 48 : 0"
+      :custom-navbar-height="gCustomNavbarHeight"
       @overlay-click="overlayClick"
       @item-click="itemClick"
     />
@@ -25,7 +25,7 @@
 <script>
 import tButton from 'tdesign-uniapp/button/button.vue';
 import tDrawer from 'tdesign-uniapp/drawer/drawer.vue';
-import SkylineBehavior from 'packages/demo/src/mixins/skyline.js';
+import SkylineBehavior from 'tdesign-uniapp/mixins/skyline.js';
 
 export default {
   components: {

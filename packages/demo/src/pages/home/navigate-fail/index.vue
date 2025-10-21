@@ -9,19 +9,17 @@
       <view class="fail-error">
         页面加载错误
       </view>
-      <TButton
+      <t-button
         class="fail-button"
         @click="toHome"
       >
         回到首页
-      </TButton>
+      </t-button>
     </view>
   </view>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue';
-import TButton from 'tdesign-uniapp/button/button.vue';
-import TIcon from 'tdesign-uniapp/icon/icon.vue';
 
 const failImage = ref('error-circle-filled');
 

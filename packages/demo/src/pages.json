@@ -206,7 +206,7 @@
     }
   ],
   "globalStyle": {
-    "navigationBarTextStyle": "black",
+    "pageOrientation": "portrait",
     "navigationBarTitleText": "TDesign UniApp",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8",
@@ -452,5 +452,10 @@
         "pathName": "pages-more/toast/toast"
       }
     ]
+  },
+  "easycom": {
+    "custom": {
+      "^t-(.*)": "tdesign-uniapp/$1/$1.vue"
+    }
   }
 }
