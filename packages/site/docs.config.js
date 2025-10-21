@@ -415,14 +415,14 @@ export const docs = [
         path: '/components/progress',
         component: () => import('@/progress/README.md'),
       },
-      // {
-      //   title: 'QRCode 二维码',
-      //   titleEn: 'QRCode',
-      //   name: 'qrcode',
-      //   meta: { docType: 'data' },
-      //   path: '/components/qrcode',
-      //   component: () => import('@/qrcode/README.md'),
-      // },
+      {
+        title: 'QRCode 二维码',
+        titleEn: 'QRCode',
+        name: 'qrcode',
+        meta: { docType: 'data' },
+        path: '/components/qrcode',
+        component: () => import('@/qrcode/README.md'),
+      },
       {
         title: 'Result 结果',
         titleEn: 'Result',

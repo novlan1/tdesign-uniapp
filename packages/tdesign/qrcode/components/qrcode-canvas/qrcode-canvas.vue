@@ -1,5 +1,8 @@
 <template>
-  <view class="t-qrcode__canvas-wrapper">
+  <view
+    class="t-qrcode__canvas-wrapper"
+    :class="tClass"
+  >
     <canvas
       :id="canvasId"
       ref="qrcodeCanvas"
@@ -15,9 +18,15 @@
 import props from './props';
 import useQRCode from '../../hooks/useQRCode';
 import { DEFAULT_MINVERSION, excavateModules, isSupportPath2d, generatePath } from '../../../common/shared/qrcode/utils';
+import { uniComponent } from '../../../common/src/index';
+import { prefix } from '../../../common/config';
 
-export default {
+
+export default uniComponent({
   name: 'QrcodeCanvas',
+  externalClasses: [
+    `${prefix}-class`,
+  ],
   props: {
     ...props,
   },
@@ -75,7 +84,6 @@ export default {
     // #endif
 
     // #ifndef MP
-    // eslint-disable-next-line no-unreachable
     this.isWeb = true;
     // #endif
 
@@ -90,7 +98,6 @@ export default {
       // #endif
 
       // #ifndef MP
-      // eslint-disable-next-line no-unreachable
       this.initH5Canvas();
       // #endif
     },
@@ -197,24 +204,25 @@ export default {
 
         // 获取设备像素比
         let pixelRatio = 1;
+        let canvasSize;
+        let scale;
 
         // #ifdef MP
         // 小程序环境：获取真实的设备像素比并设置 Canvas 尺寸
         // 使用 getWindowInfo 替代已废弃的 getSystemInfoSync
         const windowInfo = uni.getWindowInfo();
         pixelRatio = windowInfo.pixelRatio || 1;
-        const canvasSize = this.size * pixelRatio;
+        canvasSize = this.size * pixelRatio;
         canvas.width = canvasSize;
         canvas.height = canvasSize;
         // 小程序环境：scale 计算方式（参考 TS 实现）
-        const scale = canvasSize / qrData.numCells;
+        scale = canvasSize / qrData.numCells;
         // #endif
 
         // #ifndef MP
-        // eslint-disable-next-line no-unreachable
         // H5 环境：每次渲染时重新设置 Canvas 尺寸（因为 size 可能变化）
         pixelRatio = window.devicePixelRatio || 1;
-        const canvasSize = this.size * pixelRatio;
+        canvasSize = this.size * pixelRatio;
 
         // 重新设置 Canvas 物理尺寸（会重置 canvas 状态）
         canvas.width = canvasSize;
@@ -225,7 +233,7 @@ export default {
         canvas.style.height = `${this.size}px`;
 
         // H5 环境：scale 计算方式（基于物理尺寸）
-        const scale = canvasSize / qrData.numCells;
+        scale = canvasSize / qrData.numCells;
         // #endif
 
         // 重置变换矩阵并应用缩放
@@ -371,8 +379,9 @@ export default {
 
     // 暴露 canvas 节点给父组件
     getCanvasNode() {
+      let result;
       // #ifdef MP
-      return new Promise((resolve) => {
+      result = new Promise((resolve) => {
         if (typeof uni !== 'undefined' && uni.createSelectorQuery) {
           const query = uni.createSelectorQuery().in(this);
           query
@@ -388,12 +397,13 @@ export default {
       // #endif
 
       // #ifndef MP
-      // eslint-disable-next-line no-unreachable
-      return Promise.resolve(document.querySelector(`#${this.canvasId}`));
+      result = Promise.resolve(document.querySelector(`#${this.canvasId}`));
       // #endif
+
+      return result;
     },
   },
-};
+});
 </script>
 
 <style lang="less" scoped>

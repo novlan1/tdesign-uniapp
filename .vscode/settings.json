@@ -30,7 +30,8 @@
     "msdk",
     "wzyd",
     "ebus",
-    "uniapp"
+    "uniapp",
+    "qrcode"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always",

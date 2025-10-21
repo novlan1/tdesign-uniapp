@@ -1,11 +1,11 @@
 <template>
   <view
     :style="`${_._style([style, customStyle])}; width:${containerSize}px; height: ${containerSize}px; background-color: ${bgColor};`"
-    :class="`${classPrefix} ${borderless ? prefix + '-' + 'borderless' : ''} class ${prefix}-class`"
+    :class="`${classPrefix} ${borderless ? prefix + '-' + 'borderless' : ''} class ${tClass}`"
   >
-    <qrcode-canvas
+    <QrcodeCanvas
       ref="qrcodeCanvas"
-      :class="`${prefix}-class-canvas`"
+      :t-class="tClassCanvas"
       :size="size"
       :value="value"
       :level="level"
@@ -17,8 +17,11 @@
       @drawCompleted="handleDrawCompleted"
     />
 
-    <view v-if="showMask && canvasReady" :class="`${prefix}-mask`">
-      <qrcode-status
+    <view
+      v-if="showMask && canvasReady"
+      :class="`${prefix}-mask`"
+    >
+      <QrcodeStatus
         :status="status"
         :status-render="statusRender"
         @refresh="handleRefresh"
@@ -26,7 +29,7 @@
         <template #statusRender>
           <slot name="statusRender" />
         </template>
-      </qrcode-status>
+      </QrcodeStatus>
     </view>
   </view>
 </template>
@@ -34,31 +37,25 @@
 <script>
 import QrcodeCanvas from './components/qrcode-canvas/qrcode-canvas.vue';
 import QrcodeStatus from './components/qrcode-status/qrcode-status.vue';
-import config from '../common/config';
+import { prefix } from '../common/config';
 import props from './props';
+import { uniComponent } from '../common/src/index';
 import _ from '../common/utils.wxs';
 
-const { prefix } = config;
 const name = `${prefix}-qrcode`;
 
-export default {
-  name: 'TQrcode',
+export default uniComponent({
+  name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-canvas`,
+  ],
   components: {
     QrcodeCanvas,
     QrcodeStatus,
   },
   props: {
     ...props,
-    // 样式
-    style: {
-      type: String,
-      default: '',
-    },
-    // 自定义样式
-    customStyle: {
-      type: String,
-      default: '',
-    },
   },
   data() {
     return {
@@ -127,7 +124,7 @@ export default {
       }
     },
   },
-};
+});
 </script>
 
 <style lang="less" scoped>
