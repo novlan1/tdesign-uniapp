@@ -45,6 +45,10 @@ async function processLess(inputFile, rawOutputFile, rawOutputFileInApp) {
     };
 
 
+    const outputFile = getOutputFile(rawOutputFile);
+    fs.writeFileSync(outputFile, postcssResult.css);
+    console.log(`✅ 转换完成: ${outputFile}`);
+
     if (rawOutputFileInApp) {
       const outputFile = getOutputFile(rawOutputFileInApp);
 

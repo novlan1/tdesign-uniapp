@@ -73,9 +73,7 @@
                 "dSYMs": false
             },
             "sdkConfigs": {
-                "speech": {
-                    "ifly": {}
-                }
+                "speech": {}
             },
             "orientation": [
                 "portrait-primary"
@@ -88,7 +86,7 @@
                     "xxxhdpi": "/static/logo-tdesign.png"
                 },
                 "ios": {
-                    "appstore": "/static/logo-tdesign.png",
+                    "appstore": "",
                     "iphone": {
                         "app@2x": "/static/logo-tdesign.png",
                         "app@3x": "/static/logo-tdesign.png",
