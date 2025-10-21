@@ -9,12 +9,12 @@
       <view class="fail-error">
         页面加载错误
       </view>
-      <TButton
+      <t-button
         class="fail-button"
         @click="toHome"
       >
         回到首页
-      </TButton>
+      </t-button>
     </view>
   </view>
 </template>

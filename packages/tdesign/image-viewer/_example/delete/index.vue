@@ -22,7 +22,7 @@
       :show-index="showIndex"
       :visible="visible"
       :images="images"
-      :custom-navbar-height="isH5 ? 48 : 0"
+      :custom-navbar-height="gCustomNavbarHeight"
       @change="onChange"
       @delete="onDelete"
       @close="onClose"

@@ -47,11 +47,29 @@ import TLoading from 'tdesign-uniapp/loading/loading.vue';
 
 在 `pages.json` 配置 [easycom](https://uniapp.dcloud.net.cn/collocation/pages.html#easycom)，可实现自动导入。
 
+### CI 模式
+
+使用 CI 模式，即使用 `node_modules` 下的 `tdesign-uniapp` 时，配置如下。
+
 ```json
 {
   "easycom": {
     "custom": {
       "^t-(.*)": "tdesign-uniapp/$1/$1.vue"
+    }
+  }
+}
+```
+
+### uni_modules
+
+使用 `uni_modules` 下的 `tdesign-uniapp` 时，配置如下。
+
+```json
+{
+  "easycom": {
+    "custom": {
+      "^t-(.*)": "@/uni_modules/tdesign-uniapp/components/$1/$1.vue"
     }
   }
 }

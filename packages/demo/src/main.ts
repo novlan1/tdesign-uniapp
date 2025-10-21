@@ -7,6 +7,13 @@ export function createApp() {
 
   app.mixin({
     computed: {
+      gCustomNavbarHeight() {
+        let result = 0;
+        // #ifdef H5 || APP-PLUS
+        result = 48;
+        // #endif
+        return result;
+      },
       isH5() {
         let result = false;
         // #ifdef H5
