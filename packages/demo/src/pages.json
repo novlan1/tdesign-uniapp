@@ -154,6 +154,9 @@
       "path": "pages-more/progress/progress"
     },
     {
+      "path": "pages-more/qrcode/qrcode"
+    },
+    {
       "path": "pages-more/result/result"
     },
     {
@@ -379,6 +382,10 @@
       {
         "name": "progress",
         "pathName": "pages-more/progress/progress"
+      },
+      {
+        "name": "q-r-code",
+        "pathName": "pages-more/qrcode/qrcode"
       },
       {
         "name": "result",

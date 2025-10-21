@@ -50,8 +50,7 @@
       {
         "name": "QRCode",
         "label": "二维码",
-        "path": "/pages-more/qrcode/qrcode",
-        "hide": true
+        "path": "/pages-more/qrcode/qrcode"
       },
       {
         "name": "Result",
