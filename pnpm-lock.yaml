@@ -678,6 +678,8 @@ importers:
         specifier: ^1.0.24
         version: 1.8.27(typescript@5.1.6)
 
+  packages/tdesign-app: {}
+
 packages:
 
   '@alloc/quick-lru@5.2.0':
