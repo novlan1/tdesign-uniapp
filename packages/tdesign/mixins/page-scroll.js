@@ -1,5 +1,6 @@
 import { getCurrentPage } from '../common/utils';
 
+const overflowScrollReg = /scroll|auto|overlay/i;
 
 const onPageScroll = function (event) {
   const page = getCurrentPage();
@@ -9,7 +10,6 @@ const onPageScroll = function (event) {
 
   pageScroller?.forEach((scroller) => {
     if (typeof scroller === 'function') {
-      // @ts-ignore
       scroller(event);
     }
   });
@@ -18,7 +18,7 @@ const onPageScroll = function (event) {
 export default (funcName = 'onScroll') => ({
   mounted() {
     const that = this;
-    // const bindScroller = this[funcName]?.bind(this);
+
     function bindScroller(e) {
       let result;
       // #ifdef H5
@@ -29,12 +29,14 @@ export default (funcName = 'onScroll') => ({
       // #endif
       return result;
     }
+
     // #ifdef H5
     this._scroller = getScroller(this.$el);
     if (this._scroller) {
       this._scroller.addEventListener('scroll', bindScroller);
     }
     // #endif
+
     const page = getCurrentPage();
     if (!page) return;
 
@@ -68,7 +70,7 @@ export default (funcName = 'onScroll') => ({
   },
 });
 
-const overflowScrollReg = /scroll|auto|overlay/i;
+
 export function getScroller(el, root) {
   // #ifdef H5
   if (root === void 0) {
