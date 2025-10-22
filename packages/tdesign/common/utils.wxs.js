@@ -5,12 +5,11 @@ import { getRegExp } from './runtime/wxs-polyfill';
  * addUnit */
 // 为 css 添加单位
 function addUnit(value) {
-  // prettier-ignore
-  var REGEXP = getRegExp('^-?\\d+(.\\d+)?$');
+  const REGEXP = getRegExp('^-?\\d+(.\\d+)?$');
   if (value == null) {
     return undefined;
   }
-  return REGEXP.test(`${value}`) ? value + 'px' : value;
+  return REGEXP.test(`${value}`) ? `${value}px` : value;
 }
 
 function isString(string) {
@@ -31,15 +30,15 @@ function isBoolean(value) {
   return typeof value === 'boolean';
 }
 
-var isNoEmptyObj = function (obj) {
+const isNoEmptyObj = function (obj) {
   return isObject(obj) && JSON.stringify(obj) !== '{}';
 };
 
 function includes(arr, value) {
   if (!arr || !isArray(arr)) return false;
 
-  var i = 0;
-  var len = arr.length;
+  let i = 0;
+  const len = arr.length;
 
   for (; i < len; i++) {
     if (arr[i] === value) return true;
@@ -48,21 +47,21 @@ function includes(arr, value) {
 }
 
 function cls(base, arr) {
-  var res = [base];
-  var i = 0;
-  for (var size = arr.length; i < size; i++) {
-    var item = arr[i];
+  const res = [base];
+  let i = 0;
+  for (let size = arr.length; i < size; i++) {
+    const item = arr[i];
 
     if (item && Array.isArray(item)) {
-      var key = arr[i][0];
-      var value = arr[i][1];
+      const key = arr[i][0];
+      const value = arr[i][1];
 
       if (value) {
-        res.push(base + '--' + key);
+        res.push(`${base}--${key}`);
       }
     } else if (typeof item === 'string' || typeof item === 'number') {
       if (item) {
-        res.push(base + '--' + item);
+        res.push(`${base}--${item}`);
       }
     }
   }
@@ -70,7 +69,7 @@ function cls(base, arr) {
 }
 
 function getBadgeAriaLabel(options) {
-  var maxCount = options.maxCount || 99;
+  const maxCount = options.maxCount || 99;
   if (options.dot) {
     return '有新的消息';
   }
@@ -80,13 +79,12 @@ function getBadgeAriaLabel(options) {
   if (isNaN(options.count)) {
     return options.count;
   }
-  var str1 = '有' + maxCount + '+条消息';
-  var str2 = '有' + options.count + '条消息';
+  const str1 = `有${maxCount}+条消息`;
+  const str2 = `有${options.count}条消息`;
   return Number(options.count) > maxCount ? str1 : str2;
 }
 
 function endsWith(str, endStr) {
-  
   return str.slice(-endStr.length) === endStr ? str : str + endStr;
 }
 
@@ -94,39 +92,28 @@ function keys(obj) {
   return JSON.stringify(obj)
     .replace(getRegExp('{|}|"', 'g'), '')
     .split(',')
-    .map(function (item) {
-      return item.split(':')[0];
-    });
+    .map(item => item.split(':')[0]);
 }
 
 function kebabCase(str) {
   return str
-    .replace(getRegExp('[A-Z]', 'g'), function (ele) {
-      return '-' + ele;
-    })
+    .replace(getRegExp('[A-Z]', 'g'), ele => `-${ele}`)
     .toLowerCase();
 }
 
+// eslint-disable-next-line no-underscore-dangle
 function _style(styles) {
   if (isArray(styles)) {
     return styles
-      .filter(function (item) {
-        return item != null && item !== '';
-      })
-      .map(function (item) {
-        return (isArray(item) || isObject(item)) ? _style(item) : endsWith(item, ';');
-      })
+      .filter(item => item != null && item !== '')
+      .map(item => ((isArray(item) || isObject(item)) ? _style(item) : endsWith(item, ';')))
       .join(' ');
   }
 
   if (isObject(styles)) {
     return keys(styles)
-      .filter(function (key) {
-        return styles[key] != null && styles[key] !== '';
-      })
-      .map(function (key) {
-        return [kebabCase(key), [styles[key]]].join(':');
-      })
+      .filter(key => styles[key] != null && styles[key] !== '')
+      .map(key => [kebabCase(key), [styles[key]]].join(':'))
       .join(';');
   }
 
@@ -135,19 +122,19 @@ function _style(styles) {
 
 function isValidIconName(str) {
   // prettier-ignore
-  return getRegExp('^[A-Za-z0-9\-]+$').test(str);
+  return getRegExp('^[A-Za-z0-9-_]+$').test(str);
 }
 
 export default {
-  addUnit: addUnit,
-  isString: isString,
-  isArray: isArray,
-  isObject: isObject,
-  isBoolean: isBoolean,
-  isNoEmptyObj: isNoEmptyObj,
-  includes: includes,
-  cls: cls,
-  getBadgeAriaLabel: getBadgeAriaLabel,
-  _style: _style,
-  isValidIconName: isValidIconName,
+  addUnit,
+  isString,
+  isArray,
+  isObject,
+  isBoolean,
+  isNoEmptyObj,
+  includes,
+  cls,
+  getBadgeAriaLabel,
+  _style,
+  isValidIconName,
 };
