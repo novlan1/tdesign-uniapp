@@ -138,7 +138,6 @@ export default uniComponent({
     tLink,
   },
   props: {
-    // ...props,
   },
   data() {
     return {
@@ -146,25 +145,7 @@ export default uniComponent({
       ...messageDefaultData,
       animation: [],
 
-      // align: '',
-      // closeBtn: '',
-      // content: '',
-      // duration: 3000,
-      // height: 0,
-      // id: '',
-      // gap: 0,
-      // icon: null,
-      // link: null,
-      // marquee: null,
-      // offset: [16, 16],
-      // style: '',
-      // customStyle: '',
-      // theme: 'info',
-      // visible: false,
-      // zIndex: 1000,
-      // single: true,
-      // defaultVisible: false,
-      // ariaHidden: true,
+
       _,
     };
   },
@@ -266,12 +247,6 @@ export default uniComponent({
         this.animation = this.resetAnimation.translateX(wrapRect.width).step()
           .export();
 
-        // this.setData(
-        //   {
-        //     this.animation = this.resetAnimation.translateX(wrapRect.width).step()
-        //       .export()
-        //   },
-        //   () => {
         setTimeout(() => {
           const durationTime = ((nodeRect.width + wrapRect.width) / speeding) * 1000;
           const nextAnimation = wx
@@ -287,12 +262,10 @@ export default uniComponent({
           // 不用这个的话会出现reset动画没跑完就开始跑这个等的奇怪问题
           setTimeout(() => {
             this.nextAnimationContext = setTimeout(this.checkAnimation.bind(this), durationTime);
-            // this.setData({ animation: nextAnimation });
             this.animation = nextAnimation;
           }, 20);
         });
       });
-      // });
     },
 
     /** 清理动画循环 */
@@ -303,12 +276,10 @@ export default uniComponent({
 
     show(offsetHeight = 0) {
       const { duration, innerMarquee, offset, id } = this;
-      // this.setData({
       this.visible = true;
       this.loop = innerMarquee.loop || this.loop;
       this.fadeClass = `${name}__fade`;
       this.wrapTop = unitConvert(offset[0]) + offsetHeight;
-      // });
 
       this.reset();
       setTimeout(() => {
@@ -330,11 +301,6 @@ export default uniComponent({
             setTimeout(() => {
               this.fadeClass = '';
             });
-            // this.setData({ height: wrapRect.height }, () => {
-            //   this.setData({
-            //     fadeClass: '',
-            //   });
-            // });
           })
           .catch((err) => {
             console.warn('err', err);

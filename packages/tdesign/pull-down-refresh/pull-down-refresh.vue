@@ -67,7 +67,6 @@ import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
 import { getRect, systemInfo, unitConvert } from '../common/utils';
-// import { canUseProxyScrollView } from '../common/version';
 import _ from '../common/utils.wxs';
 import { getObserver } from '../common/wechat';
 import { ParentMixin, RELATION_MAP } from '../common/relation';
@@ -322,7 +321,6 @@ export default uniComponent({
     },
 
     setScrollTop(scrollTop) {
-      // this.setData({ scrollTop });
       this.scrollTop = scrollTop;
     },
 
@@ -338,6 +336,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './pull-down-refresh.css';
 </style>

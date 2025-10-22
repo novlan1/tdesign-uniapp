@@ -102,10 +102,9 @@ export default {
     setLoadingStatus(ele) {
       ele.onLoadError = null;
       ele.onLoaded = null;
-      ele.setData({
-        isLoading: true,
-        isFailed: false,
-      });
+
+      ele.isLoading = true;
+      ele.isFailed = false;
     },
   },
 };

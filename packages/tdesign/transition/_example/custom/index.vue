@@ -36,14 +36,10 @@ export default {
   created() {},
   methods: {
     onTriggerClick() {
-      this.setData({
-        visible: !this.visible,
-      });
+      this.visible = !this.visible;
     },
     onClose() {
-      this.setData({
-        visible: false,
-      });
+      this.visible = false;
     },
   },
 };

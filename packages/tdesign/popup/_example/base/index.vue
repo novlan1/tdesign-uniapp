@@ -74,26 +74,11 @@ export default {
   created() {},
   methods: {
     handlePopup(e, { item }) {
-    //
-      /* ---处理dataset begin--- */
-      //   this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      //   const { item } = e.currentTarget.dataset;
       this.cur = item;
 
       setTimeout(() => {
         this.visible = true;
       });
-    //   this.setData(
-    //     {
-    //       cur: item,
-    //     },
-    //     () => {
-    //       this.setData({
-    //         visible: true,
-    //       });
-    //     },
-    //   );
     },
     onVisibleChange({ visible }) {
       this.visible = visible;

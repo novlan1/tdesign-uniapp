@@ -554,20 +554,11 @@ export default uniComponent({
         this.dragLayout = true;
 
 
-        // this.setData(
-        //   {
-        //     dragBaseData,
-        //     dragWrapStyle,
-        //     dragLayout: true,
-        //   },
-        //   () => {
         // 为了给拖拽元素加上拖拽方法，同时控制不拖拽时不取消穿透
         const timer = setTimeout(() => {
           this.dragging = false;
           clearTimeout(timer);
         }, 0);
-        //   },
-        // );
       });
     },
 
@@ -873,6 +864,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './upload.css';
 </style>

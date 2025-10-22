@@ -66,7 +66,7 @@
       </scroll-view>
     </view>
 
-    <base v-if="type == 'base'">
+    <baseDemo v-if="type == 'base'" />
     <advance v-else-if="type == 'advance'" />
     <draggable v-else />
   </view>
@@ -76,14 +76,14 @@
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import tButton from 'tdesign-uniapp/button/button.vue';
-import base from '../base';
-import advance from '../advance';
-import draggable from '../draggable';
+import baseDemo from '../base/index.vue';
+import advance from '../advance/index.vue';
+import draggable from '../draggable/index.vue';
 export default {
   components: {
     tNavbar,
     tButton,
-    base,
+    baseDemo,
     advance,
     draggable,
   },
@@ -93,13 +93,8 @@ export default {
     };
   },
   methods: {
-    handleChange(e: any, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      this.setData({
-        type: e.target.dataset.type,
-      });
+    handleChange(e, { type }) {
+      this.type = type;
     },
   },
 };

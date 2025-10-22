@@ -141,19 +141,14 @@ export default uniComponent({
       handler(v) {
         this.base.type = v;
       },
-      // immediate: true,
     },
 
     confirmBtn: {
       handler(v) {
         if (typeof v === 'string') {
-        // this.setData({
           this.innerConfirmBtn = v === 'slot' ? 'slot' : { content: v };
-        //  });
         } else if (typeof v === 'object') {
-        // this.setData({
           this.innerConfirmBtn = v;
-        //  });
         }
       },
       immediate: true,
@@ -225,10 +220,8 @@ export default uniComponent({
     const realLocalText = { ...defaultLocaleText, ...this.localeText };
     this.initialValue();
     this.onWatchMinMaxDate();
-    // this.setData({
     this.days = this.base.getDays(realLocalText.weekdays);
     this.realLocalText = realLocalText;
-    // });
 
     this.calcMonths();
     this.updateCurrentMonth();
@@ -253,9 +246,7 @@ export default uniComponent({
           initialValue[1] = now + 24 * 3600 * 1000; // 第二天
         }
 
-        // this.setData({
         this.dataValue = initialValue;
-        // });
         this.base.value = initialValue;
       }
     },
@@ -268,9 +259,7 @@ export default uniComponent({
       const date = new Date(Array.isArray(value) ? value[0] : value);
 
       if (date) {
-        // this.setData({
         this.scrollIntoView = `year_${date.getFullYear()}_month_${date.getMonth()}`;
-        // });
       }
     },
 
@@ -296,14 +285,12 @@ export default uniComponent({
       const nextYearBtnDisable = _nextMonthTimestamp > _maxTimestamp || _nextYearTimestamp > _maxTimestamp;
       const nextMonthBtnDisable = _nextMonthTimestamp > _maxTimestamp;
 
-      // this.setData({
       this.actionButtons = {
         preYearBtnDisable,
         prevMonthBtnDisable,
         nextYearBtnDisable,
         nextMonthBtnDisable,
       };
-      // });
     },
 
     updateCurrentMonth(newValue) {
@@ -318,9 +305,7 @@ export default uniComponent({
 
       this.updateActionButton(date);
 
-      // this.setData({
       this.currentMonth = currentMonth.length > 0 ? currentMonth : [this.months[0]];
-      // });
     },
 
     calcMonths() {
@@ -328,17 +313,13 @@ export default uniComponent({
 
       const months = this.base.getMonths();
 
-      // this.setData({
       this.months = months;
-      // });
     },
 
     close(trigger) {
       if (this.autoClose) {
         this.$emit('update:visible', false);
-        // this.setData({
         this.dataVisible = false;
-        // });
       }
       this.$emit('close', { trigger });
     },
@@ -367,9 +348,7 @@ export default uniComponent({
       if (this.confirmBtn == null) {
         // 不显示确认按钮，则选择完即关闭 popup
         if (this.type === 'single' || rawValue.length === 2) {
-          // this.setData({
           this.dataVisible = false;
-          // });
           this._trigger('change', { value }); // 受控
         }
       }
@@ -440,6 +419,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './calendar.css';
 </style>

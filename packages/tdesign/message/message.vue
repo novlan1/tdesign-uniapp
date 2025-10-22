@@ -122,7 +122,6 @@ export default uniComponent({
           setTimeout(() => {
             instance.show.call(instance, offsetHeight);
           });
-          // instance.setData(msgObj, instance.show.bind(instance, offsetHeight));
           instance.onHide = () => {
             this.close(id);
           };
@@ -139,11 +138,6 @@ export default uniComponent({
       this.messageList = list;
 
       setTimeout(() => {
-        // this.setData(
-        //   {
-        //     messageList: list,
-        //   },
-        //   () => {
         const offsetHeight = this.getOffsetHeight();
         const instance = this.showMessageItem(msgObj, msgObj.id, offsetHeight);
         if (this.instances) {
@@ -151,8 +145,6 @@ export default uniComponent({
           this.index += 1;
         }
       });
-      //   },
-      // );
     },
 
     /**
@@ -194,7 +186,6 @@ export default uniComponent({
           setTimeout(() => {
             instance.show.call(instance, offsetHeight);
           });
-          // instance.setData(options, instance.show.bind(instance, offsetHeight));
           instance.onHide = () => {
             this.close(id);
           };
