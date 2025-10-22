@@ -22,7 +22,7 @@
       :height="52"
       :x="56"
       :y="56"
-      layout="hexagon"
+      layout="hexagonal"
     >
       <view style="width: 100%; height: 340px" />
     </t-watermark>
