@@ -1,21 +1,27 @@
 export default class Bus {
-    constructor() {
-        this.listeners = new Map();
-        this.emitted = new Set();
+  constructor() {
+    this.listeners = new Map();
+    this.emitted = new Set();
+  }
+
+  on(evtName, listener) {
+    if (this.emitted.has(evtName)) {
+      listener();
+      return;
     }
-    on(t, e) {
-        if (this.emitted.has(t)) {
-            return void e();
-        }
-        const s = this.listeners.get(t) || [];
-        s.push(e);
-        this.listeners.set(t, s);
+    const target = this.listeners.get(evtName) || [];
+
+    target.push(listener);
+
+    this.listeners.set(evtName, target);
+  }
+
+  emit(evtName) {
+    const listeners = this.listeners.get(evtName);
+
+    if (listeners) {
+      listeners.forEach(func => func());
     }
-    emit(t) {
-        const e = this.listeners.get(t);
-        if (e) {
-            e.forEach((t) => t());
-        }
-        this.emitted.add(t);
-    }
+    this.emitted.add(evtName);
+  }
 }
