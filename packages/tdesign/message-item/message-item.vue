@@ -3,6 +3,7 @@
     <view
       v-if="visible"
       :id="id || classPrefix"
+      :ref="id || classPrefix"
       :class="classPrefix + ' class ' + prefix + '-class ' + classPrefix + '--' + theme + ' ' + fadeClass"
       :style="_._style([getMessageStyles(zIndex, offset, wrapTop), style, customStyle])"
       :animation="showAnimation"
@@ -30,11 +31,13 @@
       </view>
       <view
         :id="classPrefix + '__text-wrap'"
+        :ref="classPrefix + '__text-wrap'"
         :class="classPrefix + '__text-wrap ' + (marquee ? classPrefix + '__text-nowrap' : '')"
         :style="'text-align: ' + align"
       >
         <view
           :id="classPrefix + '__text'"
+          :ref="classPrefix + '__text'"
           :class="classPrefix + '__text ' + prefix + '-class-content'"
           :animation="animation"
         >
