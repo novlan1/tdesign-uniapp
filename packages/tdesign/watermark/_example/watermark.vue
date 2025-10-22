@@ -7,7 +7,7 @@
       <t-demo title="01 组件类型" desc="文字水印">
         <base-watermark />
       </t-demo>
-      <!-- <t-demo desc="图片水印">
+      <t-demo desc="图片水印">
         <image-watermark />
       </t-demo>
       <t-demo desc="图片灰阶水印">
@@ -27,7 +27,7 @@
       </t-demo>
       <t-demo title="02 组件样式">
         <layout />
-      </t-demo> -->
+      </t-demo>
     </view>
   </view>
 </template>

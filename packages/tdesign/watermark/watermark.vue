@@ -8,7 +8,11 @@
       id="watermarkCanvas"
       style="display: none; width: 100%; height: 100%"
     />
-    <view id="watermark" :style="_._style(watermarkStyle)"></view>
+    <view
+      id="watermark"
+      :class="movable ? 'watermark-move' : ''"
+      :style="_._style(watermarkStyle)"
+    ></view>
   </view>
 </template>
 
@@ -71,10 +75,6 @@ export default uniComponent({
       // #ifdef MP-WEIXIN
       query = wx.createSelectorQuery().in(this);
       // #endif
-
-      // #ifndef H5 || MP-WEIXIN
-      query = uni.createSelectorQuery().in(this);
-      // #endif
       query
         .select('#watermarkCanvas')
         .fields({ node: true, size: true })
@@ -129,6 +129,9 @@ export default uniComponent({
                   '--watermark-top-25': top25,
                   '--watermark-top-50': top50,
                   '--watermark-top-75': top75,
+                  '--watermark-animation-duration': `${
+                    (this.moveInterval * 4) / 60
+                  }s`,
                 };
               }
 
@@ -147,9 +150,6 @@ export default uniComponent({
                 pointerEvents: 'none',
                 backgroundRepeat: this.movable ? 'no-repeat' : 'repeat',
                 backgroundImage: `url('${base64Url}')`,
-                animation: this.movable
-                  ? `watermark infinite ${(this.moveInterval * 4) / 60}s`
-                  : 'none',
                 ...animationVars,
               };
             }

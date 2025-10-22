@@ -83,15 +83,9 @@ export default function generateBase64Url(
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
 
-  // canvas.style.width = `${gapX * 2}px`;
-  // canvas.style.height = `${gapY * 2}px`;
-
   if (isHexagonal) {
     canvas.width = canvasWidth * 2;
     canvas.height = canvasHeight * 2;
-
-    // canvas.style.width = `${canvasWidth * 2}px`;
-    // canvas.style.height = `${canvasHeight * 2}px`;
 
     // 两倍宽度+间距
     actualBackgroundSize = {
@@ -99,11 +93,17 @@ export default function generateBase64Url(
     };
   }
 
-  ctx.translate(offsetLeft * ratio, offsetTop * ratio);
   ctx.globalAlpha = alpha;
+
+  // h5需要全局缩放
+  // #ifndef MP
+  ctx.scale(1 / ratio, 1 / ratio);
+  // #endif
 
   ctx.fillStyle = 'transparent';
   ctx.fillRect(0, 0, markWidth, markHeight);
+
+  ctx.translate(offsetLeft * ratio, offsetTop * ratio);
 
   const contents = Array.isArray(watermarkContent)
     ? watermarkContent
@@ -204,7 +204,6 @@ export default function generateBase64Url(
         }
       };
     } else if (item.text) {
-      console.log('item', item);
       const {
         text,
         fontSize = 16,
@@ -226,11 +225,6 @@ export default function generateBase64Url(
         fontFamily,
         fillStyle
       );
-      console.log('Canvas尺寸:', canvas.width, canvas.height);
-      console.log('文字内容:', text);
-      console.log('字体设置:', ctx.font);
-      console.log('文字测量:', ctx.measureText(text));
-      console.log('渲染位置:', offsetX, offsetY + item.top * ratio);
       ctx.restore?.();
     }
   };
