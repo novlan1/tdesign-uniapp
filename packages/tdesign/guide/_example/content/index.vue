@@ -10,185 +10,62 @@
         </view>
       </view>
       <view class="field label-field">
-        <t-input
-          label="标签文字"
-          layout="vertical"
-          placeholder="请输入文字"
-        />
+        <t-input label="标签文字" layout="vertical" placeholder="请输入文字" />
       </view>
       <view class="field">
-        <t-input
-          label="标签文字"
-          layout="vertical"
-          placeholder="请输入文字"
-        />
+        <t-input label="标签文字" layout="vertical" placeholder="请输入文字" />
       </view>
       <view class="action">
-        <t-button
-          block
-          theme="light"
-          size="large"
-        >
+        <t-button block theme="light" size="large">
           重置
         </t-button>
-        <t-button
-          block
-          theme="primary"
-          size="large"
-        >
+        <t-button block theme="primary" size="large">
           确定
         </t-button>
       </view>
     </view>
 
-    <t-guide
-      :current="current"
-      :steps="steps"
-      @skip="close"
-      @finish="close"
-    >
-      <view
-        slot="content-0"
-        class="content"
-      >
-        <t-icon
-          name="arrow-up"
-          size="64rpx"
-          color="#fff"
-          class="icon"
-        />
+    <t-guide :current="current" :steps="steps" @skip="close" @finish="close">
+      <view slot="content-0" class="content">
+        <t-icon name="arrow-up" size="64rpx" color="#fff" class="icon" />
         <p class="text">
           1、自定义的图形或说明文案，用来解释或指导该功能使用。
         </p>
         <view class="footer">
-          <t-button
-            v-if="current < steps.length - 1"
-            theme="light"
-            content="跳过"
-            size="extra-small"
-            class="guide-demo-button"
-            @click="skip"
-          />
-          <t-button
-            v-else
-            class="guide-demo-button"
-            theme="light"
-            content="返回"
-            size="extra-small"
-            @click="back"
-          />
-          <t-button
-            v-if="current < steps.length - 1"
-            theme="primary"
-            content="下一步"
-            size="extra-small"
-            class="guide-demo-button"
-            @click="next"
-          />
-          <t-button
-            v-else
-            class="guide-demo-button"
-            theme="primary"
-            content="完成"
-            size="extra-small"
-            @click="finish"
-          />
+          <t-button v-if="current < steps.length - 1" theme="light" content="跳过" size="extra-small"
+            class="guide-demo-button" @click="skip" />
+          <t-button v-else class="guide-demo-button" theme="light" content="返回" size="extra-small" @click="back" />
+          <t-button v-if="current < steps.length - 1" theme="primary" content="下一步" size="extra-small"
+            class="guide-demo-button" @click="next" />
+          <t-button v-else class="guide-demo-button" theme="primary" content="完成" size="extra-small" @click="finish" />
         </view>
       </view>
-      <view
-        slot="content-1"
-        class="content"
-      >
-        <t-icon
-          name="arrow-up"
-          size="64rpx"
-          color="#fff"
-          class="icon"
-        />
+      <view slot="content-1" class="content">
+        <t-icon name="arrow-up" size="64rpx" color="#fff" class="icon" />
         <p class="text">
           2、自定义的图形或说明文案，用来解释或指导该功能使用。
         </p>
         <view class="footer">
-          <t-button
-            v-if="current < steps.length - 1"
-            theme="light"
-            content="跳过"
-            size="extra-small"
-            class="guide-demo-button"
-            @click="skip"
-          />
-          <t-button
-            v-else
-            class="guide-demo-button"
-            theme="light"
-            content="返回"
-            size="extra-small"
-            @click="back"
-          />
-          <t-button
-            v-if="current < steps.length - 1"
-            theme="primary"
-            content="下一步"
-            size="extra-small"
-            class="guide-demo-button"
-            @click="next"
-          />
-          <t-button
-            v-else
-            class="guide-demo-button"
-            theme="primary"
-            content="完成"
-            size="extra-small"
-            @click="finish"
-          />
+          <t-button v-if="current < steps.length - 1" theme="light" content="跳过" size="extra-small"
+            class="guide-demo-button" @click="skip" />
+          <t-button v-else class="guide-demo-button" theme="light" content="返回" size="extra-small" @click="back" />
+          <t-button v-if="current < steps.length - 1" theme="primary" content="下一步" size="extra-small"
+            class="guide-demo-button" @click="next" />
+          <t-button v-else class="guide-demo-button" theme="primary" content="完成" size="extra-small" @click="finish" />
         </view>
       </view>
-      <view
-        slot="content-2"
-        class="content"
-      >
-        <t-icon
-          name="arrow-up"
-          size="64rpx"
-          color="#fff"
-          class="icon"
-        />
+      <view slot="content-2" class="content">
+        <t-icon name="arrow-up" size="64rpx" color="#fff" class="icon" />
         <p class="text">
           3、自定义的图形或说明文案，用来解释或指导该功能使用。
         </p>
         <view class="footer">
-          <t-button
-            v-if="current < steps.length - 1"
-            theme="light"
-            content="跳过"
-            size="extra-small"
-            class="guide-demo-button"
-            @click="skip"
-          />
-          <t-button
-            v-else
-            class="guide-demo-button"
-            theme="light"
-            content="返回"
-            size="extra-small"
-            @click="back"
-          />
-          <t-button
-            v-if="current < steps.length - 1"
-            theme="primary"
-            content="下一步"
-            size="extra-small"
-            class="guide-demo-button"
-            @click="next"
-          />
-          <t-button
-            v-else
-            class="guide-demo-button"
-            theme="primary"
-            content="完成"
-            size="extra-small"
-            @click="finish"
-          />
+          <t-button v-if="current < steps.length - 1" theme="light" content="跳过" size="extra-small"
+            class="guide-demo-button" @click="skip" />
+          <t-button v-else class="guide-demo-button" theme="light" content="返回" size="extra-small" @click="back" />
+          <t-button v-if="current < steps.length - 1" theme="primary" content="下一步" size="extra-small"
+            class="guide-demo-button" @click="next" />
+          <t-button v-else class="guide-demo-button" theme="primary" content="完成" size="extra-small" @click="finish" />
         </view>
       </view>
     </t-guide>
@@ -196,7 +73,7 @@
 </template>
 
 <script>
-import tGuide from 'tdesign-uniapp/guide/guide';
+import tGuide from 'tdesign-uniapp/guide/guide.vue';
 import tInput from 'tdesign-uniapp/input/input';
 import tButton from 'tdesign-uniapp/button/button';
 export default {
@@ -215,46 +92,43 @@ export default {
     // 处理小程序 attached 生命周期
     this.attached();
   },
-  created() {},
+  created() { },
   methods: {
     attached() {
-      this.setData({
-        current: 0,
+      this.current = 0;
+      this.steps = [
+        {
+          element: () => new Promise(resolve => uni
+            .createSelectorQuery()
+            .in(this)
+            .select('.main-title')
+            .boundingClientRect(rect => resolve(rect))
+            .exec()),
 
-        steps: [
-          {
-            element: () => new Promise(resolve => uni
-              .createSelectorQuery()
-              .in(this)
-              .select('.main-title')
-              .boundingClientRect(rect => resolve(rect))
-              .exec()),
+          placement: 'center',
+        },
+        {
+          element: () => new Promise(resolve => uni
+            .createSelectorQuery()
+            .in(this)
+            .select('.label-field')
+            .boundingClientRect(rect => resolve(rect))
+            .exec()),
 
-            placement: 'center',
-          },
-          {
-            element: () => new Promise(resolve => uni
-              .createSelectorQuery()
-              .in(this)
-              .select('.label-field')
-              .boundingClientRect(rect => resolve(rect))
-              .exec()),
+          placement: 'bottom',
+          highlightPadding: 0,
+        },
+        {
+          element: () => new Promise(resolve => uni
+            .createSelectorQuery()
+            .in(this)
+            .select('.action')
+            .boundingClientRect(rect => resolve(rect))
+            .exec()),
 
-            placement: 'bottom',
-            highlightPadding: 0,
-          },
-          {
-            element: () => new Promise(resolve => uni
-              .createSelectorQuery()
-              .in(this)
-              .select('.action')
-              .boundingClientRect(rect => resolve(rect))
-              .exec()),
-
-            placement: 'bottom-right',
-          },
-        ],
-      });
+          placement: 'bottom-right',
+        },
+      ];
     },
 
     close() {
@@ -262,28 +136,20 @@ export default {
     },
 
     skip() {
-      this.setData({
-        current: -1,
-      });
+      this.current = -1;
       this.close();
     },
 
     back() {
-      this.setData({
-        current: 0,
-      });
+      this.current = 0;
     },
 
     next() {
-      this.setData({
-        current: this.current + 1,
-      });
+      this.current = this.current + 1;
     },
 
     finish() {
-      this.setData({
-        current: -1,
-      });
+      this.current = -1;
       this.close();
     },
   },

@@ -502,14 +502,14 @@ export const docs = [
         path: '/components/dropdown-menu',
         component: () => import('@/dropdown-menu/README.md'),
       },
-      // {
-      //   title: 'Guide 引导',
-      //   titleEn: 'Guide',
-      //   name: 'guide',
-      //   meta: { docType: 'navigation' },
-      //   path: '/components/guide',
-      //   component: () => import('@/guide/README.md'),
-      // },
+      {
+        title: 'Guide 引导',
+        titleEn: 'Guide',
+        name: 'guide',
+        meta: { docType: 'navigation' },
+        path: '/components/guide',
+        component: () => import('@/guide/README.md'),
+      },
       {
         title: 'Loading 加载',
         titleEn: 'Loading',

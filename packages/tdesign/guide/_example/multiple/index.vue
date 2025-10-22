@@ -10,61 +10,33 @@
         </view>
       </view>
       <view class="field label-field">
-        <t-input
-          label="标签文字"
-          layout="vertical"
-          placeholder="请输入文字"
-        />
+        <t-input label="标签文字" layout="vertical" placeholder="请输入文字" />
       </view>
       <view class="field">
-        <t-input
-          label="标签文字"
-          layout="vertical"
-          placeholder="请输入文字"
-        />
+        <t-input label="标签文字" layout="vertical" placeholder="请输入文字" />
       </view>
       <view class="action">
-        <t-button
-          block
-          theme="light"
-          size="large"
-        >
+        <t-button block theme="light" size="large">
           重置
         </t-button>
-        <t-button
-          block
-          theme="primary"
-          size="large"
-        >
+        <t-button block theme="primary" size="large">
           确定
         </t-button>
       </view>
     </view>
 
-    <t-guide
-      :current="current"
-      :steps="steps"
-      @skip="close"
-      @finish="close"
-    >
-      <view
-        slot="body-1"
-        class="slot-body"
-      >
+    <t-guide :current="current" :steps="steps" @skip="close" @finish="close">
+      <view slot="body-1" class="slot-body">
         <p>用户引导的说明文案 1</p>
-        <t-image
-          class="guide-demo-image"
-          src="https://tdesign.gtimg.com/demo/demo-image-1.png"
-          mode="scaleToFill"
-          width="100%"
-        />
+        <t-image class="guide-demo-image" src="https://tdesign.gtimg.com/demo/demo-image-1.png" mode="scaleToFill"
+          width="100%" />
       </view>
     </t-guide>
   </view>
 </template>
 
 <script>
-import tGuide from 'tdesign-uniapp/guide/guide';
+import tGuide from 'tdesign-uniapp/guide/guide.vue';
 import tInput from 'tdesign-uniapp/input/input';
 import tButton from 'tdesign-uniapp/button/button';
 import tImage from 'tdesign-uniapp/image/image';
@@ -85,51 +57,48 @@ export default {
     // 处理小程序 attached 生命周期
     this.attached();
   },
-  created() {},
+  created() { },
   methods: {
     attached() {
-      this.setData({
-        current: 0,
+      this.current = 0;
+      this.steps = [
+        {
+          element: () => new Promise(resolve => uni
+            .createSelectorQuery()
+            .in(this)
+            .select('.main-title')
+            .boundingClientRect(rect => resolve(rect))
+            .exec()),
 
-        steps: [
-          {
-            element: () => new Promise(resolve => uni
-              .createSelectorQuery()
-              .in(this)
-              .select('.main-title')
-              .boundingClientRect(rect => resolve(rect))
-              .exec()),
+          title: '用户引导标题',
+          body: '用户引导的说明文案',
+          placement: 'center',
+        },
+        {
+          element: () => new Promise(resolve => uni
+            .createSelectorQuery()
+            .in(this)
+            .select('.label-field')
+            .boundingClientRect(rect => resolve(rect))
+            .exec()),
 
-            title: '用户引导标题',
-            body: '用户引导的说明文案',
-            placement: 'center',
-          },
-          {
-            element: () => new Promise(resolve => uni
-              .createSelectorQuery()
-              .in(this)
-              .select('.label-field')
-              .boundingClientRect(rect => resolve(rect))
-              .exec()),
+          title: '用户引导标题',
+          placement: 'bottom',
+          mode: 'dialog',
+        },
+        {
+          element: () => new Promise(resolve => uni
+            .createSelectorQuery()
+            .in(this)
+            .select('.action')
+            .boundingClientRect(rect => resolve(rect))
+            .exec()),
 
-            title: '用户引导标题',
-            placement: 'bottom',
-            mode: 'dialog',
-          },
-          {
-            element: () => new Promise(resolve => uni
-              .createSelectorQuery()
-              .in(this)
-              .select('.action')
-              .boundingClientRect(rect => resolve(rect))
-              .exec()),
-
-            title: '用户引导标题',
-            body: '用户引导的说明文案',
-            placement: 'bottom-right',
-          },
-        ],
-      });
+          title: '用户引导标题',
+          body: '用户引导的说明文案',
+          placement: 'bottom-right',
+        },
+      ];
     },
 
     close() {

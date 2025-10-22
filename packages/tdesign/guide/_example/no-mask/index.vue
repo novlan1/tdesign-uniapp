@@ -10,49 +10,27 @@
         </view>
       </view>
       <view class="field label-field">
-        <t-input
-          label="标签文字"
-          layout="vertical"
-          placeholder="请输入文字"
-        />
+        <t-input label="标签文字" layout="vertical" placeholder="请输入文字" />
       </view>
       <view class="field">
-        <t-input
-          label="标签文字"
-          layout="vertical"
-          placeholder="请输入文字"
-        />
+        <t-input label="标签文字" layout="vertical" placeholder="请输入文字" />
       </view>
       <view class="action">
-        <t-button
-          block
-          theme="light"
-          size="large"
-        >
+        <t-button block theme="light" size="large">
           重置
         </t-button>
-        <t-button
-          block
-          theme="primary"
-          size="large"
-        >
+        <t-button block theme="primary" size="large">
           确定
         </t-button>
       </view>
     </view>
 
-    <t-guide
-      :current="current"
-      :steps="steps"
-      :show-overlay="false"
-      @skip="close"
-      @finish="close"
-    />
+    <t-guide :current="current" :steps="steps" :show-overlay="false" @skip="close" @finish="close" />
   </view>
 </template>
 
 <script>
-import tGuide from 'tdesign-uniapp/guide/guide';
+import tGuide from 'tdesign-uniapp/guide/guide.vue';
 import tInput from 'tdesign-uniapp/input/input';
 import tButton from 'tdesign-uniapp/button/button';
 export default {
@@ -71,52 +49,49 @@ export default {
     // 处理小程序 attached 生命周期
     this.attached();
   },
-  created() {},
+  created() { },
   methods: {
     attached() {
-      this.setData({
-        current: 0,
+      this.current = 0;
+      this.steps = [
+        {
+          element: () => new Promise(resolve => uni
+            .createSelectorQuery()
+            .in(this)
+            .select('.main-title')
+            .boundingClientRect(rect => resolve(rect))
+            .exec()),
 
-        steps: [
-          {
-            element: () => new Promise(resolve => uni
-              .createSelectorQuery()
-              .in(this)
-              .select('.main-title')
-              .boundingClientRect(rect => resolve(rect))
-              .exec()),
+          title: '用户引导标题',
+          body: '用户引导的说明文案',
+          placement: 'center',
+        },
+        {
+          element: () => new Promise(resolve => uni
+            .createSelectorQuery()
+            .in(this)
+            .select('.label-field')
+            .boundingClientRect(rect => resolve(rect))
+            .exec()),
 
-            title: '用户引导标题',
-            body: '用户引导的说明文案',
-            placement: 'center',
-          },
-          {
-            element: () => new Promise(resolve => uni
-              .createSelectorQuery()
-              .in(this)
-              .select('.label-field')
-              .boundingClientRect(rect => resolve(rect))
-              .exec()),
+          title: '用户引导标题',
+          body: '用户引导的说明文案',
+          placement: 'bottom',
+          highlightPadding: 0,
+        },
+        {
+          element: () => new Promise(resolve => uni
+            .createSelectorQuery()
+            .in(this)
+            .select('.action')
+            .boundingClientRect(rect => resolve(rect))
+            .exec()),
 
-            title: '用户引导标题',
-            body: '用户引导的说明文案',
-            placement: 'bottom',
-            highlightPadding: 0,
-          },
-          {
-            element: () => new Promise(resolve => uni
-              .createSelectorQuery()
-              .in(this)
-              .select('.action')
-              .boundingClientRect(rect => resolve(rect))
-              .exec()),
-
-            title: '用户引导标题',
-            body: '用户引导的说明文案',
-            placement: 'top-right',
-          },
-        ],
-      });
+          title: '用户引导标题',
+          body: '用户引导的说明文案',
+          placement: 'top-right',
+        },
+      ];
     },
 
     close() {

@@ -169,6 +169,9 @@
       "path": "pages-more/dropdown-menu/dropdown-menu"
     },
     {
+      "path": "pages-more/guide/guide"
+    },
+    {
       "path": "pages-more/loading/loading"
     },
     {
@@ -390,6 +393,10 @@
       {
         "name": "dropdown-menu",
         "pathName": "pages-more/dropdown-menu/dropdown-menu"
+      },
+      {
+        "name": "guide",
+        "pathName": "pages-more/guide/guide"
       },
       {
         "name": "loading",

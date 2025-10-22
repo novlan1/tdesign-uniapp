@@ -17,6 +17,10 @@
       },
       {
         "name": "Guide",
+        "label": "引导"
+      },
+      {
+        "name": "Guide",
         "label": "引导",
         "hide": true
       },
