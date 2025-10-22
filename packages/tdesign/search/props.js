@@ -34,7 +34,6 @@ const props = {
   cursor: {
     type: Number,
     default: -1,
-    required: true,
   },
   cursorSpacing: {
     type: Number,
@@ -74,7 +73,6 @@ const props = {
   placeholderStyle: {
     type: String,
     default: '',
-    required: true,
   },
   readonly: {
     type: Boolean,
