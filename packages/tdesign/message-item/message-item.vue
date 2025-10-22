@@ -48,7 +48,7 @@
       <t-link
         v-if="_link && _link.content"
         :t-class="classPrefix + '__link ' + prefix + '-class-link'"
-        :style="_._style([_link.style, _link.customStyle])"
+        :custom-style="_._style([_link.style, _link.customStyle])"
         :disabled="_link.disabled || false"
         :hover="_link.hover || true"
         :theme="_link.theme || 'primary'"
