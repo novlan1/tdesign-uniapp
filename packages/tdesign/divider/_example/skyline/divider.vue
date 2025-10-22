@@ -21,7 +21,7 @@
           title="01 组件类型"
           desc="水平分割线"
         >
-          <base>
+          <baseDemo />
         </t-demo>
         <t-demo
           title="02 组件状态"
@@ -37,12 +37,12 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import base from '../base';
-import theme from '../theme';
+import baseDemo from '../base/index.vue';
+import theme from '../theme/index.vue';
 export default {
   components: {
     tNavbar,
-    base,
+    baseDemo,
     theme,
   },
   data() {

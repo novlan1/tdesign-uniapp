@@ -544,6 +544,6 @@ export default uniComponent({
 
 });
 </script>
-<style scoped >
+<style scoped>
 @import './date-time-picker.css';
 </style>

@@ -320,6 +320,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './notice-bar.css';
 </style>

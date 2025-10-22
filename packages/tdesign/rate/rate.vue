@@ -263,6 +263,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped >
+<style scoped>
 @import './rate.css';
 </style>

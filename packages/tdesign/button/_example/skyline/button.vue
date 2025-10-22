@@ -21,7 +21,7 @@
           title="01 组件类型"
           desc="基础按钮"
         >
-          <base>
+          <baseDemo />
         </t-demo>
 
         <t-demo desc="图标按钮">
@@ -68,22 +68,22 @@
 
 <script lang="ts">
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import base from '../base';
-import size from '../size';
-import iconBtn from '../icon-btn';
-import groupBtn from '../group-btn';
-import blockBtn from '../block-btn';
-import ghostBtn from '../ghost-btn';
-import shape from '../shape';
-import theme from '../theme';
-import disabled from '../disabled';
+import baseDemo from '../base/index.vue';
+import size from '../size/index.vue';
+import iconBtn from '../icon-btn/index.vue';
+import groupBtn from '../group-btn/index.vue';
+import blockBtn from '../block-btn/index.vue';
+import ghostBtn from '../ghost-btn/index.vue';
+import shape from '../shape/index.vue';
+import theme from '../theme/index.vue';
+import disabled from '../disabled/index.vue';
 export default {
   options: {
     styleIsolation: 'shared',
   },
   components: {
     tNavbar,
-    base,
+    baseDemo,
     size,
     iconBtn,
     groupBtn,

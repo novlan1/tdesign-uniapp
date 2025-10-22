@@ -43,6 +43,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped >
+<style scoped>
 @import './transition.css';
 </style>

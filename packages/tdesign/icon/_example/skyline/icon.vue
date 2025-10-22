@@ -18,7 +18,7 @@
           用于界面中的操作、入口、功能、服务等视觉表达，icon风格与品牌风格需要保持一致的感受，从而增加一致性
         </view>
         <t-demo title="01 基础组件图标">
-          <base>
+          <baseDemo />
         </t-demo>
         <t-demo title="02 自定义组件图标">
           <custom />
@@ -34,13 +34,13 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import base from '../base';
-import custom from '../custom';
-import iconImage from '../iconImage';
+import baseDemo from '../base/index.vue';
+import custom from '../custom/index.vue';
+import iconImage from '../iconImage/index.vue';
 export default {
   components: {
     tNavbar,
-    base,
+    baseDemo,
     custom,
     iconImage,
   },

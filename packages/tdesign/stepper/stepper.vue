@@ -232,6 +232,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './stepper.css';
 </style>

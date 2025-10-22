@@ -25,51 +25,74 @@
 
 ## 预览
 
-小程序组件示例小程序，请使用微信扫码预览 ↓
+UniApp 组件示例小程序，请使用微信扫码预览 ↓
 <br/>
 
 <img width="260" src="https://mike-1255355338.cos.ap-guangzhou.myqcloud.com/article/2025/10/own_mike_5nFZmp27arnbwnjQ.png" />
 
 ## 安装
 
-### 使用 NPM
+### NPM 方式
 
 ```bash
-npm i tdesign-uniapp
+npm i tdesign-uniapp -s
 ```
 
-## 使用组件
+### UNI_MODULES 方式
 
-`main.ts` 中引入样式文件
+已上传[插件](https://ext.dcloud.net.cn/plugin?id=25431)到 DCloud 插件市场，请打开插件详情页并点击`使用 HBuilderX 导入插件`。
 
-```ts
+## 使用
+
+1. `main.ts` 中引入样式文件
+
+```js
 import 'tdesign-uniapp/common/style/theme/index.css';
 ```
 
-然后在文件中引入自定义组件
+2. 在文件中使用
 
-```js
-import TButton from 'tdesign-uniapp/button/button.vue';
+```html
+<template>
+  <t-loading />
+</template>
+
+<script lang="ts" setup>
+import TLoading from 'tdesign-uniapp/loading/loading.vue';
+</script>
 ```
 
-## 开发
+## 自动导入
 
-```bash
-# 安装项目依赖
-npm install
+在 `pages.json` 配置 [easycom](https://uniapp.dcloud.net.cn/collocation/pages.html#easycom)，可实现自动导入。
 
-# 执行组件编译
-npm run dev
+### CLI 模式
 
-# 小程序
-npm run dev:mp
+使用 CLI 模式，即使用 `node_modules` 下的 `tdesign-uniapp` 时，配置如下。
+
+```json
+{
+  "easycom": {
+    "custom": {
+      "^t-(.*)": "tdesign-uniapp/$1/$1.vue"
+    }
+  }
+}
 ```
 
-打开[微信开发者工具](https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/download.html)，把 `packages/demo/dist/dev` 目录添加进去就可以预览示例了。
+### UNI_MODULES 模式
 
-## 基础库版本
+使用 `uni_modules` 下的 `tdesign-uniapp` 时，配置如下。
 
-最低基础库版本`^2.6.5`
+```json
+{
+  "easycom": {
+    "custom": {
+      "^t-(.*)": "@/uni_modules/tdesign-uniapp/components/$1/$1.vue"
+    }
+  }
+}
+```
 
 ## 反馈
 

@@ -228,7 +228,7 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './swipe-cell.css';
 
 </style>

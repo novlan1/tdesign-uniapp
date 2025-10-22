@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import tCellGroup from 'tdesign-uniapp/cell-group/cell-group.vue';
 import tCell from 'tdesign-uniapp/cell/cell.vue';
 import tPicker from 'tdesign-uniapp/picker/picker.vue';
 import tPickerItem from 'tdesign-uniapp/picker-item/picker-item.vue';
@@ -122,7 +121,6 @@ const getOptions = (obj, filter) => {
 const match = (v1, v2, size) => v1.toString().slice(0, size) === v2.toString().slice(0, size);
 export default {
   components: {
-    tCellGroup,
     tCell,
     tPicker,
     tPickerItem,

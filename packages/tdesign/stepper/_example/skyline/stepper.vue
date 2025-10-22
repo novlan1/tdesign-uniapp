@@ -21,7 +21,7 @@
           title="01 组件类型"
           desc="基础步进器"
         >
-          <base>
+          <baseDemo />
         </t-demo>
         <t-demo
           title="02 组件状态"
@@ -49,15 +49,15 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import base from '../base';
-import minMax from '../min-max';
-import status from '../status';
-import theme from '../theme';
-import size from '../size';
+import baseDemo from '../base/index.vue';
+import minMax from '../min-max/index.vue';
+import status from '../status/index.vue';
+import theme from '../theme/index.vue';
+import size from '../size/index.vue';
 export default {
   components: {
     tNavbar,
-    base,
+    baseDemo,
     minMax,
     status,
     theme,

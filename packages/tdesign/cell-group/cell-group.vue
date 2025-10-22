@@ -60,6 +60,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './cell-group.css';
 </style>

@@ -59,16 +59,14 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import tSkeleton from 'tdesign-uniapp/skeleton/skeleton.vue';
-import theme from '../theme';
-import grid from '../grid';
-import cellGroup from '../cell-group';
-import imageGroup from '../image-group';
-import animation from '../animation';
+import theme from '../theme/index.vue';
+import grid from '../grid/index.vue';
+import cellGroup from '../cell-group/index.vue';
+import imageGroup from '../image-group/index.vue';
+import animation from '../animation/index.vue';
 export default {
   components: {
     tNavbar,
-    tSkeleton,
     theme,
     grid,
     cellGroup,

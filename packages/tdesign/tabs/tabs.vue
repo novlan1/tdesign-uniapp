@@ -454,7 +454,7 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './tabs.css';
 
 </style>

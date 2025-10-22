@@ -1,17 +1,15 @@
 <template>
   <view>
-    <link>
+    <linkDemo />
   </view>
 </template>
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import link from '../link';
+import linkDemo from '../link.vue';
 export default {
   components: {
-    tNavbar,
-    link,
+    linkDemo,
   },
   data() {
     return {};

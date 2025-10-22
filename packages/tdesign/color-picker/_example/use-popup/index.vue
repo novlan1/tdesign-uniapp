@@ -24,11 +24,9 @@
 
 <script>
 import tColorPicker from 'tdesign-uniapp/color-picker/color-picker.vue';
-import tPopup from 'tdesign-uniapp/popup/popup.vue';
 export default {
   components: {
     tColorPicker,
-    tPopup,
   },
   data() {
     return {

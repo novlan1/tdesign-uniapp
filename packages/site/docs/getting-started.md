@@ -61,7 +61,7 @@ import TLoading from 'tdesign-uniapp/loading/loading.vue';
 }
 ```
 
-### uni_modules
+### UNI_MODULES 模式
 
 使用 `uni_modules` 下的 `tdesign-uniapp` 时，配置如下。
 
@@ -81,14 +81,14 @@ import TLoading from 'tdesign-uniapp/loading/loading.vue';
 
 目前不支持 `nvue`。
 
-支持平台
+已验证平台
 
 1. H5
 2. 微信小程序
 3. iOS
 4. 安卓
 
-其他平台陆续支持中，欢迎共建。
+其他平台陆续验证中，欢迎共建。
 
 ## 开发
 

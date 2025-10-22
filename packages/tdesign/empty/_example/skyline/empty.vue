@@ -21,7 +21,7 @@
           title="01 类型"
           desc="图标空状态"
         >
-          <base>
+          <baseDemo />
         </t-demo>
         <t-demo desc="自定义图片空状态">
           <imageEmpty />
@@ -37,9 +37,9 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import base from '../base';
-import imageEmpty from '../imageEmpty';
-import buttonEmpty from '../buttonEmpty';
+import baseDemo from '../base/index.vue';
+import imageEmpty from '../imageEmpty/index.vue';
+import buttonEmpty from '../buttonEmpty/index.vue';
 /*
  * @Author: shiyanzhang
  * @Date: 2021-08-24 15:56:07
@@ -49,7 +49,7 @@ import buttonEmpty from '../buttonEmpty';
 export default {
   components: {
     tNavbar,
-    base,
+    baseDemo,
     imageEmpty,
     buttonEmpty,
   },

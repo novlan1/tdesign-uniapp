@@ -276,6 +276,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scopd >
+<style scoped>
 @import './grid-item.css';
 </style>

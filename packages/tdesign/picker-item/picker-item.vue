@@ -223,6 +223,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './picker-item.css';
 </style>

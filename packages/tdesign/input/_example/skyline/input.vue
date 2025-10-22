@@ -21,7 +21,7 @@
           title="01 组件类型"
           desc="基础输入框"
         >
-          <base>
+          <baseDemo />
         </t-demo>
         <t-demo desc="带字数限制输入框">
           <maxlength />
@@ -72,24 +72,22 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import tInput from 'tdesign-uniapp/input/input.vue';
-import base from '../base';
-import suffix from '../suffix';
-import prefix from '../prefix';
-import layout from '../layout';
-import bordered from '../bordered';
-import align from '../align';
-import maxlength from '../maxlength';
-import special from '../special';
-import status from '../status';
-import custom from '../custom';
-import labelDemo from '../label';
-import banner from '../banner';
+import baseDemo from '../base/index.vue';
+import suffix from '../suffix/index.vue';
+import prefix from '../prefix/index.vue';
+import layout from '../layout/index.vue';
+import bordered from '../bordered/index.vue';
+import align from '../align/index.vue';
+import maxlength from '../maxlength/index.vue';
+import special from '../special/index.vue';
+import status from '../status/index.vue';
+import custom from '../custom/index.vue';
+import labelDemo from '../label/index.vue';
+import banner from '../banner/index.vue';
 export default {
   components: {
     tNavbar,
-    tInput,
-    base,
+    baseDemo,
     suffix,
     prefix,
     layout,

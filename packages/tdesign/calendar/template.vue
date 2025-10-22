@@ -238,6 +238,6 @@ export default {
 };
 
 </script>
-<style scopd >
+<style scoped>
 @import './calendar.css';
 </style>

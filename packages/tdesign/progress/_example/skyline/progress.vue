@@ -6,11 +6,9 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import demoProgress from '../progress';
+import demoProgress from '../progress.vue';
 export default {
   components: {
-    tNavbar,
     demoProgress,
   },
   data() {

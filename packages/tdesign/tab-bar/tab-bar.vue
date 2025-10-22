@@ -96,6 +96,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './tab-bar.css';
 </style>

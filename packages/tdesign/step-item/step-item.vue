@@ -166,6 +166,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped >
+<style scoped>
 @import './step-item.css';
 </style>

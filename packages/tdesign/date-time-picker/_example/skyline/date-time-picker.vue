@@ -24,7 +24,7 @@
         <t-demo desc="年月选择器" />
         <year-month />
         <!-- <t-demo desc="月日选择器" /> -->
-        <time />
+        <timeDemo />
 
         <t-demo desc="年月日时分秒选择器" />
         <date-all />
@@ -47,18 +47,18 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import yearMonthDate from '../year-month-date';
-import yearMonth from '../year-month';
-import time from '../time';
-import dateAll from '../date-all';
-import steps from '../steps';
-import withoutPopup from '../without-popup';
+import yearMonthDate from '../year-month-date/index.vue';
+import yearMonth from '../year-month/index.vue';
+import timeDemo from '../time/index.vue';
+import dateAll from '../date-all/index.vue';
+import steps from '../steps/index.vue';
+import withoutPopup from '../without-popup/index.vue';
 export default {
   components: {
     tNavbar,
     yearMonthDate,
     yearMonth,
-    time,
+    timeDemo,
     dateAll,
     steps,
     withoutPopup,

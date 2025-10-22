@@ -473,6 +473,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scod >
+<style scoped>
 @import './cascader.css';
 </style>

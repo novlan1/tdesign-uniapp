@@ -22,7 +22,7 @@
           desc="基础遮罩层"
           padding
         >
-          <base>
+          <baseDemo />
         </t-demo>
       </view>
     </scroll-view>
@@ -32,11 +32,11 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import base from '../base';
+import baseDemo from '../base/index.vue';
 export default {
   components: {
     tNavbar,
-    base,
+    baseDemo,
   },
   data() {
     return {};

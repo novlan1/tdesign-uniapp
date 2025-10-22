@@ -6,11 +6,9 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import textareaDemo from '../textarea';
+import textareaDemo from '../textarea.vue';
 export default {
   components: {
-    tNavbar,
     textareaDemo,
   },
   data() {

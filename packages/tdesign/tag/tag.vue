@@ -154,7 +154,7 @@ export default uniComponent({
 });
 
 </script>
-<style scoped >
+<style scoped>
 @import './tag.css';
 
 </style>

@@ -6,11 +6,9 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import steps from '../steps';
+import steps from '../steps.vue';
 export default {
   components: {
-    tNavbar,
     steps,
   },
   data() {

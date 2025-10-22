@@ -20,7 +20,7 @@
           title="01 组件类型"
           desc="基础用法"
         >
-          <base>
+          <baseDemo />
         </t-demo>
 
         <t-demo desc="在列元素之间增加间距">
@@ -34,12 +34,12 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import base from '../base';
-import offset from '../offset';
+import baseDemo from '../base/index.vue';
+import offset from '../offset/index.vue';
 export default {
   components: {
     tNavbar,
-    base,
+    baseDemo,
     offset,
   },
   data() {
