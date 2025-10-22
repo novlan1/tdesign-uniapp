@@ -82,7 +82,7 @@
         <view
           v-if="_clearIcon && dataValue?.length && showClearIcon"
           :class="classPrefix + '__wrap--clearable-icon'"
-          @tap="clearInput"
+          @click="clearInput"
         >
           <!-- parse <template is="icon" :data="tClass: prefix + '-class-clearable', ariaRole: 'button', ariaLabel: '清除', ..._clearIcon"/> -->
 
@@ -101,7 +101,7 @@
         </view>
         <view
           :class="classPrefix + '__wrap--suffix ' + tClassSuffix"
-          @tap="onSuffixClick"
+          @click="onSuffixClick"
         >
           <text v-if="suffix">
             {{ suffix }}
@@ -110,7 +110,7 @@
         </view>
         <view
           :class="classPrefix + '__wrap--suffix-icon'"
-          @tap="onSuffixIconClick"
+          @click="onSuffixIconClick"
         >
           <slot name="suffix-icon" />
           <!-- parse <template v-if="_suffixIcon" is="icon" :data="tClass: prefix + '-class-suffix-icon', ariaRole: 'button', ..._suffixIcon"/> -->

@@ -27,7 +27,7 @@ export default {
   created() {},
   methods: {
     onLineChange(e) {
-      console.log('lineCount: ', e.detail);
+      console.log('lineCount: ', e);
     },
   },
 };

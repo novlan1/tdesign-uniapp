@@ -115,7 +115,7 @@
               :key="index"
               :class="classPrefix + '__swatches-item'"
               :data-value="swatch"
-              @tap.stop.prevent="clickSwatch"
+              @click.stop.prevent="clickSwatch"
             >
               <view
                 :class="classPrefix + '__swatches-inner'"
@@ -166,6 +166,6 @@ export default {
 };
 </script>
 
-<style scoped >
+<style scoped>
 @import './color-picker.css';
 </style>

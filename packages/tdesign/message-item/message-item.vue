@@ -63,7 +63,7 @@
       <slot name="link" />
       <view
         :class="classPrefix + '__icon--right'"
-        @tap="handleClose"
+        @click="handleClose"
       >
         <slot name="close-btn" />
         <!-- parse <template v-if="_closeBtn" is="icon" :data="tClass: prefix + '-class-close-btn', ariaRole: 'button', ariaLabel: '关闭', ..._closeBtn"/> -->

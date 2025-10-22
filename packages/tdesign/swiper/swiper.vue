@@ -33,7 +33,7 @@
         :aria-hidden="navCurrent !== index"
         aria-role="image"
         :aria-label="_.isObject(item) ? item.ariaLabel : ''"
-        @tap="onTap($event, { index })"
+        @click="onTap($event, { index })"
       >
         <!-- parse <template is="image" :data="tClass: _this.getImageClass(prefix, navCurrent, index, list), style: 'height: ' + _.addUnit(height), src: _.isObject(item) ? item.value : item, mode: 'aspectFill', dataset: index, ...imageProps, bindload: 'onImageLoad'"/> -->
         <t-image

@@ -201,9 +201,12 @@ export const getInstance = function (context, selector) {
     const page = pages[pages.length - 1];
     context = (page).$$basePage || page;
   }
-  const instance = context ? context.$refs[selector.slice(1)] : null;
+
+  const pureSelector = /^[.#]/.test(selector) ? selector.slice(1) : selector;
+  const instance = context ? context.$refs[pureSelector] : null;
+
   if (!instance) {
-    console.warn('未找到组件,请检查selector是否正确');
+    console.warn('未找到组件,请检查 selector 是否正确');
     return null;
   }
   return instance;

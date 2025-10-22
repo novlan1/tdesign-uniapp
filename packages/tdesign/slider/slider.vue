@@ -23,7 +23,7 @@
       <view
         id="sliderLine"
         :class="_.cls(classPrefix + '__bar', [['disabled', disabled], theme, ['marks', isScale && theme == 'capsule']]) + ' ' + tClassBar"
-        @tap="onSingleLineTap"
+        @click="onSingleLineTap"
       >
         <block v-if="isScale">
           <view
@@ -98,7 +98,7 @@
       <view
         id="sliderLine"
         :class="_.cls(classPrefix + '__bar', [['disabled', disabled], theme, ['marks', isScale && theme == 'capsule']]) + ' ' + tClassBar"
-        @tap="onLineTap"
+        @click="onLineTap"
       >
         <block v-if="isScale">
           <view

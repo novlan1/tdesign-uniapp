@@ -9,7 +9,7 @@
   >
     <view
       :class="classPrefix + '__prefix-icon'"
-      @tap="clickPrefixIcon"
+      @click="clickPrefixIcon"
     >
       <slot name="prefix-icon" />
       <!-- parse <template v-if="_prefixIcon" is="icon" :data="tClass: prefix + '-class-prefix-icon', ..._prefixIcon"></template> -->
@@ -33,7 +33,7 @@
     </view>
     <view
       :class="classPrefix + '__content-wrap'"
-      @tap="clickContent"
+      @click="clickContent"
     >
       <view v-if="direction === 'vertical' && _.isArray(content)">
         <swiper
@@ -68,7 +68,7 @@
         <slot name="content" />
         <view
           :class="classPrefix + '__operation ' + tClassOperation"
-          @tap.stop.prevent="clickOperation"
+          @click.stop.prevent="clickOperation"
         >
           <block v-if="operation">
             {{ operation }}
@@ -79,7 +79,7 @@
     </view>
     <view
       :class="classPrefix + '__suffix-icon'"
-      @tap="clickSuffixIcon"
+      @click="clickSuffixIcon"
     >
       <slot name="suffix-icon" />
       <!-- parse <template v-if="_suffixIcon" is="icon" :data="tClass: prefix + '-class-suffix-icon', ..._suffixIcon"></template> -->

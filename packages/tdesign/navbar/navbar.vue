@@ -14,7 +14,7 @@
           :class="classPrefix + '__btn'"
           aria-role="button"
           aria-label="返回"
-          @tap="goBack"
+          @click="goBack"
         >
           <t-icon
             name="chevron-left"

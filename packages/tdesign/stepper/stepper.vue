@@ -22,7 +22,7 @@
       :aria-label="'减少' + step"
       aria-role="button"
       :aria-disabled="disabled || disableMinus || currentValue <= min"
-      @tap.stop.prevent="minusValue"
+      @click.stop.prevent="minusValue"
     >
       <t-icon name="remove" />
     </view>
@@ -57,7 +57,7 @@
       :aria-label="'增加' + step"
       aria-role="button"
       :aria-disabled="disabled || disablePlus || currentValue >= max"
-      @tap.stop.prevent="plusValue"
+      @click.stop.prevent="plusValue"
     >
       <t-icon name="add" />
     </view>

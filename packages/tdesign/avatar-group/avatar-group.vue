@@ -10,7 +10,7 @@
     <view
       v-if="max && max < length"
       :class="classPrefix + '__collapse--default'"
-      @tap="onCollapsedItemClick"
+      @click="onCollapsedItemClick"
     >
       <t-avatar
         :t-class-image="prefix + '-avatar--border ' + prefix + '-avatar--border-' + size + ' ' + tClassImage"
@@ -97,9 +97,7 @@ export default uniComponent({
       });
     },
     onCollapsedItemClick(e) {
-      this.$emit('collapsed-item-click', {
-        detail: e.detail,
-      });
+      this.$emit('collapsed-item-click', e);
     },
   },
 });

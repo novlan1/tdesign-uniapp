@@ -102,25 +102,21 @@ export default uniComponent({
     return {
       prefix,
       classPrefix: name,
-      // typeMapIcon: '',
-      // direction: null,
-      // message: '',
-      // icon: '',
       _icon: null,
-      // placement: 'center',
-      // preventScrollThrough: false,
-
-      // dataTheme: this.theme,
-      // dataDuration: this.duration,
       ...info,
 
-      // visible: false,
       isLoading: false,
-
       hideTimer: null,
       _,
     };
   },
+
+  pageLifetimes: {
+    hide() {
+      this.hide();
+    },
+  },
+
   beforeUnMount() {
     this.destroyed();
   },
@@ -189,6 +185,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped >
+<style scoped>
 @import './toast.css';
 </style>

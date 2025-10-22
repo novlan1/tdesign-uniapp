@@ -2,7 +2,7 @@
   <view
     :style="_._style([style, customStyle])"
     :class="className + ' class ' + prefix + '-class'"
-    @tap="onClick"
+    @click="onClick"
   >
     <view
       :aria-hidden="true"
@@ -141,7 +141,7 @@ export default uniComponent({
 });
 
 </script>
-<style scoped >
+<style scopd >
 @import './check-tag.css';
 
 </style>

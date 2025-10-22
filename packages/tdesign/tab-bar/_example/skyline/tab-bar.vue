@@ -89,7 +89,7 @@ export default {
   },
   methods: {
     onChange(event: any) {
-      console.log(event.detail);
+      console.log(event);
     },
 
     onScroll() {

@@ -82,7 +82,7 @@ import TCalendar from 'tdesign-uniapp/calendar/calendar.vue';
 | change | `(value: timestamp)` | `0.28.0`。不显示 confirm-btn 时，完成选择时触发（暂不支持 type = multiple） |
 | close | `(trigger: CalendarTrigger)` | `0.34.0`。关闭按钮时触发。[详细类型定义](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/calendar/type.ts)。<br/>`type CalendarTrigger = 'close-btn' \| 'confirm-btn' \| 'overlay' \| 'auto-close'`<br/> |
 | confirm | `(value: timestamp)` | 点击确认按钮时触发 |
-| panel-change | `(detail: { year: number, month: number })` | `1.8.4`。切换月或年时触发（switch-mode 不为 none 时有效） |
+| panel-change | `({ year: number, month: number })` | `1.8.4`。切换月或年时触发（switch-mode 不为 none 时有效） |
 | scroll | `({scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY})` | `1.4.6`。滚动时触发 |
 | select | `(value: timestamp)` | `0.28.0`。点击日期时触发 |
 

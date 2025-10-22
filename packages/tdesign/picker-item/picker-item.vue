@@ -17,7 +17,7 @@
         :class="_.cls(classPrefix + '__item', [['active', curIndex == index]])"
         :style="'height: ' + pickItemHeight + 'px'"
         :data-index="index"
-        @tap="onClickItem"
+        @click="onClickItem"
       >
         <text :class="classPrefix + '__item-label'">
           {{ option[pickerKeys.label] }}

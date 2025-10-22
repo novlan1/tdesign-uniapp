@@ -10,7 +10,7 @@
     :aria-role="ariaRole || 'button'"
     :aria-label="ariaLabel"
     :aria-describedby="describedbyID"
-    @tap="onClick"
+    @click="onClick"
   >
     <view
       :class="_.cls(classPrefix + '__wrapper', [layout])"
@@ -276,6 +276,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scopd >
 @import './grid-item.css';
 </style>

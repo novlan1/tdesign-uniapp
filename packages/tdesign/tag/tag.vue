@@ -2,7 +2,7 @@
   <view
     :class="[className + ' class ', tClass]"
     :style="_._style([tagStyle, style, customStyle])"
-    @tap="handleClick"
+    @click="handleClick"
   >
     <view
       :aria-hidden="true"
@@ -30,7 +30,7 @@
     <view :class="classPrefix + '__text'">
       <slot />
     </view>
-    <!-- parse <template v-if="_closable" is="icon" :data="tClass: classPrefix + '__icon-close ' + prefix + '-icon', bindclick: 'handleClose',  ariaRole: 'button', ariaLabel: '关闭',  ..._closable" @tap.native.stop.prevent="handleClose"/> -->
+    <!-- parse <template v-if="_closable" is="icon" :data="tClass: classPrefix + '__icon-close ' + prefix + '-icon', bindclick: 'handleClose',  ariaRole: 'button', ariaLabel: '关闭',  ..._closable" @click.native.stop.prevent="handleClose"/> -->
     <block
       v-if="_closable"
       name="icon"

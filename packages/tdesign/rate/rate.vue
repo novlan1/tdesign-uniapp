@@ -13,7 +13,7 @@
       :aria-valuetext="utils.getText(texts, dataValue, defaultTexts)"
       @touchstart="parseEventDynamicCode($event, !disabled ? 'onTouchStart' : '')"
       @touchmove="parseEventDynamicCode($event, !disabled ? 'onTouchMove' : '')"
-      @tap="onTap"
+      @click="onTap"
       @touchend="parseEventDynamicCode($event, !disabled ? 'onTouchEnd' : '')"
       @touchcancel="parseEventDynamicCode($event, !disabled ? 'onTouchEnd' : '')"
     >
@@ -61,7 +61,7 @@
           v-if="allowHalf"
           :class="_.cls(classPrefix + '__tips-item', [['active', utils.ceil(dataValue) - 0.5 == dataValue]])"
           :data-value="utils.ceil(dataValue) - 0.5"
-          @tap="onSelect"
+          @click="onSelect"
         >
           <t-icon
             :t-class="classPrefix + '__icon ' + classPrefix + '__icon--selected-half'"
@@ -76,7 +76,7 @@
         <view
           :class="_.cls(classPrefix + '__tips-item', [['active', utils.ceil(dataValue) == dataValue]])"
           :data-value="utils.ceil(dataValue)"
-          @tap="onSelect"
+          @click="onSelect"
         >
           <t-icon
             :t-class="_.cls(classPrefix + '__icon', ['selected'])"
@@ -93,7 +93,7 @@
         v-else
         :class="_.cls(classPrefix + '__tips-item', [['active', utils.ceil(dataValue) == dataValue && actionType == 'tap']])"
         :data-value="utils.ceil(dataValue)"
-        @tap="onSelect"
+        @click="onSelect"
       >
         <t-icon
           :t-class="

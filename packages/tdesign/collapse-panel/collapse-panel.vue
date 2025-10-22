@@ -11,7 +11,7 @@
       aria-role="button"
       :aria-expanded="expanded"
       :aria-disabled="ultimateDisabled"
-      @tap="onClick"
+      @click="onClick"
     >
       <t-cell
         :title="header"

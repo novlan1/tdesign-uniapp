@@ -63,7 +63,7 @@
           :class="classPrefix + '__clear hotspot-expanded ' + tClassClear"
           aria-role="button"
           aria-label="清除"
-          @tap.stop.prevent="handleClear"
+          @click.stop.prevent="handleClear"
         >
           <t-icon
             name="close-circle-filled"
@@ -76,7 +76,7 @@
         v-if="action"
         :class="classPrefix + '__search-action ' + tClassAction"
         aria-role="button"
-        @tap.stop.prevent="onActionClick"
+        @click.stop.prevent="onActionClick"
       >
         {{ action }}
       </view>

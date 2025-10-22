@@ -6,7 +6,7 @@
     :opened="dataOpened"
     :left-width="leftWidth"
     :right-width="rightWidth"
-    @tap="onTap"
+    @click="onTap"
     @touchstart="parseEventDynamicCode($event, disabled || 'startDrag')"
     @touchmove="parseEventDynamicCode($event, skipMove ? '' : disabled || 'onDrag')"
     @touchend="parseEventDynamicCode($event, skipMove ? '' : disabled || 'endDrag')"

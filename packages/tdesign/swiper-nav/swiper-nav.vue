@@ -10,14 +10,14 @@
         data-dir="prev"
         aria-role="button"
         aria-label="上一张"
-        @tap="nav($event, { dir: 'prev'})"
+        @click="nav($event, { dir: 'prev'})"
       />
       <view
         :class="classPrefix + '__btn--next'"
         data-dir="next"
         aria-role="button"
         aria-label="下一张"
-        @tap="nav($event, { dir: 'next'})"
+        @click="nav($event, { dir: 'next'})"
       />
     </view>
     <view

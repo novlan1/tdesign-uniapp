@@ -48,7 +48,7 @@
         :app-parameter="buttonData.appParameter"
         :show-message-card="buttonData.showMessageCard"
         :aria-label="buttonData.ariaLabel"
-        @tap="onTplButtonTap"
+        @click="onTplButtonTap"
         @getuserinfo="onTplButtonTap"
         @contact="onTplButtonTap"
         @getphonenumber="onTplButtonTap"
@@ -102,7 +102,7 @@
       :app-parameter="buttonData.appParameter"
       :show-message-card="buttonData.showMessageCard"
       :aria-label="buttonData.ariaLabel"
-      @tap="onTplButtonTap"
+      @click="onTplButtonTap"
       @getuserinfo="onTplButtonTap"
       @contact="onTplButtonTap"
       @getphonenumber="onTplButtonTap"
@@ -182,14 +182,10 @@ export default uniComponent({
   },
   methods: {
     onTplButtonTap(t) {
-      this.$emit('click', {
-        detail: t,
-      });
+      this.$emit('click', t);
     },
     onStart(t) {
-      this.$emit('dragstart', {
-        detail: t,
-      });
+      this.$emit('dragstart', t);
     },
     onMove(e) {
       const {
@@ -208,9 +204,7 @@ export default uniComponent({
       this.moveStyle = `right: ${right}px; bottom: ${bottom}px;`;
     },
     onEnd(t) {
-      this.$emit('dragend', {
-        detail: t,
-      });
+      this.$emit('dragend', t);
     },
     computedSize() {
       if (!this.draggable) return;

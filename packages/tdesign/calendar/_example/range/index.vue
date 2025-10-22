@@ -11,7 +11,7 @@
 
     <view
       class="wrapper"
-      @tap="handleCalendar"
+      @click="handleCalendar"
     >
       <view class="wrapper__left">
         {{ formatTimestamp(value[0]) }}

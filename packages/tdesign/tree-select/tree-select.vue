@@ -41,7 +41,7 @@
               tClassMiddleItem +
               ' scroll-into-view'
           "
-          @tap="handleTreeClick"
+          @click="handleTreeClick"
         >
           <view :id="'scroll-to-' + treeItem.value">
             {{ treeItem.label }}

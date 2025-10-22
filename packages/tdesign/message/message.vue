@@ -80,8 +80,16 @@ export default uniComponent({
       immediate: true,
     },
   },
+
+  pageLifetimes: {
+    show() {
+      this.hideAll();
+    },
+  },
+
   mounted() {
   },
+
   methods: {
     /**
    * 设置消息信息

@@ -11,7 +11,7 @@
       :aria-expanded="hasChildren && isSpread ? true : ''"
       :aria-role="hasChildren ? 'button' : 'tab'"
       :aria-label="ariaLabel || (badgeProps.dot || badgeProps.count ? _.getBadgeAriaLabel({ ...badgeProps }) : '')"
-      @tap="toggle"
+      @click="toggle"
     >
       <view
         :class="classPrefix + '__icon'"
@@ -92,7 +92,7 @@
         :hover-stay-time="200"
         :data-value="child.value || index"
         aria-role="tab"
-        @tap="selectChild"
+        @click="selectChild"
       >
         <view
           v-if="index !== 0"

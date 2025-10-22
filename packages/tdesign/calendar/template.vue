@@ -97,7 +97,7 @@
               aria-role="button"
               :aria-label="getDateLabel(item, dateItem)"
               :aria-disabled="dateItem.type === 'disabled'"
-              @tap="handleSelect"
+              @click="handleSelect"
             >
               <view
                 v-if="dateItem.prefix"
@@ -238,6 +238,6 @@ export default {
 };
 
 </script>
-<style scoped >
+<style scopd >
 @import './calendar.css';
 </style>

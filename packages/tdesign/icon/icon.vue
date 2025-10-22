@@ -75,9 +75,7 @@ export default uniComponent({
   },
   methods: {
     onTap(t) {
-      this.$emit('click', {
-        detail: t.detail,
-      });
+      this.$emit('click', t);
     },
     setIconStyle() {
       const {

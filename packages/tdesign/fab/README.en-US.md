@@ -19,9 +19,9 @@ y-bounds | Array | - | Typescript：`Array<string \| number>` | N
 
 name | params | description
 -- | -- | --
-click | `(detail: {e: Event})` | \-
-drag-end | `(detail: { e: TouchEvent })` | \-
-drag-start | `(detail: { e: TouchEvent })` | \-
+click | `(e: Event)` | \-
+drag-end | `(e: TouchEvent)` | \-
+drag-start | `(e: TouchEvent)` | \-
 
 ### CSS Variables
 

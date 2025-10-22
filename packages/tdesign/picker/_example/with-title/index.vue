@@ -50,13 +50,11 @@
 </template>
 
 <script>
-import tCellGroup from 'tdesign-uniapp/cell-group/cell-group.vue';
 import tCell from 'tdesign-uniapp/cell/cell.vue';
 import tPicker from 'tdesign-uniapp/picker/picker.vue';
 import tPickerItem from 'tdesign-uniapp/picker-item/picker-item.vue';
 export default {
   components: {
-    tCellGroup,
     tCell,
     tPicker,
     tPickerItem,
@@ -104,7 +102,7 @@ export default {
     },
     onPickerChange(e, { key }) {
       const { value } = e;
-      console.log('picker change:', e.detail);
+      console.log('picker change:', e);
 
       this[`${key}Visible`] = false;
       this[`${key}Value`] = value;

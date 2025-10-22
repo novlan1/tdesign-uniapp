@@ -150,44 +150,28 @@ export default uniComponent({
       this.className = t.join(' ');
     },
     getuserinfo(t) {
-      this.$emit('getuserinfo', {
-        detail: t.detail,
-      });
+      this.$emit('getuserinfo', t);
     },
     contact(t) {
-      this.$emit('contact', {
-        detail: t.detail,
-      });
+      this.$emit('contact', t);
     },
     getphonenumber(t) {
-      this.$emit('getphonenumber', {
-        detail: t.detail,
-      });
+      this.$emit('getphonenumber', t);
     },
     error(t) {
-      this.$emit('error', {
-        detail: t.detail,
-      });
+      this.$emit('error', t);
     },
     opensetting(t) {
-      this.$emit('opensetting', {
-        detail: t.detail,
-      });
+      this.$emit('opensetting', t);
     },
     launchapp(t) {
-      this.$emit('launchapp', {
-        detail: t.detail,
-      });
+      this.$emit('launchapp', t);
     },
     chooseavatar(t) {
-      this.$emit('chooseavatar', {
-        detail: t.detail,
-      });
+      this.$emit('chooseavatar', t);
     },
     agreeprivacyauthorization(t) {
-      this.$emit('agreeprivacyauthorization', {
-        detail: t.detail,
-      });
+      this.$emit('agreeprivacyauthorization', t);
     },
     handleTap(t) {
       if (this.disabled || this.loading) return;

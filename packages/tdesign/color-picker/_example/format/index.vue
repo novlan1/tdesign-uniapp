@@ -10,7 +10,7 @@
         :key="index1"
         :class="'format-item ' + (curFormat === item ? 'active' : '')"
         :data-format="item"
-        @tap.stop.prevent="clickFormat"
+        @click.stop.prevent="clickFormat"
       >
         <t-icon
           v-if="curFormat === item"

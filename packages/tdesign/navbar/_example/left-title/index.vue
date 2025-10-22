@@ -39,7 +39,7 @@
       >
         <text
           class="left-text"
-          @tap="onBack"
+          @click="onBack"
         >
           返回
         </text>

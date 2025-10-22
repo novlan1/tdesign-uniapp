@@ -15,7 +15,7 @@
         <slot />
         <view
           :class="classPrefix + '__close'"
-          @tap="handleClose"
+          @click="handleClose"
         >
           <t-icon
             v-if="closeBtn"

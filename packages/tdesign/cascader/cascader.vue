@@ -16,7 +16,7 @@
         </view>
         <view
           :class="name + '__close-btn'"
-          @tap="onClose"
+          @click="onClose"
         >
           <slot name="close-btn" />
           <t-icon
@@ -37,7 +37,7 @@
                 :key="index"
                 :class="name + '__step'"
                 :data-index="index"
-                @tap="() => onStepClick(index)"
+                @click="() => onStepClick(index)"
               >
                 <view
                   :class="
@@ -473,6 +473,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scod >
 @import './cascader.css';
 </style>

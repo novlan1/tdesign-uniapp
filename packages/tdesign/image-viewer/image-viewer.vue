@@ -15,7 +15,7 @@
       :style="'background-color: ' + backgroundColor"
       aria-role="button"
       aria-label="关闭"
-      @tap="(e) => onClose(e, 'overlay')"
+      @click="(e) => onClose(e, 'overlay')"
     />
     <block v-if="images && images.length">
       <view :class="classPrefix + '__content'">
@@ -26,7 +26,7 @@
           :current="currentSwiperIndex"
           tabindex="0"
           @change="onSwiperChange"
-          @tap="(e) => onClose(e, '')"
+          @click="(e) => onClose(e, '')"
         >
           <swiper-item
             v-for="(item, index) in images"
@@ -53,7 +53,7 @@
           :class="classPrefix + '__nav-close'"
           aria-role="button"
           aria-label="关闭"
-          @tap.stop.prevent="(e) => onClose(e, '')"
+          @click.stop.prevent="(e) => onClose(e, '')"
         >
           <slot name="close-btn" />
           <!-- parse <template v-if="_closeBtn" is="icon" :data="..._closeBtn"/> -->
@@ -85,7 +85,7 @@
           :class="classPrefix + '__nav-delete'"
           aria-role="button"
           aria-label="删除"
-          @tap="onDelete"
+          @click="onDelete"
         >
           <slot name="delete-btn" />
           <!-- parse <template is="icon" :data="..._deleteBtn"/> -->

@@ -21,10 +21,10 @@ export default {
   created() {},
   methods: {
     onDragstart(e) {
-      console.log('dragstart', e.detail);
+      console.log('dragstart', e);
     },
     onDragend(e) {
-      console.log('dragend', e.detail);
+      console.log('dragend', e);
     },
   },
 };

@@ -23,7 +23,7 @@
             <view
               v-if="cancelBtn"
               :class="classPrefix + '__cancel ' + tClassCancel"
-              @tap="onCancel"
+              @click="onCancel"
             >
               {{ cancelBtn }}
             </view>
@@ -33,7 +33,7 @@
             <view
               v-if="confirmBtn"
               :class="classPrefix + '__confirm ' + tClassConfirm"
-              @tap="onConfirm"
+              @click="onConfirm"
             >
               {{ confirmBtn }}
             </view>
@@ -66,7 +66,7 @@
           <view
             v-if="cancelBtn"
             :class="classPrefix + '__cancel ' + tClassCancel"
-            @tap="onCancel"
+            @click="onCancel"
           >
             {{ cancelBtn }}
           </view>
@@ -76,7 +76,7 @@
           <view
             v-if="confirmBtn"
             :class="classPrefix + '__confirm ' + tClassConfirm"
-            @tap="onConfirm"
+            @click="onConfirm"
           >
             {{ confirmBtn }}
           </view>
@@ -246,6 +246,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './picker.css';
 </style>

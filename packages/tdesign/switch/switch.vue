@@ -5,7 +5,7 @@
     :aria-checked="checked"
     :aria-disabled="disabled"
     aria-role="switch"
-    @tap="handleSwitch"
+    @click="handleSwitch"
   >
     <view :class="_.cls(classPrefix + '__body', [['checked', checked], ['disabled', disabled || loading], size]) + ' ' + tClassBody">
       <view

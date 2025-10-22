@@ -45,41 +45,6 @@ export default {
     };
   },
   methods: {
-    onChange(e: any) {
-      this.setData({
-        timeData: e.detail,
-      });
-    },
-
-    start() {
-      const countDown = this.zpSelectComponent('.control-count-down');
-      if (!countDown.counting) {
-        countDown.start();
-        this.setData({
-          counting: true,
-        });
-      } else {
-        countDown.pause();
-        this.setData({
-          counting: false,
-        });
-      }
-    },
-
-    reset() {
-      const countDown = this.zpSelectComponent('.control-count-down');
-      countDown.reset();
-    },
-
-    finished() {
-      uni.showToast({
-        icon: 'none',
-        title: '倒计时结束',
-      });
-      this.setData({
-        counting: false,
-      });
-    },
   },
 };
 </script>

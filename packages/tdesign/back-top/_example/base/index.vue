@@ -33,9 +33,7 @@ export default {
   created() {},
   methods: {
     onToTop(e) {
-      this.$emit('to-top', {
-        detail: e,
-      });
+      this.$emit('to-top', e);
     },
   },
 };

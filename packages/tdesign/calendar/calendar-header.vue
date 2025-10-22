@@ -12,7 +12,7 @@
         :class="utils.cls(classPrefix + '__icon', [['disabled', preYearBtnDisable]])"
         :data-disabled="preYearBtnDisable"
         data-type="pre-year"
-        @tap="handleSwitchModeChange"
+        @click="handleSwitchModeChange"
       >
         <TIcon name="chevron-left-double" />
       </view>
@@ -20,7 +20,7 @@
         :class="utils.cls(classPrefix + '__icon', [['disabled', prevMonthBtnDisable]])"
         :data-disabled="prevMonthBtnDisable"
         data-type="pre-month"
-        @tap="handleSwitchModeChange"
+        @click="handleSwitchModeChange"
       >
         <TIcon name="chevron-left" />
       </view>
@@ -36,7 +36,7 @@
         :class="utils.cls(classPrefix + '__icon', [['disabled', nextMonthBtnDisable]])"
         :data-disabled="nextMonthBtnDisable"
         data-type="next-month"
-        @tap="handleSwitchModeChange"
+        @click="handleSwitchModeChange"
       >
         <TIcon name="chevron-right" />
       </view>
@@ -45,7 +45,7 @@
         :class="utils.cls(classPrefix + '__icon', [['disabled', nextYearBtnDisable]])"
         :data-disabled="nextYearBtnDisable"
         data-type="next-year"
-        @tap="handleSwitchModeChange"
+        @click="handleSwitchModeChange"
       >
         <TIcon name="chevron-right-double" />
       </view>
@@ -93,6 +93,6 @@ export default {
 
 </script>
 
-<style scoped >
+<style scoped>
 @import './calendar.css';
 </style>

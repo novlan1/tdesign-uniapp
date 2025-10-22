@@ -54,28 +54,33 @@ import TTabsPanel from 'tdesign-uniapp/tabs-panel/tabs-panel.vue';
 ### 受控用法
 
 ```html
-<t-tabs value="{{value}}" bind:change="onTabsChange">
+<t-tabs :value="value" @change="onTabsChange">
   <t-tab-panel label="标签页一" value="0">标签一内容</t-tab-panel>
   <t-tab-panel label="标签页二" value="1">标签二内容</t-tab-panel>
 </t-tabs>
 ```
 
 ```js
-Page({
+export default{
   data: {
-    value: '0',
+    return {
+      value: '0',
+    };
   },
-  onTabsChange(e) {
-    this.setData({ value: e.detail.value })
-  },
-});
+  methods: {
+    onTabsChange(e) {
+      this.value = e.value;
+    },
+  }
+  
+};
 ```
 
 ### 与 Popup 使用
 
 ```html
- <t-popup visible="{{visible}}" bind:visible-change="onVisibleChange">
-  <t-tabs id="tabs" defaultValue="{{0}}" bind:change="onTabsChange" bind:click="onTabsClick" t-class="custom-tabs">
+ <t-popup :visible="visible" @visible-change="onVisibleChange">
+  <t-tabs ref="tabs" defaultValue="0" @change="onTabsChange" @click="onTabsClick" t-class="custom-tabs">
     <t-tab-panel label="标签页一" value="0">标签一内容</t-tab-panel>
     <t-tab-panel label="标签页二" value="1">标签二内容</t-tab-panel>
     <t-tab-panel label="标签页三" value="2">标签三内容</t-tab-panel>
@@ -84,19 +89,23 @@ Page({
 ```
 
 ```js
-Page({
+export default {
   data: {
-    visible: false
+    return {
+      visible: false,
+    };
   },
-  showPopup() {
-    this.setData({
-      visible: true
-    }, () => {
-      const tabs = this.selectComponent('tabs');
+  methods: {
+    showPopup() {
+      this.visible = true;
+      setTimeout(() => {
+        const tabs = this.$refs['tabs'];
 
-      tabs.setTrack(); // 这一步很重要，因为小程序的无法正确执行生命周期，所以需要手动设置下 tabs 的滑块
-    })
-  }
+        // 这一步很重要，因为小程序的无法正确执行生命周期，所以需要手动设置下 tabs 的滑块
+        tabs.setTrack(); 
+      });
+    },
+  },
 })
 ```
 
