@@ -1,16 +1,16 @@
-function getRegExp () {
-  var args = Array.prototype.slice.call(arguments);
+function getRegExp() {
+  const args = Array.prototype.slice.call(arguments);
   args.unshift(RegExp);
-  return new (Function.prototype.bind.apply(RegExp, args))()
+  return new (Function.prototype.bind.apply(RegExp, args))();
 }
 
 /**
  * wxs getDate
  */
-function getDate () {
-  var args = Array.prototype.slice.call(arguments);
+function getDate() {
+  const args = Array.prototype.slice.call(arguments);
   args.unshift(Date);
-  return new (Function.prototype.bind.apply(Date, args))()
+  return new (Function.prototype.bind.apply(Date, args))();
 }
 
 export { getDate, getRegExp };
