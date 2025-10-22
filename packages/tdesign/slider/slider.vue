@@ -523,6 +523,7 @@ export default uniComponent({
       const { min, max, theme, vertical } = this;
       const { initialLeft, maxRange, blockSize } = this;
       const touch = e.changedTouches.find(item => item.identifier === this.identifier[0]);
+      if (!touch) return;
       const pagePosition = this.getPagePosition(touch);
 
       let offset = 0;
@@ -632,6 +633,7 @@ export default uniComponent({
       if (disabled) return;
 
       const touch = e.changedTouches.find(item => item.identifier === this.identifier[0]);
+      if (!touch) return;
       const pagePosition = this.getPagePosition(touch);
       let offset = 0;
       if ((theme) === 'capsule') {
@@ -653,6 +655,8 @@ export default uniComponent({
       if (disabled) return;
 
       const touch = e.changedTouches.find(item => item.identifier === this.identifier[1]);
+      if (!touch) return;
+
       const pagePosition = this.getPagePosition(touch);
       let offset = 0;
       if ((theme) === 'capsule') {
