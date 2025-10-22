@@ -24,7 +24,7 @@
         #indicator
       >
         <t-image
-          style="width: 100%; height: 100%"
+          custom-style="width: 100%; height: 100%"
           src="https://tdesign.gtimg.com/mobile/demos/logo2.png"
         />
       </template>

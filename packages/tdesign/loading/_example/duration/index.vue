@@ -42,9 +42,7 @@ export default {
   created() {},
   methods: {
     durationChange(e) {
-      this.setData({
-        duration: e.detail.value,
-      });
+      this.duration = e.value;
     },
   },
 };
