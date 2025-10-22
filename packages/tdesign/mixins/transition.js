@@ -15,7 +15,6 @@ export default function transition() {
       visible: {
         type: Boolean,
         default: null,
-        observer: 'watchVisible',
       },
       appear: Boolean,
       name: {
@@ -55,7 +54,7 @@ export default function transition() {
         }
       },
       getDurations() {
-        const { durations } = this.data;
+        const { durations } = this;
         if (Array.isArray(durations)) {
           return durations.map(item => Number(item));
         }
@@ -76,7 +75,7 @@ export default function transition() {
           this.transitionT = setTimeout(this.entered.bind(this), duration + 30);
         } else {
           this.transitionT = setTimeout(
-            this.status === 'leaving' ? this.leaved.bind(this) : null,
+            this.status === 'leaving' ? this.leaved.bind(this) : (() => {}),
             transitionDurations + 30,
           );
         }
@@ -103,7 +102,7 @@ export default function transition() {
           this.transitionT = setTimeout(this.leaved.bind(this), duration + 30);
         } else {
           this.transitionT = setTimeout(
-            this.status === 'leaving' ? this.leaved.bind(this) : null,
+            this.status === 'leaving' ? this.leaved.bind(this) : (() => {}),
             transitionDurations + 30,
           );
         }
