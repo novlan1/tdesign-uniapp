@@ -325,13 +325,25 @@ export default uniComponent({
     },
 
     scrollToTop() {
-      // https://yuanbao.tencent.com/chat/naQivTmsDa/c10ae37f-c66f-4489-ac4e-e72710a3f65a
+      let parsed = false;
+
+      // #ifdef APP-PLUS || MP
+      this.scrollTop = 0;
+      setTimeout(() => {
+        this.scrollTop = 0.01;
+      });
+      parsed = true;
+      // #endif
+
       // #ifdef H5
+      // https://yuanbao.tencent.com/chat/naQivTmsDa/c10ae37f-c66f-4489-ac4e-e72710a3f65a
       this.scrollTop = this.scrollTop === 0 ? 0.01 : 0;
+      parsed = true;
       // #endif
-      // #ifndef H5
-      this.setScrollTop(0);
-      // #endif
+
+      if (!parsed) {
+        this.setScrollTop(0);
+      }
     },
   },
 });

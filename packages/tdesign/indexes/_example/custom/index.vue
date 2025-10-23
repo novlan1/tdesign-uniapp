@@ -46,7 +46,10 @@ import tIndexes from 'tdesign-uniapp/indexes/indexes.vue';
 import tIndexesAnchor from 'tdesign-uniapp/indexes-anchor/indexes-anchor.vue';
 import tCellGroup from 'tdesign-uniapp/cell-group/cell-group.vue';
 import tCell from 'tdesign-uniapp/cell/cell.vue';
+import { handlePageScroll } from 'tdesign-uniapp/mixins/page-scroll';
+
 const children = new Array(5).fill('列表内容');
+
 const list = [
   {
     index: 1,
@@ -81,7 +84,9 @@ export default {
   options: {
     styleIsolation: 'shared',
   },
-  onPageScroll() {},
+  onPageScroll(e) {
+    handlePageScroll(e);
+  },
   components: {
     tIndexes,
     tIndexesAnchor,

@@ -2,6 +2,7 @@
 import App from './App';
 import store from './store';
 import './style/app.less';
+import DemoBaseMixin from './mixins/demo-base.js';
 
 
 import {
@@ -20,6 +21,8 @@ export function createApp() {
     playTime: 0,
     formatedPlayTime: '00:00:00',
   };
+
+  app.mixin(DemoBaseMixin);
   return {
     app,
     Vuex, // 如果 nvue 使用 vuex 的各种map工具方法时，必须 return Vuex

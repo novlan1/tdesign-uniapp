@@ -109,6 +109,7 @@ import BaseDemo from './base/index.vue';
 import advance from './advance/index.vue';
 import draggable from './draggable/index.vue';
 import collapsible from './collapsible/index.vue';
+import { handlePageScroll } from 'tdesign-uniapp/mixins/page-scroll';
 
 export default {
   components: {
@@ -134,7 +135,9 @@ export default {
       ],
     };
   },
-  onPageScroll() {},
+  onPageScroll(e) {
+    handlePageScroll(e);
+  },
   methods: {
     handleChange(e: any, _dataset) {
       this.type = _dataset.type;
