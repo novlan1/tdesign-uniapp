@@ -1,22 +1,27 @@
 <template>
-  <view :class="classPrefix + ' class'" :style="_._style([style, customStyle])">
-    <block v-if="content">{{ content }}</block>
+  <view
+    :class="classPrefix + ' class'"
+    :style="_._style([style, customStyle])"
+  >
+    <block v-if="content">
+      {{ content }}
+    </block>
     <slot name="content" />
     <slot />
     <canvas
+      :id="canvasId"
+      :canvas-id="canvasId"
       type="2d"
-      id="watermarkCanvas"
-      style="display: none; width: 100%; height: 100%"
+      :style="canvasStyle"
     />
     <view
-      id="watermark"
       :class="movable ? 'watermark-move' : ''"
       :style="_._style(watermarkStyle)"
-    ></view>
+    />
   </view>
 </template>
 
-<script lang="ts">
+<script>
 import _ from '../common/utils.wxs';
 import watermarkProps from './props';
 import { prefix } from '../common/config';
@@ -38,7 +43,26 @@ export default uniComponent({
       classPrefix: name,
       _,
       watermarkStyle: {},
+      initialed: false,
+      canvasId: `watermark-canvas-${Math.random().toString(36)
+        .slice(2, 11)}`,
     };
+  },
+  computed: {
+    canvasStyle() {
+      let result = 'width: 100px; height: 100px;';
+
+      // #ifdef APP-PLUS
+      if (this.initialed) {
+        result += 'display: none;';
+      }
+      // #endif
+
+      // #ifndef APP-PLUS
+      result += 'display: none;';
+      // #endif
+      return result;
+    },
   },
   watch: {
     watermarkContent: 'renderWatermark',
@@ -57,7 +81,8 @@ export default uniComponent({
     isRepeat: 'renderWatermark',
     layout: 'renderWatermark',
   },
-  mounted() {
+  async mounted() {
+    await this.$nextTick();
     this.renderWatermark();
   },
   methods: {
@@ -67,16 +92,10 @@ export default uniComponent({
         : 'rgba(0, 0, 0, 0.1)';
     },
     renderWatermark() {
-      let query;
-      // #ifdef H5
-      query = uni.createSelectorQuery().in(this);
-      // #endif
+      const query = uni.createSelectorQuery().in(this);
 
-      // #ifdef MP-WEIXIN
-      query = wx.createSelectorQuery().in(this);
-      // #endif
       query
-        .select('#watermarkCanvas')
+        .select(`#${this.canvasId}`)
         .fields({ node: true, size: true })
         .exec(async (res) => {
           if (!res[0]?.node) {
@@ -96,16 +115,18 @@ export default uniComponent({
             rotate: this.movable ? 0 : this.rotate,
             lineSpace: this.lineSpace,
             alpha: this.alpha,
-            gapX: gapX,
-            gapY: gapY,
+            gapX,
+            gapY,
             watermarkContent: this.watermarkContent,
             offsetLeft,
             offsetTop,
             watermarkColor: this.watermarkColor(),
             layout: this.layout,
           };
-          generateBase64Url(
+          generateBase64Url.call(
+            this,
             canvas,
+            this.canvasId,
             bgImageOptions,
             (base64Url, backgroundSize) => {
               let animationVars = {};
@@ -152,8 +173,13 @@ export default uniComponent({
                 backgroundImage: `url('${base64Url}')`,
                 ...animationVars,
               };
-            }
-          );
+            },
+            () => {
+              this.initialed = true;
+            },
+          ).catch((e) => {
+            console.log('e', e);
+          });
         });
     },
   },

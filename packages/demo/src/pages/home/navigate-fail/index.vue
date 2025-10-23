@@ -1,7 +1,7 @@
 <template>
   <view class="demo">
     <view class="container">
-      <TIcon
+      <t-icon
         :name="failImage"
         size="224rpx"
         color="#DCDCDC"
