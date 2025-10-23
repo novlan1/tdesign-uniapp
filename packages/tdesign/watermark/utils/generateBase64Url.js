@@ -253,11 +253,13 @@ export default async function generateBase64Url(
 // 跨平台 Canvas 导出方法
 export function exportCanvasImage(canvas, canvasId) {
   return new Promise((resolve, reject) => {
-    // #ifdef H5
+    let parsed = false;
+    // #ifdef H5 || MP-WEIXIN
     resolve(canvas.toDataURL('image/png'));
+    parsed = true;
     // #endif
 
-    // #ifndef H5
+    if (parsed) return;
     const query = uni.createSelectorQuery().in(this);
 
     query
@@ -280,7 +282,6 @@ export function exportCanvasImage(canvas, canvasId) {
           fail: reject,
         });
       });
-    // #endif
   });
 }
 
