@@ -7,9 +7,5 @@ const props = {
     type: [String, Number],
     default: '',
   },
-  tClass: {
-    type: String,
-    default: '',
-  },
 };
 export default props;

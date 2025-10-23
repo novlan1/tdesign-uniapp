@@ -37,7 +37,10 @@
       </view>
     </view>
     <view :class="classPrefix + '__wrap'">
-      <view :class="classPrefix + '__content ' + classPrefix + '--' + status">
+      <view
+        :class="classPrefix + '__content ' + classPrefix + '--' + status"
+        @click="onClick"
+      >
         <input
           :class="getInputClass(classPrefix, suffix, align, disabled) + ' ' + tClassInput"
           :maxlength="allowInputOverMax ? -1 : maxlength"
@@ -79,7 +82,7 @@
         <view
           v-if="_clearIcon && dataValue?.length && showClearIcon"
           :class="classPrefix + '__wrap--clearable-icon'"
-          @tap="clearInput"
+          @click="clearInput"
         >
           <!-- parse <template is="icon" :data="tClass: prefix + '-class-clearable', ariaRole: 'button', ariaLabel: '清除', ..._clearIcon"/> -->
 
@@ -98,7 +101,7 @@
         </view>
         <view
           :class="classPrefix + '__wrap--suffix ' + tClassSuffix"
-          @tap="onSuffixClick"
+          @click="onSuffixClick"
         >
           <text v-if="suffix">
             {{ suffix }}
@@ -107,7 +110,7 @@
         </view>
         <view
           :class="classPrefix + '__wrap--suffix-icon'"
-          @tap="onSuffixIconClick"
+          @click="onSuffixIconClick"
         >
           <slot name="suffix-icon" />
           <!-- parse <template v-if="_suffixIcon" is="icon" :data="tClass: prefix + '-class-suffix-icon', ariaRole: 'button', ..._suffixIcon"/> -->
@@ -224,6 +227,12 @@ export default uniComponent({
     clearTrigger: 'updateClearIconVisible',
     disabled: 'updateClearIconVisible',
     readonly: 'updateClearIconVisible',
+
+    value: {
+      handler(v) {
+        this.dataValue = v;
+      },
+    },
 
     // count: 'updateInnerMaxLen',
     // dataValue: 'updateInnerMaxLen',
@@ -352,11 +361,15 @@ export default uniComponent({
     onNickNameReview(e) {
       this.$emit('nicknamereview', e.detail);
     },
+
+    onClick() {
+      this.$emit('click', { trigger: 'input' });
+    },
   },
 });
 
 </script>
-<style scoped >
+<style scoped>
 @import './input.css';
 
 </style>

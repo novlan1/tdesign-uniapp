@@ -156,9 +156,7 @@ export default uniComponent({
       if (this.hideOnLoadFailed) {
         this.isShow = false;
       }
-      this.$emit('error', {
-        detail: t.detail,
-      });
+      this.$emit('error', t);
     },
   },
 });

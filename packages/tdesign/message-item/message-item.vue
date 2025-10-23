@@ -3,6 +3,7 @@
     <view
       v-if="visible"
       :id="id || classPrefix"
+      :ref="id || classPrefix"
       :class="classPrefix + ' class ' + prefix + '-class ' + classPrefix + '--' + theme + ' ' + fadeClass"
       :style="_._style([getMessageStyles(zIndex, offset, wrapTop), style, customStyle])"
       :animation="showAnimation"
@@ -30,11 +31,13 @@
       </view>
       <view
         :id="classPrefix + '__text-wrap'"
+        :ref="classPrefix + '__text-wrap'"
         :class="classPrefix + '__text-wrap ' + (marquee ? classPrefix + '__text-nowrap' : '')"
         :style="'text-align: ' + align"
       >
         <view
           :id="classPrefix + '__text'"
+          :ref="classPrefix + '__text'"
           :class="classPrefix + '__text ' + prefix + '-class-content'"
           :animation="animation"
         >
@@ -48,7 +51,7 @@
       <t-link
         v-if="_link && _link.content"
         :t-class="classPrefix + '__link ' + prefix + '-class-link'"
-        :style="_._style([_link.style, _link.customStyle])"
+        :custom-style="_._style([_link.style, _link.customStyle])"
         :disabled="_link.disabled || false"
         :hover="_link.hover || true"
         :theme="_link.theme || 'primary'"
@@ -63,7 +66,7 @@
       <slot name="link" />
       <view
         :class="classPrefix + '__icon--right'"
-        @tap="handleClose"
+        @click="handleClose"
       >
         <slot name="close-btn" />
         <!-- parse <template v-if="_closeBtn" is="icon" :data="tClass: prefix + '-class-close-btn', ariaRole: 'button', ariaLabel: '关闭', ..._closeBtn"/> -->
@@ -138,7 +141,6 @@ export default uniComponent({
     tLink,
   },
   props: {
-    // ...props,
   },
   data() {
     return {
@@ -146,25 +148,7 @@ export default uniComponent({
       ...messageDefaultData,
       animation: [],
 
-      // align: '',
-      // closeBtn: '',
-      // content: '',
-      // duration: 3000,
-      // height: 0,
-      // id: '',
-      // gap: 0,
-      // icon: null,
-      // link: null,
-      // marquee: null,
-      // offset: [16, 16],
-      // style: '',
-      // customStyle: '',
-      // theme: 'info',
-      // visible: false,
-      // zIndex: 1000,
-      // single: true,
-      // defaultVisible: false,
-      // ariaHidden: true,
+
       _,
     };
   },
@@ -266,12 +250,6 @@ export default uniComponent({
         this.animation = this.resetAnimation.translateX(wrapRect.width).step()
           .export();
 
-        // this.setData(
-        //   {
-        //     this.animation = this.resetAnimation.translateX(wrapRect.width).step()
-        //       .export()
-        //   },
-        //   () => {
         setTimeout(() => {
           const durationTime = ((nodeRect.width + wrapRect.width) / speeding) * 1000;
           const nextAnimation = wx
@@ -287,12 +265,10 @@ export default uniComponent({
           // 不用这个的话会出现reset动画没跑完就开始跑这个等的奇怪问题
           setTimeout(() => {
             this.nextAnimationContext = setTimeout(this.checkAnimation.bind(this), durationTime);
-            // this.setData({ animation: nextAnimation });
             this.animation = nextAnimation;
           }, 20);
         });
       });
-      // });
     },
 
     /** 清理动画循环 */
@@ -303,12 +279,10 @@ export default uniComponent({
 
     show(offsetHeight = 0) {
       const { duration, innerMarquee, offset, id } = this;
-      // this.setData({
       this.visible = true;
       this.loop = innerMarquee.loop || this.loop;
       this.fadeClass = `${name}__fade`;
       this.wrapTop = unitConvert(offset[0]) + offsetHeight;
-      // });
 
       this.reset();
       setTimeout(() => {
@@ -322,20 +296,14 @@ export default uniComponent({
         }, duration);
       }
       const wrapID = id ? `#${id}` : `#${name}`;
-      console.log('wrapID', wrapID);
+
       setTimeout(() => {
         getRect(this, wrapID)
           .then((wrapRect) => {
-            console.log('wrapRect', wrapRect);
             this.height = wrapRect.height;
             setTimeout(() => {
               this.fadeClass = '';
             });
-            // this.setData({ height: wrapRect.height }, () => {
-            //   this.setData({
-            //     fadeClass: '',
-            //   });
-            // });
           })
           .catch((err) => {
             console.warn('err', err);
@@ -376,6 +344,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './message-item.css';
 </style>

@@ -16,6 +16,9 @@
 <script>
 import tProgress from 'tdesign-uniapp/progress/progress.vue';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tProgress,
   },
@@ -31,7 +34,7 @@ export default {
     color: #d504d9;
 }
 
-.external-class-bar {
-    border-radius: 20rpx;
+:deep(.external-class-bar) {
+    border-radius: 10px !important;
 }
 </style>

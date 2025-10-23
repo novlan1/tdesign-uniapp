@@ -143,7 +143,7 @@
           :hover-class="classPrefix + '__cancel--hover'"
           hover-stay-time="70"
           aria-role="button"
-          @tap="onCancel"
+          @click="onCancel"
         >
           {{ dataCancelText || '取消' }}
         </view>

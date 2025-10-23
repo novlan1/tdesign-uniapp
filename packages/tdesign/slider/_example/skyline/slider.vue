@@ -21,7 +21,7 @@
           title="01 组件类型"
           desc="单游标滑块"
         >
-          <base>
+          <baseDemo />
         </t-demo>
 
         <t-demo desc="双游标滑块">
@@ -29,7 +29,7 @@
         </t-demo>
 
         <t-demo desc="带数值滑动选择器">
-          <label />
+          <labelDemo />
         </t-demo>
         <!--
       <t-demo desc="起始非零滑动选择器">
@@ -56,7 +56,7 @@
 
         <!-- skylne模式下，e.changedTouches返回的坐标为0 -->
         <!-- <t-demo title="04 垂直状态">
-        <vertical />
+        <verticalDemo />
       </t-demo> -->
       </view>
     </scroll-view>
@@ -66,23 +66,23 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import base from '../base';
-import label from '../label';
-import step from '../step';
-import range from '../range';
-import disabled from '../disabled';
-import capsule from '../capsule';
-import vertical from '../vertical';
+import baseDemo from '../base/index.vue';
+import labelDemo from '../label/index.vue';
+import step from '../step/index.vue';
+import range from '../range/index.vue';
+import disabled from '../disabled/index.vue';
+import capsule from '../capsule/index.vue';
+// import verticalDemo from '../vertical/index.vue';
 export default {
   components: {
     tNavbar,
-    base,
-    label,
+    baseDemo,
+    labelDemo,
     step,
     range,
     disabled,
     capsule,
-    vertical,
+    // verticalDemo,
   },
   data() {
     return {};

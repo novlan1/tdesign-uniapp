@@ -8,7 +8,7 @@
       v-if="show"
       :class="classPrefix + '__mask'"
       :style="_._style(['height:' + maskHeight + 'px', style, customStyle])"
-      @tap="handleMaskClick"
+      @click="handleMaskClick"
       @touchmove.stop.prevent="closeDropdown"
     />
     <t-popup
@@ -303,6 +303,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped >
+<style scoped>
 @import './dropdown-item.css';
 </style>

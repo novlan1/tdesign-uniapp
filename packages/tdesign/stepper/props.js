@@ -15,11 +15,11 @@ const props = {
     default: true,
   },
   max: {
-    type: Number,
+    type: [Number, String],
     default: 100,
   },
   min: {
-    type: Number,
+    type: [Number, String],
     default: 0,
   },
   size: {

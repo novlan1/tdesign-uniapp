@@ -8,6 +8,7 @@
       :navigation="navigation"
       :list="swiperList"
       :loop="false"
+      @change="onChange"
     />
   </view>
 </template>
@@ -51,7 +52,12 @@ export default {
     };
   },
   created() {},
-  methods: {},
+  methods: {
+    onChange(e) {
+      const { current } = e;
+      this.current = current;
+    },
+  },
 };
 </script>
 <style>

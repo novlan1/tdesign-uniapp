@@ -146,28 +146,16 @@ export default {
   methods: {
     onScroll(e: any) {
       const { scrollTop } = e.detail;
-      this.setData({
-        scrollTop,
-      });
+      this.scrollTop = scrollTop;
     },
 
     onToTop() {
-      this.setData({
-        scrollTo: 0,
-      });
+      this.scrollTo = 0;
     },
 
-    onBtnClick(e: any, _dataset) {
-      /* ---处理dataset begin--- */
-      this.handleDataset(e, _dataset);
-      /* ---处理dataset end--- */
-      const { source: type } = e.currentTarget.dataset;
-      this.setData({
-        type,
-      });
-      this.setData({
-        scrollTo: 800,
-      });
+    onBtnClick(e: any, { source: type }) {
+      this.type = type;
+      this.scrollTo = 100;
     },
   },
 };

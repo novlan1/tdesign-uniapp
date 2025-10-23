@@ -135,7 +135,7 @@ import TInput from 'tdesign-uniapp/input/input.vue';
 | focus | `(value: InputValue)` | 获得焦点时触发 |
 | keyboardheightchange | `(height: number, duration: number)` | 键盘高度发生变化的时候触发此事件 |
 | nicknamereview | `(pass: boolean, timeout: boolean)` | 用户昵称审核完毕后触发，仅在 type 为 "nickname" 时有效 |
-| validate | `(detail: { error?: 'exceed-maximum' \| 'below-minimum' })` | 字数超出限制时触发 |
+| validate | `({ error?: 'exceed-maximum' \| 'below-minimum' })` | 字数超出限制时触发 |
 
 ### Input External Classes
 

@@ -45,7 +45,7 @@
               :aria-selected="currentIndex === index"
               :aria-disabled="item.disabled"
               :aria-label="ariaLabel || (item.badgeProps.dot || item.badgeProps.count ? item.label + _.getBadgeAriaLabel({ ...item.badgeProps }) : '')"
-              @tap="onTabTap"
+              @click="onTabTap"
             >
               <view
                 :class="_.cls(classPrefix + '__item-inner', [theme, ['active', currentIndex === index]])"
@@ -454,7 +454,7 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './tabs.css';
 
 </style>

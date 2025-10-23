@@ -14,7 +14,7 @@
           :class="classPrefix + '__btn'"
           aria-role="button"
           aria-label="返回"
-          @tap="goBack"
+          @click="goBack"
         >
           <t-icon
             name="chevron-left"
@@ -147,7 +147,7 @@ export default uniComponent({
         '--td-navbar-capsule-width': `${_menuRect.width}px`, // 胶囊宽度
         '--td-navbar-height': `${(_menuRect.top - systemInfo.statusBarHeight) * 2 + _menuRect.height}px`,
       };
-      // #ifdef H5
+      // #ifdef H5 || APP-PLUS
       delete _boxStyle['--td-navbar-height'];
       // #endif
 

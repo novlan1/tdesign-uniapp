@@ -5,7 +5,7 @@
     :aria-role="ariaRole || readonly ? 'option' : 'button'"
     :aria-label="ariaLabel || getAriaLabel(index, title, content)"
     :aria-current="curStatus == 'process' ? 'step' : ''"
-    @tap="onTap"
+    @click="onTap"
   >
     <view
       :class="_.cls(classPrefix + '__anchor', [layout])"
@@ -166,6 +166,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped >
+<style scoped>
 @import './step-item.css';
 </style>

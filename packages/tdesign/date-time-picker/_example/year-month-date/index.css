@@ -1,7 +1,0 @@
-:deep(.panel-item) {
-    margin-bottom: 32rpx;
-}
-
-:deep(.panel-item::after) {
-    border: 0;
-}

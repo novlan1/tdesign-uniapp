@@ -24,6 +24,10 @@
         "label": "时间选择器"
       },
       {
+        "name": "Form",
+        "label": "表单"
+      },
+      {
         "name": "Input",
         "label": "输入框"
       },

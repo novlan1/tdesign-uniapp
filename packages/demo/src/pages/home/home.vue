@@ -1,6 +1,6 @@
 <template>
   <!-- #ifndef H5 -->
-  <TNavbar title="TDesign UI" />
+  <t-navbar title="TDesign UI" />
   <!-- #endif -->
   <view class="main">
     <view class="title-wrap">
@@ -37,8 +37,8 @@
     >
       《TDesign组件库服务声明》
     </view>
-    <TFooter text="该小程序仅演示示例，不收集个人信息。" />
-    <TFooter :text="`Copyright © 1998 - ${currentYear} All Rights Reserved`" />
+    <t-footer text="该小程序仅演示示例，不收集个人信息。" />
+    <t-footer :text="`Copyright © 1998 - ${currentYear} All Rights Reserved`" />
   </view>
   <TrdPrivacy
     ref="trdPrivacy"
@@ -49,8 +49,6 @@
 </template>
 
 <script lang="ts" setup>
-import TFooter from 'tdesign-uniapp/footer/footer.vue';
-import TNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import { useTheme } from 'tdesign-uniapp/mixins/theme-change';
 
 import { ref } from 'vue';

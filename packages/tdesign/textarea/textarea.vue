@@ -113,7 +113,7 @@ export default uniComponent({
 
       this.dataValue = val;
 
-      console.log('updateValue.value', { value, count });
+
       this.$nextTick(() => {
         this.dataValue = value;
         this.count = count;
@@ -200,6 +200,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './textarea.css';
 </style>

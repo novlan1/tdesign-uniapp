@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="[tClass, extraClass, prefix || 't-icon']"
+    :class="[tClass, prefix || 't-icon']"
     :style="_._style([iconStyle, style, customStyle])"
     :aria-hidden="ariaHidden"
     :aria-label="ariaLabel"
@@ -75,9 +75,7 @@ export default uniComponent({
   },
   methods: {
     onTap(t) {
-      this.$emit('click', {
-        detail: t.detail,
-      });
+      this.$emit('click', t);
     },
     setIconStyle() {
       const {
@@ -115,6 +113,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './icon.css';
 </style>

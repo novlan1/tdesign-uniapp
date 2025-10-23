@@ -20,8 +20,8 @@
           title="01 组件类型"
           desc="基础选择器"
         >
-          <base>
-          <area>
+          <labelDemo />
+          <areaDemo />
         </t-demo>
         <t-demo
           title="02 组件样式"
@@ -40,16 +40,16 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import base from '../base';
-import withTitle from '../with-title';
-import area from '../area';
-import withoutPopup from '../without-popup';
+import labelDemo from '../base/index.vue';
+import withTitle from '../with-title/index.vue';
+import areaDemo from '../area/index.vue';
+import withoutPopup from '../without-popup/index.vue';
 export default {
   components: {
     tNavbar,
-    base,
+    labelDemo,
     withTitle,
-    area,
+    areaDemo,
     withoutPopup,
   },
   data() {

@@ -29,11 +29,11 @@ z-index | Number | 999999 | \- | N
 
 name | params | description
 -- | -- | --
-back | `(detail: { current: number, total: number })` | \-
+back | `({ current: number, total: number })` | \-
 change | `(current: number, context?: { total: number })` | \-
-finish | `(detail: { current: number, total: number })` | \-
-next-step-click | `(detail: { next: number, current: number, total: number })` | \-
-skip | `(detail: { current: number, total: number })` | \-
+finish | `({ current: number, total: number })` | \-
+next-step-click | `({ next: number, current: number, total: number })` | \-
+skip | `({ current: number, total: number })` | \-
 
 ### Guide External Classes
 

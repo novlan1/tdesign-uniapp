@@ -22,7 +22,6 @@
 
 <script>
 import tLoading from 'tdesign-uniapp/loading/loading.vue';
-// import tSlider from 'tdesign-uniapp/slider/slider.vue';
 // import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js'
 export default {
   options: {
@@ -42,9 +41,7 @@ export default {
   created() {},
   methods: {
     durationChange(e) {
-      this.setData({
-        duration: e.detail.value,
-      });
+      this.duration = e.value;
     },
   },
 };

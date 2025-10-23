@@ -11,7 +11,7 @@
       aria-role="button"
       :aria-expanded="expanded"
       :aria-disabled="ultimateDisabled"
-      @tap="onClick"
+      @click="onClick"
     >
       <t-cell
         :title="header"
@@ -148,23 +148,26 @@ export default uniComponent({
               .height('auto')
               .step();
           } else {
-            // #ifdef H5
+            let doAnimation = false;
+
+            // #ifdef H5 || APP-PLUS
             animation
               .height(height)
               .top(1)
               .step({ duration: 17 })
               .height(0)
               .step({ duration: 300 });
+            doAnimation = true;
             // #endif
 
-            // #ifndef H5
-            animation
-              .height(height)
-              .top(1)
-              .step({ duration: 1 })
-              .height(0)
-              .step({ duration: 300 });
-            // #endif
+            if (!doAnimation) {
+              animation
+                .height(height)
+                .top(1)
+                .step({ duration: 1 })
+                .height(0)
+                .step({ duration: 300 });
+            }
           }
 
           this.animation =  animation.export();
@@ -192,12 +195,18 @@ export default uniComponent({
       this.ultimateDisabled = this.disabled == null ? disabled : this.disabled;
 
 
-      this.updateExpanded(dataValue);
+      let interval = 0;
+      // #ifdef APP-PLUS
+      interval = 33;
+      // #endif
+      setTimeout(() => {
+        this.updateExpanded(dataValue);
+      }, interval);
     },
   },
 });
 
 </script>
-<style scoped >
+<style scoped>
 @import './collapse-panel.css';
 </style>

@@ -156,6 +156,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './dropdown-menu.css';
 </style>

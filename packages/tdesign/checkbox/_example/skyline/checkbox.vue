@@ -6,11 +6,9 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import checkboxDemo from '../checkbox';
+import checkboxDemo from '../checkbox.vue';
 export default {
   components: {
-    tNavbar,
     checkboxDemo,
   },
   data() {

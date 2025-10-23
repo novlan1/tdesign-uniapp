@@ -1,167 +1,225 @@
 import { prefix } from './config';
 import { isString, isNumber, isDef, isBoolean, isObject } from './validator';
 import { getWindowInfo, getAppBaseInfo, getDeviceInfo } from './wechat';
+
 export { getWindowInfo };
+
 export const systemInfo = getWindowInfo();
+
 export const appBaseInfo = getAppBaseInfo();
+
 export const deviceInfo = getDeviceInfo();
-export const debounce = function (e, t = 500) {
-  let n;
-  return function (...o) {
-    if (n) {
-      clearTimeout(n);
+
+
+export const debounce = function (func, wait = 500) {
+  let timerId;
+  return function (...rest) {
+    if (timerId) {
+      clearTimeout(timerId);
     }
-    n = setTimeout(() => {
-      e.apply(this, o);
-    }, t);
+    timerId = setTimeout(() => {
+      func.apply(this, rest);
+    }, wait);
   };
 };
-export const throttle = (e, t = 100, n = null) => {
-  let o = 0;
-  let r = null;
-  n
-        || (n = {
-          leading: true,
-        });
-  return function (...c) {
-    const s = Date.now();
-    o || n.leading || (o = s);
-    const that = this;
-    if (t - (s - o) <= 0) {
-      if (r) {
-        clearTimeout(r), (r = null);
+
+export const throttle = (func, wait = 100, options = null) => {
+  let previous = 0;
+  let timerid = null;
+
+  if (!options) {
+    options = {
+      leading: true,
+    };
+  }
+
+  return function (...args) {
+    const now = Date.now();
+
+    if (!previous && !options.leading) previous = now;
+
+    const remaining = wait - (now - previous);
+    const context = this;
+
+    if (remaining <= 0) {
+      if (timerid) {
+        clearTimeout(timerid);
+        timerid = null;
       }
-      o = s;
-      e.apply(that, c);
+      previous = now;
+      func.apply(context, args);
     }
   };
 };
-export const classNames = function (...e) {
-  const t = {}.hasOwnProperty;
-  const n = [];
-  e.forEach((e) => {
-    if (!e) {
-      return;
-    }
-    const o = typeof e;
-    if ('string' === o || 'number' === o) n.push(e);
-    else if (Array.isArray(e) && e.length) {
-      const t = classNames(...e);
-      if (t) {
-        n.push(t);
+
+export const classNames = function (...args) {
+  const hasOwn = {}.hasOwnProperty;
+  const classes = [];
+
+  args.forEach((arg) => {
+    // for (let i = 0; i < args.length; i++) {
+    // eslint-disable-next-line
+    // const arg = args[i]
+    if (!arg) return;
+
+    const argType = typeof arg;
+
+    if (argType === 'string' || argType === 'number') {
+      classes.push(arg);
+    } else if (Array.isArray(arg) && arg.length) {
+      const inner = classNames(...arg);
+      if (inner) {
+        classes.push(inner);
       }
-    } else if ('object' === o) {
-      for (const o in e) {
-        if (t.call(e, o) && e[o]) {
-          n.push(o);
+    } else if (argType === 'object') {
+      // eslint-disable-next-line
+      for (const key in arg) {
+        if (hasOwn.call(arg, key) && arg[key]) {
+          classes.push(key);
         }
       }
     }
   });
-  return n.join(' ');
+
+  return classes.join(' ');
 };
-export const styles = function (e) {
-  return Object.keys(e)
-    .map(t => `${t}: ${e[t]}`)
+
+export const styles = function (styleObj) {
+  return Object.keys(styleObj)
+    .map(styleKey => `${styleKey}: ${styleObj[styleKey]}`)
     .join('; ');
 };
-export const getAnimationFrame = function (e, t) {
+
+export const getAnimationFrame = function (context, cb) {
   return uni
     .createSelectorQuery()
-    .in(e)
+    .in(context)
     .selectViewport()
     .boundingClientRect()
     .exec(() => {
-      t();
+      cb();
     });
 };
-export const getRect = function (e, t, n = false) {
-  return new Promise((o, r) => {
-    uni.createSelectorQuery().in(e)
-      [n ? 'selectAll' : 'select'](t)
-      .boundingClientRect((e) => {
-        e ? o(e) : r(e);
+
+export const getRect = function (context, selector, needAll = false) {
+  return new Promise((resolve, reject) => {
+    uni
+      .createSelectorQuery()
+      .in(context)
+      // eslint-disable-next-line no-unexpected-multiline
+      [needAll ? 'selectAll' : 'select'](selector)
+      .boundingClientRect((rect) => {
+        if (rect) {
+          resolve(rect);
+        } else {
+          reject(rect);
+        }
       })
       .exec();
   });
 };
-export const getTreeDepth = (e, t) => e.reduce(
-  (e, n) => (n[null != t ? t : 'children'] && n[null != t ? t : 'children'].length > 0 ? Math.max(e, getTreeDepth(n[null != t ? t : 'children'], t) + 1) : Math.max(e, 1)),
-  0,
-);
-export const isIOS = function () {
-  let e;
-  return !!((null === (e = null == deviceInfo ? void 0 : deviceInfo.system) || void 0 === e ? void 0 : e.toLowerCase().search('ios')) + 1);
-};
-export const addUnit = function (e) {
-  if (isDef(e)) {
-    e = String(e);
-    return isNumber(e) ? `${e}px` : e;
+
+
+export const getTreeDepth = (tree, key) => tree.reduce((maxDepth, node) => {
+  if (node[key ?? 'children'] && node[key ?? 'children'].length > 0) {
+    return Math.max(maxDepth, getTreeDepth(node[key ?? 'children'], key) + 1);
   }
+  return Math.max(maxDepth, 1);
+}, 0);
+
+export const isIOS = function () {
+  return !!(deviceInfo?.system?.toLowerCase().search('ios') + 1);
 };
-export const getCharacterLength = (e, t, n) => {
-  const o = String(null != t ? t : '');
-  if (0 === o.length) {
+
+export const addUnit = function (value) {
+  if (!isDef(value)) {
+    return undefined;
+  }
+  value = String(value);
+  return isNumber(value) ? `${value}px` : value;
+};
+
+/**
+ * 计算字符串字符的长度并可以截取字符串。
+ * @param char 传入字符串（maxcharacter条件下，一个汉字表示两个字符）
+ * @param max 规定最大字符串长度
+ * @returns 当没有传入maxCharacter/maxLength 时返回字符串字符长度，当传入maxCharacter/maxLength时返回截取之后的字符串和长度。
+ */
+export const getCharacterLength = (type, char, max) => {
+  const str = String(char ?? '');
+
+  if (str.length === 0) {
     return {
       length: 0,
       characters: '',
     };
   }
-  if ('maxcharacter' === e) {
-    let e = 0;
-    for (let t = 0; t < o.length; t += 1) {
-      let r = 0;
-      r = o.charCodeAt(t) > 127 || 94 === o.charCodeAt(t) ? 2 : 1;
-      if (e + r > n) {
+
+  if (type === 'maxcharacter') {
+    let len = 0;
+    for (let i = 0; i < str.length; i += 1) {
+      let currentStringLength = 0;
+      if (str.charCodeAt(i) > 127 || str.charCodeAt(i) === 94) {
+        currentStringLength = 2;
+      } else {
+        currentStringLength = 1;
+      }
+      if (len + currentStringLength > max) {
         return {
-          length: e,
-          characters: o.slice(0, t),
+          length: len,
+          characters: str.slice(0, i),
         };
       }
-      e += r;
+      len += currentStringLength;
     }
     return {
-      length: e,
-      characters: o,
+      length: len,
+      characters: str,
     };
   }
-  if ('maxlength' === e) {
-    const e = o.length > n ? n : o.length;
+
+  if (type === 'maxlength') {
+    const length = str.length > max ? max : str.length;
     return {
-      length: e,
-      characters: o.slice(0, e),
+      length,
+      characters: str.slice(0, length),
     };
   }
+
   return {
-    length: o.length,
-    characters: o,
+    length: str.length,
+    characters: str,
   };
 };
-export const chunk = (e, t) => Array.from(
-  {
-    length: Math.ceil(e.length / t),
-  },
-  (n, o) => e.slice(o * t, o * t + t),
-);
-export const getInstance = function (e, t) {
-  if (!e) {
-    const t = getCurrentPages();
-    const n = t[t.length - 1];
-    e = n.$$basePage || n;
+
+export const chunk = (arr, size) => Array.from({ length: Math.ceil(arr.length / size) }, (v, i) => arr.slice(i * size, i * size + size));
+
+
+export const getInstance = function (context, selector) {
+  if (!context) {
+    const pages = getCurrentPages();
+    const page = pages[pages.length - 1];
+    context = (page).$$basePage || page;
   }
-  console.log('getInstance.e', { e, t });
-  const n = e ? e.$refs[t.slice(1)] : null;
-  return n || (console.warn('未找到组件,请检查selector是否正确'), null);
+
+  const pureSelector = /^[.#]/.test(selector) ? selector.slice(1) : selector;
+  const instance = context ? context.$refs[pureSelector] : null;
+
+  if (!instance) {
+    console.warn('未找到组件,请检查 selector 是否正确');
+    return null;
+  }
+  return instance;
 };
-export const unitConvert = (e) => {
-  let t;
-  return 'string' === typeof e
-    ? e.includes('rpx')
-      ? (parseInt(e, 10) * (null !== (t = null == systemInfo ? void 0 : systemInfo.screenWidth) && void 0 !== t ? t : 750)) / 750
-      : parseInt(e, 10)
-    : null != e
-      ? e
-      : 0;
+
+export const unitConvert = (value) => {
+  if (typeof value === 'string') {
+    if (value.includes('rpx')) {
+      return (parseInt(value, 10) * (systemInfo?.screenWidth ?? 750)) / 750;
+    }
+    return parseInt(value, 10);
+  }
+  return value ?? 0;
 };
 
 export const setIcon = (iconName, icon, defaultIcon) => {
@@ -189,20 +247,22 @@ export const setIcon = (iconName, icon, defaultIcon) => {
   };
 };
 
+export const toCamel = str => str.replace(/-(\w)/g, (match, m1) => m1.toUpperCase());
 
-export const toCamel = e => e.replace(/-(\w)/g, (e, t) => t.toUpperCase());
 export const getCurrentPage = function () {
-  const e = getCurrentPages();
-  return e[e.length - 1];
+  const pages = getCurrentPages();
+  return pages[pages.length - 1];
 };
-export const uniqueFactory = (e) => {
-  let t = 0;
+
+export const uniqueFactory = (compName) => {
+  let number = 0;
   return () => {
-    const n = `${prefix}_${e}_${t}`;
-    t += 1;
-    return n;
+    const uniqueId = `${prefix}_${compName}_${number}`;
+    number += 1;
+    return uniqueId;
   };
 };
+
 export const calcIcon = (icon, defaultIcon) => {
   if (icon && ((isBoolean(icon) && defaultIcon) || isString(icon))) {
     return { name: isBoolean(icon) ? defaultIcon : icon };
@@ -213,24 +273,25 @@ export const calcIcon = (icon, defaultIcon) => {
   return null;
 };
 
+export const isOverSize = (size, sizeLimit) => {
+  if (!sizeLimit) return false;
 
-export const isOverSize = (e, t) => {
-  let n;
-  if (!t) {
-    return false;
-  }
-  const o = 1000;
-  const r = {
+  const base = 1000;
+  const unitMap = {
     B: 1,
-    KB: o,
-    MB: 1000000,
-    GB: 1000000000,
+    KB: base,
+    MB: base * base,
+    GB: base * base * base,
   };
-  return e > ('number' === typeof t ? t * o : (null == t ? void 0 : t.size) * r[null !== (n = null == t ? void 0 : t.unit) && void 0 !== n ? n : 'KB']);
+  const computedSize =    typeof sizeLimit === 'number' ? sizeLimit * base : sizeLimit?.size * unitMap[sizeLimit?.unit ?? 'KB']; // 单位 KB
+
+  return size > computedSize;
 };
-export const rpx2px = e => Math.floor((systemInfo.windowWidth * e) / 750);
-export const nextTick = () => new Promise((e) => {
-  this.$nextTick(() => {
-    e();
+
+export const rpx2px = rpx => Math.floor((systemInfo.windowWidth * rpx) / 750);
+
+export const nextTick = () => new Promise((resolve) => {
+  wx.nextTick(() => {
+    resolve();
   });
 });

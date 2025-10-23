@@ -40,8 +40,13 @@
 import BaseDemo from './base/index.vue';
 import offset from './offset/index.vue';
 import container from './container/index.vue';
+import { handlePageScroll } from 'tdesign-uniapp/mixins/page-scroll';
+
+
 export default {
-  onPageScroll() {},
+  onPageScroll(e) {
+    handlePageScroll(e);
+  },
   components: {
     BaseDemo,
     offset,

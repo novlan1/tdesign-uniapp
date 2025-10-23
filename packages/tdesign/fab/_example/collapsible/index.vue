@@ -55,6 +55,8 @@
 import tFab from 'tdesign-uniapp/fab/fab.vue';
 import tIcon from 'tdesign-uniapp/icon/icon.vue';
 import pageScrollMixin from 'tdesign-uniapp/mixins/page-scroll';
+
+
 export default {
   components: {
     tFab,
@@ -67,7 +69,6 @@ export default {
       timer: null,
     };
   },
-  created() {},
   methods: {
     handleClick(e) {
       console.log('handleClick: ', e);

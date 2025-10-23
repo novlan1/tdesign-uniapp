@@ -10,7 +10,7 @@
     hover-stay-time="70"
     :aria-role="ariaRole || (arrow ? 'button' : '')"
     :aria-label="ariaLabel"
-    @tap="onClick"
+    @click="onClick"
   >
     <view :class="classPrefix + '__left ' + tClassLeft">
       <!-- parse <template v-if="_leftIcon" is="icon" :data="tClass: classPrefix + '__left-icon ' + prefix + '-class-left-icon', ..._leftIcon"/> -->
@@ -203,9 +203,7 @@ export default uniComponent({
       this[e] = calcIcon(t, s);
     },
     onClick(e) {
-      this.$emit('click', {
-        detail: e.detail,
-      });
+      this.$emit('click', e);
       this.jumpLink();
     },
     jumpLink(e = 'url', t = 'jumpType') {
@@ -220,6 +218,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './cell.css';
 </style>

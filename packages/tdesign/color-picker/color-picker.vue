@@ -259,7 +259,7 @@ export default uniComponent({
     getEleReact() {
       let saturationSelector = `.${name}__root >>> .${name}__saturation`;
       let sliderSelector = `.${name}__root >>> .${name}__slider`;
-      // #ifdef H5
+      // #ifndef MP
       saturationSelector = `.${name}__saturation`;
       sliderSelector = `.${name}__slider`;
       // #endif
@@ -491,6 +491,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped >
+<style scoped>
 @import './color-picker.css';
 </style>

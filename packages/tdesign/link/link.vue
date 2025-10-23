@@ -144,19 +144,13 @@ export default uniComponent({
       this.className = classList.join(' ');
     },
     onSuccess(e) {
-      this.$emit('success', {
-        detail: e,
-      });
+      this.$emit('success', e);
     },
     onFail(e) {
-      this.$emit('fail', {
-        detail: e,
-      });
+      this.$emit('fail', e);
     },
     onComplete(e) {
-      this.$emit('complete', {
-        detail: e,
-      });
+      this.$emit('complete', e);
     },
   },
 });

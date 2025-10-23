@@ -66,11 +66,11 @@ import TGuide from 'tdesign-uniapp/guide/guide.vue';
 
 | 名称 | 参数 | 描述 |
 | -- | -- | -- | 
-| back | `(detail: { current: number, total: number })` | 点击返回按钮时触发 |
+| back | `({ current: number, total: number })` | 点击返回按钮时触发 |
 | change | `(current: number, context?: { total: number })` | 当前步骤发生变化时触发 |
-| finish | `(detail: { current: number, total: number })` | 点击完成按钮时触发 |
-| next-step-click | `(detail: { next: number, current: number, total: number })` | 点击下一步时触发 |
-| skip | `(detail: { current: number, total: number })` | 点击跳过按钮时触发 |
+| finish | `({ current: number, total: number })` | 点击完成按钮时触发 |
+| next-step-click | `({ next: number, current: number, total: number })` | 点击下一步时触发 |
+| skip | `({ current: number, total: number })` | 点击跳过按钮时触发 |
 
 ### Guide External Classes
 

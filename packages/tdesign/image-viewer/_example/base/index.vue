@@ -9,9 +9,13 @@
     >
       基础图片预览
     </t-button>
-    <t-toast id="t-toast" />
+    <t-toast
+      id="t-toast"
+      ref="t-toast"
+    />
     <t-image-viewer
       using-custom-navbar
+      :custom-navbar-height="gCustomNavbarHeight"
       :delete-btn="deleteBtn"
       :close-btn="closeBtn"
       :show-index="showIndex"
@@ -52,11 +56,11 @@ export default {
       this.visible = true;
     },
     onChange(e) {
-      const { index } = e.detail;
+      const { index } = e;
       console.log('change', index);
     },
     onDelete(e) {
-      const { index } = e.detail;
+      const { index } = e;
       Toast({
         context: this,
         selector: '#t-toast',
@@ -64,7 +68,7 @@ export default {
       });
     },
     onClose(e) {
-      const { trigger } = e.detail;
+      const { trigger } = e;
       console.log(trigger);
       this.visible = false;
     },

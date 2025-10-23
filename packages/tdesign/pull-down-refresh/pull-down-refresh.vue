@@ -67,7 +67,6 @@ import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
 import { getRect, systemInfo, unitConvert } from '../common/utils';
-// import { canUseProxyScrollView } from '../common/version';
 import _ from '../common/utils.wxs';
 import { getObserver } from '../common/wechat';
 import { ParentMixin, RELATION_MAP } from '../common/relation';
@@ -322,22 +321,33 @@ export default uniComponent({
     },
 
     setScrollTop(scrollTop) {
-      // this.setData({ scrollTop });
       this.scrollTop = scrollTop;
     },
 
     scrollToTop() {
-      // https://yuanbao.tencent.com/chat/naQivTmsDa/c10ae37f-c66f-4489-ac4e-e72710a3f65a
+      let parsed = false;
+
+      // #ifdef APP-PLUS || MP
+      this.scrollTop = 0;
+      setTimeout(() => {
+        this.scrollTop = 0.01;
+      });
+      parsed = true;
+      // #endif
+
       // #ifdef H5
+      // https://yuanbao.tencent.com/chat/naQivTmsDa/c10ae37f-c66f-4489-ac4e-e72710a3f65a
       this.scrollTop = this.scrollTop === 0 ? 0.01 : 0;
+      parsed = true;
       // #endif
-      // #ifndef H5
-      this.setScrollTop(0);
-      // #endif
+
+      if (!parsed) {
+        this.setScrollTop(0);
+      }
     },
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './pull-down-refresh.css';
 </style>

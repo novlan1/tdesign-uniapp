@@ -27,7 +27,7 @@
         </t-demo>
 
         <t-demo desc="图标加文字标签栏">
-          <base>
+          <baseDemo />
         </t-demo>
 
         <t-demo desc="纯图标标签栏">
@@ -35,7 +35,7 @@
         </t-demo>
 
         <t-demo desc="双层级纯文本标签栏">
-          <sub />
+          <subDemo />
         </t-demo>
 
         <t-demo
@@ -63,20 +63,20 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import textOnly from '../text-only';
-import iconOnly from '../icon-only';
-import base from '../base';
-import sub from '../sub';
-import badge from '../badge';
-import round from '../round';
-import custom from '../custom';
+import textOnly from '../text-only/index.vue';
+import iconOnly from '../icon-only/index.vue';
+import baseDemo from '../base/index.vue';
+import subDemo from '../sub/index.vue';
+import badge from '../badge/index.vue';
+import round from '../round/index.vue';
+import custom from '../custom/index.vue';
 export default {
   components: {
     tNavbar,
     textOnly,
     iconOnly,
-    base,
-    sub,
+    baseDemo,
+    subDemo,
     badge,
     round,
     custom,
@@ -89,7 +89,7 @@ export default {
   },
   methods: {
     onChange(event: any) {
-      console.log(event.detail);
+      console.log(event);
     },
 
     onScroll() {

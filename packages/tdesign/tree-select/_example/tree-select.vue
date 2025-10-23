@@ -48,5 +48,4 @@ export default {
 };
 </script>
 <style>
-@import './tree-select.css';
 </style>

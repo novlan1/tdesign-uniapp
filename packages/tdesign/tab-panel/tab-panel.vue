@@ -73,6 +73,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './tab-panel.css';
 </style>

@@ -37,6 +37,10 @@ const name = `${prefix}-divider`;
 
 export default uniComponent({
   name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-content`,
+  ],
   props: {
     ...props,
   },
@@ -67,6 +71,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './divider.css';
 </style>

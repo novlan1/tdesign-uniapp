@@ -1,13 +1,16 @@
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import uni from '@dcloudio/vite-plugin-uni';
+// import AutoImport from 'unplugin-auto-import/vite';
+// import Components from 'unplugin-vue-components/vite';
+// import { TDesignResolver } from 'tdesign-uniapp-auto-import-resolver';
 
 
 const baseAlias = {
-  'tdesign-site': path.resolve(__dirname),
-  packages: path.resolve(__dirname, '../'),
-  'tdesign-uniapp-raw': path.resolve(__dirname, './src/_tdesign-raw'),
-  'tdesign-uniapp': path.resolve(__dirname, './src/_tdesign'),
+  'tdesign-site': path.resolve(__dirname).replace(/\\/g, '/'),
+  packages: path.resolve(__dirname, '../').replace(/\\/g, '/'),
+  'tdesign-uniapp-raw': path.resolve(__dirname, './src/_tdesign-raw').replace(/\\/g, '/'),
+  'tdesign-uniapp': path.resolve(__dirname, './src/_tdesign').replace(/\\/g, '/'),
 };
 const ENV_PREFIX = ['VITE_', 'VUE_APP'];
 const root: string = process.cwd();
@@ -20,6 +23,18 @@ export default ({ mode }) => {
   const result = defineConfig({
     plugins: [
       uni(),
+
+      // auto-import 有兼容性问题，可尝试打开，并去掉 pages.json 中的 easycom 配置
+      // AutoImport({
+      //   resolvers: [TDesignResolver({
+      //     library: 'uniapp',
+      //   })],
+      // }),
+      // Components({
+      //   resolvers: [TDesignResolver({
+      //     library: 'uniapp',
+      //   })],
+      // }),
     ],
     resolve: {
       alias: {

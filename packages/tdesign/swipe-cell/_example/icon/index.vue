@@ -35,7 +35,7 @@
         >
           <view
             class="btn edit-btn column"
-            @tap="onEdit"
+            @click="onEdit"
           >
             <t-icon
               t-class="padding-bottom"
@@ -46,7 +46,7 @@
           </view>
           <view
             class="btn delete-btn column"
-            @tap="onDelete"
+            @click="onDelete"
           >
             <t-icon
               t-class="padding-bottom"

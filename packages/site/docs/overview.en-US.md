@@ -116,7 +116,7 @@ spline: explain
   </div>
 </section>
 
-<h3>Form<em class="tag">16</em></h3>
+<h3>Form<em class="tag">17</em></h3>
 <section class="image-group">
   <div class="image-wrapper">
     <a class="item" href="#/components/calendar-en">
@@ -151,6 +151,13 @@ spline: explain
       <img class="__light__" src="https://tdesign.gtimg.com/site/mobile/doc-datetimepicker.png" />
       <img class="__dark__" src="https://tdesign.gtimg.com/site/mobile/doc-datetimepicker-dark.png" />
       <p class="name">DateTimePicker</p>
+    </a>
+  </div>
+  <div class="image-wrapper">
+    <a class="item" href="#/components/form-en">
+      <img class="__light__" src="https://tdesign.gtimg.com/site/mobile/doc-input.png" />
+      <img class="__dark__" src="https://tdesign.gtimg.com/site/mobile/doc-input-dark.png" />
+      <p class="name">Form</p>
     </a>
   </div>
   <div class="image-wrapper">

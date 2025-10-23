@@ -30,8 +30,6 @@
 </template>
 
 <script>
-import tButton from 'tdesign-uniapp/button/button.vue';
-import tActionSheet from 'tdesign-uniapp/action-sheet/action-sheet.vue';
 import ActionSheet, { ActionSheetTheme } from 'tdesign-uniapp/action-sheet/index';
 const firstGrid = [
   {
@@ -69,8 +67,6 @@ const firstGrid = [
 ];
 export default {
   components: {
-    tButton,
-    tActionSheet,
   },
   data() {
     return {};

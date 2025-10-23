@@ -25,3 +25,11 @@ packages/demo/src/_tdesign-raw/
 packages/demo/src/pages-more/
 
 npm_dist/
+
+packages/tdesign-app/uni_modules/tdesign-uniapp/
+
+packages/tdesign-app/unpackage/
+packages/tdesign-app/pages-more/
+packages/tdesign-app/pages/
+packages/tdesign-app/components/
+packages/tdesign-app/tdesign-uniapp-raw/

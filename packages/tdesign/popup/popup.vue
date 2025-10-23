@@ -15,7 +15,7 @@
         <slot />
         <view
           :class="classPrefix + '__close'"
-          @tap="handleClose"
+          @click="handleClose"
         >
           <t-icon
             v-if="closeBtn"
@@ -99,6 +99,6 @@ export default uniComponent({
 });
 
 </script>
-<style scoped >
+<style scoped>
 @import './popup.css';
 </style>

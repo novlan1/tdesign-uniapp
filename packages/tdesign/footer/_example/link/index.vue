@@ -46,5 +46,12 @@ export default {
 };
 </script>
 <style>
-@import "./index.css";
+.footer-example {
+  padding: 8rpx 0;
+}
+
+.footer-example:not(:last-child) {
+  margin-bottom: 32rpx;
+}
+
 </style>

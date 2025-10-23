@@ -209,6 +209,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './radio.css';
 </style>

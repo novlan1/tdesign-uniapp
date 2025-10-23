@@ -139,7 +139,7 @@ export default uniComponent({
 });
 
 </script>
-<style scoped >
+<style scoped>
 @import './side-bar-item.css';
 
 </style>

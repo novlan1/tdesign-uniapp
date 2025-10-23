@@ -7,7 +7,6 @@
       inheritColor ? 'color: inherit' : ''
     ])"
     :class="[
-      extraClass,
       tClass,
       classPrefix + ' ' + (classPrefix + '--' + layout) + ' ' + (fullscreen ? classPrefix + '--fullscreen' : '')
     ]"
@@ -106,6 +105,11 @@ const name = `${prefix}-loading`;
 
 export default uniComponent({
   name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-text`,
+    `${prefix}-class-indicator`,
+  ],
   options: {
     multipleSlots: true,
   },

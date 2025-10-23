@@ -63,9 +63,9 @@ Fab 组件默认定位 `right: 16px; bottom: 32px;`，且拖拽功能也是通�
 
 | 名称 | 参数 | 描述 |
 | -- | -- | -- | 
-| click | `(detail: {e: Event})` | 悬浮按钮点击事件 |
-| drag-end | `(detail: { e: TouchEvent })` | 结束拖拽时触发 |
-| drag-start | `(detail: { e: TouchEvent })` | 开始拖拽时触发 |
+| click | `(e: Event)` | 悬浮按钮点击事件 |
+| drag-end | `(e: TouchEvent)` | 结束拖拽时触发 |
+| drag-start | `(e: TouchEvent)` | 开始拖拽时触发 |
 
 ### CSS Variables
 

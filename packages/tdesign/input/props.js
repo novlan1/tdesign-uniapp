@@ -42,7 +42,6 @@ const props = {
   cursor: {
     type: Number,
     default: -1,
-    required: true,
   },
   cursorColor: {
     type: String,
@@ -93,7 +92,6 @@ const props = {
   placeholderStyle: {
     type: String,
     default: '',
-    required: true,
   },
   prefixIcon: {
     type: [String, Object],

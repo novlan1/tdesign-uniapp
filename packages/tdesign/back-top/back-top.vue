@@ -4,7 +4,7 @@
     :style="_._style([style, customStyle])"
     :class="'class ' + tClass + ' ' + _.cls(classPrefix, [['fixed', fixed], theme])"
     aria-role="button"
-    @tap="toTop"
+    @click="toTop"
   >
     <view
       :class="classPrefix + '__icon'"

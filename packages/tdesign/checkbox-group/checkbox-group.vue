@@ -84,7 +84,7 @@ export default uniComponent({
       deep: true,
     },
     dataValue: {
-      handler(v) {
+      handler() {
         this.updateChildren();
       },
       immediate: true,
@@ -237,6 +237,5 @@ export default uniComponent({
 });
 
 </script>
-<style scoped >
-@import './checkbox-group.css';
+<style scoped>
 </style>

@@ -60,16 +60,7 @@ export default {
     };
   },
   methods: {
-    setData(value) {
-      Object.keys(value).forEach((key) => {
-        this[key] = value[key];
-      });
-    },
-    handleChange(e: any) {
-      this.setData({
-        activeValues: e.detail.value,
-      });
-    },
+
   },
 };
 </script>

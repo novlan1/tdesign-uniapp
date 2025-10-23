@@ -16,14 +16,6 @@ const props = {
     type: [String, Number],
     default: '',
   },
-  tClass: {
-    type: String,
-    default: '',
-  },
-  extraClass: {
-    type: String,
-    default: '',
-  },
   style: {
     type: String,
     default: '',

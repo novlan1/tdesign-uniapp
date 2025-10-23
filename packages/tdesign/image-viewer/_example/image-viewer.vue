@@ -14,11 +14,15 @@
       <t-demo
         title="01 组件类型"
         description="基础图片预览"
+        padding
       >
         <BaseComp />
       </t-demo>
 
-      <t-demo title="带操作图片预览">
+      <t-demo
+        title="带操作图片预览"
+        padding
+      >
         <DeleteDemo />
       </t-demo>
     </view>

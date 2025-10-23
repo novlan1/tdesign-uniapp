@@ -107,18 +107,5 @@ const props = {
     type: String,
     default: 'base',
   },
-
-  tClass: {
-    type: String,
-    default: '',
-  },
-  tClassIcon: {
-    type: String,
-    default: '',
-  },
-  tClassLoading: {
-    type: String,
-    default: '',
-  },
 };
 export default props;

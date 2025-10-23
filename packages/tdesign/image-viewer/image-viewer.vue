@@ -1,9 +1,9 @@
 <template>
   <view
-    v-if="visible"
+    v-if="dataVisible"
     :id="classPrefix"
-    :class="classPrefix + ' class ' + prefix + '-class'"
-    :style="_._style([style, customStyle, '--td-image-viewer-top: ' + maskTop + 'px'])"
+    :class="classPrefix + ' class ' + tClass"
+    :style="_._style([style, customStyle, '--td-image-viewer-top: ' + distanceTop + 'px'])"
     :aria-modal="true"
     aria-role="dialog"
     aria-label="图片查看器"
@@ -15,7 +15,7 @@
       :style="'background-color: ' + backgroundColor"
       aria-role="button"
       aria-label="关闭"
-      @tap="onClose"
+      @click="(e) => onClose(e, 'overlay')"
     />
     <block v-if="images && images.length">
       <view :class="classPrefix + '__content'">
@@ -26,7 +26,7 @@
           :current="currentSwiperIndex"
           tabindex="0"
           @change="onSwiperChange"
-          @tap="onClose"
+          @click="(e) => onClose(e, '')"
         >
           <swiper-item
             v-for="(item, index) in images"
@@ -36,7 +36,7 @@
             <t-image
               v-if="!lazy || shouldLoadImage(index, currentSwiperIndex, loadedImageIndexes)"
               t-class="t-image--external"
-              :style="imagesStyle[index]?.style || ''"
+              :custom-style="imagesStyle[index]?.style || ''"
               mode="aspectFit"
               :src="item"
               :data-index="index"
@@ -46,12 +46,14 @@
           </swiper-item>
         </swiper>
       </view>
-      <view :class="classPrefix + '__nav'">
+      <view
+        :class="classPrefix + '__nav'"
+      >
         <view
           :class="classPrefix + '__nav-close'"
           aria-role="button"
           aria-label="关闭"
-          @tap.stop.prevent="onClose"
+          @click.stop.prevent="(e) => onClose(e, '')"
         >
           <slot name="close-btn" />
           <!-- parse <template v-if="_closeBtn" is="icon" :data="..._closeBtn"/> -->
@@ -60,16 +62,16 @@
             name="icon"
           >
             <t-icon
-              :style="style || ''"
-              :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-              :prefix="prefix || ''"
-              :name="'close' || ''"
-              :size="22 || ''"
-              :color="color || ''"
-              :aria-hidden="true || ''"
-              :aria-label="ariaLabel || ''"
-              :aria-role="ariaRole || ''"
-              @click="bindclick || ''"
+              :custom-style="_closeBtn.style || ''"
+              :t-class="_closeBtn.tClass"
+              :prefix="_closeBtn.prefix"
+              :name="_closeBtn.name"
+              :size="_closeBtn.size"
+              :color="_closeBtn.color"
+              :aria-hidden="!!_closeBtn.ariaHidden"
+              :aria-label="_closeBtn.ariaLabel"
+              :aria-role="_closeBtn.ariaRole"
+              @click="_closeBtn.click || ''"
             />
           </block>
         </view>
@@ -83,21 +85,22 @@
           :class="classPrefix + '__nav-delete'"
           aria-role="button"
           aria-label="删除"
-          @tap="onDelete"
+          @click="onDelete"
         >
           <slot name="delete-btn" />
           <!-- parse <template is="icon" :data="..._deleteBtn"/> -->
           <t-icon
-            :style="style || ''"
-            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
-            :prefix="prefix || ''"
-            :name="'close' || ''"
-            :size="22 || ''"
-            :color="color || ''"
-            :aria-hidden="true || ''"
-            :aria-label="ariaLabel || ''"
-            :aria-role="ariaRole || ''"
-            @click="bindclick || ''"
+            v-if="_deleteBtn"
+            :custom-style="_deleteBtn.style || ''"
+            :t-class="_deleteBtn.tClass"
+            :prefix="_deleteBtn.prefix"
+            :name="_deleteBtn.name"
+            :size="_deleteBtn.size"
+            :color="_deleteBtn.color"
+            :aria-hidden="!!_deleteBtn.ariaHidden"
+            :aria-label="_deleteBtn.ariaLabel"
+            :aria-role="_deleteBtn.ariaRole"
+            @click="_deleteBtn.click || ''"
           />
         </view>
       </view>
@@ -107,30 +110,36 @@
 <script>
 import tImage from '../image/image';
 import tIcon from '../icon/icon';
-import { __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
+import { uniComponent } from '../common/src/index';
 import { styles, calcIcon, systemInfo } from '../common/utils';
-import config from '../common/config';
+import { prefix } from '../common/config';
 import props from './props';
 import _ from '../common/utils.wxs';
-import { initTDesign } from '../common/runtime';
-import { shouldLoadImage } from './image-viewer.wxs';
+import { shouldLoadImage } from './computed.js';
+import useCustomNavbar from '../mixins/using-custom-navbar';
 
-const {
-  prefix: prefix,
-} = config;
+
 const name = `${prefix}-image-viewer`;
-let ImageViewer = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`];
-    this.properties = props;
-    this._ = _;
-    this.components = {
-      tImage,
-      tIcon,
-    };
-    this.setData({
+
+export default uniComponent({
+  name,
+  controlledProps: [
+    {
+      key: 'visible',
+      event: 'close',
+    },
+  ],
+  externalClasses: [`${prefix}-class`],
+  mixins: [useCustomNavbar],
+  components: {
+    tImage,
+    tIcon,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       currentSwiperIndex: 0,
@@ -140,174 +149,161 @@ let ImageViewer = class extends SuperComponent {
       swiperStyle: {},
       imagesStyle: {},
       maskTop: 0,
-    });
-    this.options = {
-      multipleSlots: true,
+      _,
+
+      _deleteBtn: null,
+      _closeBtn: null,
+      dataVisible: this.visible,
     };
-    this.controlledProps = [{
-      key: 'visible',
-      event: 'close',
-    }];
-    this.observers = {
-      'visible,initialIndex,images'(e, t, s) {
-        if (e && (null == s ? void 0 : s.length)) {
-          this.setData({
-            loadedImageIndexes: [],
-            currentSwiperIndex: t >= s.length ? s.length - 1 : t,
-          });
+  },
+  watch: {
+    visible: {
+      handler(v) {
+        this.dataVisible = v;
+        this.init();
+      },
+    },
+    initialIndex: 'init',
+    images: 'init',
+
+    closeBtn: {
+      handler(v) {
+        this._closeBtn = calcIcon(v, 'close');
+      },
+      immediate: true,
+    },
+
+    deleteBtn: {
+      handler(v) {
+        this._deleteBtn =  calcIcon(v, 'delete');
+      },
+      immediate: true,
+    },
+  },
+  created() {
+    this.saveScreenSize();
+    // this.calcMaskTop();
+  },
+  mounted() {
+    this.init();
+  },
+  methods: {
+    shouldLoadImage,
+    init() {
+      const { visible: dataVisible, images, initialIndex } = this;
+      if (dataVisible && images?.length) {
+        this.loadedImageIndexes = [];
+        this.currentSwiperIndex =  initialIndex >= images.length ? images.length - 1 : initialIndex;
+      }
+    },
+    calcMaskTop() {
+      if (this.usingCustomNavbar) {
+        const rect = wx?.getMenuButtonBoundingClientRect() || null;
+        const { statusBarHeight } = systemInfo;
+
+        if (rect && statusBarHeight) {
+          this.maskTop =  rect.top - statusBarHeight + rect.bottom;
         }
-      },
-      closeBtn(e) {
-        this.setData({
-          _closeBtn: calcIcon(e, 'close'),
-        });
-      },
-      deleteBtn(e) {
-        this.setData({
-          _deleteBtn: calcIcon(e, 'delete'),
-        });
-      },
-    };
-    this.methods = {
-      shouldLoadImage,
-      calcMaskTop() {
-        if (this.usingCustomNavbar) {
-          const e = (null === wx || void 0 === wx ? void 0 : uni.getMenuButtonBoundingClientRect()) || null;
-          const {
-            statusBarHeight: t,
-          } = systemInfo;
-          if (e && t) {
-            this.setData({
-              maskTop: e.top - t + e.bottom,
-            });
-          }
-        }
-      },
-      saveScreenSize() {
-        const {
-          windowHeight: e,
-          windowWidth: t,
-        } = systemInfo;
-        this.setData({
-          windowHeight: e,
-          windowWidth: t,
-        });
-      },
-      calcImageDisplayStyle(e, t) {
-        console.log('calcImageDisplayStyle', { e, t });
-        const {
-          windowWidth: s,
-          windowHeight: i,
-        } = uni.getWindowInfo();
-        console.log('window', { s, i });
-        const a = e / t;
-        if (e < s && t < i) {
-          return {
-            styleObj: {
-              width: `${e}px`,
-              height: `${t}px`,
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-            },
-          };
-        }
-        if (a >= 1) {
-          return {
-            styleObj: {
-              width: '100vw',
-              height: `${s / a}px`,
-            },
-          };
-        }
-        const n = a * i ;
-        return n < s ? {
+      }
+    },
+    saveScreenSize() {
+      const { windowHeight, windowWidth } = systemInfo;
+      this.windowHeight = windowHeight;
+      this.windowWidth = windowWidth;
+    },
+
+    calcImageDisplayStyle(imageWidth, imageHeight) {
+      const { windowWidth, windowHeight } = this;
+      const ratio = imageWidth / imageHeight;
+      // 图片宽高都小于屏幕宽高
+      if (imageWidth < windowWidth && imageHeight < windowHeight) {
+        return {
           styleObj: {
-            width: `${n}px`,
+            width: `${imageWidth}px`,
+            height: `${imageHeight}px`,
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+          },
+        };
+      }
+      // 图片宽高至少存在一个大于屏幕宽高，此时判断图片宽高比，按长边显示
+      if (ratio >= 1) {
+        return {
+          styleObj: {
+            width: '100vw',
+            height: `${(windowWidth / ratio)}px`,
+          },
+        };
+      }
+
+      // 图片的高大于宽（纵向图），设定高度为100vh，宽度自适应，且确保宽度不超过屏幕宽度
+      const scaledHeight = ratio * windowHeight * 2;
+      if (scaledHeight < windowWidth) {
+        return {
+          styleObj: {
+            width: `${scaledHeight}rpx`,
             height: '100vh',
             left: '50%',
             transform: 'translate(-50%, -50%)',
           },
-        } : {
-          styleObj: {
-            width: '100vw',
-            height: `${s / e * t}px`,
-          },
         };
-      },
-      onImageLoadSuccess(e, { index: i }) {
-        console.log('onImageLoadSuccess', { e, i });
-        const {
-          detail: {
-            width: t,
-            height: s,
-          },
-          // currentTarget: {
-          // dataset: {
-          // index: i
-          // }
-          // }
-        } = e;
-        const {
-          mode: a,
-          styleObj: n,
-        } = this.calcImageDisplayStyle(t, s);
-        const o = this.imagesStyle;
-        const r = this.swiperStyle;
-        this.loadedImageIndexes.includes(i) || this.setData({
-          loadedImageIndexes: [...this.loadedImageIndexes, i],
-        });
-        console.log('imagesStyle', { n });
-        this.setData({
-          swiperStyle: Object.assign(Object.assign({}, r), {
-            [i]: {
-              style: `height: ${n.height}`,
-            },
-          }),
-          imagesStyle: Object.assign(Object.assign({}, o), {
-            [i]: {
-              mode: a,
-              style: styles(Object.assign({}, n)),
-            },
-          }),
-        });
-      },
-      onSwiperChange(e) {
-        const {
-          detail: {
-            current: t,
-          },
-        } = e;
-        this.setData({
-          currentSwiperIndex: t,
-        });
-        this._trigger('change', {
-          index: t,
-        });
-      },
-      onClose(e) {
-        const {
-          source: t,
-        } = e.currentTarget.dataset;
-        this._trigger('close', {
-          visible: false,
-          trigger: t || 'button',
-          index: this.currentSwiperIndex,
-        });
-      },
-      onDelete() {
-        this._trigger('delete', {
-          index: this.currentSwiperIndex,
-        });
-      },
-    };
-  }
-  ready() {
-    this.saveScreenSize();
-    this.calcMaskTop();
-  }
-};
-ImageViewer = initTDesign(__decorate([wxComponent()], ImageViewer));
-export default ImageViewer;
+      }
+      // 当通过高度计算的图片宽度超过屏幕宽度时, 以屏幕宽度为基准, 重新计算高度
+      return {
+        styleObj: {
+          width: '100vw',
+          height: `${(windowWidth / imageWidth) * imageHeight}px`,
+        },
+      };
+    },
+
+    onImageLoadSuccess(e, { index }) {
+      const {
+        detail: { width, height },
+      } = e;
+
+      const { mode, styleObj } = this.calcImageDisplayStyle(width, height);
+      const originImagesStyle = this.imagesStyle;
+      const originSwiperStyle = this.swiperStyle;
+
+      if (!this.loadedImageIndexes.includes(index)) {
+        this.loadedImageIndexes = [...this.loadedImageIndexes, index];
+      }
+
+
+      this.swiperStyle = {
+        ...originSwiperStyle,
+        [index]: {
+          style: `height: ${styleObj.height}`,
+        },
+      };
+      this.imagesStyle = {
+        ...originImagesStyle,
+        [index]: {
+          mode,
+          style: styles({ ...styleObj }),
+        },
+      };
+    },
+
+    onSwiperChange(e) {
+      const {
+        detail: { current },
+      } = e;
+      this.currentSwiperIndex = current;
+
+      this._trigger('change', { index: current });
+    },
+
+    onClose(e, source) {
+      this._trigger('close', { visible: false, trigger: source || 'button', index: this.currentSwiperIndex });
+    },
+
+    onDelete() {
+      this._trigger('delete', { index: this.currentSwiperIndex });
+    },
+  },
+});
 </script>
 <style scoped>
 @import './image-viewer.css';

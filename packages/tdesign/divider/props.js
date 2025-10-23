@@ -15,14 +15,5 @@ const props = {
     type: String,
     default: 'horizontal',
   },
-
-  tClass: {
-    type: String,
-    default: '',
-  },
-  tClassContent: {
-    type: String,
-    default: '',
-  },
 };
 export default props;

@@ -22,7 +22,7 @@
           desc="基础弹出层"
           padding
         >
-          <base>
+          <baseDemo />
         </t-demo>
         <t-demo
           title="02 组件示例"
@@ -40,13 +40,13 @@
 <script lang="ts">
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import base from '../base';
-import withTitle from '../with-title';
-import customClose from '../custom-close';
+import baseDemo from '../base/index.vue';
+import withTitle from '../with-title/index.vue';
+import customClose from '../custom-close/index.vue';
 export default {
   components: {
     tNavbar,
-    base,
+    baseDemo,
     withTitle,
     customClose,
   },

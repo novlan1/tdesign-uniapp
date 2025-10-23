@@ -1,22 +1,30 @@
-export function isFunction(t) {
-    return 'function' == typeof t;
+export function isFunction(val) {
+  return typeof val === 'function';
 }
-export const isString = (t) => 'string' == typeof t;
-export const isNull = (t) => null === t;
-export const isUndefined = (t) => void 0 === t;
-export function isDef(t) {
-    return !isUndefined(t) && !isNull(t);
+
+export const isString = val => typeof val === 'string';
+
+export const isNull = value => value === null;
+
+export const isUndefined = value => value === undefined;
+
+export function isDef(value) {
+  return !isUndefined(value) && !isNull(value);
 }
-export function isNumber(t) {
-    return /^\d+(\.\d+)?$/.test(t);
+
+export function isNumber(value) {
+  return /^\d+(\.\d+)?$/.test(value);
 }
-export function isBoolean(t) {
-    return 'boolean' == typeof t;
+
+export function isBoolean(value) {
+  return typeof value === 'boolean';
 }
-export function isObject(t) {
-    const n = typeof t;
-    return null !== t && ('object' === n || 'function' === n);
+
+export function isObject(x) {
+  const type = typeof x;
+  return x !== null && (type === 'object' || type === 'function');
 }
-export function isPlainObject(t) {
-    return null !== t && 'object' == typeof t && '[object Object]' === Object.prototype.toString.call(t);
+
+export function isPlainObject(val) {
+  return val !== null && typeof val === 'object' && Object.prototype.toString.call(val) === '[object Object]';
 }

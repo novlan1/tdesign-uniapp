@@ -66,7 +66,7 @@ enter | `(value: InputValue)` | \-
 focus | `(value: InputValue)` | \-
 keyboardheightchange | `(height: number, duration: number)` | \-
 nicknamereview | `(pass: boolean, timeout: boolean)` | \-
-validate | `(detail: { error?: 'exceed-maximum' \| 'below-minimum' })` | trigger on text length being over max length or max character
+validate | `({ error?: 'exceed-maximum' \| 'below-minimum' })` | trigger on text length being over max length or max character
 
 ### Input External Classes
 

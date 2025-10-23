@@ -11,7 +11,7 @@
       >
         <view
           class="btn favor-btn"
-          @tap="onChoice"
+          @click="onChoice"
         >
           选择
         </view>

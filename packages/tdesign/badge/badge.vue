@@ -111,6 +111,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './badge.css';
 </style>

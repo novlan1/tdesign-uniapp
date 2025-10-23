@@ -6,7 +6,7 @@
           加载默认提示
         </view>
         <t-image
-          id="loading-img"
+          ref="loading-img"
           shape="round"
           width="72"
           height="72"
@@ -17,7 +17,7 @@
           加载自定义提示
         </view>
         <t-image
-          id="loading-img-custom"
+          ref="loading-img-custom"
           shape="round"
           loading="slot"
           width="72"
@@ -85,11 +85,16 @@ export default {
       isFailed: false,
     };
   },
+  pageLifetimes: {
+    show() {
+      this.handlePageShow();
+    },
+  },
   created() {},
   methods: {
     handlePageShow() {
-      const $ele1 = this.zpSelectComponent('#loading-img');
-      const $ele2 = this.zpSelectComponent('#loading-img-custom');
+      const $ele1 = this.$refs['#loading-img'];
+      const $ele2 = this.$refs['#loading-img-custom'];
       this.setLoadingStatus($ele1);
       this.setLoadingStatus($ele2);
     },
@@ -97,10 +102,9 @@ export default {
     setLoadingStatus(ele) {
       ele.onLoadError = null;
       ele.onLoaded = null;
-      ele.setData({
-        isLoading: true,
-        isFailed: false,
-      });
+
+      ele.isLoading = true;
+      ele.isFailed = false;
     },
   },
 };

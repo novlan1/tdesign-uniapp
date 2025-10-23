@@ -48,14 +48,10 @@
 
 <script lang="ts">
 
-import tDropdownMenu from 'tdesign-uniapp/dropdown-menu/dropdown-menu.vue';
-import tDropdownItem from 'tdesign-uniapp/dropdown-item/dropdown-item.vue';
 import single from './single/index.vue';
 import multi from './multi/index.vue';
 export default {
   components: {
-    tDropdownMenu,
-    tDropdownItem,
     single,
     multi,
   },

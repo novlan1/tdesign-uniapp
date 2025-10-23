@@ -21,7 +21,7 @@
         :custom-style="buttonData.style || ''"
         :block="buttonData.block"
         :class="getActionClass(classPrefix, buttonData.buttonLayout) || ''"
-        :t-class="prefix + '-class-action'"
+        :t-class="buttonData.tClass"
         :disabled="buttonData.disabled"
         :data-type="'action'"
         :data-extra="buttonData.index"
@@ -48,7 +48,7 @@
         :app-parameter="buttonData.appParameter"
         :show-message-card="buttonData.showMessageCard"
         :aria-label="buttonData.ariaLabel"
-        @tap="onTplButtonTap"
+        @click="onTplButtonTap"
         @getuserinfo="onTplButtonTap"
         @contact="onTplButtonTap"
         @getphonenumber="onTplButtonTap"
@@ -75,7 +75,7 @@
       :custom-style="buttonData.style || ''"
       :block="buttonData.block"
       :class="getActionClass(classPrefix, buttonData.buttonLayout) || ''"
-      :t-class="prefix + '-class-action'"
+      :t-class="buttonData.tClass"
       :disabled="buttonData.disabled"
       :data-type="'action'"
       :data-extra="buttonData.index"
@@ -102,7 +102,7 @@
       :app-parameter="buttonData.appParameter"
       :show-message-card="buttonData.showMessageCard"
       :aria-label="buttonData.ariaLabel"
-      @tap="onTplButtonTap"
+      @click="onTplButtonTap"
       @getuserinfo="onTplButtonTap"
       @contact="onTplButtonTap"
       @getphonenumber="onTplButtonTap"
@@ -118,7 +118,7 @@
 
 <script>
 import tButton from '../button/button';
-import tDraggable from './draggable/draggable';
+import TDraggable from '../draggable/draggable.vue';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
@@ -137,10 +137,11 @@ const baseButtonProps = {
 
 export default uniComponent({
   name,
+  externalClasses: [`${prefix}-class`, `${prefix}-class-button`],
   mixins: [useCustomNavbar],
   components: {
     tButton,
-    tDraggable,
+    TDraggable,
   },
   props: {
     ...props,
@@ -181,14 +182,10 @@ export default uniComponent({
   },
   methods: {
     onTplButtonTap(t) {
-      this.$emit('click', {
-        detail: t,
-      });
+      this.$emit('click', t);
     },
     onStart(t) {
-      this.$emit('dragstart', {
-        detail: t,
-      });
+      this.$emit('dragstart', t);
     },
     onMove(e) {
       const {
@@ -207,9 +204,7 @@ export default uniComponent({
       this.moveStyle = `right: ${right}px; bottom: ${bottom}px;`;
     },
     onEnd(t) {
-      this.$emit('dragend', {
-        detail: t,
-      });
+      this.$emit('dragend', t);
     },
     computedSize() {
       if (!this.draggable) return;
@@ -233,6 +228,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './fab.css';
 </style>

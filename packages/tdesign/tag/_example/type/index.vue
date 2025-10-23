@@ -89,7 +89,7 @@
 
 <script>
 import tTag from 'tdesign-uniapp/tag/tag.vue';
-import SkylineBehavior from 'packages/demo/src/mixins/skyline.js';
+import SkylineBehavior from 'tdesign-uniapp/mixins/skyline.js';
 
 export default {
   components: {

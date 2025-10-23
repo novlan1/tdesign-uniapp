@@ -6,11 +6,9 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
-import radioDemo from '../radio';
+import radioDemo from '../radio.vue';
 export default {
   components: {
-    tNavbar,
     radioDemo,
   },
   data() {

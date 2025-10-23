@@ -1,42 +1,56 @@
 import { getAppBaseInfo } from './wechat';
+
 let systemInfo;
+
+// 获取系统信息
 function getSystemInfo() {
-    if (null == systemInfo) {
-        systemInfo = getAppBaseInfo();
-    }
-    return systemInfo;
+  if (systemInfo == null) {
+    systemInfo = getAppBaseInfo();
+  }
+  return systemInfo;
 }
-export function compareVersion(e, n) {
-    e = e.split('.');
-    n = n.split('.');
-    const t = Math.max(e.length, n.length);
-    for (; e.length < t; ) {
-        e.push('0');
+
+// 版本号比较, 参考：https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html
+export function compareVersion(v1, v2) {
+  v1 = v1.split('.');
+  v2 = v2.split('.');
+  const len = Math.max(v1.length, v2.length);
+
+  while (v1.length < len) {
+    v1.push('0');
+  }
+  while (v2.length < len) {
+    v2.push('0');
+  }
+
+  for (let i = 0; i < len; i += 1) {
+    const num1 = parseInt(v1[i], 10);
+    const num2 = parseInt(v2[i], 10);
+
+    if (num1 > num2) {
+      return 1;
     }
-    for (; n.length < t; ) {
-        n.push('0');
+    if (num1 < num2) {
+      return -1;
     }
-    for (let r = 0; r < t; r += 1) {
-        const t = parseInt(e[r], 10);
-        const o = parseInt(n[r], 10);
-        if (t > o) {
-            return 1;
-        }
-        if (t < o) {
-            return -1;
-        }
-    }
-    return 0;
+  }
+
+  return 0;
 }
-function judgeByVersion(e) {
-    return compareVersion(getSystemInfo().SDKVersion, e) >= 0;
+
+function judgeByVersion(version) {
+  const currentSDKVersion = getSystemInfo().SDKVersion;
+  return compareVersion(currentSDKVersion, version) >= 0;
 }
+
 export function canIUseFormFieldButton() {
-    return judgeByVersion('2.10.3');
+  return judgeByVersion('2.10.3');
 }
+
 export function canUseVirtualHost() {
-    return judgeByVersion('2.19.2');
+  return judgeByVersion('2.19.2');
 }
+
 export function canUseProxyScrollView() {
-    return judgeByVersion('2.19.2');
+  return judgeByVersion('2.19.2');
 }

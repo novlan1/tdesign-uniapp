@@ -6,11 +6,9 @@
 
 <script lang="ts">
 
-import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import demoAvatar from '../avatar.vue';
 export default {
   components: {
-    tNavbar,
     demoAvatar,
   },
   data() {

@@ -41,7 +41,7 @@
               tClassMiddleItem +
               ' scroll-into-view'
           "
-          @tap="handleTreeClick"
+          @click="handleTreeClick"
         >
           <view :id="'scroll-to-' + treeItem.value">
             {{ treeItem.label }}
@@ -306,6 +306,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './tree-select.css';
 </style>

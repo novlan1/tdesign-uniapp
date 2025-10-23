@@ -38,7 +38,7 @@
             :data-index="index"
             :aria-role="ariaRole || 'button'"
             :aria-label="item.title"
-            @tap="itemClick"
+            @click="itemClick"
           >
             <view
               v-if="item.icon"
@@ -130,6 +130,6 @@ export default uniComponent({
   },
 });
 </script>
-<style scoped >
+<style scoped>
 @import './drawer.css';
 </style>

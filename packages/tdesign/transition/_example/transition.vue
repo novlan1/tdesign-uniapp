@@ -60,9 +60,7 @@ export default {
   },
   methods: {
     onTriggerClick() {
-      this.setData({
-        visible: !this.visible,
-      });
+      this.visible = !this.visible;
     },
   },
 };

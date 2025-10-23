@@ -1,8 +1,0 @@
-.loading-container-flex {
-    display: flex;
-    align-items: center;
-}
-
-:deep(.wrapper) {
-    margin-right: 40px;
-}

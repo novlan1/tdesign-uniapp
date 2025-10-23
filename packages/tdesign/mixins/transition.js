@@ -15,7 +15,6 @@ export default function transition() {
       visible: {
         type: Boolean,
         default: null,
-        observer: 'watchVisible',
       },
       appear: Boolean,
       name: {
@@ -49,32 +48,36 @@ export default function transition() {
       clearTimeout(this.transitionT);
     },
     methods: {
-      watchVisible(t, i) {
-        if (this.inited && t !== i) {
-          if (t) {
-            this.enter();
-          } else {
-            this.leave();
-          }
+      watchVisible(curr, prev) {
+        if (this.inited && curr !== prev) {
+          curr ? this.enter() : this.leave();
         }
       },
       getDurations() {
-        const { durations: t } = this;
-        return Array.isArray(t) ? t.map(t => Number(t)) : [Number(t), Number(t)];
+        const { durations } = this;
+        if (Array.isArray(durations)) {
+          return durations.map(item => Number(item));
+        }
+        return [Number(durations), Number(durations)];
       },
       enter() {
-        const { name: t } = this;
-        const [i] = this.dataDurations;
+        const { name, transitionDurations } = this;
+        const [duration] = this.dataDurations;
         this.status = 'entering';
         this.realVisible = true;
-        this.transitionClass = `${prefix}-${t}-enter ${prefix}-${t}-enter-active`;
+        this.transitionClass = `${prefix}-${name}-enter ${prefix}-${name}-enter-active`;
 
 
         setTimeout(() => {
-          this.transitionClass = `${prefix}-${t}-enter-active ${prefix}-${t}-enter-to`;
+          this.transitionClass = `${prefix}-${name}-enter-active ${prefix}-${name}-enter-to`;
         }, 30);
-        if ('number' === typeof i && i > 0) {
-          this.transitionT = setTimeout(this.entered.bind(this), i + 30);
+        if (typeof duration === 'number' && duration > 0) {
+          this.transitionT = setTimeout(this.entered.bind(this), duration + 30);
+        } else {
+          this.transitionT = setTimeout(
+            this.status === 'leaving' ? this.leaved.bind(this) : (() => {}),
+            transitionDurations + 30,
+          );
         }
       },
       entered() {
@@ -84,19 +87,24 @@ export default function transition() {
         this.transitionClass = '';
       },
       leave() {
-        const { name: t } = this;
-        const [, i] = this.dataDurations;
+        const { name, transitionDurations } = this;
+        const [, duration] = this.dataDurations;
         this.status = 'leaving';
-        this.transitionClass = `${prefix}-${t}-leave  ${prefix}-${t}-leave-active`;
+        this.transitionClass = `${prefix}-${name}-leave  ${prefix}-${name}-leave-active`;
 
         clearTimeout(this.transitionT);
         setTimeout(() => {
-          this.transitionClass = `${prefix}-${t}-leave-active ${prefix}-${t}-leave-to`;
+          this.transitionClass = `${prefix}-${name}-leave-active ${prefix}-${name}-leave-to`;
         }, 30);
 
-        if ('number' === typeof i && i > 0) {
+        if (typeof duration === 'number' && duration > 0) {
           this.customDuration = true;
-          this.transitionT = setTimeout(this.leaved.bind(this), i + 30);
+          this.transitionT = setTimeout(this.leaved.bind(this), duration + 30);
+        } else {
+          this.transitionT = setTimeout(
+            this.status === 'leaving' ? this.leaved.bind(this) : (() => {}),
+            transitionDurations + 30,
+          );
         }
       },
       leaved() {
@@ -104,18 +112,20 @@ export default function transition() {
         this.$emit('leaved');
         clearTimeout(this.transitionT);
         this.status = 'leaved';
+
         this.transitionClass = '';
+        this.realVisible = false;
       },
       onTransitionEnd() {
-        this.customDuration
-                    || (clearTimeout(this.transitionT),
-                    'entering' === this.status && this.visible
-                      ? this.entered()
-                      : 'leaving' !== this.status
-                          || this.visible
-                          || (this.leaved(),
-                          this.realVisible = false
-                          ));
+        if (this.customDuration) {
+          return;
+        }
+        clearTimeout(this.transitionT);
+        if (this.status === 'entering' && this.visible) {
+          this.entered();
+        } else if (this.status === 'leaving' && !this.visible) {
+          this.leaved();
+        }
       },
     },
   };
