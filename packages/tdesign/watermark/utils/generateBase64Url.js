@@ -120,15 +120,12 @@ export default async function generateBase64Url(
     : [{ ...watermarkContent }];
 
   let top = 0;
-  let imageLoadCount = 0;
-  let totalImages = 0;
 
   // 预处理
   contents.forEach((item) => {
     item.top = top;
     if (item.url) {
       top += height;
-      totalImages += isHexagonal ? 2 : 1; // hexagonal布局需要绘制两次
     } else if (item.text) {
       top += lineSpace;
     }
@@ -145,7 +142,6 @@ export default async function generateBase64Url(
   ) => {
     if (item.url) {
       const { url, isGrayscale = false } = item;
-      // const img = createImage();
       const img = await loadImage({
         canvas,
         src: url,
@@ -156,6 +152,17 @@ export default async function generateBase64Url(
 
       // TODO：其他技术栈修复了「灰度效果只影响图片，不影响文字」的bug，因为小程序不能创建临时canvas，暂时没有想到比较优雅的解决方案
       if (isGrayscale) {
+        // #ifdef APP-PLUS
+        ctx.drawImage(
+          img,
+          offsetX,
+          offsetY + item.top * ratio,
+          width * ratio / 2,
+          height * ratio / 2,
+        );
+        // #endif
+
+        // #ifndef APP-PLUS
         ctx.drawImage(
           img,
           offsetX,
@@ -163,12 +170,13 @@ export default async function generateBase64Url(
           width * ratio,
           height * ratio,
         );
-        const imgData = ctx.getImageData(
-          0,
-          0,
+        // #endif
+        const imgData = await getImageData(ctx, {
+          x: 0,
+          y: 0,
           width,
           height,
-        );
+        });
         const pixels = imgData.data;
         for (let i = 0; i < pixels.length; i += 4) {
           const lightness = (pixels[i] + pixels[i + 1] + pixels[i + 2]) / 3;
@@ -176,8 +184,22 @@ export default async function generateBase64Url(
           pixels[i + 1] = lightness;
           pixels[i + 2] = lightness;
         }
-        ctx.putImageData(imgData, 0, 0);
+        await putImageData(ctx, imgData, {
+          x: 0,
+          y: 0,
+        });
       } else {
+        // #ifdef APP-PLUS
+        ctx.drawImage(
+          img,
+          offsetX,
+          (offsetY + item.top * ratio),
+          width * ratio / 2,
+          height * ratio / 2,
+        );
+        // #endif
+
+        // #ifndef APP-PLUS
         ctx.drawImage(
           img,
           offsetX,
@@ -185,17 +207,14 @@ export default async function generateBase64Url(
           width * ratio,
           height * ratio,
         );
+        // #endif
       }
 
       ctx.restore?.();
+      return;
+    }
 
-      // 图片加载完成再返回
-      imageLoadCount += 1;
-      if (imageLoadCount === totalImages) {
-        const canvasUrl = await exportCanvasImage.call(this, canvas, canvasId);
-        onFinish(canvasUrl, actualBackgroundSize);
-      }
-    } else if (item.text) {
+    if (item.text) {
       const {
         text,
         fontSize = 16,
@@ -243,11 +262,10 @@ export default async function generateBase64Url(
   // #endif
 
 
-  const canvasUrl = await exportCanvasImage.call(this, canvas, canvasId);
   // 没有图片
-  if (totalImages === 0) {
-    onFinish(canvasUrl, actualBackgroundSize);
-  }
+  const canvasUrl = await exportCanvasImage.call(this, canvas, canvasId);
+  onFinish(canvasUrl, actualBackgroundSize, ratio);
+
   onFinally?.();
 }
 // 跨平台 Canvas 导出方法
@@ -286,3 +304,57 @@ export function exportCanvasImage(canvas, canvasId) {
 }
 
 
+async function getImageData(ctx, options) {
+  let result;
+  // #ifdef H5 || MP
+  result = ctx.getImageData(options.x, options.y, options.width, options.height);
+  // #endif
+
+  if (!result) {
+    result = new Promise((resolve) => {
+      uni.canvasGetImageData({
+        canvasId: options.canvasId,
+        x: options.x,
+        y: options.y,
+        width: options.width,
+        height: options.height,
+        success: (res) => {
+        // 小程序/App 返回的数据结构需要转换
+          resolve({
+            data: new Uint8ClampedArray(res.data),
+            width: res.width,
+            height: res.height,
+          });
+        },
+      }, this);
+    });
+  }
+
+  return result;
+}
+
+
+async function putImageData(ctx, imageData, options) {
+  let result;
+  // #ifdef H5 || MP
+  ctx.putImageData(imageData, options.x, options.y);
+  result = Promise.resolve();
+  // #endif
+
+  if (!result) {
+    result = new Promise((resolve, reject) => {
+      uni.canvasPutImageData({
+        canvasId: options.canvasId,
+        x: options.x,
+        y: options.y,
+        width: imageData.width,
+        height: imageData.height,
+        data: imageData.data,
+        success: resolve,
+        fail: reject,
+      }, this);
+    });
+  }
+
+  return result;
+}
