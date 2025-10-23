@@ -20,7 +20,7 @@ import useQRCode from '../../hooks/useQRCode';
 import { DEFAULT_MINVERSION, excavateModules, isSupportPath2d, generatePath } from '../../../common/shared/qrcode/utils';
 import { uniComponent } from '../../../common/src/index';
 import { prefix } from '../../../common/config';
-
+import { loadImage } from '../../../common/canvas/index';
 
 export default uniComponent({
   name: 'QrcodeCanvas',
@@ -352,54 +352,13 @@ export default uniComponent({
     // 参考 TSX (H5) 和 TS (小程序) 的实现
     async loadIconImage() {
       const canvas = this._canvas || this.canvas;
-      let result = Promise.reject(null);
       if (!this.icon || !canvas) {
         return null;
       }
-
-      // #ifdef MP
-      // 小程序环境：使用 canvas.createImage
-      if (canvas.createImage) {
-        result =  new Promise((resolve, reject) => {
-          const img = canvas.createImage();
-          // 必须先设置 onload 和 onerror，再设置 src
-          img.onload = () => resolve(img);
-          img.onerror = (err) => {
-            console.error('创建图片对象失败:', err);
-            reject(err);
-          };
-          img.src = this.icon;
-        });
-      }
-      // #endif
-
-      // #ifdef APP-PLUS
-      result = new Promise((resolve) => {
-        uni.getImageInfo({
-          src: this.icon,
-          success: (res) => {
-            const imgPath = res.path; // 本地临时路径
-            resolve(imgPath);
-          },
-        });
+      return loadImage({
+        canvas,
+        src: this.icon,
       });
-      // #endif
-
-      // #ifdef H5
-      // H5 环境：创建 Image 对象（参考 TSX 实现）
-      result = new Promise((resolve, reject) => {
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.onload = () => resolve(img);
-        img.onerror = (err) => {
-          console.error('图标加载失败:', err);
-          reject(err);
-        };
-        img.src = this.icon;
-      });
-      // #endif
-
-      return result;
     },
 
     getSizeProp(iconSize) {
