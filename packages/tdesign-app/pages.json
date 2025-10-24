@@ -184,6 +184,9 @@
 			"path": "pages-more/dropdown-menu/dropdown-menu"
 		},
 		{
+			"path": "pages-more/guide/guide"
+		},
+		{
 			"path": "pages-more/loading/loading"
 		},
 		{
@@ -211,7 +214,6 @@
 	"globalStyle": {
 		"pageOrientation": "portrait",
 		"navigationBarTitleText": "TDesign UniApp",
-		"navigationBarTextStyle": "black",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
 		"navigationStyle": "custom"
@@ -426,6 +428,10 @@
 			{
 				"name": "dropdown-menu",
 				"pathName": "pages-more/dropdown-menu/dropdown-menu"
+			},
+			{
+				"name": "guide",
+				"pathName": "pages-more/guide/guide"
 			},
 			{
 				"name": "loading",
