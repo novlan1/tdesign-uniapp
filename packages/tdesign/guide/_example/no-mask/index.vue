@@ -69,7 +69,9 @@ export default {
   },
   mounted() {
     // 处理小程序 attached 生命周期
-    this.attached();
+    setTimeout(() => {
+      this.attached();
+    }, 33);
   },
   created() {},
   methods: {
