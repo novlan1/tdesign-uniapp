@@ -209,6 +209,7 @@
 import tGuide from 'tdesign-uniapp/guide/guide.vue';
 import tInput from 'tdesign-uniapp/input/input.vue';
 import tButton from 'tdesign-uniapp/button/button.vue';
+import { getRect } from 'tdesign-uniapp/common/utils';
 
 
 export default {
@@ -236,34 +237,17 @@ export default {
 
       this.steps = [
         {
-          element: () => new Promise(resolve => uni
-            .createSelectorQuery()
-            .in(this)
-            .select('.main-title')
-            .boundingClientRect(rect => resolve(rect))
-            .exec()),
+          element: () => getRect(this, '.main-title', false, true),
 
           placement: 'center',
         },
         {
-          element: () => new Promise(resolve => uni
-            .createSelectorQuery()
-            .in(this)
-            .select('.label-field')
-            .boundingClientRect(rect => resolve(rect))
-            .exec()),
-
+          element: () => getRect(this, '.label-field', false, true),
           placement: 'bottom',
           highlightPadding: 0,
         },
         {
-          element: () => new Promise(resolve => uni
-            .createSelectorQuery()
-            .in(this)
-            .select('.action')
-            .boundingClientRect(rect => resolve(rect))
-            .exec()),
-
+          element: () => getRect(this, '.action', false, true),
           placement: 'bottom-right',
         },
       ];

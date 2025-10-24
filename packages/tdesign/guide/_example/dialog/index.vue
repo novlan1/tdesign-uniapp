@@ -129,36 +129,15 @@ export default {
 
       this.steps = [
         {
-          element: () => new Promise(resolve => uni
-            .createSelectorQuery()
-            .in(this)
-            .select('.main-title')
-            .boundingClientRect(rect => resolve(rect))
-            .exec()),
-
           title: '用户引导标题',
           placement: 'center',
         },
         {
-          element: () => new Promise(resolve => uni
-            .createSelectorQuery()
-            .in(this)
-            .select('.label-field')
-            .boundingClientRect(rect => resolve(rect))
-            .exec()),
-
           title: '用户引导标题',
           placement: 'bottom',
           highlightPadding: 0,
         },
         {
-          element: () => new Promise(resolve => uni
-            .createSelectorQuery()
-            .in(this)
-            .select('.action')
-            .boundingClientRect(rect => resolve(rect))
-            .exec()),
-
           title: '用户引导标题',
           placement: 'bottom-right',
         },

@@ -71,6 +71,8 @@ import tGuide from 'tdesign-uniapp/guide/guide.vue';
 import tInput from 'tdesign-uniapp/input/input.vue';
 import tButton from 'tdesign-uniapp/button/button.vue';
 import tImage from 'tdesign-uniapp/image/image.vue';
+import { getRect } from 'tdesign-uniapp/common/utils';
+
 export default {
   components: {
     tGuide,
@@ -97,36 +99,21 @@ export default {
 
       this.steps = [
         {
-          element: () => new Promise(resolve => uni
-            .createSelectorQuery()
-            .in(this)
-            .select('.main-title')
-            .boundingClientRect(rect => resolve(rect))
-            .exec()),
+          element: () => getRect(this, '.main-title', false, true),
 
           title: '用户引导标题',
           body: '用户引导的说明文案',
           placement: 'center',
         },
         {
-          element: () => new Promise(resolve => uni
-            .createSelectorQuery()
-            .in(this)
-            .select('.label-field')
-            .boundingClientRect(rect => resolve(rect))
-            .exec()),
+          element: () => getRect(this, '.label-field', false, true),
 
           title: '用户引导标题',
           placement: 'bottom',
           mode: 'dialog',
         },
         {
-          element: () => new Promise(resolve => uni
-            .createSelectorQuery()
-            .in(this)
-            .select('.action')
-            .boundingClientRect(rect => resolve(rect))
-            .exec()),
+          element: () => getRect(this, '.action', false, true),
 
           title: '用户引导标题',
           body: '用户引导的说明文案',
