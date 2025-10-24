@@ -17,8 +17,7 @@
       },
       {
         "name": "Guide",
-        "label": "引导",
-        "hide": true
+        "label": "引导"
       },
       {
         "name": "Loading",

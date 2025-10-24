@@ -80,7 +80,7 @@
           :show-overlay="false"
         >
           <view :style="'height: calc(100vh - ' + navbarHeight + 'px)'">
-            <dialog
+            <dialogDemo
               v-if="visibleDialog"
               @close="handleDialogClose"
             />
@@ -128,7 +128,7 @@
           :show-overlay="false"
         >
           <view :style="'height: calc(100vh - ' + navbarHeight + 'px)'">
-            <content
+            <contentDemo
               v-if="visibleContent"
               @close="handleContentClose"
             />
@@ -139,24 +139,25 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import tButton from 'tdesign-uniapp/button/button.vue';
 import tPopup from 'tdesign-uniapp/popup/popup.vue';
-import BaseDemo from './base';
-import noMask from './no-mask';
-import dialog from './dialog';
-import multiple from './multiple';
-import content from './content';
+import BaseDemo from './base/index.vue';
+import noMask from './no-mask/index.vue';
+import dialogDemo from './dialog/index.vue';
+import multiple from './multiple/index.vue';
+import contentDemo from './content/index.vue';
+
 export default {
   components: {
     tButton,
     tPopup,
     BaseDemo,
     noMask,
-    dialog,
+    dialogDemo,
     multiple,
-    content,
+    contentDemo,
   },
   data() {
     return {
@@ -173,125 +174,85 @@ export default {
       visibleContent: false,
     };
   },
-  onLoad() {
-    uni.createSelectorQuery()
-      .in(this)
-      .select('.custom-navbar')
-      .boundingClientRect((rect) => {
-        this.setData({
-          navbarHeight: rect.height,
-        });
-      })
-      .exec();
+  mounted() {
+    setTimeout(() => {
+      uni.createSelectorQuery()
+        .in(this)
+        .select('.custom-navbar')
+        .boundingClientRect((rect) => {
+          this.navbarHeight = rect.height;
+        })
+        .exec();
+    }, 33);
   },
   methods: {
     handleBaseClick() {
-      this.setData({
-        visibleBasePopup: true,
-      });
+      this.visibleBasePopup = true;
       setTimeout(() => {
-        this.setData({
-          visibleBase: true,
-        });
+        this.visibleBase = true;
       }, 300);
     },
 
     handleBaseClose() {
-      this.setData({
-        visibleBasePopup: false,
-      });
+      this.visibleBasePopup = false;
       setTimeout(() => {
-        this.setData({
-          visibleBase: false,
-        });
+        this.visibleBase = false;
       }, 300);
     },
 
     handleNoMaskClick() {
-      this.setData({
-        visibleNoMaskPopup: true,
-      });
+      this.visibleNoMaskPopup = true;
       setTimeout(() => {
-        this.setData({
-          visibleNoMask: true,
-        });
+        this.visibleNoMask = true;
       }, 300);
     },
 
     handleNoMaskClose() {
-      this.setData({
-        visibleNoMaskPopup: false,
-      });
+      this.visibleNoMaskPopup = false;
       setTimeout(() => {
-        this.setData({
-          visibleNoMask: false,
-        });
+        this.visibleNoMask = false;
       }, 300);
     },
 
     handleDialogClick() {
-      this.setData({
-        visibleDialogPopup: true,
-      });
+      this.visibleDialogPopup = true;
       setTimeout(() => {
-        this.setData({
-          visibleDialog: true,
-        });
+        this.visibleDialog = true;
       }, 300);
     },
 
     handleDialogClose() {
-      this.setData({
-        visibleDialogPopup: false,
-      });
+      this.visibleDialogPopup = false;
       setTimeout(() => {
-        this.setData({
-          visibleDialog: false,
-        });
+        this.visibleDialog = false;
       }, 300);
     },
 
     handleDialog1Click() {
-      this.setData({
-        visibleDialog1Popup: true,
-      });
+      this.visibleDialog1Popup = true;
       setTimeout(() => {
-        this.setData({
-          visibleDialog1: true,
-        });
+        this.visibleDialog1 = true;
       }, 300);
     },
 
     handleDialog1Close() {
-      this.setData({
-        visibleDialog1Popup: false,
-      });
+      this.visibleDialog1Popup = false;
       setTimeout(() => {
-        this.setData({
-          visibleDialog1: false,
-        });
+        this.visibleDialog1 = false;
       }, 300);
     },
 
     handleContentClick() {
-      this.setData({
-        visibleContentPopup: true,
-      });
+      this.visibleContentPopup = true;
       setTimeout(() => {
-        this.setData({
-          visibleContent: true,
-        });
+        this.visibleContent = true;
       }, 300);
     },
 
     handleContentClose() {
-      this.setData({
-        visibleContentPopup: false,
-      });
+      this.visibleContentPopup = false;
       setTimeout(() => {
-        this.setData({
-          visibleContent: false,
-        });
+        this.visibleContent = false;
       }, 300);
     },
   },

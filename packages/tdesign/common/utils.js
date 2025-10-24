@@ -291,7 +291,7 @@ export const isOverSize = (size, sizeLimit) => {
 export const rpx2px = rpx => Math.floor((systemInfo.windowWidth * rpx) / 750);
 
 export const nextTick = () => new Promise((resolve) => {
-  wx.nextTick(() => {
+  setTimeout(() => {
     resolve();
-  });
+  }, 33);
 });

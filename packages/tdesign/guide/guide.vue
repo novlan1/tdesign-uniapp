@@ -17,238 +17,88 @@
           :class="prefix + '-class-popover ' + classPrefix + '__container ' + (title || body ? classPrefix + '__container--' + modeType : '')"
           :style="popoverStyle"
         >
-          <!-- parse <template is="content" :data="prefix, classPrefix, title, body, steps, current, modeType, hideSkip, hideBack, ...buttonProps"/> -->
-          <block name="content">
-            <slot
-              v-if="!title && !body"
-              :name="'content-' + current"
-            />
-            <block v-else>
-              <view :class="prefix + '-class-tooltip'">
-                <view
-                  v-if="title"
-                  :class="prefix + '-class-title ' + classPrefix + '__title--' + modeType"
-                >
-                  {{ title }}
-                </view>
-                <slot
-                  v-else
-                  :name="'title-' + current"
-                />
-                <view
-                  v-if="body"
-                  :class="prefix + '-class-body ' + classPrefix + '__body--' + modeType"
-                >
-                  {{ body }}
-                </view>
-                <slot
-                  v-else
-                  :name="'body-' + current"
-                />
-              </view>
-              <view
-                v-if="current !== -1"
-                :class="prefix + '-class-footer ' + classPrefix + '__footer ' + classPrefix + '__footer--' + modeType"
-              >
-                <!-- parse <template is="button" v-if="current < steps.length - 1 && !hideSkip" :data="...skipButton"/> -->
-                <block
-                  v-if="current < steps.length - 1 && !hideSkip"
-                  name="button"
-                >
-                  <t-button
-                    :t-id="tId || ''"
-                    :style="style || ''"
-                    :block="true || false"
-                    :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-                    :t-class="prefix + '-class-action'"
-                    :disabled="disabled || false"
-                    :data-type="'action'"
-                    :data-extra="index"
-                    :custom-dataset="customDataset"
-                    :content="content || ''"
-                    :icon="icon || ''"
-                    :loading="loading || false"
-                    :loading-props="loadingProps || null"
-                    :theme="'primary' || 'default'"
-                    :ghost="ghost || false"
-                    :shape="shape || 'rectangle'"
-                    :size="size || 'medium'"
-                    :variant="variant || 'base'"
-                    :open-type="openType || ''"
-                    :hover-class="hoverClass || ''"
-                    :hover-stop-propagation="hoverStopPropagation || false"
-                    :hover-start-time="hoverStartTime || 20"
-                    :hover-stay-time="hoverStayTime || 70"
-                    :lang="lang || 'en'"
-                    :session-from="sessionFrom || ''"
-                    :send-message-title="sendMessageTitle || ''"
-                    :send-message-path="sendMessagePath || ''"
-                    :send-message-img="sendMessageImg || ''"
-                    :app-parameter="appParameter || ''"
-                    :show-message-card="showMessageCard || false"
-                    :aria-label="ariaLabel || ''"
-                    @click="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
-                  >
-                    <slot v-if="true || false" />
-                  </t-button>
-                </block>
-                <!-- parse <template is="button" v-else-if="current === steps.length - 1 && !hideBack" :data="...backButton"/> -->
-                <block
-                  v-else-if="current === steps.length - 1 && !hideBack"
-                  name="button"
-                >
-                  <t-button
-                    :t-id="tId || ''"
-                    :style="style || ''"
-                    :block="true || false"
-                    :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-                    :t-class="prefix + '-class-action'"
-                    :disabled="disabled || false"
-                    :data-type="'action'"
-                    :data-extra="index"
-                    :custom-dataset="customDataset"
-                    :content="content || ''"
-                    :icon="icon || ''"
-                    :loading="loading || false"
-                    :loading-props="loadingProps || null"
-                    :theme="'primary' || 'default'"
-                    :ghost="ghost || false"
-                    :shape="shape || 'rectangle'"
-                    :size="size || 'medium'"
-                    :variant="variant || 'base'"
-                    :open-type="openType || ''"
-                    :hover-class="hoverClass || ''"
-                    :hover-stop-propagation="hoverStopPropagation || false"
-                    :hover-start-time="hoverStartTime || 20"
-                    :hover-stay-time="hoverStayTime || 70"
-                    :lang="lang || 'en'"
-                    :session-from="sessionFrom || ''"
-                    :send-message-title="sendMessageTitle || ''"
-                    :send-message-path="sendMessagePath || ''"
-                    :send-message-img="sendMessageImg || ''"
-                    :app-parameter="appParameter || ''"
-                    :show-message-card="showMessageCard || false"
-                    :aria-label="ariaLabel || ''"
-                    @click="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
-                  >
-                    <slot v-if="true || false" />
-                  </t-button>
-                </block>
-                <!-- parse <template is="button" v-if="current < steps.length - 1" :data="...nextButton"/> -->
-                <block
-                  v-if="current < steps.length - 1"
-                  name="button"
-                >
-                  <t-button
-                    :t-id="tId || ''"
-                    :style="style || ''"
-                    :block="true || false"
-                    :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-                    :t-class="prefix + '-class-action'"
-                    :disabled="disabled || false"
-                    :data-type="'action'"
-                    :data-extra="index"
-                    :custom-dataset="customDataset"
-                    :content="content || ''"
-                    :icon="icon || ''"
-                    :loading="loading || false"
-                    :loading-props="loadingProps || null"
-                    :theme="'primary' || 'default'"
-                    :ghost="ghost || false"
-                    :shape="shape || 'rectangle'"
-                    :size="size || 'medium'"
-                    :variant="variant || 'base'"
-                    :open-type="openType || ''"
-                    :hover-class="hoverClass || ''"
-                    :hover-stop-propagation="hoverStopPropagation || false"
-                    :hover-start-time="hoverStartTime || 20"
-                    :hover-stay-time="hoverStayTime || 70"
-                    :lang="lang || 'en'"
-                    :session-from="sessionFrom || ''"
-                    :send-message-title="sendMessageTitle || ''"
-                    :send-message-path="sendMessagePath || ''"
-                    :send-message-img="sendMessageImg || ''"
-                    :app-parameter="appParameter || ''"
-                    :show-message-card="showMessageCard || false"
-                    :aria-label="ariaLabel || ''"
-                    @click="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
-                  >
-                    <slot v-if="true || false" />
-                  </t-button>
-                </block>
-                <!-- parse <template is="button" v-else :data="...finishButton"/> -->
-                <block
-                  v-else
-                  name="button"
-                >
-                  <t-button
-                    :t-id="tId || ''"
-                    :style="style || ''"
-                    :block="true || false"
-                    :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-                    :t-class="prefix + '-class-action'"
-                    :disabled="disabled || false"
-                    :data-type="'action'"
-                    :data-extra="index"
-                    :custom-dataset="customDataset"
-                    :content="content || ''"
-                    :icon="icon || ''"
-                    :loading="loading || false"
-                    :loading-props="loadingProps || null"
-                    :theme="'primary' || 'default'"
-                    :ghost="ghost || false"
-                    :shape="shape || 'rectangle'"
-                    :size="size || 'medium'"
-                    :variant="variant || 'base'"
-                    :open-type="openType || ''"
-                    :hover-class="hoverClass || ''"
-                    :hover-stop-propagation="hoverStopPropagation || false"
-                    :hover-start-time="hoverStartTime || 20"
-                    :hover-stay-time="hoverStayTime || 70"
-                    :lang="lang || 'en'"
-                    :session-from="sessionFrom || ''"
-                    :send-message-title="sendMessageTitle || ''"
-                    :send-message-path="sendMessagePath || ''"
-                    :send-message-img="sendMessageImg || ''"
-                    :app-parameter="appParameter || ''"
-                    :show-message-card="showMessageCard || false"
-                    :aria-label="ariaLabel || ''"
-                    @click="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                    @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
-                  >
-                    <slot v-if="true || false" />
-                  </t-button>
-                </block>
-              </view>
-            </block>
-          </block>
+          <ContentComp
+            :title="title"
+            :body="body"
+            :current="_current"
+            :class-prefix="classPrefix"
+            :prefix="prefix"
+            :skip-button="skipButton"
+            :back-button="backButton"
+            :next-button="nextButton"
+            :finish-button="finishButton"
+            :mode-type="modeType"
+            :hide-skip="hideSkip"
+            :hide-back="hideBack"
+            :steps="steps"
+            @onTplButtonTap="onTplButtonTap"
+          >
+            <template #content-0>
+              <slot name="content-0" />
+            </template>
+            <template #content-1>
+              <slot name="content-1" />
+            </template>
+            <template #content-2>
+              <slot name="content-2" />
+            </template>
+            <template #content-3>
+              <slot name="content-3" />
+            </template>
+            <template #content-4>
+              <slot name="content-4" />
+            </template>
+            <template #content-5>
+              <slot name="content-5" />
+            </template>
+            <template #content-6>
+              <slot name="content-6" />
+            </template>
+
+            <template #title-0>
+              <slot name="title-0" />
+            </template>
+            <template #title-1>
+              <slot name="title-1" />
+            </template>
+            <template #title-2>
+              <slot name="title-2" />
+            </template>
+            <template #title-3>
+              <slot name="title-3" />
+            </template>
+            <template #title-4>
+              <slot name="title-4" />
+            </template>
+            <template #title-5>
+              <slot name="title-5" />
+            </template>
+            <template #title-6>
+              <slot name="title-6" />
+            </template>
+
+            <template #body-0>
+              <slot name="body-0" />
+            </template>
+            <template #body-1>
+              <slot name="body-1" />
+            </template>
+            <template #body-2>
+              <slot name="body-2" />
+            </template>
+            <template #body-3>
+              <slot name="body-3" />
+            </template>
+            <template #body-4>
+              <slot name="body-4" />
+            </template>
+            <template #body-5>
+              <slot name="body-5" />
+            </template>
+            <template #body-6>
+              <slot name="body-6" />
+            </template>
+          </ContentComp>
         </view>
       </view>
     </t-overlay>
@@ -263,236 +113,88 @@
     >
       <view :class="'class ' + prefix + '-class ' + classPrefix">
         <view :class="prefix + '-class-popover ' + classPrefix + '__container ' + (title || body ? classPrefix + '__container--' + modeType : '')">
-          <!-- parse <template is="content" :data="prefix, classPrefix, title, body, steps, current, modeType, hideSkip, ...buttonProps"/> -->
-          <slot
-            v-if="!title && !body"
-            :name="'content-' + current"
-          />
-          <block v-else>
-            <view :class="prefix + '-class-tooltip'">
-              <view
-                v-if="title"
-                :class="prefix + '-class-title ' + classPrefix + '__title--' + modeType"
-              >
-                {{ title }}
-              </view>
-              <slot
-                v-else
-                :name="'title-' + current"
-              />
-              <view
-                v-if="body"
-                :class="prefix + '-class-body ' + classPrefix + '__body--' + modeType"
-              >
-                {{ body }}
-              </view>
-              <slot
-                v-else
-                :name="'body-' + current"
-              />
-            </view>
-            <view
-              v-if="current !== -1"
-              :class="prefix + '-class-footer ' + classPrefix + '__footer ' + classPrefix + '__footer--' + modeType"
-            >
-              <!-- parse <template is="button" v-if="current < steps.length - 1 && !hideSkip" :data="...skipButton"/> -->
-              <block
-                v-if="current < steps.length - 1 && !hideSkip"
-                name="button"
-              >
-                <t-button
-                  :t-id="tId || ''"
-                  :style="style || ''"
-                  :block="true || false"
-                  :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-                  :t-class="prefix + '-class-action'"
-                  :disabled="disabled || false"
-                  :data-type="'action'"
-                  :data-extra="index"
-                  :custom-dataset="customDataset"
-                  :content="content || ''"
-                  :icon="icon || ''"
-                  :loading="loading || false"
-                  :loading-props="loadingProps || null"
-                  :theme="'primary' || 'default'"
-                  :ghost="ghost || false"
-                  :shape="shape || 'rectangle'"
-                  :size="size || 'medium'"
-                  :variant="variant || 'base'"
-                  :open-type="openType || ''"
-                  :hover-class="hoverClass || ''"
-                  :hover-stop-propagation="hoverStopPropagation || false"
-                  :hover-start-time="hoverStartTime || 20"
-                  :hover-stay-time="hoverStayTime || 70"
-                  :lang="lang || 'en'"
-                  :session-from="sessionFrom || ''"
-                  :send-message-title="sendMessageTitle || ''"
-                  :send-message-path="sendMessagePath || ''"
-                  :send-message-img="sendMessageImg || ''"
-                  :app-parameter="appParameter || ''"
-                  :show-message-card="showMessageCard || false"
-                  :aria-label="ariaLabel || ''"
-                  @click="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
-                >
-                  <slot v-if="true || false" />
-                </t-button>
-              </block>
-              <!-- parse <template is="button" v-else-if="current === steps.length - 1 && !hideBack" :data="...backButton"/> -->
-              <block
-                v-else-if="current === steps.length - 1 && !hideBack"
-                name="button"
-              >
-                <t-button
-                  :t-id="tId || ''"
-                  :style="style || ''"
-                  :block="true || false"
-                  :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-                  :t-class="prefix + '-class-action'"
-                  :disabled="disabled || false"
-                  :data-type="'action'"
-                  :data-extra="index"
-                  :custom-dataset="customDataset"
-                  :content="content || ''"
-                  :icon="icon || ''"
-                  :loading="loading || false"
-                  :loading-props="loadingProps || null"
-                  :theme="'primary' || 'default'"
-                  :ghost="ghost || false"
-                  :shape="shape || 'rectangle'"
-                  :size="size || 'medium'"
-                  :variant="variant || 'base'"
-                  :open-type="openType || ''"
-                  :hover-class="hoverClass || ''"
-                  :hover-stop-propagation="hoverStopPropagation || false"
-                  :hover-start-time="hoverStartTime || 20"
-                  :hover-stay-time="hoverStayTime || 70"
-                  :lang="lang || 'en'"
-                  :session-from="sessionFrom || ''"
-                  :send-message-title="sendMessageTitle || ''"
-                  :send-message-path="sendMessagePath || ''"
-                  :send-message-img="sendMessageImg || ''"
-                  :app-parameter="appParameter || ''"
-                  :show-message-card="showMessageCard || false"
-                  :aria-label="ariaLabel || ''"
-                  @click="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
-                >
-                  <slot v-if="true || false" />
-                </t-button>
-              </block>
-              <!-- parse <template is="button" v-if="current < steps.length - 1" :data="...nextButton"/> -->
-              <block
-                v-if="current < steps.length - 1"
-                name="button"
-              >
-                <t-button
-                  :t-id="tId || ''"
-                  :style="style || ''"
-                  :block="true || false"
-                  :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-                  :t-class="prefix + '-class-action'"
-                  :disabled="disabled || false"
-                  :data-type="'action'"
-                  :data-extra="index"
-                  :custom-dataset="customDataset"
-                  :content="content || ''"
-                  :icon="icon || ''"
-                  :loading="loading || false"
-                  :loading-props="loadingProps || null"
-                  :theme="'primary' || 'default'"
-                  :ghost="ghost || false"
-                  :shape="shape || 'rectangle'"
-                  :size="size || 'medium'"
-                  :variant="variant || 'base'"
-                  :open-type="openType || ''"
-                  :hover-class="hoverClass || ''"
-                  :hover-stop-propagation="hoverStopPropagation || false"
-                  :hover-start-time="hoverStartTime || 20"
-                  :hover-stay-time="hoverStayTime || 70"
-                  :lang="lang || 'en'"
-                  :session-from="sessionFrom || ''"
-                  :send-message-title="sendMessageTitle || ''"
-                  :send-message-path="sendMessagePath || ''"
-                  :send-message-img="sendMessageImg || ''"
-                  :app-parameter="appParameter || ''"
-                  :show-message-card="showMessageCard || false"
-                  :aria-label="ariaLabel || ''"
-                  @click="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
-                >
-                  <slot v-if="true || false" />
-                </t-button>
-              </block>
-              <!-- parse <template is="button" v-else :data="...finishButton"/> -->
-              <block
-                v-else
-                name="button"
-              >
-                <t-button
-                  :t-id="tId || ''"
-                  :style="style || ''"
-                  :block="true || false"
-                  :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-                  :t-class="prefix + '-class-action'"
-                  :disabled="disabled || false"
-                  :data-type="'action'"
-                  :data-extra="index"
-                  :custom-dataset="customDataset"
-                  :content="content || ''"
-                  :icon="icon || ''"
-                  :loading="loading || false"
-                  :loading-props="loadingProps || null"
-                  :theme="'primary' || 'default'"
-                  :ghost="ghost || false"
-                  :shape="shape || 'rectangle'"
-                  :size="size || 'medium'"
-                  :variant="variant || 'base'"
-                  :open-type="openType || ''"
-                  :hover-class="hoverClass || ''"
-                  :hover-stop-propagation="hoverStopPropagation || false"
-                  :hover-start-time="hoverStartTime || 20"
-                  :hover-stay-time="hoverStayTime || 70"
-                  :lang="lang || 'en'"
-                  :session-from="sessionFrom || ''"
-                  :send-message-title="sendMessageTitle || ''"
-                  :send-message-path="sendMessagePath || ''"
-                  :send-message-img="sendMessageImg || ''"
-                  :app-parameter="appParameter || ''"
-                  :show-message-card="showMessageCard || false"
-                  :aria-label="ariaLabel || ''"
-                  @click="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @getuserinfo="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @contact="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @getphonenumber="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @error="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @opensetting="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @launchapp="onTplButtonTap($event, { type: 'action', extra: index })"
-                  @agreeprivacyauthorization="onTplButtonTap($event, { type: 'action', extra: index })"
-                >
-                  <slot v-if="true || false" />
-                </t-button>
-              </block>
-            </view>
-          </block>
+          <ContentComp
+            :title="title"
+            :body="body"
+            :current="_current"
+            :class-prefix="classPrefix"
+            :prefix="prefix"
+            :skip-button="skipButton"
+            :back-button="backButton"
+            :next-button="nextButton"
+            :finish-button="finishButton"
+            :mode-type="modeType"
+            :hide-skip="hideSkip"
+            :hide-back="hideBack"
+            :steps="steps"
+            @onTplButtonTap="onTplButtonTap"
+          >
+            <template #content-0>
+              <slot name="content-0" />
+            </template>
+            <template #content-1>
+              <slot name="content-1" />
+            </template>
+            <template #content-2>
+              <slot name="content-2" />
+            </template>
+            <template #content-3>
+              <slot name="content-3" />
+            </template>
+            <template #content-4>
+              <slot name="content-4" />
+            </template>
+            <template #content-5>
+              <slot name="content-5" />
+            </template>
+            <template #content-6>
+              <slot name="content-6" />
+            </template>
+
+            <template #title-0>
+              <slot name="title-0" />
+            </template>
+            <template #title-1>
+              <slot name="title-1" />
+            </template>
+            <template #title-2>
+              <slot name="title-2" />
+            </template>
+            <template #title-3>
+              <slot name="title-3" />
+            </template>
+            <template #title-4>
+              <slot name="title-4" />
+            </template>
+            <template #title-5>
+              <slot name="title-5" />
+            </template>
+            <template #title-6>
+              <slot name="title-6" />
+            </template>
+
+            <template #body-0>
+              <slot name="body-0" />
+            </template>
+            <template #body-1>
+              <slot name="body-1" />
+            </template>
+            <template #body-2>
+              <slot name="body-2" />
+            </template>
+            <template #body-3>
+              <slot name="body-3" />
+            </template>
+            <template #body-4>
+              <slot name="body-4" />
+            </template>
+            <template #body-5>
+              <slot name="body-5" />
+            </template>
+            <template #body-6>
+              <slot name="body-6" />
+            </template>
+          </ContentComp>
         </view>
       </view>
     </t-popup>
@@ -503,338 +205,311 @@
 import tOverlay from '../overlay/overlay';
 import tButton from '../button/button';
 import tPopup from '../popup/popup';
-import { __awaiter, __decorate } from '../miniprogram_npm/tslib';
-import { SuperComponent, wxComponent } from '../common/src/index';
+import { uniComponent } from '../common/src/index';
 import props from './props';
-import config from '../common/config';
+import { prefix } from '../common/config';
 import { isFunction, isNumber } from '../common/validator';
 import { debounce, getRect, rpx2px, styles, unitConvert, nextTick, systemInfo } from '../common/utils';
-const {
-  prefix: prefix,
-} = config;
+import ContentComp from './content.vue';
+
+import useCustomNavbar from '../mixins/using-custom-navbar';
+
 const name = `${prefix}-guide`;
-let Guide = class extends SuperComponent {
-  constructor() {
-    super(...arguments);
-    this.externalClasses = [`${prefix}-class`, `${prefix}-class-reference`, `${prefix}-class-popover`, `${prefix}-class-tooltip`, `${prefix}-class-title`, `${prefix}-class-body`, `${prefix}-class-footer`, `${prefix}-class-skip`, `${prefix}-class-next`, `${prefix}-class-back`, `${prefix}-class-finish`];
-    this.properties = props;
-    this.options = {
-      pureDataPattern: /^_/,
-      multipleSlots: true,
-    };
-    this.setData({
+
+let that;
+
+export default uniComponent({
+  name,
+  controlledProps: [
+    {
+      key: 'current',
+      event: 'change',
+    },
+  ],
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-reference`,
+    `${prefix}-class-popover`,
+    `${prefix}-class-tooltip`,
+    `${prefix}-class-title`,
+    `${prefix}-class-body`,
+    `${prefix}-class-footer`,
+    `${prefix}-class-skip`,
+    `${prefix}-class-next`,
+    `${prefix}-class-back`,
+    `${prefix}-class-finish`,
+  ],
+  mixins: [
+    useCustomNavbar,
+  ],
+  components: {
+    tOverlay,
+    tButton,
+    tPopup,
+    ContentComp,
+  },
+  props: {
+    ...props,
+  },
+  data() {
+    return {
       prefix,
       classPrefix: name,
       visible: false,
       _current: -1,
       _steps: [],
-      buttonProps: {},
       referenceStyle: '',
       popoverStyle: '',
       title: '',
       body: '',
       nonOverlay: false,
       modeType: '',
-    });
-    this.controlledProps = [{
-      key: 'current',
-      event: 'change',
-    }];
-    this.observers = {
-      'steps, current, showOverlay'() {
-        return __awaiter(this, void 0, void 0, function* () {
-          this._init();
-        });
-      },
+
+      skipButton: {},
+      backButton: {},
+      nextButton: {},
+      finishButton: {},
     };
-    this.lifetimes = {
-      created() {
-        this._init = debounce(() => this.init(), 20);
-        this._getPlacement = this.getPlacement();
-      },
-      attached() {
+  },
+  watch: {
+    steps: {
+      handler() {
         this._init();
       },
-    };
-    this.methods = {
-      init() {
-        let t;
-        let e;
-        let i;
-        let s;
-        let a;
-        let o;
-        let n;
-        return __awaiter(this, void 0, void 0, function* () {
-          const {
-            steps: r,
-            current: p,
-          } = this;
-          const {
-            _steps: l,
-            _current: h,
-          } = this;
-          const c = r[p];
-          if (!c) {
-            return this.setData({
-              visible: false,
-            });
-          }
-          const u = 'dialog' === (null !== (t = c.mode) && void 0 !== t ? t : this.mode) ? 'dialog' : 'popover';
-          const x = null !== (e = c.showOverlay) && void 0 !== e ? e : this.showOverlay;
-          this.setData({
-            nonOverlay: !x,
-            modeType: u,
-          });
-          if (r !== l || p !== h) {
-            if ('popover' === u) {
-              const t = yield c.element();
-              if (!t) {
-                return;
-              }
-              const e = rpx2px(null !== (i = c.highlightPadding) && void 0 !== i ? i : this.highlightPadding);
-              const o = {
-                top: `${t.top - e}px`,
-                right: `${systemInfo.windowWidth - t.right - e}px`,
-                left: `${t.left - e}px`,
-                width: `${t.width + 2 * e}px`,
-                height: `${t.height + 2 * e}px`,
-              };
-              this.setData({
-                _steps: this.steps,
-                _current: this.current,
-                visible: true,
-                referenceStyle: styles(o),
-                title: null !== (s = c.title) && void 0 !== s ? s : '',
-                body: null !== (a = c.body) && void 0 !== a ? a : '',
-                buttonProps: this.buttonProps(c, 'popover'),
-              });
-              const n = yield this.placementOffset(c, o);
-              this.setData({
-                popoverStyle: n,
-              });
-            } else {
-              this.setData({
-                _steps: this.steps,
-                _current: this.current,
-                visible: true,
-                title: null !== (o = c.title) && void 0 !== o ? o : '',
-                body: null !== (n = c.body) && void 0 !== n ? n : '',
-                buttonProps: this.buttonProps(c, 'dialog'),
-              });
-            }
-          }
-        });
+      deep: true,
+    },
+    current: {
+      handler(v) {
+        this._current = v;
       },
-      placementOffset({
-        placement: t,
-        offset: e,
-      }, i) {
-        let s;
-        let a;
-        return __awaiter(this, void 0, void 0, function* () {
-          yield nextTick();
-          const o = yield getRect(this, `.${name}__container`);
-          const n = null === (a = (s = this._getPlacement)[t]) || void 0 === a ? void 0 : a.call(s, o, i, e);
-          return styles(Object.assign({
-            position: 'absolute',
-          }, n));
-        });
-      },
-      buttonProps(t, e) {
-        let i;
-        let s;
-        let a;
-        let o;
-        let n = null !== (i = t.skipButtonProps) && void 0 !== i ? i : this.skipButtonProps;
-        const r = 'popover' === e ? 'extra-small' : 'medium';
-        n = Object.assign(Object.assign({
-          theme: 'light',
-          content: '跳过',
-          size: r,
-        }, n), {
-          tClass: `${prefix}-class-skip ${name}__button ${(null == n ? void 0 : n.class) || ''}`,
-          type: 'skip',
-        });
-        let p = null !== (s = t.nextButtonProps) && void 0 !== s ? s : this.nextButtonProps;
-        p = Object.assign(Object.assign({
-          theme: 'primary',
-          content: '下一步',
-          size: r,
-        }, p), {
-          tClass: `${prefix}-class-next ${name}__button ${(null == p ? void 0 : p.class) || ''}`,
-          type: 'next',
-        });
-        p = Object.assign(Object.assign({}, p), {
-          content: this.buttonContent(p),
-        });
-        let l = null !== (a = t.backButtonProps) && void 0 !== a ? a : this.backButtonProps;
-        l = Object.assign(Object.assign({
-          theme: 'light',
-          content: '返回',
-          size: r,
-        }, l), {
-          tClass: `${prefix}-class-back ${name}__button ${(null == l ? void 0 : l.class) || ''}`,
-          type: 'back',
-        });
-        let h = null !== (o = t.finishButtonProps) && void 0 !== o ? o : this.finishButtonProps;
-        h = Object.assign(Object.assign({
-          theme: 'primary',
-          content: '完成',
-          size: r,
-        }, h), {
-          tClass: `${prefix}-class-finish ${name}__button ${(null == h ? void 0 : h.class) || ''}`,
-          type: 'finish',
-        });
-        h = Object.assign(Object.assign({}, h), {
-          content: this.buttonContent(h),
-        });
-        return {
-          skipButton: n,
-          nextButton: p,
-          backButton: l,
-          finishButton: h,
+    },
+    _current: '_init',
+    showOverlay: '_init',
+  },
+  created() {
+    that = this;
+    // this._init =
+    this._getPlacement = this.getPlacement();
+  },
+  mounted() {
+    this._init();
+  },
+  methods: {
+    _init: debounce(() => that.init(), 20),
+    async init() {
+      console.log('doing init');
+      const { steps } = this;
+      const { _current } = this;
+      const step = steps[_current];
+      if (!step) {
+        this.visible = false;
+        return;
+      }
+
+      const modeType = (step.mode ?? this.mode) === 'dialog' ? 'dialog' : 'popover';
+      const showOverlay = step.showOverlay ?? this.showOverlay;
+      this.nonOverlay = !showOverlay;
+      this.modeType = modeType;
+
+
+      // if (current === _current) return;
+      if (modeType === 'popover') {
+        const rect = await step.element();
+        console.log('rect', rect);
+        if (!rect) return;
+        const highlightPadding = rpx2px(step.highlightPadding ?? this.highlightPadding);
+        const referenceTop = rect.top - highlightPadding;
+        const referenceRight = systemInfo.windowWidth - rect.right - highlightPadding;
+        const referenceLeft = rect.left - highlightPadding;
+        const referenceWidth = rect.width + 2 * highlightPadding;
+        const referenceHeight = rect.height + 2 * highlightPadding;
+
+        const style = {
+          top: `${referenceTop}px`,
+          right: `${referenceRight}px`,
+          left: `${referenceLeft}px`,
+          width: `${referenceWidth}px`,
+          height: `${referenceHeight}px`,
         };
-      },
-      renderCounter() {
-        const {
-          steps: t,
-          current: e,
-          counter: i,
-        } = this;
-        const s = t.length;
-        const a = e + 1;
-        const o = isFunction(i) ? i({
-          total: s,
-          current: a,
-        }) : i;
-        return i ? o : `(${a}/${s})`;
-      },
-      buttonContent(t) {
-        const {
-          hideCounter: e,
-        } = this;
-        return `${t.content.replace(/ \(.*?\)/, '')} ${e ? '' : this.renderCounter()}`;
-      },
-      onTplButtonTap(t) {
-        const {
-          type: e,
-        } = t.target.dataset;
-        const i = {
-          e: t,
-          current: this.current,
-          total: this.steps.length,
-        };
-        switch (e) {
-          case 'next':
-            this.$emit('next-step-click', {
-              detail: Object.assign({
-                next: this.current + 1,
-              }, i),
-            });
-            this.setData({
-              current: this.current + 1,
-            });
-            break;
-          case 'skip':
-            this.$emit('skip', {
-              detail: i,
-            });
-            this.setData({
-              current: -1,
-            });
-            break;
-          case 'back':
-            this.$emit('back', {
-              detail: i,
-            });
-            this.setData({
-              current: 0,
-            });
-            break;
-          case 'finish':
-            this.$emit('finish', {
-              detail: i,
-            });
-            this.setData({
-              current: -1,
-            });
-        }
-        this.$emit('change', {
-          detail: {
-            current: this.current,
-          },
-        });
-      },
-      getPlacement() {
-        const t = rpx2px(32);
-        const e = t => unitConvert(isNumber(null == t ? void 0 : t[0]) ? `${null == t ? void 0 : t[0]}rpx` : (null == t ? void 0 : t[0]) || 0);
-        const i = t => unitConvert(isNumber(null == t ? void 0 : t[1]) ? `${null == t ? void 0 : t[1]}rpx` : (null == t ? void 0 : t[1]) || 0);
-        const s = t => parseFloat(t.left);
-        const a = t => parseFloat(t.right);
-        const o = t => parseFloat(t.top);
-        const n = t => parseFloat(t.height);
-        const r = t => parseFloat(t.width);
-        return {
-          center: (a, p, l) => ({
-            top: `${Math.max(n(p) + o(p) + t + i(l), 1)}px`,
-            left: `${Math.max(r(p) / 2 + s(p) - a.width / 2 + e(l), 1)}px`,
-          }),
-          bottom: (a, p, l) => ({
-            top: `${Math.max(n(p) + o(p) + t + i(l), 1)}px`,
-            left: `${Math.max(r(p) / 2 + s(p) - a.width / 2 + e(l), 1)}px`,
-          }),
-          'bottom-left': (a, r, p) => ({
-            top: `${Math.max(n(r) + o(r) + t + i(p), 1)}px`,
-            left: `${Math.max(s(r) + e(p), 1)}px`,
-          }),
-          'bottom-right': (s, r, p) => ({
-            top: `${Math.max(n(r) + o(r) + t + i(p), 1)}px`,
-            right: `${Math.max(a(r) - e(p), 1)}px`,
-          }),
-          left: (s, p, l) => ({
-            top: `${Math.max(n(p) / 2 + o(p) - s.height / 2 + i(l), 1)}px`,
-            right: `${Math.max(r(p) + a(p) + t - e(l), 1)}px`,
-          }),
-          'left-top': (s, n, p) => ({
-            top: `${Math.max(o(n) + i(p), 1)}px`,
-            right: `${Math.max(r(n) + a(n) + t - e(p), 1)}px`,
-          }),
-          'left-bottom': (s, p, l) => ({
-            top: `${Math.max(o(p) + n(p) - s.height - i(l), 1)}px`,
-            right: `${Math.max(r(p) + a(p) + t - e(l), 1)}px`,
-          }),
-          right: (a, p, l) => ({
-            top: `${Math.max(n(p) / 2 + o(p) - a.height / 2 + i(l), 1)}px`,
-            left: `${Math.max(s(p) + r(p) + t + e(l), 1)}px`,
-          }),
-          'right-top': (a, n, p) => ({
-            top: `${Math.max(o(n) + i(p), 1)}px`,
-            left: `${Math.max(s(n) + r(n) + t + e(p), 1)}px`,
-          }),
-          'right-bottom': (a, p, l) => ({
-            top: `${Math.max(o(p) + n(p) - a.height - i(l), 1)}px`,
-            left: `${Math.max(s(p) + r(p) + t + e(l), 1)}px`,
-          }),
-          top: (a, n, p) => ({
-            top: `${Math.max(o(n) - a.height - t + i(p), 1)}px`,
-            left: `${Math.max(r(n) / 2 + s(n) - a.width / 2 + e(p), 1)}px`,
-          }),
-          'top-left': (a, n, r) => ({
-            top: `${Math.max(o(n) - a.height - t + i(r), 1)}px`,
-            left: `${Math.max(s(n) + e(r), 1)}px`,
-          }),
-          'top-right': (s, n, r) => ({
-            top: `${Math.max(o(n) - s.height - t + i(r), 1)}px`,
-            right: `${Math.max(a(n) - e(r), 1)}px`,
-          }),
-        };
-      },
-    };
-  }
-};
-Guide = __decorate([wxComponent()], Guide);
-export default Guide;
+        this._steps = this.steps;
+        // this._current = this.current;
+        this.visible = true;
+        this.referenceStyle = styles(style);
+        this.title = step.title ?? '';
+        this.body = step.body ?? '';
+        this.makeButtonProps(step, 'popover');
+
+        const popoverStyle = await this.placementOffset(step, style);
+        this.popoverStyle = popoverStyle;
+      } else {
+        this._steps = this.steps;
+        // this._current = this.current;
+        this.visible = true;
+        this.title = step.title ?? '';
+        this.body = step.body ?? '';
+        this.makeButtonProps(step, 'dialog');
+      }
+    },
+    async placementOffset({ placement, offset }, place) {
+      await nextTick();
+      const rect = await getRect(this, `.${name}__container`);
+      const style = this._getPlacement[placement]?.(rect, place, offset);
+      return styles({ position: 'absolute', ...style });
+    },
+    makeButtonProps(step, mode) {
+      let skipButton = step.skipButtonProps ?? this.skipButtonProps;
+      const size = mode === 'popover' ? 'extra-small' : 'medium';
+      skipButton = {
+        theme: 'light',
+        content: '跳过',
+        size,
+        ...skipButton,
+        tClass: `${prefix}-class-skip ${name}__button ${skipButton?.class || ''}`,
+        type: 'skip',
+      };
+      let nextButton = step.nextButtonProps ?? this.nextButtonProps;
+      nextButton = {
+        theme: 'primary',
+        content: '下一步',
+        size,
+        ...nextButton,
+        tClass: `${prefix}-class-next ${name}__button ${nextButton?.class || ''}`,
+        type: 'next',
+      };
+      nextButton = { ...nextButton, content: this.buttonContent(nextButton) };
+      let backButton = step.backButtonProps ?? this.backButtonProps;
+      backButton = {
+        theme: 'light',
+        content: '返回',
+        size,
+        ...backButton,
+        tClass: `${prefix}-class-back ${name}__button ${backButton?.class || ''}`,
+        type: 'back',
+      };
+      let finishButton = step.finishButtonProps ?? this.finishButtonProps;
+      finishButton = {
+        theme: 'primary',
+        content: '完成',
+        size,
+        ...finishButton,
+        tClass: `${prefix}-class-finish ${name}__button ${finishButton?.class || ''}`,
+        type: 'finish',
+      };
+      finishButton = { ...finishButton, content: this.buttonContent(finishButton) };
+
+      this.skipButton = skipButton;
+      this.nextButton = nextButton;
+      this.backButton = backButton;
+      this.finishButton = finishButton;
+    },
+    renderCounter() {
+      const { steps, _current, counter } = this;
+      const stepsTotal = steps.length;
+      const innerCurrent = _current + 1;
+      const popupSlotCounter = isFunction(counter) ? counter({ total: stepsTotal, current: innerCurrent }) : counter;
+      return counter ? popupSlotCounter : `(${innerCurrent}/${stepsTotal})`;
+    },
+    buttonContent(button) {
+      const { hideCounter } = this;
+      return `${button.content.replace(/ \(.*?\)/, '')} ${hideCounter ? '' : this.renderCounter()}`;
+    },
+    onTplButtonTap(e, { type }) {
+      console.log('onTplButtonTap.type', type);
+      const params = { e, current: this._current, total: this.steps.length };
+      switch (type) {
+        case 'next':
+          this.$emit('next-step-click', { next: this._current + 1, ...params });
+          // this.setData({ current: this..current + 1 });
+          this._current = this._current + 1;
+          break;
+        case 'skip':
+          this.$emit('skip', params);
+          // this.setData({ current: -1 });
+          this._current = -1;
+          break;
+        case 'back':
+          this.$emit('back', params);
+          // this.setData({ current: 0 });
+          this._current = 0;
+          break;
+        case 'finish':
+          this.$emit('finish', params);
+          // this.setData({ current: -1 });
+          this._current = -1;
+          break;
+        default:
+          break;
+      }
+      console.log('_current', this._current);
+      this.$emit('change', { current: this._current });
+    },
+    getPlacement() {
+      const space = rpx2px(32);
+      const offsetLeft = offset => unitConvert(isNumber(offset?.[0]) ? `${offset?.[0]}rpx` : offset?.[0] || 0);
+      const offsetTop = offset => unitConvert(isNumber(offset?.[1]) ? `${offset?.[1]}rpx` : offset?.[1] || 0);
+      const left = place => parseFloat(place.left);
+      const right = place => parseFloat(place.right);
+      const top = place => parseFloat(place.top);
+      const height = place => parseFloat(place.height);
+      const width = place => parseFloat(place.width);
+      return {
+        center: (rect, place, offset) => ({
+          top: `${Math.max(height(place) + top(place) + space + offsetTop(offset), 1)}px`,
+          left: `${Math.max(width(place) / 2 + left(place) - rect.width / 2 + offsetLeft(offset), 1)}px`,
+        }),
+        bottom: (rect, place, offset) => ({
+          top: `${Math.max(height(place) + top(place) + space + offsetTop(offset), 1)}px`,
+          left: `${Math.max(width(place) / 2 + left(place) - rect.width / 2 + offsetLeft(offset), 1)}px`,
+        }),
+        'bottom-left': (rect, place, offset) => ({
+          top: `${Math.max(height(place) + top(place) + space + offsetTop(offset), 1)}px`,
+          left: `${Math.max(left(place) + offsetLeft(offset), 1)}px`,
+        }),
+        'bottom-right': (rect, place, offset) => ({
+          top: `${Math.max(height(place) + top(place) + space + offsetTop(offset), 1)}px`,
+          right: `${Math.max(right(place) - offsetLeft(offset), 1)}px`,
+        }),
+        left: (rect, place, offset) => ({
+          top: `${Math.max(height(place) / 2 + top(place) - rect.height / 2 + offsetTop(offset), 1)}px`,
+          right: `${Math.max(width(place) + right(place) + space - offsetLeft(offset), 1)}px`,
+        }),
+        'left-top': (rect, place, offset) => ({
+          top: `${Math.max(top(place) + offsetTop(offset), 1)}px`,
+          right: `${Math.max(width(place) + right(place) + space - offsetLeft(offset), 1)}px`,
+        }),
+        'left-bottom': (rect, place, offset) => ({
+          top: `${Math.max(top(place) + height(place) - rect.height - offsetTop(offset), 1)}px`,
+          right: `${Math.max(width(place) + right(place) + space - offsetLeft(offset), 1)}px`,
+        }),
+        right: (rect, place, offset) => ({
+          top: `${Math.max(height(place) / 2 + top(place) - rect.height / 2 + offsetTop(offset), 1)}px`,
+          left: `${Math.max(left(place) + width(place) + space + offsetLeft(offset), 1)}px`,
+        }),
+        'right-top': (rect, place, offset) => ({
+          top: `${Math.max(top(place) + offsetTop(offset), 1)}px`,
+          left: `${Math.max(left(place) + width(place) + space + offsetLeft(offset), 1)}px`,
+        }),
+        'right-bottom': (rect, place, offset) => ({
+          top: `${Math.max(top(place) + height(place) - rect.height - offsetTop(offset), 1)}px`,
+          left: `${Math.max(left(place) + width(place) + space + offsetLeft(offset), 1)}px`,
+        }),
+        top: (rect, place, offset) => ({
+          top: `${Math.max(top(place) - rect.height - space + offsetTop(offset), 1)}px`,
+          left: `${Math.max(width(place) / 2 + left(place) - rect.width / 2 + offsetLeft(offset), 1)}px`,
+        }),
+        'top-left': (rect, place, offset) => ({
+          top: `${Math.max(top(place) - rect.height - space + offsetTop(offset), 1)}px`,
+          left: `${Math.max(left(place) + offsetLeft(offset), 1)}px`,
+        }),
+        'top-right': (rect, place, offset) => ({
+          top: `${Math.max(top(place) - rect.height - space + offsetTop(offset), 1)}px`,
+          right: `${Math.max(right(place) - offsetLeft(offset), 1)}px`,
+        }),
+      };
+    },
+  },
+});
+
 </script>
 <style scoped>
 @import './guide.css';

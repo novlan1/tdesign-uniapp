@@ -47,12 +47,15 @@
       @skip="close"
       @finish="close"
     >
-      <view
-        slot="body-2"
-        class="slot-body"
+      <template
+        #body-2
       >
-        slot展示 用户引导的说明文案
-      </view>
+        <view
+          class="slot-body"
+        >
+          slot展示 用户引导的说明文案
+        </view>
+      </template>
     </t-guide>
   </view>
 </template>
@@ -61,6 +64,7 @@
 import tGuide from 'tdesign-uniapp/guide/guide.vue';
 import tInput from 'tdesign-uniapp/input/input.vue';
 import tButton from 'tdesign-uniapp/button/button.vue';
+
 export default {
   components: {
     tGuide,
@@ -80,50 +84,48 @@ export default {
   created() {},
   methods: {
     attached() {
-      this.setData({
-        current: 0,
+      this.current = 0;
 
-        steps: [
-          {
-            element: () => new Promise(resolve => uni
-              .createSelectorQuery()
-              .in(this)
-              .select('.main-title')
-              .boundingClientRect(rect => resolve(rect))
-              .exec()),
+      this.steps = [
+        {
+          element: () => new Promise(resolve => uni
+            .createSelectorQuery()
+            .in(this)
+            .select('.main-title')
+            .boundingClientRect(rect => resolve(rect))
+            .exec()),
 
-            title: '用户引导标题',
-            body: '用户引导的说明文案',
-            placement: 'center',
-          },
-          {
-            element: () => new Promise(resolve => uni
-              .createSelectorQuery()
-              .in(this)
-              .select('.label-field')
-              .boundingClientRect(rect => resolve(rect))
-              .exec()),
+          title: '用户引导标题',
+          body: '用户引导的说明文案',
+          placement: 'center',
+        },
+        {
+          element: () => new Promise(resolve => uni
+            .createSelectorQuery()
+            .in(this)
+            .select('.label-field')
+            .boundingClientRect(rect => resolve(rect))
+            .exec()),
 
-            title: '用户引导标题',
-            body: '用户引导的说明文案',
-            placement: 'bottom',
-            highlightPadding: 0,
-          },
-          {
-            element: () => new Promise(resolve => uni
-              .createSelectorQuery()
-              .in(this)
-              .select('.action')
-              .boundingClientRect(rect => resolve(rect))
-              .exec()),
+          title: '用户引导标题',
+          body: '用户引导的说明文案',
+          placement: 'bottom',
+          highlightPadding: 0,
+        },
+        {
+          element: () => new Promise(resolve => uni
+            .createSelectorQuery()
+            .in(this)
+            .select('.action')
+            .boundingClientRect(rect => resolve(rect))
+            .exec()),
 
-            title: '用户引导标题',
+          title: '用户引导标题',
 
-            // body: '用户引导的说明文案',
-            placement: 'bottom-right',
-          },
-        ],
-      });
+          // body: '用户引导的说明文案',
+          placement: 'bottom-right',
+        },
+      ];
     },
 
     close() {

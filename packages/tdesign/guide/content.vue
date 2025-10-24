@@ -1,246 +1,293 @@
 <template>
-  <view>
-    <!-- template对应的原始代码，为保证正常显示，已对其进行隐藏。 -->
-    <block
-      v-if="false"
-      name="content"
-    >
+  <slot
+    v-if="!title && !body"
+    :name="'content-' + current"
+  />
+  <block v-else>
+    <view :class="prefix + '-class-tooltip'">
+      <view
+        v-if="title"
+        :class="prefix + '-class-title ' + classPrefix + '__title--' + modeType"
+      >
+        {{ title }}
+      </view>
       <slot
-        v-if="!title && !body"
-        :name="'content-' + current"
+        v-else
+        :name="'title-' + current"
       />
-      <block v-else>
-        <view :class="prefix + '-class-tooltip'">
-          <view
-            v-if="title"
-            :class="prefix + '-class-title ' + classPrefix + '__title--' + modeType"
-          >
-            {{ title }}
-          </view>
-          <slot
-            v-else
-            :name="'title-' + current"
-          />
-          <view
-            v-if="body"
-            :class="prefix + '-class-body ' + classPrefix + '__body--' + modeType"
-          >
-            {{ body }}
-          </view>
-          <slot
-            v-else
-            :name="'body-' + current"
-          />
-        </view>
-        <view
-          v-if="current !== -1"
-          :class="prefix + '-class-footer ' + classPrefix + '__footer ' + classPrefix + '__footer--' + modeType"
-        >
-          <!-- parse <template is="button" v-if="current < steps.length - 1 && !hideSkip" :data="...skipButton"/> -->
-          <block
-            v-if="current < steps.length - 1 && !hideSkip"
-            name="button"
-          >
-            <t-button
-              :t-id="tId || ''"
-              :style="style || ''"
-              :block="true || false"
-              :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-              :t-class="prefix + '-class-action'"
-              :disabled="disabled || false"
-              :data-type="'action'"
-              :data-extra="index"
-              :custom-dataset="customDataset"
-              :content="content || ''"
-              :icon="icon || ''"
-              :loading="loading || false"
-              :loading-props="loadingProps || null"
-              :theme="'primary' || 'default'"
-              :ghost="ghost || false"
-              :shape="shape || 'rectangle'"
-              :size="size || 'medium'"
-              :variant="variant || 'base'"
-              :open-type="openType || ''"
-              :hover-class="hoverClass || ''"
-              :hover-stop-propagation="hoverStopPropagation || false"
-              :hover-start-time="hoverStartTime || 20"
-              :hover-stay-time="hoverStayTime || 70"
-              :lang="lang || 'en'"
-              :session-from="sessionFrom || ''"
-              :send-message-title="sendMessageTitle || ''"
-              :send-message-path="sendMessagePath || ''"
-              :send-message-img="sendMessageImg || ''"
-              :app-parameter="appParameter || ''"
-              :show-message-card="showMessageCard || false"
-              :aria-label="ariaLabel || ''"
-              @click="onTplButtonTap"
-              @getuserinfo="onTplButtonTap"
-              @contact="onTplButtonTap"
-              @getphonenumber="onTplButtonTap"
-              @error="onTplButtonTap"
-              @opensetting="onTplButtonTap"
-              @launchapp="onTplButtonTap"
-              @agreeprivacyauthorization="onTplButtonTap"
-            >
-              <slot v-if="true || false" />
-            </t-button>
-          </block>
-          <!-- parse <template is="button" v-else-if="current === steps.length - 1 && !hideBack" :data="...backButton"/> -->
-          <block
-            v-if="false"
-            v-else-if="current === steps.length - 1 && !hideBack"
-            name="button"
-          >
-            <t-button
-              :t-id="tId || ''"
-              :style="style || ''"
-              :block="true || false"
-              :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-              :t-class="prefix + '-class-action'"
-              :disabled="disabled || false"
-              :data-type="'action'"
-              :data-extra="index"
-              :custom-dataset="customDataset"
-              :content="content || ''"
-              :icon="icon || ''"
-              :loading="loading || false"
-              :loading-props="loadingProps || null"
-              :theme="'primary' || 'default'"
-              :ghost="ghost || false"
-              :shape="shape || 'rectangle'"
-              :size="size || 'medium'"
-              :variant="variant || 'base'"
-              :open-type="openType || ''"
-              :hover-class="hoverClass || ''"
-              :hover-stop-propagation="hoverStopPropagation || false"
-              :hover-start-time="hoverStartTime || 20"
-              :hover-stay-time="hoverStayTime || 70"
-              :lang="lang || 'en'"
-              :session-from="sessionFrom || ''"
-              :send-message-title="sendMessageTitle || ''"
-              :send-message-path="sendMessagePath || ''"
-              :send-message-img="sendMessageImg || ''"
-              :app-parameter="appParameter || ''"
-              :show-message-card="showMessageCard || false"
-              :aria-label="ariaLabel || ''"
-              @click="onTplButtonTap"
-              @getuserinfo="onTplButtonTap"
-              @contact="onTplButtonTap"
-              @getphonenumber="onTplButtonTap"
-              @error="onTplButtonTap"
-              @opensetting="onTplButtonTap"
-              @launchapp="onTplButtonTap"
-              @agreeprivacyauthorization="onTplButtonTap"
-            >
-              <slot v-if="true || false" />
-            </t-button>
-          </block>
-          <!-- parse <template is="button" v-if="current < steps.length - 1" :data="...nextButton"/> -->
-          <block
-            v-if="current < steps.length - 1"
-            name="button"
-          >
-            <t-button
-              :t-id="tId || ''"
-              :style="style || ''"
-              :block="true || false"
-              :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-              :t-class="prefix + '-class-action'"
-              :disabled="disabled || false"
-              :data-type="'action'"
-              :data-extra="index"
-              :custom-dataset="customDataset"
-              :content="content || ''"
-              :icon="icon || ''"
-              :loading="loading || false"
-              :loading-props="loadingProps || null"
-              :theme="'primary' || 'default'"
-              :ghost="ghost || false"
-              :shape="shape || 'rectangle'"
-              :size="size || 'medium'"
-              :variant="variant || 'base'"
-              :open-type="openType || ''"
-              :hover-class="hoverClass || ''"
-              :hover-stop-propagation="hoverStopPropagation || false"
-              :hover-start-time="hoverStartTime || 20"
-              :hover-stay-time="hoverStayTime || 70"
-              :lang="lang || 'en'"
-              :session-from="sessionFrom || ''"
-              :send-message-title="sendMessageTitle || ''"
-              :send-message-path="sendMessagePath || ''"
-              :send-message-img="sendMessageImg || ''"
-              :app-parameter="appParameter || ''"
-              :show-message-card="showMessageCard || false"
-              :aria-label="ariaLabel || ''"
-              @click="onTplButtonTap"
-              @getuserinfo="onTplButtonTap"
-              @contact="onTplButtonTap"
-              @getphonenumber="onTplButtonTap"
-              @error="onTplButtonTap"
-              @opensetting="onTplButtonTap"
-              @launchapp="onTplButtonTap"
-              @agreeprivacyauthorization="onTplButtonTap"
-            >
-              <slot v-if="true || false" />
-            </t-button>
-          </block>
-          <!-- parse <template is="button" v-else :data="...finishButton"/> -->
-          <block
-            v-if="false"
-            v-else
-            name="button"
-          >
-            <t-button
-              :t-id="tId || ''"
-              :style="style || ''"
-              :block="true || false"
-              :class="_this.getActionClass(classPrefix, buttonLayout) || ''"
-              :t-class="prefix + '-class-action'"
-              :disabled="disabled || false"
-              :data-type="'action'"
-              :data-extra="index"
-              :custom-dataset="customDataset"
-              :content="content || ''"
-              :icon="icon || ''"
-              :loading="loading || false"
-              :loading-props="loadingProps || null"
-              :theme="'primary' || 'default'"
-              :ghost="ghost || false"
-              :shape="shape || 'rectangle'"
-              :size="size || 'medium'"
-              :variant="variant || 'base'"
-              :open-type="openType || ''"
-              :hover-class="hoverClass || ''"
-              :hover-stop-propagation="hoverStopPropagation || false"
-              :hover-start-time="hoverStartTime || 20"
-              :hover-stay-time="hoverStayTime || 70"
-              :lang="lang || 'en'"
-              :session-from="sessionFrom || ''"
-              :send-message-title="sendMessageTitle || ''"
-              :send-message-path="sendMessagePath || ''"
-              :send-message-img="sendMessageImg || ''"
-              :app-parameter="appParameter || ''"
-              :show-message-card="showMessageCard || false"
-              :aria-label="ariaLabel || ''"
-              @click="onTplButtonTap"
-              @getuserinfo="onTplButtonTap"
-              @contact="onTplButtonTap"
-              @getphonenumber="onTplButtonTap"
-              @error="onTplButtonTap"
-              @opensetting="onTplButtonTap"
-              @launchapp="onTplButtonTap"
-              @agreeprivacyauthorization="onTplButtonTap"
-            >
-              <slot v-if="true || false" />
-            </t-button>
-          </block>
-        </view>
+      <view
+        v-if="body"
+        :class="prefix + '-class-body ' + classPrefix + '__body--' + modeType"
+      >
+        {{ body }}
+      </view>
+      <slot
+        v-else
+        :name="'body-' + current"
+      />
+    </view>
+    <view
+      v-if="current !== -1"
+      :class="prefix + '-class-footer ' + classPrefix + '__footer ' + classPrefix + '__footer--' + modeType"
+    >
+      <block
+        v-if="current < steps.length - 1 && !hideSkip"
+        name="button"
+      >
+        <TButton
+          :t-id="skipButton.tId"
+          :custom-style="skipButton.style"
+          :block="skipButton.block"
+          :t-class="skipButton.tClass"
+          :disabled="skipButton.disabled"
+          :data-type="skipButton.dataType"
+          :data-extra="skipButton.dataExtra"
+          :custom-dataset="skipButton.customDataset"
+          :content="skipButton.content"
+          :icon="skipButton.icon"
+          :loading="skipButton.loading"
+          :loading-props="skipButton.loadingProps"
+          :theme="skipButton.theme"
+          :ghost="skipButton.ghost"
+          :shape="skipButton.shape"
+          :size="skipButton.size"
+          :variant="skipButton.variant"
+          :open-type="skipButton.openType"
+          :hover-class="skipButton.hoverClass"
+          :hover-stop-propagation="skipButton.hoverStopPropagation"
+          :hover-start-time="skipButton.hoverStartTime"
+          :hover-stay-time="skipButton.hoverStayTime"
+          :lang="skipButton.lang"
+          :session-from="skipButton.sessionFrom"
+          :send-message-title="skipButton.sendMessageTitle"
+          :send-message-path="skipButton.sendMessagePath"
+          :send-message-img="skipButton.sendMessageImg"
+          :app-parameter="skipButton.appParameter"
+          :show-message-card="skipButton.showMessageCard"
+          :aria-label="skipButton.ariaLabel"
+          @click="(e) => onTplButtonTap(e, { type: skipButton.type })"
+          @getuserinfo="(e) => onTplButtonTap(e, { type: skipButton.type })"
+          @contact="(e) => onTplButtonTap(e, { type: skipButton.type })"
+          @getphonenumber="(e) => onTplButtonTap(e, { type: skipButton.type })"
+          @error="(e) => onTplButtonTap(e, { type: skipButton.type })"
+          @opensetting="(e) => onTplButtonTap(e, { type: skipButton.type })"
+          @launchapp="(e) => onTplButtonTap(e, { type: skipButton.type })"
+          @agreeprivacyauthorization="(e) => onTplButtonTap(e, { type: skipButton.type })"
+        />
       </block>
-    </block>
-  </view>
+      <block
+        v-else-if="current === steps.length - 1 && !hideBack"
+        name="button"
+      >
+        <TButton
+          :t-id="backButton.tId"
+          :custom-style="backButton.style"
+          :block="backButton.block"
+          :t-class="backButton.tClass"
+          :disabled="backButton.disabled"
+          :data-type="backButton.dataType"
+          :data-extra="backButton.dataExtra"
+          :custom-dataset="backButton.customDataset"
+          :content="backButton.content"
+          :icon="backButton.icon"
+          :loading="backButton.loading"
+          :loading-props="backButton.loadingProps"
+          :theme="backButton.theme"
+          :ghost="backButton.ghost"
+          :shape="backButton.shape"
+          :size="backButton.size"
+          :variant="backButton.variant"
+          :open-type="backButton.openType"
+          :hover-class="backButton.hoverClass"
+          :hover-stop-propagation="backButton.hoverStopPropagation"
+          :hover-start-time="backButton.hoverStartTime"
+          :hover-stay-time="backButton.hoverStayTime"
+          :lang="backButton.lang"
+          :session-from="backButton.sessionFrom"
+          :send-message-title="backButton.sendMessageTitle"
+          :send-message-path="backButton.sendMessagePath"
+          :send-message-img="backButton.sendMessageImg"
+          :app-parameter="backButton.appParameter"
+          :show-message-card="backButton.showMessageCard"
+          :aria-label="backButton.ariaLabel"
+          @click="(e) => onTplButtonTap(e, { type: backButton.type })"
+          @getuserinfo="(e) => onTplButtonTap(e, { type: backButton.type })"
+          @contact="(e) => onTplButtonTap(e, { type: backButton.type })"
+          @getphonenumber="(e) => onTplButtonTap(e, { type: backButton.type })"
+          @error="(e) => onTplButtonTap(e, { type: backButton.type })"
+          @opensetting="(e) => onTplButtonTap(e, { type: backButton.type })"
+          @launchapp="(e) => onTplButtonTap(e, { type: backButton.type })"
+          @agreeprivacyauthorization="(e) => onTplButtonTap(e, { type: backButton.type })"
+        />
+      </block>
+      <block
+        v-if="current < steps.length - 1"
+        name="button"
+      >
+        <TButton
+          :t-id="nextButton.tId"
+          :custom-style="nextButton.style"
+          :block="nextButton.block"
+          :t-class="nextButton.tClass"
+          :disabled="nextButton.disabled"
+          :data-type="nextButton.dataType"
+          :data-extra="nextButton.dataExtra"
+          :custom-dataset="nextButton.customDataset"
+          :content="nextButton.content"
+          :icon="nextButton.icon"
+          :loading="nextButton.loading"
+          :loading-props="nextButton.loadingProps"
+          :theme="nextButton.theme"
+          :ghost="nextButton.ghost"
+          :shape="nextButton.shape"
+          :size="nextButton.size"
+          :variant="nextButton.variant"
+          :open-type="nextButton.openType"
+          :hover-class="nextButton.hoverClass"
+          :hover-stop-propagation="nextButton.hoverStopPropagation"
+          :hover-start-time="nextButton.hoverStartTime"
+          :hover-stay-time="nextButton.hoverStayTime"
+          :lang="nextButton.lang"
+          :session-from="nextButton.sessionFrom"
+          :send-message-title="nextButton.sendMessageTitle"
+          :send-message-path="nextButton.sendMessagePath"
+          :send-message-img="nextButton.sendMessageImg"
+          :app-parameter="nextButton.appParameter"
+          :show-message-card="nextButton.showMessageCard"
+          :aria-label="nextButton.ariaLabel"
+          @click="(e) => onTplButtonTap(e, { type: nextButton.type })"
+          @getuserinfo="(e) => onTplButtonTap(e, { type: nextButton.type })"
+          @contact="(e) => onTplButtonTap(e, { type: nextButton.type })"
+          @getphonenumber="(e) => onTplButtonTap(e, { type: nextButton.type })"
+          @error="(e) => onTplButtonTap(e, { type: nextButton.type })"
+          @opensetting="(e) => onTplButtonTap(e, { type: nextButton.type })"
+          @launchapp="(e) => onTplButtonTap(e, { type: nextButton.type })"
+          @agreeprivacyauthorization="(e) => onTplButtonTap(e, { type: nextButton.type })"
+        />
+      </block>
+      <block
+        v-else
+        name="button"
+      >
+        <TButton
+          :t-id="finishButton.tId"
+          :custom-style="finishButton.style"
+          :block="finishButton.block"
+          :t-class="finishButton.tClass"
+          :disabled="finishButton.disabled"
+          :data-type="finishButton.dataType"
+          :data-extra="finishButton.dataExtra"
+          :custom-dataset="finishButton.customDataset"
+          :content="finishButton.content"
+          :icon="finishButton.icon"
+          :loading="finishButton.loading"
+          :loading-props="finishButton.loadingProps"
+          :theme="finishButton.theme"
+          :ghost="finishButton.ghost"
+          :shape="finishButton.shape"
+          :size="finishButton.size"
+          :variant="finishButton.variant"
+          :open-type="finishButton.openType"
+          :hover-class="finishButton.hoverClass"
+          :hover-stop-propagation="finishButton.hoverStopPropagation"
+          :hover-start-time="finishButton.hoverStartTime"
+          :hover-stay-time="finishButton.hoverStayTime"
+          :lang="finishButton.lang"
+          :session-from="finishButton.sessionFrom"
+          :send-message-title="finishButton.sendMessageTitle"
+          :send-message-path="finishButton.sendMessagePath"
+          :send-message-img="finishButton.sendMessageImg"
+          :app-parameter="finishButton.appParameter"
+          :show-message-card="finishButton.showMessageCard"
+          :aria-label="finishButton.ariaLabel"
+          @click="(e) => onTplButtonTap(e, { type: finishButton.type })"
+          @getuserinfo="(e) => onTplButtonTap(e, { type: finishButton.type })"
+          @contact="(e) => onTplButtonTap(e, { type: finishButton.type })"
+          @getphonenumber="(e) => onTplButtonTap(e, { type: finishButton.type })"
+          @error="(e) => onTplButtonTap(e, { type: finishButton.type })"
+          @opensetting="(e) => onTplButtonTap(e, { type: finishButton.type })"
+          @launchapp="(e) => onTplButtonTap(e, { type: finishButton.type })"
+          @agreeprivacyauthorization="(e) => onTplButtonTap(e, { type: finishButton.type })"
+        />
+      </block>
+    </view>
+  </block>
 </template>
+<script>
+import TButton from '../button/button.vue';
 
+
+export default {
+  options: {
+    styleIsolation: 'shared',
+  },
+  components: {
+    TButton,
+  },
+  props: {
+    title: {
+      type: String,
+      default: '',
+    },
+    body: {
+      type: String,
+      default: '',
+    },
+    current: {
+      type: [String, Number],
+      default: '',
+    },
+    classPrefix: {
+      type: String,
+      default: '',
+    },
+    prefix: {
+      type: String,
+      default: '',
+    },
+    skipButton: {
+      type: [Object, null],
+      default: null,
+    },
+    backButton: {
+      type: [Object, null],
+      default: null,
+    },
+    nextButton: {
+      type: [Object, null],
+      default: null,
+    },
+    finishButton: {
+      type: [Object, null],
+      default: null,
+    },
+    modeType: {
+      type: String,
+      default: '',
+    },
+    hideSkip: {
+      type: Boolean,
+      default: false,
+    },
+    hideBack: {
+      type: Boolean,
+      default: false,
+    },
+    steps: {
+      type: Array,
+      default: () => ([]),
+    },
+  },
+  emits: [
+    'onTplButtonTap',
+  ],
+  methods: {
+    onTplButtonTap(...args) {
+      this.$emit('onTplButtonTap', ...args);
+    },
+  },
+};
+</script>
 <style scoped>
-@import './content.css';
-
+@import './guide.css';
 </style>
