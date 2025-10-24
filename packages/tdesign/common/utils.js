@@ -101,7 +101,17 @@ export const getAnimationFrame = function (context, cb) {
     });
 };
 
-export const getRect = function (context, selector, needAll = false) {
+export const getRect = function (context, selector, needAll = false, useH5Origin = false) {
+  let result;
+  // #ifdef H5
+  if (useH5Origin) {
+    result = document[needAll ? 'querySelectorAll' : 'querySelector'](selector)?.getBoundingClientRect();
+  }
+  // #endif
+  if (result) {
+    return result;
+  }
+
   return new Promise((resolve, reject) => {
     uni
       .createSelectorQuery()
