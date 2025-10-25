@@ -200,7 +200,7 @@ export default uniComponent({
       const { url } = e.currentTarget.dataset;
       const urls = url.map(item => item.url) || [];
       if (url) {
-        wx.previewImage({
+        uni.previewImage({
           urls,
           current: urls[0],
         });

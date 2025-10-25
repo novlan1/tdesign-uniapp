@@ -1,4 +1,4 @@
-import { getCharacterLength } from '../common/utils';
+import { getCharacterLength, coalesce } from '../common/utils';
 
 
 export function getInnerMaxLen({
@@ -32,7 +32,7 @@ export function getInnerMaxLen({
     allowInputOverMax ? Infinity : maxcharacter,
   );
 
-  const extra = (count ?? computedCount) - dataValue.length;
+  const extra = (coalesce(count, computedCount)) - dataValue.length;
 
   return maxcharacter - extra;
 }

@@ -6,6 +6,7 @@
     "versionCode": "100",
     "transformPx": false,
     "app-plus": {
+        "darkmode": true,
         "usingComponents": true,
         "nvueStyleCompiler": "uni-app",
         "compilerVersion": 3,
@@ -57,7 +58,8 @@
     },
     "mp-alipay": {
         "darkmode": true,
-        "usingComponents": true
+        "usingComponents": true,
+        "appid": "2021006103621888"
     },
     "mp-baidu": {
         "darkmode": true,

@@ -64,10 +64,10 @@
   </view>
 </template>
 <script>
-// import tCell from '../cell/cell';
 import tIcon from '../icon/icon';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
+import { coalesce } from '../common/utils';
 import props from './props';
 import _ from '../common/utils.wxs';
 
@@ -90,7 +90,6 @@ export default uniComponent({
     `${prefix}-class-plus`,
   ],
   components: {
-    // tCell,
     tIcon,
   },
   props: {
@@ -114,7 +113,7 @@ export default uniComponent({
   },
   mounted() {
     const { value, defaultValue, min } = this;
-    const cur = value ?? defaultValue;
+    const cur = coalesce(value, defaultValue);
 
     this.updateCurrentValue(cur ? Number(cur) : min);
   },

@@ -191,14 +191,14 @@ export default uniComponent({
     },
 
     getMenuRect() {
-      // 场景值为1177（视频号直播间）和1175 （视频号profile页）时，小程序禁用了 wx.getMenuButtonBoundingClientRect
+      // 场景值为1177（视频号直播间）和1175 （视频号profile页）时，小程序禁用了 uni.getMenuButtonBoundingClientRect
       let rect = {
         ...BASE_MENU_RECT,
         bottom: BASE_MENU_RECT.top + BASE_MENU_RECT.height,
         left: BASE_MENU_RECT.right - BASE_MENU_RECT.width,
       };
       if (uni.getMenuButtonBoundingClientRect) {
-        rect = wx.getMenuButtonBoundingClientRect();
+        rect = uni.getMenuButtonBoundingClientRect();
       }
 
       this._menuRect = rect;
@@ -208,16 +208,16 @@ export default uniComponent({
     },
 
     onMenuButtonBoundingClientRectWeightChange() {
-      if (wx.onMenuButtonBoundingClientRectWeightChange) {
+      if (uni.onMenuButtonBoundingClientRectWeightChange) {
         this.onMenuButtonBoundingClientRectWeightChangeCallback = res => this.queryElements(res);
 
-        wx.onMenuButtonBoundingClientRectWeightChange(this.onMenuButtonBoundingClientRectWeightChangeCallback);
+        uni.onMenuButtonBoundingClientRectWeightChange(this.onMenuButtonBoundingClientRectWeightChangeCallback);
       }
     },
 
     offMenuButtonBoundingClientRectWeightChange() {
       if (this.onMenuButtonBoundingClientRectWeightChangeCallback) {
-        wx.offMenuButtonBoundingClientRectWeightChange(this.onMenuButtonBoundingClientRectWeightChangeCallback);
+        uni.offMenuButtonBoundingClientRectWeightChange(this.onMenuButtonBoundingClientRectWeightChangeCallback);
       }
     },
 
@@ -246,7 +246,7 @@ export default uniComponent({
       const that = this;
       this.$emit('go-back');
       if (delta > 0) {
-        wx.navigateBack({
+        uni.navigateBack({
           delta,
           fail(e) {
             that.$emit('fail', e);

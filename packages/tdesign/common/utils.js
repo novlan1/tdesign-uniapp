@@ -131,8 +131,9 @@ export const getRect = function (context, selector, needAll = false, useH5Origin
 
 
 export const getTreeDepth = (tree, key) => tree.reduce((maxDepth, node) => {
-  if (node[key ?? 'children'] && node[key ?? 'children'].length > 0) {
-    return Math.max(maxDepth, getTreeDepth(node[key ?? 'children'], key) + 1);
+  const keyName = coalesce(key, 'children');
+  if (node[keyName] && node[keyName].length > 0) {
+    return Math.max(maxDepth, getTreeDepth(node[keyName], key) + 1);
   }
   return Math.max(maxDepth, 1);
 }, 0);
@@ -156,7 +157,7 @@ export const addUnit = function (value) {
  * @returns 当没有传入maxCharacter/maxLength 时返回字符串字符长度，当传入maxCharacter/maxLength时返回截取之后的字符串和长度。
  */
 export const getCharacterLength = (type, char, max) => {
-  const str = String(char ?? '');
+  const str = String(coalesce(char, ''));
 
   if (str.length === 0) {
     return {
@@ -225,11 +226,11 @@ export const getInstance = function (context, selector) {
 export const unitConvert = (value) => {
   if (typeof value === 'string') {
     if (value.includes('rpx')) {
-      return (parseInt(value, 10) * (systemInfo?.screenWidth ?? 750)) / 750;
+      return (parseInt(value, 10) * (coalesce(systemInfo?.screenWidth, 750))) / 750;
     }
     return parseInt(value, 10);
   }
-  return value ?? 0;
+  return coalesce(value, 0);
 };
 
 export const setIcon = (iconName, icon, defaultIcon) => {
@@ -293,7 +294,9 @@ export const isOverSize = (size, sizeLimit) => {
     MB: base * base,
     GB: base * base * base,
   };
-  const computedSize =    typeof sizeLimit === 'number' ? sizeLimit * base : sizeLimit?.size * unitMap[sizeLimit?.unit ?? 'KB']; // 单位 KB
+  const computedSize = typeof sizeLimit === 'number'
+    ? sizeLimit * base
+    : sizeLimit?.size * unitMap[coalesce(sizeLimit?.unit, 'KB')]; // 单位 KB
 
   return size > computedSize;
 };
@@ -305,3 +308,20 @@ export const nextTick = () => new Promise((resolve) => {
     resolve();
   }, 33);
 });
+
+/**
+ * 多参数空值合并函数
+ * @param {...any} args - 任意数量的参数
+ * @returns {any} 第一个非null/undefined的参数值
+ */
+export function coalesce(...args) {
+  // 遍历所有参数
+  for (let i = 0; i < args.length; i++) {
+    // 返回第一个非null且非undefined的值
+    if (args[i] !== null && args[i] !== undefined) {
+      return args[i];
+    }
+  }
+  // 如果所有参数都是null/undefined，返回最后一个参数
+  return args[args.length - 1];
+}

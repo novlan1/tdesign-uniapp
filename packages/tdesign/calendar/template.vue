@@ -130,8 +130,8 @@
         <t-button
           :t-id="innerConfirmBtn.tId"
           :custom-style="innerConfirmBtn.style"
-          :block="innerConfirmBtn.block ?? true"
-          :t-class="innerConfirmBtn.tClass ?? prefix + '-class-action'"
+          :block="coalesce(innerConfirmBtn.block, true)"
+          :t-class="coalesce(coalesce(innerConfirmBtn.tClass, prefix + '-class-action'))"
           :class="prefix + '-calendar__confirm-btn'"
           :disabled="innerConfirmBtn.disabled"
           :data-type="'action'"
@@ -141,7 +141,7 @@
           :icon="innerConfirmBtn.icon"
           :loading="innerConfirmBtn.loading"
           :loading-props="innerConfirmBtn.loadingProps"
-          :theme="innerConfirmBtn.theme ?? 'primary'"
+          :theme="coalesce(innerConfirmBtn.theme, 'primary')"
           :ghost="innerConfirmBtn.ghost"
           :shape="innerConfirmBtn.shape"
           :size="innerConfirmBtn.size"
@@ -183,6 +183,7 @@ import {
 } from './computed.js';
 import CalendarHeader from './calendar-header.vue';
 import { prefix } from '../common/config';
+import { coalesce } from '../common/utils';
 import props from './template.props';
 
 
@@ -217,6 +218,7 @@ export default {
 
   },
   methods: {
+    coalesce,
     getDateLabel,
     getMonthTitle,
     onTplButtonTap() {

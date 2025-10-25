@@ -48,6 +48,7 @@
 import tPicker from '../picker/picker';
 import tPickerItem from '../picker-item/picker-item';
 import { prefix } from '../common/config';
+import { coalesce } from '../common/utils';
 import { uniComponent } from '../common/src/index';
 import props from './props';
 import dayjsLocaleMap from './locale/dayjs';
@@ -115,7 +116,7 @@ export default uniComponent({
       dayjsLocale: dayjsLocaleMap[defaultLocale].key, // dayjs 自适应的 key
       _,
 
-      dataValue: this.value ?? this.defaultValue,
+      dataValue: coalesce(this.value, this.defaultValue),
     };
   },
   watch: {
@@ -169,7 +170,7 @@ export default uniComponent({
       const startOfMonth = date.startOf('month');
       const minEdge = this.getOptionEdge('min', type);
       const maxEdge = this.getOptionEdge('max', type);
-      const step = steps?.[type] ?? 1;
+      const step = coalesce(steps?.[type], 1);
       const daysOfWeek = [];
 
       for (let i = minEdge; i <= maxEdge; i += step) {
@@ -277,7 +278,7 @@ export default uniComponent({
 
       const minEdge = this.getOptionEdge('min', type);
       const maxEdge = this.getOptionEdge('max', type);
-      const step = steps?.[type] ?? 1;
+      const step = coalesce(steps?.[type], 1);
       const dayjsMonthsShort = dayjs().locale(this.dayjsLocale)
         .localeData()
         .monthsShort();

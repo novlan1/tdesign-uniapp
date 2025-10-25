@@ -209,7 +209,7 @@ import { uniComponent } from '../common/src/index';
 import props from './props';
 import { prefix } from '../common/config';
 import { isFunction, isNumber } from '../common/validator';
-import { debounce, getRect, rpx2px, styles, unitConvert, nextTick, systemInfo } from '../common/utils';
+import { debounce, getRect, rpx2px, styles, unitConvert, nextTick, systemInfo, coalesce } from '../common/utils';
 import ContentComp from './content.vue';
 
 import useCustomNavbar from '../mixins/using-custom-navbar';
@@ -306,8 +306,8 @@ export default uniComponent({
         return;
       }
 
-      const modeType = (step.mode ?? this.mode) === 'dialog' ? 'dialog' : 'popover';
-      const showOverlay = step.showOverlay ?? this.showOverlay;
+      const modeType = (coalesce(step.mode, this.mode)) === 'dialog' ? 'dialog' : 'popover';
+      const showOverlay = coalesce(step.showOverlay, this.showOverlay);
       this.nonOverlay = !showOverlay;
       this.modeType = modeType;
 
@@ -317,7 +317,7 @@ export default uniComponent({
         const rect = await step.element();
         console.log('rect', rect);
         if (!rect) return;
-        const highlightPadding = rpx2px(step.highlightPadding ?? this.highlightPadding);
+        const highlightPadding = rpx2px(coalesce(step.highlightPadding, this.highlightPadding));
         const referenceTop = rect.top - highlightPadding;
         const referenceRight = systemInfo.windowWidth - rect.right - highlightPadding;
         const referenceLeft = rect.left - highlightPadding;
@@ -335,8 +335,8 @@ export default uniComponent({
         // this._current = this.current;
         this.visible = true;
         this.referenceStyle = styles(style);
-        this.title = step.title ?? '';
-        this.body = step.body ?? '';
+        this.title = coalesce(step.title, '');
+        this.body = coalesce(step.body, '');
         this.makeButtonProps(step, 'popover');
 
         const popoverStyle = await this.placementOffset(step, style);
@@ -345,8 +345,8 @@ export default uniComponent({
         this._steps = this.steps;
         // this._current = this.current;
         this.visible = true;
-        this.title = step.title ?? '';
-        this.body = step.body ?? '';
+        this.title = coalesce(step.title, '');
+        this.body = coalesce(step.body, '');
         this.makeButtonProps(step, 'dialog');
       }
     },
@@ -357,7 +357,7 @@ export default uniComponent({
       return styles({ position: 'absolute', ...style });
     },
     makeButtonProps(step, mode) {
-      let skipButton = step.skipButtonProps ?? this.skipButtonProps;
+      let skipButton = coalesce(step.skipButtonProps, this.skipButtonProps);
       const size = mode === 'popover' ? 'extra-small' : 'medium';
       skipButton = {
         theme: 'light',
@@ -367,7 +367,7 @@ export default uniComponent({
         tClass: `${prefix}-class-skip ${name}__button ${skipButton?.class || ''}`,
         type: 'skip',
       };
-      let nextButton = step.nextButtonProps ?? this.nextButtonProps;
+      let nextButton = coalesce(step.nextButtonProps, this.nextButtonProps);
       nextButton = {
         theme: 'primary',
         content: '下一步',
@@ -377,7 +377,7 @@ export default uniComponent({
         type: 'next',
       };
       nextButton = { ...nextButton, content: this.buttonContent(nextButton) };
-      let backButton = step.backButtonProps ?? this.backButtonProps;
+      let backButton = coalesce(step.backButtonProps, this.backButtonProps);
       backButton = {
         theme: 'light',
         content: '返回',
@@ -386,7 +386,7 @@ export default uniComponent({
         tClass: `${prefix}-class-back ${name}__button ${backButton?.class || ''}`,
         type: 'back',
       };
-      let finishButton = step.finishButtonProps ?? this.finishButtonProps;
+      let finishButton = coalesce(step.finishButtonProps, this.finishButtonProps);
       finishButton = {
         theme: 'primary',
         content: '完成',

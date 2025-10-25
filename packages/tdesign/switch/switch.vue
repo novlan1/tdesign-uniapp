@@ -43,6 +43,7 @@ import tIcon from '../icon/icon';
 import tLoading from '../loading/loading';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
+import { coalesce } from '../common/utils';
 import props from './props';
 import _ from '../common/utils.wxs';
 
@@ -78,7 +79,7 @@ export default uniComponent({
       checked: false,
       _,
 
-      dataValue: this.value ?? this.defaultValue,
+      dataValue: coalesce(this.value, this.defaultValue),
     };
   },
   watch: {

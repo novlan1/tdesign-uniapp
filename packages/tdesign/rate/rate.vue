@@ -118,7 +118,7 @@ import tIcon from '../icon/icon';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
-import { unitConvert, getRect } from '../common/utils';
+import { unitConvert, getRect, coalesce } from '../common/utils';
 import _ from '../common/utils.wxs';
 import utils from './computed.js';
 import { parseEventDynamicCode } from '../common/event/dynamic';
@@ -159,7 +159,7 @@ export default uniComponent({
 
       _,
       utils,
-      dataValue: this.value ?? this.defaultValue,
+      dataValue: coalesce(this.value, this.defaultValue),
     };
   },
   watch: {

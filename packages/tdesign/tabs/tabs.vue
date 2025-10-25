@@ -141,7 +141,7 @@ import { uniComponent } from '../common/src/index';
 import props from './props';
 import { prefix } from '../common/config';
 import touch from '../mixins/touch';
-import { getRect, uniqueFactory } from '../common/utils';
+import { getRect, uniqueFactory, coalesce } from '../common/utils';
 import { getObserver } from '../common/wechat';
 import _ from '../common/utils.wxs';
 import { ParentMixin, RELATION_MAP } from '../common/relation';
@@ -223,7 +223,7 @@ export default uniComponent({
       placement: 'top',
       _,
 
-      dataValue: this.value ?? this.defaultValue,
+      dataValue: coalesce(this.value, this.defaultValue),
     };
   },
   methods: {

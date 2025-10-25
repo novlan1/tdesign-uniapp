@@ -53,7 +53,7 @@
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
-import { getCharacterLength } from '../common/utils';
+import { getCharacterLength, coalesce } from '../common/utils';
 import _ from '../common/utils.wxs';
 import { textareaStyle } from './computed.js';
 // import { getInnerMaxLen } from '../input/utils';
@@ -79,7 +79,7 @@ export default uniComponent({
       count: 0,
       _,
 
-      dataValue: this.value ?? this.defaultValue ?? '',
+      dataValue: coalesce(this.value, this.defaultValue, ''),
       // innerMaxLen: -1,
       // rawValue: '',
     };
@@ -97,7 +97,7 @@ export default uniComponent({
   },
   mounted() {
     const { value, defaultValue } = this;
-    this.updateValue(value ?? defaultValue ?? '');
+    this.updateValue(coalesce(value, defaultValue, ''));
   },
   methods: {
     textareaStyle,

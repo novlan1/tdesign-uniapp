@@ -135,7 +135,7 @@ export default uniComponent({
       return getRect(this, `.${name}__content`)
         .then(rect => rect.height)
         .then((height) => {
-          const animation = wx.createAnimation({
+          const animation = uni.createAnimation({
             duration: 0,
             timingFunction: 'ease-in-out',
           });

@@ -82,12 +82,12 @@
                 <t-button
                   :t-id="actionItem.tId"
                   :custom-style="actionItem.style"
-                  :block="actionItem.block ?? true"
-                  :t-class="actionItem.tClass ?? prefix + '-class-action'"
+                  :block="coalesce(actionItem.block, true)"
+                  :t-class="coalesce(actionItem.tClass, prefix + '-class-action')"
                   :class="getActionClass(classPrefix, dataButtonLayout)"
                   :disabled="actionItem.disabled"
                   :data-type="'action'"
-                  :data-extra="actionItem.index ?? index"
+                  :data-extra="coalesce(actionItem.index, index)"
                   :custom-dataset="actionItem.customDataset"
                   :content="actionItem.content"
                   :icon="actionItem.icon"
@@ -233,7 +233,7 @@ import tButton from '../button/button';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
-import { toCamel } from '../common/utils';
+import { toCamel, coalesce } from '../common/utils';
 import { isObject } from '../common/validator';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
@@ -288,6 +288,7 @@ export default uniComponent({
     },
   },
   methods: {
+    coalesce,
     getActionClass,
     onWatchBtn(confirm, cancel) {
       const { prefix, classPrefix, dataButtonLayout } = this;

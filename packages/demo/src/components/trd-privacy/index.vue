@@ -119,7 +119,7 @@ defineExpose({
   showPrivacyWin,
 });
 
-const onReady = () => {
+const checkPrivacy = () => {
   const TIMIShowPrivacy = uni.getStorageSync('TIMIShowPrivacy');
   // #ifdef MP-WEIXIN
   if (!TIMIShowPrivacy) {
@@ -128,7 +128,7 @@ const onReady = () => {
   // #endif
 };
 onMounted(() => {
-  onReady();
+  checkPrivacy();
 });
 </script>
 <style lang="less" src="./index.less"></style>

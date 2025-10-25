@@ -26,7 +26,7 @@ const useCustomNavbarBehavior = {
       let distance = 0;
       // #ifndef H5
       // #ifndef APP-PLUS
-      const menuButton = wx.getMenuButtonBoundingClientRect();
+      const menuButton = uni.getMenuButtonBoundingClientRect();
       distance = menuButton.top + menuButton.bottom - statusBarHeight;
       // #endif
       // #endif

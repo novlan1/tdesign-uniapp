@@ -6,7 +6,7 @@
       :visible="visible && dataVisible"
       placement="bottom"
       :using-custom-navbar="usingCustomNavbar || popupProps?.usingCustomNavbar"
-      :custom-navbar-height="customNavbarHeight ?? popupProps?.usingCustomNavbar"
+      :custom-navbar-height="coalesce(customNavbarHeight, popupProps?.usingCustomNavbar)"
       :z-index="popupProps?.zIndex || defaultPopUpzIndex"
       :overlay-props="popupProps?.overlayProps || defaultPopUpProps"
       @visible-change="onPopupChange"
@@ -100,7 +100,7 @@
 <script>
 import tPopup from '../popup/popup';
 import { uniComponent } from '../common/src/index';
-import { rpx2px } from '../common/utils';
+import { rpx2px, coalesce } from '../common/utils';
 import { prefix } from '../common/config';
 import props from './props';
 import useCustomNavbar from '../mixins/using-custom-navbar';
@@ -137,7 +137,7 @@ export default uniComponent({
       pickItemHeight: 0,
       _,
 
-      dataValue: this.value ?? this.defaultValue,
+      dataValue: coalesce(this.value, this.defaultValue),
       dataVisible: this.visible,
     };
   },
@@ -187,7 +187,7 @@ export default uniComponent({
       const { value, defaultValue } = this;
 
       this.children?.forEach((child, index) => {
-        child.value = value?.[index] ?? defaultValue?.[index] ?? '';
+        child.value = coalesce(value?.[index], defaultValue?.[index], '');
         child.columnIndex = index;
         child.pickItemHeight = pickItemHeight;
 

@@ -114,7 +114,7 @@ import tScrollView from '../scroll-view/scroll-view.vue';
 import { uniComponent } from '../common/src/index';
 import { isDef } from '../common/validator';
 import { prefix } from '../common/config';
-import { getTreeDepth } from '../common/utils';
+import { getTreeDepth, coalesce } from '../common/utils';
 import props from './props';
 import _ from '../common/utils.wxs';
 import { getTreeClass } from './computed.js';
@@ -157,7 +157,7 @@ export default uniComponent({
       scrollIntoView: null,
       _,
 
-      innerValue: this.value ?? this.defaultValue,
+      innerValue: coalesce(this.value, this.defaultValue),
     };
   },
   computed: {
@@ -215,9 +215,9 @@ export default uniComponent({
 
         treeOptions.push(currentLevelOptions);
 
-        const currentValue = customValue?.[level] ?? value?.[level];
+        const currentValue = coalesce(customValue?.[level], value?.[level]);
         currentNode = currentValue
-          ? currentLevelOptions.find(child => child.value === currentValue) ?? currentLevelOptions[0]
+          ? coalesce(currentLevelOptions.find(child => child.value === currentValue), currentLevelOptions[0])
           : currentLevelOptions[0];
       }
 
@@ -234,7 +234,7 @@ export default uniComponent({
         || treeOptions.map((levelOptions, idx) => {
           const isLastLevel = idx === treeOptions.length - 1;
           const defaultValue = isLastLevel && multiple ? [levelOptions[0]?.value] : levelOptions[0]?.value;
-          return value?.[idx] ?? defaultValue;
+          return coalesce(value?.[idx], defaultValue);
         });
 
       this.innerValue = innerValue;
