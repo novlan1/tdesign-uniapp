@@ -34,7 +34,7 @@ export const DEFAULT_IMG_SCALE = 0.1;
  * @param margin
  * @returns
  */
-export const generatePath = (modules: Modules, margin: number = 0) => {
+export const generatePath = (modules: Modules, margin = 0) => {
   const ops: string[] = [];
   modules.forEach((row, y) => {
     let start: number | null = null;
@@ -71,18 +71,17 @@ export const generatePath = (modules: Modules, margin: number = 0) => {
  * @param excavation
  * @returns
  */
-export const excavateModules = (modules: Modules, excavation: Excavation) =>
-  modules.slice().map((row, y) => {
-    if (y < excavation.y || y >= excavation.y + excavation.h) {
-      return row;
+export const excavateModules = (modules: Modules, excavation: Excavation) => modules.slice().map((row, y) => {
+  if (y < excavation.y || y >= excavation.y + excavation.h) {
+    return row;
+  }
+  return row.map((cell, x) => {
+    if (x < excavation.x || x >= excavation.x + excavation.w) {
+      return cell;
     }
-    return row.map((cell, x) => {
-      if (x < excavation.x || x >= excavation.x + excavation.w) {
-        return cell;
-      }
-      return false;
-    });
+    return false;
   });
+});
 
 /**
  * Get image settings
@@ -118,7 +117,7 @@ export const getImageSettings = (
   const y = imageSettings.y == null ? cells.length / 2 - h / 2 : imageSettings.y * scale;
   const opacity = imageSettings.opacity == null ? 1 : imageSettings.opacity;
 
-  let excavation = null;
+  let excavation: null | { x: number; y: number; w: number; h: number; } = null;
   if (imageSettings.excavate) {
     const floorX = Math.floor(x);
     const floorY = Math.floor(y);
@@ -151,7 +150,7 @@ export const getMarginSize = (needMargin: boolean, marginSize?: number) => {
 export const isSupportPath2d = (() => {
   try {
     new Path2D().addPath(new Path2D());
-  } catch {
+  } catch (e) {
     return false;
   }
   return true;

@@ -271,7 +271,7 @@ import tImage from '../image/image';
 import { uniComponent } from '../common/src/index';
 import props from './props';
 import { prefix } from '../common/config';
-import { isOverSize } from '../common/utils';
+import { isOverSize, coalesce } from '../common/utils';
 import { isObject } from '../common/validator';
 import _ from '../common/utils.wxs';
 import {
@@ -594,11 +594,11 @@ export default uniComponent({
       const { index } = e.currentTarget.dataset;
       const urls = this.customFiles.filter(file => file.percent !== -1).map(file => file.url);
       const current = this.customFiles[index]?.url;
-      wx.previewImage({
+      uni.previewImage({
         urls,
         current,
         fail() {
-          wx.showToast({ title: '预览图片失败', icon: 'none' });
+          uni.showToast({ title: '预览图片失败', icon: 'none' });
         },
       });
     },
@@ -606,11 +606,11 @@ export default uniComponent({
     onPreviewMedia(e) {
       const { index: current } = e.currentTarget.dataset;
       const sources = this.getPreviewMediaSources();
-      wx.previewMedia({
+      uni.previewMedia({
         sources,
         current,
         fail() {
-          wx.showToast({ title: '预览视频失败', icon: 'none' });
+          uni.showToast({ title: '预览视频失败', icon: 'none' });
         },
       });
     },
@@ -686,7 +686,7 @@ export default uniComponent({
               if (typeof sizeLimit !== 'number') {
                 title = sizeLimit.message.replace('{sizeLimit}', sizeLimit?.size);
               }
-              wx.showToast({ icon: 'none', title });
+              uni.showToast({ icon: 'none', title });
               return;
             }
 
@@ -718,7 +718,7 @@ export default uniComponent({
     chooseMessageFile(mediaType) {
       const { customLimit } = this;
       const { config, sizeLimit } = this;
-      wx.chooseMessageFile({
+      uni.chooseMessageFile({
         count: Math.min(100, customLimit),
         type: Array.isArray(mediaType) ? 'all' : mediaType,
         ...config,
@@ -735,7 +735,7 @@ export default uniComponent({
               if (typeof sizeLimit !== 'number') {
                 title = sizeLimit.message.replace('{sizeLimit}', sizeLimit?.size);
               }
-              wx.showToast({ icon: 'none', title });
+              uni.showToast({ icon: 'none', title });
               return;
             }
 
@@ -768,10 +768,10 @@ export default uniComponent({
     dragVibrate(e) {
       const { vibrateType } = e;
       const { draggable } = this;
-      const dragVibrate = draggable?.vibrate ?? true;
+      const dragVibrate = coalesce(draggable?.vibrate, true);
       const dragCollisionVibrate = draggable?.collisionVibrate;
       if ((dragVibrate && vibrateType === 'longPress') || (dragCollisionVibrate && vibrateType === 'touchMove')) {
-        wx.vibrateShort({
+        uni.vibrateShort({
           type: 'light',
         });
       }

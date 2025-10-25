@@ -197,7 +197,7 @@ import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import { trimSingleValue, trimValue } from './tool';
 import props from './props';
-import { getRect } from '../common/utils';
+import { getRect, coalesce } from '../common/utils';
 import Bus from '../common/bus';
 import _ from '../common/utils.wxs';
 import { getValue } from './computed.js';
@@ -299,7 +299,7 @@ export default uniComponent({
   mounted() {
     const { value, defaultValue } = this;
     // if (!value)
-    this.handlePropsChange(value ?? defaultValue ?? 0);
+    this.handlePropsChange(coalesce(value, defaultValue, 0));
     this.init();
     this.injectPageScroll();
   },

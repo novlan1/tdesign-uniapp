@@ -34,6 +34,7 @@
 import tCheckbox from '../checkbox/checkbox';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
+import { coalesce } from '../common/utils';
 import props from './props';
 import _ from '../common/utils.wxs';
 import { ParentMixin, RELATION_MAP } from '../common/relation';
@@ -72,7 +73,7 @@ export default uniComponent({
       checkboxOptions: [],
       _,
 
-      dataValue: this.value ?? this.defaultValue,
+      dataValue: coalesce(this.value, this.defaultValue),
     };
   },
   watch: {
@@ -198,9 +199,9 @@ export default uniComponent({
           }
           : {
             ...item,
-            label: item[keys?.label ?? 'label'],
-            value: item[keys?.value ?? 'value'],
-            checked: value?.includes(item[keys?.value ?? 'value']),
+            label: item[coalesce(keys?.label, 'label')],
+            value: item[coalesce(keys?.value, 'value')],
+            checked: value?.includes(item[coalesce(keys?.value, 'value')]),
           };
       });
 

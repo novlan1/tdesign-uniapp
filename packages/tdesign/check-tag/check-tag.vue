@@ -53,7 +53,7 @@ import tIcon from '../icon/icon';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
-import { classNames, calcIcon } from '../common/utils';
+import { classNames, calcIcon, coalesce } from '../common/utils';
 import _ from '../common/utils.wxs';
 
 
@@ -84,7 +84,7 @@ export default uniComponent({
       _,
       _icon: null,
 
-      dataChecked: this.checked ?? this.defaultChecked,
+      dataChecked: coalesce(this.checked, this.defaultChecked),
     };
   },
   watch: {

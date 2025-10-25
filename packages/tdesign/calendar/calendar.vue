@@ -66,6 +66,8 @@ import CalendarTemplate from './template.vue';
 
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
+import { coalesce } from '../common/utils';
+
 import props from './props';
 import TCalendar from '../common/shared/calendar/index';
 import useCustomNavbar from '../mixins/using-custom-navbar';
@@ -132,7 +134,7 @@ export default uniComponent({
       _,
 
       dataVisible: this.visible,
-      dataValue: this.value ?? this.defaultValue,
+      dataValue: coalesce(this.value, this.defaultValue),
       days: [],
     };
   },

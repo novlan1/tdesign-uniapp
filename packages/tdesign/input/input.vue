@@ -149,7 +149,7 @@ import tIcon from '../icon/icon';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
-import { getCharacterLength, calcIcon } from '../common/utils';
+import { getCharacterLength, calcIcon, coalesce } from '../common/utils';
 import { isDef } from '../common/validator';
 import { getInputClass } from './computed.js';
 import _ from '../common/utils.wxs';
@@ -194,7 +194,7 @@ export default uniComponent({
       showClearIcon: true,
       _,
 
-      dataValue: this.value ?? this.defaultValue,
+      dataValue: coalesce(this.value, this.defaultValue),
 
       // rawValue: '',
       // innerMaxLen: -1,
@@ -242,7 +242,7 @@ export default uniComponent({
   },
   mounted() {
     const { value, defaultValue } = this;
-    this.updateValue(value ?? defaultValue ?? '');
+    this.updateValue(coalesce(value, defaultValue, ''));
 
     this.updateClearIconVisible();
   },

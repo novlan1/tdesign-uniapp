@@ -88,6 +88,7 @@
 <script>
 import tIcon from '../icon/icon';
 import { uniComponent } from '../common/src/index';
+import { coalesce } from '../common/utils';
 import { prefix } from '../common/config';
 import props from './props';
 import _ from '../common/utils.wxs';
@@ -135,7 +136,7 @@ export default uniComponent({
 
       dataBorderless: this.borderless,
       dataIndeterminate: this.indeterminate,
-      dataChecked: this.checked ?? this.defaultChecked,
+      dataChecked: coalesce(this.checked, this.defaultChecked),
     };
   },
   watch: {
@@ -178,7 +179,7 @@ export default uniComponent({
         _disabled: this.disabled == null ? disabled : this.disabled,
       };
 
-      data.dataBorderless = !!(this.borderless ?? borderless);
+      data.dataBorderless = !!(coalesce(this.borderless, borderless));
 
       data.dataChecked = this.dataChecked || checkedFromParent;
       if (this.dataChecked) {

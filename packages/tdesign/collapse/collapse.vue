@@ -13,6 +13,7 @@
 <script>
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
+import { coalesce } from '../common/utils';
 import props from './props';
 import _ from '../common/utils.wxs';
 import { ParentMixin, RELATION_MAP } from '../common/relation';
@@ -40,7 +41,7 @@ export default uniComponent({
       classPrefix: name,
       _,
       border: false,
-      dataValue: this.value ?? this.defaultValue,
+      dataValue: coalesce(this.value, this.defaultValue),
       mounted: false,
     };
   },

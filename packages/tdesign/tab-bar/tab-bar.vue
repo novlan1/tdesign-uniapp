@@ -11,6 +11,7 @@
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
+import { coalesce } from '../common/utils';
 import { ParentMixin, RELATION_MAP } from '../common/relation';
 import _ from '../common/utils.wxs';
 
@@ -37,7 +38,7 @@ export default uniComponent({
       classPrefix,
       _,
 
-      dataValue: this.value ?? this.defaultValue,
+      dataValue: coalesce(this.value, this.defaultValue),
     };
   },
   watch: {

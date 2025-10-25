@@ -13,6 +13,8 @@
   "scripts": {
     "dev": "concurrently \"npm run watch\" \"pnpm --filter=\"./packages/demo\" dev:h5\" \"pnpm --filter=\"./packages/site\" dev\"",
     "dev:mp-weixin": "concurrently \"npm run watch\" \"pnpm --filter=\"./packages/demo\" dev:mp-weixin\"",
+    "dev:mp-alipay": "concurrently \"npm run watch\" \"pnpm --filter=\"./packages/demo\" dev:mp-alipay\"",
+    "dev:mp-toutiao": "concurrently \"npm run watch\" \"pnpm --filter=\"./packages/demo\" dev:mp-toutiao\"",
     "dev:mp": "npm run dev:mp-weixin",
     "dev:mp:pure": "pnpm --filter=\"./packages/demo\" dev:mp-weixin",
     "build": "pnpm --filter=\"./packages/site\" build && pnpm --filter=\"./packages/demo\" build:h5",

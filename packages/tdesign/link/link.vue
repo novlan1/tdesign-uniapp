@@ -78,7 +78,7 @@ import tIcon from '../icon/icon';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
-import { calcIcon } from '../common/utils';
+import { calcIcon, coalesce } from '../common/utils';
 import _ from '../common/utils.wxs';
 
 
@@ -128,7 +128,7 @@ export default uniComponent({
     setClass() {
       const { theme, size, underline, navigatorProps, disabled } = this;
       const classList = [name, `${name}--${theme}`, `${name}--${size}`];
-      const { url, appId, shortLink, target, openType } = navigatorProps ?? {};
+      const { url, appId, shortLink, target, openType } = coalesce(navigatorProps, {});
       const condition = !(url || (target === 'miniProgram' && (appId || shortLink)));
 
       if (underline) {

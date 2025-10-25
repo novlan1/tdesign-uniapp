@@ -111,11 +111,11 @@ export default uniComponent({
       }
 
       // 注意：此方法在非小程序环境需要适配
-      if (typeof wx !== 'undefined' && wx.canvasToTempFilePath) {
-        wx.canvasToTempFilePath({
+      if (typeof wx !== 'undefined' && uni.canvasToTempFilePath) {
+        uni.canvasToTempFilePath({
           canvas: this.canvasNode,
           success: (res) => {
-            wx.saveImageToPhotosAlbum({ filePath: res.tempFilePath });
+            uni.saveImageToPhotosAlbum({ filePath: res.tempFilePath });
           },
           fail: (err) => {
             console.error('canvasToTempFilePath failed', err);

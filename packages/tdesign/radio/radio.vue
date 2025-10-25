@@ -93,6 +93,7 @@
 <script>
 import tIcon from '../icon/icon';
 import { prefix } from '../common/config';
+import { coalesce } from '../common/utils';
 import { uniComponent } from '../common/src/index';
 import props from './props';
 import _ from '../common/utils.wxs';
@@ -143,7 +144,7 @@ export default uniComponent({
       _readonly: false,
       _,
 
-      dataChecked: this.checked ?? this.defaultChecked,
+      dataChecked: coalesce(this.checked, this.defaultChecked),
     };
   },
   watch: {

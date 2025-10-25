@@ -128,7 +128,7 @@ import tRadioGroup from '../radio-group/radio-group';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
-import { getRect } from '../common/utils';
+import { getRect, coalesce } from '../common/utils';
 
 import _ from '../common/utils.wxs';
 
@@ -136,8 +136,8 @@ import _ from '../common/utils.wxs';
 const name = `${prefix}-cascader`;
 
 function parseOptions(options, keys) {
-  const label = keys?.label ?? 'label';
-  const value = keys?.value ?? 'value';
+  const label = coalesce(keys?.label, 'label');
+  const value = coalesce(keys?.value, 'value');
 
   return options.map(item => ({
     [label]: item[label],
@@ -187,7 +187,7 @@ export default uniComponent({
       _,
 
       dataVisible: this.visible,
-      dataValue: this.value ?? this.defaultValue,
+      dataValue: coalesce(this.value, this.defaultValue),
       items: [],
     };
   },
@@ -338,11 +338,11 @@ export default uniComponent({
 
       for (let i = 0, size = options.length; i < size; i += 1) {
         const opt = options[i];
-        if (opt[keys?.value ?? 'value'] === value) {
+        if (opt[coalesce(keys?.value, 'value')] === value) {
           return [i];
         }
-        if (opt[keys?.children ?? 'children']) {
-          const res = this.getIndexesByValue(opt[keys?.children ?? 'children'], value);
+        if (opt[coalesce(keys?.children, 'children')]) {
+          const res = this.getIndexesByValue(opt[coalesce(keys?.children, 'children')], value);
           if (res) {
             return [i, ...res];
           }
@@ -393,13 +393,13 @@ export default uniComponent({
         for (let i = 0, size = selectedIndexes.length; i < size; i += 1) {
           const index = selectedIndexes[i];
           const next = current[index];
-          current = next[keys?.children ?? 'children'];
+          current = next[coalesce(keys?.children, 'children')];
 
-          selectedValue.push(next[keys?.value ?? 'value']);
-          steps.push(next[keys?.label ?? 'label']);
+          selectedValue.push(next[coalesce(keys?.value, 'value')]);
+          steps.push(next[coalesce(keys?.label, 'label')]);
 
-          if (next[keys?.children ?? 'children']) {
-            items.push(parseOptions(next[keys?.children ?? 'children'], keys));
+          if (next[coalesce(keys?.children, 'children')]) {
+            items.push(parseOptions(next[coalesce(keys?.children, 'children')], keys));
           }
         }
       }
@@ -418,28 +418,28 @@ export default uniComponent({
       const { checkStrictly } = this;
       const { selectedIndexes, items, keys, options, selectedValue } = this;
 
-      const index = items[level].findIndex(item => item[keys?.value ?? 'value'] === value);
+      const index = items[level].findIndex(item => item[coalesce(keys?.value, 'value')] === value);
 
       let item = selectedIndexes.slice(0, level).reduce((acc, item, index) => {
         if (index === 0) {
           return acc[item];
         }
-        return acc[keys?.children ?? 'children'][item];
+        return acc[coalesce(keys?.children, 'children')][item];
       }, options);
 
 
       if (level === 0) {
         item = item[index];
       } else {
-        item = item[keys?.children ?? 'children'][index];
+        item = item[coalesce(keys?.children, 'children')][index];
       }
 
       if (item.disabled) {
         return;
       }
       this.$emit('pick', {
-        value: item[keys?.value ?? 'value'],
-        label: item[keys?.label ?? 'label'],
+        value: item[coalesce(keys?.value, 'value')],
+        label: item[coalesce(keys?.label, 'label')],
         index,
         level,
       });
@@ -452,7 +452,7 @@ export default uniComponent({
       selectedIndexes.length = level + 1;
 
       const { items: newItems } = this.genItems();
-      if (item?.[keys?.children ?? 'children']?.length >= 0) {
+      if (item?.[coalesce(keys?.children, 'children')]?.length >= 0) {
         this.selectedIndexes = selectedIndexes;
         this[`items[${level + 1}]`] = newItems[level + 1];
       } else {
@@ -466,7 +466,7 @@ export default uniComponent({
     triggerChange() {
       const { items, selectedValue, selectedIndexes } = this;
       this._trigger('change', {
-        value: selectedValue[selectedValue.length - 1] ?? '',
+        value: coalesce(selectedValue[selectedValue.length - 1], ''),
         selectedOptions: items.map((item, index) => item[selectedIndexes[index]]).filter(Boolean),
       });
     },

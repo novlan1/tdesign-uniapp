@@ -35,6 +35,7 @@
 <script>
 import tRadio from '../radio/radio';
 import { prefix } from '../common/config';
+import { coalesce } from '../common/utils';
 import { uniComponent } from '../common/src/index';
 import props from './props';
 import _ from '../common/utils.wxs';
@@ -69,7 +70,7 @@ export default uniComponent({
       radioOptions: [],
       _,
 
-      dataValue: this.value ?? this.defaultValue,
+      dataValue: coalesce(this.value, this.defaultValue),
     };
   },
   watch: {
@@ -164,9 +165,9 @@ export default uniComponent({
           } else if (typeName === 'object') {
             optionsValue.push({
               ...element,
-              label: element[keys?.label ?? 'label'],
-              value: element[keys?.value ?? 'value'],
-              checked: value === element[keys?.value ?? 'value'],
+              label: element[coalesce(keys?.label, 'label')],
+              value: element[coalesce(keys?.value, 'value')],
+              checked: value === element[coalesce(keys?.value, 'value')],
               disabled: element.disabled || disabled,
               readonly: element.readonly || readonly,
             });

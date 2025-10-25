@@ -1,4 +1,4 @@
-import { getInstance } from '../common/utils';
+import { getInstance, coalesce } from '../common/utils';
 
 type Context = WechatMiniprogram.Page.TrivialInstance | WechatMiniprogram.Component.TrivialInstance;
 
@@ -25,7 +25,7 @@ function Toast(options: ToastOptionsType) {
   if (instance) {
     instance.show({
       ...Options,
-      duration: Options.duration ?? 2000,
+      duration: coalesce(Options.duration, 2000),
     });
   }
 }

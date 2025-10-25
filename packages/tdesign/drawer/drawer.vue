@@ -66,6 +66,7 @@ import tPopup from '../popup/popup';
 import tIcon from '../icon/icon';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
+import { coalesce } from '../common/utils';
 import props from './props';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
@@ -96,7 +97,7 @@ export default uniComponent({
     return {
       classPrefix: name,
       _,
-      dataVisible: this.visible ?? this.defaultVisible,
+      dataVisible: coalesce(this.visible, this.defaultVisible),
     };
   },
   watch: {

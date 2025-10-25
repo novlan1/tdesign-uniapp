@@ -234,7 +234,7 @@ export default uniComponent({
         // 与当前小程序逻辑不同
         this.setAnchorOnScroll(scrollTop);
         // } else {
-        wx.pageScrollTo({
+        uni.pageScrollTo({
           scrollTop,
           duration: 0,
         });

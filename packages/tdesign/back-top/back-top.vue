@@ -97,7 +97,7 @@ export default uniComponent({
         this[RELATION_MAP.BackTop]?.scrollToTop();
         this.hidden = true;
       } else {
-        wx.pageScrollTo({
+        uni.pageScrollTo({
           scrollTop: 0,
           duration: 300,
         });

@@ -63,7 +63,7 @@ import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
 import { transitionMixins } from '../mixins/transition';
-import { calcIcon, toCamel } from '../common/utils';
+import { calcIcon, toCamel, coalesce } from '../common/utils';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
 
@@ -145,7 +145,7 @@ export default uniComponent({
         ...options,
         realVisible: true,
         isLoading: options?.theme === 'loading',
-        _icon: calcIcon(typeMapIcon ?? options.icon),
+        _icon: calcIcon(coalesce(typeMapIcon, options.icon)),
       };
 
       const { duration } = data;
