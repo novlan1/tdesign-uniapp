@@ -1,10 +1,12 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="Tag"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo">
       <t-demo-header
         title="Tag 标签"

@@ -182,6 +182,7 @@ export default uniComponent({
     });
   },
   methods: {
+    coalesce,
     afterInnerLinked() {
       this.updateChildren();
     },

@@ -1,10 +1,12 @@
 <template>
   <view class="wrap">
     <view class="custom-navbar">
+      <!-- #ifndef MP-ALIPAY -->
       <t-navbar
         title="TDesign"
         left-arrow
       />
+      <!-- #endif -->
     </view>
     <view class="indexes">
       <t-indexes

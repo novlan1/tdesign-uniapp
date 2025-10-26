@@ -213,8 +213,8 @@
   ],
   "globalStyle": {
     "pageOrientation": "portrait",
+    "navigationBarTextStyle": "black",
     "navigationBarTitleText": "TDesign UniApp",
-    "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8",
     "navigationStyle": "custom"
   },

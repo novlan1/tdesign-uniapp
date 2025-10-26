@@ -1,14 +1,14 @@
 <template>
   <view>
     <t-avatar
-      class="avatar-example"
+      t-class="avatar-example"
       t-class-content="external-class-content"
       aria-label="字符头像"
     >
       A
     </t-avatar>
     <t-avatar
-      class="avatar-example"
+      t-class="avatar-example"
       t-class-content="external-class-content"
       shape="round"
     >

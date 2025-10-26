@@ -1,9 +1,11 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="Stepper"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo">
       <t-demo-header
         title="Stepper 步进器"
@@ -40,11 +42,11 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import minMax from './min-max';
-import status from './status';
-import theme from './theme';
-import size from './size';
+import BaseDemo from './base/index.vue';
+import minMax from './min-max/index.vue';
+import status from './status/index.vue';
+import theme from './theme/index.vue';
+import size from './size/index.vue';
 export default {
   components: {
     BaseDemo,

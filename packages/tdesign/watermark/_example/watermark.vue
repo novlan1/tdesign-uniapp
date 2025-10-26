@@ -1,9 +1,11 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="Watermark"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo">
       <t-demo-header
         title="Watermark 水印"

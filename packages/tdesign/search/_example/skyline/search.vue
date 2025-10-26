@@ -1,9 +1,11 @@
 <template>
   <view class="skyline">
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="Search"
       left-arrow
     />
+    <!-- #endif -->
     <scroll-view
       scroll-y
       type="list"
@@ -19,7 +21,7 @@
         title="01 组件类型"
         desc="基础搜索框"
       >
-        <base>
+        <baseDemo />
       </t-demo>
       <t-demo desc="字数限制">
         <maxlength />
@@ -45,14 +47,14 @@
 
 <script lang="ts">
 
-import base from '../base';
-import maxlength from '../maxlength';
-import action from '../action';
-import shape from '../shape';
-import other from '../other';
+import baseDemo from '../base/index.vue';
+import maxlength from '../maxlength/index.vue';
+import action from '../action/index.vue';
+import shape from '../shape/index.vue';
+import other from '../other/index.vue';
 export default {
   components: {
-    base,
+    baseDemo,
     maxlength,
     action,
     shape,

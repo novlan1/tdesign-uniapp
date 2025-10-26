@@ -1,10 +1,12 @@
 <template>
   <view class="skyline">
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="Steps"
       left-arrow
       :capsule="false"
     />
+    <!-- #endif -->
     <scroll-view
       scroll-y
       type="list"

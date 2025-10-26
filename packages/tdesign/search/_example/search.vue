@@ -1,9 +1,11 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="Search"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo">
       <t-demo-header
         title="Search 搜索框"
@@ -40,11 +42,11 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import maxlength from './maxlength';
-import action from './action';
-import shape from './shape';
-import other from './other';
+import BaseDemo from './base/index.vue';
+import maxlength from './maxlength/index.vue';
+import action from './action/index.vue';
+import shape from './shape/index.vue';
+import other from './other/index.vue';
 export default {
   components: {
     BaseDemo,

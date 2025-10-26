@@ -1,10 +1,12 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="Fab"
       left-arrow
     />
+    <!-- #endif -->
     <t-demo-header
       title="Fab 悬浮按钮"
       desc="当功能使用图标即可表意清楚时，可使用纯图标悬浮按钮，例如：添加、发布。"

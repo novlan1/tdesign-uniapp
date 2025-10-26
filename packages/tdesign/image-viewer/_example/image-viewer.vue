@@ -1,10 +1,12 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="ImageViewer"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo">
       <t-demo-header
         title="ImageViewer 图片预览"

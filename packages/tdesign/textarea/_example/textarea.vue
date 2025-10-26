@@ -1,9 +1,11 @@
 <template>
   <view class="skyline">
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="Textarea"
       left-arrow
     />
+    <!-- #endif -->
     <scroll-view
       scroll-y
       type="list"
@@ -64,14 +66,14 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import labelDemo from './label';
-import autosize from './autosize';
-import maxlength from './maxlength';
-import disabled from './disabled';
-import maxcharacter from './maxcharacter';
-import card from './card';
-import custom from './custom';
+import BaseDemo from './base/index.vue';
+import labelDemo from './label/index.vue';
+import autosize from './autosize/index.vue';
+import maxlength from './maxlength/index.vue';
+import disabled from './disabled/index.vue';
+import maxcharacter from './maxcharacter/index.vue';
+import card from './card/index.vue';
+import custom from './custom/index.vue';
 export default {
   components: {
     BaseDemo,

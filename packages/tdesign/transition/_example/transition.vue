@@ -1,9 +1,11 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="Transition"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo">
       <view class="demo-title">
         Transition 过渡
@@ -42,10 +44,10 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import custom from './custom';
-import destroy from './destroy';
-import appear from './appear';
+import BaseDemo from './base/index.vue';
+import custom from './custom/index.vue';
+import destroy from './destroy/index.vue';
+import appear from './appear/index.vue';
 export default {
   components: {
     BaseDemo,

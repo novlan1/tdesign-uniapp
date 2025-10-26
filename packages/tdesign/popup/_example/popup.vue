@@ -1,10 +1,12 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="Popup"
       left-arrow
     />
+    <!-- #endif -->
     <t-demo-header
       title="Popup 弹出层"
       desc="由其他控件触发，屏幕滑出或弹出一块自定义内容区域。"

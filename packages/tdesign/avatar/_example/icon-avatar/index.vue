@@ -1,11 +1,11 @@
 <template>
   <view>
     <t-avatar
-      class="avatar-example"
+      t-class="avatar-example"
       icon="user"
     />
     <t-avatar
-      class="avatar-example"
+      t-class="avatar-example"
       shape="round"
       icon="user"
     />

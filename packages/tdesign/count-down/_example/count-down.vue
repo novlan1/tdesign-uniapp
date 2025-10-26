@@ -1,10 +1,12 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="CountDown"
       left-arrow
     />
+    <!-- #endif -->
     <t-demo-header
       title="CountDown 倒计时"
       desc="用于实时展示倒计时数值。"

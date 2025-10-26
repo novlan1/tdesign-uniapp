@@ -1,9 +1,11 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="Picker"
       left-arrow
     />
+    <!-- #endif -->
     <view class="area-picker-demo">
       <t-demo-header
         title="Picker 选择器"

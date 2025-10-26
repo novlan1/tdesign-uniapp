@@ -1,9 +1,11 @@
 <template>
   <view class="skyline">
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="Radio"
       left-arrow
     />
+    <!-- #endif -->
     <scroll-view
       scroll-y
       type="list"

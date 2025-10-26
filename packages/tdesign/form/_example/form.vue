@@ -1,10 +1,12 @@
 <template>
   <view class="tdesign-mobile-demo">
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="Form"
       left-arrow
     />
+    <!-- #endif -->
     <t-demo-header
       title="Form 表单"
       desc="用于开启一个闭环的操作任务，如“删除”对象、“购买”商品等。"

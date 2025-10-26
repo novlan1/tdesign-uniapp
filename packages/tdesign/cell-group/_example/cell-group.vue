@@ -1,9 +1,11 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="cell-group 组合单元格"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo">
       <view class="demo-title">
         Cell-group 组合单元格

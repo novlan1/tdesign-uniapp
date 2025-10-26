@@ -24,6 +24,9 @@ import { loadImage } from '../../../common/canvas/index';
 
 export default uniComponent({
   name: 'QrcodeCanvas',
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
   ],
