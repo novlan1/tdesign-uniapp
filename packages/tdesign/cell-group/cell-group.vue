@@ -32,6 +32,9 @@ const name = `${prefix}-cell-group`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [`${prefix}-class`, `${prefix}-class-title`],
   mixins: [ParentMixin(RELATION_MAP.Cell)],
   props: {

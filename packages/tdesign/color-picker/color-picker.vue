@@ -131,6 +131,9 @@ const genSwatchList = (prop) => {
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tPopup,
     TemplateVue,

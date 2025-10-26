@@ -118,10 +118,9 @@ import tPopup from '../popup/popup';
 
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
-import { coalesce } from '../common/utils';
+import { coalesce, getRect } from '../common/utils';
 import props from './props';
 import menuProps from '../dropdown-menu/props';
-import { getRect } from '../common/utils';
 import _ from '../common/utils.wxs';
 import { getStyles } from './computed';
 import { ChildrenMixin, RELATION_MAP } from '../common/relation';
@@ -132,6 +131,9 @@ const name = `${prefix}-dropdown-item`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [{
     key: 'value',
     event: 'change',

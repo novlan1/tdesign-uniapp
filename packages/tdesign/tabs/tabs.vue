@@ -153,6 +153,9 @@ const getUniqueID = uniqueFactory('tabs');
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [{
     key: 'value',
     event: 'change',

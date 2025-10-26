@@ -74,6 +74,9 @@ const getUniqueID = uniqueFactory('badge');
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-count`,

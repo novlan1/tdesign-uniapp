@@ -61,6 +61,9 @@ const momentum = (distance, duration) => {
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
   ],

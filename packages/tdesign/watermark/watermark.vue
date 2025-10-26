@@ -34,6 +34,9 @@ const name = `${prefix}-watermark`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [`${prefix}-class`],
   props: {
     ...watermarkProps,

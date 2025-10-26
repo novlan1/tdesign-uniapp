@@ -20,6 +20,9 @@ const name = `${prefix}-side-bar`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'value',

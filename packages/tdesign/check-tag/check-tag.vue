@@ -62,6 +62,9 @@ const name = `${prefix}-tag`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [{
     key: 'checked',
     event: 'change',

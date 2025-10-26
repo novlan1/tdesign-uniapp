@@ -39,6 +39,9 @@ const name = `${prefix}-overlay`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   mixins: [
     transition(),
     useCustomNavbar,

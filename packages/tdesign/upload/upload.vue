@@ -309,6 +309,9 @@ const makeMethods = () => [
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'files',

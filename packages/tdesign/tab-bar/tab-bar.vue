@@ -20,6 +20,9 @@ const classPrefix = `${prefix}-tab-bar`;
 
 export default uniComponent({
   name: classPrefix,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [{
     key: 'value',
     event: 'change',

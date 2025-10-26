@@ -86,6 +86,9 @@ const name = `${prefix}-link`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tIcon,
   },

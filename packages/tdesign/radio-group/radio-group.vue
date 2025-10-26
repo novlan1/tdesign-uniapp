@@ -47,7 +47,9 @@ const name = `${prefix}-radio-group`;
 
 export default uniComponent({
   name,
-  mixins: [ParentMixin(RELATION_MAP.Radio)],
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'value',
@@ -57,6 +59,7 @@ export default uniComponent({
   externalClasses: [
     `${prefix}-class`,
   ],
+  mixins: [ParentMixin(RELATION_MAP.Radio)],
   components: {
     tRadio,
   },

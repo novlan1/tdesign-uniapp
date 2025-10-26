@@ -100,6 +100,9 @@ const name = `${prefix}-checkbox`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'checked',

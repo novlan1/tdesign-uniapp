@@ -52,6 +52,9 @@ const name = `${prefix}-switch`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'value',

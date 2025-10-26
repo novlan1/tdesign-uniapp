@@ -48,6 +48,9 @@ const name = `${prefix}-message`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     TMessageItem,
   },

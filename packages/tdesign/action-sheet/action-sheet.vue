@@ -171,6 +171,9 @@ const name = `${prefix}-action-sheet`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [{
     key: 'visible',
     event: 'visible-change',

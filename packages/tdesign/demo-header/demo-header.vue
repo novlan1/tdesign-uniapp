@@ -18,6 +18,9 @@ import TNoticeBar from '../notice-bar/notice-bar.vue';
 
 export default {
   name: 'TDemoHeader',
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     TNoticeBar,
   },

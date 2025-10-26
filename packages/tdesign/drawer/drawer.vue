@@ -77,6 +77,9 @@ const name = `${prefix}-drawer`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   mixins: [
     useCustomNavbar,
   ],

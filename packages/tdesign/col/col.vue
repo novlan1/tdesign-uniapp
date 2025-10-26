@@ -24,6 +24,9 @@ const name = `${prefix}-col`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [`${prefix}-class`],
   mixins: [ChildrenMixin(RELATION_MAP.Col)],
   props: {

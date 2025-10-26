@@ -78,6 +78,9 @@ const defaultLoadingTexts = ['下拉刷新', '松手刷新', '正在刷新', '�
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-loading`,

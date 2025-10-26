@@ -25,6 +25,9 @@ const name = `${prefix}-tab-panel`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [`${prefix}-class`],
   mixins: [ChildrenMixin(RELATION_MAP.TabPanel)],
   props: {

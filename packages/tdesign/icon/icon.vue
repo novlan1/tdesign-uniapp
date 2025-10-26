@@ -34,6 +34,9 @@ import _ from '../common/utils.wxs';
 const name = `${prefix}-icon`;
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [`${prefix}-class`],
   props: {
     ...props,

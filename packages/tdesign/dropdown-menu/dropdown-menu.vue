@@ -67,6 +67,9 @@ const name = `${prefix}-dropdown-menu`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-item`,

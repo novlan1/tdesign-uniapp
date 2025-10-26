@@ -208,6 +208,9 @@ const name = `${prefix}-slider`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'value',

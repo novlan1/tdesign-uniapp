@@ -78,6 +78,9 @@ const name = `${prefix}-side-bar-item`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
   ],

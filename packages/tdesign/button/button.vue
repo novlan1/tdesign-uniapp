@@ -85,6 +85,9 @@ const name = `${prefix}-button`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-icon`,

@@ -46,9 +46,7 @@ const name = `${prefix}-checkbox-group`;
 export default uniComponent({
   name,
   options: {
-    externalClasses: [
-      `${prefix}-class`,
-    ],
+    styleIsolation: 'shared',
   },
   controlledProps: [
     {

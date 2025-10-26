@@ -104,6 +104,9 @@ const name = `${prefix}-radio`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'checked',

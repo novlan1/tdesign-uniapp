@@ -159,6 +159,9 @@ const name = `${prefix}-input`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-prefix-icon`,

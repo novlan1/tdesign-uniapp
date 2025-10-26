@@ -35,6 +35,9 @@ const name = `${prefix}-form`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
   ],

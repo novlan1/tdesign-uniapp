@@ -124,6 +124,9 @@ const classPrefix = `${prefix}-tab-bar-item`;
 
 export default uniComponent({
   name: classPrefix,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [`${prefix}-class`],
   mixins: [ChildrenMixin(RELATION_MAP.TabBarItem)],
   components: {

@@ -95,6 +95,9 @@ import _ from '../common/utils.wxs';
 const name = `${prefix}-image`;
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-load`,

@@ -123,6 +123,9 @@ const name = `${prefix}-image-viewer`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'visible',

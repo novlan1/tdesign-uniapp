@@ -81,14 +81,15 @@ const name = `${prefix}-swiper`;
 
 export default uniComponent({
   name,
+  options: {
+    multipleSlots: true,
+    styleIsolation: 'shared',
+  },
   externalClasses: [`${prefix}-class`, `${prefix}-class-nav`, `${prefix}-class-image`, `${prefix}-class-prev-image`, `${prefix}-class-next-image`],
   mixins: [ParentMixin(RELATION_MAP.SwiperNav)],
   components: {
     tSwiperNav,
     tImage,
-  },
-  options: {
-    multipleSlots: true,
   },
   props: {
     ...props,

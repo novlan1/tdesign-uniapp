@@ -73,6 +73,9 @@ const name = `${prefix}-footer`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
   ],

@@ -135,6 +135,9 @@ import props from './template.props';
 
 
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   props: {
     ...props,
   },

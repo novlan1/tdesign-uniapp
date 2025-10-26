@@ -92,6 +92,9 @@ const name = `${prefix}-form-item`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-label`,

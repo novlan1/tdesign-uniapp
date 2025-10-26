@@ -35,6 +35,9 @@ const name = `${prefix}-grid`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: ['t-class'],
   mixins: [ParentMixin(RELATION_MAP.GridItem)],
   props: {

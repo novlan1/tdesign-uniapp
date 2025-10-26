@@ -54,6 +54,9 @@ const name = `${prefix}-indexes`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'current',
