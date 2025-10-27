@@ -30,7 +30,14 @@
         @select="handleSelect"
         @clickButton="onTplButtonTap"
         @handleSwitchModeChange="handleSwitchModeChange"
-      />
+      >
+        <template #confirm-btn>
+          <slot name="confirm-btn" />
+        </template>
+        <template #title>
+          <slot name="title" />
+        </template>
+      </CalendarTemplate>
     </t-popup>
     <block v-else>
       <!-- parse <include src="./template.wxml"/> -->
@@ -54,7 +61,14 @@
         @select="handleSelect"
         @clickButton="onTplButtonTap"
         @handleSwitchModeChange="handleSwitchModeChange"
-      />
+      >
+        <template #confirm-btn>
+          <slot name="confirm-btn" />
+        </template>
+        <template #title>
+          <slot name="title" />
+        </template>
+      </CalendarTemplate>
     </block>
   </view>
 </template>
