@@ -177,7 +177,7 @@ export default uniComponent({
             // 小程序环境也添加 willReadFrequently 属性
             try {
               let ctx;
-              // #ifdef MP-WEIXIN
+              // #ifdef MP
               ctx = canvas.getContext('2d', { willReadFrequently: true });
               // #endif
               if (!ctx) {
