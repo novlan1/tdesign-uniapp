@@ -180,7 +180,12 @@ export default uniComponent({
     parseEventDynamicCode,
     onTouch(e, eventType) {
       const { count, allowHalf, gap, dataValue: currentValue, size } = this;
-      const [touch] = e.changedTouches;
+      let touch = e.changedTouches?.[0];
+      // #ifdef MP-ALIPAY
+      if (eventType === 'tap') {
+        touch = e.target;
+      }
+      // #endif
       const margin = unitConvert(gap);
       getRect(this, `.${name}__wrapper`).then((rect) => {
         const { width, left } = rect;

@@ -67,11 +67,11 @@
     padding: 32rpx;
     .border(top, @component-border);
 
-    &-btn {
+    :deep(&-btn) {
       flex: 1;
     }
 
-    &-btn + &-btn {
+    :deep(&-btn + &-btn) {
       margin-left: 32rpx;
     }
   }
@@ -83,8 +83,8 @@
     }
   }
 
-  &__radio,
-  &__checkbox {
+  :deep(&__radio),
+  :deep(&__checkbox) {
     width: 100%;
     overflow: scroll;
     box-sizing: border-box;
@@ -95,14 +95,14 @@
     }
   }
 
-  &__radio {
+  :deep(&__radio) {
     &-group {
       display: grid;
       grid-gap: 0rpx;
     }
   }
 
-  &__checkbox {
+  :deep(&__checkbox) {
     &-group {
       padding: 32rpx;
     }
