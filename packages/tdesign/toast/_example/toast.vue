@@ -52,6 +52,9 @@ import theme from './theme/index.vue';
 import cover from './cover/index.vue';
 import close from './close/index.vue';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     BaseDemo,
     theme,

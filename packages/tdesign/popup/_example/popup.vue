@@ -26,7 +26,7 @@
         padding
       >
         <with-title />
-        <custom-close style="display: block; margin-top: 32rpx" />
+        <custom-close />
       </t-demo>
     </view>
   </view>

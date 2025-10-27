@@ -2,28 +2,28 @@
   <view>
     <view class="block">
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         size="extra-large"
         variant="light"
       >
         加大尺寸
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         size="large"
         variant="light"
       >
         大尺寸
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         size="medium"
         variant="light"
       >
         中尺寸
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         size="small"
         variant="light"
       >
@@ -33,7 +33,7 @@
 
     <view class="block">
       <t-tag
-        class="margin-8"
+        t-class="margin-8"
         size="extra-large"
         variant="light"
         closable
@@ -41,7 +41,7 @@
         加大尺寸
       </t-tag>
       <t-tag
-        class="margin-8"
+        t-class="margin-8"
         size="large"
         variant="light"
         closable
@@ -49,7 +49,7 @@
         大尺寸
       </t-tag>
       <t-tag
-        class="margin-8"
+        t-class="margin-8"
         size="medium"
         variant="light"
         closable
@@ -57,7 +57,7 @@
         中尺寸
       </t-tag>
       <t-tag
-        class="margin-8"
+        t-class="margin-8"
         size="small"
         variant="light"
         closable
@@ -71,6 +71,9 @@
 <script>
 import tTag from 'tdesign-uniapp/tag/tag.vue';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tTag,
   },
@@ -90,16 +93,16 @@ export default {
     margin-top: 32rpx;
 }
 
-.block .margin-16,
-.block .margin-8 {
+.block :deep(.margin-16),
+.block :deep(.margin-8) {
     vertical-align: top;
 }
 
-.block .margin-16:not(:last-child) {
+.block :deep(.margin-16:not(:last-child)) {
     margin-right: 32rpx;
 }
 
-.block .margin-8:not(:last-child) {
+.block :deep(.margin-8:not(:last-child)) {
     margin-right: 10rpx;
 }
 </style>

@@ -7,7 +7,7 @@
       left-arrow
     />
     <!-- #endif -->
-    <view class="demo">
+    <view>
       <t-demo-header
         title="Tag 标签"
         desc="用于表明主体的类目，属性或状态。"

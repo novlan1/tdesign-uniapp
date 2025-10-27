@@ -1,8 +1,8 @@
 <template>
-  <view class="demo">
+  <view class="demo-closable">
     <t-tag
       v-if="show[0]"
-      class="margin-16"
+      t-class="margin-16"
       closable
       variant="light"
       @close="handleClose0"
@@ -11,7 +11,7 @@
     </t-tag>
     <t-tag
       v-if="show[1]"
-      class="margin-16"
+      t-class="margin-16"
       closable
       variant="outline"
       @close="handleClose1"
@@ -24,6 +24,9 @@
 <script>
 import tTag from 'tdesign-uniapp/tag/tag.vue';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tTag,
   },
@@ -44,11 +47,11 @@ export default {
 };
 </script>
 <style>
-.demo {
+.demo-closable {
     margin-left: 32rpx;
 }
 
-.demo .margin-16:not(:last-child) {
+.demo-closable :deep(.margin-16:not(:last-child)) {
     margin-right: 32rpx;
 }
 </style>

@@ -2,34 +2,34 @@
   <view>
     <view class="block">
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="light"
       >
         默认
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="light"
         theme="primary"
       >
         主要
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="light"
         theme="warning"
       >
         警告
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="light"
         theme="danger"
       >
         危险
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="light"
         theme="success"
       >
@@ -39,31 +39,31 @@
 
     <view class="block">
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         theme="default"
       >
         默认
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         theme="primary"
       >
         主要
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         theme="warning"
       >
         警告
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         theme="danger"
       >
         危险
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         theme="success"
       >
         成功
@@ -72,34 +72,34 @@
 
     <view class="block">
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="outline"
       >
         默认
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="outline"
         theme="primary"
       >
         主要
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="outline"
         theme="warning"
       >
         警告
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="outline"
         theme="danger"
       >
         危险
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="outline"
         theme="success"
       >
@@ -109,34 +109,34 @@
 
     <view class="block">
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="light-outline"
       >
         默认
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="light-outline"
         theme="primary"
       >
         主要
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="light-outline"
         theme="warning"
       >
         警告
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="light-outline"
         theme="danger"
       >
         危险
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="light-outline"
         theme="success"
       >
@@ -149,6 +149,9 @@
 <script>
 import tTag from 'tdesign-uniapp/tag/tag.vue';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tTag,
   },
@@ -168,7 +171,7 @@ export default {
     margin-top: 48rpx;
 }
 
-.block .margin-16:not(:last-child) {
+.block :deep(.margin-16:not(:last-child)) {
     margin-right: 32rpx;
 }
 </style>

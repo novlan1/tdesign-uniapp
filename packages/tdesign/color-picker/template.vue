@@ -3,28 +3,46 @@
     :class="classPrefix + '__panel'"
     :style="customStyle"
   >
-    <view :class="classPrefix + '__body ' + classPrefix + '__body--' + type">
+    <view
+      :class="classPrefix + '__body ' + classPrefix + '__body--' + type"
+    >
+      <!-- #ifdef MP-ALIPAY -->
       <view
-        v-if="isMultiple"
-        :class="classPrefix + '__saturation'"
-        data-type="saturation"
-        :style="'background: hsl(' + sliderInfo.value + ', 100%, 50%)'"
-        @touchstart.stop.prevent="onTouchStart"
-        @touchmove.stop.prevent="onTouchMove"
-        @touchend.stop.prevent="onTouchEnd"
+        disable-scroll
       >
+        <!-- #endif -->
+
         <view
-          :class="classPrefix + '__thumb'"
-          :tab-index="0"
-          :style="utils._style(saturationThumbStyle)"
-        />
+          v-if="isMultiple"
+          :class="classPrefix + '__saturation'"
+          data-type="saturation"
+          :style="'background: hsl(' + sliderInfo.value + ', 100%, 50%)'"
+          @touchstart.stop.prevent="onTouchStart"
+          @touchmove.stop.prevent="onTouchMove"
+          @touchend.stop.prevent="onTouchEnd"
+        >
+          <view
+            :class="classPrefix + '__thumb'"
+            :tab-index="0"
+            :style="utils._style(saturationThumbStyle)"
+          />
+        </view>
+        <!-- #ifdef MP-ALIPAY -->
       </view>
+      <!-- #endif -->
+
+
       <view
         v-if="isMultiple"
         :class="classPrefix + '__sliders-wrapper'"
       >
-        <view :class="classPrefix + '__sliders'">
-          <view :class="classPrefix + '__slider-wrapper ' + classPrefix + '__slider-wrapper--hue-type'">
+        <view
+          :class="classPrefix + '__sliders'"
+        >
+          <view
+            :class="classPrefix + '__slider-wrapper ' + classPrefix + '__slider-wrapper--hue-type'"
+            disable-scroll
+          >
             <view
               :class="classPrefix + '__slider'"
               data-type="hue-slider"
@@ -42,12 +60,14 @@
           <view
             v-if="enableAlpha"
             :class="classPrefix + '__slider-wrapper ' + classPrefix + '__slider-wrapper--alpha-type'"
+            :disable-scroll="true"
           >
             <view
               :class="classPrefix + '__slider-padding'"
               :style="
                 'background: linear-gradient(90deg, rgba(0,0,0,.0) 0%, rgba(0,0,0,.0) 93%, ' + alphaSliderStyle.color + ' 93%, ' + alphaSliderStyle.color + ' 100%)'
               "
+              :disable-scroll="false"
             />
             <view
               :class="classPrefix + '__slider'"

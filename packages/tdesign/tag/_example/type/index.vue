@@ -1,18 +1,18 @@
 <template>
   <view>
     <view class="demo">
-      <view class="demo-desc">
+      <view class="tag-demo-desc">
         基础标签
       </view>
 
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="light"
       >
         标签文字
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="outline"
       >
         标签文字
@@ -20,26 +20,26 @@
     </view>
 
     <view class="demo">
-      <view class="demo-desc">
+      <view class="tag-demo-desc">
         圆弧标签
       </view>
 
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="light"
         shape="round"
       >
         标签文字
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="outline"
         shape="round"
       >
         标签文字
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="outline"
         shape="mark"
       >
@@ -48,19 +48,19 @@
     </view>
 
     <view class="demo">
-      <view class="demo-desc">
+      <view class="tag-demo-desc">
         带图标的标签
       </view>
 
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="light"
         icon="discount"
       >
         标签文字
       </t-tag>
       <t-tag
-        class="margin-16"
+        t-class="margin-16"
         variant="outline"
         icon="discount"
       >
@@ -73,7 +73,7 @@
       v-if="!skylineRender"
       class="demo"
     >
-      <view class="demo-desc">
+      <view class="tag-demo-desc">
         超长省略文本标签
       </view>
 
@@ -92,6 +92,9 @@ import tTag from 'tdesign-uniapp/tag/tag.vue';
 import SkylineBehavior from 'tdesign-uniapp/mixins/skyline.js';
 
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tTag,
   },
@@ -105,7 +108,7 @@ export default {
   methods: {},
 };
 </script>
-<style>
+<style scoped>
 .demo {
     padding: 0 32rpx 48rpx;
 }
@@ -114,13 +117,13 @@ export default {
     padding-bottom: 0;
 }
 
-.demo-desc {
+.tag-demo-desc {
     font-size: 14px;
     color: var(--td-text-color-secondary);
     margin-bottom: 32rpx;
 }
 
-.demo .margin-16:not(:last-child) {
+.demo :deep(.margin-16:not(:last-child)) {
     margin-right: 32rpx;
 }
 </style>

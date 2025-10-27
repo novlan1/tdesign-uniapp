@@ -1,7 +1,7 @@
 <template>
   <view>
     <t-cell
-      class="mb-16"
+      t-class="mb-16"
       title="带标题选择器"
       arrow
       hover
@@ -54,6 +54,9 @@ import tCell from 'tdesign-uniapp/cell/cell.vue';
 import tPicker from 'tdesign-uniapp/picker/picker.vue';
 import tPickerItem from 'tdesign-uniapp/picker-item/picker-item.vue';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tCell,
     tPicker,
@@ -124,7 +127,7 @@ export default {
 };
 </script>
 <style>
-.mb-16 {
+:deep(.mb-16) {
     margin-bottom: 32rpx;
 }
 </style>

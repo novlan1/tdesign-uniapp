@@ -35,6 +35,9 @@ import tButton from 'tdesign-uniapp/button/button.vue';
 
 
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tToast,
     tButton,

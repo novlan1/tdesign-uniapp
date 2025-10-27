@@ -1,7 +1,7 @@
 <template>
   <view
     :style="_._style([style, customStyle])"
-    :class="_.cls(classPrefix, [theme]) + ' class ' + prefix + '-class'"
+    :class="_.cls(classPrefix, [theme]) + ' class ' + tClass"
   >
     <view
       v-if="column > 0"

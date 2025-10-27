@@ -41,6 +41,10 @@ export default {
     tDateTimePicker,
   },
   data() {
+    let usingCustomNavbar = true;
+    // #ifdef MP-ALIPAY
+    usingCustomNavbar = false;
+    // #endif
     return {
       mode: '',
       dateVisible: false,
@@ -54,7 +58,7 @@ export default {
         return options;
       },
       popupProps: {
-        usingCustomNavbar: true,
+        usingCustomNavbar,
       },
       formatter(item, index) {
         if (index === 1) {

@@ -48,42 +48,42 @@
         <view class="container-flex">
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
         </view>

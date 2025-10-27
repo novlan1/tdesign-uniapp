@@ -1,7 +1,8 @@
 <template>
-  <view>
+  <view
+    class="block"
+  >
     <t-grid
-      class="block"
       :column="0"
     >
       <t-grid-item

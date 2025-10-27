@@ -111,11 +111,11 @@ export default {
     height: 240px;
 }
 
-.wrapper {
+:deep(.wrapper) {
     margin-bottom: 32rpx;
 }
 
-.wrapper:last-child {
+:deep(.wrapper:last-child) {
     margin-bottom: 0;
 }
 </style>

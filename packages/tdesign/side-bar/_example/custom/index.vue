@@ -144,7 +144,10 @@ export default {
   },
   methods: {
     getCustomNavbarHeight() {
-      const query = uni.createSelectorQuery().in(this);
+      let query = uni.createSelectorQuery().in(this);
+      // #ifdef MP-ALIPAY
+      query = uni.createSelectorQuery();
+      // #endif
       const { sideBarIndex } = this;
       query.selectAll('.title').boundingClientRect();
       query.select('.custom-navbar').boundingClientRect();

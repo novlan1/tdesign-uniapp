@@ -6,6 +6,7 @@
       :style="_._style(['--td-overlay-transition-duration:' + duration + 'ms', 'z-index:' + _zIndex, 'top:' + distanceTop + 'px', computedStyle, style, customStyle])"
       :aria-role="ariaRole || 'button'"
       :aria-label="ariaLabel || '关闭'"
+      disable-scroll
       @click.stop="handleClick"
       @touchmove.stop.prevent="noop"
       @transitionend="onTransitionEnd"
