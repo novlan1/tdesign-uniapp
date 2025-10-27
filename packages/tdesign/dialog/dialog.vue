@@ -17,7 +17,7 @@
     >
       <template #content>
         <view
-          :class="classPrefix + ' ' + prefix + '-class'"
+          :class="classPrefix + ' ' + tClass"
         >
           <slot name="top" />
           <view
@@ -46,7 +46,7 @@
               size="44rpx"
             />
           </view>
-          <view :class="classPrefix + '__content ' + prefix + '-class-content'">
+          <view :class="classPrefix + '__content ' + tClassContent">
             <view
               v-if="dataTitle"
               :class="classPrefix + '__header'"
@@ -83,8 +83,7 @@
                   :t-id="actionItem.tId"
                   :custom-style="actionItem.style"
                   :block="coalesce(actionItem.block, true)"
-                  :t-class="coalesce(actionItem.tClass, prefix + '-class-action')"
-                  :class="getActionClass(classPrefix, dataButtonLayout)"
+                  :t-class="getActionClass(classPrefix, dataButtonLayout) + ' ' + coalesce(actionItem.tClass, tClassAction)"
                   :disabled="actionItem.disabled"
                   :data-type="'action'"
                   :data-extra="coalesce(actionItem.index, index)"
@@ -317,7 +316,7 @@ export default uniComponent({
           block: true,
           rootClass,
           // tClass: [...externalCls, `${prefix}-class-${key}`],
-          tClass: [...externalCls, `${prefix}-class-${key}`, ...rootClass].join(' '),
+          tClass: [...externalCls, this[toCamel(`${prefix}-class-${key}`)], ...rootClass].join(' '),
           variant: rect.buttonVariant,
           openType: '',
         };
