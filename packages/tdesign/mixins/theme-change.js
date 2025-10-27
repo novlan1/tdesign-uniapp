@@ -18,3 +18,18 @@ export const useTheme = () => {
     theme,
   };
 };
+
+
+export const themeMixin = {
+  data() {
+    return {
+      theme: 'light',
+    };
+  },
+  mounted() {
+    this.theme = appBaseInfo.theme;
+    uni.onThemeChange((t) => {
+      this.theme = t.theme;
+    });
+  },
+};

@@ -3,7 +3,7 @@
     <t-action-sheet
       id="t-action-sheet"
       ref="t-action-sheet"
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       @selected="handleSelected($event, { tagId: 't-action-sheet' })"
     />
 

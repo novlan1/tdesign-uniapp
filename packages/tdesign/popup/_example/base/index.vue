@@ -2,7 +2,7 @@
   <view>
     <t-popup
       :visible="visible"
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       :placement="cur.value || 'top'"
       @visible-change="onVisibleChange"
     >

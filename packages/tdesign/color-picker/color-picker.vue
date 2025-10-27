@@ -15,6 +15,7 @@
       <slot name="header" />
       <!-- parse <include src="./template.wxml"/> -->
       <TemplateVue
+        ref="templateVue"
         :class-prefix="classPrefix"
         :custom-style="_._style([style, customStyle])"
         :is-multiple="isMultiple"
@@ -39,6 +40,7 @@
     <block v-else>
       <!-- parse <include src="./template.wxml"/> -->
       <TemplateVue
+        ref="templateVue"
         :class-prefix="classPrefix"
         :custom-style="_._style([style, customStyle])"
         :is-multiple="isMultiple"
@@ -75,7 +77,7 @@ import {
   HUE_MAX,
   DEFAULT_SYSTEM_SWATCH_COLORS,
 } from './constants';
-import { getRect, debounce } from '../common/utils';
+import { debounce } from '../common/utils';
 import { Color, getColorObject } from './utils';
 import TemplateVue from './template.vue';
 
@@ -192,7 +194,6 @@ export default uniComponent({
       handler() {
         this.setCoreStyle();
       },
-      // immediate: true,
       deep: true,
     },
     swatchColors: {
@@ -260,15 +261,14 @@ export default uniComponent({
     },
 
     getEleReact() {
-      let saturationSelector = `.${name}__root >>> .${name}__saturation`;
-      let sliderSelector = `.${name}__root >>> .${name}__slider`;
-      // #ifndef MP
-      saturationSelector = `.${name}__saturation`;
-      sliderSelector = `.${name}__slider`;
-      // #endif
+      const saturationSelector = `.${name}__saturation`;
+      const sliderSelector = `.${name}__slider`;
+      // }
+      if (!this.$refs.templateVue) return;
+
       Promise.all([
-        getRect(this, saturationSelector),
-        getRect(this, sliderSelector),
+        this.$refs.templateVue.getRect(saturationSelector),
+        this.$refs.templateVue.getRect(sliderSelector),
       ])
         .then(([saturationRect, sliderRect]) => {
           this.panelRect = {

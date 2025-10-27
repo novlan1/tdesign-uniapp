@@ -24,7 +24,7 @@
       :title="cityTitle"
       cancel-btn="取消"
       confirm-btn="确认"
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       @change="onPickerChange($event, { key: 'city' })"
       @pick="onColumnChange($event, { key: 'city' })"
       @cancel="onPickerCancel($event, { key: 'city' })"
@@ -39,7 +39,7 @@
       :title="city2Title"
       cancel-btn="取消"
       confirm-btn="确认"
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       @change="onPickerChange($event, { key: 'city2' })"
       @pick="onColumnChange($event, { key: 'city2' })"
       @cancel="onPickerCancel($event, { key: 'city2' })"

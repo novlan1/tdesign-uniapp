@@ -8,7 +8,7 @@
       :title="cityTitle"
       cancel-btn="取消"
       confirm-btn="确认"
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       @change="onPickerChange($event, { key: 'city' })"
       @pick="onColumnChange($event, { key: 'city' })"
       @cancel="onPickerCancel($event, { key: 'city' })"

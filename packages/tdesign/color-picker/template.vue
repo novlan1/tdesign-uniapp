@@ -132,6 +132,7 @@
 <script>
 import utils from '../common/utils.wxs';
 import props from './template.props';
+import { getRect } from '../common/utils';
 
 
 export default {
@@ -164,6 +165,9 @@ export default {
     },
     clickSwatch(...args) {
       this.$emit('clickSwatch', ...args);
+    },
+    getRect(selector, needAll, useH5Origin) {
+      return getRect(this, selector, needAll, useH5Origin);
     },
   },
 };

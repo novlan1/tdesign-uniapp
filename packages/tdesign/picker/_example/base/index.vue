@@ -26,7 +26,7 @@
       title="选择城市"
       cancel-btn="取消"
       confirm-btn="确认"
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       @change="onPickerChange($event, { key: 'city' })"
       @pick="onColumnChange($event, { key: 'city' })"
       @cancel="onPickerCancel($event, { key: 'city' })"
@@ -62,7 +62,7 @@
       title="选择时间"
       cancel-btn="取消"
       confirm-btn="确认"
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       @change="onPickerChange($event, { key: 'date' })"
       @pick="onColumnChange($event, { key: 'date' })"
       @cancel="onPickerCancel($event, { key: 'date' })"

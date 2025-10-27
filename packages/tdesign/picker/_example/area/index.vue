@@ -14,7 +14,7 @@
       title="选择地区"
       cancel-btn="取消"
       confirm-btn="确认"
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       @change="onPickerChange"
       @pick="onColumnChange"
       @cancel="onPickerCancel"
