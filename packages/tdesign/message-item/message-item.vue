@@ -255,7 +255,7 @@ export default uniComponent({
 
         setTimeout(() => {
           const durationTime = ((nodeRect.width + wrapRect.width) / speeding) * 1000;
-          const nextAnimation = wx
+          const nextAnimation = uni
             .createAnimation({
             // 默认50px/s
               duration: durationTime,
