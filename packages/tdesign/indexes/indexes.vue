@@ -2,6 +2,7 @@
   <view
     :style="_._style([style, customStyle])"
     :class="classPrefix + ' class ' + tClass"
+    disable-scroll
   >
     <view
       :id="'id-' + classPrefix + '__bar'"

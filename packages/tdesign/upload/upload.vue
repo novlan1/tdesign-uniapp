@@ -669,7 +669,7 @@ export default uniComponent({
       const { customLimit } = this;
       const { config, sizeLimit } = this;
       let func = 'chooseMedia';
-      // #ifdef H5
+      // #ifdef H5 || MP-ALIPAY
       func = 'chooseImage';
       // #endif
       uni[func]({
