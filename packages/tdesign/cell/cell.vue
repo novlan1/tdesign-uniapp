@@ -13,13 +13,12 @@
     @click="onClick"
   >
     <view :class="classPrefix + '__left ' + tClassLeft">
-      <!-- parse <template v-if="_leftIcon" is="icon" :data="tClass: classPrefix + '__left-icon ' + prefix + '-class-left-icon', ..._leftIcon"/> -->
       <block
         v-if="_leftIcon"
         name="icon"
       >
         <t-icon
-          :custom-style="_leftIcon.style || ''"
+          :custom-style="leftIconCustomStyle"
           :t-class="classPrefix + '__left-icon ' + tClassLeftIcon"
           :name="_leftIcon.name"
           :size="_leftIcon.size"
@@ -36,6 +35,7 @@
         shape="round"
         :t-class="classPrefix + '__left-image ' + tClassImage"
         :src="image"
+        :custom-style="leftImageCustomStyle"
       />
       <slot name="image" />
     </view>
@@ -45,6 +45,7 @@
           classPrefix + '__title-text ',
           tClassTitle
         ]"
+        :style="_._style(titleStyle)"
       >
         <block v-if="title">
           {{ title }}
@@ -79,6 +80,7 @@
         classPrefix + '__note ',
         tClassNote
       ]"
+      :style="_._style(noteStyle)"
     >
       <text v-if="note">
         {{ note }}
@@ -91,10 +93,9 @@
         tClassRight
       ]"
     >
-      <!-- parse <template v-if="_arrow" is="icon" :data="tClass: classPrefix + '__right-icon ' + prefix + '-class-right-icon', ..._arrow"/> -->
       <t-icon
         v-if="_arrow"
-        :custom-style="_arrow.style || ''"
+        :custom-style="rightArrowCustomStyle"
         :t-class=" classPrefix + '__right-icon ' + tClassRightIcon"
         :name="_arrow.name || ''"
         :size="_arrow.size"
@@ -105,13 +106,12 @@
         @click="'handleClose' || ''"
       />
       <block v-else>
-        <!-- parse <template v-if="_rightIcon" is="icon" :data="tClass: classPrefix + '__right-icon ' + prefix + '-class-right-icon', ..._rightIcon"/> -->
         <block
           v-if="_rightIcon"
           name="icon"
         >
           <t-icon
-            :custom-style="_rightIcon.style || ''"
+            :custom-style="rightIconCustomStyle"
             :t-class=" classPrefix + '__right-icon ' + tClassRightIcon"
             :name="_rightIcon.name"
             :size="_rightIcon.size"
@@ -138,8 +138,12 @@ import _ from '../common/utils.wxs';
 
 import { ChildrenMixin, RELATION_MAP } from '../common/relation';
 
-const name = `${prefix}-cell`;
 
+const name = `${prefix}-cell`;
+const COMMON_RIGHT_ICON_STYLE = {
+  color: 'var(--td-cell-right-icon-color, var(--td-text-color-placeholder, var(--td-font-gray-3, rgba(0, 0, 0, .4))))',
+  fontSize: 'var(--td-cell-right-icon-font-size, 24px)',
+};
 
 export default uniComponent({
   name,
@@ -180,6 +184,37 @@ export default uniComponent({
       isLastChild: false,
       _,
     };
+  },
+  computed: {
+    rightArrowCustomStyle() {
+      return _._style([
+        COMMON_RIGHT_ICON_STYLE,
+        this.rightIconStyle || '',
+        this._arrow.style || '',
+      ]);
+    },
+    rightIconCustomStyle() {
+      return _._style([
+        COMMON_RIGHT_ICON_STYLE,
+        this.rightIconStyle || '',
+        this._rightIcon.style || '',
+      ]);
+    },
+    leftIconCustomStyle() {
+      return _._style([
+        {
+          color: 'var(--td-cell-left-icon-color, var(--td-brand-color, var(--td-primary-color-7, #0052d9)))',
+          fontSize: 'var(--td-cell-left-icon-font-size, 24px)',
+        },
+        this._leftIcon.style || '',
+      ]);
+    },
+    leftImageCustomStyle() {
+      return _._style({
+        height: 'var(--td-cell-image-height, 48px)',
+        width: 'var(--td-cell-image-width, 48px)',
+      });
+    },
   },
   watch: {
     leftIcon: {

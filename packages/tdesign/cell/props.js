@@ -46,5 +46,17 @@ const props = {
     type: String,
     default: '',
   },
+  titleStyle: {
+    type: [String, Object],
+    default: '',
+  },
+  noteStyle: {
+    type: [String, Object],
+    default: '',
+  },
+  rightIconStyle: {
+    type: [String, Object],
+    default: '',
+  },
 };
 export default props;
