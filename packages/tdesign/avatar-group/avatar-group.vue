@@ -97,13 +97,15 @@ export default uniComponent({
       if (!max || max > len) return;
 
       const restAvatars = this.children.splice(max, len - max);
-      if (cascading === 'left-up') {
-        this.children.forEach((child, index) => {
-          child.setStyle({
-            zIndex: `calc(var(--td-avatar-group-init-z-index, ${AVATAR_GROUP_INIT_Z_INDEX}) - ${index})`,
-          });
+
+      const isLeft = cascading === 'left-up';
+      this.children.forEach((child, index) => {
+        child.setStyle({
+          zIndex: isLeft && `calc(var(--td-avatar-group-init-z-index, ${AVATAR_GROUP_INIT_Z_INDEX}) - ${index})`,
+          padding: 'var(--td-avatar-group-line-spacing, 2px) 0',
         });
-      }
+      });
+
       restAvatars.forEach((child) => {
         child.hide();
       });

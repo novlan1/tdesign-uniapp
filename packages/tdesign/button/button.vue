@@ -28,13 +28,12 @@
     @chooseavatar="chooseavatar"
     @agreeprivacyauthorization="agreeprivacyauthorization"
   >
-    <!-- parse <template v-if="_icon" is="icon" :data="tClass: classPrefix + '__icon ' + prefix + '-class-icon', ariaHidden: true, name: iconName, ..._icon"/> -->
     <block
       v-if="_icon"
       name="icon"
     >
       <t-icon
-        :custom-style="_icon.style || ''"
+        :custom-style="iconCustomStyle"
         :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (_icon.activeIdx == _icon.index ? 'active ' : ' ') + tClassIcon"
         :prefix="_icon.prefix"
         :name="_icon.name || ''"
@@ -59,8 +58,9 @@
       loading
       :t-class="classPrefix + '__loading ' + classPrefix + '__loading--wrapper'"
       :t-class-indicator="classPrefix + '__loading--indicator ' + tClassLoading"
+      :custom-style="loadingCustomStyle"
     />
-    <view :class="classPrefix + '__content ' + ((_icon || loading) ? classPrefix + '__content--has-icon' : '')">
+    <view :class="classPrefix + '__content ' + ((_icon && _icon.name || loading) ? classPrefix + '__content--has-icon' : '')">
       <slot name="content" />
       <block v-if="content">
         {{ content }}
@@ -100,6 +100,9 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'click',
+  ],
   data() {
     return {
       _,
@@ -109,9 +112,31 @@ export default uniComponent({
       _icon: undefined,
     };
   },
-  emits: [
-    'click',
-  ],
+  computed: {
+    iconCustomStyle() {
+      const fontSize = {
+        'extra-small': 'var(--td-button-extra-small-icon-font-size, 18px)',
+        small: 'var(--td-button-small-icon-font-size, 18px)',
+        medium: 'var(--td-button-medium-icon-font-size, 20px)',
+        large: 'var(--td-button-large-icon-font-size, 24px)',
+      };
+
+      return _._style([
+        {
+          fontSize: fontSize[this.size || 'medium'],
+          borderRadius: 'var(--td-button-icon-border-radius, 4px)',
+        },
+        this._icon.style || '',
+      ]);
+    },
+    loadingCustomStyle() {
+      return _._style({
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      });
+    },
+  },
   watch: {
     icon: {
       handler(value) {

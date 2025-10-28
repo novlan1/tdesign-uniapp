@@ -139,11 +139,12 @@
     padding-right: @@padding;
     height: @@height;
     line-height: @@height;
-    --td-icon-font-size: @@iconSize;
 
-    & :deep(.@{button}__icon) {
-      font-size: @@iconSize;
-    }
+    // --td-icon-font-size: @@iconSize;
+
+    // & :deep(.@{button}__icon) {
+    //   font-size: @@iconSize;
+    // }
   }
 }
 
@@ -517,15 +518,15 @@
     .ghost-theme(default);
   }
 
-  :deep(&__loading) + &__content:not(:empty),
-  :deep(&__icon) + &__content:not(:empty),
+  // :deep(&__loading) + &__content:not(:empty),
+  // :deep(&__icon) + &__content:not(:empty),
   &__content--has-icon {
     margin-left: 8rpx;
   }
 
-  :deep(&__icon) {
-    border-radius: @button-icon-border-radius;
-  }
+  // :deep(&__icon) {
+  //   border-radius: @button-icon-border-radius;
+  // }
 
   // 圆角长方形
   &--round {
@@ -630,13 +631,13 @@
     cursor: not-allowed;
   }
 
-  :deep(&__loading) {
-    &--wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
+  // :deep(&__loading) {
+  //   &--wrapper {
+  //     display: flex;
+  //     align-items: center;
+  //     justify-content: center;
+  //   }
+  // }
 
   &.@{button}--hover::after {
     z-index: -1;
