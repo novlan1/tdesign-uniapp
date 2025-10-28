@@ -259,6 +259,10 @@ export const setIcon = (iconName, icon, defaultIcon) => {
 };
 
 export const toCamel = str => str.replace(/-(\w)/g, (match, m1) => m1.toUpperCase());
+export const toPascal = name => name
+  .split('-')
+  .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+  .join('');
 
 export const getCurrentPage = function () {
   const pages = getCurrentPages();

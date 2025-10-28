@@ -49,7 +49,6 @@ function getParentInToutiao(name) {
 
 function getParent(name = '') {
   const found = getParentInToutiao.call(this, name);
-  // console.log('found', found);
   if (found) {
     return found;
   }
@@ -154,7 +153,7 @@ export function ChildrenMixin(parent, options = {}) {
     methods: {
       bindRelation() {
         // #ifdef MP-TOUTIAO
-        const parentComponentName = `Press${parent.replace(/^\w/, a => a.toUpperCase())}`;
+        const parentComponentName = `T${parent}`;
         this[parent] = getParent.call(this, parentComponentName);
         // #endif
         if (!this[parent] || (this[parent].children && this[parent].children.indexOf(this) !== -1)) {

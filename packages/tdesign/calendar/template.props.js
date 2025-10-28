@@ -15,7 +15,7 @@ export default {
     default: '',
   },
   customStyle: {
-    type: String,
+    type: [String, Object],
     default: '',
   },
   title: {

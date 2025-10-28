@@ -36,6 +36,7 @@ import { ParentMixin, RELATION_MAP } from '../common/relation';
 
 
 const name = `${prefix}-avatar-group`;
+const AVATAR_GROUP_INIT_Z_INDEX = 50;
 
 
 export default uniComponent({
@@ -71,8 +72,10 @@ export default uniComponent({
   },
   mounted() {
     this.setClass();
-    this.length = this.children.length;
-    this.handleMax();
+    this.length = this.children?.length || 0;
+    if (this.length) {
+      this.handleMax();
+    }
   },
   methods: {
     setClass() {
@@ -89,12 +92,18 @@ export default uniComponent({
     },
 
     handleMax() {
-      const { max } = this;
+      const { max, cascading } = this;
       const len = this.children.length;
       if (!max || max > len) return;
 
       const restAvatars = this.children.splice(max, len - max);
-
+      if (cascading === 'left-up') {
+        this.children.forEach((child, index) => {
+          child.setStyle({
+            zIndex: `calc(var(--td-avatar-group-init-z-index, ${AVATAR_GROUP_INIT_Z_INDEX}) - ${index})`,
+          });
+        });
+      }
       restAvatars.forEach((child) => {
         child.hide();
       });

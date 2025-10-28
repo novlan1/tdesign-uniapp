@@ -3,9 +3,8 @@ export default {
     type: String,
     default: '',
   },
-  // merged style
   customStyle: {
-    type: String,
+    type: [String, Object],
     default: '',
   },
   isMultiple: {

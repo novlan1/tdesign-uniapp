@@ -29,7 +29,7 @@ const props = {
   },
 
   customStyle: {
-    type: String,
+    type: [String, Object],
     default: '',
   },
 };

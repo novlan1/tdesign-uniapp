@@ -117,6 +117,7 @@
                 :name="item.icon"
                 :t-class="classPrefix + '__list-item-icon'"
                 size="48rpx"
+                :custom-style="iconCustomStyle"
               />
               <view :class="classPrefix + '__list-item-text'">
                 {{ item.label || item }}
@@ -126,6 +127,7 @@
                 :name="item.suffixIcon"
                 :t-class="classPrefix + '__list-item-icon ' + classPrefix + '__list-item-icon--suffix'"
                 size="48rpx"
+                :custom-style="suffixIconCustomStyle"
               />
             </view>
           </block>
@@ -203,6 +205,14 @@ export default uniComponent({
       defaultPopUpzIndex: 11500,
       _,
     };
+  },
+  computed: {
+    iconCustomStyle() {
+      return 'margin-right: 8px;';
+    },
+    suffixIconCustomStyle() {
+      return 'margin-right: 8px;margin-left: auto;';
+    },
   },
   watch: {
     dataVisible: {

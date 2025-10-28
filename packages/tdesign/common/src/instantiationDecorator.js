@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { isPlainObject } from '../validator';
 import { canUseVirtualHost } from '../version';
-import { toCamel } from '../utils';
+import { toCamel, toPascal } from '../utils';
 
 const getInnerControlledValue = key => `data${key.replace(/^(\w)/, (e, t) => t.toUpperCase())}`;
 
@@ -24,7 +24,7 @@ export const COMMON_PROPS = {
   }), {}),
 
   style: { type: String, default: '' },
-  customStyle: { type: String, default: '' },
+  customStyle: { type: [String, Object], default: '' },
 };
 
 
@@ -147,6 +147,9 @@ export const uniComponent = function (info) {
 
   if (!info.options.styleIsolation) {
     info.options.styleIsolation = 'shared';
+  }
+  if (info.name) {
+    info.name = toPascal(info.name);
   }
 
   const obj = toComponent(info);
