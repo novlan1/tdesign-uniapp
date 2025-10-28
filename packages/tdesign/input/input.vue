@@ -7,7 +7,6 @@
     <view :class="classPrefix + '__wrap--prefix'">
       <view :class="classPrefix + '__icon--prefix'">
         <slot name="prefix-icon" />
-        <!-- parse <template v-if="_prefixIcon" is="icon" :data="tClass: prefix + '-class-prefix-icon', ariaHidden: true, ..._prefixIcon"/> -->
         <block
           v-if="_prefixIcon"
           name="icon"
@@ -84,9 +83,7 @@
           :class="classPrefix + '__wrap--clearable-icon'"
           @click="clearInput"
         >
-          <!-- parse <template is="icon" :data="tClass: prefix + '-class-clearable', ariaRole: 'button', ariaLabel: '清除', ..._clearIcon"/> -->
-
-          <t-icon
+<t-icon
             :custom-style="_clearIcon.style || ''"
             :t-class="tClassClearable"
             :prefix="_clearIcon.prefix"
@@ -113,7 +110,6 @@
           @click="onSuffixIconClick"
         >
           <slot name="suffix-icon" />
-          <!-- parse <template v-if="_suffixIcon" is="icon" :data="tClass: prefix + '-class-suffix-icon', ariaRole: 'button', ..._suffixIcon"/> -->
           <block
             v-if="_suffixIcon"
             name="icon"
@@ -149,13 +145,15 @@ import tIcon from '../icon/icon';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
-import { getCharacterLength, calcIcon, coalesce } from '../common/utils';
+import { getCharacterLength, calcIcon, coalesce, nextTick } from '../common/utils';
 import { isDef } from '../common/validator';
 import { getInputClass } from './computed.js';
 import _ from '../common/utils.wxs';
 // import { getInnerMaxLen } from './utils';
 
+
 const name = `${prefix}-input`;
+
 
 export default uniComponent({
   name,
@@ -258,18 +256,18 @@ export default uniComponent({
       const { allowInputOverMax, maxcharacter, maxlength } = this;
       if (!allowInputOverMax && maxcharacter && maxcharacter > 0 && !Number.isNaN(maxcharacter)) {
         const { length, characters } = getCharacterLength('maxcharacter', value, maxcharacter);
-        this.$nextTick(() => {
+        nextTick().then(() => {
           this.dataValue = characters;
         });
         this.count = length;
       } else if (!allowInputOverMax && maxlength && maxlength > 0 && !Number.isNaN(maxlength)) {
         const { length, characters } = getCharacterLength('maxlength', value, maxlength);
-        this.$nextTick(() => {
+        nextTick().then(() => {
           this.dataValue = characters;
         });
         this.count = length;
       } else {
-        this.$nextTick(() => {
+        nextTick().then(() => {
           this.dataValue = value;
         });
         this.dataValue = value;

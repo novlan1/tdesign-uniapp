@@ -62,6 +62,7 @@
                   size="44rpx"
                   :t-class="name + '__step-arrow'"
                   :custom-style="stepArrowCustomStyle"
+                  style="margin-left: auto"
                 />
               </view>
             </view>
@@ -129,7 +130,7 @@ import tRadioGroup from '../radio-group/radio-group';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
-import { getRect, coalesce } from '../common/utils';
+import { getRect, coalesce, nextTick } from '../common/utils';
 
 import _ from '../common/utils.wxs';
 
@@ -218,7 +219,9 @@ export default uniComponent({
           $tabs?.getTabHeight().then((res) => {
             this.state.tabsHeight = res.height;
           });
-          this.$nextTick(() => {
+
+          // 不能使用 this.$nextTick，在头条小程序下会报错
+          nextTick().then(() => {
             this.initOptionsHeight(this.steps.length);
             this.updateScrollTop();
             this.initWithValue();

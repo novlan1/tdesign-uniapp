@@ -51,7 +51,6 @@
                 :class="_.cls(classPrefix + '__item-inner', [theme, ['active', currentIndex === index]])"
                 :aria-hidden="item.badgeProps.dot || item.badgeProps.count"
               >
-                <!-- parse <template v-if="item.icon" is="icon" :data="tClass: classPrefix + '__icon', ...item.icon"/> -->
                 <block
                   v-if="item.icon"
                   name="icon"
@@ -70,9 +69,7 @@
                   />
                 </block>
                 <block v-if="item.badgeProps">
-                  <!-- parse <template is="badge" :data="...item.badgeProps, content: item.label, tClass: _.cls(classPrefix + '__badge', [ ['disabled', item.disabled], ['active', currentIndex === index]])"/> -->
-
-                  <t-badge
+<t-badge
                     :color="item.badgeProps.color || ''"
                     :content="item.label"
                     :count="item.badgeProps.count || 0"
@@ -141,7 +138,7 @@ import { uniComponent } from '../common/src/index';
 import props from './props';
 import { prefix } from '../common/config';
 import touch from '../mixins/touch';
-import { getRect, uniqueFactory, coalesce } from '../common/utils';
+import { getRect, uniqueFactory, coalesce, nextTick } from '../common/utils';
 import { getObserver } from '../common/wechat';
 import _ from '../common/utils.wxs';
 import { ParentMixin, RELATION_MAP } from '../common/relation';
@@ -200,7 +197,7 @@ export default uniComponent({
   },
 
   mounted() {
-    this.$nextTick(() => {
+    nextTick().then(() => {
       this.setTrack();
     });
     getRect(this, `.${name}`).then((rect) => {

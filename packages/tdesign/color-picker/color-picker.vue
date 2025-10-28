@@ -13,7 +13,6 @@
       @visible-change="onVisibleChange"
     >
       <slot name="header" />
-      <!-- parse <include src="./template.wxml"/> -->
       <TemplateVue
         ref="templateVue"
         :class-prefix="classPrefix"
@@ -38,7 +37,6 @@
       <slot name="footer" />
     </t-popup>
     <block v-else>
-      <!-- parse <include src="./template.wxml"/> -->
       <TemplateVue
         ref="templateVue"
         :class-prefix="classPrefix"
@@ -77,7 +75,7 @@ import {
   HUE_MAX,
   DEFAULT_SYSTEM_SWATCH_COLORS,
 } from './constants';
-import { debounce } from '../common/utils';
+import { debounce, nextTick } from '../common/utils';
 import { Color, getColorObject } from './utils';
 import TemplateVue from './template.vue';
 
@@ -461,7 +459,7 @@ export default uniComponent({
     },
 
     onTouchEnd(e) {
-      this.$nextTick(() => {
+      nextTick().then(() => {
         this.handleDiffDrag(e);
       });
     },

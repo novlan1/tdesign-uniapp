@@ -21,7 +21,7 @@ import { DEFAULT_MINVERSION, excavateModules, isSupportPath2d, generatePath } fr
 import { uniComponent } from '../../../common/src/index';
 import { prefix } from '../../../common/config';
 import { loadImage } from '../../../common/canvas/index';
-import { getWindowInfo } from '../../../common/utils';
+import { getWindowInfo, nextTick } from '../../../common/utils';
 
 export default uniComponent({
   name: 'QrcodeCanvas',
@@ -101,7 +101,7 @@ export default uniComponent({
   },
   methods: {
     async initCanvas() {
-      await this.$nextTick();
+      await nextTick();
 
       // #ifndef H5
       this.initMiniProgramCanvas();

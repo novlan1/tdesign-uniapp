@@ -16,7 +16,7 @@ import { uniComponent } from '../common/src/index';
 import props from './props';
 import { prefix } from '../common/config';
 import pageScrollMixin from '../mixins/page-scroll';
-import { getRect } from '../common/utils';
+import { getRect, nextTick } from '../common/utils';
 import _ from '../common/utils.wxs';
 
 
@@ -106,7 +106,7 @@ export default uniComponent({
       const { offsetTop } = this;
       const { containerStyle: prevContainerStyle, contentStyle: prevContentStyle } = this;
       const { isFixed, height, transform } = data;
-      this.$nextTick(() => {
+      nextTick().then(() => {
         let containerStyle = '';
         let contentStyle = '';
 

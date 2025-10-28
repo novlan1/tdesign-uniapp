@@ -116,7 +116,7 @@ import tCell from '../cell/cell';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
-import { getCharacterLength } from '../common/utils';
+import { getCharacterLength, nextTick } from '../common/utils';
 import _ from '../common/utils.wxs';
 import { highLight } from './computed.js';
 // import { getInnerMaxLen } from '../input/utils';
@@ -218,7 +218,7 @@ export default uniComponent({
       }
 
 
-      this.$nextTick(() => {
+      nextTick().then(() => {
         this.dataValue = value;
         this.$emit('change', { value });
       });

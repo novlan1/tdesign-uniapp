@@ -26,7 +26,7 @@ import _ from '../common/utils.wxs';
 import watermarkProps from './props';
 import { prefix } from '../common/config';
 import { uniComponent } from '../common/src/index';
-import { appBaseInfo } from '../common/utils';
+import { appBaseInfo, nextTick } from '../common/utils';
 import generateBase64Url from './utils/generateBase64Url';
 import randomMovingStyle from './utils/randomMovingStyle';
 
@@ -85,7 +85,7 @@ export default uniComponent({
     layout: 'renderWatermark',
   },
   async mounted() {
-    await this.$nextTick();
+    await nextTick();
     this.renderWatermark();
   },
   methods: {
