@@ -61,6 +61,7 @@
                   name="chevron-right"
                   size="44rpx"
                   :t-class="name + '__step-arrow'"
+                  :custom-style="stepArrowCustomStyle"
                 />
               </view>
             </view>
@@ -193,6 +194,14 @@ export default uniComponent({
       dataValue: coalesce(this.value, this.defaultValue),
       items: [],
     };
+  },
+  computed: {
+    stepArrowCustomStyle() {
+      return _._style({
+        color: 'var(--td-cascader-step-arrow-color, var(--td-text-color-placeholder, var(--td-font-gray-3, rgba(0, 0, 0, .4))))',
+        marginLeft: 'auto',
+      });
+    },
   },
   watch: {
     visible: {
