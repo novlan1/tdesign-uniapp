@@ -50,6 +50,10 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'click',
+    'leaved',
+  ],
   data() {
     return {
       prefix,

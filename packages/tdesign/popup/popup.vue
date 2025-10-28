@@ -78,6 +78,10 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'visible-change',
+    'leaved',
+  ],
   data() {
     return {
       prefix,

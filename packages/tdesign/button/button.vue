@@ -60,7 +60,7 @@
       :t-class="classPrefix + '__loading ' + classPrefix + '__loading--wrapper'"
       :t-class-indicator="classPrefix + '__loading--indicator ' + tClassLoading"
     />
-    <view :class="classPrefix + '__content'">
+    <view :class="classPrefix + '__content ' + ((_icon || loading) ? classPrefix + '__content--has-icon' : '')">
       <slot name="content" />
       <block v-if="content">
         {{ content }}
@@ -73,7 +73,7 @@
 <script>
 import tIcon from '../icon/icon';
 import tLoading from '../loading/loading';
-import { getExternalClasses, COMMON_PROPS } from '../common/src/index';
+import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
 import { calcIcon } from '../common/utils';
@@ -83,43 +83,35 @@ import _ from '../common/utils.wxs';
 const name = `${prefix}-button`;
 
 
-export default {
+export default uniComponent({
   name,
   options: {
     styleIsolation: 'shared',
-    multipleSlots: true,
-    virtualHost: true,
   },
-
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-icon`,
+    `${prefix}-class-loading`,
+  ],
   components: {
     tIcon,
     tLoading,
   },
   props: {
     ...props,
-    ...COMMON_PROPS,
-    ...getExternalClasses({
-      externalClasses: [
-        `${prefix}-class`,
-        `${prefix}-class-icon`,
-        `${prefix}-class-loading`,
-      ],
-    }),
   },
-  emits: [
-    'click',
-  ],
   data() {
     return {
-      // eslint-disable-next-line vue/no-reserved-keys
       _,
       prefix,
       className: '',
       classPrefix: name,
-      // eslint-disable-next-line vue/no-reserved-keys
       _icon: undefined,
     };
   },
+  emits: [
+    'click',
+  ],
   watch: {
     icon: {
       handler(value) {
@@ -189,7 +181,7 @@ export default {
       this.$emit('click', t);
     },
   },
-};
+});
 </script>
 <style scoped>
 @import './button.css';

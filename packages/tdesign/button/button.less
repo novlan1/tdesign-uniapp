@@ -139,6 +139,7 @@
     padding-right: @@padding;
     height: @@height;
     line-height: @@height;
+    --td-icon-font-size: @@iconSize;
 
     & :deep(.@{button}__icon) {
       font-size: @@iconSize;
@@ -517,7 +518,8 @@
   }
 
   :deep(&__loading) + &__content:not(:empty),
-  :deep(&__icon) + &__content:not(:empty) {
+  :deep(&__icon) + &__content:not(:empty),
+  &__content--has-icon {
     margin-left: 8rpx;
   }
 

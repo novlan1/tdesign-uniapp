@@ -1,7 +1,7 @@
 import { loadImage } from '../../common/canvas/index';
+import { getWindowInfo } from '../../common/utils';
 
-
-const ratio = uni.getWindowInfo().pixelRatio || 1;
+const ratio = getWindowInfo().pixelRatio || 1;
 
 // 元素中心为旋转点执行旋转
 const drawRotate = (

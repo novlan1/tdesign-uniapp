@@ -16,7 +16,6 @@
           inherit-color
           layout="vertical"
         />
-        <!-- parse <template v-else-if="_icon" is="icon" :data="ariaHidden: true, tClass: classPrefix + '__icon ' + classPrefix + '__icon--' + direction, ..._icon"/> -->
         <block
           v-else-if="_icon"
           name="icon"
@@ -96,6 +95,11 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'leaved',
+    'destory',
+    'close',
+  ],
   data() {
     const info = needTransformKeys.reduce((acc, key) => ({
       ...acc,

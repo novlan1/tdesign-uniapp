@@ -21,6 +21,7 @@ import { DEFAULT_MINVERSION, excavateModules, isSupportPath2d, generatePath } fr
 import { uniComponent } from '../../../common/src/index';
 import { prefix } from '../../../common/config';
 import { loadImage } from '../../../common/canvas/index';
+import { getWindowInfo } from '../../../common/utils';
 
 export default uniComponent({
   name: 'QrcodeCanvas',
@@ -230,7 +231,7 @@ export default uniComponent({
         // #ifndef H5
         // 小程序环境：获取真实的设备像素比并设置 Canvas 尺寸
         // 使用 getWindowInfo 替代已废弃的 getSystemInfoSync
-        const windowInfo = uni.getWindowInfo();
+        const windowInfo = getWindowInfo();
         pixelRatio = windowInfo.pixelRatio || 1;
         canvasSize = this.size * pixelRatio;
         canvas.width = canvasSize;

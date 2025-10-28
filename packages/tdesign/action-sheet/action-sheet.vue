@@ -240,8 +240,24 @@ export default uniComponent({
 
     /** 指令调用显示 */
     show(options) {
+      const defaultOptions = [
+        'align',
+        'cancelText',
+        'count',
+        'description',
+        'items',
+        'popupProps',
+        'showCancel',
+        'showOverlay',
+        'theme',
+        'usingCustomNavbar',
+      ].reduce((acc, key) => ({
+        ...acc,
+        [key]: props[key].default,
+      }));
+
       this.setData({
-        ...this.initialData,
+        ...defaultOptions,
         ...options,
         visible: true,
       });
