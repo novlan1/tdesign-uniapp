@@ -49,7 +49,8 @@
         "appid": "wx9713aa2e5d67f6bd",
         "darkmode": true,
         "setting": {
-            "urlCheck": false
+            "urlCheck": false,
+            "minified": true
         },
         "usingComponents": true
     },
