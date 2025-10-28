@@ -73,7 +73,7 @@
 <script>
 import tIcon from '../icon/icon';
 import tLoading from '../loading/loading';
-import { uniComponent } from '../common/src/index';
+import { getExternalClasses, COMMON_PROPS } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
 import { calcIcon } from '../common/utils';
@@ -83,35 +83,43 @@ import _ from '../common/utils.wxs';
 const name = `${prefix}-button`;
 
 
-export default uniComponent({
+export default {
   name,
   options: {
     styleIsolation: 'shared',
+    multipleSlots: true,
+    virtualHost: true,
   },
-  externalClasses: [
-    `${prefix}-class`,
-    `${prefix}-class-icon`,
-    `${prefix}-class-loading`,
-  ],
+
   components: {
     tIcon,
     tLoading,
   },
   props: {
     ...props,
-  },
-  data() {
-    return {
-      _,
-      prefix,
-      className: '',
-      classPrefix: name,
-      _icon: undefined,
-    };
+    ...COMMON_PROPS,
+    ...getExternalClasses({
+      externalClasses: [
+        `${prefix}-class`,
+        `${prefix}-class-icon`,
+        `${prefix}-class-loading`,
+      ],
+    }),
   },
   emits: [
     'click',
   ],
+  data() {
+    return {
+      // eslint-disable-next-line vue/no-reserved-keys
+      _,
+      prefix,
+      className: '',
+      classPrefix: name,
+      // eslint-disable-next-line vue/no-reserved-keys
+      _icon: undefined,
+    };
+  },
   watch: {
     icon: {
       handler(value) {
@@ -181,7 +189,7 @@ export default uniComponent({
       this.$emit('click', t);
     },
   },
-});
+};
 </script>
 <style scoped>
 @import './button.css';
