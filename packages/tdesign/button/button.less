@@ -333,6 +333,12 @@
     color: @button-default-outline-color;
     background-color: @bg-color-container;
 
+    // 适配 qq 小程序
+    /* #ifdef MP-QQ */
+    border-style: solid;
+    border-width: 2rpx;
+    /* #endif */
+
     &,
     &::after {
       border-color: @button-default-outline-border-color;

@@ -122,6 +122,7 @@
                 :name="item.suffixIcon"
                 :t-class="classPrefix + '__list-item-icon ' + classPrefix + '__list-item-icon--suffix'"
                 size="48rpx"
+                style="margin-left: auto;"
                 :custom-style="suffixIconCustomStyle"
               />
             </view>
