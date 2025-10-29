@@ -35,7 +35,8 @@
       >
         <t-icon
           :custom-style="_arrowIcon.style || ''"
-          :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
+          :t-class="getIconTClass(index)"
+          :class="getIconClass(index)"
           :prefix="_arrowIcon.prefix"
           :name="_arrowIcon.name"
           :size="_arrowIcon.size"
@@ -59,6 +60,7 @@ import { calcIcon } from '../common/utils';
 import _ from '../common/utils.wxs';
 import { ParentMixin, RELATION_MAP } from '../common/relation';
 import { parseEventDynamicCode } from '../common/event/dynamic';
+import { canUseVirtualHost } from '../common/version';
 
 
 const name = `${prefix}-dropdown-menu`;
@@ -112,6 +114,16 @@ export default uniComponent({
     this.getAllItems();
   },
   methods: {
+    getIconTClass(index) {
+      return canUseVirtualHost() ? this.getIconRealClass(index) : '';
+    },
+    getIconClass(index) {
+      return !canUseVirtualHost() ? this.getIconRealClass(index) : '';
+    },
+    getIconRealClass(index) {
+      const { classPrefix, activeIdx, tClassIcon } = this;
+      return `${classPrefix}__icon ${classPrefix}__icon--${activeIdx == index ? 'active ' : ' '}${tClassIcon}`;
+    },
     parseEventDynamicCode,
     toggle(index) {
       const { activeIdx, duration } = this;
