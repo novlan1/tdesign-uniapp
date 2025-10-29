@@ -25,7 +25,6 @@
             :class="classPrefix + '__close-btn'"
             @click="onClose"
           >
-            <!-- parse <template v-if="_.isObject(closeBtn)" is="icon" :data="name: 'close', size: 22, ...closeBtn"/> -->
             <template
               v-if="_.isObject(dataCloseBtn)"
             >
@@ -78,7 +77,6 @@
                 v-for="(actionItem, index) in dataActions"
                 :key="index"
               >
-                <!-- parse <template is="button" :data="block: true, type: 'action', extra: index, tClass: prefix + '-class-action', rootClass: getActionClass(classPrefix, buttonLayout), ...item"/> -->
                 <t-button
                   :t-id="actionItem.tId"
                   :custom-style="actionItem.style"
@@ -132,6 +130,7 @@
                 :custom-style="_cancel.style"
                 :block="_cancel.block"
                 :t-class="_cancel.tClass"
+                :class="_cancel.class"
                 :disabled="_cancel.disabled"
                 :data-type="'cancel'"
                 :data-extra="_cancel.index"
@@ -172,13 +171,12 @@
             </template>
             <slot name="cancel-btn" />
             <template v-if="_confirm">
-              <!-- parse <template is="button" :data="type: 'confirm', theme: 'primary', ..._confirm"/> -->
-              <!-- <template name="button"> -->
               <t-button
                 :t-id="_confirm.tId"
                 :custom-style="_confirm.style"
                 :block="_confirm.block"
                 :t-class="_confirm.tClass"
+                :class="_confirm.class"
                 :disabled="_confirm.disabled"
                 :data-type="'confirm'"
                 :data-extra="_confirm.index"
@@ -216,7 +214,6 @@
               >
                 <slot v-if="_confirm.useDefaultSlot || false" />
               </t-button>
-            <!-- </template> -->
             </template>
             <slot name="confirm-btn" />
           </view>
@@ -238,7 +235,7 @@ import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
 import { getActionClass } from './computed.js';
 import { getFunctionalMixin } from '../common/functional/mixin';
-
+import { canUseVirtualHost } from '../common/version';
 
 const name = `${prefix}-dialog`;
 
@@ -308,15 +305,20 @@ export default uniComponent({
         externalCls.push(`${classPrefix}-button`);
       }
 
+      const useVirtualHost = canUseVirtualHost();
+
       Object.keys(buttonMap).forEach((key) => {
         const btn = buttonMap[key];
         const rootClass = [...cls, `${classPrefix}__button--${key}`];
+        const tClass = [...externalCls, this[toCamel(`${prefix}-class-${key}`)], ...rootClass].join(' ');
 
         const base = {
           block: true,
           rootClass,
-          // tClass: [...externalCls, `${prefix}-class-${key}`],
-          tClass: [...externalCls, this[toCamel(`${prefix}-class-${key}`)], ...rootClass].join(' '),
+
+          tClass: useVirtualHost ? tClass : '',
+          class: !useVirtualHost ? tClass : '',
+
           variant: rect.buttonVariant,
           openType: '',
         };

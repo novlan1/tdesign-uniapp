@@ -48,14 +48,14 @@ export function canIUseFormFieldButton() {
 }
 
 export function canUseVirtualHost() {
-  let result = true;
+  let result = false;
 
   // #ifdef MP-WEIXIN
   result = judgeByVersion('2.19.2');
   // #endif
 
-  // #ifdef MP-TOUTIAO
-  result = false;
+  // #ifdef H5 || APP-PLUS || MP-ALIPAY
+  result = true;
   // #endif
 
   return result;
