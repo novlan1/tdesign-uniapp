@@ -1,16 +1,20 @@
 <template>
   <view>
-    <t-dropdown-menu>
+    <t-dropdown-menu
+      :relation-key="relationKey"
+    >
       <t-dropdown-item
         :options="product.options"
         placement="right"
         :value="product.value"
+        :relation-key="relationKey"
         @change="onChange"
       />
       <t-dropdown-item
         :options="sorter.options"
         placement="right"
         :default-value="sorter.value"
+        :relation-key="relationKey"
       />
     </t-dropdown-menu>
   </view>
@@ -57,6 +61,7 @@ export default {
           },
         ],
       },
+      relationKey: `${Math.random()}`,
     };
   },
   created() {},

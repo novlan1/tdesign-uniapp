@@ -217,7 +217,6 @@ export default uniComponent({
 
 
       if (parent) {
-        // TODO
         parent.updateValue({ value, checkAll, indeterminate: dataIndeterminate, checked, item: { label, value, checked } });
       } else {
         this._trigger('change', { context: { value, label }, checked });

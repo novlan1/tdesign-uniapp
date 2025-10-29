@@ -19,5 +19,10 @@ const props = {
     type: Number,
     default: 11600,
   },
+
+  relationKey: {
+    type: String,
+    default: '',
+  },
 };
 export default props;

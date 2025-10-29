@@ -30,5 +30,10 @@ const props = {
     type: [Array, null],
     default: null,
   },
+
+  relationKey: {
+    type: String,
+    default: '',
+  },
 };
 export default props;

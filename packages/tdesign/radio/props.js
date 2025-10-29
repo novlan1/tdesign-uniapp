@@ -58,5 +58,10 @@ const props = {
     type: [String, Number, Boolean],
     default: false,
   },
+
+  relationKey: {
+    type: String,
+    default: '',
+  },
 };
 export default props;

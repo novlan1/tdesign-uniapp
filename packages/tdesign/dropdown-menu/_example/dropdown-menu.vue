@@ -31,14 +31,16 @@
         title="02 组件状态"
         desc="禁用状态"
       >
-        <t-dropdown-menu>
+        <t-dropdown-menu :relation-key="relationKey">
           <t-dropdown-item
             disabled
             label="禁用菜单"
+            :relation-key="relationKey"
           />
           <t-dropdown-item
             disabled
             label="禁用菜单"
+            :relation-key="relationKey"
           />
         </t-dropdown-menu>
       </t-demo>
@@ -58,7 +60,9 @@ export default {
     multi,
   },
   data() {
-    return {};
+    return {
+      relationKey: `${Math.random()}`,
+    };
   },
   methods: {},
 };

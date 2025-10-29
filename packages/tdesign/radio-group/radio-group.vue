@@ -28,6 +28,7 @@
       :max-label-row="item.maxLabelRow || 3"
       :name="item.name || ''"
       :borderless="borderless"
+      :relation-key="relationKey"
       @change="handleRadioChange($event, { index, value: item.value, allowUncheck: item.allowUncheck || allowUncheck })"
     />
   </view>

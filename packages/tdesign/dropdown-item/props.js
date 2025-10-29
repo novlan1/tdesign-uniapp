@@ -39,5 +39,10 @@ const props = {
     type: [null, String, Number, Array],
     default: null,
   },
+
+  relationKey: {
+    type: String,
+    default: '',
+  },
 };
 export default props;
