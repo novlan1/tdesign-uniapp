@@ -61,7 +61,6 @@
         v-for="(item, index) in switchMode === 'none' ? months : currentMonth"
         :key="index"
       >
-        <!-- parse <template v-if="switchMode === 'none'" is="calendar-header" :data="class: classPrefix + '__month', classPrefix: classPrefix + '-header', tId: 'year_' + item.year + '_month_' + item.month, switchMode, ...actionButtons, title: _this.getMonthTitle(item.year, realLocalText.months[item.month], realLocalText.monthTitle)"/> -->
         <block
           v-if="switchMode === 'none'"
           name="calendar-header"
@@ -126,7 +125,6 @@
         name="confirm-btn"
       />
       <block v-else-if="innerConfirmBtn">
-        <!-- parse <template is="button" :data="block: true,  theme: 'primary', rootClass: 't-calendar__confirm-btn', content: realLocalText.confirm, ...innerConfirmBtn"/> -->
         <t-button
           :t-id="innerConfirmBtn.tId"
           :custom-style="innerConfirmBtn.style"
@@ -185,7 +183,6 @@ import CalendarHeader from './calendar-header.vue';
 import { prefix } from '../common/config';
 import { coalesce } from '../common/utils';
 import props from './template.props';
-import _ from '../common/utils.wxs';
 
 
 export default {
@@ -215,7 +212,7 @@ export default {
   },
   computed: {
     closeBtnCustomStyle() {
-      return _._style({
+      return utils._style({
         position: 'absolute',
         top: '16px',
         right: '16px',

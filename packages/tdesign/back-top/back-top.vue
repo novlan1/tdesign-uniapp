@@ -11,7 +11,6 @@
       aria-hidden
     >
       <slot name="icon" />
-      <!-- parse <template v-if="_icon" is="icon" :data="tClass: prefix + '-class-icon', ..._icon"/> -->
       <block
         v-if="_icon"
         name="icon"

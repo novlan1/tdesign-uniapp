@@ -8,7 +8,6 @@
       :aria-hidden="true"
       :class="classPrefix + '__icon'"
     >
-      <!-- parse <template v-if="_icon" is="icon" :data="tClass: prefix + '-icon', ..._icon"/> -->
       <block
         v-if="_icon"
         name="icon"

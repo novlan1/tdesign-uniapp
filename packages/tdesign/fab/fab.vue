@@ -11,7 +11,6 @@
     @end="onEnd"
   >
     <slot v-if="!buttonData.content && !buttonData.icon" />
-    <!-- parse <template v-else is="button" :data="useDefaultSlot: true, ...buttonData"/> -->
     <block
       v-else
       name="button"
@@ -68,7 +67,6 @@
     :style="_._style(['right: 16px; bottom: 32px;', style, customStyle])"
   >
     <slot v-if="!buttonData?.content && !buttonData?.icon" />
-    <!-- parse <template v-else is="button" :data="useDefaultSlot: true, ...buttonData"/> -->
     <t-button
       v-else
       :t-id="buttonData.tId"

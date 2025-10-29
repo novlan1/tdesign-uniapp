@@ -29,7 +29,6 @@
         {{ item.label }}
       </view>
 
-      <!-- parse <template is="icon" :data="..._arrowIcon, ariaHidden: true, tClass: classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"/> -->
       <block
         v-if="_arrowIcon"
         name="icon"

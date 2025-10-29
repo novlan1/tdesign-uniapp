@@ -26,8 +26,6 @@
           {{ dataDescription }}
         </view>
         <block v-if="gridThemeItems.length">
-          <!-- parse <template is="grid" :data="classPrefix, prefix, gridThemeItems, count, currentSwiperIndex"/> -->
-          <!-- <block name="grid"> -->
           <block v-if="gridThemeItems.length === 1">
             <t-grid
               align="center"
@@ -91,7 +89,6 @@
               </view>
             </view>
           </block>
-          <!-- </block> -->
         </block>
         <view
           v-else-if="dataItems && dataItems.length"
@@ -101,8 +98,6 @@
             v-for="(item, index) in dataItems"
             :key="index"
           >
-            <!-- parse <template is="list" :data="index, classPrefix, listThemeItemClass: _.cls(classPrefix + '__list-item', [align, [disabled, item.disabled]]), item"/> -->
-            <!-- <block name="list"> -->
             <view
               :data-index="index"
               :style="item.color ? 'color: ' + item.color : ''"

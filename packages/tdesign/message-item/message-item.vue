@@ -11,7 +11,6 @@
     >
       <view :class="classPrefix + '__icon--left'">
         <slot name="icon" />
-        <!-- parse <template v-if="_icon" is="icon" :data="tClass: prefix + '-class-icon', ariaHidden: true, ..._icon"/> -->
         <block
           v-if="_icon"
           name="icon"
@@ -69,7 +68,6 @@
         @click="handleClose"
       >
         <slot name="close-btn" />
-        <!-- parse <template v-if="_closeBtn" is="icon" :data="tClass: prefix + '-class-close-btn', ariaRole: 'button', ariaLabel: '关闭', ..._closeBtn"/> -->
         <block
           v-if="_closeBtn"
           name="icon"

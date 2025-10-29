@@ -23,7 +23,6 @@
     >
       <view :class="classPrefix + '__prefix-icon ' + prefix + '-class-prefix-icon'">
         <slot name="prefix-icon" />
-        <!-- parse <template v-if="_prefixIcon" is="icon" :data="tClass: prefix + '-class-prefix-icon', ariaHidden: true, ..._prefixIcon"/> -->
         <block
           v-if="_prefixIcon"
           name="icon"
@@ -51,7 +50,6 @@
       </view>
       <view :class="classPrefix + '__suffix-icon ' + prefix + '-class-suffix-icon'">
         <slot name="suffix-icon" />
-        <!-- parse <template v-if="_suffixIcon" is="icon" :data="tClass: prefix + '-class-suffix-icon', ariaHidden: true, ..._suffixIcon"/> -->
         <block
           v-if="_suffixIcon"
           name="icon"

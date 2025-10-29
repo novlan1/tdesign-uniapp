@@ -35,7 +35,6 @@
         :aria-label="_.isObject(item) ? item.ariaLabel : ''"
         @click="onTap($event, { index })"
       >
-        <!-- parse <template is="image" :data="tClass: _this.getImageClass(prefix, navCurrent, index, list), style: 'height: ' + _.addUnit(height), src: _.isObject(item) ? item.value : item, mode: 'aspectFill', dataset: index, ...imageProps, bindload: 'onImageLoad'"/> -->
         <t-image
           :t-class="getImageClass(prefix, navCurrent, index, list, tClassImage, tClassPrevImage, tClassNextImage)"
           :custom-style="'height: ' + _.addUnit(height) || ''"

@@ -8,7 +8,6 @@
       :aria-hidden="true"
       :class="classPrefix + '__icon'"
     >
-      <!-- parse <template v-if="_icon" is="icon" :data="tClass: prefix + '-icon', ..._icon"/> -->
       <block
         v-if="_icon"
         name="icon"
@@ -30,7 +29,6 @@
     <view :class="classPrefix + '__text'">
       <slot />
     </view>
-    <!-- parse <template v-if="_closable" is="icon" :data="tClass: classPrefix + '__icon-close ' + prefix + '-icon', bindclick: 'handleClose',  ariaRole: 'button', ariaLabel: '关闭',  ..._closable" @click.native.stop.prevent="handleClose"/> -->
     <block
       v-if="_closable"
       name="icon"

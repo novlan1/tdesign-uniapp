@@ -30,7 +30,6 @@
           :data-action="item"
           @click.stop="onActionTap(item)"
         >
-          <!-- parse <template v-if="item.icon" is="icon" :data="tClass: classPrefix + '__icon', name: item.icon, ...item.icon"></template> -->
           <block
             v-if="item.icon"
           >
@@ -69,7 +68,6 @@
           :data-action="item"
           @click.stop="onActionTap(item)"
         >
-          <!-- parse <template v-if="item.icon" is="icon" :data="tClass: classPrefix + '__icon', name: item.icon, ...item.icon"></template> -->
           <block
             v-if="item.icon"
           >

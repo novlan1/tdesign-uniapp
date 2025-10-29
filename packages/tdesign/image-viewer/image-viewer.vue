@@ -56,7 +56,6 @@
           @click.stop.prevent="(e) => onClose(e, '')"
         >
           <slot name="close-btn" />
-          <!-- parse <template v-if="_closeBtn" is="icon" :data="..._closeBtn"/> -->
           <block
             v-if="_closeBtn"
             name="icon"
@@ -88,7 +87,6 @@
           @click="onDelete"
         >
           <slot name="delete-btn" />
-          <!-- parse <template is="icon" :data="..._deleteBtn"/> -->
           <t-icon
             v-if="_deleteBtn"
             :custom-style="_deleteBtn.style || ''"

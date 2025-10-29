@@ -17,7 +17,6 @@
         :src="image"
         mode="aspectFit"
       />
-      <!-- parse <template v-else-if="iconName || _.isNoEmptyObj(iconData)" is="icon" :data="tClass: classPrefix + '__icon', name: iconName, ...iconData"/> -->
       <block
         v-else-if="iconName || _.isNoEmptyObj(iconData)"
         name="icon"

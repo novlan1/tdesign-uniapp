@@ -12,7 +12,6 @@
       @click="clickPrefixIcon"
     >
       <slot name="prefix-icon" />
-      <!-- parse <template v-if="_prefixIcon" is="icon" :data="tClass: prefix + '-class-prefix-icon', ..._prefixIcon"></template> -->
       <block
         v-if="_prefixIcon"
         name="icon"
@@ -82,7 +81,6 @@
       @click="clickSuffixIcon"
     >
       <slot name="suffix-icon" />
-      <!-- parse <template v-if="_suffixIcon" is="icon" :data="tClass: prefix + '-class-suffix-icon', ..._suffixIcon"></template> -->
       <block
         v-if="_suffixIcon"
         name="icon"

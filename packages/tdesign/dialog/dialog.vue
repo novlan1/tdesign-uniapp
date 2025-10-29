@@ -123,8 +123,6 @@
             </template>
             <slot name="actions" />
             <template v-if="_cancel">
-              <!-- parse <template is="button" :data="type: 'cancel', ..._cancel"/> -->
-
               <t-button
                 :t-id="_cancel.tId"
                 :custom-style="_cancel.style"

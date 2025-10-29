@@ -16,7 +16,6 @@
         :src="image"
         mode="aspectFit"
       />
-      <!-- parse <template v-else-if="_icon" is="icon" :data="tClass: classPrefix + '__icon', ..._icon"/> -->
       <block
         v-else-if="_icon"
         name="icon"
