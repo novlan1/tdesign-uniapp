@@ -23,7 +23,8 @@
       >
         <t-icon
           :custom-style="iconData.style || ''"
-          :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (iconData.activeIdx == iconData.index ? 'active ' : ' ')"
+          :t-class="iconTClass"
+          :class="iconClass"
           :prefix="iconData.prefix"
           :name="iconName || iconData.name"
           :size="iconData.size"
@@ -67,6 +68,7 @@ import props from './props';
 import { prefix } from '../common/config';
 import { setIcon } from '../common/utils';
 import _ from '../common/utils.wxs';
+import { canUseVirtualHost } from '../common/version';
 
 
 const name = `${prefix}-empty`;
@@ -100,6 +102,18 @@ export default uniComponent({
 
       _,
     };
+  },
+  computed: {
+    iconTClass() {
+      return canUseVirtualHost() ? this.iconRealClass : '';
+    },
+    iconClass() {
+      return !canUseVirtualHost() ? this.iconRealClass : '';
+    },
+    iconRealClass() {
+      const { classPrefix, iconData } = this;
+      return `${classPrefix}__icon ${classPrefix}__icon--${iconData.activeIdx == iconData.index ? 'active ' : ' '}`;
+    },
   },
   watch: {
     icon: {

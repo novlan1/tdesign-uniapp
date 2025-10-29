@@ -2,7 +2,7 @@
   <view
     id="t-bar"
     :style="_._style([style, customStyle])"
-    :class="classPrefix + ' class ' + prefix + '-class'"
+    :class="classPrefix + ' class ' + tClass"
     @touchmove.stop.prevent="parseEventDynamicCode($event, activeIdx === -1 ? '' : 'noop')"
   >
     <view
@@ -16,8 +16,7 @@
           [index, true]
         ]) +
           ' ' +
-          prefix +
-          '-class-item'
+          tClassItem
       "
       :aria-disabled="item.disabled"
       aria-role="button"
@@ -25,7 +24,7 @@
       aria-haspopup="menu"
       @click="handleToggle(index)"
     >
-      <view :class="classPrefix + '__title ' + prefix + '-class-label'">
+      <view :class="classPrefix + '__title ' + tClassLabel">
         {{ item.label }}
       </view>
 
