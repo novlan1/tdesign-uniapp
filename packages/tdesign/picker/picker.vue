@@ -189,7 +189,7 @@ export default uniComponent({
   },
   methods: {
     coalesce,
-    afterInnerLinked() {
+    innerAfterLinked() {
       this.updateChildren();
     },
     updateChildren() {

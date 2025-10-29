@@ -119,7 +119,7 @@ export const wxComponent = function wxComponent() {
     //   current.options.addGlobalClass = true;
     // }
 
-    if (canUseVirtualHost()) {
+    if (canUseVirtualHost() && current.options.virtualHost == null) {
       current.options.virtualHost = true;
     }
 
@@ -141,7 +141,7 @@ export const uniComponent = function (info) {
     multipleSlots: true,
   };
 
-  if (canUseVirtualHost()) {
+  if (canUseVirtualHost() && info.options.virtualHost == null) {
     info.options.virtualHost = true;
   }
 

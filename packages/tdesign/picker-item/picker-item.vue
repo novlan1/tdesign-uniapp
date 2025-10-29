@@ -63,6 +63,7 @@ export default uniComponent({
   name,
   options: {
     styleIsolation: 'shared',
+    virtualHost: true,
   },
   externalClasses: [
     `${prefix}-class`,
@@ -112,7 +113,7 @@ export default uniComponent({
 
   },
   methods: {
-    afterInnerLinked() {
+    innerAfterLinked() {
       const parent = this[RELATION_MAP.PickerItem];
 
       if ('keys' in parent) {
