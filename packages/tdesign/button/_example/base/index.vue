@@ -4,16 +4,20 @@
       <t-button
         theme="primary"
         size="large"
+        custom-style="margin-right: 16px;"
       >
         填充按钮
       </t-button>
       <t-button
         theme="light"
         size="large"
+        custom-style="margin-right: 16px;"
       >
         填充按钮
       </t-button>
-      <t-button size="large">
+      <t-button
+        size="large"
+      >
         填充按钮
       </t-button>
     </view>
@@ -23,12 +27,14 @@
         theme="primary"
         size="large"
         variant="outline"
+        custom-style="margin-right: 16px;"
       >
         描边按钮
       </t-button>
       <t-button
         theme="primary"
         size="large"
+        custom-style="margin-right: 16px;"
         variant="dashed"
       >
         虚框按钮

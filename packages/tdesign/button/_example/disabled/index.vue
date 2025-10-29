@@ -5,6 +5,7 @@
         theme="primary"
         size="large"
         disabled
+        custom-style="margin-right: 16px;"
       >
         填充按钮
       </t-button>
@@ -12,6 +13,7 @@
         theme="light"
         size="large"
         disabled
+        custom-style="margin-right: 16px;"
       >
         填充按钮
       </t-button>
@@ -29,6 +31,7 @@
         size="large"
         variant="outline"
         disabled
+        custom-style="margin-right: 16px;"
       >
         描边按钮
       </t-button>
@@ -37,6 +40,7 @@
         size="large"
         variant="dashed"
         disabled
+        custom-style="margin-right: 16px;"
       >
         虚框按钮
       </t-button>

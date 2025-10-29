@@ -5,11 +5,13 @@
       icon="app"
       content="填充按钮"
       size="large"
+      custom-style="margin-right: 16px;"
     />
     <t-button
       v-if="skylineRender"
       theme="light"
       size="large"
+      custom-style="margin-right: 16px;"
     >
       <t-loading
         t-class="loading"
@@ -23,6 +25,7 @@
       theme="primary"
       size="large"
       loading
+      custom-style="margin-right: 16px;"
     >
       加载中
     </t-button>

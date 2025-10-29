@@ -23,7 +23,7 @@ export const COMMON_PROPS = {
     },
   }), {}),
 
-  style: { type: String, default: '' },
+  style: { type: [String, Object], default: '' },
   customStyle: { type: [String, Object], default: '' },
 };
 
