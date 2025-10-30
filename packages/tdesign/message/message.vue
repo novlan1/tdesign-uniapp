@@ -45,7 +45,6 @@ import { unitConvert } from '../common/utils';
 const SHOW_DURATION = 400;
 const name = `${prefix}-message`;
 
-
 export default uniComponent({
   name,
   options: {
@@ -147,7 +146,7 @@ export default uniComponent({
           this.instances.push(instance);
           this.index += 1;
         }
-      });
+      }, 33);
     },
 
     /**
