@@ -56,7 +56,22 @@
   },
   "mp-qq": {
     "appid": "1112328122",
-    "darkmode": true
+    "setting": {
+      "urlCheck": false,
+      "ignoreDevUnusedFiles": false,
+      "ignoreUploadUnusedFiles": false,
+      "minify": true,
+      "minifyJS": true,
+      "minifyWXSS": true,
+      "minified": true,
+      "es6": true,
+      "enhance": false
+    },
+    "usingComponents": true,
+    "lazyCodeLoading": "requiredComponents",
+    "optimization": {
+      "subPackages": true
+    }
   },
   "mp-alipay": {
     "darkmode": true,
