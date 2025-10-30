@@ -226,7 +226,9 @@ export default uniComponent({
     this.formatList =  getFormatList(props.format.default, this.color);
   },
   mounted() {
-    this.init();
+    setTimeout(() => {
+      this.init();
+    }, 33);
     this.debouncedUpdateEleRect = debounce(e => this.updateEleRect(e), 150);
   },
   beforeUnMount() {
