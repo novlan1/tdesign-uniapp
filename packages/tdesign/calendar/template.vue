@@ -127,7 +127,7 @@
       />
       <block v-else-if="innerConfirmBtn">
         <!-- parse <template is="button" :data="block: true,  theme: 'primary', rootClass: 't-calendar__confirm-btn', content: realLocalText.confirm, ...innerConfirmBtn"/> -->
-        <t-button
+        <TButton
           :t-id="innerConfirmBtn.tId"
           :custom-style="innerConfirmBtn.style"
           :block="coalesce(innerConfirmBtn.block, true)"
@@ -169,13 +169,14 @@
           @agreeprivacyauthorization="onTplButtonTap"
         >
           <slot v-if="innerConfirmBtn.useDefaultSlot" />
-        </t-button>
+        </TButton>
       </block>
     </view>
   </view>
 </template>
 <script>
 import TIcon from '../icon/icon.vue';
+import TButton from '../button/button.vue';
 import utils from '../common/utils.wxs';
 import {
   getDateLabel,
@@ -195,6 +196,7 @@ export default {
   components: {
     CalendarHeader,
     TIcon,
+    TButton,
   },
   props: {
     ...props,

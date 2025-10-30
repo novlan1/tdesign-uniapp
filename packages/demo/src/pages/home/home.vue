@@ -37,8 +37,8 @@
     >
       《TDesign组件库服务声明》
     </view>
-    <t-footer text="该小程序仅演示示例，不收集个人信息。" />
-    <t-footer :text="`Copyright © 1998 - ${currentYear} All Rights Reserved`" />
+    <TFooter text="该小程序仅演示示例，不收集个人信息。" />
+    <TFooter :text="`Copyright © 1998 - ${currentYear} All Rights Reserved`" />
   </view>
   <TrdPrivacy
     ref="trdPrivacy"
@@ -50,6 +50,7 @@
 
 <script lang="ts" setup>
 import { useTheme } from 'tdesign-uniapp/mixins/theme-change';
+import TFooter from 'tdesign-uniapp/footer/footer.vue';
 
 import { ref } from 'vue';
 import { onLoad } from '@dcloudio/uni-app';

@@ -1,26 +1,26 @@
 <template>
   <view class="container">
     <view class="button-group">
-      <t-button
+      <TButton
         class="button"
         variant="text"
         :disabled="size <= minSize"
         @click="() => changeSize(-10)"
       >
         - Smaller
-      </t-button>
+      </TButton>
       <view class="line" />
-      <t-button
+      <TButton
         class="button"
         variant="text"
         :disabled="size >= maxSize"
         @click="() => changeSize(10)"
       >
         + Larger
-      </t-button>
+      </TButton>
     </view>
     <view class="qrcode-container">
-      <t-qrcode
+      <TQrcode
         :size="size"
         value="https://tdesign.tencent.com/"
       />
@@ -29,10 +29,15 @@
 </template>
 
 <script>
+import TQrcode from 'tdesign-uniapp/qrcode/qrcode.vue';
+import TButton from 'tdesign-uniapp/button/button.vue';
+
 
 export default {
   name: 'QRCodeSize',
   components: {
+    TQrcode,
+    TButton,
   },
   data() {
     return {

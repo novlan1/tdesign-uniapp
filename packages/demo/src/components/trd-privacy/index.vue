@@ -39,13 +39,13 @@
         </text> -->
       </view>
       <view class="footer">
-        <t-button
+        <TButton
           class="t-design-button"
           theme="primary"
           @click="privacyConfirm"
         >
           我已知晓
-        </t-button>
+        </TButton>
       </view>
     </view>
   </view>
@@ -76,19 +76,20 @@
         </text>有任何疑问或建议，可以通过声明内的联系方式向我们反馈。
       </view> -->
       <view class="footer">
-        <t-button
+        <TButton
           class="t-design-button"
           theme="primary"
           @click="privacyConfirm"
         >
           我已知晓
-        </t-button>
+        </TButton>
       </view>
     </view>
   </view>
 </template>
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
+import TButton from 'tdesign-uniapp/button/button.vue';
 
 defineProps<{
   name: string;

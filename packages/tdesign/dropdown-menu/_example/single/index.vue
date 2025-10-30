@@ -1,24 +1,30 @@
 <template>
   <view>
-    <t-dropdown-menu>
-      <t-dropdown-item
+    <TDropdownMenu>
+      <TDropdownItem
         :options="product.options"
         placement="right"
         :value="product.value"
         @change="onChange"
       />
-      <t-dropdown-item
+      <TDropdownItem
         :options="sorter.options"
         placement="right"
         :default-value="sorter.value"
       />
-    </t-dropdown-menu>
+    </TDropdownMenu>
   </view>
 </template>
 
 <script>
+import TDropdownMenu from 'tdesign-uniapp/dropdown-menu/dropdown-menu.vue';
+import TDropdownItem from 'tdesign-uniapp/dropdown-item/dropdown-item.vue';
+
+
 export default {
   components: {
+    TDropdownMenu,
+    TDropdownItem,
   },
   data() {
     return {

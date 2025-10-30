@@ -1,6 +1,6 @@
 <template>
   <view>
-    <t-slider
+    <TSlider
       :value="value"
       :min="0"
       :max="3"
@@ -9,7 +9,7 @@
       @change="handleSliderChange"
     />
     <view class="qrcode-content">
-      <t-qrcode
+      <TQrcode
         value="https://tdesign.gtimg.com/site/tdesign-logo.png"
         :level="currentLevel"
         status="active"
@@ -19,10 +19,14 @@
 </template>
 
 <script>
+import TQrcode from 'tdesign-uniapp/qrcode/qrcode.vue';
+import TSlider from 'tdesign-uniapp/slider/slider.vue';
 
 export default {
   name: 'QRCodeLevel',
   components: {
+    TQrcode,
+    TSlider,
   },
   data() {
     return {

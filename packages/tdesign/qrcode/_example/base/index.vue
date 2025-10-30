@@ -1,5 +1,5 @@
 <template>
-  <t-qrcode
+  <TQrcode
     value="https://tdesign.tencent.com/"
     level="M"
     status="active"
@@ -7,10 +7,12 @@
 </template>
 
 <script>
+import TQrcode from 'tdesign-uniapp/qrcode/qrcode.vue';
 
 export default {
   name: 'QRCodeBase',
   components: {
+    TQrcode,
   },
 };
 </script>

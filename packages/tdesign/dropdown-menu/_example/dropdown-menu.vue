@@ -29,16 +29,16 @@
         title="02 组件状态"
         desc="禁用状态"
       >
-        <t-dropdown-menu>
-          <t-dropdown-item
+        <TDropdownMenu>
+          <TDropdownItem
             disabled
             label="禁用菜单"
           />
-          <t-dropdown-item
+          <TDropdownItem
             disabled
             label="禁用菜单"
           />
-        </t-dropdown-menu>
+        </TDropdownMenu>
       </t-demo>
 
       <view style="height: 600rpx" />
@@ -50,10 +50,16 @@
 
 import single from './single/index.vue';
 import multi from './multi/index.vue';
+import TDropdownMenu from 'tdesign-uniapp/dropdown-menu/dropdown-menu.vue';
+import TDropdownItem from 'tdesign-uniapp/dropdown-item/dropdown-item.vue';
+
+
 export default {
   components: {
     single,
     multi,
+    TDropdownMenu,
+    TDropdownItem,
   },
   data() {
     return {};

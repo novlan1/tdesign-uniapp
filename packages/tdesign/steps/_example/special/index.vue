@@ -28,13 +28,13 @@
         </t-step-item>
       </t-steps>
 
-      <t-button
+      <TButton
         style="margin-top: 32rpx; display: block"
         block
         @click="toNext"
       >
         下一步
-      </t-button>
+      </TButton>
     </view>
 
     <view class="demo-desc">
@@ -63,13 +63,14 @@
 import tSteps from 'tdesign-uniapp/steps/steps.vue';
 import tStepItem from 'tdesign-uniapp/step-item/step-item.vue';
 import tIcon from 'tdesign-uniapp/icon/icon.vue';
-
+import TButton from 'tdesign-uniapp/button/button.vue';
 
 export default {
   components: {
     tSteps,
     tStepItem,
     tIcon,
+    TButton,
   },
   data() {
     return {

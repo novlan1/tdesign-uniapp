@@ -1,6 +1,6 @@
 <template>
   <view>
-    <t-qrcode
+    <TQrcode
       value="https://tdesign.tencent.com/"
       level="M"
       status="active"
@@ -12,7 +12,7 @@
       二维码背景颜色
     </view>
 
-    <t-qrcode
+    <TQrcode
       value="https://tdesign.tencent.com/"
       level="M"
       status="active"
@@ -23,9 +23,11 @@
 </template>
 
 <script>
+import TQrcode from 'tdesign-uniapp/qrcode/qrcode.vue';
 export default {
   name: 'QRCodeColor',
   components: {
+    TQrcode,
   },
 };
 </script>
