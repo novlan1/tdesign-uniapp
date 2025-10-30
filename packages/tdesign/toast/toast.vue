@@ -22,7 +22,8 @@
         >
           <t-icon
             :custom-style="_icon.style || ''"
-            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + dataDirection"
+            :t-class="iconTClass"
+            :class="iconClass"
             :prefix="_icon.prefix"
             :name="_icon.name"
             :size="_icon.size"
@@ -65,6 +66,7 @@ import { transitionMixins } from '../mixins/transition';
 import { calcIcon, toCamel, coalesce } from '../common/utils';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
+import { canUseVirtualHost } from '../common/version';
 
 
 const name = `${prefix}-toast`;
@@ -116,6 +118,19 @@ export default uniComponent({
       hideTimer: null,
       _,
     };
+  },
+
+  computed: {
+    iconTClass() {
+      return canUseVirtualHost() ? this.iconRealClass : '';
+    },
+    iconClass() {
+      return !canUseVirtualHost() ? this.iconRealClass : '';
+    },
+    iconRealClass() {
+      const { classPrefix, dataDirection } = this;
+      return `${classPrefix}__icon ${classPrefix}__icon--${dataDirection}`;
+    },
   },
 
   pageLifetimes: {

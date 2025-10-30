@@ -11,6 +11,7 @@
           theme="primary"
           size="large"
           variant="outline"
+          :style="buttonStyle"
           @click="handleShow"
         >
           显示提示
@@ -19,6 +20,7 @@
           theme="primary"
           size="large"
           variant="outline"
+          :style="buttonStyle"
           @click="handleHide"
         >
           关闭提示
@@ -43,7 +45,10 @@ export default {
     tButton,
   },
   data() {
-    return {};
+    return {
+      // 兼容 抖音小程序、QQ 小程序等
+      buttonStyle: 'margin-left: auto;margin-right: auto;',
+    };
   },
   created() {},
   methods: {
