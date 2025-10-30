@@ -55,6 +55,7 @@
     "usingComponents": true
   },
   "mp-qq": {
+    "appid": "1112328122",
     "darkmode": true
   },
   "mp-alipay": {

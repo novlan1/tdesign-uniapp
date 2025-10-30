@@ -503,6 +503,12 @@
     background-color: transparent;
     color: @button-ghost-color;
 
+    // 适配 qq 小程序
+    /* #ifdef MP-QQ */
+    border-style: solid;
+    border-width: 2rpx;
+    /* #endif */
+
     &,
     &::after {
       border-color: @button-ghost-border-color;
