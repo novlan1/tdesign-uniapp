@@ -56,8 +56,8 @@
                   name="icon"
                 >
                   <t-icon
-                    :custom-style="item.icon.style || ''"
                     :t-class="classPrefix + '__icon'"
+                    :custom-style="getIconCustomStyle(item)"
                     :prefix="item.icon.prefix"
                     :name="item.icon.name"
                     :size="item.icon.size"
@@ -69,7 +69,7 @@
                   />
                 </block>
                 <block v-if="item.badgeProps">
-<t-badge
+                  <t-badge
                     :color="item.badgeProps.color || ''"
                     :content="item.label"
                     :count="item.badgeProps.count || 0"
@@ -85,6 +85,7 @@
                         ['active', currentIndex === index]
                       ])
                     "
+                    :custom-style="getBadgeCustomStyle(item, index)"
                     :t-class-content="item.badgeProps.tClassContent"
                     :t-class-count="item.badgeProps.tClassCount"
                   />
@@ -450,6 +451,26 @@ export default uniComponent({
         }
       }
       return -1;
+    },
+
+    getBadgeCustomStyle(item, index) {
+      if (item.disabled) {
+        return '--td-badge-content-text-color: var(--td-tab-item-disabled-color, var(--td-text-color-disabled, var(--td-font-gray-4, rgba(0, 0, 0, .26))))';
+      }
+      if (this.currentIndex === index) {
+        return '--td-badge-content-text-color: var(--td-tab-item-active-color, var(--td-brand-color, var(--td-primary-color-7, #0052d9)));';
+      }
+      return '';
+    },
+
+    getIconCustomStyle(item) {
+      return _._style([
+        {
+          fontSize: 'var(--td-tab-icon-size, 18px)',
+          marginRight: 'calc(var(--td-spacer, 8px) / 4)',
+        },
+        item.icon.style || '',
+      ]);
     },
   },
 });

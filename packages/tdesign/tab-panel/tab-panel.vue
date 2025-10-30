@@ -27,6 +27,7 @@ export default uniComponent({
   name,
   options: {
     styleIsolation: 'shared',
+    virtualHost: true,
   },
   externalClasses: [`${prefix}-class`],
   mixins: [ChildrenMixin(RELATION_MAP.TabPanel)],
