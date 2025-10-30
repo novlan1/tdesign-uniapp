@@ -101,7 +101,8 @@ export default uniComponent({
     setMessage(msg, theme = MessageType.info) {
       let id = `${name}_${this.index}`;
       if (msg.single) {
-        id = name;
+        // 不能与外层的 ref 相同，否则抖音小程序报错
+        id = `${name}_inner`;
       }
       const gap = unitConvert(msg.gap || this.gap);
       const msgObj = {
