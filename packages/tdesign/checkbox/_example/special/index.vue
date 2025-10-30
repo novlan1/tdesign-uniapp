@@ -12,7 +12,8 @@
         <t-icon
           v-if="contain(value, index)"
           name="check"
-          t-class="card__icon"
+          :t-class="cardIconTClass"
+          :class="cardIconClass"
           :aria-hidden="true"
         />
 
@@ -46,7 +47,9 @@
         <t-icon
           v-if="contain(value1, index)"
           name="check"
-          t-class="card__icon"
+          :t-class="cardIconTClass"
+          :class="cardIconClass"
+          custom-style="font-size: 12px;"
           :aria-hidden="true"
         />
 
@@ -64,6 +67,9 @@
 import tCheckboxGroup from 'tdesign-uniapp/checkbox-group/checkbox-group.vue';
 import tCheckbox from 'tdesign-uniapp/checkbox/checkbox.vue';
 import tIcon from 'tdesign-uniapp/icon/icon.vue';
+import { canUseVirtualHost } from 'tdesign-uniapp/common/version';
+
+
 export default {
   options: {
     styleIsolation: 'shared',
@@ -78,6 +84,17 @@ export default {
       value: [0, 1],
       value1: [0, 1],
     };
+  },
+  computed: {
+    cardIconTClass() {
+      return canUseVirtualHost() ? this.cardIconRealClass : '';
+    },
+    cardIconClass() {
+      return !canUseVirtualHost() ? this.cardIconRealClass : '';
+    },
+    cardIconRealClass() {
+      return 'card__icon';
+    },
   },
   created() {},
   methods: {
@@ -129,6 +146,7 @@ export default {
     left: 1.5px;
     top: 1.5px;
     z-index: 1;
+    font-size: 16px;
 }
 
 /* 横向布局 */
@@ -149,7 +167,7 @@ export default {
     border-width: 48rpx 48rpx 48rpx 0;
 }
 
-.horizontal-box .card__icon {
+/* .horizontal-box .card__icon {
     font-size: 24rpx;
-}
+} */
 </style>

@@ -1,7 +1,7 @@
 <template>
   <view>
     <t-checkbox-group
-      t-class="box"
+      :custom-style="boxCustomStyle"
       borderless
       :value="current"
       @change="onChange"
@@ -28,6 +28,8 @@
 <script>
 import tCheckboxGroup from 'tdesign-uniapp/checkbox-group/checkbox-group.vue';
 import tCheckbox from 'tdesign-uniapp/checkbox/checkbox.vue';
+import _ from 'tdesign-uniapp/common/utils.wxs';
+
 export default {
   options: {
     styleIsolation: 'shared',
@@ -41,10 +43,18 @@ export default {
       current: ['checkbox1', 'checkbox2'],
     };
   },
+  computed: {
+    boxCustomStyle() {
+      return _._style({
+        padding: '16px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        backgroundColor: 'var(--td-bg-color-container, #fff)',
+      });
+    },
+  },
   created() {},
-  /**
-     * 组件的方法列表
-     */
   methods: {
     onChange(event) {
       console.log('checkbox', event.value);
@@ -54,11 +64,11 @@ export default {
 };
 </script>
 <style>
-.box {
+/* .box {
     padding: 32rpx;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     background-color: var(--td-bg-color-container, #fff);
-}
+} */
 </style>
