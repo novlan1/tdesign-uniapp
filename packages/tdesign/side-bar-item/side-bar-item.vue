@@ -28,7 +28,7 @@
       name="icon"
     >
       <t-icon
-        :custom-style="_icon.style || ''"
+        :custom-style="iconCustomStyle"
         :t-class="classPrefix + '__icon'"
         :prefix="_icon.prefix"
         :name="_icon.name"
@@ -103,6 +103,17 @@ export default uniComponent({
       isNext: false,
       _,
     };
+  },
+  computed: {
+    iconCustomStyle() {
+      return _._style([
+        {
+          fontSize: 'var(--td-side-bar-icon-size, 20px)',
+          marginRight: '2px',
+        },
+        this._icon.style || '',
+      ]);
+    },
   },
   watch: {
     icon: {
