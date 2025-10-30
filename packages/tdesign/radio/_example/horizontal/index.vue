@@ -3,7 +3,7 @@
     <t-radio-group
       default-value="0"
       borderless
-      t-class="box"
+      :custom-style="boxCustomStyle"
     >
       <t-radio
         :block="false"
@@ -27,6 +27,9 @@
 <script>
 import tRadioGroup from 'tdesign-uniapp/radio-group/radio-group.vue';
 import tRadio from 'tdesign-uniapp/radio/radio.vue';
+import _ from 'tdesign-uniapp/common/utils.wxs';
+
+
 export default {
   options: {
     styleIsolation: 'shared',
@@ -39,6 +42,17 @@ export default {
     return {
       checked: false,
     };
+  },
+  computed: {
+    boxCustomStyle() {
+      return _._style({
+        padding: '16px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        backgroundColor: 'var(--td-bg-color-container, #fff)',
+      });
+    },
   },
   methods: {
     handleChange(e) {

@@ -35,7 +35,9 @@
     </view>
 
     <t-checkbox-group
-      t-class="horizontal-box"
+      :t-class="horBoxTClass"
+      :class="horBoxClass"
+      :custom-style="horBoxCustomStyle"
       :value="value1"
       @change="onChange1"
     >
@@ -68,7 +70,7 @@ import tCheckboxGroup from 'tdesign-uniapp/checkbox-group/checkbox-group.vue';
 import tCheckbox from 'tdesign-uniapp/checkbox/checkbox.vue';
 import tIcon from 'tdesign-uniapp/icon/icon.vue';
 import { canUseVirtualHost } from 'tdesign-uniapp/common/version';
-
+import _ from 'tdesign-uniapp/common/utils.wxs';
 
 export default {
   options: {
@@ -94,6 +96,24 @@ export default {
     },
     cardIconRealClass() {
       return 'card__icon';
+    },
+    horBoxTClass() {
+      return canUseVirtualHost() ? this.horBoxRealClass : '';
+    },
+    horBoxClass() {
+      return !canUseVirtualHost() ? this.horBoxRealClass : '';
+    },
+    horBoxRealClass() {
+      return 'horizontal-box';
+    },
+    horBoxCustomStyle() {
+      return _._style({
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        margin: '16px',
+      });
     },
   },
   created() {},
@@ -150,13 +170,13 @@ export default {
 }
 
 /* 横向布局 */
-.horizontal-box {
+/* .horizontal-box {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
     margin: 32rpx;
-}
+} */
 
 .horizontal-box .card {
     flex: 0 0 calc(33.33% - 12rpx);

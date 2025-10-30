@@ -5,11 +5,13 @@
       allow-uncheck
       icon="line"
       label="单选"
+      relation-key="-1"
     />
 
     <view
       class="gutter"
       style="height: 32rpx"
+      relation-key="-1"
     />
 
     <t-radio
@@ -17,6 +19,7 @@
       allow-uncheck
       icon="dot"
       label="单选"
+      relation-key="-1"
     />
   </view>
 </template>

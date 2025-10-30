@@ -89,14 +89,13 @@
 import tIcon from '../icon/icon';
 import { uniComponent } from '../common/src/index';
 import { coalesce } from '../common/utils';
-import { prefix } from '../common/config';
+import { prefix, ISOLATED_RELATION_KEY } from '../common/config';
 import props from './props';
 import _ from '../common/utils.wxs';
 import { ChildrenMixin, RELATION_MAP } from '../common/relation';
 
 
 const name = `${prefix}-checkbox`;
-const ISOLATED_RELATION_KEY = '-1';
 
 export default uniComponent({
   name,

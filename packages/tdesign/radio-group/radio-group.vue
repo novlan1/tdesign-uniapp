@@ -115,10 +115,12 @@ export default uniComponent({
     },
   },
   mounted() {
-    this.getChildren()?.forEach((item) => {
-      item.dataChecked = this.dataValue === item.value;
-      item.setDisabled(this.disabled);
-    });
+    setTimeout(() => {
+      this.getChildren()?.forEach((item) => {
+        item.dataChecked = this.dataValue === item.value;
+        item.setDisabled(this.disabled);
+      });
+    }, 33);
   },
   methods: {
     innerAfterLinked(target) {

@@ -119,7 +119,9 @@ export default uniComponent({
     this.getChildren()?.forEach((item) => {
       item.setDisabled(this.disabled);
     });
-    this.updateChildren();
+    setTimeout(() => {
+      this.updateChildren();
+    }, 33);
   },
   methods: {
     getChildren() {

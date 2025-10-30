@@ -3,6 +3,7 @@
     <t-checkbox-group
       :options="options"
       :default-value="checkAllValues"
+      :relation-key="relationKey"
       @change="onCheckAllChange"
     />
   </view>
@@ -16,6 +17,7 @@ export default {
   },
   data() {
     return {
+      relationKey: `${Math.random()}`,
       options: [
         {
           label: '全选',

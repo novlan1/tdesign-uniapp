@@ -9,7 +9,7 @@ function findNearListParent(children = [], name) {
   let temp;
   for (const item of children) {
     // console.log('__nodeId__', item, item.$options.name, parentRelationKey, thisRelationKey);
-    const parentRelationKey = (item.$data && item.$data.relationKey) || (item.$props && item.$props.relationKey);
+    const parentRelationKey = item.$props && item.$props.relationKey;
     const thisRelationKey = this.$props && this.$props.relationKey;
     if (item.$options.name === name && parentRelationKey === thisRelationKey) {
       temp = item;

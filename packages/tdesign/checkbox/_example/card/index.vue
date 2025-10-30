@@ -2,6 +2,7 @@
   <view>
     <t-checkbox-group
       t-class="theme-card"
+      :custom-style="cardCustomStyle"
       :default-value="['1', '2']"
     >
       <t-checkbox
@@ -23,6 +24,9 @@
 <script>
 import tCheckboxGroup from 'tdesign-uniapp/checkbox-group/checkbox-group.vue';
 import tCheckbox from 'tdesign-uniapp/checkbox/checkbox.vue';
+import _ from 'tdesign-uniapp/common/utils.wxs';
+
+
 export default {
   components: {
     tCheckboxGroup,
@@ -33,10 +37,15 @@ export default {
       checked: true,
     };
   },
-  created() {},
-  /**
-     * 组件的方法列表
-     */
+  computed: {
+    cardCustomStyle() {
+      return _._style({
+        borderRadius: '24rpx',
+        margin: '16px',
+        overflow: 'hidden',
+      });
+    },
+  },
   methods: {
     changeChecked(e) {
       this.checked = e.checked;
@@ -45,9 +54,9 @@ export default {
 };
 </script>
 <style>
-.theme-card {
+/* .theme-card {
     border-radius: 24rpx;
     margin: 32rpx;
     overflow: hidden;
-}
+} */
 </style>

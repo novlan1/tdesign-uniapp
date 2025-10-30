@@ -2,6 +2,7 @@
   <view>
     <t-radio-group
       t-class="theme-card"
+      :custom-style="cardCustomStyle"
       default-value="radio1"
     >
       <t-radio
@@ -24,6 +25,8 @@
 <script>
 import tRadioGroup from 'tdesign-uniapp/radio-group/radio-group.vue';
 import tRadio from 'tdesign-uniapp/radio/radio.vue';
+import _ from 'tdesign-uniapp/common/utils.wxs';
+
 export default {
   options: {
     styleIsolation: 'shared',
@@ -39,19 +42,25 @@ export default {
   data() {
     return {};
   },
+  computed: {
+    cardCustomStyle() {
+      return _._style({
+        borderRadius: '24rpx',
+        margin: '16px',
+        overflow: 'hidden',
+      });
+    },
+  },
   created() {},
-  /**
-     * 组件的方法列表
-     */
   methods: {
     onChange() {},
   },
 };
 </script>
 <style>
-.theme-card {
+/* .theme-card {
     border-radius: 24rpx;
     margin: 32rpx;
     overflow: hidden;
-}
+} */
 </style>
