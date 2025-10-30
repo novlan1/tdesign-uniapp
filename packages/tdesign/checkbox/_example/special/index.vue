@@ -123,9 +123,11 @@ export default {
     },
     onChange(e) {
       this.value = e.value;
+      console.log('[change] e:', e);
     },
     onChange1(e) {
       this.value1 = e.value;
+      console.log('[change] e:', e);
     },
   },
 };
