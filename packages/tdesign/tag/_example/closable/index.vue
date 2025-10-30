@@ -2,7 +2,7 @@
   <view class="demo-closable">
     <t-tag
       v-if="show[0]"
-      t-class="margin-16"
+      :custom-style="mr16"
       closable
       variant="light"
       @close="handleClose0"
@@ -11,7 +11,7 @@
     </t-tag>
     <t-tag
       v-if="show[1]"
-      t-class="margin-16"
+      :custom-style="mr16"
       closable
       variant="outline"
       @close="handleClose1"
@@ -33,6 +33,7 @@ export default {
   data() {
     return {
       show: [true, true],
+      mr16: 'margin-right: 16px;',
     };
   },
   created() {},
@@ -49,9 +50,5 @@ export default {
 <style>
 .demo-closable {
     margin-left: 32rpx;
-}
-
-.demo-closable :deep(.margin-16:not(:last-child)) {
-    margin-right: 32rpx;
 }
 </style>

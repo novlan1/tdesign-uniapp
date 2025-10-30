@@ -6,13 +6,13 @@
       </view>
 
       <t-tag
-        t-class="margin-16"
+        :custom-style="mr16"
         variant="light"
       >
         标签文字
       </t-tag>
       <t-tag
-        t-class="margin-16"
+        :custom-style="mr16"
         variant="outline"
       >
         标签文字
@@ -25,21 +25,20 @@
       </view>
 
       <t-tag
-        t-class="margin-16"
+        :custom-style="mr16"
         variant="light"
         shape="round"
       >
         标签文字
       </t-tag>
       <t-tag
-        t-class="margin-16"
+        :custom-style="mr16"
         variant="outline"
         shape="round"
       >
         标签文字
       </t-tag>
       <t-tag
-        t-class="margin-16"
         variant="outline"
         shape="mark"
       >
@@ -53,14 +52,13 @@
       </view>
 
       <t-tag
-        t-class="margin-16"
+        :custom-style="mr16"
         variant="light"
         icon="discount"
       >
         标签文字
       </t-tag>
       <t-tag
-        t-class="margin-16"
         variant="outline"
         icon="discount"
       >
@@ -102,6 +100,7 @@ export default {
   data() {
     return {
       skylineRender: '',
+      mr16: 'margin-right: 16px;',
     };
   },
   created() {},
@@ -121,9 +120,5 @@ export default {
     font-size: 14px;
     color: var(--td-text-color-secondary);
     margin-bottom: 32rpx;
-}
-
-.demo :deep(.margin-16:not(:last-child)) {
-    margin-right: 32rpx;
 }
 </style>

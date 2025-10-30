@@ -76,8 +76,8 @@ export default {
       closeIconCustomStyle: _._style({
         position: 'absolute',
         left: '50%',
-        marginLeft: '-32rpx',
-        bottom: 'calc(-1 * (48rpx + 64rpx))',
+        marginLeft: '-16px',
+        bottom: 'calc(-1 * (24px + 32px))',
       }),
     };
   },
