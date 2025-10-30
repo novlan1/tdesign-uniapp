@@ -124,6 +124,7 @@ export default uniComponent({
   name: classPrefix,
   options: {
     styleIsolation: 'shared',
+    virtualHost: true,
   },
   externalClasses: [`${prefix}-class`],
   mixins: [ChildrenMixin(RELATION_MAP.TabBarItem)],
