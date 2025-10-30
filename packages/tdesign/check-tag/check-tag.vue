@@ -1,14 +1,13 @@
 <template>
   <view
     :style="_._style([style, customStyle])"
-    :class="className + ' class ' + prefix + '-class'"
+    :class="className + ' class ' + tClass"
     @click="onClick"
   >
     <view
       :aria-hidden="true"
       :class="classPrefix + '__icon'"
     >
-      <!-- parse <template v-if="_icon" is="icon" :data="tClass: prefix + '-icon', ..._icon"/> -->
       <block
         v-if="_icon"
         name="icon"
@@ -62,6 +61,9 @@ const name = `${prefix}-tag`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [{
     key: 'checked',
     event: 'change',

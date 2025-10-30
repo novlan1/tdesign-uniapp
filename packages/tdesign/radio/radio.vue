@@ -92,7 +92,7 @@
 </template>
 <script>
 import tIcon from '../icon/icon';
-import { prefix } from '../common/config';
+import { prefix, ISOLATED_RELATION_KEY } from '../common/config';
 import { coalesce } from '../common/utils';
 import { uniComponent } from '../common/src/index';
 import props from './props';
@@ -104,6 +104,9 @@ const name = `${prefix}-radio`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'checked',
@@ -147,6 +150,11 @@ export default uniComponent({
       dataChecked: coalesce(this.checked, this.defaultChecked),
     };
   },
+  computed: {
+    isIsolated() {
+      return this.relationKey === ISOLATED_RELATION_KEY;
+    },
+  },
   watch: {
     checked: {
       handler(v) {
@@ -181,10 +189,11 @@ export default uniComponent({
     },
     doChange() {
       const { value, dataChecked, allowUncheck } = this;
+      const parent = this.isIsolated ? null : this[RELATION_MAP.Radio];
 
-      const isAllowUncheck = Boolean(allowUncheck || this[RELATION_MAP.Radio]?.allowUncheck);
+      const isAllowUncheck = Boolean(allowUncheck || parent?.allowUncheck);
 
-      if (this[RELATION_MAP.Radio]) {
+      if (parent) {
         this[RELATION_MAP.Radio].updateValue(dataChecked && isAllowUncheck ? null : value);
       } else {
         this._trigger('change', { checked: isAllowUncheck ? !dataChecked : true });
@@ -192,15 +201,18 @@ export default uniComponent({
     },
     init() {
       const { icon } = this;
-      const isIdArr = Array.isArray(this[RELATION_MAP.Radio]?.icon || icon);
+      const parent = this.isIsolated ? null : this[RELATION_MAP.Radio];
+      const isIdArr = Array.isArray(parent?.icon || icon);
 
       this.customIcon = isIdArr;
       this.slotIcon = icon === 'slot';
-      this.iconVal = isIdArr ? this[RELATION_MAP.Radio]?.icon || icon : [];
-      this._placement = this.placement || this[RELATION_MAP.Radio]?.placement || 'left';
+      this.iconVal = isIdArr ? parent?.icon || icon : [];
+      this._placement = this.placement || parent?.placement || 'left';
     },
 
     setDisabled(disabled) {
+      if (this.isIsolated) return;
+
       this._disabled = this.disabled || disabled;
     },
 

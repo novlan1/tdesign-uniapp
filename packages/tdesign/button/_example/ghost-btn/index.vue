@@ -4,6 +4,7 @@
       theme="primary"
       ghost
       size="large"
+      custom-style="margin-right: 16px;"
     >
       幽灵按钮
     </t-button>
@@ -11,6 +12,7 @@
       theme="danger"
       ghost
       size="large"
+      custom-style="margin-right: 16px;"
     >
       幽灵按钮
     </t-button>

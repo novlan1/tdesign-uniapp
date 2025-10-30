@@ -1,10 +1,12 @@
 <template>
   <view>
     <view class="custom-navbar">
+      <!-- #ifndef MP-ALIPAY -->
       <t-navbar
         title="Sticky"
         left-arrow
       />
+    <!-- #endif -->
     </view>
     <view class="demo tdesign-demo-sticky-base">
       <t-demo-header

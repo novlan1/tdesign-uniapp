@@ -1,7 +1,7 @@
 <template>
   <view>
     <t-grid
-      class="block"
+      t-class="block"
       :column="5"
     >
       <t-grid-item
@@ -31,7 +31,7 @@
       />
     </t-grid>
 
-    <t-grid class="block">
+    <t-grid t-class="block">
       <t-grid-item
         t-class-image="image"
         text="标题文字"
@@ -55,7 +55,7 @@
     </t-grid>
 
     <t-grid
-      class="block"
+      t-class="block"
       :column="3"
     >
       <t-grid-item
@@ -100,16 +100,16 @@ export default {
 };
 </script>
 <style>
-.block {
+:deep(.block) {
     display: block;
     margin-bottom: 32rpx;
 }
 
-.block :deep(.image) {
+:deep(.block .image) {
     position: inherit;
 }
 
-.block :deep(.image)::before {
+:deep(.block .image::before) {
     content: ' ';
     position: absolute;
     top: 0;

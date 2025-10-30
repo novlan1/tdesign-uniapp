@@ -5,6 +5,7 @@
       block
       size="large"
       t-class="group-btn"
+      style="flex: 1;margin-right: 16px;"
     >
       填充按钮
     </t-button>
@@ -13,6 +14,7 @@
       block
       size="large"
       t-class="group-btn"
+      style="flex: 1;"
     >
       填充按钮
     </t-button>

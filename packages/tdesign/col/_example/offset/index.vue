@@ -35,7 +35,7 @@ export default {
   methods: {},
 };
 </script>
-<style>
+<style scoped>
 .dark {
     background-color: #0052d9;
 }

@@ -1,7 +1,7 @@
 <template>
   <view
     :style="_._style([style, customStyle])"
-    :class="_.cls(classPrefix, [theme]) + ' class ' + prefix + '-class'"
+    :class="_.cls(classPrefix, [theme]) + ' class ' + tClass"
   >
     <view
       v-if="column > 0"
@@ -35,6 +35,9 @@ const name = `${prefix}-grid`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: ['t-class'],
   mixins: [ParentMixin(RELATION_MAP.GridItem)],
   props: {

@@ -1,9 +1,11 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="Message"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo message-example">
       <t-demo-header
         title="Message 消息通知"

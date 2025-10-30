@@ -12,8 +12,8 @@ const props = {
     default: '',
   },
   customStyle: {
-    type: String,
+    type: [String, Object],
     default: '',
-  }
+  },
 };
 export default props;

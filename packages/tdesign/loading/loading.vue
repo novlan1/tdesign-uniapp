@@ -105,14 +105,15 @@ const name = `${prefix}-loading`;
 
 export default uniComponent({
   name,
+  options: {
+    multipleSlots: true,
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-text`,
     `${prefix}-class-indicator`,
   ],
-  options: {
-    multipleSlots: true,
-  },
   props: {
     ...props,
   },

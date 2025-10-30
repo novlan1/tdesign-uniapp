@@ -16,7 +16,7 @@
     />
 
     <t-image-viewer
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       :delete-btn="deleteBtn"
       :close-btn="closeBtn"
       :show-index="showIndex"

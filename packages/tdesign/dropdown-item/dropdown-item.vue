@@ -32,7 +32,7 @@
         >
           <t-radio-group
             :t-class="classPrefix + '__radio ' + classPrefix + '__radio-group ' + tClassColumn"
-            :custom-style="'grid-template-columns: repeat(' + optionsColumns + ', 1fr)'"
+            :custom-style="radioGroupCustomStyle"
             :value="dataValue"
             @change="handleRadioChange"
           >
@@ -44,12 +44,14 @@
               <t-radio
                 :placement="placement"
                 tabindex="0"
+                :checked="dataValue === item[valueAlias]"
                 icon="line"
                 :t-class="classPrefix + '__radio-item radio ' + tClassColumnItem"
                 :t-class-label="tClassColumnItemLabel"
                 :value="item[valueAlias]"
                 :label="item[labelAlias]"
                 :disabled="item.disabled"
+                @change="e => onRadioChange(e, item[valueAlias])"
               />
             </view>
           </t-radio-group>
@@ -61,8 +63,9 @@
           :scroll-into-view="'id_' + firstCheckedValue"
         >
           <t-checkbox-group
+            ref="checkboxGroupRef"
             :t-class="classPrefix + '__checkbox ' + classPrefix + '__checkbox-group ' + tClassColumn"
-            :custom-style="'grid-template-columns: repeat(' + optionsColumns + ', 1fr)'"
+            :custom-style="checkboxGroupCustomStyle"
             :value="dataValue ? dataValue : []"
             @change="handleRadioChange"
           >
@@ -78,6 +81,8 @@
                 :value="item[valueAlias]"
                 :label="item[labelAlias]"
                 :disabled="item.disabled"
+                :checked="dataValue.indexOf(item[valueAlias]) > -1"
+                @change="e => onCheckboxChange(e, item[valueAlias])"
               />
             </view>
           </t-checkbox-group>
@@ -89,7 +94,8 @@
         <block v-if="multiple">
           <t-button
             block
-            :t-class="classPrefix + '__footer-btn ' + classPrefix + '__reset-btn'"
+            :t-class="footerBtnTClass"
+            :class="footerBtnClass"
             theme="light"
             content="重置"
             :disabled="dataValue.length == 0"
@@ -97,7 +103,8 @@
           />
           <t-button
             block
-            :t-class="classPrefix + '__footer-btn ' + classPrefix + '__confirm-btn'"
+            :t-class="confirmBtnTClass"
+            :class="confirmBtnClass"
             theme="primary"
             content="确定"
             :disabled="dataValue.length == 0"
@@ -118,13 +125,13 @@ import tPopup from '../popup/popup';
 
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
-import { coalesce } from '../common/utils';
+import { coalesce, getRect } from '../common/utils';
 import props from './props';
 import menuProps from '../dropdown-menu/props';
-import { getRect } from '../common/utils';
 import _ from '../common/utils.wxs';
 import { getStyles } from './computed';
 import { ChildrenMixin, RELATION_MAP } from '../common/relation';
+import { canUseVirtualHost } from '../common/version';
 
 
 const name = `${prefix}-dropdown-item`;
@@ -132,6 +139,9 @@ const name = `${prefix}-dropdown-item`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [{
     key: 'value',
     event: 'change',
@@ -179,6 +189,59 @@ export default uniComponent({
       wrapperVisible: false,
       _,
     };
+  },
+  computed: {
+    footerBtnTClass() {
+      return canUseVirtualHost() ? this.footerBtnRealClass : '';
+    },
+    footerBtnClass() {
+      return !canUseVirtualHost() ? this.footerBtnRealClass : '';
+    },
+    footerBtnRealClass() {
+      const { classPrefix } = this;
+      return `${classPrefix}__footer-btn ${classPrefix}__reset-btn`;
+    },
+
+    confirmBtnTClass() {
+      return canUseVirtualHost() ? this.confirmBtnRealClass : '';
+    },
+    confirmBtnClass() {
+      return !canUseVirtualHost() ? this.confirmBtnRealClass : '';
+    },
+    confirmBtnRealClass() {
+      const { classPrefix } = this;
+      return `${classPrefix}__footer-btn ${classPrefix}__confirm-btn`;
+    },
+
+    radioGroupCustomStyle() {
+      return _._style([
+        {
+          width: '100%',
+          overflow: 'scroll',
+          boxSizing: 'border-box',
+
+          display: 'grid',
+          gridGap: '0px',
+
+          gridTemplateColumns: `repeat(${this.optionsColumns}, 1fr)`,
+        },
+      ]);
+    },
+    checkboxGroupCustomStyle() {
+      return _._style([
+        {
+          width: '100%',
+          overflow: 'scroll',
+          boxSizing: 'border-box',
+
+          display: 'grid',
+          gridGap: '12px',
+
+          gridTemplateColumns: `repeat(${this.optionsColumns}, 1fr)`,
+          padding: '16px',
+        },
+      ]);
+    },
   },
   watch: {
     keys: {
@@ -262,6 +325,22 @@ export default uniComponent({
 
       dataValue[level] = itemValue;
       this._trigger('change', { value: dataValue });
+    },
+
+    onRadioChange(e, curValue) {
+      this.handleRadioChange({ value: curValue });
+    },
+    onCheckboxChange(e) {
+      const { checkAll, dataIndeterminate } = this.$refs.checkboxGroupRef;
+      const { context: { value, label }, checked } = e;
+      this.$refs.checkboxGroupRef.updateValue({
+        value,
+        checkAll,
+        indeterminate: dataIndeterminate,
+        checked,
+        item: { label, value, checked },
+        validChildren: false,
+      });
     },
 
     handleRadioChange(e) {

@@ -45,9 +45,11 @@ import { unitConvert } from '../common/utils';
 const SHOW_DURATION = 400;
 const name = `${prefix}-message`;
 
-
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     TMessageItem,
   },
@@ -99,7 +101,8 @@ export default uniComponent({
     setMessage(msg, theme = MessageType.info) {
       let id = `${name}_${this.index}`;
       if (msg.single) {
-        id = name;
+        // 不能与外层的 ref 相同，否则抖音小程序报错
+        id = `${name}_inner`;
       }
       const gap = unitConvert(msg.gap || this.gap);
       const msgObj = {
@@ -144,7 +147,7 @@ export default uniComponent({
           this.instances.push(instance);
           this.index += 1;
         }
-      });
+      }, 33);
     },
 
     /**

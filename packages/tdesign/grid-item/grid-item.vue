@@ -46,7 +46,6 @@
             ]"
           >
             <block v-if="image && image != 'slot'">
-              <!-- parse <template is="image" :data="src: image, shape: 'round', mode: 'widthFix', tClass: _.cls(classPrefix + '__image', [getImageSize(column)]) + ' ' + prefix + '-class-image', ...imageProps"/> -->
               <t-image
                 :t-class="_.cls(classPrefix + '__image', [getImageSize(column)]) + ' ' + tClassImage"
                 :custom-style="_._style([style, customStyle])"
@@ -66,7 +65,6 @@
               />
             </block>
             <slot name="image" />
-            <!-- parse <template v-if="iconName || _.isNoEmptyObj(iconData)" is="icon" :data="tClass: classPrefix + '__icon', name: iconName, ...iconData"/> -->
             <block
               v-if="iconName || _.isNoEmptyObj(iconData)"
               name="icon"
@@ -142,6 +140,9 @@ const LinkTypes = {
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-content`,

@@ -1,11 +1,13 @@
 <template>
   <view>
     <view class="custom-navbar">
+      <!-- #ifndef MP-ALIPAY -->
       <t-navbar
         class="demo-navbar"
         title="TDesign"
         left-arrow
       />
+      <!-- #endif -->
     </view>
 
     <view
@@ -144,7 +146,11 @@ export default {
   },
   methods: {
     getCustomNavbarHeight() {
-      const query = uni.createSelectorQuery().in(this);
+      let query = uni.createSelectorQuery().in(this);
+      // #ifdef MP-ALIPAY
+      query = uni.createSelectorQuery();
+      // #endif
+
       const { sideBarIndex } = this;
       query.selectAll('.title').boundingClientRect();
       query.select('.custom-navbar').boundingClientRect();

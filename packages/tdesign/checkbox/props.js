@@ -65,5 +65,11 @@ const props = {
   value: {
     type: [String, Number, Boolean],
   },
+
+  // -1 时代表独立，不再寻找 parent，用于头条小程序
+  relationKey: {
+    type: String,
+    default: '',
+  },
 };
 export default props;

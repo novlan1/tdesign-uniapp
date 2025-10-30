@@ -11,7 +11,6 @@
       aria-hidden
     >
       <slot name="icon" />
-      <!-- parse <template v-if="_icon" is="icon" :data="tClass: prefix + '-class-icon', ..._icon"/> -->
       <block
         v-if="_icon"
         name="icon"
@@ -53,6 +52,9 @@ const name = `${prefix}-back-top`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-icon`,

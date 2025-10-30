@@ -48,7 +48,17 @@ export function canIUseFormFieldButton() {
 }
 
 export function canUseVirtualHost() {
-  return judgeByVersion('2.19.2');
+  let result = false;
+
+  // #ifdef MP-WEIXIN
+  result = judgeByVersion('2.19.2');
+  // #endif
+
+  // #ifdef H5 || APP-PLUS || MP-ALIPAY
+  result = true;
+  // #endif
+
+  return result;
 }
 
 export function canUseProxyScrollView() {

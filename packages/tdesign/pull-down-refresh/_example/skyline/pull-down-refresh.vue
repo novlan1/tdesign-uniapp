@@ -1,10 +1,12 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="PullDownRefresh"
       left-arrow
     />
+    <!-- #endif -->
     <baseComp />
   </view>
 </template>

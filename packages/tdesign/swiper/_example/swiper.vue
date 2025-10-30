@@ -1,10 +1,12 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="Swiper"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo swiper-demo">
       <t-demo-header
         title="Swiper 轮播图"

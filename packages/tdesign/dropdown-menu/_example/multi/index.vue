@@ -1,11 +1,12 @@
 <template>
   <view>
-    <TDropdownMenu>
+    <TDropdownMenu relation-key="relationKey">
       <TDropdownItem
         label="单列多选"
         :options="multipleSelect.options"
         :value="multipleSelect.value"
         multiple
+        :relation-key="relationKey"
         @change="handleMultipleSelect"
       />
       <TDropdownItem
@@ -14,6 +15,7 @@
         :options="doubleColumnsOptions"
         :default-value="['option_1', 'option_2']"
         multiple
+        :relation-key="relationKey"
       />
       <TDropdownItem
         label="三列多选"
@@ -21,6 +23,7 @@
         :options="tripleColumnsOptions"
         :default-value="['option_1', 'option_2', 'option_3']"
         multiple
+        :relation-key="relationKey"
       />
     </TDropdownMenu>
   </view>
@@ -77,6 +80,7 @@ export default {
       },
       doubleColumnsOptions,
       tripleColumnsOptions,
+      relationKey: `${Math.random()}`,
     };
   },
   created() {},

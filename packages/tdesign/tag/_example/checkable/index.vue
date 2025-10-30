@@ -7,13 +7,12 @@
       <view class="block">
         <text>{{ item }}</text>
         <t-check-tag
-          class="margin-16"
           size="large"
           :variant="item"
+          :custom-style="mr16"
           :content="['已选中态', '未选中态']"
         />
         <t-check-tag
-          class="margin-16"
           default-checked
           size="large"
           :variant="item"
@@ -27,12 +26,16 @@
 <script>
 import tCheckTag from 'tdesign-uniapp/check-tag/check-tag.vue';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tCheckTag,
   },
   data() {
     return {
       items: ['light', 'dark', 'outline', 'light-outline'],
+      mr16: 'margin-right: 16px;',
     };
   },
   created() {},
@@ -63,15 +66,7 @@ export default {
     margin-right: 32rpx;
 }
 
-/* .block t-check-tag {
-  margin-right: 32rpx;
-} */
-
 .block + .block {
     margin-top: 32rpx;
-}
-
-.block .margin-16:not(:last-child) {
-    margin-right: 32rpx;
 }
 </style>

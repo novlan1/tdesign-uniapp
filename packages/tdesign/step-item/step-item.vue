@@ -93,6 +93,10 @@ const name = `${prefix}-steps-item`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+    virtualHost: true,
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-content`,

@@ -1,9 +1,11 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="DateTimePicker"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo">
       <t-demo-header
         title="DateTimePicker 时间选择器"
@@ -46,12 +48,12 @@
 
 <script lang="ts">
 
-import yearMonthDate from './year-month-date';
-import yearMonth from './year-month';
-import timeDemo from './time';
-import dateAll from './date-all';
-import steps from './steps';
-import withoutPopup from './without-popup';
+import yearMonthDate from './year-month-date/index.vue';
+import yearMonth from './year-month/index.vue';
+import timeDemo from './time/index.vue';
+import dateAll from './date-all/index.vue';
+import steps from './steps/index.vue';
+import withoutPopup from './without-popup/index.vue';
 export default {
   components: {
     yearMonthDate,

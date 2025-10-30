@@ -26,8 +26,6 @@
           {{ dataDescription }}
         </view>
         <block v-if="gridThemeItems.length">
-          <!-- parse <template is="grid" :data="classPrefix, prefix, gridThemeItems, count, currentSwiperIndex"/> -->
-          <!-- <block name="grid"> -->
           <block v-if="gridThemeItems.length === 1">
             <t-grid
               align="center"
@@ -91,7 +89,6 @@
               </view>
             </view>
           </block>
-          <!-- </block> -->
         </block>
         <view
           v-else-if="dataItems && dataItems.length"
@@ -101,8 +98,6 @@
             v-for="(item, index) in dataItems"
             :key="index"
           >
-            <!-- parse <template is="list" :data="index, classPrefix, listThemeItemClass: _.cls(classPrefix + '__list-item', [align, [disabled, item.disabled]]), item"/> -->
-            <!-- <block name="list"> -->
             <view
               :data-index="index"
               :style="item.color ? 'color: ' + item.color : ''"
@@ -117,6 +112,7 @@
                 :name="item.icon"
                 :t-class="classPrefix + '__list-item-icon'"
                 size="48rpx"
+                :custom-style="iconCustomStyle"
               />
               <view :class="classPrefix + '__list-item-text'">
                 {{ item.label || item }}
@@ -126,6 +122,8 @@
                 :name="item.suffixIcon"
                 :t-class="classPrefix + '__list-item-icon ' + classPrefix + '__list-item-icon--suffix'"
                 size="48rpx"
+                style="margin-left: auto;"
+                :custom-style="suffixIconCustomStyle"
               />
             </view>
           </block>
@@ -171,6 +169,9 @@ const name = `${prefix}-action-sheet`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [{
     key: 'visible',
     event: 'visible-change',
@@ -200,6 +201,14 @@ export default uniComponent({
       defaultPopUpzIndex: 11500,
       _,
     };
+  },
+  computed: {
+    iconCustomStyle() {
+      return 'margin-right: 8px;';
+    },
+    suffixIconCustomStyle() {
+      return 'margin-right: 8px;margin-left: auto;';
+    },
   },
   watch: {
     dataVisible: {
@@ -237,8 +246,24 @@ export default uniComponent({
 
     /** 指令调用显示 */
     show(options) {
+      const defaultOptions = [
+        'align',
+        'cancelText',
+        'count',
+        'description',
+        'items',
+        'popupProps',
+        'showCancel',
+        'showOverlay',
+        'theme',
+        'usingCustomNavbar',
+      ].reduce((acc, key) => ({
+        ...acc,
+        [key]: props[key].default,
+      }));
+
       this.setData({
-        ...this.initialData,
+        ...defaultOptions,
         ...options,
         visible: true,
       });

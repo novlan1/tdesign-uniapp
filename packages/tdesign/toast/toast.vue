@@ -16,14 +16,14 @@
           inherit-color
           layout="vertical"
         />
-        <!-- parse <template v-else-if="_icon" is="icon" :data="ariaHidden: true, tClass: classPrefix + '__icon ' + classPrefix + '__icon--' + direction, ..._icon"/> -->
         <block
           v-else-if="_icon"
           name="icon"
         >
           <t-icon
             :custom-style="_icon.style || ''"
-            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + dataDirection"
+            :t-class="iconTClass"
+            :class="iconClass"
             :prefix="_icon.prefix"
             :name="_icon.name"
             :size="_icon.size"
@@ -66,6 +66,7 @@ import { transitionMixins } from '../mixins/transition';
 import { calcIcon, toCamel, coalesce } from '../common/utils';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
+import { canUseVirtualHost } from '../common/version';
 
 
 const name = `${prefix}-toast`;
@@ -81,6 +82,9 @@ const needTransformKeys = [
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
   ],
@@ -93,6 +97,11 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'leaved',
+    'destory',
+    'close',
+  ],
   data() {
     const info = needTransformKeys.reduce((acc, key) => ({
       ...acc,
@@ -109,6 +118,19 @@ export default uniComponent({
       hideTimer: null,
       _,
     };
+  },
+
+  computed: {
+    iconTClass() {
+      return canUseVirtualHost() ? this.iconRealClass : '';
+    },
+    iconClass() {
+      return !canUseVirtualHost() ? this.iconRealClass : '';
+    },
+    iconRealClass() {
+      const { classPrefix, dataDirection } = this;
+      return `${classPrefix}__icon ${classPrefix}__icon--${dataDirection}`;
+    },
   },
 
   pageLifetimes: {

@@ -17,7 +17,7 @@
     >
       <template #content>
         <view
-          :class="classPrefix + ' ' + prefix + '-class'"
+          :class="classPrefix + ' ' + tClass"
         >
           <slot name="top" />
           <view
@@ -25,7 +25,6 @@
             :class="classPrefix + '__close-btn'"
             @click="onClose"
           >
-            <!-- parse <template v-if="_.isObject(closeBtn)" is="icon" :data="name: 'close', size: 22, ...closeBtn"/> -->
             <template
               v-if="_.isObject(dataCloseBtn)"
             >
@@ -46,7 +45,7 @@
               size="44rpx"
             />
           </view>
-          <view :class="classPrefix + '__content ' + prefix + '-class-content'">
+          <view :class="classPrefix + '__content ' + tClassContent">
             <view
               v-if="dataTitle"
               :class="classPrefix + '__header'"
@@ -78,13 +77,11 @@
                 v-for="(actionItem, index) in dataActions"
                 :key="index"
               >
-                <!-- parse <template is="button" :data="block: true, type: 'action', extra: index, tClass: prefix + '-class-action', rootClass: getActionClass(classPrefix, buttonLayout), ...item"/> -->
                 <t-button
                   :t-id="actionItem.tId"
                   :custom-style="actionItem.style"
                   :block="coalesce(actionItem.block, true)"
-                  :t-class="coalesce(actionItem.tClass, prefix + '-class-action')"
-                  :class="getActionClass(classPrefix, dataButtonLayout)"
+                  :t-class="getActionClass(classPrefix, dataButtonLayout) + ' ' + coalesce(actionItem.tClass, tClassAction)"
                   :disabled="actionItem.disabled"
                   :data-type="'action'"
                   :data-extra="coalesce(actionItem.index, index)"
@@ -126,13 +123,12 @@
             </template>
             <slot name="actions" />
             <template v-if="_cancel">
-              <!-- parse <template is="button" :data="type: 'cancel', ..._cancel"/> -->
-
               <t-button
                 :t-id="_cancel.tId"
                 :custom-style="_cancel.style"
                 :block="_cancel.block"
                 :t-class="_cancel.tClass"
+                :class="_cancel.class"
                 :disabled="_cancel.disabled"
                 :data-type="'cancel'"
                 :data-extra="_cancel.index"
@@ -173,13 +169,12 @@
             </template>
             <slot name="cancel-btn" />
             <template v-if="_confirm">
-              <!-- parse <template is="button" :data="type: 'confirm', theme: 'primary', ..._confirm"/> -->
-              <!-- <template name="button"> -->
               <t-button
                 :t-id="_confirm.tId"
                 :custom-style="_confirm.style"
                 :block="_confirm.block"
                 :t-class="_confirm.tClass"
+                :class="_confirm.class"
                 :disabled="_confirm.disabled"
                 :data-type="'confirm'"
                 :data-extra="_confirm.index"
@@ -217,7 +212,6 @@
               >
                 <slot v-if="_confirm.useDefaultSlot || false" />
               </t-button>
-            <!-- </template> -->
             </template>
             <slot name="confirm-btn" />
           </view>
@@ -239,13 +233,16 @@ import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
 import { getActionClass } from './computed.js';
 import { getFunctionalMixin } from '../common/functional/mixin';
-
+import { canUseVirtualHost } from '../common/version';
 
 const name = `${prefix}-dialog`;
 
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-content`,
@@ -306,15 +303,20 @@ export default uniComponent({
         externalCls.push(`${classPrefix}-button`);
       }
 
+      const useVirtualHost = canUseVirtualHost();
+
       Object.keys(buttonMap).forEach((key) => {
         const btn = buttonMap[key];
         const rootClass = [...cls, `${classPrefix}__button--${key}`];
+        const tClass = [...externalCls, this[toCamel(`${prefix}-class-${key}`)], ...rootClass].join(' ');
 
         const base = {
           block: true,
           rootClass,
-          // tClass: [...externalCls, `${prefix}-class-${key}`],
-          tClass: [...externalCls, `${prefix}-class-${key}`, ...rootClass].join(' '),
+
+          tClass: useVirtualHost ? tClass : '',
+          class: !useVirtualHost ? tClass : '',
+
           variant: rect.buttonVariant,
           openType: '',
         };

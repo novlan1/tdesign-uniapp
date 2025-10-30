@@ -15,7 +15,7 @@
       :placement="placement"
       title="标题"
       :items="sidebar"
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       :custom-navbar-height="gCustomNavbarHeight"
       @overlay-click="overlayClick"
       @item-click="itemClick"

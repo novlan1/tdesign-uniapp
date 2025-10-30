@@ -1,6 +1,8 @@
 <template>
   <!-- #ifndef H5 -->
+  <!-- #ifndef MP-ALIPAY -->
   <t-navbar title="TDesign UI" />
+  <!-- #endif -->
   <!-- #endif -->
   <view class="main">
     <view class="title-wrap">

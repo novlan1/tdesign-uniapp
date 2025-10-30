@@ -1,9 +1,11 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="DropdownMenu"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo">
       <t-demo-header
         title="DropdownMenu 下拉菜单"
@@ -29,14 +31,16 @@
         title="02 组件状态"
         desc="禁用状态"
       >
-        <TDropdownMenu>
+        <TDropdownMenu relation-key="relationKey">
           <TDropdownItem
             disabled
             label="禁用菜单"
+            :relation-key="relationKey"
           />
           <TDropdownItem
             disabled
             label="禁用菜单"
+            :relation-key="relationKey"
           />
         </TDropdownMenu>
       </t-demo>
@@ -62,7 +66,9 @@ export default {
     TDropdownItem,
   },
   data() {
-    return {};
+    return {
+      relationKey: `${Math.random()}`,
+    };
   },
   methods: {},
 };

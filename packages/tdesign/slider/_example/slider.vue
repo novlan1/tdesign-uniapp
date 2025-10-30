@@ -1,9 +1,11 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="Slider"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo">
       <t-demo-header
         title="Slider 滑动选择器"
@@ -56,14 +58,14 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import range from './range';
-import labelDemo from './label';
-import maxDemo from './max';
-import step from './step';
-import disabled from './disabled';
-import capsule from './capsule';
-import vertical from './vertical';
+import BaseDemo from './base/index.vue';
+import range from './range/index.vue';
+import labelDemo from './label/index.vue';
+import maxDemo from './max/index.vue';
+import step from './step/index.vue';
+import disabled from './disabled/index.vue';
+import capsule from './capsule/index.vue';
+import vertical from './vertical/index.vue';
 export default {
   components: {
     BaseDemo,

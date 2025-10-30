@@ -5,6 +5,7 @@
       allow-uncheck
       label="单选"
       default-checked
+      relation-key="-1"
     />
 
     <view class="block" />
@@ -15,6 +16,7 @@
       label="单选"
       placement="right"
       default-checked
+      relation-key="-1"
     />
   </view>
 </template>

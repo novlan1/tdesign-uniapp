@@ -21,6 +21,9 @@ const name = `${prefix}-draggable`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   props: {
     ...props,
   },

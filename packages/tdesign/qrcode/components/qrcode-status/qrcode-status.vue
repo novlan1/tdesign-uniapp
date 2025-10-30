@@ -60,6 +60,9 @@ const name = `${prefix}-qrcode`;
 
 export default {
   name: 'QrcodeStatus',
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tIcon,
     tLoading,

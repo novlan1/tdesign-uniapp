@@ -140,9 +140,11 @@
     height: @@height;
     line-height: @@height;
 
-    & :deep(.@{button}__icon) {
-      font-size: @@iconSize;
-    }
+    // --td-icon-font-size: @@iconSize;
+
+    // & :deep(.@{button}__icon) {
+    //   font-size: @@iconSize;
+    // }
   }
 }
 
@@ -255,6 +257,9 @@
   font-weight: @button-font-weight;
   vertical-align: top;
   box-sizing: border-box;
+  
+  margin-left: auto;
+  margin-right: auto;
 
   .cursor-pointer();
 
@@ -327,6 +332,12 @@
   &--outline {
     color: @button-default-outline-color;
     background-color: @bg-color-container;
+
+    // 适配 qq 小程序
+    /* #ifdef MP-QQ */
+    border-style: solid;
+    border-width: 2rpx;
+    /* #endif */
 
     &,
     &::after {
@@ -492,6 +503,12 @@
     background-color: transparent;
     color: @button-ghost-color;
 
+    // 适配 qq 小程序
+    /* #ifdef MP-QQ */
+    border-style: solid;
+    border-width: 2rpx;
+    /* #endif */
+
     &,
     &::after {
       border-color: @button-ghost-border-color;
@@ -513,14 +530,15 @@
     .ghost-theme(default);
   }
 
-  :deep(&__loading) + &__content:not(:empty),
-  :deep(&__icon) + &__content:not(:empty) {
+  // :deep(&__loading) + &__content:not(:empty),
+  // :deep(&__icon) + &__content:not(:empty),
+  &__content--has-icon {
     margin-left: 8rpx;
   }
 
-  :deep(&__icon) {
-    border-radius: @button-icon-border-radius;
-  }
+  // :deep(&__icon) {
+  //   border-radius: @button-icon-border-radius;
+  // }
 
   // 圆角长方形
   &--round {
@@ -625,13 +643,13 @@
     cursor: not-allowed;
   }
 
-  :deep(&__loading) {
-    &--wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
+  // :deep(&__loading) {
+  //   &--wrapper {
+  //     display: flex;
+  //     align-items: center;
+  //     justify-content: center;
+  //   }
+  // }
 
   &.@{button}--hover::after {
     z-index: -1;

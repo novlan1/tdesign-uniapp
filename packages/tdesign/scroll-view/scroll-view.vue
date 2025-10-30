@@ -22,6 +22,9 @@ const name = `${prefix}-scroll-view`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [`${prefix}-class`],
   props: {
     scrollIntoView: {

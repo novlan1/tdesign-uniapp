@@ -4,6 +4,7 @@
       <t-button
         theme="primary"
         size="large"
+        custom-style="margin-right: 16px;"
       >
         填充按钮
       </t-button>
@@ -13,11 +14,13 @@
         icon="search"
         shape="square"
         aria-label="搜索"
+        custom-style="margin-right: 16px;"
       />
       <t-button
         theme="primary"
         size="large"
         shape="round"
+        custom-style="margin-right: 16px;"
       >
         填充按钮
       </t-button>
@@ -35,6 +38,7 @@
       size="large"
       block
       t-class="external-class"
+      custom-style="border-radius: 0"
     >
       填充按钮
     </t-button>
@@ -62,9 +66,5 @@ export default {
     display: flex;
     justify-content: space-between;
     margin: 0 32rpx 32rpx;
-}
-
-:deep(.external-class) {
-    border-radius: 0 !important;
 }
 </style>

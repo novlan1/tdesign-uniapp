@@ -11,6 +11,7 @@
         <t-image
           v-if="logo.icon"
           :t-class="classPrefix + '__icon'"
+          :custom-style="iconCustomStyle"
           :src="logo.icon"
         />
         <view
@@ -22,6 +23,7 @@
         <t-image
           v-else-if="logo.url"
           :t-class="classPrefix + '__title-url'"
+          :custom-style="titleUrlCustomStyle"
           :src="logo.url"
           mode="widthFix"
         />
@@ -73,6 +75,9 @@ const name = `${prefix}-footer`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
   ],
@@ -88,6 +93,20 @@ export default uniComponent({
       classPrefix: name,
       _,
     };
+  },
+  computed: {
+    iconCustomStyle() {
+      return _._style({
+        width: 'var(--td-footer-logo-icon-width, 24px)',
+        height: 'var(--td-footer-logo-icon-height, 24px)',
+        marginRight: 'var(--td-footer-logo-icon-margin-right, var(--td-spacer, 8px))',
+      });
+    },
+    titleUrlCustomStyle() {
+      return _._style({
+        width: 'var(--td-footer-logo-title-url-width, 128px)',
+      });
+    },
   },
   methods: {
   },

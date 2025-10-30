@@ -63,6 +63,9 @@ const name = `${prefix}-popup`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-content`,
@@ -75,6 +78,10 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'visible-change',
+    'leaved',
+  ],
   data() {
     return {
       prefix,

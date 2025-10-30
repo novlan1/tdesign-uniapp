@@ -1,10 +1,12 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="Indexes"
       left-arrow
     />
+    <!-- #endif -->
     <view class="indexes">
       <t-demo-header
         title="Indexes 索引"

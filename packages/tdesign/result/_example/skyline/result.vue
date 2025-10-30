@@ -1,10 +1,12 @@
 <template>
   <view class="skyline">
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="Result"
       left-arrow
     />
+    <!-- #endif -->
     <scroll-view
       scroll-y
       type="list"
@@ -51,9 +53,9 @@
 
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import tButton from 'tdesign-uniapp/button/button.vue';
-import theme from '../theme';
-import description from '../description';
-import custom from '../custom';
+import theme from '../theme/index.vue';
+import description from '../description/index.vue';
+import custom from '../custom/index.vue';
 export default {
   components: {
     tNavbar,

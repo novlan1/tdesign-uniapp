@@ -1,6 +1,7 @@
 const props = {
   content: {
     type: String,
+    default: '',
   },
   disabled: {
     type: Boolean,

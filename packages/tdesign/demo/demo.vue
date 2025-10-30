@@ -62,6 +62,9 @@ import TButton from '../button/button.vue';
 
 export default {
   name: 'TDemo',
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     TButton,
   },

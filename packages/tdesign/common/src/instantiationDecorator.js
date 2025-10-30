@@ -1,17 +1,37 @@
 /* eslint-disable no-param-reassign */
 import { isPlainObject } from '../validator';
 import { canUseVirtualHost } from '../version';
-import { toCamel } from '../utils';
+import { toCamel, toPascal } from '../utils';
 
 const getInnerControlledValue = key => `data${key.replace(/^(\w)/, (e, t) => t.toUpperCase())}`;
+
+const ARIAL_PROPS = [
+  { key: 'ariaHidden', type: Boolean },
+  { key: 'ariaRole', type: String },
+  { key: 'ariaLabel', type: String },
+  { key: 'ariaLabelledby', type: String },
+  { key: 'ariaDescribedby', type: String },
+  { key: 'ariaBusy', type: Boolean },
+];
+
+export const COMMON_PROPS = {
+  ...ARIAL_PROPS.reduce((acc, item) => ({
+    ...acc,
+    [item.key]: {
+      type: item.type,
+      default: item.type === Boolean ? false : '',
+    },
+  }), {}),
+
+  style: { type: [String, Object], default: '' },
+  customStyle: { type: [String, Object], default: '' },
+};
 
 
 export const toComponent = function (options) {
   if (!options.properties && options.props) {
     options.properties = options.props;
   }
-
-  const { externalClasses = [] } = options;
 
   if (options.properties) {
     Object.keys(options.properties).forEach((k) => {
@@ -23,31 +43,17 @@ export const toComponent = function (options) {
       options.properties[k] = opt;
     });
 
-    // 内置 aria 相关属性
-    const ariaProps = [
-      { key: 'ariaHidden', type: Boolean },
-      { key: 'ariaRole', type: String },
-      { key: 'ariaLabel', type: String },
-      { key: 'ariaLabelledby', type: String },
-      { key: 'ariaDescribedby', type: String },
-      { key: 'ariaBusy', type: Boolean },
-    ];
-    ariaProps.forEach(({ key, type }) => {
+
+    Object.keys(COMMON_PROPS).forEach((key) => {
       options.properties[key] = {
-        type,
+        ...COMMON_PROPS[key],
       };
     });
-
-    // 处理 style 和 customStyle 属性
-    options.properties.style = { type: String, value: '' };
-    options.properties.customStyle = { type: String, value: '' };
   }
 
   if (!options.methods) options.methods = {};
 
   if (!options.lifetimes) options.lifetimes = {};
-
-  options.externalClasses = ['class', ...externalClasses];
 
   const oldCreated = options.created;
   const { controlledProps = [] } = options;
@@ -113,14 +119,12 @@ export const wxComponent = function wxComponent() {
     //   current.options.addGlobalClass = true;
     // }
 
-    if (canUseVirtualHost()) {
+    if (canUseVirtualHost() && current.options.virtualHost == null) {
       current.options.virtualHost = true;
     }
 
-    // const obj = toComponent(toObject(current));
     const obj = toComponent(current);
 
-    // Component(obj);
     return obj;
   };
 };
@@ -137,12 +141,15 @@ export const uniComponent = function (info) {
     multipleSlots: true,
   };
 
-  if (canUseVirtualHost()) {
+  if (canUseVirtualHost() && info.options.virtualHost == null) {
     info.options.virtualHost = true;
   }
 
   if (!info.options.styleIsolation) {
     info.options.styleIsolation = 'shared';
+  }
+  if (info.name) {
+    info.name = toPascal(info.name);
   }
 
   const obj = toComponent(info);
@@ -150,7 +157,7 @@ export const uniComponent = function (info) {
 };
 
 
-function getExternalClasses(info) {
+export function getExternalClasses(info) {
   if (!info.externalClasses) {
     return {};
   }

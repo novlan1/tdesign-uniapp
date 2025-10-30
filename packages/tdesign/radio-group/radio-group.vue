@@ -28,6 +28,7 @@
       :max-label-row="item.maxLabelRow || 3"
       :name="item.name || ''"
       :borderless="borderless"
+      :relation-key="relationKey"
       @change="handleRadioChange($event, { index, value: item.value, allowUncheck: item.allowUncheck || allowUncheck })"
     />
   </view>
@@ -47,7 +48,9 @@ const name = `${prefix}-radio-group`;
 
 export default uniComponent({
   name,
-  mixins: [ParentMixin(RELATION_MAP.Radio)],
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'value',
@@ -57,6 +60,7 @@ export default uniComponent({
   externalClasses: [
     `${prefix}-class`,
   ],
+  mixins: [ParentMixin(RELATION_MAP.Radio)],
   components: {
     tRadio,
   },
@@ -111,10 +115,12 @@ export default uniComponent({
     },
   },
   mounted() {
-    this.getChildren()?.forEach((item) => {
-      item.dataChecked = this.dataValue === item.value;
-      item.setDisabled(this.disabled);
-    });
+    setTimeout(() => {
+      this.getChildren()?.forEach((item) => {
+        item.dataChecked = this.dataValue === item.value;
+        item.setDisabled(this.disabled);
+      });
+    }, 33);
   },
   methods: {
     innerAfterLinked(target) {

@@ -3,7 +3,7 @@
     <t-pull-down-refresh
       :value="enable"
       :loading-texts="['下拉刷新', '松手刷新', '正在刷新', '刷新完成']"
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       @refresh="onRefresh"
       @scroll="onScroll"
     >

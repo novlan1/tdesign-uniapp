@@ -1,10 +1,12 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="Toast"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo">
       <t-demo-header
         title="Toast 轻提示"
@@ -50,6 +52,9 @@ import theme from './theme/index.vue';
 import cover from './cover/index.vue';
 import close from './close/index.vue';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     BaseDemo,
     theme,

@@ -1,10 +1,12 @@
 <template>
   <view class="demo-wrap">
     <view class="custom-navbar">
+      <!-- #ifndef MP-ALIPAY -->
       <t-navbar
         title="Tabs"
         left-arrow
       />
+    <!-- #endif -->
     </view>
     <view class="demo">
       <t-demo-header

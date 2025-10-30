@@ -53,7 +53,7 @@
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
-import { getCharacterLength, coalesce } from '../common/utils';
+import { getCharacterLength, coalesce, nextTick } from '../common/utils';
 import _ from '../common/utils.wxs';
 import { textareaStyle } from './computed.js';
 // import { getInnerMaxLen } from '../input/utils';
@@ -63,6 +63,9 @@ const name = `${prefix}-textarea`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-textarea`,
@@ -114,7 +117,7 @@ export default uniComponent({
       this.dataValue = val;
 
 
-      this.$nextTick(() => {
+      nextTick().then(() => {
         this.dataValue = value;
         this.count = count;
       });

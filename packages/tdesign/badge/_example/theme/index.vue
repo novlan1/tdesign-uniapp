@@ -89,6 +89,9 @@ import tButton from 'tdesign-uniapp/button/button.vue';
 import SkylineBehavior from 'tdesign-uniapp/mixins/skyline.js';
 
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tBadge,
     tCell,
@@ -100,9 +103,6 @@ export default {
     return {
       skylineRender: false,
     };
-  },
-  options: {
-    styleIsolation: 'apply-shared',
   },
   created() {},
   methods: {},
@@ -117,7 +117,7 @@ export default {
     align-items: center;
 }
 
-.t-class-cell {
+:deep(.t-class-cell) {
     overflow: hidden;
 }
 </style>

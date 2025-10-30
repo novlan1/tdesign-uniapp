@@ -64,15 +64,13 @@ export default {
   methods: {},
 };
 </script>
-<style>
+<style scoped>
 .dark {
     background-color: #0052d9;
 }
-
 .light {
     background-color: #366ef4;
 }
-
 .dark,
 .light {
     background-clip: content-box;

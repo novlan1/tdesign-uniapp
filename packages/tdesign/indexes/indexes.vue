@@ -2,6 +2,7 @@
   <view
     :style="_._style([style, customStyle])"
     :class="classPrefix + ' class ' + tClass"
+    disable-scroll
   >
     <view
       :id="'id-' + classPrefix + '__bar'"
@@ -54,6 +55,9 @@ const name = `${prefix}-indexes`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'current',
@@ -103,9 +107,19 @@ export default uniComponent({
   },
   watch: {
     indexList: {
-      handler(v) {
-        this.setIndexList(v);
-        this.setHeight(this._height);
+      handler(v, pre) {
+        const cb = () => {
+          this.setIndexList(v);
+          this.setHeight(this._height);
+        };
+        if (!pre?.length) {
+          // 防止抖音小程序报错
+          setTimeout(() => {
+            cb();
+          }, 33);
+        } else {
+          cb();
+        }
       },
       immediate: true,
     },
@@ -135,9 +149,11 @@ export default uniComponent({
     this.timer = null;
     this.groupTop = [];
     this.sidebar = null;
+
     if (this._height === 0) {
       this.setHeight();
     }
+
     if (this.indexList === null) {
       this.setIndexList();
     }
@@ -180,18 +196,26 @@ export default uniComponent({
 
         const current = this.dataCurrent || this._indexList[0];
         this.setAnchorByCurrent(current, 'init');
-      });
+      })
+        .catch((err) => {
+          console.log('err', err);
+        });
       this.getSidebarRect();
     },
 
     getAnchorsRect() {
-      return Promise.all(this.children.map(child => getRect(child, `.${name}-anchor`).then((rect) => {
-        this.groupTop.push({
-          height: rect.height,
-          top: rect.top,
-          anchor: child.index,
-        });
-      })));
+      return Promise.all((this.children || [])
+        .map(child => getRect(child, `.${name}-anchor`)
+          .then((rect) => {
+            this.groupTop.push({
+              height: rect.height,
+              top: rect.top,
+              anchor: child.index,
+            });
+          })
+          .catch((err) => {
+            console.log('err', err);
+          })));
     },
 
     getSidebarRect() {
@@ -204,7 +228,10 @@ export default uniComponent({
           height,
           itemHeight: (height - (length - 1) * 2) / length, // margin = 2px
         };
-      });
+      })
+        .catch((err) => {
+          console.log('err', err);
+        });
     },
 
     toggleTips(flag) {

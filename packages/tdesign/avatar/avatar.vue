@@ -4,7 +4,7 @@
       classPrefix + '__wrapper class ',
       tClass
     ]"
-    :style="_._style([utils.getStyles(isShow), style, customStyle])"
+    :style="_._style([utils.getStyles(isShow), style, customStyle, innerStyle])"
   >
     <t-badge
       :color="badgeProps.color || ''"
@@ -34,7 +34,8 @@
           v-if="image"
           :t-class="prefix + '-image ' + classPrefix + '__image'"
           :t-class-load="tClassAlt"
-          :custom-style="(imageProps && imageProps.style) || ''"
+          :custom-style="imageCustomStyle"
+          style="width: 100%;height: 100%;"
           :src="image"
           :mode="(imageProps && imageProps.mode) || 'aspectFill'"
           :lazy="(imageProps && imageProps.lazy) || false"
@@ -44,13 +45,11 @@
           :error="alt || 'default'"
           @error="onLoadError"
         />
-        <!-- parse <template v-else-if="iconName || _.isNoEmptyObj(iconData)" is="icon" :data="tClass: classPrefix + '__icon ' + prefix + '-class-icon', name: iconName, ...iconData"/> -->
         <block
           v-else-if="iconName || _.isNoEmptyObj(iconData)"
           name="icon"
         >
           <t-icon
-            :custom-style="iconData.style || ''"
             :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (iconData.activeIdx == iconData.index ? 'active ' : ' ') + tClassIcon"
             :prefix="iconData.prefix"
             :name="iconName || iconData.name"
@@ -59,6 +58,7 @@
             :aria-hidden="!!iconData.ariaHidden"
             :aria-label="iconData.ariaLabel"
             :aria-role="iconData.ariaRole"
+            :custom-style="iconCustomStyle"
             @click="iconData.click || ''"
           />
         </block>
@@ -93,6 +93,9 @@ const name = `${prefix}-avatar`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-image`,
@@ -125,7 +128,33 @@ export default uniComponent({
       dataShape: this.shape,
       dataSize: this.size,
       dataBordered: this.bordered,
+      innerStyle: '',
     };
+  },
+  computed: {
+    iconCustomStyle() {
+      const fontSize = {
+        small: 'var(--td-avatar-icon-small-font-size, 20px)',
+        medium: 'var(--td-avatar-icon-medium-font-size, 24px)',
+        large: 'var(--td-avatar-icon-large-font-size, 32px)',
+      };
+      if (!fontSize[this.dataSize]) return '';
+      return _._style([
+        {
+          fontSize: fontSize[this.dataSize],
+        },
+        this.iconData.style || '',
+      ]);
+    },
+    imageCustomStyle() {
+      return _._style([
+        {
+          width: '100%',
+          height: '100%',
+        },
+        this.imageProps?.style || '',
+      ]);
+    },
   },
   watch: {
     icon: {
@@ -157,6 +186,9 @@ export default uniComponent({
         this.isShow = false;
       }
       this.$emit('error', t);
+    },
+    setStyle(val = '') {
+      this.innerStyle = val;
     },
   },
 });

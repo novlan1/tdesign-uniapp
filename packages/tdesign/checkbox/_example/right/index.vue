@@ -4,6 +4,7 @@
       value="1"
       label="多选"
       default-checked
+      relation-key="-1"
     />
 
     <view
@@ -15,6 +16,7 @@
       label="多选"
       placement="right"
       default-checked
+      relation-key="-1"
     />
   </view>
 </template>

@@ -9,6 +9,7 @@ const props = {
   },
   content: {
     type: String,
+    default: '',
   },
   customDataset: {
     type: [Object, Array, String, Number, Boolean, null, undefined],
@@ -44,6 +45,7 @@ const props = {
   },
   lang: {
     type: String,
+    default: '',
   },
   loading: {
     type: Boolean,
@@ -55,6 +57,7 @@ const props = {
   },
   openType: {
     type: String,
+    default: '',
   },
   phoneNumberNoQuotaToast: {
     type: Boolean,
@@ -102,6 +105,7 @@ const props = {
   },
   type: {
     type: String,
+    default: '',
   },
   variant: {
     type: String,

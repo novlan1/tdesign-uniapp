@@ -13,7 +13,8 @@
         <t-icon
           v-if="value == index"
           name="check"
-          t-class="card__icon"
+          :t-class="cardIconTClass"
+          :class="cardIconClass"
         />
 
         <t-radio
@@ -34,7 +35,9 @@
     </view>
 
     <t-radio-group
-      t-class="horizontal-box"
+      :t-class="horBoxTClass"
+      :class="horBoxClass"
+      :custom-style="horBoxCustomStyle"
       :value="value1"
       @change="onChange1"
     >
@@ -46,7 +49,9 @@
         <t-icon
           v-if="value1 == index"
           name="check"
-          t-class="card__icon"
+          :t-class="cardIconTClass"
+          :class="cardIconClass"
+          custom-style="font-size: 12px;"
         />
 
         <t-radio
@@ -64,6 +69,10 @@
 import tRadioGroup from 'tdesign-uniapp/radio-group/radio-group.vue';
 import tRadio from 'tdesign-uniapp/radio/radio.vue';
 import tIcon from 'tdesign-uniapp/icon/icon.vue';
+import { canUseVirtualHost } from 'tdesign-uniapp/common/version';
+import _ from 'tdesign-uniapp/common/utils.wxs';
+
+
 export default {
   options: {
     styleIsolation: 'shared',
@@ -79,13 +88,44 @@ export default {
       value1: 0,
     };
   },
+  computed: {
+    cardIconTClass() {
+      return canUseVirtualHost() ? this.cardIconRealClass : '';
+    },
+    cardIconClass() {
+      return !canUseVirtualHost() ? this.cardIconRealClass : '';
+    },
+    cardIconRealClass() {
+      return 'card__icon';
+    },
+    horBoxTClass() {
+      return canUseVirtualHost() ? this.horBoxRealClass : '';
+    },
+    horBoxClass() {
+      return !canUseVirtualHost() ? this.horBoxRealClass : '';
+    },
+    horBoxRealClass() {
+      return 'horizontal-box';
+    },
+    horBoxCustomStyle() {
+      return _._style({
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        margin: '16px',
+      });
+    },
+  },
   created() {},
   methods: {
     onChange(e) {
       this.value = e.value;
+      console.log('[change] e:', e);
     },
     onChange1(e) {
       this.value1 = e.value;
+      console.log('[change] e:', e);
     },
   },
 };
@@ -122,16 +162,17 @@ export default {
     left: 1.5px;
     top: 1.5px;
     z-index: 1;
+    font-size: 16px;
 }
 
 /* 横向布局 */
-.horizontal-box {
+/* .horizontal-box {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
     margin: 32rpx;
-}
+} */
 
 .horizontal-box .card {
     flex: 0 0 calc(33.33% - 12rpx);

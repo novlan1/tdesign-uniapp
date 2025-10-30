@@ -1,10 +1,12 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="Footer"
       left-arrow
     />
+    <!-- #endif -->
     <t-demo-header
       title="Footer 页脚"
       desc="用于基础列表展示，可附带文字、品牌logo、操作，常用商详、个人中心、设置等页面。"

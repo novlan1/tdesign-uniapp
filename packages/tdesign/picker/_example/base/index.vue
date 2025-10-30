@@ -2,7 +2,7 @@
 <template>
   <view>
     <t-cell
-      class="mb-16"
+      t-class="mb-16"
       title="选择城市"
       arrow
       hover
@@ -11,7 +11,7 @@
     />
 
     <t-cell
-      class="mb-16"
+      t-class="mb-16"
       title="选择时间"
       arrow
       hover
@@ -26,7 +26,7 @@
       title="选择城市"
       cancel-btn="取消"
       confirm-btn="确认"
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       @change="onPickerChange($event, { key: 'city' })"
       @pick="onColumnChange($event, { key: 'city' })"
       @cancel="onPickerCancel($event, { key: 'city' })"
@@ -62,7 +62,7 @@
       title="选择时间"
       cancel-btn="取消"
       confirm-btn="确认"
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       @change="onPickerChange($event, { key: 'date' })"
       @pick="onColumnChange($event, { key: 'date' })"
       @cancel="onPickerCancel($event, { key: 'date' })"
@@ -79,6 +79,9 @@ import tPicker from 'tdesign-uniapp/picker/picker.vue';
 import tPickerItem from 'tdesign-uniapp/picker-item/picker-item.vue';
 import tTag from 'tdesign-uniapp/tag/tag.vue';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tCell,
     tPicker,
@@ -198,7 +201,7 @@ export default {
 };
 </script>
 <style>
-.mb-16 {
+:deep(.mb-16) {
     margin-bottom: 32rpx;
 }
 

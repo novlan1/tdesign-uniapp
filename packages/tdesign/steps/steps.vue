@@ -19,6 +19,9 @@ const name = `${prefix}-steps`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'current',

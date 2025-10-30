@@ -1,10 +1,12 @@
 <template>
   <view>
     <view class="skyline">
+      <!-- #ifndef MP-ALIPAY -->
       <t-navbar
         title="Fab"
         left-arrow
       />
+      <!-- #endif -->
       <scroll-view
         scroll-y
         type="list"

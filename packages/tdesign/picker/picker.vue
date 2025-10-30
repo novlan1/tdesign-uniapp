@@ -40,7 +40,10 @@
           </view>
           <slot name="header" />
           <slot name="content" />
-          <view :class="_.cls(classPrefix + '__main', [])">
+          <view
+            :class="_.cls(classPrefix + '__main', [])"
+            disable-scroll
+          >
             <slot />
             <view :class="classPrefix + '__mask ' + classPrefix + '__mask--top'" />
             <view :class="classPrefix + '__mask ' + classPrefix + '__mask--bottom'" />
@@ -83,7 +86,10 @@
         </view>
         <slot name="header" />
         <slot name="content" />
-        <view :class="_.cls(classPrefix + '__main', [])">
+        <view
+          :class="_.cls(classPrefix + '__main', [])"
+          disable-scroll
+        >
           <slot />
           <view :class="classPrefix + '__mask ' + classPrefix + '__mask--top'" />
           <view :class="classPrefix + '__mask ' + classPrefix + '__mask--bottom'" />
@@ -112,6 +118,9 @@ const name = `${prefix}-picker`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-confirm`,
@@ -180,7 +189,7 @@ export default uniComponent({
   },
   methods: {
     coalesce,
-    afterInnerLinked() {
+    innerAfterLinked() {
       this.updateChildren();
     },
     updateChildren() {

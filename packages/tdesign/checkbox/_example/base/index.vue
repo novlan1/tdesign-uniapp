@@ -3,6 +3,7 @@
     <t-checkbox-group
       :value="current"
       :options="options"
+      :relation-key="relationKey"
       @change="handleGroupChange"
     />
   </view>
@@ -17,6 +18,7 @@ export default {
   },
   data() {
     return {
+      relationKey: `${Math.random()}`,
       current: ['checkbox1', 'checkbox2'],
       options: [
         {

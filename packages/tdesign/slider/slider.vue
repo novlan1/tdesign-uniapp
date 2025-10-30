@@ -197,7 +197,7 @@ import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import { trimSingleValue, trimValue } from './tool';
 import props from './props';
-import { getRect, coalesce } from '../common/utils';
+import { getRect, coalesce, nextTick } from '../common/utils';
 import Bus from '../common/bus';
 import _ from '../common/utils.wxs';
 import { getValue } from './computed.js';
@@ -208,6 +208,9 @@ const name = `${prefix}-slider`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'value',
@@ -290,7 +293,7 @@ export default uniComponent({
     this.bus = new Bus();
     this.bus.on('initial', () => this.handleMark(this.marks));
     this.bus.on('initial', () => {
-      this.$nextTick(() => {
+      nextTick().then(() => {
         this.renderLine(this._value);
       });
     });

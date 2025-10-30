@@ -9,7 +9,7 @@ function findNearListParent(children = [], name) {
   let temp;
   for (const item of children) {
     // console.log('__nodeId__', item, item.$options.name, parentRelationKey, thisRelationKey);
-    const parentRelationKey = item.$data && item.$data.relationKey;
+    const parentRelationKey = item.$props && item.$props.relationKey;
     const thisRelationKey = this.$props && this.$props.relationKey;
     if (item.$options.name === name && parentRelationKey === thisRelationKey) {
       temp = item;
@@ -49,7 +49,6 @@ function getParentInToutiao(name) {
 
 function getParent(name = '') {
   const found = getParentInToutiao.call(this, name);
-  // console.log('found', found);
   if (found) {
     return found;
   }
@@ -154,7 +153,7 @@ export function ChildrenMixin(parent, options = {}) {
     methods: {
       bindRelation() {
         // #ifdef MP-TOUTIAO
-        const parentComponentName = `Press${parent.replace(/^\w/, a => a.toUpperCase())}`;
+        const parentComponentName = `T${parent}`;
         this[parent] = getParent.call(this, parentComponentName);
         // #endif
         if (!this[parent] || (this[parent].children && this[parent].children.indexOf(this) !== -1)) {

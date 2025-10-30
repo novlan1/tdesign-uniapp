@@ -1,10 +1,12 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="ColorPicker"
       left-arrow
     />
+    <!-- #endif -->
 
     <view class="demo">
       <t-demo-header
@@ -42,10 +44,10 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import multiple from './multiple';
-import format from './format';
-import usePopup from './use-popup';
+import BaseDemo from './base/index.vue';
+import multiple from './multiple/index.vue';
+import format from './format/index.vue';
+import usePopup from './use-popup/index.vue';
 export default {
   components: {
     BaseDemo,

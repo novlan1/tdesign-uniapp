@@ -2,19 +2,19 @@
   <view>
     <view class="avatar-example">
       <t-avatar
-        class="avatar-example--large"
+        t-class="avatar-example--large"
         :image="image"
         size="large"
       />
       <t-avatar
-        class="avatar-example--large"
+        t-class="avatar-example--large"
         t-class-content="external-class-content"
         size="large"
       >
         A
       </t-avatar>
       <t-avatar
-        class="avatar-example--large"
+        t-class="avatar-example--large"
         icon="user"
         size="large"
       />
@@ -22,18 +22,18 @@
 
     <view class="avatar-example">
       <t-avatar
-        class="avatar-example--medium"
+        t-class="avatar-example--medium"
         :image="image"
       />
       <t-avatar
-        class="avatar-example--medium"
+        t-class="avatar-example--medium"
         t-class-content="external-class-content"
         size="medium"
       >
         A
       </t-avatar>
       <t-avatar
-        class="avatar-example--medium"
+        t-class="avatar-example--medium"
         icon="user"
         size="medium"
       />
@@ -41,19 +41,19 @@
 
     <view class="avatar-example">
       <t-avatar
-        class="avatar-example--small"
+        t-class="avatar-example--small"
         :image="image"
         size="small"
       />
       <t-avatar
-        class="avatar-example--small"
+        t-class="avatar-example--small"
         t-class-content="external-class-content"
         size="small"
       >
         A
       </t-avatar>
       <t-avatar
-        class="avatar-example--small"
+        t-class="avatar-example--small"
         icon="user"
         size="small"
       />

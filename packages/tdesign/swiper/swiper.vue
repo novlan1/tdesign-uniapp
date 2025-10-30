@@ -35,7 +35,6 @@
         :aria-label="_.isObject(item) ? item.ariaLabel : ''"
         @click="onTap($event, { index })"
       >
-        <!-- parse <template is="image" :data="tClass: _this.getImageClass(prefix, navCurrent, index, list), style: 'height: ' + _.addUnit(height), src: _.isObject(item) ? item.value : item, mode: 'aspectFill', dataset: index, ...imageProps, bindload: 'onImageLoad'"/> -->
         <t-image
           :t-class="getImageClass(prefix, navCurrent, index, list, tClassImage, tClassPrevImage, tClassNextImage)"
           :custom-style="'height: ' + _.addUnit(height) || ''"
@@ -81,14 +80,15 @@ const name = `${prefix}-swiper`;
 
 export default uniComponent({
   name,
+  options: {
+    multipleSlots: true,
+    styleIsolation: 'shared',
+  },
   externalClasses: [`${prefix}-class`, `${prefix}-class-nav`, `${prefix}-class-image`, `${prefix}-class-prev-image`, `${prefix}-class-next-image`],
   mixins: [ParentMixin(RELATION_MAP.SwiperNav)],
   components: {
     tSwiperNav,
     tImage,
-  },
-  options: {
-    multipleSlots: true,
   },
   props: {
     ...props,

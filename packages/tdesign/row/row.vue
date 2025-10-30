@@ -19,6 +19,9 @@ const name = `${prefix}-row`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   mixins: [ParentMixin(RELATION_MAP.Col)],
   props: {
     ...props,

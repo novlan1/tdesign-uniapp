@@ -86,6 +86,9 @@ const FULL_MODES = [...DATE_MODES, ...TIME_MODES];
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'value',

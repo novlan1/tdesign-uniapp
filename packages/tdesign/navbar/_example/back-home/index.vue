@@ -16,7 +16,8 @@
             aria-role="button"
             aria-label="返回"
             name="chevron-left"
-            class="custom-capsule__icon back"
+            :t-class="getIconTClass('back')"
+            :class="getIconClass('back')"
             @click="onBack"
           />
           <t-icon
@@ -24,7 +25,8 @@
             aria-role="button"
             aria-label="首页"
             name="home"
-            class="custom-capsule__icon home"
+            :t-class="getIconTClass('home')"
+            :class="getIconClass('home')"
             @click="onGoHome"
           />
         </view>
@@ -36,7 +38,13 @@
 <script>
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
 import tIcon from 'tdesign-uniapp/icon/icon.vue';
+import { canUseVirtualHost } from 'tdesign-uniapp/common/version';
+
+
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tNavbar,
     tIcon,
@@ -54,6 +62,15 @@ export default {
         url: '/pages/home/home',
       });
     },
+    getIconTClass(name) {
+      return canUseVirtualHost() ? this.getIconRealClass(name) : '';
+    },
+    getIconClass(name) {
+      return !canUseVirtualHost() ? this.getIconRealClass(name) : '';
+    },
+    getIconRealClass(name) {
+      return `custom-capsule__icon ${name}`;
+    },
   },
 };
 </script>
@@ -65,12 +82,12 @@ export default {
     justify-content: center;
 }
 
-.custom-capsule__icon {
+:deep(.custom-capsule__icon) {
     flex: 1;
     position: relative;
 }
 
-.custom-capsule__icon.home:before {
+:deep(.custom-capsule__icon.home:before) {
     content: '';
     display: block;
     position: absolute;

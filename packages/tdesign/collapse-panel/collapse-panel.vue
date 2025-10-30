@@ -24,6 +24,9 @@
         :t-class-note="'class-note ' + (ultimateDisabled ? 'class-note--disabled' : '')"
         :t-class-right-icon="'class-right-icon ' + classPrefix + '__arrow--' + placement + ' ' + (ultimateDisabled ? 'class-right-icon--disabled' : '')"
         t-class-hover="class-header-hover"
+        :title-style="titleCustomStyle"
+        :note-style="noteCustomStyle"
+        :right-icon-style="rightIconCustomStyle"
       >
         <template
           #left-icon
@@ -79,10 +82,13 @@ import { ChildrenMixin, RELATION_MAP } from '../common/relation';
 
 
 const name = `${prefix}-collapse-panel`;
-
+const DISABLED_COLOR = 'var(--td-text-color-disabled, var(--td-font-gray-4, rgba(0, 0, 0, .26)))';
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-content`,
@@ -106,6 +112,25 @@ export default uniComponent({
       _,
       animation: null,
     };
+  },
+  computed: {
+    titleCustomStyle() {
+      return _._style({
+        fontSize: 'var(--td-collapse-title-font-size, var(--td-font-size-m, 16px))',
+        color: this.ultimateDisabled && DISABLED_COLOR,
+      });
+    },
+    noteCustomStyle() {
+      return _._style({
+        color: this.ultimateDisabled && DISABLED_COLOR,
+
+      });
+    },
+    rightIconCustomStyle() {
+      return _._style({
+        color: this.ultimateDisabled && DISABLED_COLOR,
+      });
+    },
   },
   watch: {
     disabled: {

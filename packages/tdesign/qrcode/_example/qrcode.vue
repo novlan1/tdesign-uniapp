@@ -1,10 +1,12 @@
 <template>
   <view class="skyline">
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="QRCode"
       :left-arrow="true"
     />
+    <!-- #endif -->
     <view class="demo">
       <t-demo-header
         title="QRCode 二维码"

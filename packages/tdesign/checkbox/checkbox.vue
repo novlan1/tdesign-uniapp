@@ -89,7 +89,7 @@
 import tIcon from '../icon/icon';
 import { uniComponent } from '../common/src/index';
 import { coalesce } from '../common/utils';
-import { prefix } from '../common/config';
+import { prefix, ISOLATED_RELATION_KEY } from '../common/config';
 import props from './props';
 import _ from '../common/utils.wxs';
 import { ChildrenMixin, RELATION_MAP } from '../common/relation';
@@ -97,9 +97,11 @@ import { ChildrenMixin, RELATION_MAP } from '../common/relation';
 
 const name = `${prefix}-checkbox`;
 
-
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'checked',
@@ -139,6 +141,11 @@ export default uniComponent({
       dataChecked: coalesce(this.checked, this.defaultChecked),
     };
   },
+  computed: {
+    isIsolated() {
+      return this.relationKey === ISOLATED_RELATION_KEY;
+    },
+  },
   watch: {
     borderless: {
       handler(v) {
@@ -170,6 +177,7 @@ export default uniComponent({
   },
   methods: {
     innerAfterLinked() {
+      if (this.isIsolated) return;
       const parent = this[RELATION_MAP.Checkbox];
       const { value, disabled, borderless } = parent;
       const { dataValue, checked, checkAll, item, dataIndeterminate } = this;
@@ -213,8 +221,7 @@ export default uniComponent({
       const parent = this[RELATION_MAP.Checkbox];
 
 
-      if (parent) {
-        // TODO
+      if (parent && !this.isIsolated) {
         parent.updateValue({ value, checkAll, indeterminate: dataIndeterminate, checked, item: { label, value, checked } });
       } else {
         this._trigger('change', { context: { value, label }, checked });

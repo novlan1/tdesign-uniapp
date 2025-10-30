@@ -19,9 +19,9 @@
       size="48rpx"
       aria-role="button"
       aria-label="关闭"
+      :custom-style="closeBtnCustomStyle"
       @click="handleClose"
     />
-    <!-- parse <template v-if="switchMode !== 'none'" is="calendar-header" :data="classPrefix: classPrefix + '-header', switchMode, ...actionButtons, title: _this.getMonthTitle(currentMonth[0].year, realLocalText.months[currentMonth[0].month], realLocalText.monthTitle)"/> -->
     <block
       v-if="switchMode !== 'none'"
       name="calendar-header"
@@ -61,7 +61,6 @@
         v-for="(item, index) in switchMode === 'none' ? months : currentMonth"
         :key="index"
       >
-        <!-- parse <template v-if="switchMode === 'none'" is="calendar-header" :data="class: classPrefix + '__month', classPrefix: classPrefix + '-header', tId: 'year_' + item.year + '_month_' + item.month, switchMode, ...actionButtons, title: _this.getMonthTitle(item.year, realLocalText.months[item.month], realLocalText.monthTitle)"/> -->
         <block
           v-if="switchMode === 'none'"
           name="calendar-header"
@@ -126,7 +125,6 @@
         name="confirm-btn"
       />
       <block v-else-if="innerConfirmBtn">
-        <!-- parse <template is="button" :data="block: true,  theme: 'primary', rootClass: 't-calendar__confirm-btn', content: realLocalText.confirm, ...innerConfirmBtn"/> -->
         <TButton
           :t-id="innerConfirmBtn.tId"
           :custom-style="innerConfirmBtn.style"
@@ -213,6 +211,18 @@ export default {
       prefix,
       utils,
     };
+  },
+  computed: {
+    closeBtnCustomStyle() {
+      return utils._style({
+        position: 'absolute',
+        top: '16px',
+        right: '16px',
+        margin: '-12px',
+        padding: '12px',
+        color: 'var(--td-calendar-title-color, var(--td-text-color-primary, var(--td-font-gray-1, rgba(0, 0, 0, .9))))',
+      });
+    },
   },
   watch: {
   },

@@ -1,9 +1,11 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="Input"
       left-arrow
     />
+    <!-- #endif -->
     <view class="input-example">
       <t-demo-header
         title="Input 输入框"

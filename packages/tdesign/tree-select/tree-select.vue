@@ -114,7 +114,7 @@ import tScrollView from '../scroll-view/scroll-view.vue';
 import { uniComponent } from '../common/src/index';
 import { isDef } from '../common/validator';
 import { prefix } from '../common/config';
-import { getTreeDepth, coalesce } from '../common/utils';
+import { getTreeDepth, coalesce, nextTick } from '../common/utils';
 import props from './props';
 import _ from '../common/utils.wxs';
 import { getTreeClass } from './computed.js';
@@ -123,6 +123,9 @@ const name = `${prefix}-tree-select`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'value',
@@ -188,7 +191,7 @@ export default uniComponent({
     multiple: 'buildTreeOptions',
   },
   mounted() {
-    this.$nextTick(() => {
+    nextTick().then(() => {
       this.getScrollIntoView('init');
     });
   },

@@ -13,8 +13,8 @@
       @visible-change="onVisibleChange"
     >
       <slot name="header" />
-      <!-- parse <include src="./template.wxml"/> -->
       <TemplateVue
+        ref="templateVue"
         :class-prefix="classPrefix"
         :custom-style="_._style([style, customStyle])"
         :is-multiple="isMultiple"
@@ -37,8 +37,8 @@
       <slot name="footer" />
     </t-popup>
     <block v-else>
-      <!-- parse <include src="./template.wxml"/> -->
       <TemplateVue
+        ref="templateVue"
         :class-prefix="classPrefix"
         :custom-style="_._style([style, customStyle])"
         :is-multiple="isMultiple"
@@ -75,7 +75,7 @@ import {
   HUE_MAX,
   DEFAULT_SYSTEM_SWATCH_COLORS,
 } from './constants';
-import { getRect, debounce } from '../common/utils';
+import { debounce, nextTick } from '../common/utils';
 import { Color, getColorObject } from './utils';
 import TemplateVue from './template.vue';
 
@@ -131,6 +131,9 @@ const genSwatchList = (prop) => {
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tPopup,
     TemplateVue,
@@ -189,7 +192,6 @@ export default uniComponent({
       handler() {
         this.setCoreStyle();
       },
-      // immediate: true,
       deep: true,
     },
     swatchColors: {
@@ -224,7 +226,9 @@ export default uniComponent({
     this.formatList =  getFormatList(props.format.default, this.color);
   },
   mounted() {
-    this.init();
+    setTimeout(() => {
+      this.init();
+    }, 33);
     this.debouncedUpdateEleRect = debounce(e => this.updateEleRect(e), 150);
   },
   beforeUnMount() {
@@ -257,15 +261,14 @@ export default uniComponent({
     },
 
     getEleReact() {
-      let saturationSelector = `.${name}__root >>> .${name}__saturation`;
-      let sliderSelector = `.${name}__root >>> .${name}__slider`;
-      // #ifndef MP
-      saturationSelector = `.${name}__saturation`;
-      sliderSelector = `.${name}__slider`;
-      // #endif
+      const saturationSelector = `.${name}__saturation`;
+      const sliderSelector = `.${name}__slider`;
+      // }
+      if (!this.$refs.templateVue) return;
+
       Promise.all([
-        getRect(this, saturationSelector),
-        getRect(this, sliderSelector),
+        this.$refs.templateVue.getRect(saturationSelector),
+        this.$refs.templateVue.getRect(sliderSelector),
       ])
         .then(([saturationRect, sliderRect]) => {
           this.panelRect = {
@@ -458,7 +461,7 @@ export default uniComponent({
     },
 
     onTouchEnd(e) {
-      this.$nextTick(() => {
+      nextTick().then(() => {
         this.handleDiffDrag(e);
       });
     },

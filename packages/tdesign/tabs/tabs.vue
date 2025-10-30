@@ -51,14 +51,13 @@
                 :class="_.cls(classPrefix + '__item-inner', [theme, ['active', currentIndex === index]])"
                 :aria-hidden="item.badgeProps.dot || item.badgeProps.count"
               >
-                <!-- parse <template v-if="item.icon" is="icon" :data="tClass: classPrefix + '__icon', ...item.icon"/> -->
                 <block
                   v-if="item.icon"
                   name="icon"
                 >
                   <t-icon
-                    :custom-style="item.icon.style || ''"
                     :t-class="classPrefix + '__icon'"
+                    :custom-style="getIconCustomStyle(item)"
                     :prefix="item.icon.prefix"
                     :name="item.icon.name"
                     :size="item.icon.size"
@@ -70,8 +69,6 @@
                   />
                 </block>
                 <block v-if="item.badgeProps">
-                  <!-- parse <template is="badge" :data="...item.badgeProps, content: item.label, tClass: _.cls(classPrefix + '__badge', [ ['disabled', item.disabled], ['active', currentIndex === index]])"/> -->
-
                   <t-badge
                     :color="item.badgeProps.color || ''"
                     :content="item.label"
@@ -88,6 +85,7 @@
                         ['active', currentIndex === index]
                       ])
                     "
+                    :custom-style="getBadgeCustomStyle(item, index)"
                     :t-class-content="item.badgeProps.tClassContent"
                     :t-class-count="item.badgeProps.tClassCount"
                   />
@@ -141,7 +139,7 @@ import { uniComponent } from '../common/src/index';
 import props from './props';
 import { prefix } from '../common/config';
 import touch from '../mixins/touch';
-import { getRect, uniqueFactory, coalesce } from '../common/utils';
+import { getRect, uniqueFactory, coalesce, nextTick } from '../common/utils';
 import { getObserver } from '../common/wechat';
 import _ from '../common/utils.wxs';
 import { ParentMixin, RELATION_MAP } from '../common/relation';
@@ -153,6 +151,9 @@ const getUniqueID = uniqueFactory('tabs');
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [{
     key: 'value',
     event: 'change',
@@ -197,7 +198,7 @@ export default uniComponent({
   },
 
   mounted() {
-    this.$nextTick(() => {
+    nextTick().then(() => {
       this.setTrack();
     });
     getRect(this, `.${name}`).then((rect) => {
@@ -236,7 +237,7 @@ export default uniComponent({
       target.dataIndex = this.children.length - 1;
       this.updateTabs();
     },
-    nnerAfterUnlinked(target) {
+    innerAfterUnlinked(target) {
       this.children = this.children.filter(item => item.index !== target.dataIndex);
       this.updateTabs(() => this.setTrack());
       this.initChildId();
@@ -267,7 +268,7 @@ export default uniComponent({
 
       this.tabs = tabs;
       if (typeof cb === 'function') {
-        setTimeout(cb);
+        setTimeout(cb, 33);
       }
 
       this.setCurrentIndexByName(this.dataValue);
@@ -301,7 +302,7 @@ export default uniComponent({
 
       setTimeout(() => {
         this.setTrack();
-      });
+      }, 33);
     },
 
     getCurrentName() {
@@ -381,9 +382,13 @@ export default uniComponent({
         }
 
         const isInit = this.previousIndex === undefined;
-        if (isInit || this.previousIndex !== currentIndex) {
+        if (isInit
+          || this.previousIndex !== currentIndex
+          || this.lastDistance !== distance
+        ) {
           this.previousIndex = currentIndex;
           this.trackOption = { lineWidth, distance, isInit };
+          this.lastDistance = distance;
         }
       } catch (err) {
         console.warn('err', err);
@@ -450,6 +455,26 @@ export default uniComponent({
         }
       }
       return -1;
+    },
+
+    getBadgeCustomStyle(item, index) {
+      if (item.disabled) {
+        return '--td-badge-content-text-color: var(--td-tab-item-disabled-color, var(--td-text-color-disabled, var(--td-font-gray-4, rgba(0, 0, 0, .26))))';
+      }
+      if (this.currentIndex === index) {
+        return '--td-badge-content-text-color: var(--td-tab-item-active-color, var(--td-brand-color, var(--td-primary-color-7, #0052d9)));';
+      }
+      return '';
+    },
+
+    getIconCustomStyle(item) {
+      return _._style([
+        {
+          fontSize: 'var(--td-tab-icon-size, 18px)',
+          marginRight: 'calc(var(--td-spacer, 8px) / 4)',
+        },
+        item.icon.style || '',
+      ]);
     },
   },
 });

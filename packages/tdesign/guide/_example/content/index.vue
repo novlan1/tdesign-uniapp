@@ -57,7 +57,7 @@
             name="arrow-up"
             size="64rpx"
             color="#fff"
-            class="icon"
+            t-class="icon"
           />
           <p class="text">
             1、自定义的图形或说明文案，用来解释或指导该功能使用。
@@ -68,12 +68,12 @@
               theme="light"
               content="跳过"
               size="extra-small"
-              class="guide-demo-button"
+              t-class="guide-demo-button"
               @click="skip"
             />
             <t-button
               v-else
-              class="guide-demo-button"
+              t-class="guide-demo-button"
               theme="light"
               content="返回"
               size="extra-small"
@@ -84,12 +84,12 @@
               theme="primary"
               content="下一步"
               size="extra-small"
-              class="guide-demo-button"
+              t-class="guide-demo-button"
               @click="next"
             />
             <t-button
               v-else
-              class="guide-demo-button"
+              t-class="guide-demo-button"
               theme="primary"
               content="完成"
               size="extra-small"
@@ -108,7 +108,7 @@
             name="arrow-up"
             size="64rpx"
             color="#fff"
-            class="icon"
+            t-class="icon"
           />
           <p class="text">
             2、自定义的图形或说明文案，用来解释或指导该功能使用。
@@ -119,12 +119,12 @@
               theme="light"
               content="跳过"
               size="extra-small"
-              class="guide-demo-button"
+              t-class="guide-demo-button"
               @click="skip"
             />
             <t-button
               v-else
-              class="guide-demo-button"
+              t-class="guide-demo-button"
               theme="light"
               content="返回"
               size="extra-small"
@@ -135,12 +135,12 @@
               theme="primary"
               content="下一步"
               size="extra-small"
-              class="guide-demo-button"
+              t-class="guide-demo-button"
               @click="next"
             />
             <t-button
               v-else
-              class="guide-demo-button"
+              t-class="guide-demo-button"
               theme="primary"
               content="完成"
               size="extra-small"
@@ -160,7 +160,7 @@
             name="arrow-up"
             size="64rpx"
             color="#fff"
-            class="icon"
+            t-class="icon"
           />
           <p class="text">
             3、自定义的图形或说明文案，用来解释或指导该功能使用。
@@ -171,12 +171,12 @@
               theme="light"
               content="跳过"
               size="extra-small"
-              class="guide-demo-button"
+              t-class="guide-demo-button"
               @click="skip"
             />
             <t-button
               v-else
-              class="guide-demo-button"
+              t-class="guide-demo-button"
               theme="light"
               content="返回"
               size="extra-small"
@@ -187,12 +187,12 @@
               theme="primary"
               content="下一步"
               size="extra-small"
-              class="guide-demo-button"
+              t-class="guide-demo-button"
               @click="next"
             />
             <t-button
               v-else
-              class="guide-demo-button"
+              t-class="guide-demo-button"
               theme="primary"
               content="完成"
               size="extra-small"
@@ -213,6 +213,9 @@ import { getRect } from 'tdesign-uniapp/common/utils';
 
 
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tGuide,
     tInput,
@@ -307,7 +310,7 @@ export default {
     width: 480rpx;
 }
 
-.content .icon {
+.content :deep(.icon) {
     font-weight: 700;
     width: 64rpx;
 }
@@ -326,7 +329,7 @@ export default {
     margin-top: 32rpx;
 }
 
-.content .footer .guide-demo-button + .guide-demo-button {
+.content .footer :deep(.guide-demo-button + .guide-demo-button){
     margin-left: 24rpx;
 }
 </style>

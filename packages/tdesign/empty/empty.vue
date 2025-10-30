@@ -17,14 +17,14 @@
         :src="image"
         mode="aspectFit"
       />
-      <!-- parse <template v-else-if="iconName || _.isNoEmptyObj(iconData)" is="icon" :data="tClass: classPrefix + '__icon', name: iconName, ...iconData"/> -->
       <block
         v-else-if="iconName || _.isNoEmptyObj(iconData)"
         name="icon"
       >
         <t-icon
           :custom-style="iconData.style || ''"
-          :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (iconData.activeIdx == iconData.index ? 'active ' : ' ')"
+          :t-class="iconTClass"
+          :class="iconClass"
           :prefix="iconData.prefix"
           :name="iconName || iconData.name"
           :size="iconData.size"
@@ -68,6 +68,7 @@ import props from './props';
 import { prefix } from '../common/config';
 import { setIcon } from '../common/utils';
 import _ from '../common/utils.wxs';
+import { canUseVirtualHost } from '../common/version';
 
 
 const name = `${prefix}-empty`;
@@ -75,6 +76,9 @@ const name = `${prefix}-empty`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-description`,
@@ -98,6 +102,18 @@ export default uniComponent({
 
       _,
     };
+  },
+  computed: {
+    iconTClass() {
+      return canUseVirtualHost() ? this.iconRealClass : '';
+    },
+    iconClass() {
+      return !canUseVirtualHost() ? this.iconRealClass : '';
+    },
+    iconRealClass() {
+      const { classPrefix, iconData } = this;
+      return `${classPrefix}__icon ${classPrefix}__icon--${iconData.activeIdx == iconData.index ? 'active ' : ' '}`;
+    },
   },
   watch: {
     icon: {

@@ -2,28 +2,28 @@
   <view>
     <view class="block">
       <t-tag
-        class="margin-16"
+        :custom-style="mr16V"
         size="extra-large"
         variant="light"
       >
         加大尺寸
       </t-tag>
       <t-tag
-        class="margin-16"
+        :custom-style="mr16V"
         size="large"
         variant="light"
       >
         大尺寸
       </t-tag>
       <t-tag
-        class="margin-16"
+        :custom-style="mr16V"
         size="medium"
         variant="light"
       >
         中尺寸
       </t-tag>
       <t-tag
-        class="margin-16"
+        custom-style="vertical-align: top;"
         size="small"
         variant="light"
       >
@@ -33,7 +33,7 @@
 
     <view class="block">
       <t-tag
-        class="margin-8"
+        :custom-style="mr8V"
         size="extra-large"
         variant="light"
         closable
@@ -41,7 +41,7 @@
         加大尺寸
       </t-tag>
       <t-tag
-        class="margin-8"
+        :custom-style="mr8V"
         size="large"
         variant="light"
         closable
@@ -49,7 +49,7 @@
         大尺寸
       </t-tag>
       <t-tag
-        class="margin-8"
+        :custom-style="mr8V"
         size="medium"
         variant="light"
         closable
@@ -57,10 +57,10 @@
         中尺寸
       </t-tag>
       <t-tag
-        class="margin-8"
         size="small"
         variant="light"
         closable
+        custom-style="vertical-align: top;"
       >
         小尺寸
       </t-tag>
@@ -71,11 +71,17 @@
 <script>
 import tTag from 'tdesign-uniapp/tag/tag.vue';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tTag,
   },
   data() {
-    return {};
+    return {
+      mr16V: 'margin-right: 16px;vertical-align: top;',
+      mr8V: 'margin-right: 8px;vertical-align: top;',
+    };
   },
   created() {},
   methods: {},
@@ -88,18 +94,5 @@ export default {
 
 .block + .block {
     margin-top: 32rpx;
-}
-
-.block .margin-16,
-.block .margin-8 {
-    vertical-align: top;
-}
-
-.block .margin-16:not(:last-child) {
-    margin-right: 32rpx;
-}
-
-.block .margin-8:not(:last-child) {
-    margin-right: 10rpx;
 }
 </style>

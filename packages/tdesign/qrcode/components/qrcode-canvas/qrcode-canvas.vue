@@ -21,9 +21,13 @@ import { DEFAULT_MINVERSION, excavateModules, isSupportPath2d, generatePath } fr
 import { uniComponent } from '../../../common/src/index';
 import { prefix } from '../../../common/config';
 import { loadImage } from '../../../common/canvas/index';
+import { getWindowInfo, nextTick } from '../../../common/utils';
 
 export default uniComponent({
   name: 'QrcodeCanvas',
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
   ],
@@ -97,7 +101,7 @@ export default uniComponent({
   },
   methods: {
     async initCanvas() {
-      await this.$nextTick();
+      await nextTick();
 
       // #ifndef H5
       this.initMiniProgramCanvas();
@@ -174,7 +178,7 @@ export default uniComponent({
             // 小程序环境也添加 willReadFrequently 属性
             try {
               let ctx;
-              // #ifdef MP-WEIXIN
+              // #ifdef MP
               ctx = canvas.getContext('2d', { willReadFrequently: true });
               // #endif
               if (!ctx) {
@@ -227,7 +231,7 @@ export default uniComponent({
         // #ifndef H5
         // 小程序环境：获取真实的设备像素比并设置 Canvas 尺寸
         // 使用 getWindowInfo 替代已废弃的 getSystemInfoSync
-        const windowInfo = uni.getWindowInfo();
+        const windowInfo = getWindowInfo();
         pixelRatio = windowInfo.pixelRatio || 1;
         canvasSize = this.size * pixelRatio;
         canvas.width = canvasSize;

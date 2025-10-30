@@ -14,7 +14,7 @@
       v-model:visible="visible"
       :placement="placement"
       :items="sidebar"
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       :custom-navbar-height="gCustomNavbarHeight"
       @overlay-click="overlayClick"
       @item-click="itemClick"

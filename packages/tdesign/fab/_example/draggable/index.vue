@@ -4,7 +4,7 @@
       icon="gesture-press"
       text="拖我"
       aria-label="增加"
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       draggable
       :y-bounds="[0, 32]"
       @click="handleClick"

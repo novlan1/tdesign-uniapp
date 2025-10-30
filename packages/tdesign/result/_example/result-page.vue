@@ -1,10 +1,12 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="Result Page"
       left-arrow
     />
+    <!-- #endif -->
     <view class="page">
       <view class="demo-section__wrapper">
         <t-result

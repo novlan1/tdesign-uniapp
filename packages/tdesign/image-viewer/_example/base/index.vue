@@ -14,7 +14,7 @@
       ref="t-toast"
     />
     <t-image-viewer
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       :custom-navbar-height="gCustomNavbarHeight"
       :delete-btn="deleteBtn"
       :close-btn="closeBtn"

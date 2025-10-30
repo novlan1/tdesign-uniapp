@@ -33,7 +33,6 @@
         :class="classPrefix + '__info ' + tClassLabel"
         :aria-hidden="true"
       >
-        <!-- parse <template v-if="_.includes(STATUS, status)" is="icon" :data="tClass: classPrefix + '__icon', size:'44rpx', name: LINE_STATUS_ICON[status]"></template> -->
         <block
           v-if="_.includes(STATUS, status)"
           name="icon"
@@ -129,7 +128,6 @@
             :class="classPrefix + '__info ' + tClassLabel"
             :aria-hidden="true"
           >
-            <!-- parse <template v-if="_.includes(STATUS, status)" is="icon" :data="tClass: classPrefix + '__icon', size:'96rpx', name: CIRCLE_STATUS_ICON[status]"></template> -->
             <block
               v-if="_.includes(STATUS, status)"
               name="icon"
@@ -178,6 +176,9 @@ const name = `${prefix}-progress`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-bar`,

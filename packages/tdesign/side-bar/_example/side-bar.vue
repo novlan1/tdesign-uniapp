@@ -1,10 +1,12 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="SideBar"
       left-arrow
     />
+    <!-- #endif -->
 
     <t-demo-header
       title="SideBar 侧边栏"

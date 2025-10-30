@@ -29,7 +29,6 @@
           :offset="badgeProps.offset || [0, 0]"
           :t-class-count="prefix + '-badge-class'"
         >
-          <!-- parse <template is="icon" :data="size: iconOnly ? 24 : 20, ..._icon"/> -->
           <block
             v-if="_icon"
             name="icon"
@@ -50,7 +49,6 @@
           <!-- 避免被 badge 组件识别为空，t-badge__content:not(:empty) -->
           <view v-else />
         </t-badge>
-        <!-- parse <template v-else-if="(!!icon)" is="icon" :data="ariaHidden: !iconOnly, size: iconOnly ? 24 : 20, ..._icon"/> -->
         <block
           v-else-if="!!icon"
           name="icon"
@@ -124,6 +122,10 @@ const classPrefix = `${prefix}-tab-bar-item`;
 
 export default uniComponent({
   name: classPrefix,
+  options: {
+    styleIsolation: 'shared',
+    virtualHost: true,
+  },
   externalClasses: [`${prefix}-class`],
   mixins: [ChildrenMixin(RELATION_MAP.TabBarItem)],
   components: {

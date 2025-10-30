@@ -23,13 +23,12 @@
       <view :class="classPrefix + '__prefix'" />
       <view :class="classPrefix + '__suffix'" />
     </block>
-    <!-- parse <template v-if="_icon" is="icon" :data="tClass: classPrefix + '__icon', ..._icon"/> -->
     <block
       v-if="_icon"
       name="icon"
     >
       <t-icon
-        :custom-style="_icon.style || ''"
+        :custom-style="iconCustomStyle"
         :t-class="classPrefix + '__icon'"
         :prefix="_icon.prefix"
         :name="_icon.name"
@@ -42,7 +41,6 @@
       />
     </block>
     <block v-if="badgeProps">
-      <!-- parse <template is="badge" :data="...badgeProps, content: label"/> -->
       <t-badge
         :color="badgeProps.color"
         :content="label"
@@ -78,6 +76,9 @@ const name = `${prefix}-side-bar-item`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
   ],
@@ -102,6 +103,17 @@ export default uniComponent({
       isNext: false,
       _,
     };
+  },
+  computed: {
+    iconCustomStyle() {
+      return _._style([
+        {
+          fontSize: 'var(--td-side-bar-icon-size, 20px)',
+          marginRight: '2px',
+        },
+        this._icon.style || '',
+      ]);
+    },
   },
   watch: {
     icon: {

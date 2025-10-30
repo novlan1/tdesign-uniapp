@@ -14,7 +14,7 @@
 
     <view class="message-example--base">
       <t-button
-        t-class="external-class"
+        custom-style="margin-bottom: 16px;"
         theme="primary"
         variant="outline"
         size="large"
@@ -25,7 +25,7 @@
       </t-button>
 
       <t-button
-        t-class="external-class"
+        custom-style="margin-bottom: 16px;"
         theme="primary"
         variant="outline"
         size="large"
@@ -36,7 +36,7 @@
       </t-button>
 
       <t-button
-        t-class="external-class"
+        custom-style="margin-bottom: 16px;"
         theme="primary"
         variant="outline"
         size="large"
@@ -47,7 +47,7 @@
       </t-button>
 
       <t-button
-        t-class="external-class"
+        custom-style="margin-bottom: 16px;"
         theme="primary"
         variant="outline"
         size="large"
@@ -58,7 +58,7 @@
       </t-button>
 
       <t-button
-        t-class="external-class"
+        custom-style="margin-bottom: 16px;"
         theme="primary"
         variant="outline"
         size="large"
@@ -69,7 +69,7 @@
       </t-button>
 
       <t-button
-        t-class="external-class"
+        custom-style="margin-bottom: 16px;"
         theme="primary"
         variant="outline"
         size="large"
@@ -179,12 +179,8 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .message-example--base {
     margin: 32rpx;
-}
-
-.external-class {
-    margin: 0 0 32rpx 0;
 }
 </style>

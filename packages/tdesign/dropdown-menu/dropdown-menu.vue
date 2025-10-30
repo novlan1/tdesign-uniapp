@@ -2,7 +2,7 @@
   <view
     id="t-bar"
     :style="_._style([style, customStyle])"
-    :class="classPrefix + ' class ' + prefix + '-class'"
+    :class="classPrefix + ' class ' + tClass"
     @touchmove.stop.prevent="parseEventDynamicCode($event, activeIdx === -1 ? '' : 'noop')"
   >
     <view
@@ -16,8 +16,7 @@
           [index, true]
         ]) +
           ' ' +
-          prefix +
-          '-class-item'
+          tClassItem
       "
       :aria-disabled="item.disabled"
       aria-role="button"
@@ -25,18 +24,18 @@
       aria-haspopup="menu"
       @click="handleToggle(index)"
     >
-      <view :class="classPrefix + '__title ' + prefix + '-class-label'">
+      <view :class="classPrefix + '__title ' + tClassLabel">
         {{ item.label }}
       </view>
 
-      <!-- parse <template is="icon" :data="..._arrowIcon, ariaHidden: true, tClass: classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"/> -->
       <block
         v-if="_arrowIcon"
         name="icon"
       >
         <t-icon
           :custom-style="_arrowIcon.style || ''"
-          :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (activeIdx == index ? 'active ' : ' ') + prefix + '-class-icon'"
+          :t-class="getIconTClass(index)"
+          :class="getIconClass(index)"
           :prefix="_arrowIcon.prefix"
           :name="_arrowIcon.name"
           :size="_arrowIcon.size"
@@ -60,6 +59,7 @@ import { calcIcon } from '../common/utils';
 import _ from '../common/utils.wxs';
 import { ParentMixin, RELATION_MAP } from '../common/relation';
 import { parseEventDynamicCode } from '../common/event/dynamic';
+import { canUseVirtualHost } from '../common/version';
 
 
 const name = `${prefix}-dropdown-menu`;
@@ -67,6 +67,9 @@ const name = `${prefix}-dropdown-menu`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-item`,
@@ -110,6 +113,16 @@ export default uniComponent({
     this.getAllItems();
   },
   methods: {
+    getIconTClass(index) {
+      return canUseVirtualHost() ? this.getIconRealClass(index) : '';
+    },
+    getIconClass(index) {
+      return !canUseVirtualHost() ? this.getIconRealClass(index) : '';
+    },
+    getIconRealClass(index) {
+      const { classPrefix, activeIdx, tClassIcon } = this;
+      return `${classPrefix}__icon ${classPrefix}__icon--${activeIdx == index ? 'active ' : ' '}${tClassIcon}`;
+    },
     parseEventDynamicCode,
     toggle(index) {
       const { activeIdx, duration } = this;

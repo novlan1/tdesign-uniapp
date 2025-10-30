@@ -26,6 +26,7 @@
       :borderless="borderless"
       :readonly="item.readonly || false"
       :placement="item.placement || 'left'"
+      :relation-key="relationKey"
       @change="({checked}) => handleInnerChildChange($event, { item, checked })"
     />
   </view>
@@ -46,9 +47,7 @@ const name = `${prefix}-checkbox-group`;
 export default uniComponent({
   name,
   options: {
-    externalClasses: [
-      `${prefix}-class`,
-    ],
+    styleIsolation: 'shared',
   },
   controlledProps: [
     {
@@ -120,7 +119,9 @@ export default uniComponent({
     this.getChildren()?.forEach((item) => {
       item.setDisabled(this.disabled);
     });
-    this.updateChildren();
+    setTimeout(() => {
+      this.updateChildren();
+    }, 33);
   },
   methods: {
     getChildren() {
@@ -149,12 +150,14 @@ export default uniComponent({
       }
     },
 
-    updateValue({ trigger, value, checked, checkAll, item, indeterminate }) {
+    updateValue({ validChildren, trigger, value, checked, checkAll, item, indeterminate }) {
       let { dataValue: newValue } = this;
       const { max } = this;
-      const keySet = new Set(this.getChildren().map(item => item.value));
 
-      newValue = newValue.filter(value => keySet.has(value));
+      if (validChildren !== false) {
+        const keySet = new Set(this.getChildren().map(item => item.value));
+        newValue = newValue.filter(value => keySet.has(value));
+      }
 
       if (max && checked && newValue.length === max) return;
 

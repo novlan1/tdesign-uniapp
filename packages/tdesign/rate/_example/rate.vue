@@ -1,9 +1,11 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="Rate"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo">
       <t-demo-header
         title="Rate 评分"
@@ -64,15 +66,15 @@
 
 <script lang="ts">
 
-import BaseDemo from './base';
-import custom from './custom';
-import customPrefix from './custom-prefix';
-import special from './special';
-import count from './count';
-import action from './action';
-import showText from './show-text';
-import color from './color';
-import size from './size';
+import BaseDemo from './base/index.vue';
+import custom from './custom/index.vue';
+import customPrefix from './custom-prefix/index.vue';
+import special from './special/index.vue';
+import count from './count/index.vue';
+import action from './action/index.vue';
+import showText from './show-text/index.vue';
+import color from './color/index.vue';
+import size from './size/index.vue';
 export default {
   components: {
     BaseDemo,

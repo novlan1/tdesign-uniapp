@@ -4,7 +4,7 @@
       t-class="external-class"
       label="标签文字"
       placeholder="设置最大字符个数，一个汉字表示两个字符"
-      maxcharacter="200"
+      :maxcharacter="200"
       :disable-default-padding="true"
       indicator
     />

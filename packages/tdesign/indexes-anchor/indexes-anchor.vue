@@ -34,6 +34,9 @@ const name = `${prefix}-indexes-anchor`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
   ],

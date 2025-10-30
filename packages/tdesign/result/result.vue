@@ -16,7 +16,6 @@
         :src="image"
         mode="aspectFit"
       />
-      <!-- parse <template v-else-if="_icon" is="icon" :data="tClass: classPrefix + '__icon', ..._icon"/> -->
       <block
         v-else-if="_icon"
         name="icon"
@@ -81,6 +80,9 @@ const THEME_ICON = {
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-image`,

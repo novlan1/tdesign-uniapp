@@ -1,10 +1,12 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="Icon"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo">
       <t-demo-header
         title="Icon 图标"
@@ -24,9 +26,9 @@
 </template>
 
 <script lang="ts">
-import baseComp from './base';
-import custom from './custom';
-import iconImage from './iconImage';
+import baseComp from './base/index.vue';
+import custom from './custom/index.vue';
+import iconImage from './iconImage/index.vue';
 export default {
   components: {
     baseComp,

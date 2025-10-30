@@ -1,10 +1,12 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       class="demo-navbar"
       title="BackTop"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo">
       <t-demo-header
         title="BackTop 返回顶部"
@@ -46,42 +48,42 @@
         <view class="container-flex">
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
           <t-skeleton
             :row-col="rowCol"
-            class="skeleton-item"
+            t-class="skeleton-item"
             loading
           />
         </view>

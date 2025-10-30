@@ -2,7 +2,7 @@
   <view>
     <t-popup
       :visible="visible"
-      using-custom-navbar
+      :using-custom-navbar="!isMPAlipay"
       :placement="cur.value || 'top'"
       @visible-change="onVisibleChange"
     >
@@ -19,7 +19,7 @@
       variant="outline"
       theme="primary"
       :data-item="item"
-      t-class="wrapper"
+      :custom-style="index === item.length - 1 ? '' : 'margin-bottom: 16px;'"
       @click="handlePopup($event, { item })"
     >
       {{ item.text }}
@@ -109,13 +109,5 @@ export default {
 .block--center {
     width: 240px;
     height: 240px;
-}
-
-.wrapper {
-    margin-bottom: 32rpx;
-}
-
-.wrapper:last-child {
-    margin-bottom: 0;
 }
 </style>

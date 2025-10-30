@@ -107,6 +107,9 @@ const defaultLocaleText = {
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   controlledProps: [
     {
       key: 'value',

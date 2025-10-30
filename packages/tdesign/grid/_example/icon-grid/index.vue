@@ -1,6 +1,6 @@
 <template>
-  <view>
-    <t-grid class="block">
+  <view class="block">
+    <t-grid>
       <t-grid-item
         text="分享"
         image="slot"

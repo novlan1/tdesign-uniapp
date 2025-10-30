@@ -57,6 +57,7 @@
 
   &__scroll {
     max-height: @dropdown-body-max-height;
+    width: 100%;
   }
 
   &__footer {
@@ -66,11 +67,11 @@
     padding: 32rpx;
     .border(top, @component-border);
 
-    &-btn {
+    :deep(&-btn) {
       flex: 1;
     }
 
-    &-btn + &-btn {
+    :deep(&-btn + &-btn) {
       margin-left: 32rpx;
     }
   }
@@ -82,30 +83,30 @@
     }
   }
 
-  &__radio,
-  &__checkbox {
-    width: 100%;
-    overflow: scroll;
-    box-sizing: border-box;
+  // :deep(&__radio),
+  // :deep(&__checkbox) {
+  //   width: 100%;
+  //   overflow: scroll;
+  //   box-sizing: border-box;
 
-    &-group {
-      display: grid;
-      grid-gap: 24rpx;
-    }
-  }
+  //   &-group {
+  //     display: grid;
+  //     grid-gap: 24rpx;
+  //   }
+  // }
 
-  &__radio {
-    &-group {
-      display: grid;
-      grid-gap: 0rpx;
-    }
-  }
+  // :deep(&__radio) {
+  //   &-group {
+  //     display: grid;
+  //     grid-gap: 0rpx;
+  //   }
+  // }
 
-  &__checkbox {
-    &-group {
-      padding: 32rpx;
-    }
-  }
+  // :deep(&__checkbox) {
+  //   &-group {
+  //     padding: 32rpx;
+  //   }
+  // }
 
   /** 树形结构 */
   &__tree {

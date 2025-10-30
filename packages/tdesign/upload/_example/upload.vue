@@ -1,9 +1,11 @@
 <template>
   <view>
+    <!-- #ifndef MP-ALIPAY -->
     <t-navbar
       title="Upload"
       left-arrow
     />
+    <!-- #endif -->
     <view class="demo">
       <t-demo-header
         title="Upload 上传"
@@ -84,11 +86,11 @@
 
 <script lang="ts">
 
-import single from './single';
-import multiple from './multiple';
-import status from './status';
-import messageFile from './messageFile';
-import drag from './drag';
+import single from './single/index.vue';
+import multiple from './multiple/index.vue';
+import status from './status/index.vue';
+import messageFile from './messageFile/index.vue';
+import drag from './drag/index.vue';
 export default {
   components: {
     single,

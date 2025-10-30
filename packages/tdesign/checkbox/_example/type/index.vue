@@ -4,6 +4,7 @@
       label="多选"
       icon="line"
       default-checked
+      relation-key="-1"
     />
 
     <view
@@ -14,6 +15,7 @@
       label="多选"
       icon="rectangle"
       default-checked
+      relation-key="-1"
     />
 
     <view
@@ -24,6 +26,7 @@
       value="checkbox1"
       label="图片图标"
       :icon="[activeImage, inActiveImage]"
+      relation-key="-1"
     />
   </view>
 </template>

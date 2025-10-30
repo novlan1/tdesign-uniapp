@@ -18,6 +18,7 @@
         >
           <t-icon
             name="chevron-left"
+            :custom-style="leftArrowCustomStyle"
             :t-class="classPrefix + '__left-arrow'"
           />
         </view>
@@ -59,6 +60,9 @@ const BASE_MENU_RECT = {
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [
     `${prefix}-class`,
     `${prefix}-class-placeholder`,
@@ -100,6 +104,11 @@ export default uniComponent({
       visibleClass: '',
 
     };
+  },
+  computed: {
+    leftArrowCustomStyle() {
+      return 'font-size: var(--td-navbar-left-arrow-size, 24px);';
+    },
   },
   watch: {
     visible(visible) {

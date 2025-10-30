@@ -4,6 +4,7 @@
       allow-uncheck
       :value="current"
       :options="options"
+      :relation-key="relationKey"
       @change="onChange"
     />
   </view>
@@ -18,6 +19,7 @@ export default {
   },
   data() {
     return {
+      relationKey: `${Math.random()}`,
       current: 1,
       options: [
         {

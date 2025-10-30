@@ -1,7 +1,7 @@
 import { loadImage } from '../../common/canvas/index';
+import { getWindowInfo } from '../../common/utils';
 
-
-const ratio = uni.getWindowInfo().pixelRatio || 1;
+const ratio = getWindowInfo().pixelRatio || 1;
 
 // 元素中心为旋转点执行旋转
 const drawRotate = (
@@ -62,7 +62,7 @@ export default async function generateBase64Url(
 
   let ctx;
 
-  // #ifdef MP-WEIXIN || H5
+  // #ifdef MP || H5
   ctx = canvas.getContext('2d', { willReadFrequently: true });
   // #endif
 
@@ -272,7 +272,7 @@ export default async function generateBase64Url(
 export function exportCanvasImage(canvas, canvasId) {
   return new Promise((resolve, reject) => {
     let parsed = false;
-    // #ifdef H5 || MP-WEIXIN
+    // #ifdef H5 || MP
     resolve(canvas.toDataURL('image/png'));
     parsed = true;
     // #endif
@@ -290,10 +290,10 @@ export function exportCanvasImage(canvas, canvasId) {
         }
 
         uni.canvasToTempFilePath({
-          // #ifdef MP-WEIXIN
+          // #ifdef MP
           canvas: res[0].node,
           // #endif
-          // #ifndef MP-WEIXIN
+          // #ifndef MP
           canvasId,
           // #endif
           success: res => resolve(res.tempFilePath),

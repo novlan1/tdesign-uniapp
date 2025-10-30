@@ -24,6 +24,9 @@ const name = `${prefix}-collapse`;
 
 export default uniComponent({
   name,
+  options: {
+    styleIsolation: 'shared',
+  },
   externalClasses: [`${prefix}-class`],
   mixins: [ParentMixin(RELATION_MAP.CollapsePanel)],
   props: {

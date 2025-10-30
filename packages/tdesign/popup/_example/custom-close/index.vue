@@ -7,8 +7,8 @@
     >
       <view class="block">
         <t-icon
-          t-class="close-btn"
           name="close-circle"
+          :custom-style="closeIconCustomStyle"
           size="64rpx"
           color="#fff"
           @click="onClose"
@@ -21,6 +21,7 @@
       size="large"
       variant="outline"
       theme="primary"
+      custom-style="display: block; margin-top: 32rpx"
       @click="handlePopup"
     >
       居中弹出层-带自定义关闭按钮
@@ -32,6 +33,8 @@
 import tPopup from 'tdesign-uniapp/popup/popup.vue';
 import tIcon from 'tdesign-uniapp/icon/icon.vue';
 import tButton from 'tdesign-uniapp/button/button.vue';
+import _ from 'tdesign-uniapp/common/utils.wxs';
+
 export default {
   options: {
     styleIsolation: 'shared',
@@ -69,6 +72,13 @@ export default {
       ],
 
       visible: false,
+
+      closeIconCustomStyle: _._style({
+        position: 'absolute',
+        left: '50%',
+        marginLeft: '-16px',
+        bottom: 'calc(-1 * (24px + 32px))',
+      }),
     };
   },
   created() {},
@@ -92,12 +102,5 @@ export default {
     height: 240px;
     background: var(--td-bg-color-container);
     border-radius: 16rpx;
-}
-
-:deep(.close-btn) {
-    position: absolute;
-    left: 50%;
-    margin-left: -32rpx;
-    bottom: calc(-1 * (48rpx + 64rpx));
 }
 </style>
