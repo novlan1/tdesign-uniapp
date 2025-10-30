@@ -15,7 +15,7 @@
       <view class="name">
         {{ name }}
       </view>
-      <t-icon
+      <TIcon
         :name="icon"
         size="48rpx"
         color="#A6A6A6"
@@ -36,7 +36,7 @@
         @click="() => clickChild(item)"
       >
         {{ item.name }} {{ item.label }}
-        <t-icon
+        <TIcon
           name="chevron-right"
           color="var(--td-text-color-placeholder)"
           aria-hidden
@@ -47,6 +47,7 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue';
+import TIcon from 'tdesign-uniapp/icon/icon.vue';
 
 const itemHeight = 56 * 2;
 const childBoxHeight = ref(0);

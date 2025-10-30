@@ -1,13 +1,13 @@
 <template>
   <view>
-    <t-action-sheet
+    <TActionSheet
       id="t-action-sheet"
       ref="t-action-sheet"
       :using-custom-navbar="!isMPAlipay"
       @selected="handleSelected($event, { tagId: 't-action-sheet' })"
     />
 
-    <t-button
+    <TButton
       size="large"
       variant="outline"
       block
@@ -15,15 +15,19 @@
       @click="handleAction"
     >
       左对齐列表型
-    </t-button>
+    </TButton>
   </view>
 </template>
 
 <script>
 import { default as ActionSheet, ActionSheetTheme } from 'tdesign-uniapp/action-sheet/index';
+import TActionSheet from 'tdesign-uniapp/action-sheet/action-sheet.vue';
+import TButton from 'tdesign-uniapp/button/button.vue';
 
 export default {
   components: {
+    TActionSheet,
+    TButton,
   },
   data() {
     return {};

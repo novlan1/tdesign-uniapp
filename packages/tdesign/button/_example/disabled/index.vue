@@ -58,6 +58,7 @@
 
 <script>
 import tButton from 'tdesign-uniapp/button/button.vue';
+
 export default {
   components: {
     tButton,

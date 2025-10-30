@@ -1,28 +1,32 @@
 <template>
   <view>
-    <t-dropdown-menu
-      :relation-key="relationKey"
-    >
-      <t-dropdown-item
+    <TDropdownMenu relation-key="relationKey">
+      <TDropdownItem
         :options="product.options"
         placement="right"
         :value="product.value"
         :relation-key="relationKey"
         @change="onChange"
       />
-      <t-dropdown-item
+      <TDropdownItem
         :options="sorter.options"
         placement="right"
         :default-value="sorter.value"
         :relation-key="relationKey"
       />
-    </t-dropdown-menu>
+    </TDropdownMenu>
   </view>
 </template>
 
 <script>
+import TDropdownMenu from 'tdesign-uniapp/dropdown-menu/dropdown-menu.vue';
+import TDropdownItem from 'tdesign-uniapp/dropdown-item/dropdown-item.vue';
+
+
 export default {
   components: {
+    TDropdownMenu,
+    TDropdownItem,
   },
   data() {
     return {

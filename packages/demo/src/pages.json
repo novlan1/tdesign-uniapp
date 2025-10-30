@@ -466,10 +466,5 @@
         "pathName": "pages-more/toast/toast"
       }
     ]
-  },
-  "easycom": {
-    "custom": {
-      "^t-(.*)": "tdesign-uniapp/$1/$1.vue"
-    }
   }
 }

@@ -1,13 +1,13 @@
 <template>
   <view>
-    <t-action-sheet
+    <TActionSheet
       id="t-action-sheet"
       ref="t-action-sheet"
       :using-custom-navbar="!isMPAlipay"
       @selected="handleSelected($event, { tagId: 't-action-sheet' })"
     />
 
-    <t-button
+    <TButton
       size="large"
       variant="outline"
       block
@@ -15,9 +15,9 @@
       @click="handleAction"
     >
       常规宫格型
-    </t-button>
+    </TButton>
 
-    <t-button
+    <TButton
       size="large"
       variant="outline"
       block
@@ -25,12 +25,16 @@
       @click="handleMultiAction"
     >
       带翻页宫格型
-    </t-button>
+    </TButton>
   </view>
 </template>
 
 <script>
 import ActionSheet, { ActionSheetTheme } from 'tdesign-uniapp/action-sheet/index';
+import TActionSheet from 'tdesign-uniapp/action-sheet/action-sheet.vue';
+import TButton from 'tdesign-uniapp/button/button.vue';
+
+
 const firstGrid = [
   {
     label: '微信',
@@ -67,6 +71,8 @@ const firstGrid = [
 ];
 export default {
   components: {
+    TActionSheet,
+    TButton,
   },
   data() {
     return {};

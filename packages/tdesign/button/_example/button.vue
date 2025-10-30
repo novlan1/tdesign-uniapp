@@ -70,6 +70,8 @@ import ghostBtn from './ghost-btn/index.vue';
 import shape from './shape/index.vue';
 import theme from './theme/index.vue';
 import disabled from './disabled/index.vue';
+
+
 export default {
   options: {
     styleIsolation: 'shared',

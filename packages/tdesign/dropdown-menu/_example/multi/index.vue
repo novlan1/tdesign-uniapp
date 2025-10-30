@@ -1,7 +1,7 @@
 <template>
   <view>
-    <t-dropdown-menu :relation-key="relationKey">
-      <t-dropdown-item
+    <TDropdownMenu relation-key="relationKey">
+      <TDropdownItem
         label="单列多选"
         :options="multipleSelect.options"
         :value="multipleSelect.value"
@@ -9,7 +9,7 @@
         :relation-key="relationKey"
         @change="handleMultipleSelect"
       />
-      <t-dropdown-item
+      <TDropdownItem
         label="双列多选"
         options-columns="2"
         :options="doubleColumnsOptions"
@@ -17,7 +17,7 @@
         multiple
         :relation-key="relationKey"
       />
-      <t-dropdown-item
+      <TDropdownItem
         label="三列多选"
         options-columns="3"
         :options="tripleColumnsOptions"
@@ -25,11 +25,15 @@
         multiple
         :relation-key="relationKey"
       />
-    </t-dropdown-menu>
+    </TDropdownMenu>
   </view>
 </template>
 
 <script>
+import TDropdownMenu from 'tdesign-uniapp/dropdown-menu/dropdown-menu.vue';
+import TDropdownItem from 'tdesign-uniapp/dropdown-item/dropdown-item.vue';
+
+
 const chineseNumber = '一二三四五六七八九十'.split('');
 const singleSelectOptions = new Array(8).fill(null)
   .map((_, i) => ({
@@ -65,6 +69,8 @@ tripleColumnsOptions.splice(8, 0, {
 });
 export default {
   components: {
+    TDropdownMenu,
+    TDropdownItem,
   },
   data() {
     return {

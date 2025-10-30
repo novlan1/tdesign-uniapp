@@ -18,7 +18,7 @@
       desc="侧边导航用法"
       padding
     >
-      <t-button
+      <TButton
         variant="outline"
         theme="primary"
         size="large"
@@ -27,9 +27,9 @@
         @click="toNavigation($event, { target: 'base' })"
       >
         锚点用法
-      </t-button>
+      </TButton>
 
-      <t-button
+      <TButton
         variant="outline"
         theme="primary"
         size="large"
@@ -38,14 +38,14 @@
         @click="toNavigation($event, { target: 'switch' })"
       >
         切页用法
-      </t-button>
+      </TButton>
     </t-demo>
 
     <t-demo
       desc="带图标侧边导航"
       padding
     >
-      <t-button
+      <TButton
         variant="outline"
         theme="primary"
         size="large"
@@ -54,7 +54,7 @@
         @click="toNavigation($event, { target: 'with-icon' })"
       >
         带图标侧边导航
-      </t-button>
+      </TButton>
     </t-demo>
 
     <t-demo
@@ -62,7 +62,7 @@
       desc="侧边导航样式"
       padding
     >
-      <t-button
+      <TButton
         variant="outline"
         theme="primary"
         size="large"
@@ -71,13 +71,18 @@
         @click="toNavigation($event, { target: 'custom' })"
       >
         自定义样式
-      </t-button>
+      </TButton>
     </t-demo>
   </view>
 </template>
 
 <script>
+import TButton from 'tdesign-uniapp/button/button.vue';
+
 export default {
+  components: {
+    TButton,
+  },
   data() {
     return {};
   },

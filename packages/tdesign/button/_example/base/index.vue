@@ -1,59 +1,60 @@
 <template>
   <view>
     <view class="button-example">
-      <t-button
+      <TButton
         theme="primary"
         size="large"
         custom-style="margin-right: 16px;"
       >
         填充按钮
-      </t-button>
-      <t-button
+      </TButton>
+      <TButton
         theme="light"
         size="large"
         custom-style="margin-right: 16px;"
       >
         填充按钮
-      </t-button>
-      <t-button
-        size="large"
-      >
+      </TButton>
+      <TButton size="large">
         填充按钮
-      </t-button>
+      </TButton>
     </view>
 
     <view class="button-example">
-      <t-button
+      <TButton
         theme="primary"
         size="large"
         variant="outline"
         custom-style="margin-right: 16px;"
       >
         描边按钮
-      </t-button>
-      <t-button
+      </TButton>
+      <TButton
         theme="primary"
         size="large"
         custom-style="margin-right: 16px;"
         variant="dashed"
       >
         虚框按钮
-      </t-button>
-      <t-button
+      </TButton>
+      <TButton
         theme="primary"
         size="large"
         variant="text"
       >
         文字按钮
-      </t-button>
+      </TButton>
     </view>
   </view>
 </template>
 
 <script>
+import TButton from 'tdesign-uniapp/button/button.vue';
+
 
 export default {
   components: {
+    TButton,
   },
   data() {
     return {};

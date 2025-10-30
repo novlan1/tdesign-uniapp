@@ -18,22 +18,22 @@
     >
       <view class="option">
         <view class="select-button-group">
-          <t-button
+          <TButton
             :theme="isActive1 ? 'light' : 'default'"
             shape="round"
             data-name="isActive1"
             @click="() => onClick()"
           >
             水平排布
-          </t-button>
-          <t-button
+          </TButton>
+          <TButton
             :theme="isActive2 ? 'light' : 'default'"
             shape="round"
             data-name="isActive2"
             @click="() => onClick()"
           >
             竖向排布
-          </t-button>
+          </TButton>
         </view>
       </view>
     </t-demo>
@@ -52,11 +52,14 @@
 
 import Horizontal from './horizontal/index.vue';
 import Vertical from './vertical/index.vue';
+import TButton from 'tdesign-uniapp/button/button.vue';
+
 
 export default {
   components: {
     Horizontal,
     Vertical,
+    TButton,
   },
   data() {
     return {
