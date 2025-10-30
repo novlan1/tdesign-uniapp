@@ -237,7 +237,7 @@ export default uniComponent({
       target.dataIndex = this.children.length - 1;
       this.updateTabs();
     },
-    nnerAfterUnlinked(target) {
+    innerAfterUnlinked(target) {
       this.children = this.children.filter(item => item.index !== target.dataIndex);
       this.updateTabs(() => this.setTrack());
       this.initChildId();
@@ -268,7 +268,7 @@ export default uniComponent({
 
       this.tabs = tabs;
       if (typeof cb === 'function') {
-        setTimeout(cb);
+        setTimeout(cb, 33);
       }
 
       this.setCurrentIndexByName(this.dataValue);
@@ -302,7 +302,7 @@ export default uniComponent({
 
       setTimeout(() => {
         this.setTrack();
-      });
+      }, 33);
     },
 
     getCurrentName() {
@@ -382,9 +382,13 @@ export default uniComponent({
         }
 
         const isInit = this.previousIndex === undefined;
-        if (isInit || this.previousIndex !== currentIndex) {
+        if (isInit
+          || this.previousIndex !== currentIndex
+          || this.lastDistance !== distance
+        ) {
           this.previousIndex = currentIndex;
           this.trackOption = { lineWidth, distance, isInit };
+          this.lastDistance = distance;
         }
       } catch (err) {
         console.warn('err', err);

@@ -1,6 +1,6 @@
 <template>
   <view>
-    <t-popup
+    <TPopup
       class="class"
       :visible="dataVisible"
       placement="bottom"
@@ -19,13 +19,15 @@
           @click="onClose"
         >
           <slot name="close-btn" />
-          <t-icon
+          <TIcon
             v-if="closeBtn"
             size="48rpx"
             name="close"
           />
         </view>
+
         <slot name="header" />
+
         <view :class="name + '__content'">
           <block v-if="steps && steps.length">
             <view
@@ -57,7 +59,7 @@
                   {{ item }}
                 </view>
 
-                <t-icon
+                <TIcon
                   name="chevron-right"
                   size="44rpx"
                   :t-class="name + '__step-arrow'"
@@ -66,29 +68,32 @@
                 />
               </view>
             </view>
-            <block v-if="theme == 'tab'">
-              <t-tabs
-                id="tabs"
-                ref="tabs"
-                :value="stepIndex"
-                :space-evenly="false"
-                @change="({value}) => onTabChange(value)"
-              >
-                <t-tab-panel
-                  v-for="(item, index) in steps"
-                  :key="index"
-                  :value="index"
-                  :label="item"
-                />
-              </t-tabs>
-            </block>
+
+            <TTabs
+              v-if="theme == 'tab'"
+              id="tabs"
+              ref="tabs"
+              :value="stepIndex"
+              :space-evenly="false"
+              @change="({value}) => onTabChange(value)"
+            >
+              <TTabPanel
+                v-for="(item, index) in steps"
+                :key="index"
+                :ref="`tab-${index}`"
+                :value="index"
+                :label="item"
+              />
+            </TTabs>
           </block>
+
           <view
             v-if="subTitles && subTitles[stepIndex]"
             :class="name + '__options-title'"
           >
             {{ subTitles[stepIndex] }}
           </view>
+
           <view
             :class="name + '__options-container'"
             :style="'width: ' + (items.length + 1) + '00vw; transform: translateX(-' + stepIndex + '00vw)'"
@@ -103,7 +108,7 @@
               :style="'height: ' + _optionsHeight + 'px'"
             >
               <view :class="'cascader-radio-group-' + index">
-                <t-radio-group
+                <TRadioGroup
                   :value="selectedValue[index]"
                   :keys="keys"
                   :options="options"
@@ -118,15 +123,15 @@
           </view>
         </view>
       </view>
-    </t-popup>
+    </TPopup>
   </view>
 </template>
 <script>
-import tIcon from '../icon/icon';
-import tPopup from '../popup/popup';
-import tTabs from '../tabs/tabs';
-import tTabPanel from '../tab-panel/tab-panel';
-import tRadioGroup from '../radio-group/radio-group';
+import TIcon from '../icon/icon';
+import TPopup from '../popup/popup';
+import TTabs from '../tabs/tabs';
+import TTabPanel from '../tab-panel/tab-panel';
+import TRadioGroup from '../radio-group/radio-group';
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
@@ -170,11 +175,11 @@ export default uniComponent({
     `${prefix}-class`,
   ],
   components: {
-    tIcon,
-    tPopup,
-    tTabs,
-    tTabPanel,
-    tRadioGroup,
+    TIcon,
+    TPopup,
+    TTabs,
+    TTabPanel,
+    TRadioGroup,
   },
   props: {
     ...props,
@@ -214,10 +219,12 @@ export default uniComponent({
     dataVisible: {
       handler(v) {
         if (v) {
-          const $tabs = this.$refs.tabs;
-          $tabs?.setTrack();
-          $tabs?.getTabHeight().then((res) => {
-            this.state.tabsHeight = res.height;
+          nextTick().then(() => {
+            const $tabs = this.$refs.tabs;
+            $tabs?.setTrack();
+            $tabs?.getTabHeight().then((res) => {
+              this.state.tabsHeight = res.height;
+            });
           });
 
           // 不能使用 this.$nextTick，在头条小程序下会报错
@@ -255,6 +262,7 @@ export default uniComponent({
         this.items = items;
         this.selectedValue = selectedValue;
         this.stepIndex = items.length - 1;
+        this.setTabParent();
       },
       immediate: true,
       deep: true,
@@ -265,6 +273,7 @@ export default uniComponent({
         const { selectedValue, steps, items } = this.genItems();
 
         this.steps = steps;
+        this.setTabParent();
         this.selectedValue = selectedValue;
         this.stepIndex = items.length - 1;
 
@@ -302,6 +311,17 @@ export default uniComponent({
 
   },
   methods: {
+    setTabParent() {
+      // #ifdef MP-TOUTIAO
+      nextTick().then(() => {
+        const tabsRef = this.$refs.tabs;
+        this.steps.forEach((_, index) => {
+          const tabRef = this.$refs[`tab-${index}`];
+          tabRef?.[0]?.setParent(tabsRef);
+        });
+      });
+      // #endif
+    },
     updateOptionsHeight(steps) {
       const { contentHeight, stepsInitHeight, stepHeight, subTitlesHeight } = this.state;
       this._optionsHeight = contentHeight - stepsInitHeight - subTitlesHeight - (steps - 1) * stepHeight;

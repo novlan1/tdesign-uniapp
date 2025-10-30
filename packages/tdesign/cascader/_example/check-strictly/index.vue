@@ -223,5 +223,6 @@ export default {
 <style>
 .confirm-btn {
     color: #0052d9;
+    font-size: 16px;
 }
 </style>

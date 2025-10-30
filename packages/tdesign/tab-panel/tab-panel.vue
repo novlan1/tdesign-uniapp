@@ -46,11 +46,29 @@ export default uniComponent({
     };
   },
   watch: {
-    'label, badgeProps, disabled, icon, panel, value, lazy'() {
-      this.update();
+    label: 'update',
+    badgeProps: {
+      handler() {
+        this.update();
+      },
+      deep: true,
     },
+    disabled: 'update',
+
+    icon: 'update',
+    panel: 'update',
+    value: 'update',
+
+    lazy: 'update',
   },
   methods: {
+    setParent(parent) {
+      this[RELATION_MAP.TabPanel] = parent;
+      if (!parent.children.includes(this)) {
+        parent.children.push(this);
+      }
+      parent.innerAfterLinked(this);
+    },
     setId(id) {
       this.id = id;
     },
@@ -61,7 +79,7 @@ export default uniComponent({
       return `${this.dataIndex}`;
     },
     update() {
-      this.$parent?.updateTabs();
+      this[RELATION_MAP.TabPanel]?.updateTabs();
     },
 
     render(active, parent) {
