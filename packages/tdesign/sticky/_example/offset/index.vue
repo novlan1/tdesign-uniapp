@@ -5,6 +5,7 @@
         size="large"
         theme="danger"
         t-class="external-class"
+        custom-style="width: 104px;margin-left: 136px;"
       >
         吸顶距离
       </t-button>
@@ -37,8 +38,8 @@ export default {
 };
 </script>
 <style scoped>
-:deep(.external-class) {
+/* :deep(.external-class) {
     width: 208rpx;
     margin-left: 272rpx;
-}
+} */
 </style>

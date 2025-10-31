@@ -8,6 +8,7 @@
         size="large"
         t-class="external-class green-button"
         hover-class="hover-class "
+        custom-style="width: 104px;margin-left: 256px;"
       >
         指定容器
       </t-button>
@@ -57,10 +58,10 @@ export default {
     background-color: var(--bg-color-demo-secondary);
 }
 
-:deep(.external-class) {
+/* :deep(.external-class) {
     width: 208rpx;
     margin-left: 512rpx;
-}
+} */
 
 .green-button {
     z-index: 0 !important;

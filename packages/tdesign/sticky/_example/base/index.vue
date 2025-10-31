@@ -5,6 +5,7 @@
         size="large"
         theme="primary"
         t-class="external-class"
+        custom-style="width: 104px"
       >
         基础吸顶
       </t-button>
@@ -37,7 +38,7 @@ export default {
 };
 </script>
 <style scoped>
-:deep(.external-class) {
+/* :deep(.external-class) {
     width: 208rpx;
-}
+} */
 </style>
