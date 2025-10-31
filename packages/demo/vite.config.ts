@@ -1,6 +1,16 @@
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import uni from '@dcloudio/vite-plugin-uni';
+import {
+  genVersionMpVitePlugin,
+} from '@plugin-light/vite-plugin-gen-version';
+
+
+const diffPlugins: any[] = [];
+if (process.env.UNI_PLATFORM !== 'h5') {
+  diffPlugins.push(genVersionMpVitePlugin());
+}
+
 // import AutoImport from 'unplugin-auto-import/vite';
 // import Components from 'unplugin-vue-components/vite';
 // import { TDesignResolver } from 'tdesign-uniapp-auto-import-resolver';
@@ -23,6 +33,7 @@ export default ({ mode }) => {
   const result = defineConfig({
     plugins: [
       uni(),
+      diffPlugins,
 
       // auto-import 有兼容性问题，可尝试打开，并去掉 pages.json 中的 easycom 配置
       // AutoImport({
