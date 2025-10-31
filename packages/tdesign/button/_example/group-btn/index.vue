@@ -5,7 +5,8 @@
       block
       size="large"
       t-class="group-btn"
-      style="flex: 1;margin-right: 16px;"
+      :custom-style="useVirtualHost ? flex1Mr16 : ''"
+      :style="!useVirtualHost ? flex1Mr16 : ''"
     >
       填充按钮
     </t-button>
@@ -14,7 +15,8 @@
       block
       size="large"
       t-class="group-btn"
-      style="flex: 1;"
+      :custom-style="useVirtualHost ? flex1 : ''"
+      :style="!useVirtualHost ? flex1 : ''"
     >
       填充按钮
     </t-button>
@@ -23,12 +25,23 @@
 
 <script>
 import tButton from 'tdesign-uniapp/button/button.vue';
+import { canUseVirtualHost } from 'tdesign-uniapp/common/version';
+
+
 export default {
   components: {
     tButton,
   },
   data() {
-    return {};
+    return {
+      flex1Mr16: 'flex: 1;margin-right: 16px;',
+      flex1: 'flex: 1;',
+    };
+  },
+  computed: {
+    useVirtualHost() {
+      return canUseVirtualHost();
+    },
   },
   created() {},
   methods: {},
