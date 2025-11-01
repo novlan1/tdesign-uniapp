@@ -54,16 +54,17 @@ export default uniComponent({
   computed: {
     canvasStyle() {
       let result = 'width: 100px; height: 100px;';
+      let shouldHide = true;
 
-      // #ifdef APP-PLUS
-      if (this.initialed) {
-        result += 'display: none;';
+      // #ifdef APP-PLUS || MP-ALIPAY
+      if (!this.initialed) {
+        shouldHide = false;
       }
       // #endif
 
-      // #ifndef APP-PLUS
-      result += 'display: none;';
-      // #endif
+      if (shouldHide) {
+        result += 'display: none;';
+      }
       return result;
     },
   },
