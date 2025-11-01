@@ -81,7 +81,8 @@
                   :t-id="actionItem.tId"
                   :custom-style="actionItem.style"
                   :block="coalesce(actionItem.block, true)"
-                  :t-class="getActionClass(classPrefix, dataButtonLayout) + ' ' + coalesce(actionItem.tClass, tClassAction)"
+                  :t-class="useVirtualHost ? getActionClass(classPrefix, dataButtonLayout, actionItem, tClassAction) : ''"
+                  :class="!useVirtualHost ? getActionClass(classPrefix, dataButtonLayout, actionItem, tClassAction) : ''"
                   :disabled="actionItem.disabled"
                   :data-type="'action'"
                   :data-extra="coalesce(actionItem.index, index)"
@@ -268,6 +269,7 @@ export default uniComponent({
 
       _confirm: null,
       _cancel: null,
+      useVirtualHost: canUseVirtualHost(),
     };
   },
   watch: {

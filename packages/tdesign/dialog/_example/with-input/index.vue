@@ -28,6 +28,7 @@
           clearable
           placeholder="输入12文案"
           placeholder-class="placeholder"
+          :custom-style="inputStyle"
         />
       </template>
     </t-dialog>
@@ -58,6 +59,7 @@
         <t-input
           borderless
           class="dialog-input"
+          :custom-style="inputStyle"
           clearable
           placeholder="输入12文案"
           placeholder-class="placeholder"
@@ -72,6 +74,9 @@ import tButton from 'tdesign-uniapp/button/button.vue';
 import tInput from 'tdesign-uniapp/input/input.vue';
 import tDialog from 'tdesign-uniapp/dialog/dialog.vue';
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tButton,
     tInput,
@@ -82,6 +87,8 @@ export default {
       dialogKey: '',
       showWithInput: false,
       showTextAndTitleWithInput: false,
+
+      inputStyle: 'background-color: var(--td-bg-color-page);padding-top: 12px;padding-bottom: 12px;',
     };
   },
   created() {},
@@ -102,7 +109,7 @@ export default {
     margin-bottom: 32rpx;
 }
 
-.placeholder {
+:deep(.placeholder) {
     color: var(--td-text-color-placeholder);
     line-height: 96rpx;
     height: 96rpx !important;
@@ -110,9 +117,7 @@ export default {
     align-items: center;
 }
 
-.dialog-input {
-    padding-top: 12px;
-    padding-bottom: 12px;
+:deep(.dialog-input) {
     text-align: left;
     margin-top: 32rpx;
     border-radius: 8rpx;
