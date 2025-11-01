@@ -38,7 +38,8 @@
           :t-id="skipButton.tId"
           :custom-style="skipButton.style"
           :block="skipButton.block"
-          :t-class="skipButton.tClass"
+          :t-class="useVirtualHost ? skipButton.tClass : ''"
+          :class="!useVirtualHost ? skipButton.tClass : ''"
           :disabled="skipButton.disabled"
           :data-type="skipButton.dataType"
           :data-extra="skipButton.dataExtra"
@@ -83,7 +84,8 @@
           :t-id="backButton.tId"
           :custom-style="backButton.style"
           :block="backButton.block"
-          :t-class="backButton.tClass"
+          :t-class="useVirtualHost ? backButton.tClass : ''"
+          :class="!useVirtualHost ? backButton.tClass : ''"
           :disabled="backButton.disabled"
           :data-type="backButton.dataType"
           :data-extra="backButton.dataExtra"
@@ -128,7 +130,8 @@
           :t-id="nextButton.tId"
           :custom-style="nextButton.style"
           :block="nextButton.block"
-          :t-class="nextButton.tClass"
+          :t-class="useVirtualHost ? nextButton.tClass : ''"
+          :class="!useVirtualHost ? nextButton.tClass : ''"
           :disabled="nextButton.disabled"
           :data-type="nextButton.dataType"
           :data-extra="nextButton.dataExtra"
@@ -173,7 +176,8 @@
           :t-id="finishButton.tId"
           :custom-style="finishButton.style"
           :block="finishButton.block"
-          :t-class="finishButton.tClass"
+          :t-class="useVirtualHost ? finishButton.tClass : ''"
+          :class="!useVirtualHost ? finishButton.tClass : ''"
           :disabled="finishButton.disabled"
           :data-type="finishButton.dataType"
           :data-extra="finishButton.dataExtra"
@@ -215,6 +219,7 @@
 </template>
 <script>
 import TButton from '../button/button.vue';
+import { canUseVirtualHost } from '../common/version';
 
 
 export default {
@@ -281,6 +286,11 @@ export default {
   emits: [
     'onTplButtonTap',
   ],
+  data() {
+    return {
+      useVirtualHost: canUseVirtualHost(),
+    };
+  },
   methods: {
     onTplButtonTap(...args) {
       this.$emit('onTplButtonTap', ...args);

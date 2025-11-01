@@ -122,6 +122,12 @@
 
       :deep(.@{prefix}-guide__button:last-child) {
         flex-grow: 1;
+        
+        // 适配 QQ 小程序等
+        display: inline-flex;
+        .t-button {
+          flex-grow: 1;
+        }
       }
     }
   }

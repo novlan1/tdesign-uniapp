@@ -68,15 +68,17 @@
               theme="light"
               content="跳过"
               size="extra-small"
-              t-class="guide-demo-button"
+              :t-class="useVirtualHost ? btn : ''"
+              :class="!useVirtualHost ? btn : ''"
               @click="skip"
             />
             <t-button
               v-else
-              t-class="guide-demo-button"
               theme="light"
               content="返回"
               size="extra-small"
+              :t-class="useVirtualHost ? btn : ''"
+              :class="!useVirtualHost ? btn : ''"
               @click="back"
             />
             <t-button
@@ -84,15 +86,17 @@
               theme="primary"
               content="下一步"
               size="extra-small"
-              t-class="guide-demo-button"
+              :t-class="useVirtualHost ? btn : ''"
+              :class="!useVirtualHost ? btn : ''"
               @click="next"
             />
             <t-button
               v-else
-              t-class="guide-demo-button"
               theme="primary"
               content="完成"
               size="extra-small"
+              :t-class="useVirtualHost ? btn : ''"
+              :class="!useVirtualHost ? btn : ''"
               @click="finish"
             />
           </view>
@@ -119,15 +123,17 @@
               theme="light"
               content="跳过"
               size="extra-small"
-              t-class="guide-demo-button"
+              :t-class="useVirtualHost ? btn : ''"
+              :class="!useVirtualHost ? btn : ''"
               @click="skip"
             />
             <t-button
               v-else
-              t-class="guide-demo-button"
               theme="light"
               content="返回"
               size="extra-small"
+              :t-class="useVirtualHost ? btn : ''"
+              :class="!useVirtualHost ? btn : ''"
               @click="back"
             />
             <t-button
@@ -135,15 +141,17 @@
               theme="primary"
               content="下一步"
               size="extra-small"
-              t-class="guide-demo-button"
+              :t-class="useVirtualHost ? btn : ''"
+              :class="!useVirtualHost ? btn : ''"
               @click="next"
             />
             <t-button
               v-else
-              t-class="guide-demo-button"
               theme="primary"
               content="完成"
               size="extra-small"
+              :t-class="useVirtualHost ? btn : ''"
+              :class="!useVirtualHost ? btn : ''"
               @click="finish"
             />
           </view>
@@ -171,15 +179,17 @@
               theme="light"
               content="跳过"
               size="extra-small"
-              t-class="guide-demo-button"
+              :t-class="useVirtualHost ? btn : ''"
+              :class="!useVirtualHost ? btn : ''"
               @click="skip"
             />
             <t-button
               v-else
-              t-class="guide-demo-button"
               theme="light"
               content="返回"
               size="extra-small"
+              :t-class="useVirtualHost ? btn : ''"
+              :class="!useVirtualHost ? btn : ''"
               @click="back"
             />
             <t-button
@@ -187,12 +197,14 @@
               theme="primary"
               content="下一步"
               size="extra-small"
-              t-class="guide-demo-button"
+              :t-class="useVirtualHost ? btn : ''"
+              :class="!useVirtualHost ? btn : ''"
               @click="next"
             />
             <t-button
               v-else
-              t-class="guide-demo-button"
+              :t-class="useVirtualHost ? btn : ''"
+              :class="!useVirtualHost ? btn : ''"
               theme="primary"
               content="完成"
               size="extra-small"
@@ -210,6 +222,7 @@ import tGuide from 'tdesign-uniapp/guide/guide.vue';
 import tInput from 'tdesign-uniapp/input/input.vue';
 import tButton from 'tdesign-uniapp/button/button.vue';
 import { getRect } from 'tdesign-uniapp/common/utils';
+import { canUseVirtualHost } from 'tdesign-uniapp/common/version';
 
 
 export default {
@@ -225,6 +238,10 @@ export default {
     return {
       current: -1,
       steps: [],
+
+      ml12: 'margin-left: 12px;',
+      useVirtualHost: canUseVirtualHost(),
+      btn: 'guide-demo-button',
     };
   },
   mounted() {
