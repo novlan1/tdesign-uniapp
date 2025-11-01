@@ -40,9 +40,7 @@ import TLoading from 'tdesign-uniapp/loading/loading.vue';
 
 https://uwayfly.com/tdesign-uniapp/
 
-<img src="./packages/demo/docs/img/github-pages.png" width="260" />
-
-<img src="./packages/demo/docs/img/tdesign-uniapp-mp.png" width="260" />
+<img src="https://cdn.uwayfly.com/tdesign-uniapp/tdesign-uniapp-qrcodes.png" width="600" />
 
 ## 平台兼容性
 
