@@ -12,7 +12,7 @@ isComponent: true
 
 ```js
 import TTabBar from 'tdesign-uniapp/tab-bar/tab-bar.vue';
-import TTabBarItem from 'tdesign-uniapp/tab-barr-item/tab-barr-item.vue';
+import TTabBarItem from 'tdesign-uniapp/tab-bar-item/tab-bar-item.vue';
 ```
 
 ### 组件类型

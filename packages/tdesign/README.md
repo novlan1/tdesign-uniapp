@@ -19,10 +19,6 @@
 
 [TDesign](https://github.com/Tencent/tdesign) 适配 [uniapp](https://uniapp.dcloud.net.cn/) 的组件库。
 
-## 文档
-
-[https://uwayfly.com/tdesign-uniapp/](https://uwayfly.com/tdesign-uniapp/)
-
 ## 预览
 
 扫码查看 ↓
