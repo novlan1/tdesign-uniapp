@@ -13,6 +13,7 @@ const props = {
   },
   gutter: {
     type: Number,
+    default: 0,
   },
   hover: {
     type: Boolean,

@@ -49,7 +49,7 @@
           <block v-else-if="gridThemeItems.length > 1">
             <view :class="classPrefix + '__swiper-wrap'">
               <swiper
-                style="height: 456rpx"
+                :style="heightStyle"
                 :autoplay="false"
                 :current="currentSwiperIndex"
                 @change="onSwiperChange"
@@ -62,6 +62,7 @@
                     align="center"
                     :t-class="classPrefix + '__grid ' + classPrefix + '__grid--swiper'"
                     :column="dataCount / 2"
+                    custom-style="heightStyle"
                   >
                     <t-grid-item
                       v-for="(item, index1) in item"
@@ -200,6 +201,8 @@ export default uniComponent({
       defaultPopUpProps: {},
       defaultPopUpzIndex: 11500,
       _,
+
+      heightStyle: 'height: 228px;',
     };
   },
   computed: {
