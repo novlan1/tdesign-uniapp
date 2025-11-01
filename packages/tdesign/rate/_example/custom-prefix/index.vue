@@ -47,6 +47,7 @@ export default {
 
 .demo-rate__title {
     width: 200rpx;
+    font-size: 16px;
 }
 
 .demo-rate__transparent {

@@ -63,6 +63,10 @@ export default {
     margin-bottom: 32rpx;
 }
 
+.demo-rate__title {
+  font-size: 16px;
+}
+
 .demo-rate__transparent {
     background-color: transparent;
     padding-left: 32rpx;
