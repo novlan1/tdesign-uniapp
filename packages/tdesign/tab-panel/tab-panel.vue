@@ -2,8 +2,8 @@
   <view
     v-if="!lazy || hasActivated"
     :id="id"
-    :class="'class ' + tClass + ' ' + classPrefix + ' ' + (active ? classPrefix + '--active' : classPrefix + '--inactive')"
-    :style="_._style([style, customStyle, hide ? 'display: none' : ''])"
+    :class="tClass + ' ' + classPrefix + ' ' + (active ? classPrefix + '--active' : classPrefix + '--inactive')"
+    :style="_._style([customStyle, hide ? 'display: none' : ''])"
     aria-role="tabpanel"
   >
     <view v-if="panel">

@@ -1,23 +1,15 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
-    :class="classPrefix + ' ' + classPrefix + '--' + size + ' class ' + tClass"
+    :style="_._style([customStyle])"
+    :class="classPrefix + ' ' + classPrefix + '--' + size + ' ' + tClass"
   >
     <view
       :class="
-        classPrefix +
-          '__minus ' +
-          classPrefix +
-          '__minus--' +
-          theme +
-          ' ' +
-          classPrefix +
-          '__icon--' +
-          size +
-          ' ' +
-          (disabled || disableMinus || currentValue <= min ? classPrefix + '--' + theme + '-disabled' : '') +
-          ' ' +
-          tClassMinus
+        classPrefix +'__minus ' +
+          classPrefix + '__minus--' + theme +
+          ' ' + classPrefix + '__icon--' + size +
+          ' ' + (disabled || disableMinus || currentValue <= min ? classPrefix + '--' + theme + '-disabled' : '') +
+          ' ' + tClassMinus
       "
       :aria-label="'减少' + step"
       aria-role="button"
@@ -40,19 +32,11 @@
     </view>
     <view
       :class="
-        classPrefix +
-          '__plus ' +
-          classPrefix +
-          '__plus--' +
-          theme +
-          ' ' +
-          classPrefix +
-          '__icon--' +
-          size +
-          ' ' +
-          (disabled || disablePlus || currentValue >= max ? classPrefix + '--' + theme + '-disabled' : '') +
-          ' ' +
-          tClassPlus
+        classPrefix + '__plus ' +
+          classPrefix + '__plus--' + theme +
+          ' ' + classPrefix + '__icon--' + size +
+          ' ' + (disabled || disablePlus || currentValue >= max ? classPrefix + '--' + theme + '-disabled' : '') +
+          ' ' + tClassPlus
       "
       :aria-label="'增加' + step"
       aria-role="button"

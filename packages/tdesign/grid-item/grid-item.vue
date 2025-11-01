@@ -1,10 +1,10 @@
 <template>
   <view
     :class="[
-      _.cls(classPrefix, [['auto-size', column == 0]]) + ' class ',
+      _.cls(classPrefix, [['auto-size', column == 0]]),
       tClass
     ]"
-    :style="_._style([gridItemStyle, style, customStyle])"
+    :style="_._style([gridItemStyle, customStyle])"
     :hover-class="hover ? classPrefix + '--hover' : ''"
     :hover-stay-time="200"
     :aria-role="ariaRole || 'button'"
@@ -48,7 +48,7 @@
             <block v-if="image && image != 'slot'">
               <t-image
                 :t-class="_.cls(classPrefix + '__image', [getImageSize(column)]) + ' ' + tClassImage"
-                :custom-style="_._style([style, customStyle])"
+                :custom-style="_._style([imageProps.style, imageProps.customStyle])"
                 :height="imageProps.height || ''"
                 :width="imageProps.width || ''"
                 :error="imageProps.error"

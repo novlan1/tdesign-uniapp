@@ -1,7 +1,7 @@
 <template>
   <view
-    :class="[className + ' class ', tClass]"
-    :style="_._style([tagStyle, style, customStyle])"
+    :class="[className + ' ', tClass]"
+    :style="_._style([tagStyle, customStyle])"
     @click="handleClick"
   >
     <view

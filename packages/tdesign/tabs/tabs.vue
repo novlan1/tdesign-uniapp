@@ -1,7 +1,7 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
-    :class="_.cls(classPrefix, [placement]) + ' class ' + tClass"
+    :style="_._style([customStyle])"
+    :class="_.cls(classPrefix, [placement]) + ' ' + tClass"
   >
     <t-sticky
       :t-class="_.cls(classPrefix + '__sticky', [placement])"
@@ -391,7 +391,6 @@ export default uniComponent({
           this.lastDistance = distance;
         }
       } catch (err) {
-        console.warn('err', err);
         this.$emit('error', err);
       }
     },

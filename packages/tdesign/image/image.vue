@@ -1,7 +1,7 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
-    :class="['class ', tClass, classPrefix]"
+    :style="_._style([customStyle])"
+    :class="[tClass, classPrefix]"
   >
     <view
       v-if="isLoading"
@@ -20,7 +20,7 @@
       />
       <view
         v-else-if="loading !== '' && loading !== 'slot'"
-        :class="classPrefix + '__common ' + prefix + '-class-load'"
+        :class="classPrefix + '__common ' + tClassLoad"
       >
         {{ loading }}
       </view>

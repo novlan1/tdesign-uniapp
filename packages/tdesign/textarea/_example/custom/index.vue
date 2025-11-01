@@ -7,7 +7,7 @@
       t-class="external-class"
       placeholder="请输入文字"
       bordered
-      maxlength="100"
+      :maxlength="100"
       :disable-default-padding="true"
       indicator
       :custom-style="style"

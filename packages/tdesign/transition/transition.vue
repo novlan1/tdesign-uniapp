@@ -1,7 +1,7 @@
 <template>
   <view
-    :class="'class ' + prefix + '-class ' + classPrefix + ' ' + transitionClass"
-    :style="_._style([visible ? '' : 'display: none', style, customStyle])"
+    :class="tClass + ' ' + classPrefix + ' ' + transitionClass"
+    :style="_._style([visible ? '' : 'display: none', customStyle])"
     @transitionend="onTransitionEnd"
   >
     <slot />

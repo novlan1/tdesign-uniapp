@@ -2,8 +2,8 @@
   <view>
     <view
       v-if="realVisible"
-      :class="_.cls(classPrefix, [dataDirection, dataTheme, ['with-text', dataMessage]]) + ' class ' + prefix + '-class ' + transitionClass"
-      :style="_._style(['top:' + (dataPlacement === 'top' ? '25%' : dataPlacement === 'bottom' ? '75%' : '45%'), style, customStyle])"
+      :class="_.cls(classPrefix, [dataDirection, dataTheme, ['with-text', dataMessage]]) + ' ' + tClass + ' ' + transitionClass"
+      :style="_._style(['top:' + (dataPlacement === 'top' ? '25%' : dataPlacement === 'bottom' ? '75%' : '45%'), customStyle])"
       @transitionend="onTransitionEnd"
       @touchstart.stop.prevent="loop"
     >

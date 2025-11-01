@@ -1,7 +1,7 @@
 <template>
   <view
-    :style="`${_._style([style, customStyle])}; width:${containerSize}px; height: ${containerSize}px; background-color: ${bgColor};`"
-    :class="`${classPrefix} ${borderless ? prefix + '-' + 'borderless' : ''} class ${tClass}`"
+    :style="`${_._style([customStyle])}; width:${containerSize}px; height: ${containerSize}px; background-color: ${bgColor};`"
+    :class="`${classPrefix} ${borderless ? prefix + '-' + 'borderless' : ''} ${tClass}`"
   >
     <QrcodeCanvas
       ref="qrcodeCanvas"

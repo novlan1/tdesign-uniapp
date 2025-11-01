@@ -1,8 +1,8 @@
 <template>
   <view
     :id="tId"
-    :style="_._style([style, customStyle])"
-    :class="_.cls(classPrefix, [placement, theme, ['checked', dataChecked], ['block', block]]) + ' class ' + tClass"
+    :style="_._style([customStyle])"
+    :class="_.cls(classPrefix, [placement, theme, ['checked', dataChecked], ['block', block]]) + ' ' + tClass"
     aria-role="checkbox"
     :aria-checked="dataChecked ? (dataIndeterminate ? 'mixed' : true) : false"
     :aria-disabled="_disabled ? true : false"

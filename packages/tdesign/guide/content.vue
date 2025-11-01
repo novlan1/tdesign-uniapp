@@ -4,10 +4,10 @@
     :name="'content-' + current"
   />
   <block v-else>
-    <view :class="prefix + '-class-tooltip'">
+    <view :class="tClassTooltip">
       <view
         v-if="title"
-        :class="prefix + '-class-title ' + classPrefix + '__title--' + modeType"
+        :class="tClassTitle + ' ' + classPrefix + '__title--' + modeType"
       >
         {{ title }}
       </view>
@@ -17,7 +17,7 @@
       />
       <view
         v-if="body"
-        :class="prefix + '-class-body ' + classPrefix + '__body--' + modeType"
+        :class="tClassBody + ' ' + classPrefix + '__body--' + modeType"
       >
         {{ body }}
       </view>
@@ -28,7 +28,7 @@
     </view>
     <view
       v-if="current !== -1"
-      :class="prefix + '-class-footer ' + classPrefix + '__footer ' + classPrefix + '__footer--' + modeType"
+      :class="tClassFooter + ' ' + classPrefix + '__footer ' + classPrefix + '__footer--' + modeType"
     >
       <block
         v-if="current < steps.length - 1 && !hideSkip"
@@ -247,6 +247,22 @@ export default {
       default: '',
     },
     prefix: {
+      type: String,
+      default: '',
+    },
+    tClassTooltip: {
+      type: String,
+      default: '',
+    },
+    tClassBody: {
+      type: String,
+      default: '',
+    },
+    tClassTitle: {
+      type: String,
+      default: '',
+    },
+    tClassFooter: {
       type: String,
       default: '',
     },

@@ -1,7 +1,7 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
-    :class="classPrefix + ' ' + classPrefix + '--' + theme + ' ' + classPrefix + '--' + size + ' class ' + prefix + '-class'"
+    :style="_._style([customStyle])"
+    :class="classPrefix + ' ' + classPrefix + '--' + theme + ' ' + classPrefix + '--' + size + ' ' + tClass"
     aria-role="option"
   >
     <slot
@@ -17,13 +17,13 @@
         v-for="(item, index) in timeRange"
         :key="index"
       >
-        <text :class="classPrefix + '__item ' + prefix + '-class-count'">
+        <text :class="classPrefix + '__item ' + tClassCount">
           {{ formatUtil(timeData[timeRange[index]]) }}
         </text>
 
         <text
           v-if="splitWithUnit || timeRange.length - 1 !== index"
-          :class="classPrefix + '__split ' + classPrefix + '__split--' + (splitWithUnit ? 'text' : 'dot') + ' ' + prefix + '-class-split'"
+          :class="classPrefix + '__split ' + classPrefix + '__split--' + (splitWithUnit ? 'text' : 'dot') + ' ' + tClassSplit"
         >
           {{ splitWithUnit ? timeDataUnit[timeRange[index]] : ':' }}
         </text>

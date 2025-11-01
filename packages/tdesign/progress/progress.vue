@@ -1,7 +1,7 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
-    :class="classPrefix + ' class'"
+    :style="_._style([customStyle])"
+    :class="classPrefix"
   >
     <view
       v-if="theme === PRO_THEME.LINE"

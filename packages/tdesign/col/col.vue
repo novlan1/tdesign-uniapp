@@ -1,12 +1,11 @@
 <template>
   <view
     :class="[
-      'class',
       tClass,
       _.cls(classPrefix, [span]),
       (offset ? classPrefix + '--offset-' + offset : '')
     ]"
-    :style="getColStyles(gutter, style, customStyle)"
+    :style="getColStyles(gutter, customStyle)"
   >
     <slot />
   </view>

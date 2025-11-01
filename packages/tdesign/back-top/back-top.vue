@@ -1,8 +1,8 @@
 <template>
   <view
     v-if="!hidden"
-    :style="_._style([style, customStyle])"
-    :class="'class ' + tClass + ' ' + _.cls(classPrefix, [['fixed', fixed], theme])"
+    :style="_._style([customStyle])"
+    :class="tClass + ' ' + _.cls(classPrefix, [['fixed', fixed], theme])"
     aria-role="button"
     @click="toTop"
   >

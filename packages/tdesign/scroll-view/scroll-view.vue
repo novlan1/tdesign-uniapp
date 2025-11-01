@@ -1,6 +1,6 @@
 <template>
   <scroll-view
-    :class="'class ' + tClass"
+    :class="tClass"
     type="list"
     scroll-y
     enhanced

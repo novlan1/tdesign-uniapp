@@ -1,7 +1,7 @@
 <template>
   <view
-    :class="classPrefix + ' class'"
-    :style="_._style([style, customStyle])"
+    :class="classPrefix"
+    :style="_._style([customStyle])"
   >
     <view
       :class="classPrefix + '__wrapper ' + tClass"

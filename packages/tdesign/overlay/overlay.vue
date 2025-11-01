@@ -2,8 +2,13 @@
   <view>
     <view
       v-if="realVisible && preventScrollThrough"
-      :class="prefix + '-overlay ' + transitionClass + ' class'"
-      :style="_._style(['--td-overlay-transition-duration:' + duration + 'ms', 'z-index:' + _zIndex, 'top:' + distanceTop + 'px', computedStyle, style, customStyle])"
+      :class="prefix + '-overlay ' + transitionClass"
+      :style="_._style([
+        '--td-overlay-transition-duration:' + duration + 'ms',
+        'z-index:' + _zIndex, 'top:' + distanceTop + 'px',
+        computedStyle,
+        customStyle
+      ])"
       :aria-role="ariaRole || 'button'"
       :aria-label="ariaLabel || '关闭'"
       disable-scroll
@@ -15,8 +20,13 @@
     </view>
     <view
       v-else-if="realVisible"
-      :class="prefix + '-overlay ' + transitionClass + ' class'"
-      :style="_._style(['z-index:' + _zIndex, 'top:' + distanceTop + 'px', computedStyle, style, customStyle])"
+      :class="prefix + '-overlay ' + transitionClass "
+      :style="_._style([
+        'z-index:' + _zIndex,
+        'top:' + distanceTop + 'px',
+        computedStyle,
+        customStyle
+      ])"
       :aria-role="ariaRole || 'button'"
       :aria-label="ariaLabel || '关闭'"
       @click.stop="handleClick"

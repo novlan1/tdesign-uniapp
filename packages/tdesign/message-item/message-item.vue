@@ -4,8 +4,8 @@
       v-if="visible"
       :id="id || classPrefix"
       :ref="id || classPrefix"
-      :class="classPrefix + ' class ' + prefix + '-class ' + classPrefix + '--' + theme + ' ' + fadeClass"
-      :style="_._style([getMessageStyles(zIndex, offset, wrapTop), style, customStyle])"
+      :class="classPrefix + ' ' + tClass + ' ' + classPrefix + '--' + theme + ' ' + fadeClass"
+      :style="_._style([getMessageStyles(zIndex, offset, wrapTop), customStyle])"
       :animation="showAnimation"
       aria-role="alert"
     >
@@ -17,7 +17,7 @@
         >
           <t-icon
             :custom-style="_icon.style || ''"
-            :t-class="prefix + '-class-icon'"
+            :t-class="tClassIcon"
             :prefix="_icon.prefix"
             :name="_icon.name"
             :size="_icon.size"
@@ -37,7 +37,7 @@
         <view
           :id="classPrefix + '__text'"
           :ref="classPrefix + '__text'"
-          :class="classPrefix + '__text ' + prefix + '-class-content'"
+          :class="classPrefix + '__text ' + tClassContent"
           :animation="animation"
         >
           <block v-if="content">
@@ -49,7 +49,7 @@
       </view>
       <t-link
         v-if="_link && _link.content"
-        :t-class="classPrefix + '__link ' + prefix + '-class-link'"
+        :t-class="classPrefix + '__link ' + tClassLink"
         :custom-style="_._style([_link.style, _link.customStyle])"
         :disabled="_link.disabled || false"
         :hover="_link.hover || true"
@@ -74,7 +74,7 @@
         >
           <t-icon
             :custom-style="_closeBtn.style || ''"
-            :t-class="prefix + '-class-close-btn'"
+            :t-class="tClassCloseBtn"
             :prefix="_closeBtn.prefix"
             :name="_closeBtn.name"
             :size="_closeBtn.size"
@@ -306,8 +306,7 @@ export default uniComponent({
               this.fadeClass = '';
             });
           })
-          .catch((err) => {
-            console.warn('err', err);
+          .catch(() => {
           });
       });
     },

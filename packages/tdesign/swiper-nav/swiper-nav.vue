@@ -2,8 +2,8 @@
   <view>
     <view
       v-if="showControls"
-      :class="classPrefix + '__btn ' + 'class ' + tClass"
-      :style="_._style([style, customStyle])"
+      :class="classPrefix + '__btn ' + ' ' + tClass"
+      :style="_._style([customStyle])"
     >
       <view
         :class="classPrefix + '__btn--prev'"
@@ -22,9 +22,13 @@
     </view>
     <view
       v-if="total >= minShowNum"
-      :style="_._style([style, customStyle])"
+      :style="_._style([customStyle])"
       :class="
-        'class ' + prefix + '-class ' + classPrefix + ' ' + classPrefix + '--' + direction + ' ' + classPrefix + '__' + type + ' ' + classPrefix + '--' + paginationPosition
+        tClass +
+          ' ' + classPrefix +
+          ' ' + classPrefix + '--' + direction +
+          ' ' + classPrefix + '__' + type +
+          ' ' + classPrefix + '--' + paginationPosition
       "
     >
       <block v-if="type === 'dots' || type === 'dots-bar'">

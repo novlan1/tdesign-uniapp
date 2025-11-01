@@ -1,26 +1,16 @@
 <template>
   <view>
     <view
-      :style="_._style([style, customStyle])"
-      :class="'class ' + classPrefix + ' ' + tClass"
+      :style="_._style([customStyle])"
+      :class="classPrefix + ' ' + tClass"
     >
       <view
         :class="
-          classPrefix +
-            '__input-box ' +
-            prefix +
-            '-' +
-            (focus ? 'is-focused' : 'not-focused') +
-            ' ' +
-            classPrefix +
-            '__input-box--' +
-            (center ? 'center' : '') +
-            ' ' +
-            classPrefix +
-            '__input-box--' +
-            shape +
-            ' ' +
-            tClassInputContainer
+          classPrefix +'__input-box ' +
+            prefix + '-' +(focus ? 'is-focused' : 'not-focused') +
+            ' ' + classPrefix + '__input-box--' + (center ? 'center' : '') +
+            ' ' + classPrefix + '__input-box--' + shape +
+            ' ' + tClassInputContainer
         "
       >
         <t-icon

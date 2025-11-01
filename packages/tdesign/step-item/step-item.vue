@@ -1,7 +1,7 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
-    :class="_.cls(classPrefix, [layout, ['readonly', readonly]]) + ' class ' + tClass"
+    :style="_._style([customStyle])"
+    :class="_.cls(classPrefix, [layout, ['readonly', readonly]]) + ' ' + tClass"
     :aria-role="ariaRole || readonly ? 'option' : 'button'"
     :aria-label="ariaLabel || getAriaLabel(index, title, content)"
     :aria-current="curStatus == 'process' ? 'step' : ''"

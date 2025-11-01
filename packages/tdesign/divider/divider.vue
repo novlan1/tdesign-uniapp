@@ -2,11 +2,11 @@
   <view :class="layout === 'vertical' ? classPrefix + '--vertical-center' : ''">
     <view
       :class="[
-        classPrefix + ' class ',
+        classPrefix,
         tClass,
         classPrefix + '--' + layout + ' ' + classPrefix + '--' + align + ' ' + (dashed ? classPrefix + '--dashed' : '')
       ]"
-      :style="_._style([dividerStyle, style, customStyle])"
+      :style="_._style([dividerStyle, customStyle])"
     >
       <view
         :class="[

@@ -1,6 +1,6 @@
 import utils from '../common/utils.wxs';
 
-export function getRowStyles(gutter, style, customStyle) {
+export function getRowStyles(gutter, customStyle) {
   let _style = '';
   if (gutter) {
     _style = utils._style({
@@ -9,5 +9,5 @@ export function getRowStyles(gutter, style, customStyle) {
     });
   }
 
-  return utils._style([style, customStyle]) + _style;
+  return utils._style([customStyle]) + _style;
 }

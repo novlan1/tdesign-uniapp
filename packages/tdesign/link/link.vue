@@ -1,8 +1,8 @@
 <template>
   <view>
     <navigator
-      :class="className + ' class ' + prefix + '-class'"
-      :style="_._style([style, customStyle])"
+      :class="className + ' ' + tClass"
+      :style="_._style([customStyle])"
       :target="navigatorProps.target"
       :url="!disabled ? (navigatorProps.url || '') : ''"
       :open-type="navigatorProps.openType || 'navigate'"
@@ -12,7 +12,7 @@
       :extra-data="navigatorProps.extraData"
       :version="navigatorProps.version"
       :short-link="navigatorProps.shortLink"
-      :hover-class="(hover && !disabled && classPrefix + '--hover') + ' ' + prefix + '-class-hover ' + navigatorProps.hoverClass"
+      :hover-class="(hover && !disabled && classPrefix + '--hover') + ' ' + tClassHover + ' ' + navigatorProps.hoverClass"
       :hover-stop-propagation="!!navigatorProps.hoverStopPropagation"
       :hover-start-time="navigatorProps.hoverStartTime"
       :hover-stay-time="navigatorProps.hoverStayTime"
@@ -21,7 +21,7 @@
       @fail="onFail"
       @complete="onComplete"
     >
-      <view :class="classPrefix + '__prefix-icon ' + prefix + '-class-prefix-icon'">
+      <view :class="classPrefix + '__prefix-icon ' + tClassPrefixIcon">
         <slot name="prefix-icon" />
         <block
           v-if="_prefixIcon"
@@ -29,7 +29,7 @@
         >
           <t-icon
             :custom-style="_prefixIcon.style || ''"
-            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (_prefixIcon.activeIdx == _prefixIcon.index ? 'active ' : ' ') + prefix + '-class-icon'"
+            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (_prefixIcon.activeIdx == _prefixIcon.index ? 'active ' : ' ') + tClassIcon"
             :prefix="_prefixIcon.prefix"
             :name="_prefixIcon.name"
             :size="_prefixIcon.size"
@@ -41,14 +41,14 @@
           />
         </block>
       </view>
-      <view :class="classPrefix + '__content ' + prefix + '-class-content'">
+      <view :class="classPrefix + '__content ' + tClassContent">
         <block v-if="content">
           {{ content }}
         </block>
         <slot name="content" />
         <slot />
       </view>
-      <view :class="classPrefix + '__suffix-icon ' + prefix + '-class-suffix-icon'">
+      <view :class="classPrefix + '__suffix-icon ' + tClassSuffixIcon">
         <slot name="suffix-icon" />
         <block
           v-if="_suffixIcon"
@@ -56,7 +56,7 @@
         >
           <t-icon
             :custom-style="_suffixIcon.style || ''"
-            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (_suffixIcon.activeIdx == _suffixIcon.index ? 'active ' : ' ') + prefix + '-class-icon'"
+            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (_suffixIcon.activeIdx == _suffixIcon.index ? 'active ' : ' ') + tClassIcon"
             :prefix="_suffixIcon.prefix || ''"
             :name="_suffixIcon.name"
             :size="_suffixIcon.size"

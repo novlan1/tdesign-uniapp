@@ -3,7 +3,7 @@
     v-if="draggable"
     id="draggable"
     ref="draggable"
-    :custom-style="_._style(['right: 16px; bottom: 32px;', style, customStyle, moveStyle])"
+    :custom-style="_._style(['right: 16px; bottom: 32px;', customStyle, moveStyle])"
     :direction="draggable === true ? 'all' : draggable"
     :t-class="tClass"
     @start="onStart"
@@ -63,8 +63,8 @@
 
   <view
     v-else
-    :class="[classPrefix + ' class ', tClass]"
-    :style="_._style(['right: 16px; bottom: 32px;', style, customStyle])"
+    :class="[classPrefix, tClass]"
+    :style="_._style(['right: 16px; bottom: 32px;', customStyle])"
   >
     <slot v-if="!buttonData?.content && !buttonData?.icon" />
     <t-button

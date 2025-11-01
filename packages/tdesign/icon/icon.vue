@@ -1,7 +1,7 @@
 <template>
   <view
     :class="[tClass, prefix || 't-icon']"
-    :style="_._style([iconStyle, style, customStyle])"
+    :style="_._style([iconStyle, customStyle])"
     :aria-hidden="ariaHidden"
     :aria-label="ariaLabel"
     :aria-role="ariaRole"

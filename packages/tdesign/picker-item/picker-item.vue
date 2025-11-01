@@ -1,7 +1,7 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
-    :class="_.cls(classPrefix + '__group', []) + ' class ' + tClass"
+    :style="_._style([customStyle])"
+    :class="_.cls(classPrefix + '__group', []) + ' ' + tClass"
     @touchstart="onTouchStart"
     @touchmove.stop.prevent="onTouchMove"
     @touchend="onTouchEnd"

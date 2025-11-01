@@ -1,7 +1,7 @@
 <template>
   <scroll-view
-    :style="_._style([style, customStyle, 'max-height: calc(100vh - ' + distanceTop + 'px)'])"
-    :class="classPrefix + ' class ' + prefix + '-class'"
+    :style="_._style([customStyle, 'max-height: calc(100vh - ' + distanceTop + 'px)'])"
+    :class="classPrefix + ' ' + tClass"
     type="list"
     :scroll-top="scrollTop"
     scroll-y
@@ -48,11 +48,12 @@
           :size="loadingProps.size || '50rpx'"
           :text="loadingProps.text || dataLoadingTexts[refreshStatus]"
           :theme="loadingProps.theme || 'circular'"
-          :t-class-indicator="prefix + '-class-indicator'"
+          :t-class-indicator="tClassIndicator"
+          :t-class="tClassLoading"
         />
         <view
           v-else-if="refreshStatus >= 0"
-          :class="classPrefix + '__text ' + prefix + '-class-text'"
+          :class="classPrefix + '__text ' + tClassText"
         >
           {{ dataLoadingTexts[refreshStatus] }}
         </view>

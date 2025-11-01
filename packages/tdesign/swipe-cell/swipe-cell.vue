@@ -1,7 +1,7 @@
 <template>
   <view
-    :class="'class ' + tClass + ' ' + classPrefix"
-    :style="_._style([style, customStyle])"
+    :class="tClass + ' ' + classPrefix"
+    :style="_._style([customStyle])"
     data-key="cell"
     :opened="dataOpened"
     :left-width="leftWidth"

@@ -1,7 +1,7 @@
 <template>
   <view
-    :class="classPrefix + ' class'"
-    :style="_._style(['height:' + _.addUnit(height), style, customStyle])"
+    :class="classPrefix"
+    :style="_._style(['height:' + _.addUnit(height), customStyle])"
   >
     <t-scroll-view
       v-for="(item, level) in treeOptions"

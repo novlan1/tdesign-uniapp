@@ -1,9 +1,9 @@
 <template>
   <button
     :id="tId"
-    :style="_._style([style, customStyle])"
+    :style="_._style([customStyle])"
     :data-custom="customDataset"
-    :class="'class ' + className"
+    :class="className"
     :form-type="disabled || loading ? '' : type"
     :open-type="disabled || loading ? '' : openType"
     :hover-stop-propagation="hoverStopPropagation"

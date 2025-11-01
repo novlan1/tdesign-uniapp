@@ -1,7 +1,7 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
-    :class="_.cls(classPrefix, [['border', !borderless]]) + ' ' + classPrefix + '--layout-' + layout + ' class ' + tClass"
+    :style="_._style([customStyle])"
+    :class="_.cls(classPrefix, [['border', !borderless]]) + ' ' + classPrefix + '--layout-' + layout + ' ' + tClass"
     aria-describedby
   >
     <view :class="classPrefix + '__wrap--prefix'">
@@ -83,7 +83,7 @@
           :class="classPrefix + '__wrap--clearable-icon'"
           @click="clearInput"
         >
-<t-icon
+          <t-icon
             :custom-style="_clearIcon.style || ''"
             :t-class="tClassClearable"
             :prefix="_clearIcon.prefix"

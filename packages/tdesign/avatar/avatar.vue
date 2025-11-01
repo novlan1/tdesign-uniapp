@@ -1,10 +1,10 @@
 <template>
   <view
     :class="[
-      classPrefix + '__wrapper class ',
+      classPrefix + '__wrapper',
       tClass
     ]"
-    :style="_._style([utils.getStyles(isShow), style, customStyle, innerStyle])"
+    :style="_._style([utils.getStyles(isShow), customStyle, innerStyle])"
   >
     <t-badge
       :color="badgeProps.color || ''"

@@ -8,7 +8,7 @@
       ref="qrcodeCanvas"
       type="2d"
       :canvas-id="canvasId"
-      class="t-qrcode__canvas class"
+      class="t-qrcode__canvas"
       :style="`width: ${size}px; height: ${size}px;`"
     />
   </view>

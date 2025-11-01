@@ -1,8 +1,8 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
+    :style="_._style([customStyle])"
     :class="[
-      getBadgeOuterClass({ shape }) + ' class ',
+      getBadgeOuterClass({ shape }),
       tClass
     ]"
     :aria-labelledby="labelID"

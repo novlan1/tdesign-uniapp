@@ -1,7 +1,7 @@
 <template>
   <view
-    :class="classPrefix + ' class ' + tClass"
-    :style="_._style([dataStyle, customStyle])"
+    :class="classPrefix + ' ' + tClass"
+    :style="_._style([customStyle])"
   >
     <view
       :class="
@@ -56,13 +56,9 @@ export default uniComponent({
       sticky: false,
       active: false,
       _,
-      dataStyle: this.style,
     };
   },
   watch: {
-    style(e) {
-      this.dataStyle = e;
-    },
   },
   mounted() {
 

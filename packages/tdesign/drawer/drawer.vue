@@ -2,8 +2,7 @@
   <view>
     <t-popup
       v-if="!destroyOnClose || dataVisible"
-      :custom-style="_._style([style, customStyle])"
-      class="class"
+      :custom-style="_._style([customStyle])"
       :visible="dataVisible"
       :z-index="zIndex"
       :using-custom-navbar="usingCustomNavbar"

@@ -6,10 +6,10 @@
         ['active', active],
         ['disabled', disabled]
       ]) +
-        ' class ' +
+        ' ' +
         tClass
     "
-    :style="_._style([style, customStyle])"
+    :style="_._style([customStyle])"
     aria-role="button"
     :aria-label="
       ariaLabel ||

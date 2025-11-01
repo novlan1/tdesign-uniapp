@@ -1,7 +1,7 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
-    :class="'class ' + tClass + ' ' + classPrefix"
+    :style="_._style([customStyle])"
+    :class="tClass + ' ' + classPrefix"
     :aria-checked="checked"
     :aria-disabled="disabled"
     aria-role="switch"

@@ -1,8 +1,8 @@
 <template>
   <view
     id="t-bar"
-    :style="_._style([style, customStyle])"
-    :class="classPrefix + ' class ' + tClass"
+    :style="_._style([customStyle])"
+    :class="classPrefix + ' ' + tClass"
     @touchmove.stop.prevent="parseEventDynamicCode($event, activeIdx === -1 ? '' : 'noop')"
   >
     <view

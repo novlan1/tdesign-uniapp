@@ -2,13 +2,13 @@
   <view>
     <view
       v-if="realVisible"
-      :style="_._style([popup.getPopupStyles(zIndex, distanceTop, placement), style, customStyle])"
-      :class="_.cls(classPrefix, [placement]) + ' ' + transitionClass + ' class ' + prefix + '-class'"
+      :style="_._style([popup.getPopupStyles(zIndex, distanceTop, placement), customStyle])"
+      :class="_.cls(classPrefix, [placement]) + ' ' + transitionClass + ' ' + tClass"
       @transitionend="onTransitionEnd"
     >
       <view
         :data-prevention="preventScrollThrough || (overlayProps ? !!overlayProps.preventScrollThrough : false)"
-        :class="classPrefix + '__content ' + prefix + '-class-content'"
+        :class="classPrefix + '__content ' + tClassContent"
         @touchmove="parseEventDynamicCode($event, popup.onContentTouchMove)"
       >
         <slot name="content" />

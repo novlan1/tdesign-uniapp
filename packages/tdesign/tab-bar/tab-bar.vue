@@ -1,7 +1,10 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
-    :class="_.cls(classPrefix, [['border', bordered], ['fixed', fixed], ['safe', safeAreaInsetBottom], shape]) + ' class ' + tClass"
+    :style="_._style([customStyle])"
+    :class="_.cls(classPrefix, [
+      ['border', bordered], ['fixed', fixed],
+      ['safe', safeAreaInsetBottom], shape]
+    ) + ' ' + tClass"
     aria-role="tablist"
   >
     <slot />

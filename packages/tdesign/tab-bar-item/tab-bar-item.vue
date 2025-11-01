@@ -1,7 +1,10 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
-    :class="_.cls(classPrefix, [['split', split], ['text-only', !icon], ['crowded', crowded], shape]) + ' class ' + tClass"
+    :style="_._style([customStyle])"
+    :class="_.cls(classPrefix, [
+      ['split', split], ['text-only', !icon],
+      ['crowded', crowded], shape]
+    ) + ' ' + tClass"
   >
     <view
       :class="_.cls(classPrefix + '__content', [['checked', isChecked], theme])"

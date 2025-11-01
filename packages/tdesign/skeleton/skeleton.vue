@@ -2,8 +2,8 @@
   <view>
     <view
       v-if="isShow"
-      :style="_._style([style, customStyle])"
-      :class="[classPrefix + ' class ', tClass]"
+      :style="_._style([customStyle])"
+      :class="[classPrefix + ' ', tClass]"
     >
       <view
         v-if="parsedRowCols.length"
@@ -28,7 +28,7 @@
     </view>
     <view
       v-else
-      :class="'class ' + classPrefix + '__content'"
+      :class="classPrefix + '__content'"
     >
       <slot />
     </view>

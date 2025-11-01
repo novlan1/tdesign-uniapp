@@ -1,13 +1,13 @@
 <template>
   <view>
     <TPopup
-      class="class"
+      :class="tClass"
       :visible="dataVisible"
       placement="bottom"
       @visible-change="onVisibleChange"
     >
       <view
-        :style="_._style([style, customStyle])"
+        :style="_._style([customStyle])"
         :class="name"
       >
         <view :class="name + '__title'">

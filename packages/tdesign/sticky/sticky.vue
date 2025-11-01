@@ -1,10 +1,10 @@
 <template>
   <view
-    :class="classPrefix + ' class ' + prefix + '-class'"
+    :class="classPrefix + ' ' + tClass"
     :style="_._style(['z-index:' + zIndex, containerStyle, style, customStyle])"
   >
     <view
-      :class="classPrefix + '__content ' + prefix + '-class-content'"
+      :class="classPrefix + '__content ' + tClassContent"
       :style="_._style(['z-index:' + zIndex, contentStyle])"
     >
       <slot />

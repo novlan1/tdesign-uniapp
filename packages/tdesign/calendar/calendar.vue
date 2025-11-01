@@ -2,7 +2,6 @@
   <view>
     <t-popup
       v-if="usePopup"
-      class="class"
       :visible="visible"
       :using-custom-navbar="usingCustomNavbar"
       :custom-navbar-height="customNavbarHeight"
@@ -15,7 +14,7 @@
         :use-popup="usePopup"
         :switch-mode="switchMode"
         :t-class="tClass"
-        :custom-style="_._style([style, customStyle])"
+        :custom-style="_._style([customStyle])"
         :title="title"
         :real-local-text="realLocalText"
         :months="months"
@@ -46,7 +45,7 @@
         :use-popup="usePopup"
         :switch-mode="switchMode"
         :t-class="tClass"
-        :custom-style="_._style([style, customStyle])"
+        :custom-style="_._style([customStyle])"
         :title="title"
         :real-local-text="realLocalText"
         :months="months"

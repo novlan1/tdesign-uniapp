@@ -1,13 +1,13 @@
 <template>
   <view
     v-if="wrapperVisible"
-    :class="classPrefix + ' class ' + tClass"
-    :style="_._style([getStyles(top, zIndex), style, customStyle])"
+    :class="classPrefix + ' ' + tClass"
+    :style="_._style([getStyles(top, zIndex), customStyle])"
   >
     <view
       v-if="show"
       :class="classPrefix + '__mask'"
-      :style="_._style(['height:' + maskHeight + 'px', style, customStyle])"
+      :style="_._style(['height:' + maskHeight + 'px', customStyle])"
       @click="handleMaskClick"
       @touchmove.stop.prevent="closeDropdown"
     />

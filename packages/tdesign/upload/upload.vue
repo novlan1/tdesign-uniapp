@@ -1,7 +1,7 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
-    :class="classPrefix + ' class ' + tClass"
+    :style="_._style([customStyle])"
+    :class="classPrefix + ' ' + tClass"
   >
     <t-grid
       :gutter="gutter"

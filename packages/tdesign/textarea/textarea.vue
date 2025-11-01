@@ -1,7 +1,7 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
-    :class="classPrefix + ' ' + (bordered ? classPrefix + '--border' : '') + ' class ' + tClass"
+    :style="_._style([customStyle])"
+    :class="classPrefix + ' ' + (bordered ? classPrefix + '--border' : '') + ' ' + tClass"
   >
     <view :class="classPrefix + '__label ' + tClassLabel">
       <block v-if="label">

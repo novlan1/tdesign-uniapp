@@ -2,16 +2,17 @@
   <view>
     <view
       v-if="title"
-      :class="['class ' + classPrefix + '__title ',
-               tClassTitle
+      :class="[
+        classPrefix + '__title ',
+        tClassTitle
       ]"
     >
       {{ title }}
     </view>
     <view
-      :style="_._style([style, customStyle])"
+      :style="_._style([customStyle])"
       :class="[
-        _.cls(classPrefix, [['bordered', bordered], theme]) + ' class ',
+        _.cls(classPrefix, [['bordered', bordered], theme]),
         tClass
       ]"
     >

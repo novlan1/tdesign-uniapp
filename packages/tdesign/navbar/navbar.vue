@@ -1,7 +1,7 @@
 <template>
   <view
-    :class="_.cls(classPrefix, [['fixed', fixed]]) + ' ' + visibleClass + ' class ' + tClass"
-    :style="_._style([boxStyle, style, customStyle])"
+    :class="_.cls(classPrefix, [['fixed', fixed]]) + ' ' + visibleClass + ' ' + tClass"
+    :style="_._style([boxStyle, customStyle])"
   >
     <view
       v-if="fixed"

@@ -1,8 +1,8 @@
 <template>
   <view>
     <t-picker
-      :custom-style="_._style([style, customStyle])"
-      :class="'class ' + tClass + ' ' + classPrefix"
+      :custom-style="_._style([customStyle])"
+      :class="tClass + ' ' + classPrefix"
       :visible="visible"
       :value="columnsValue"
       :header="header"

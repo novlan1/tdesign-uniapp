@@ -2,8 +2,8 @@
   <view
     v-if="dataVisible"
     :id="classPrefix"
-    :class="classPrefix + ' class ' + tClass"
-    :style="_._style([style, customStyle, '--td-image-viewer-top: ' + distanceTop + 'px'])"
+    :class="classPrefix + ' ' + tClass"
+    :style="_._style([customStyle, '--td-image-viewer-top: ' + distanceTop + 'px'])"
     :aria-modal="true"
     aria-role="dialog"
     aria-label="图片查看器"

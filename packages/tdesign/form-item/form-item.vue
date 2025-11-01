@@ -2,20 +2,12 @@
   <view
     :class="
       classPrefix +
-        ' ' +
-        classPrefix +
-        '--' +
-        dataLabelAlign +
-        ' ' +
-        classPrefix +
-        '--bordered ' +
-        classPrefix +
-        '--' +
-        (verifyStatus === 2 ? 'error' : verifyStatus === 1 ? 'success' : '') +
-        ' ' +
-        tClass
+        ' ' + classPrefix + '--' + dataLabelAlign +
+        ' ' + classPrefix + '--bordered' +
+        ' ' + classPrefix + '--' + (verifyStatus === 2 ? 'error' : verifyStatus === 1 ? 'success' : '') +
+        ' ' + tClass
     "
-    :style="_._style([style, customStyle])"
+    :style="_._style([customStyle])"
   >
     <view
       v-if="label"

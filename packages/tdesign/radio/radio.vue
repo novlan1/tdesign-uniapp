@@ -1,8 +1,8 @@
 <template>
   <view
     :id="tId"
-    :style="_._style([style, customStyle])"
-    :class="_.cls(classPrefix, [_placement, ['block', block]]) + ' class ' + tClass"
+    :style="_._style([customStyle])"
+    :class="_.cls(classPrefix, [_placement, ['block', block]]) + ' ' + tClass"
     :disabled="_disabled"
     aria-role="radio"
     :aria-checked="dataChecked"

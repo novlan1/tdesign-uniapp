@@ -2,7 +2,6 @@
   <view :class="classPrefix + '__root'">
     <t-popup
       v-if="usePopup"
-      class="class"
       :visible="dataVisible"
       :using-custom-navbar="popupProps?.usingCustomNavbar || false"
       :custom-navbar-height="popupProps?.customNavbarHeight"
@@ -16,7 +15,7 @@
       <TemplateVue
         ref="templateVue"
         :class-prefix="classPrefix"
-        :custom-style="_._style([style, customStyle])"
+        :custom-style="_._style([customStyle])"
         :is-multiple="isMultiple"
         :type="type"
         :slider-info="sliderInfo"
@@ -40,7 +39,7 @@
       <TemplateVue
         ref="templateVue"
         :class-prefix="classPrefix"
-        :custom-style="_._style([style, customStyle])"
+        :custom-style="_._style([customStyle])"
         :is-multiple="isMultiple"
         :type="type"
         :slider-info="sliderInfo"
@@ -287,8 +286,7 @@ export default uniComponent({
             this.setCoreStyle();
           }, 33);
         })
-        .catch((err) => {
-          console.warn('err', err);
+        .catch(() => {
         });
     },
 

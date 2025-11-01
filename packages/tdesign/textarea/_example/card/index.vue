@@ -4,7 +4,7 @@
       t-class="external-class"
       label="标签文字"
       placeholder="请输入文字"
-      maxlength="500"
+      :maxlength="500"
       indicator
       :disable-default-padding="true"
       :custom-style="style"

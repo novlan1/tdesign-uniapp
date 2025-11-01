@@ -1,7 +1,7 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
-    :class="className + ' class'"
+    :style="_._style([customStyle])"
+    :class="className"
   >
     <slot />
     <view :class="classPrefix + '__collapse--slot'">

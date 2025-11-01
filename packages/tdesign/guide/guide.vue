@@ -8,13 +8,13 @@
       background-color="transparent"
       :z-index="zIndex"
     >
-      <view :class="'class ' + prefix + '-class ' + classPrefix">
+      <view :class="tClass + ' ' + classPrefix">
         <view
-          :class="prefix + '-class-reference ' + classPrefix + '__reference ' + (nonOverlay ? classPrefix + '__reference--nonoverlay' : '')"
+          :class="tClassReference + ' ' + classPrefix + '__reference ' + (nonOverlay ? classPrefix + '__reference--nonoverlay' : '')"
           :style="referenceStyle"
         />
         <view
-          :class="prefix + '-class-popover ' + classPrefix + '__container ' + (title || body ? classPrefix + '__container--' + modeType : '')"
+          :class="tClassPopover + ' ' + classPrefix + '__container ' + (title || body ? classPrefix + '__container--' + modeType : '')"
           :style="popoverStyle"
         >
           <ContentComp
@@ -31,6 +31,10 @@
             :hide-skip="hideSkip"
             :hide-back="hideBack"
             :steps="steps"
+            :t-class-tooltip="tClassTooltip"
+            :t-class-body="tClassBody"
+            :t-class-title="tClassTitle"
+            :t-class-footer="tClassFooter"
             @onTplButtonTap="onTplButtonTap"
           >
             <template #content-0>
@@ -111,8 +115,8 @@
       :z-index="zIndex"
       placement="center"
     >
-      <view :class="'class ' + prefix + '-class ' + classPrefix">
-        <view :class="prefix + '-class-popover ' + classPrefix + '__container ' + (title || body ? classPrefix + '__container--' + modeType : '')">
+      <view :class="tClass + ' ' + classPrefix">
+        <view :class="tClassPopover + ' ' + classPrefix + '__container ' + (title || body ? classPrefix + '__container--' + modeType : '')">
           <ContentComp
             :title="title"
             :body="body"
@@ -127,6 +131,10 @@
             :hide-skip="hideSkip"
             :hide-back="hideBack"
             :steps="steps"
+            :t-class-tooltip="tClassTooltip"
+            :t-class-body="tClassBody"
+            :t-class-title="tClassTitle"
+            :t-class-footer="tClassFooter"
             @onTplButtonTap="onTplButtonTap"
           >
             <template #content-0>
@@ -233,10 +241,12 @@ export default uniComponent({
     `${prefix}-class`,
     `${prefix}-class-reference`,
     `${prefix}-class-popover`,
+
     `${prefix}-class-tooltip`,
     `${prefix}-class-title`,
     `${prefix}-class-body`,
     `${prefix}-class-footer`,
+
     `${prefix}-class-skip`,
     `${prefix}-class-next`,
     `${prefix}-class-back`,
@@ -360,6 +370,12 @@ export default uniComponent({
       return styles({ position: 'absolute', ...style });
     },
     makeButtonProps(step, mode) {
+      const {
+        tClassSkip,
+        tClassNext,
+        tClassBack,
+        tClassFinish,
+      } = this;
       let skipButton = coalesce(step.skipButtonProps, this.skipButtonProps);
       const size = mode === 'popover' ? 'extra-small' : 'medium';
       skipButton = {
@@ -367,7 +383,7 @@ export default uniComponent({
         content: '跳过',
         size,
         ...skipButton,
-        tClass: `${prefix}-class-skip ${name}__button ${skipButton?.class || ''}`,
+        tClass: `${tClassSkip} ${name}__button ${skipButton?.class || ''}`,
         type: 'skip',
       };
       let nextButton = coalesce(step.nextButtonProps, this.nextButtonProps);
@@ -376,7 +392,7 @@ export default uniComponent({
         content: '下一步',
         size,
         ...nextButton,
-        tClass: `${prefix}-class-next ${name}__button ${nextButton?.class || ''}`,
+        tClass: `${tClassNext} ${name}__button ${nextButton?.class || ''}`,
         type: 'next',
       };
       nextButton = { ...nextButton, content: this.buttonContent(nextButton) };
@@ -386,7 +402,7 @@ export default uniComponent({
         content: '返回',
         size,
         ...backButton,
-        tClass: `${prefix}-class-back ${name}__button ${backButton?.class || ''}`,
+        tClass: `${tClassBack} ${name}__button ${backButton?.class || ''}`,
         type: 'back',
       };
       let finishButton = coalesce(step.finishButtonProps, this.finishButtonProps);
@@ -395,7 +411,7 @@ export default uniComponent({
         content: '完成',
         size,
         ...finishButton,
-        tClass: `${prefix}-class-finish ${name}__button ${finishButton?.class || ''}`,
+        tClass: `${tClassFinish} ${name}__button ${finishButton?.class || ''}`,
         type: 'finish',
       };
       finishButton = { ...finishButton, content: this.buttonContent(finishButton) };

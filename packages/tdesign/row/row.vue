@@ -1,7 +1,7 @@
 <template>
   <view
-    :class="'class ' + prefix + '-row'"
-    :style="getRowStyles(gutter, style, customStyle)"
+    :class="prefix + '-row'"
+    :style="getRowStyles(gutter, customStyle)"
   >
     <slot />
   </view>

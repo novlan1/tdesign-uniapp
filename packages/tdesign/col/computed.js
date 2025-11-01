@@ -1,6 +1,6 @@
 import utils from '../common/utils.wxs';
 
-export function getColStyles(gutter, style, customStyle) {
+export function getColStyles(gutter, customStyle) {
   let _style = '';
   if (gutter) {
     _style = utils._style({
@@ -9,6 +9,6 @@ export function getColStyles(gutter, style, customStyle) {
     });
   }
 
-  return utils._style([style, customStyle]) + _style;
+  return utils._style([customStyle]) + _style;
 }
 

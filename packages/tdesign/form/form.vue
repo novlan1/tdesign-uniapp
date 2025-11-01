@@ -3,22 +3,12 @@
     <form
       :class="
         classPrefix +
-          ' ' +
-          classPrefix +
-          '--' +
-          labelAlign +
-          ' ' +
-          classPrefix +
-          '--' +
-          (disabled ? 'disabled' : '') +
-          ' ' +
-          classPrefix +
-          '--' +
-          (readonly ? 'readonly' : '') +
-          ' ' +
-          tClass
+          ' ' + classPrefix + '--' + labelAlign +
+          ' ' + classPrefix + '--' + (disabled ? 'disabled' : '') +
+          ' ' + classPrefix + '--' + (readonly ? 'readonly' : '') +
+          ' ' + tClass
       "
-      :style="style"
+      :style="customStyle"
     >
       <slot />
     </form>

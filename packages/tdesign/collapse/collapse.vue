@@ -1,8 +1,7 @@
 <template>
   <view
-    :style="_._style([style, customStyle])"
+    :style="_._style([customStyle])"
     :class="[
-      'class ',
       tClass,
       _.cls(classPrefix, [['hairline--top-bottom', border], theme])
     ]"

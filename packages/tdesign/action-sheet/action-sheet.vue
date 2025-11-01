@@ -1,8 +1,8 @@
 <template>
   <view
     :id="classPrefix"
-    :style="_._style([style, customStyle])"
-    :class="classPrefix + ' class ' + prefix + '-class'"
+    :style="_._style([customStyle])"
+    :class="classPrefix + ' ' + tClass"
   >
     <t-popup
       :visible="dataVisible"
@@ -15,7 +15,7 @@
       @visible-change="onPopupVisibleChange"
     >
       <view
-        :class="_.cls(classPrefix + '__content', [['grid', gridThemeItems.length]]) + ' ' + prefix + '-class-content'"
+        :class="_.cls(classPrefix + '__content', [['grid', gridThemeItems.length]]) + ' ' + tClassContent"
         tabindex="0"
       >
         <view
@@ -137,7 +137,7 @@
       >
         <view :class="classPrefix + '__gap-' + dataTheme" />
         <view
-          :class="classPrefix + '__cancel ' + prefix + '-class-cancel'"
+          :class="classPrefix + '__cancel ' + tClassCancel"
           :hover-class="classPrefix + '__cancel--hover'"
           hover-stay-time="70"
           aria-role="button"
