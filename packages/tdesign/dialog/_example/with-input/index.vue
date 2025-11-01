@@ -24,11 +24,12 @@
       >
         <t-input
           borderless
-          class="dialog-input"
+          t-class="dialog-input"
           clearable
           placeholder="输入12文案"
           placeholder-class="placeholder"
           :custom-style="inputStyle"
+          :placeholder-style="placeholderStyle"
         />
       </template>
     </t-dialog>
@@ -58,11 +59,12 @@
       >
         <t-input
           borderless
-          class="dialog-input"
+          t-class="dialog-input"
           :custom-style="inputStyle"
           clearable
           placeholder="输入12文案"
           placeholder-class="placeholder"
+          :placeholder-style="placeholderStyle"
         />
       </template>
     </t-dialog>
@@ -89,6 +91,7 @@ export default {
       showTextAndTitleWithInput: false,
 
       inputStyle: 'background-color: var(--td-bg-color-page);padding-top: 12px;padding-bottom: 12px;',
+      placeholderStyle: 'color: var(--td-text-color-placeholder);height: 24px;line-height: 24px;display: flex;align-items: center;',
     };
   },
   created() {},
@@ -109,13 +112,13 @@ export default {
     margin-bottom: 32rpx;
 }
 
-:deep(.placeholder) {
-    color: var(--td-text-color-placeholder);
-    line-height: 96rpx;
-    height: 96rpx !important;
-    display: flex;
-    align-items: center;
-}
+/* :deep(.placeholder) {
+     color: var(--td-text-color-placeholder);
+     line-height: 96rpx;
+     height: 96rpx;
+     display: flex;
+     align-items: center;
+} */
 
 :deep(.dialog-input) {
     text-align: left;
