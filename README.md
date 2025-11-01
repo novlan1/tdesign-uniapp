@@ -44,7 +44,7 @@ https://uwayfly.com/tdesign-uniapp/
 
 <img src="./packages/demo/docs/img/tdesign-uniapp-mp.png" width="260" />
 
-## 支持平台
+## 平台兼容性
 
 |Vue2|Vue3|H5|Android|iOS|app-nvue|微信小程序|QQ小程序|
 |---|---|---|---|---|---|---|---|
