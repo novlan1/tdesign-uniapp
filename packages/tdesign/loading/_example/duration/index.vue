@@ -10,6 +10,7 @@
     <view class="slider-container">
       <TSlider
         t-class="slider-class"
+        style="flex-grow: 1;"
         :value="duration"
         :min="100"
         :max="1500"
@@ -57,7 +58,7 @@ export default {
     width: 718rpx;
 }
 
-.slider-class {
+:deep(.slider-class) {
     flex-grow: 1;
 }
 </style>
