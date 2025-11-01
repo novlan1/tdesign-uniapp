@@ -143,7 +143,7 @@ export default uniComponent({
       } = this;
 
       const lower = compareVersion(version, '2.10.3') < 0;
-      // #ifdef MP-WEIXIN
+      // #ifdef MP-WEIXIN || MP-QQ
       if ('heightFix' === mode && lower) {
         getRect(this, `#${tId || 'image'}`).then((e) => {
           const {
