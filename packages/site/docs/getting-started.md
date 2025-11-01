@@ -6,17 +6,16 @@ spline: explain
 
 ## 预览
 
-UniApp 组件示例小程序，请使用微信扫码预览 ↓
-<br/>
+扫码查看 ↓
 
-<img width="260" src="https://mike-1255355338.cos.ap-guangzhou.myqcloud.com/article/2025/10/own_mike_5nFZmp27arnbwnjQ.png" />
+<img src="https://cdn.uwayfly.com/tdesign-uniapp/tdesign-uniapp-qrcodes.png?a=3" width="600" />
 
 ## 安装
 
 ### NPM 方式
 
 ```bash
-npm i tdesign-uniapp -s
+npm i tdesign-uniapp
 ```
 
 ### UNI_MODULES 方式
@@ -75,20 +74,17 @@ import TLoading from 'tdesign-uniapp/loading/loading.vue';
 }
 ```
 
-也可以使用我们提供的 [auto-import-resolver](https://www.npmjs.com/package/tdesign-uniapp-auto-import-resolver)，但是这种工具在小程序等平台下可能存在兼容性问题（uni-app 自身编译问题），不推荐使用。
+## 平台兼容性
 
-## 支持平台
+|Vue2|Vue3|H5|Android|iOS|app-nvue|微信小程序|QQ小程序|
+|---|---|---|---|---|---|---|---|
+|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">_</p>|<p align="center">√</p>|<p align="center">√</p>|
 
-目前不支持 `nvue`。
+<p></p>
 
-已验证平台
-
-1. H5
-2. 微信小程序
-3. iOS
-4. 安卓
-
-其他平台陆续验证中，欢迎共建。
+|支付宝小程序|抖音小程序|百度小程序|快手小程序|小红书小程序|京东小程序|
+|---|---|---|---|---|---|
+|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|
 
 ## 开发
 
