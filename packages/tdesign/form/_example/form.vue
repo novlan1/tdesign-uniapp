@@ -22,6 +22,8 @@
             :theme="isActive1 ? 'light' : 'default'"
             shape="round"
             data-name="isActive1"
+            :style="!useVirtualHost ? 'flex: 1;display: flex;' : ''"
+            custom-style="flex: 1;margin-right: 16px;height: 32px;"
             @click="() => onClick()"
           >
             水平排布
@@ -30,6 +32,8 @@
             :theme="isActive2 ? 'light' : 'default'"
             shape="round"
             data-name="isActive2"
+            :style="!useVirtualHost ? 'flex: 1;display: flex;' : ''"
+            custom-style="flex: 1;height: 32px;"
             @click="() => onClick()"
           >
             竖向排布
@@ -53,7 +57,7 @@
 import Horizontal from './horizontal/index.vue';
 import Vertical from './vertical/index.vue';
 import TButton from 'tdesign-uniapp/button/button.vue';
-
+import { canUseVirtualHost } from 'tdesign-uniapp/common/version';
 
 export default {
   components: {
@@ -70,6 +74,9 @@ export default {
   computed: {
     isActive2() {
       return !this.isActive1;
+    },
+    useVirtualHost() {
+      return canUseVirtualHost();
     },
   },
   methods: {

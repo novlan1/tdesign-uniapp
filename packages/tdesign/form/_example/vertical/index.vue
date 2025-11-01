@@ -22,6 +22,7 @@
           borderless
           placeholder="请输入用户名"
           data-field="name"
+          style="flex: 1;"
           @change="onInputChange($event, { field: 'name' })"
         />
       </t-form-item>
@@ -37,6 +38,7 @@
           :clearable="false"
           placeholder="请输入密码"
           data-field="password"
+          style="flex: 1;"
           @change="onInputChange($event, { field: 'password' })"
         />
       </t-form-item>
@@ -49,6 +51,7 @@
           :value="formData.gender"
           t-class="box"
           borderless
+          style="flex: 1;"
           @change="onRadioChange"
         >
           <t-radio
@@ -81,6 +84,7 @@
           borderless
           placeholder="请输入生日"
           data-field="birth"
+          style="flex: 1;"
           @change="onInputChange($event, { field: 'birth' })"
         />
       </t-form-item>
@@ -95,6 +99,7 @@
           borderless
           placeholder="请选择籍贯"
           :readonly="true"
+          style="flex: 1;"
           @click="showCascader"
         />
         <t-cascader
@@ -141,6 +146,7 @@
           indicator
           :maxlength="50"
           placeholder="请输入个人简介"
+          style="flex: 1;"
           @change="onTextareaChange"
         />
       </t-form-item>
@@ -156,6 +162,7 @@
           :action="action"
           t-class="upload"
           :grid-config="gridConfig"
+          style="flex: 1;"
           @fail="onFail"
           @progress="onProgress"
           @change="onChangeUpload"
@@ -171,6 +178,8 @@
           variant="light"
           type="submit"
           size="large"
+          :style="!useVirtualHost ? 'flex: 1;display: flex;' : ''"
+          custom-style="flex: 1;margin-right: 16px;height: 40px;"
           @click="submit"
         >
           提交
@@ -180,6 +189,8 @@
           variant="base"
           type="reset"
           size="large"
+          :style="!useVirtualHost ? 'flex: 1;display: flex;' : ''"
+          custom-style="flex: 1;height: 40px;"
           @click="reset"
         >
           重置
@@ -202,6 +213,9 @@ import tRate from 'tdesign-uniapp/rate/rate.vue';
 import tTextarea from 'tdesign-uniapp/textarea/textarea.vue';
 import tUpload from 'tdesign-uniapp/upload/upload.vue';
 import tButton from 'tdesign-uniapp/button/button.vue';
+import { canUseVirtualHost } from 'tdesign-uniapp/common/version';
+
+
 export default {
   options: {
     styleIsolation: 'shared',
@@ -473,6 +487,11 @@ export default {
       },
     };
   },
+  computed: {
+    useVirtualHost() {
+      return canUseVirtualHost();
+    },
+  },
   created() {},
   methods: {
     onReset(e) {
@@ -577,12 +596,12 @@ export default {
     width: 100%;
 }
 
-.button-group :deep(.t-button) {
+/* .button-group :deep(.t-button) {
     height: 80rpx;
     flex: 1;
 }
 
 .button-group :deep(.t-button:not(:last-child)) {
     margin-right: 32rpx;
-}
+} */
 </style>
