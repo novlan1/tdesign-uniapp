@@ -29,11 +29,15 @@
 
 ### NPM 方式
 
+<br />
+
 ```bash
 npm i tdesign-uniapp
 ```
 
 ### UNI_MODULES 方式
+
+<br />
 
 已上传[插件](https://ext.dcloud.net.cn/plugin?id=25431)到 DCloud 插件市场，请打开插件详情页并点击`使用 HBuilderX 导入插件`。
 
@@ -95,10 +99,11 @@ import TLoading from 'tdesign-uniapp/loading/loading.vue';
 |---|---|---|---|---|---|---|---|
 |<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">_</p>|<p align="center">√</p>|<p align="center">√</p>|
 
+<br />
+
 |支付宝小程序|抖音小程序|百度小程序|快手小程序|小红书小程序|京东小程序|
 |---|---|---|---|---|---|
 |<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|
-
 
 ## 反馈
 
