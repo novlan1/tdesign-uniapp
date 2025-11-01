@@ -88,6 +88,7 @@ export default {
     border-radius: 12rpx;
     box-sizing: border-box;
     overflow: hidden;
+    font-size: 16px;
 }
 
 .format-item.active {
