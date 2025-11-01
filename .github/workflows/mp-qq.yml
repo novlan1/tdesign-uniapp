@@ -27,16 +27,17 @@ jobs:
         run: pnpm run init && pnpm run build:mp-qq
       
     # 上传小程序版本到管理端，并将此版本设置为体验版（设置体验版可选）
-      - name: Deploy 
-        uses: docker://qqminiapp/build:latest 
-        env: 
-          PLUGIN_VERSION: 1.0.0
-          PLUGIN_DESC: CI自动构建上传
-          PLUGIN_APPTOKEN: ${{ secrets.MP_QQ_APP_TOKEN }}
-          PLUGIN_BUILDUSER: ${{ github.actor }} 
-          PLUGIN_EXPERIENCE: true 
-          #PLUGIN_PREVIEW: true
-          #PLUGIN_FIRSTPAGE: pages/index/index
-          #PLUGIN_USEPACKAGEJSON: true
-          #PLUGIN_NPMBUILD: true
-          PLUGIN_SOURCECODEPATH: ./packages/demo/dist/build/mp-qq
+    # 看起来已经没人维护了，暂时不使用
+      # - name: Deploy 
+      #   uses: docker://qqminiapp/build:latest 
+      #   env: 
+      #     PLUGIN_VERSION: 1.0.0
+      #     PLUGIN_DESC: CI自动构建上传
+      #     PLUGIN_APPTOKEN: ${{ secrets.MP_QQ_APP_TOKEN }}
+      #     PLUGIN_BUILDUSER: ${{ github.actor }} 
+      #     PLUGIN_EXPERIENCE: true 
+      #     #PLUGIN_PREVIEW: true
+      #     #PLUGIN_FIRSTPAGE: pages/index/index
+      #     #PLUGIN_USEPACKAGEJSON: true
+      #     #PLUGIN_NPMBUILD: true
+      #     PLUGIN_SOURCECODEPATH: ./packages/demo/dist/build/mp-qq
