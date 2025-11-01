@@ -1,15 +1,40 @@
-# TDesign Uni App
 
-> TDesign is an artwork.
+<p align="center">
+  <a href="https://tdesign.tencent.com/" target="_blank">
+    <img alt="TDesign Logo" width="200" src="https://tdesign.gtimg.com/site/TDesign.png">
+  </a>
+</p>
 
-TDesign 在 uni-app 的适配方案。
+<p align="center">
+  <a href="https://github.com/novlan1/tdesign-uniapp/blob/develop/LICENSE">
+    <img src="https://img.shields.io/npm/l/tdesign-uniapp.svg?sanitize=true" alt="License">
+  </a>
+  <a href="https://www.npmjs.com/package/tdesign-uniapp">
+    <img src="https://img.shields.io/npm/v/tdesign-uniapp.svg?sanitize=true" alt="Version">
+  </a>
+  <a href="https://www.npmjs.com/package/tdesign-uniapp">
+    <img src="https://img.shields.io/npm/dm/tdesign-uniapp" alt="Downloads">
+  </a>
+</p>
+
+[TDesign](https://github.com/Tencent/tdesign) 适配 [uniapp](https://uniapp.dcloud.net.cn/) 的组件库。
+
+## 文档
+
+[https://uwayfly.com/tdesign-uniapp/](https://uwayfly.com/tdesign-uniapp/)
+
+## 预览
+
+扫码查看 ↓
+
+<img src="https://cdn.uwayfly.com/tdesign-uniapp/tdesign-uniapp-qrcodes.png" width="600" />
 
 ## 安装
 
 ### NPM 方式
 
 ```bash
-pnpm i tdesign-uniapp
+npm i tdesign-uniapp
 ```
 
 ### UNI_MODULES 方式
@@ -20,13 +45,13 @@ pnpm i tdesign-uniapp
 
 1. `main.ts` 中引入样式文件
 
-```ts
+```js
 import 'tdesign-uniapp/common/style/theme/index.css';
 ```
 
 2. 在文件中使用
 
-```vue
+```html
 <template>
   <t-loading />
 </template>
@@ -36,11 +61,37 @@ import TLoading from 'tdesign-uniapp/loading/loading.vue';
 </script>
 ```
 
-## 预览
+## 自动导入
 
-https://uwayfly.com/tdesign-uniapp/
+在 `pages.json` 配置 [easycom](https://uniapp.dcloud.net.cn/collocation/pages.html#easycom)，可实现自动导入。
 
-<img src="https://cdn.uwayfly.com/tdesign-uniapp/tdesign-uniapp-qrcodes.png" width="600" />
+### CLI 模式
+
+使用 CLI 模式，即使用 `node_modules` 下的 `tdesign-uniapp` 时，配置如下。
+
+```json
+{
+  "easycom": {
+    "custom": {
+      "^t-(.*)": "tdesign-uniapp/$1/$1.vue"
+    }
+  }
+}
+```
+
+### UNI_MODULES 模式
+
+使用 `uni_modules` 下的 `tdesign-uniapp` 时，配置如下。
+
+```json
+{
+  "easycom": {
+    "custom": {
+      "^t-(.*)": "@/uni_modules/tdesign-uniapp/components/$1/$1.vue"
+    }
+  }
+}
+```
 
 ## 平台兼容性
 
@@ -52,19 +103,13 @@ https://uwayfly.com/tdesign-uniapp/
 |---|---|---|---|---|---|
 |<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|
 
-## 注意
 
-1. 提供的是源码，Vue2 下需配置 `transpileDependencies`
-2. 理论上同时支持 Vue2 和 Vue3，有不符合预期的可以提 `issue`
+## 反馈
 
-## FAQ
+有任何问题，建议通过 [Github issues](https://github.com/novlan1/tdesign-uniapp/issues) 反馈或扫码加入用户微信群。
 
-### 为什么不提供转换工具
+<img src="https://raw.githubusercontent.com/Tencent/tdesign/main/packages/site-components/src/images/groups/wx-group.png" width="200" />
 
-这里只提供转换后的产物，而非转换工具。原因在于业务方真正使用的是组件库，真正在意的应该是组件库。也正因为如此，`tdesign-uniapp` 会将转换产物纳入 `git`，每次发布都会对比 `diff`，保证每次发布可控、可靠，后面也会通过单元测试等保证质量。
+## 开源协议
 
-### 与 tdesign-miniprogram 版本关系
-
-`tdesign-uniapp` 有独立的版本，并不与 `tdesign-miniprogram` 的版本相同。这是因为转换后的产物很有可能有自己的 `feature/bug`，处理需要发版，必然导致版本分叉。
-
-多个 `tdesign-uniapp` 版本会对应一个 `tdesign-miniprogram` 版本，我们会尽量提供对应 `miniprogram`  最新版本的转换产物。
+TDesign 遵循 [MIT 协议](https://github.com/novlan1/tdesign-uniapp/blob/develop/LICENSE)。

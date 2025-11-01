@@ -25,17 +25,16 @@
 
 ## 预览
 
-UniApp 组件示例小程序，请使用微信扫码预览 ↓
-<br/>
+扫码查看 ↓
 
-<img width="260" src="https://mike-1255355338.cos.ap-guangzhou.myqcloud.com/article/2025/10/own_mike_5nFZmp27arnbwnjQ.png" />
+<img src="https://cdn.uwayfly.com/tdesign-uniapp/tdesign-uniapp-qrcodes.png" width="600" />
 
 ## 安装
 
 ### NPM 方式
 
 ```bash
-npm i tdesign-uniapp -s
+npm i tdesign-uniapp
 ```
 
 ### UNI_MODULES 方式
@@ -94,6 +93,17 @@ import TLoading from 'tdesign-uniapp/loading/loading.vue';
 }
 ```
 
+## 平台兼容性
+
+|Vue2|Vue3|H5|Android|iOS|app-nvue|微信小程序|QQ小程序|
+|---|---|---|---|---|---|---|---|
+|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">_</p>|<p align="center">√</p>|<p align="center">√</p>|
+
+|支付宝小程序|抖音小程序|百度小程序|快手小程序|小红书小程序|京东小程序|
+|---|---|---|---|---|---|
+|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|
+
+
 ## 反馈
 
 有任何问题，建议通过 [Github issues](https://github.com/novlan1/tdesign-uniapp/issues) 反馈或扫码加入用户微信群。
@@ -102,4 +112,4 @@ import TLoading from 'tdesign-uniapp/loading/loading.vue';
 
 ## 开源协议
 
-TDesign 遵循 [MIT 协议](https://github.com/novlan1/tdesign-uniapp/LICENSE)。
+TDesign 遵循 [MIT 协议](https://github.com/novlan1/tdesign-uniapp/blob/develop/LICENSE)。
