@@ -29,7 +29,7 @@
         >
           <t-icon
             :custom-style="_prefixIcon.style || ''"
-            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (_prefixIcon.activeIdx == _prefixIcon.index ? 'active ' : ' ') + tClassIcon"
+            :t-class="_prefixIcon.tClass"
             :prefix="_prefixIcon.prefix"
             :name="_prefixIcon.name"
             :size="_prefixIcon.size"
@@ -37,7 +37,7 @@
             :aria-hidden="true"
             :aria-label="_prefixIcon.ariaLabel"
             :aria-role="_prefixIcon.arialRole"
-            @click="bindclick || ''"
+            @click="_suffixIcon.click || ''"
           />
         </block>
       </view>
@@ -56,7 +56,7 @@
         >
           <t-icon
             :custom-style="_suffixIcon.style || ''"
-            :t-class="classPrefix + '__icon ' + classPrefix + '__icon--' + (_suffixIcon.activeIdx == _suffixIcon.index ? 'active ' : ' ') + tClassIcon"
+            :t-class="_suffixIcon.tClass"
             :prefix="_suffixIcon.prefix || ''"
             :name="_suffixIcon.name"
             :size="_suffixIcon.size"
@@ -64,7 +64,7 @@
             :aria-hidden="true"
             :aria-label="_suffixIcon.ariaLabel"
             :aria-role="_suffixIcon.arialRole"
-            @click="bindclick || ''"
+            @click="_suffixIcon.click || ''"
           />
         </block>
       </view>
@@ -84,6 +84,13 @@ const name = `${prefix}-link`;
 
 export default uniComponent({
   name,
+  externalClasses: [
+    `${prefix}-class`,
+    `${prefix}-class-hover`,
+    `${prefix}-class-prefix-icon`,
+    `${prefix}-class-content`,
+    `${prefix}-class-suffix-icon`,
+  ],
   options: {
     styleIsolation: 'shared',
   },

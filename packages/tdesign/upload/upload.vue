@@ -524,18 +524,26 @@ export default uniComponent({
       }
 
       let query;
-      // #ifdef H5
+      // #ifdef H5 || APP-PLUS
       query = uni.createSelectorQuery().in(this);
       // #endif
-      // #ifndef H5
-      query = this.createSelectorQuery();
+      if (!query) {
+        query = this.createSelectorQuery();
+      }
+
+
+      let selectorGridItem;
+      let selectorGrid;
+      // #ifdef H5 || APP-PLUS
+      selectorGridItem = '.t-grid-item';
+      selectorGrid = '.t-grid';
       // #endif
-      let selectorGridItem = '.t-grid-item';
-      let selectorGrid = '.t-grid';
-      // #ifndef H5
-      selectorGridItem = `.${classPrefix} >>> .t-grid-item`;
-      selectorGrid = `.${classPrefix} >>> .t-grid`;
-      // #endif
+
+      if (!selectorGridItem) {
+        selectorGridItem = `.${classPrefix} >>> .t-grid-item`;
+        selectorGrid = `.${classPrefix} >>> .t-grid`;
+      }
+
       query.select(selectorGridItem).boundingClientRect();
       query.select(selectorGrid).boundingClientRect();
       query.selectViewport().scrollOffset();

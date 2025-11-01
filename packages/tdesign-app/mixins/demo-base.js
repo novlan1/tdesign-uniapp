@@ -21,5 +21,12 @@ export default {
       // #endif
       return result;
     },
+    isMPAlipay() {
+      let result = false;
+      // #ifdef MP-ALIPAY
+      result = true;
+      // #endif
+      return result;
+    },
   },
 };

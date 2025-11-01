@@ -1,7 +1,7 @@
 <template>
   <view
     :class="classPrefix + ' ' + tClass"
-    :style="_._style(['z-index:' + zIndex, containerStyle, style, customStyle])"
+    :style="_._style(['z-index:' + zIndex, containerStyle, customStyle])"
   >
     <view
       :class="classPrefix + '__content ' + tClassContent"
