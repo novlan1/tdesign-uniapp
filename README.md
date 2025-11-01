@@ -46,13 +46,13 @@ https://uwayfly.com/tdesign-uniapp/
 
 ## 支持平台
 
-|H5|Android|iOS|app-nvue|
-|---|---|---|---|
-|√|√|√|-|
-
-|微信小程序|QQ小程序|支付宝小程序|抖音小程序|百度小程序|快手小程序|小红书小程序|京东小程序|
+|Vue2|Vue3|H5|Android|iOS|app-nvue|微信小程序|QQ小程序|
 |---|---|---|---|---|---|---|---|
-|√|√|√|√|√|√|√|√|
+|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">_</p>|<p align="center">√</p>|<p align="center">√</p>|
+
+|支付宝小程序|抖音小程序|百度小程序|快手小程序|小红书小程序|京东小程序|
+|---|---|---|---|---|---|
+|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|
 
 ## 注意
 
