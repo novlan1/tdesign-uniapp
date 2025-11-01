@@ -62,7 +62,7 @@
                     align="center"
                     :t-class="classPrefix + '__grid ' + classPrefix + '__grid--swiper'"
                     :column="dataCount / 2"
-                    custom-style="heightStyle"
+                    :custom-style="heightStyle"
                   >
                     <t-grid-item
                       v-for="(item, index1) in item"
