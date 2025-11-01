@@ -24,6 +24,7 @@
       >
         <t-badge
           :count="16"
+          style="display: inline-flex;"
         />
       </template>
     </t-cell>
