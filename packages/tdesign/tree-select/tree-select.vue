@@ -7,12 +7,14 @@
       v-for="(item, level) in treeOptions"
       :key="level"
       :t-class="getScrollViewTClass(level)"
+      :class="getScrollViewClass(level)"
       :scroll-into-view="scrollIntoView && scrollIntoView[level] ? 'scroll-to-' + scrollIntoView[level] : ''"
     >
       <t-side-bar
         v-if="level == 0"
         :value="innerValue[level]"
         :t-class="classPrefix + '-column ' + tClassLeftColumn"
+        style="width: 100%;height: auto;"
         @change="onRootChange"
       >
         <t-side-bar-item
@@ -118,6 +120,7 @@ import { getTreeDepth, coalesce, nextTick } from '../common/utils';
 import props from './props';
 import _ from '../common/utils.wxs';
 import { getTreeClass } from './computed.js';
+import { canUseVirtualHost } from '../common/version';
 
 const name = `${prefix}-tree-select`;
 
@@ -298,9 +301,10 @@ export default uniComponent({
     },
 
     getScrollViewTClass(level) {
-      let result = '';
-      result = this.getScrollViewRealClass(level);
-      return result;
+      return canUseVirtualHost() ? this.getScrollViewRealClass(level) : '';
+    },
+    getScrollViewClass(level) {
+      return !canUseVirtualHost() ? this.getScrollViewRealClass(level) : '';
     },
     getScrollViewRealClass(level) {
       const { classPrefix, leafLevel, treeOptions, tClass } = this;
