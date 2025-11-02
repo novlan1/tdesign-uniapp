@@ -10,7 +10,7 @@ spline: explain
 
 <img src="https://cdn.uwayfly.com/tdesign-uniapp/tdesign-uniapp-qrcodes.png?a=3" width="600" />
 
-（注：其他平台同样支持，仅因平台审核等原因未能上架预览，不影响组件库正常使用。）
+> 其他平台同样支持，仅因平台审核等原因未能上架预览，不影响组件库正常使用。
 
 ## 安装
 
