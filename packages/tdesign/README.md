@@ -25,6 +25,8 @@
 
 <img src="https://cdn.uwayfly.com/tdesign-uniapp/tdesign-uniapp-qrcodes.png?a=3" width="600" />
 
+（注：其他平台同样支持，仅因平台审核等原因未能上架预览，不影响组件库正常使用。）
+
 ## 安装
 
 ### NPM 方式
@@ -35,11 +37,11 @@ npm i tdesign-uniapp
 
 ### UNI_MODULES 方式
 
-已上传[插件](https://ext.dcloud.net.cn/plugin?id=25431)到 DCloud 插件市场，请打开插件详情页并点击`使用 HBuilderX 导入插件`。
+已上传 [插件](https://ext.dcloud.net.cn/plugin?id=25431) 到 DCloud 插件市场，请打开插件详情页并点击`使用 HBuilderX 导入插件`。
 
 ## 使用
 
-1. `main.ts` 中引入样式文件
+1. 在 `main.ts` 中引入样式文件
 
 ```js
 import 'tdesign-uniapp/common/style/theme/index.css';
@@ -91,15 +93,13 @@ import TLoading from 'tdesign-uniapp/loading/loading.vue';
 
 ## 平台兼容性
 
-|Vue2|Vue3|H5|Android|iOS|app-nvue|微信小程序|QQ小程序|
-|---|---|---|---|---|---|---|---|
-|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">_</p>|<p align="center">√</p>|<p align="center">√</p>|
+| 平台         | Vue2 | Vue3 | H5  | Android | iOS | App-nvue | 微信小程序 | QQ小程序 |
+| ------------ | ---- | ---- | --- | ------- | --- | -------- | ---------- | -------- |
+| **支持情况** | ✅    | ✅    | ✅   | ✅       | ✅   | ⚠️        | ✅          | ✅        |
 
-<p></p>
-
-|支付宝小程序|抖音小程序|百度小程序|快手小程序|小红书小程序|京东小程序|
-|---|---|---|---|---|---|
-|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|<p align="center">√</p>|
+| 平台         | 支付宝小程序 | 抖音小程序 | 百度小程序 | 快手小程序 | 小红书小程序 | 京东小程序 |
+| ------------ | ------------ | ---------- | ---------- | ---------- | ------------ | ---------- |
+| **支持情况** | ✅            | ✅          | ✅          | ✅          | ✅            | ✅          |
 
 ## 反馈
 
