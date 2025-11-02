@@ -52,7 +52,6 @@ export default {
   mixins: [SkylineBehavior],
   data() {
     return {
-      skylineRender: '',
     };
   },
   created() {},

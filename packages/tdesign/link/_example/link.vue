@@ -16,6 +16,7 @@
         <t-demo-header
           title="Link 链接"
           desc="文字超链接用于跳转一个新页面，如当前项目跳转，友情链接等。"
+          notice="渲染框架支持情况：Skyline、WebView"
         />
         <t-demo
           title="01 组件类型"

@@ -99,7 +99,6 @@ export default {
   mixins: [SkylineBehavior],
   data() {
     return {
-      skylineRender: '',
       mr16: 'margin-right: 16px;',
     };
   },

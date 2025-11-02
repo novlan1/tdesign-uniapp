@@ -11,6 +11,7 @@
       <t-demo-header
         title="Button 按钮"
         desc="用于开启一个闭环的操作任务，如“删除”对象、“购买”商品等。"
+        notice="渲染框架支持情况：Skyline、WebView"
       />
       <t-demo
         title="01 组件类型"

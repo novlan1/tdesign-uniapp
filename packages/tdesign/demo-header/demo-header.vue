@@ -1,7 +1,7 @@
 <template>
   <div>
     <TNoticeBar
-      :visible="false"
+      :visible="noticeVisible"
       :content="notice"
     />
     <view class="demo-title">
@@ -42,6 +42,17 @@ export default {
     return {
 
     };
+  },
+  computed: {
+    noticeVisible() {
+      let result = false;
+      // #ifdef MP-WEIXIN
+      if (this.notice) {
+        result = true;
+      }
+      // #endif
+      return result;
+    },
   },
 };
 </script>

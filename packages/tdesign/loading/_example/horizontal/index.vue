@@ -19,7 +19,7 @@
 
 <script>
 import tLoading from 'tdesign-uniapp/loading/loading.vue';
-// import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js'
+import SkylineBehavior from 'tdesign-uniapp/mixins/skyline.js';
 export default {
   options: {
     styleIsolation: 'shared',
@@ -27,13 +27,12 @@ export default {
   components: {
     tLoading,
   },
+  mixins: [SkylineBehavior],
   data() {
     return {
-      skylineRender: '',
     };
   },
   created() {},
-  // mixins: [SkylineBehavior],
   methods: {},
 };
 </script>

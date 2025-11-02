@@ -1,10 +1,13 @@
+import { getCurrentPage } from '../common/utils.js';
+
 export default {
-  data: {
-    skylineRender: false,
+  data() {
+    return {
+      skylineRender: false,
+    };
   },
-  lifetimes: {
-    created() {
-      this.skylineRender = this.renderer === 'skyline';
-    },
+  mounted() {
+    this.skylineRender = getCurrentPage().renderer === 'skyline';
+    console.log('skylineRender', this.skylineRender);
   },
 };

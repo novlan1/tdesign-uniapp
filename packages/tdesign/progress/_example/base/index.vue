@@ -49,15 +49,14 @@
 
 <script>
 import tProgress from 'tdesign-uniapp/progress/progress.vue';
-// import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js'
+import SkylineBehavior from 'tdesign-uniapp/mixins/skyline.js';
 export default {
   components: {
     tProgress,
   },
-  //   mixins: [SkylineBehavior],
+  mixins: [SkylineBehavior],
   data() {
     return {
-      skylineRender: '',
     };
   },
   created() {},

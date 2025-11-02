@@ -76,8 +76,10 @@ const list = ref<PageItem[]>([]);
 const currentYear = new Date().getFullYear();
 const isSkyline = ref(false);
 
-// just focus on webview
 const showTrySkyline = ref(false);
+// #ifdef MP-WEIXIN
+showTrySkyline.value = true;
+// #endif
 
 const trdPrivacy = ref<any>(null);
 const { theme } = useTheme();

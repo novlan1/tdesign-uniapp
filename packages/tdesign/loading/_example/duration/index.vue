@@ -24,7 +24,7 @@
 <script>
 import tLoading from 'tdesign-uniapp/loading/loading.vue';
 import TSlider from 'tdesign-uniapp/slider/slider.vue';
-// import SkylineBehavior from 'tdesign-site/src/mixins/skyline.js'
+import SkylineBehavior from 'tdesign-uniapp/mixins/skyline.js';
 
 
 export default {
@@ -34,13 +34,11 @@ export default {
   components: {
     tLoading,
     TSlider,
-    // tSlider,
   },
-  //   mixins: [SkylineBehavior],
+  mixins: [SkylineBehavior],
   data() {
     return {
       duration: 800,
-      skylineRender: false,
     };
   },
   created() {},

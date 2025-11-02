@@ -11,6 +11,7 @@
       <t-demo-header
         title="Icon 图标"
         desc="用于界面中的操作、入口、功能、服务等视觉表达，icon风格与品牌风格需要保持一致的感受，从而增加一致性"
+        notice="渲染框架支持情况：Skyline、WebView"
       />
       <t-demo title="01 基础组件图标">
         <baseComp />
