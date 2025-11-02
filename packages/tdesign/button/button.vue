@@ -210,4 +210,16 @@ export default uniComponent({
 </script>
 <style scoped>
 @import './button.css';
+
+/* #ifdef MP-QQ */
+/* 适配 qq 小程序 */
+.t-button--outline {
+  border-style: solid;
+  border-width: 2rpx;
+}
+.t-button--ghost {
+  border-style: solid;
+  border-width: 2rpx;
+}
+/* #endif */
 </style>

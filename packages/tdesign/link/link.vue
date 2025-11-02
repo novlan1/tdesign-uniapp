@@ -165,4 +165,11 @@ export default uniComponent({
 </script>
 <style scoped>
 @import './link.css';
+
+/* #ifdef H5 */
+:deep(.navigator-wrap) {
+  display: flex;
+  align-items: center;
+}
+/* #endif */
 </style>
