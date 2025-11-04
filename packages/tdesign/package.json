@@ -1,10 +1,15 @@
 {
   "name": "tdesign-uniapp",
   "id": "tdesign-uniapp",
-  "version": "0.4.2",
+  "version": "0.4.4-beta.1",
   "author": "novlan1",
   "title": "tdesign-uniapp",
   "description": "TDesign Component for uniapp",
+  "exports": {
+    "./loading/loading.vue": {
+      "types": "./types/loading.d.ts"
+    }
+  },
   "keywords": [
     "tdesign",
     "miniprogram",
@@ -50,7 +55,8 @@
     "build:quickapp-webview": "uni build -p quickapp-webview",
     "build:quickapp-webview-huawei": "uni build -p quickapp-webview-huawei",
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
-    "type-check": "vue-tsc --noEmit"
+    "type-check": "vue-tsc --noEmit",
+    "postinstall": "node ./script/postinstall"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.4.8",

@@ -6,11 +6,6 @@
   "bugs": {
     "url": "https://github.com/novlan1/tdesign-uniapp/issues"
   },
-  "exports": {
-    "./loading/loading.vue": {
-      "types": "./types/loading.d.ts"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/novlan1/tdesign-uniapp.git"
