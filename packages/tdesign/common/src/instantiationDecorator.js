@@ -85,6 +85,11 @@ export const toComponent = function (options) {
         const tDataKey = getInnerControlledValue(key);
         this[tDataKey] = detail[key];
       }
+      this.$emit(
+        `update:${key}`,
+        detail[key],
+        opts,
+      );
     }
 
     this.$emit(
@@ -129,11 +134,37 @@ export const wxComponent = function wxComponent() {
 };
 
 
+function filterProps(props) {
+  const newProps = {};
+  const emits = [];
+  const reg = /^on[A-Z][a-z]/;
+
+  Object.keys(props).forEach((key) => {
+    if (reg.test(key) && props[key].type === Function) {
+      const str = key.replace(/^on/, '');
+      const eventName = str.charAt(0).toLowerCase() + str.slice(1);
+      emits.push(toCamel(eventName));
+    } else {
+      newProps[key] = props[key];
+    }
+  });
+
+  return {
+    newProps,
+    emits,
+  };
+}
+
 export const uniComponent = function (info) {
+  const { newProps, emits } = filterProps(info.props || {});
   info.props = {
     ...getExternalClasses(info),
-    ...(info.props || {}),
+    ...newProps,
   };
+  info.emits = Array.from(new Set([
+    ...(info.emits || []),
+    ...emits,
+  ]));
 
   info.options = {
     ...(info.options || {}),

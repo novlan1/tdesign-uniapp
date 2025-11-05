@@ -6,23 +6,29 @@
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
 auto-start | Boolean | true | \- | N
-content | String / Slot | 'default' | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
+content | String | 'default' | \- | N
 format | String | HH:mm:ss | \- | N
 millisecond | Boolean | false | \- | N
-size | String | 'medium' | `0.5.1`。options: small/medium/large | N
-split-with-unit | Boolean | false | `0.5.1` | N
-theme | String | 'default' | `0.5.1`。options: default/round/square | N
+size | String | 'medium' | options: small/medium/large | N
+split-with-unit | Boolean | false | \- | N
+theme | String | 'default' | options: default/round/square | N
 time | Number | 0 | required | Y
 
 ### CountDown Events
 
 name | params | description
 -- | -- | --
-change | `(time: TimeData)` | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/count-down/type.ts)。<br/>`interface TimeData { days: number; hours: number; minutes: number; seconds: number; milliseconds: number }`<br/>
+change | `(time: TimeData)` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/count-down/type.ts)。<br/>`interface TimeData {  days: number; hours: number; minutes: number; seconds: number; milliseconds: number }`<br/>
 finish | \- | \-
+
+### CountDown Slots
+
+name | Description
+-- | --
+\- | \-
+content | \-
 
 ### CountDown External Classes
 

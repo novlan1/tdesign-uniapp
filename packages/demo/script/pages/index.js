@@ -1,15 +1,25 @@
-const { base, skylineBase } = require('../../src/pages/home/data/base.json');
-const { nav, skylineNav } = require('../../src/pages/home/data/nav.json');
-const { display, skylineDisplay } = require('../../src/pages/home/data/display.json');
-const { form, skylineForm } = require('../../src/pages/home/data/form.json');
-const { ux, skylineUx } = require('../../src/pages/home/data/ux.json');
-const { chat, skylineChat } = require('../../src/pages/home/data/chat.json');
-
+const {
+  components,
+} = require('../utils/components.js');
 const path = require('path');
 const pagesJson = path.resolve(__dirname, '../../src/pages.json');
 const { writeFileSync, readFileSync, hyphenate } = require('t-comm');
 const { DEFAULT_PAGES } = require('./config');
 
+const {
+  base,
+  skylineBase,
+  nav,
+  skylineNav,
+  display,
+  skylineDisplay,
+  form,
+  skylineForm,
+  ux,
+  skylineUx,
+  chat,
+  skylineChat,
+} = components;
 
 const getComponentPages = (list,  isSkyline) => list.reduce((acc, item) => [
   ...acc,

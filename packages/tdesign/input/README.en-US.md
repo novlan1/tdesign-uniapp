@@ -6,11 +6,10 @@
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
 adjust-position | Boolean | true | \- | N
 align | String | left | text align type。options: left/center/right | N
-allow-input-over-max | Boolean | false | `1.8.6`。allow to continue input on value length is over `maxlength` or `maxcharacter` | N
+allow-input-over-max | Boolean | false | allow to continue input on value length is over `maxlength` or `maxcharacter` | N
 always-embed | Boolean | false | \- | N
 auto-focus | Boolean | false | \- | N
 borderless | Boolean | false | input without border | N
@@ -23,11 +22,10 @@ cursor-color | String | #0052d9 | \- | N
 cursor-spacing | Number | 0 | \- | N
 disabled | Boolean | undefined | make input to be disabled | N
 error-message | String | - | `deprecated` | N
-extra | Slot | - | `1.9.1`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
 focus | Boolean | false | \- | N
-format | Function | - | input value formatter, `type=number` does not work. if you need to format number, `InputNumber` Component might be better。Typescript：`InputFormatType` `type InputFormatType = (value: InputValue) => string`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/input/type.ts) | N
+format | Function | - | input value formatter, `type=number` does not work. if you need to format number, `InputNumber` Component might be better。Typescript：`InputFormatType` `type InputFormatType = (value: InputValue) => string`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/input/type.ts) | N
 hold-keyboard | Boolean | false | \- | N
-label | String / Slot | - | text on the left of input。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
+label | String | - | text on the left of input | N
 layout | String | horizontal | options: vertical/horizontal | N
 maxcharacter | Number | - | \- | N
 maxlength | Number | -1 | \- | N
@@ -35,8 +33,8 @@ password | Boolean | false | `deprecated` | N
 placeholder | String | undefined | \- | N
 placeholder-class | String | input-placeholder | \- | N
 placeholder-style | String | - | required | Y
-prefix-icon | String / Object / Slot | - | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
-readonly | Boolean | undefined | `1.7.1` | N
+prefix-icon | String / Object | - | \- | N
+readonly | Boolean | undefined | \- | N
 safe-password-cert-path | String | - | \- | N
 safe-password-custom-hash | String | - | \- | N
 safe-password-length | Number | - | \- | N
@@ -47,12 +45,12 @@ selection-end | Number | -1 | \- | N
 selection-start | Number | -1 | \- | N
 size | String | medium | `deprecated`。options: small/medium。Typescript：`'medium' \| 'small'` | N
 status | String | default | options: default/success/warning/error | N
-suffix | String / Slot | - | suffix content before suffixIcon。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
-suffix-icon | String / Object / Slot | - | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
-tips | String / Slot | - | tips on the bottom of input, different `status` can make tips to be different color。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
+suffix | String | - | suffix content before suffixIcon | N
+suffix-icon | String / Object | - | \- | N
+tips | String | - | tips on the bottom of input, different `status` can make tips to be different color | N
 type | String | text | options: text/number/idcard/digit/safe-password/password/nickname | N
-value | String / Number | - | input value。Typescript：`InputValue` `type InputValue = string \| number`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/input/type.ts) | N
-default-value | String / Number | undefined | input value。uncontrolled property。Typescript：`InputValue` `type InputValue = string \| number`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/input/type.ts) | N
+value | String / Number | - | input value。Typescript：`InputValue` `type InputValue = string \| number`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/input/type.ts) | N
+default-value | String / Number | - | input value。uncontrolled property。Typescript：`InputValue` `type InputValue = string \| number`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/input/type.ts) | N
 
 ### Input Events
 
@@ -61,12 +59,23 @@ name | params | description
 blur | `(value: InputValue)` | \-
 change | `(value: InputValue, cursor: number, keyCode: number)` | \-
 clear | \- | \-
-click | `(trigger: InputTrigger)` | `0.32.0`
+click | `(trigger: InputTrigger)` | \-
 enter | `(value: InputValue)` | \-
 focus | `(value: InputValue)` | \-
 keyboardheightchange | `(height: number, duration: number)` | \-
 nicknamereview | `(pass: boolean, timeout: boolean)` | \-
-validate | `({ error?: 'exceed-maximum' \| 'below-minimum' })` | trigger on text length being over max length or max character
+validate | `(context: { error?: 'exceed-maximum' \| 'below-minimum' })` | trigger on text length being over max length or max character
+
+### Input Slots
+
+name | Description
+-- | --
+extra | \-
+label | text on the left of input
+prefix-icon | \-
+suffix | suffix content before suffixIcon
+suffix-icon | \-
+tips | \-
 
 ### Input External Classes
 

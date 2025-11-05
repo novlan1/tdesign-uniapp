@@ -6,37 +6,42 @@
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
 disabled | Boolean | false | disabled pull down refresh | N
-enable-back-to-top | Boolean | true | `1.1.5` | N
-enable-passive | Boolean | false | `1.1.5` | N
-header | Slot | - | `1.2.10`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
+enable-back-to-top | Boolean | true | \- | N
+enable-passive | Boolean | false | \- | N
 loading-bar-height | String / Number | 50 | \- | N
-loading-props | Object | - | Typescript：`LoadingProps`，[Loading API Documents](./loading?tab=api)。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/pull-down-refresh/type.ts) | N
+loading-props | Object | - | Typescript：`LoadingProps`，[Loading API Documents](./loading?tab=api)。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/pull-down-refresh/type.ts) | N
 loading-texts | Array | [] | Typescript：`string[]` | N
-lower-threshold | String / Number | 50 | `1.1.5` | N
+lower-threshold | String / Number | 50 | \- | N
 max-bar-height | String / Number | 80 | \- | N
 refresh-timeout | Number | 3000 | \- | N
-scroll-into-view | String | - | `1.1.5` | N
+scroll-into-view | String | - | \- | N
 show-scrollbar | Boolean | true | \- | N
 success-duration | String / Number | 500 | \- | N
-upper-threshold | String / Number | 50 | `1.1.5` | N
+upper-threshold | String / Number | 50 | \- | N
 using-custom-navbar | Boolean | false | \- | N
-value | Boolean | false | \- | N
-default-value | Boolean | undefined | uncontrolled property | N
+value | Boolean | false | `v-model:value` is supported | N
+default-value | Boolean | false | uncontrolled property | N
 
 ### PullDownRefresh Events
 
 name | params | description
 -- | -- | --
 change | `(value: boolean)` | \-
-dragend | `(scrollTop: number, scrollLeft: number)` | `1.2.10`
-dragging | `(scrollTop: number, scrollLeft: number)` | `1.2.10`
-dragstart | `(scrollTop: number, scrollLeft: number)` | `1.2.10`
+dragend | `(scrollTop: number, scrollLeft: number)` | \-
+dragging | `(scrollTop: number, scrollLeft: number)` | \-
+dragstart | `(scrollTop: number, scrollLeft: number)` | \-
 refresh | \- | \-
 scrolltolower | \- | \-
 timeout | \- | \-
+
+### PullDownRefresh Slots
+
+name | Description
+-- | --
+\- | \-
+header | \-
 
 ### PullDownRefresh External Classes
 

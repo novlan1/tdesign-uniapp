@@ -6,11 +6,11 @@
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
-button-props | Object | - | Typescript：`ButtonProps`，[Button API Documents](./button?tab=api)。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/fab/type.ts) | N
-draggable | String / Boolean | false | Typescript：`boolean \| FabDirectionEnum ` `type FabDirectionEnum = 'all' \| 'vertical' \| 'horizontal'`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/fab/type.ts) | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
+button-props | Object | - | Typescript：`ButtonProps`，[Button API Documents](./button?tab=api)。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/fab/type.ts) | N
+draggable | String / Boolean | false | Typescript：`boolean \| FabDirectionEnum ` `type FabDirectionEnum = 'all' \| 'vertical' \| 'horizontal'`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/fab/type.ts) | N
 icon | String | - | \- | N
+style | String | right: 16px; bottom: 32px; | \- | N
 text | String | - | \- | N
 using-custom-navbar | Boolean | false | \- | N
 y-bounds | Array | - | Typescript：`Array<string \| number>` | N
@@ -19,9 +19,15 @@ y-bounds | Array | - | Typescript：`Array<string \| number>` | N
 
 name | params | description
 -- | -- | --
-click | `(e: Event)` | \-
-drag-end | `(e: TouchEvent)` | \-
-drag-start | `(e: TouchEvent)` | \-
+click | `(context: {e: Event})` | \-
+drag-end | `(context: { e: TouchEvent })` | \-
+drag-start | `(context: { e: TouchEvent })` | \-
+
+### Fab Slots
+
+name | Description
+-- | --
+\- | \-
 
 ### CSS Variables
 

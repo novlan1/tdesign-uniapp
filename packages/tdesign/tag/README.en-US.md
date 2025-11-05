@@ -6,11 +6,10 @@
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
-closable | Boolean / Object / Slot | false | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
+closable | Boolean / Object | false | \- | N
 disabled | Boolean | false | \- | N
-icon | String / Object / Slot | - | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
+icon | String / Object | - | \- | N
 max-width | String / Number | - | \- | N
 shape | String | square | options: square/round/mark | N
 size | String | medium | options: small/medium/large/extra-large | N
@@ -21,8 +20,16 @@ variant | String | dark | options: dark/light/outline/light-outline | N
 
 name | params | description
 -- | -- | --
-click | - | \-
-close | - | \-
+click | `(context: { e: MouseEvent })` | \-
+close | `(context: { e: MouseEvent })` | \-
+
+### Tag Slots
+
+name | Description
+-- | --
+\- | \-
+closable | \-
+icon | \-
 
 ### Tag External Classes
 
@@ -35,25 +42,32 @@ t-class | \-
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
-checked | Boolean | - | \- | N
-default-checked | Boolean | undefined | uncontrolled property | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
+checked | Boolean | - | `v-model:checked` is supported | N
+default-checked | Boolean | - | uncontrolled property | N
 closable | Boolean | false | \- | N
-content | String / Number / Array / Slot | - | Typescript：`string \| number \| string[]` | N
+content | String / Number / Array | - | Typescript：`string \| number \| string[]` | N
 disabled | Boolean | false | \- | N
-icon | String / Object / Slot | - | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
+icon | String / Object | - | \- | N
 shape | String | square | options: square/round/mark | N
-size | String | medium | options: small/medium/large。Typescript：`SizeEnum`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
-variant | String | dark | `0.26.0`。options: dark/light/outline/light-outline | N
+size | String | medium | options: small/medium/large。Typescript：`SizeEnum`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/common/common.ts) | N
+variant | String | dark | options: dark/light/outline/light-outline | N
 
 ### CheckTag Events
 
 name | params | description
 -- | -- | --
 change | `(checked: boolean)` | \-
-click | - | \-
+click | `(context: { e: MouseEvent })` | \-
 close | \- | \-
+
+### CheckTag Slots
+
+name | Description
+-- | --
+\- | \-
+content | \-
+icon | \-
 
 ### CheckTag External Classes
 

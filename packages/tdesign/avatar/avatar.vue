@@ -7,6 +7,7 @@
     :style="_._style([utils.getStyles(isShow), customStyle, innerStyle])"
   >
     <t-badge
+      v-if="badgeProps"
       :color="badgeProps.color || ''"
       :content="badgeProps.content || ''"
       :count="badgeProps.count || 0"

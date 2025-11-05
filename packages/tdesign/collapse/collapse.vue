@@ -23,6 +23,12 @@ const name = `${prefix}-collapse`;
 
 export default uniComponent({
   name,
+  controlledProps: [
+    {
+      key: 'value',
+      event: 'change',
+    },
+  ],
   options: {
     styleIsolation: 'shared',
   },
@@ -31,11 +37,8 @@ export default uniComponent({
   props: {
     ...props,
   },
-  controlledProps: [
-    {
-      key: 'value',
-      event: 'change',
-    },
+  emits: [
+    'update:value',
   ],
   data() {
     return {

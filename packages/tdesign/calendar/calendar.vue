@@ -132,6 +132,9 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'update:value',
+  ],
   data() {
     return {
       prefix,

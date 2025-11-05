@@ -6,32 +6,42 @@
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
-action | String / Slot | - | `deprecated`。operation。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
-align | String | left | options: left/center。Typescript：`MessageAlignType` `type MessageAlignType = 'left' \| 'center'`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/message/type.ts) | N
-close-btn | String / Boolean / Object / Slot | false | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
-content | String / Slot | - | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
+action | String | - | `deprecated`。operation | N
+align | String | left | options: left/center。Typescript：`MessageAlignType` `type MessageAlignType = 'left' \| 'center'`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/message/type.ts) | N
+close-btn | String / Boolean / Object | false | \- | N
+content | String | - | \- | N
 duration | Number | 3000 | \- | N
 gap | String / Number / Boolean | 12 | \- | N
-icon | String / Boolean / Object / Slot | true | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
-link | String / Object / Slot | - | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
-marquee | Boolean / Object | false | Typescript：`boolean \| MessageMarquee` `interface MessageMarquee { speed?: number; loop?: number; delay?: number }`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/message/type.ts) | N
+icon | String / Boolean / Object | true | \- | N
+link | String / Object | - | \- | N
+marquee | Boolean / Object | false | Typescript：`boolean \| MessageMarquee` `interface MessageMarquee { speed?: number; loop?: number; delay?: number }`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/message/type.ts) | N
 offset | Array | - | Typescript：`Array<string \| number>` | N
 single | Boolean | true | \- | N
-theme | String | info | options: info/success/warning/error。Typescript：`MessageThemeList` `type MessageThemeList = 'info' \| 'success' \| 'warning' \| 'error'`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/message/type.ts) | N
-visible | Boolean | false | \- | N
-default-visible | Boolean | undefined | uncontrolled property | N
+theme | String | info | options: info/success/warning/error。Typescript：`MessageThemeList` `type MessageThemeList = 'info' \| 'success' \| 'warning' \| 'error'`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/message/type.ts) | N
+visible | Boolean | false | `v-model:visible` is supported | N
+default-visible | Boolean | false | uncontrolled property | N
 z-index | Number | 15000 | \- | N
 
 ### Message Events
 
 name | params | description
 -- | -- | --
-action-btn-click | - | \-
-close-btn-click | - | \-
+action-btn-click | `(context: { e: MouseEvent })` | \-
+close-btn-click | `(context: { e: MouseEvent })` | \-
 duration-end | \- | \-
-link-click | - | \-
+link-click | `(context: { e: MouseEvent })` | \-
+
+### Message Slots
+
+name | Description
+-- | --
+\- | \-
+action | `deprecated`。operation
+close-btn | \-
+content | \-
+icon | \-
+link | \-
 
 ### Message External Classes
 

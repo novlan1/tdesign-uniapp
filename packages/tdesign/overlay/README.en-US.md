@@ -5,8 +5,7 @@
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
 background-color | String | - | \- | N
 duration | Number | 300 | \- | N
 prevent-scroll-through | Boolean | true | \- | N
@@ -19,6 +18,12 @@ z-index | Number | 11000 | \- | N
 name | params | description
 -- | -- | --
 click | `({ visible: boolean })` | \-
+
+### Overlay Slots
+
+name | Description
+-- | --
+\- | \-
 
 ### CSS Variables
 

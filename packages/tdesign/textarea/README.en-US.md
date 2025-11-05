@@ -6,10 +6,9 @@
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
 adjust-position | Boolean | true | \- | N
-allow-input-over-max | Boolean | false | `1.8.6`。Allow input after exceeding `maxlength` or `maxcharacter` | N
+allow-input-over-max | Boolean | false | Allow input after exceeding `maxlength` or `maxcharacter` | N
 autofocus | Boolean | false | \- | N
 autosize | Boolean / Object | false | Typescript：`boolean \| { maxHeight?: number, minHeight?: number }` | N
 bordered | Boolean | false | \- | N
@@ -24,18 +23,18 @@ fixed | Boolean | false | \- | N
 focus | Boolean | false | \- | N
 hold-keyboard | Boolean | false | \- | N
 indicator | Boolean | false | \- | N
-label | String / Slot | - | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
+label | String | - | \- | N
 maxcharacter | Number | - | \- | N
 maxlength | Number | -1 | \- | N
 placeholder | String | undefined | \- | N
 placeholder-class | String | textarea-placeholder | \- | N
 placeholder-style | String | - | \- | N
-readonly | Boolean | undefined | `1.8.6` | N
+readonly | Boolean | undefined | \- | N
 selection-end | Number | -1 | \- | N
 selection-start | Number | -1 | \- | N
 show-confirm-bar | Boolean | true | \- | N
-value | String / Number | - | Typescript：`TextareaValue` `type TextareaValue = string \| number`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/textarea/type.ts) | N
-default-value | String / Number | undefined | uncontrolled property。Typescript：`TextareaValue` `type TextareaValue = string \| number`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/textarea/type.ts) | N
+value | String / Number | - | `v-model:value` is supported。Typescript：`TextareaValue` `type TextareaValue = string \| number`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/textarea/type.ts) | N
+default-value | String / Number | - | uncontrolled property。Typescript：`TextareaValue` `type TextareaValue = string \| number`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/textarea/type.ts) | N
 
 ### Textarea Events
 
@@ -47,6 +46,12 @@ enter | `(value: TextareaValue)` | \-
 focus | `(value: TextareaValue)` | \-
 keyboardheightchange | `(height: number, duration: number)` | \-
 line-change | `(value: TextareaValue)` | \-
+
+### Textarea Slots
+
+name | Description
+-- | --
+label | \-
 
 ### Textarea External Classes
 

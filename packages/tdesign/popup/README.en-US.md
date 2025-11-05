@@ -6,26 +6,31 @@
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
-close-btn | Boolean / Slot | - | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
-close-on-overlay-click | Boolean | true | \- | N
-content | String / Slot | - | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
+customStyle | Object | - | CSS(Cascading Style Sheets) | N
+closeBtn | Boolean / TNode | - | Typescript：`boolean \| TNode`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/common/common.ts) | N
+closeOnOverlayClick | Boolean | true | \- | N
+content | String / TNode | - | Typescript：`string \| TNode`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/common/common.ts) | N
 duration | Number | 240 | \- | N
-overlay-props | Object | {} | Typescript：`OverlayProps`，[Overlay API Documents](./overlay?tab=api)。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/popup/type.ts) | N
+overlayProps | Object | {} | Typescript：`OverlayProps`，[Overlay API Documents](./overlay?tab=api)。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/popup/type.ts) | N
 placement | String | top | options: top/left/right/bottom/center | N
-prevent-scroll-through | Boolean | true | \- | N
-show-overlay | Boolean | true | \- | N
-using-custom-navbar | Boolean | false | \- | N
-visible | Boolean | - | Typescript：`boolean` | N
-default-visible | Boolean | undefined | uncontrolled property。Typescript：`boolean` | N
-z-index | Number | 11500 | \- | N
+preventScrollThrough | Boolean | true | \- | N
+showOverlay | Boolean | true | \- | N
+usingCustomNavbar | Boolean | false | \- | N
+visible | Boolean | - | `v-model:visible` is supported。Typescript：`boolean` | N
+defaultVisible | Boolean | - | uncontrolled property。Typescript：`boolean` | N
+zIndex | Number | 11500 | \- | N
 
 ### Popup Events
 
 name | params | description
 -- | -- | --
-visible-change | `(visible: boolean, trigger: PopupSource) ` | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/popup/type.ts)。<br/>`type PopupSource = 'close-btn' \| 'overlay'`<br/>
+visible-change | `(visible: boolean, trigger: PopupSource) ` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/popup/type.ts)。<br/>`type PopupSource = 'close-btn' \| 'overlay'`<br/>
+
+### Popup Slots
+
+name | Description
+-- | --
+- | \-
 
 ### Popup External Classes
 
