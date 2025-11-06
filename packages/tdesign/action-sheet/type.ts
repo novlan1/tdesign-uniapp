@@ -31,7 +31,7 @@ export interface TdActionSheetProps {
    * 菜单项
    * @default []
    */
-  items: Array<string | ActionSheetItem>;
+  items?: Array<string | ActionSheetItem>;
   /**
    * 透传 Popup 组件全部属性
    * @default {}

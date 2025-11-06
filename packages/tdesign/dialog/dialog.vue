@@ -66,7 +66,7 @@
           :class="
             _.cls(classPrefix + '__footer', [
               ['column', dataButtonLayout === 'vertical'],
-              ['full', buttonVariant == 'text' && dataActions.length == 0]
+              ['full', buttonVariant == 'text' && (!dataActions || dataActions.length == 0)]
             ])
           "
         >
