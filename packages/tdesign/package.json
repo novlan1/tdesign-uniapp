@@ -6,163 +6,395 @@
   "title": "tdesign-uniapp",
   "description": "TDesign Component for uniapp",
   "exports": {
+    "./common/style/theme/index.css": "./common/style/theme/index.css",
     "./action-sheet/action-sheet.vue": {
+      "import": "./action-sheet/action-sheet.vue",
+      "require": "./action-sheet/action-sheet.vue",
       "types": "./types/action-sheet.d.ts"
     },
     "./avatar/avatar.vue": {
+      "import": "./avatar/avatar.vue",
+      "require": "./avatar/avatar.vue",
       "types": "./types/avatar.d.ts"
     },
     "./avatar-group/avatar-group.vue": {
+      "import": "./avatar-group/avatar-group.vue",
+      "require": "./avatar-group/avatar-group.vue",
       "types": "./types/avatar-group.d.ts"
     },
     "./back-top/back-top.vue": {
+      "import": "./back-top/back-top.vue",
+      "require": "./back-top/back-top.vue",
       "types": "./types/back-top.d.ts"
     },
     "./badge/badge.vue": {
+      "import": "./badge/badge.vue",
+      "require": "./badge/badge.vue",
       "types": "./types/badge.d.ts"
     },
     "./button/button.vue": {
+      "import": "./button/button.vue",
+      "require": "./button/button.vue",
       "types": "./types/button.d.ts"
     },
     "./calendar/calendar.vue": {
+      "import": "./calendar/calendar.vue",
+      "require": "./calendar/calendar.vue",
       "types": "./types/calendar.d.ts"
     },
     "./cascader/cascader.vue": {
+      "import": "./cascader/cascader.vue",
+      "require": "./cascader/cascader.vue",
       "types": "./types/cascader.d.ts"
     },
     "./cell/cell.vue": {
+      "import": "./cell/cell.vue",
+      "require": "./cell/cell.vue",
       "types": "./types/cell.d.ts"
     },
     "./cell-group/cell-group.vue": {
+      "import": "./cell-group/cell-group.vue",
+      "require": "./cell-group/cell-group.vue",
       "types": "./types/cell-group.d.ts"
     },
+    "./check-tag/check-tag.vue": {
+      "import": "./check-tag/check-tag.vue",
+      "require": "./check-tag/check-tag.vue",
+      "types": "./types/check-tag.d.ts"
+    },
     "./checkbox/checkbox.vue": {
+      "import": "./checkbox/checkbox.vue",
+      "require": "./checkbox/checkbox.vue",
       "types": "./types/checkbox.d.ts"
     },
     "./checkbox-group/checkbox-group.vue": {
+      "import": "./checkbox-group/checkbox-group.vue",
+      "require": "./checkbox-group/checkbox-group.vue",
       "types": "./types/checkbox-group.d.ts"
     },
     "./col/col.vue": {
+      "import": "./col/col.vue",
+      "require": "./col/col.vue",
       "types": "./types/col.d.ts"
     },
     "./collapse/collapse.vue": {
+      "import": "./collapse/collapse.vue",
+      "require": "./collapse/collapse.vue",
       "types": "./types/collapse.d.ts"
     },
     "./collapse-panel/collapse-panel.vue": {
+      "import": "./collapse-panel/collapse-panel.vue",
+      "require": "./collapse-panel/collapse-panel.vue",
       "types": "./types/collapse-panel.d.ts"
     },
     "./color-picker/color-picker.vue": {
+      "import": "./color-picker/color-picker.vue",
+      "require": "./color-picker/color-picker.vue",
       "types": "./types/color-picker.d.ts"
     },
     "./count-down/count-down.vue": {
+      "import": "./count-down/count-down.vue",
+      "require": "./count-down/count-down.vue",
       "types": "./types/count-down.d.ts"
     },
     "./date-time-picker/date-time-picker.vue": {
+      "import": "./date-time-picker/date-time-picker.vue",
+      "require": "./date-time-picker/date-time-picker.vue",
       "types": "./types/date-time-picker.d.ts"
     },
     "./dialog/dialog.vue": {
+      "import": "./dialog/dialog.vue",
+      "require": "./dialog/dialog.vue",
       "types": "./types/dialog.d.ts"
     },
     "./divider/divider.vue": {
+      "import": "./divider/divider.vue",
+      "require": "./divider/divider.vue",
       "types": "./types/divider.d.ts"
     },
     "./drawer/drawer.vue": {
+      "import": "./drawer/drawer.vue",
+      "require": "./drawer/drawer.vue",
       "types": "./types/drawer.d.ts"
     },
+    "./dropdown-item/dropdown-item.vue": {
+      "import": "./dropdown-item/dropdown-item.vue",
+      "require": "./dropdown-item/dropdown-item.vue",
+      "types": "./types/dropdown-item.d.ts"
+    },
     "./dropdown-menu/dropdown-menu.vue": {
+      "import": "./dropdown-menu/dropdown-menu.vue",
+      "require": "./dropdown-menu/dropdown-menu.vue",
       "types": "./types/dropdown-menu.d.ts"
     },
     "./empty/empty.vue": {
+      "import": "./empty/empty.vue",
+      "require": "./empty/empty.vue",
       "types": "./types/empty.d.ts"
     },
     "./fab/fab.vue": {
+      "import": "./fab/fab.vue",
+      "require": "./fab/fab.vue",
       "types": "./types/fab.d.ts"
     },
+    "./footer/footer.vue": {
+      "import": "./footer/footer.vue",
+      "require": "./footer/footer.vue",
+      "types": "./types/footer.d.ts"
+    },
     "./form/form.vue": {
+      "import": "./form/form.vue",
+      "require": "./form/form.vue",
       "types": "./types/form.d.ts"
     },
+    "./form-item/form-item.vue": {
+      "import": "./form-item/form-item.vue",
+      "require": "./form-item/form-item.vue",
+      "types": "./types/form-item.d.ts"
+    },
+    "./grid/grid.vue": {
+      "import": "./grid/grid.vue",
+      "require": "./grid/grid.vue",
+      "types": "./types/grid.d.ts"
+    },
+    "./grid-item/grid-item.vue": {
+      "import": "./grid-item/grid-item.vue",
+      "require": "./grid-item/grid-item.vue",
+      "types": "./types/grid-item.d.ts"
+    },
     "./guide/guide.vue": {
+      "import": "./guide/guide.vue",
+      "require": "./guide/guide.vue",
       "types": "./types/guide.d.ts"
     },
     "./icon/icon.vue": {
+      "import": "./icon/icon.vue",
+      "require": "./icon/icon.vue",
       "types": "./types/icon.d.ts"
     },
     "./image/image.vue": {
+      "import": "./image/image.vue",
+      "require": "./image/image.vue",
       "types": "./types/image.d.ts"
     },
     "./image-viewer/image-viewer.vue": {
+      "import": "./image-viewer/image-viewer.vue",
+      "require": "./image-viewer/image-viewer.vue",
       "types": "./types/image-viewer.d.ts"
     },
     "./indexes/indexes.vue": {
+      "import": "./indexes/indexes.vue",
+      "require": "./indexes/indexes.vue",
       "types": "./types/indexes.d.ts"
     },
+    "./indexes-anchor/indexes-anchor.vue": {
+      "import": "./indexes-anchor/indexes-anchor.vue",
+      "require": "./indexes-anchor/indexes-anchor.vue",
+      "types": "./types/indexes-anchor.d.ts"
+    },
     "./input/input.vue": {
+      "import": "./input/input.vue",
+      "require": "./input/input.vue",
       "types": "./types/input.d.ts"
     },
     "./link/link.vue": {
+      "import": "./link/link.vue",
+      "require": "./link/link.vue",
       "types": "./types/link.d.ts"
     },
     "./loading/loading.vue": {
+      "import": "./loading/loading.vue",
+      "require": "./loading/loading.vue",
       "types": "./types/loading.d.ts"
     },
+    "./message/message.vue": {
+      "import": "./message/message.vue",
+      "require": "./message/message.vue",
+      "types": "./types/message.d.ts"
+    },
     "./navbar/navbar.vue": {
+      "import": "./navbar/navbar.vue",
+      "require": "./navbar/navbar.vue",
       "types": "./types/navbar.d.ts"
     },
     "./notice-bar/notice-bar.vue": {
+      "import": "./notice-bar/notice-bar.vue",
+      "require": "./notice-bar/notice-bar.vue",
       "types": "./types/notice-bar.d.ts"
     },
     "./overlay/overlay.vue": {
+      "import": "./overlay/overlay.vue",
+      "require": "./overlay/overlay.vue",
       "types": "./types/overlay.d.ts"
     },
     "./picker/picker.vue": {
+      "import": "./picker/picker.vue",
+      "require": "./picker/picker.vue",
       "types": "./types/picker.d.ts"
     },
+    "./picker-item/picker-item.vue": {
+      "import": "./picker-item/picker-item.vue",
+      "require": "./picker-item/picker-item.vue",
+      "types": "./types/picker-item.d.ts"
+    },
     "./popup/popup.vue": {
+      "import": "./popup/popup.vue",
+      "require": "./popup/popup.vue",
       "types": "./types/popup.d.ts"
     },
+    "./progress/progress.vue": {
+      "import": "./progress/progress.vue",
+      "require": "./progress/progress.vue",
+      "types": "./types/progress.d.ts"
+    },
     "./pull-down-refresh/pull-down-refresh.vue": {
+      "import": "./pull-down-refresh/pull-down-refresh.vue",
+      "require": "./pull-down-refresh/pull-down-refresh.vue",
       "types": "./types/pull-down-refresh.d.ts"
     },
     "./qrcode/qrcode.vue": {
+      "import": "./qrcode/qrcode.vue",
+      "require": "./qrcode/qrcode.vue",
       "types": "./types/qrcode.d.ts"
     },
+    "./radio/radio.vue": {
+      "import": "./radio/radio.vue",
+      "require": "./radio/radio.vue",
+      "types": "./types/radio.d.ts"
+    },
+    "./radio-group/radio-group.vue": {
+      "import": "./radio-group/radio-group.vue",
+      "require": "./radio-group/radio-group.vue",
+      "types": "./types/radio-group.d.ts"
+    },
+    "./rate/rate.vue": {
+      "import": "./rate/rate.vue",
+      "require": "./rate/rate.vue",
+      "types": "./types/rate.d.ts"
+    },
+    "./result/result.vue": {
+      "import": "./result/result.vue",
+      "require": "./result/result.vue",
+      "types": "./types/result.d.ts"
+    },
     "./row/row.vue": {
+      "import": "./row/row.vue",
+      "require": "./row/row.vue",
       "types": "./types/row.d.ts"
     },
+    "./search/search.vue": {
+      "import": "./search/search.vue",
+      "require": "./search/search.vue",
+      "types": "./types/search.d.ts"
+    },
     "./side-bar/side-bar.vue": {
+      "import": "./side-bar/side-bar.vue",
+      "require": "./side-bar/side-bar.vue",
       "types": "./types/side-bar.d.ts"
     },
+    "./side-bar-item/side-bar-item.vue": {
+      "import": "./side-bar-item/side-bar-item.vue",
+      "require": "./side-bar-item/side-bar-item.vue",
+      "types": "./types/side-bar-item.d.ts"
+    },
+    "./skeleton/skeleton.vue": {
+      "import": "./skeleton/skeleton.vue",
+      "require": "./skeleton/skeleton.vue",
+      "types": "./types/skeleton.d.ts"
+    },
+    "./slider/slider.vue": {
+      "import": "./slider/slider.vue",
+      "require": "./slider/slider.vue",
+      "types": "./types/slider.d.ts"
+    },
+    "./step-item/step-item.vue": {
+      "import": "./step-item/step-item.vue",
+      "require": "./step-item/step-item.vue",
+      "types": "./types/step-item.d.ts"
+    },
     "./stepper/stepper.vue": {
+      "import": "./stepper/stepper.vue",
+      "require": "./stepper/stepper.vue",
       "types": "./types/stepper.d.ts"
     },
+    "./steps/steps.vue": {
+      "import": "./steps/steps.vue",
+      "require": "./steps/steps.vue",
+      "types": "./types/steps.d.ts"
+    },
     "./sticky/sticky.vue": {
+      "import": "./sticky/sticky.vue",
+      "require": "./sticky/sticky.vue",
       "types": "./types/sticky.d.ts"
     },
     "./swipe-cell/swipe-cell.vue": {
+      "import": "./swipe-cell/swipe-cell.vue",
+      "require": "./swipe-cell/swipe-cell.vue",
       "types": "./types/swipe-cell.d.ts"
     },
     "./swiper/swiper.vue": {
+      "import": "./swiper/swiper.vue",
+      "require": "./swiper/swiper.vue",
       "types": "./types/swiper.d.ts"
     },
+    "./swiper-nav/swiper-nav.vue": {
+      "import": "./swiper-nav/swiper-nav.vue",
+      "require": "./swiper-nav/swiper-nav.vue",
+      "types": "./types/swiper-nav.d.ts"
+    },
+    "./switch/switch.vue": {
+      "import": "./switch/switch.vue",
+      "require": "./switch/switch.vue",
+      "types": "./types/switch.d.ts"
+    },
     "./tab-bar/tab-bar.vue": {
+      "import": "./tab-bar/tab-bar.vue",
+      "require": "./tab-bar/tab-bar.vue",
       "types": "./types/tab-bar.d.ts"
     },
+    "./tab-bar-item/tab-bar-item.vue": {
+      "import": "./tab-bar-item/tab-bar-item.vue",
+      "require": "./tab-bar-item/tab-bar-item.vue",
+      "types": "./types/tab-bar-item.d.ts"
+    },
+    "./tab-panel/tab-panel.vue": {
+      "import": "./tab-panel/tab-panel.vue",
+      "require": "./tab-panel/tab-panel.vue",
+      "types": "./types/tab-panel.d.ts"
+    },
     "./tabs/tabs.vue": {
+      "import": "./tabs/tabs.vue",
+      "require": "./tabs/tabs.vue",
       "types": "./types/tabs.d.ts"
     },
     "./tag/tag.vue": {
+      "import": "./tag/tag.vue",
+      "require": "./tag/tag.vue",
       "types": "./types/tag.d.ts"
     },
     "./textarea/textarea.vue": {
+      "import": "./textarea/textarea.vue",
+      "require": "./textarea/textarea.vue",
       "types": "./types/textarea.d.ts"
     },
     "./toast/toast.vue": {
+      "import": "./toast/toast.vue",
+      "require": "./toast/toast.vue",
       "types": "./types/toast.d.ts"
     },
+    "./tree-select/tree-select.vue": {
+      "import": "./tree-select/tree-select.vue",
+      "require": "./tree-select/tree-select.vue",
+      "types": "./types/tree-select.d.ts"
+    },
     "./upload/upload.vue": {
+      "import": "./upload/upload.vue",
+      "require": "./upload/upload.vue",
       "types": "./types/upload.d.ts"
     },
     "./watermark/watermark.vue": {
+      "import": "./watermark/watermark.vue",
+      "require": "./watermark/watermark.vue",
       "types": "./types/watermark.d.ts"
     }
   },

@@ -10,6 +10,10 @@ const CONFIG = {
   dtsDir: path.resolve(__dirname, '../../../tdesign/types'),
 };
 
+const OTHER_EXPORTS = {
+  './common/style/theme/index.css': './common/style/theme/index.css',
+};
+
 const DTS_TEMPLATE = `import type { TransformEventHandlers, ExtractNonOnProps } from '../common/common';
 import type { Td{{Component}}Props } from '../{{component}}/type';
 
@@ -36,12 +40,19 @@ function main() {
 
 
 function changePkgExports(fileNames) {
-  const exportsType = fileNames.reduce((acc, item) => ({
-    ...acc,
-    [`./${item}/${item}.vue`]: {
-      types: `./types/${item}.d.ts`,
-    },
-  }), {});
+  const exportsType = fileNames.reduce((acc, item) => {
+    const key = `./${item}/${item}.vue`;
+    return {
+      ...acc,
+      [key]: {
+        import: key,
+        require: key,
+        types: `./types/${item}.d.ts`,
+      },
+    };
+  }, {
+    ...OTHER_EXPORTS,
+  });
 
   const pkgJson = require(CONFIG.pkgJsonPath);
   pkgJson.exports = exportsType;
