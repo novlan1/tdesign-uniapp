@@ -26,9 +26,9 @@ vertical | Boolean | false | \- | N
 
 name | params | description
 -- | -- | --
-change | `(value: SliderValue)` | \-
-dragend | `(value: SliderValue, e: TouchEvent)` | \-
-dragstart | `(e: TouchEvent)` | \-
+change | `(context: { value: SliderValue })` | \-
+dragend | `(context: { value: SliderValue, e: TouchEvent })` | \-
+dragstart | `(context: { e: TouchEvent })` | \-
 
 ### Slider External Classes
 

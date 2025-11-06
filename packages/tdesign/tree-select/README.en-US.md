@@ -19,7 +19,7 @@ default-value | String / Number / Array | - | uncontrolled property。Typescript
 
 name | params | description
 -- | -- | --
-change | `(value: TreeSelectValue, level: TreeLevel) ` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/tree-select/type.ts)。<br/>`type TreeLevel = 0 \| 1 \| 2`<br/>
+change | `(context: { value: TreeSelectValue, level: TreeLevel })` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/tree-select/type.ts)。<br/>`type TreeLevel = 0 \| 1 \| 2`<br/>
 
 ### TreeSelect External Classes
 

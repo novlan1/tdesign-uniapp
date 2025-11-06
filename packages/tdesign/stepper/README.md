@@ -64,10 +64,10 @@ default-value | String / Number | 0 | 值。非受控属性 | N
 
 名称 | 参数 | 描述
 -- | -- | --
-blur | `({ type: string \| number })` | 输入框失去焦点时触发。支持语法糖 `v-model:blur`
-change | `({ value: string \| number })` | 数值发生变更时触发。支持语法糖 `v-model:change`
-focus | `({ value: string \| number }))` | 输入框聚焦时触发
-overlimit | `({type: 'minus' \| 'plus'})` | 数值超出限制时触发
+blur | `(context: { type: string \| number })` | 输入框失去焦点时触发
+change | `(context: { value: string \| number })` | 数值发生变更时触发
+focus | `(context: { value: string \| number })` | 输入框聚焦时触发
+overlimit | `(context: {type: 'minus' \| 'plus'})` | 数值超出限制时触发
 
 ### Stepper External Classes
 

@@ -25,11 +25,11 @@ visible | Boolean | false | \- | N
 
 name | params | description
 -- | -- | --
-cancel | `(context: { e: MouseEvent })` | \-
-change | `(value: Array<PickerValue>, label: string, columns: Array<{ column: number; index: number; disabled?: boolean; }> )` | \-
-close | `(trigger: TriggerSource)` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/picker/type.ts)。<br/>`type TriggerSource = 'overlay' \| 'cancel-btn' \| 'confirm-btn'`<br/>
-confirm | `(value: Array<PickerValue>, label: string, columns: Array<{ column: number; index: number; disabled?: boolean; }> )` | \-
-pick | `(value: Array<PickerValue>, label: string, column: number, index: number)` | \-
+cancel | \- | \-
+change | `(context: { value: Array<PickerValue>, label: string, columns: Array<{ column: number; index: number; disabled?: boolean; }> })` | \-
+close | `(context: { trigger: TriggerSource })` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/picker/type.ts)。<br/>`type TriggerSource = 'overlay' \| 'cancel-btn' \| 'confirm-btn'`<br/>
+confirm | `(context: { value: Array<PickerValue>, label: string, columns: Array<{ column: number; index: number; disabled?: boolean; }> })` | \-
+pick | `(context: { value: Array<PickerValue>, label: string, column: number, index: number })` | \-
 
 ### Picker Slots
 

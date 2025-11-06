@@ -90,9 +90,9 @@ vertical | Boolean | false | 是否是垂直的滑块（渲染垂直滑块时，
 
 名称 | 参数 | 描述
 -- | -- | --
-change | `(value: SliderValue)` | 滑块值变化时触发
-dragend | `(value: SliderValue, e: TouchEvent)` | 结束拖动时触发
-dragstart | `(e: TouchEvent)` | 开始拖动时触发
+change | `(context: { value: SliderValue })` | 滑块值变化时触发
+dragend | `(context: { value: SliderValue, e: TouchEvent })` | 结束拖动时触发
+dragstart | `(context: { e: TouchEvent })` | 开始拖动时触发
 
 ### Slider External Classes
 

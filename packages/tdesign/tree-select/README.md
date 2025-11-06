@@ -49,7 +49,7 @@ default-value | String / Number / Array | - | 选中值。非受控属性。TS �
 
 名称 | 参数 | 描述
 -- | -- | --
-change | `(value: TreeSelectValue, level: TreeLevel) ` | 点击任何节点均会触发；level 代表当前点击的层级，0 代表最左侧，依次递进。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/tree-select/type.ts)。<br/>`type TreeLevel = 0 \| 1 \| 2`<br/>
+change | `(context: { value: TreeSelectValue, level: TreeLevel })` | 点击任何节点均会触发；level 代表当前点击的层级，0 代表最左侧，依次递进。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/tree-select/type.ts)。<br/>`type TreeLevel = 0 \| 1 \| 2`<br/>
 
 ### TreeSelect External Classes
 

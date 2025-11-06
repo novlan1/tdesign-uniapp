@@ -60,11 +60,11 @@ visible | Boolean | false | 是否显示 | N
 
 名称 | 参数 | 描述
 -- | -- | --
-cancel | `(context: { e: MouseEvent })` | 点击取消按钮时触发
-change | `(value: Array<PickerValue>, label: string, columns: Array<{ column: number; index: number; disabled?: boolean; }> )` | 选中变化时候触发，即确认变化时触发
-close | `(trigger: TriggerSource)` | 关闭时触发。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/picker/type.ts)。<br/>`type TriggerSource = 'overlay' \| 'cancel-btn' \| 'confirm-btn'`<br/>
-confirm | `(value: Array<PickerValue>, label: string, columns: Array<{ column: number; index: number; disabled?: boolean; }> )` | 点击确认按钮时触发
-pick | `(value: Array<PickerValue>, label: string, column: number, index: number)` | 任何一列选中都会触发，不同的列参数不同。`column` 表示第几列变化，`index` 表示变化那一列的选中项下标
+cancel | \- | 点击取消按钮时触发
+change | `(context: { value: Array<PickerValue>, label: string, columns: Array<{ column: number; index: number; disabled?: boolean; }> })` | 选中变化时候触发，即确认变化时触发
+close | `(context: { trigger: TriggerSource })` | 关闭时触发。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/picker/type.ts)。<br/>`type TriggerSource = 'overlay' \| 'cancel-btn' \| 'confirm-btn'`<br/>
+confirm | `(context: { value: Array<PickerValue>, label: string, columns: Array<{ column: number; index: number; disabled?: boolean; }> })` | 点击确认按钮时触发
+pick | `(context: { value: Array<PickerValue>, label: string, column: number, index: number })` | 任何一列选中都会触发，不同的列参数不同。`column` 表示第几列变化，`index` 表示变化那一列的选中项下标
 
 ### Picker Slots
 
