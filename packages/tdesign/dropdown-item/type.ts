@@ -52,7 +52,7 @@ export interface TdDropdownItemProps {
   /**
    * 值改变时触发
    */
-  onChange?: (value: DropdownValue) => void;
+  onChange?: (context: { value: DropdownValue }) => void;
   /**
    * 关闭时触发
    */
@@ -60,7 +60,7 @@ export interface TdDropdownItemProps {
   /**
    * 点击确认时触发
    */
-  onConfirm?: (value: DropdownValue) => void;
+  onConfirm?: (context: { value: DropdownValue }) => void;
   /**
    * 点击重置时触发
    */

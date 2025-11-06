@@ -6,31 +6,33 @@
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-customStyle | Object | - | CSS(Cascading Style Sheets) | N
-closeBtn | Boolean / TNode | - | Typescript：`boolean \| TNode`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/common/common.ts) | N
-closeOnOverlayClick | Boolean | true | \- | N
-content | String / TNode | - | Typescript：`string \| TNode`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/common/common.ts) | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
+close-btn | Boolean | - | \- | N
+close-on-overlay-click | Boolean | true | \- | N
+content | String | - | \- | N
 duration | Number | 240 | \- | N
-overlayProps | Object | {} | Typescript：`OverlayProps`，[Overlay API Documents](./overlay?tab=api)。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/popup/type.ts) | N
+overlay-props | Object | {} | Typescript：`OverlayProps`，[Overlay API Documents](./overlay?tab=api)。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/popup/type.ts) | N
 placement | String | top | options: top/left/right/bottom/center | N
-preventScrollThrough | Boolean | true | \- | N
-showOverlay | Boolean | true | \- | N
-usingCustomNavbar | Boolean | false | \- | N
+prevent-scroll-through | Boolean | true | \- | N
+show-overlay | Boolean | true | \- | N
+using-custom-navbar | Boolean | false | \- | N
 visible | Boolean | - | `v-model:visible` is supported。Typescript：`boolean` | N
-defaultVisible | Boolean | - | uncontrolled property。Typescript：`boolean` | N
-zIndex | Number | 11500 | \- | N
+default-visible | Boolean | - | uncontrolled property。Typescript：`boolean` | N
+z-index | Number | 11500 | \- | N
 
 ### Popup Events
 
 name | params | description
 -- | -- | --
-visible-change | `(visible: boolean, trigger: PopupSource) ` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/popup/type.ts)。<br/>`type PopupSource = 'close-btn' \| 'overlay'`<br/>
+visible-change | `(context: { visible: boolean, trigger: PopupSource }) ` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/popup/type.ts)。<br/>`type PopupSource = 'close-btn' \| 'overlay'`<br/>
 
 ### Popup Slots
 
 name | Description
 -- | --
-- | \-
+\- | \-
+close-btn | \-
+content | \-
 
 ### Popup External Classes
 

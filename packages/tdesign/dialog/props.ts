@@ -66,6 +66,11 @@ export default {
     type: Number,
     default: 11500,
   },
+  /** 点击多按钮中的其中一个时触发 */
+  onAction: {
+    type: Function,
+    default: () => ({}),
+  },
   /** 如果“取消”按钮存在，则点击“取消”按钮时触发，同时触发关闭事件 */
   onCancel: {
     type: Function,

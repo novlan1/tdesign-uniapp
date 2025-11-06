@@ -26,8 +26,9 @@ z-index | Number | 11500 | \- | N
 
 name | params | description
 -- | -- | --
+action | `(context: { index: number })` | \-
 cancel | `(context: { e: MouseEvent })` | \-
-close | `(trigger: DialogEventSource)` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/dialog/type.ts)。<br/>`type DialogEventSource = 'cancel' \| 'overlay' \| 'close-btn'`<br/>
+close | `(context: { trigger: DialogEventSource })` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/dialog/type.ts)。<br/>`type DialogEventSource = 'cancel' \| 'overlay' \| 'close-btn'`<br/>
 confirm | `(context: { e: MouseEvent })` | \-
 overlay-click | `(context: { e: MouseEvent })` | \-
 

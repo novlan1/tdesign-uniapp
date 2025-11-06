@@ -257,16 +257,16 @@ export default uniComponent({
       // #endif
     },
 
-    handleClose() {
-      this.$emit('close-btn-click');
+    handleClose(e) {
+      this.$emit('close-btn-click', { e });
     },
 
-    handleLinkClick() {
-      this.$emit('link-click');
+    handleLinkClick(e) {
+      this.$emit('link-click', { e });
     },
 
-    handleDurationEnd() {
-      this.$emit('duration-end');
+    handleDurationEnd(e) {
+      this.$emit('duration-end', { e });
     },
   },
 });

@@ -77,8 +77,9 @@ z-index | Number | 11500 | 对话框层级，Web 侧样式默认为 2500，移�
 
 名称 | 参数 | 描述
 -- | -- | --
+action | `(context: { index: number })` | 点击多按钮中的其中一个时触发
 cancel | `(context: { e: MouseEvent })` | 如果“取消”按钮存在，则点击“取消”按钮时触发，同时触发关闭事件
-close | `(trigger: DialogEventSource)` | 关闭事件，点击 取消按钮 或 点击蒙层 时触发。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/dialog/type.ts)。<br/>`type DialogEventSource = 'cancel' \| 'overlay' \| 'close-btn'`<br/>
+close | `(context: { trigger: DialogEventSource })` | 关闭事件，点击 取消按钮 或 点击蒙层 时触发。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/dialog/type.ts)。<br/>`type DialogEventSource = 'cancel' \| 'overlay' \| 'close-btn'`<br/>
 confirm | `(context: { e: MouseEvent })` | 如果“确认”按钮存在，则点击“确认”按钮时触发
 overlay-click | `(context: { e: MouseEvent })` | 如果蒙层存在，点击蒙层时触发
 

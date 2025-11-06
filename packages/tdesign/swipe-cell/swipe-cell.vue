@@ -28,7 +28,7 @@
           :class="classPrefix + '__content ' + item.className"
           :style="item.style"
           :data-action="item"
-          @click.stop="onActionTap(item)"
+          @click.stop="onActionTap(item, 'left')"
         >
           <block
             v-if="item.icon"
@@ -66,7 +66,7 @@
           :class="classPrefix + '__content ' + item.className"
           :style="item.style"
           :data-action="item"
-          @click.stop="onActionTap(item)"
+          @click.stop="onActionTap(item, 'right')"
         >
           <block
             v-if="item.icon"
@@ -223,8 +223,8 @@ export default uniComponent({
       this.close();
     },
 
-    onActionTap(action) {
-      this.$emit('click', action);
+    onActionTap(action, source) {
+      this.$emit('click', action, source);
     },
   },
 });

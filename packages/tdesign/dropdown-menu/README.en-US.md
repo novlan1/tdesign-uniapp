@@ -56,9 +56,9 @@ default-value | String / Number / Array | undefined | uncontrolled property。Ty
 
 name | params | description
 -- | -- | --
-change | `(value: DropdownValue)` | \-
+change | `(context: { value: DropdownValue })` | \-
 close | \- | \-
-confirm | `(value: DropdownValue)` | \-
+confirm | `(context: { value: DropdownValue })` | \-
 reset | \- | \-
 
 ### DropdownItem Slots

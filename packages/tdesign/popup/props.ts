@@ -8,7 +8,7 @@ import type { TdPopupProps } from './type';
 export default {
   /** 关闭按钮，值类型为 Boolean 时表示是否显示关闭按钮。也可以自定义关闭按钮 */
   closeBtn: {
-    type: [Boolean, Function],
+    type: Boolean,
   },
   /** 点击遮罩层是否关闭 */
   closeOnOverlayClick: {
@@ -17,7 +17,7 @@ export default {
   },
   /** 浮层里面的内容 */
   content: {
-    type: [String, Function],
+    type: String,
   },
   /** 动画过渡时间 */
   duration: {

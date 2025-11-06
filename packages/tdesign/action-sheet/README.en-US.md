@@ -25,8 +25,8 @@ default-visible | Boolean | false | uncontrolled property | N
 name | params | description
 -- | -- | --
 cancel | \- | \-
-close | `(e: { trigger: ActionSheetTriggerSource })` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/action-sheet/type.ts)。<br/>`type ActionSheetTriggerSource = 'overlay' \| 'command' \| 'select' `<br/>
-selected | `(e: {  selected: ActionSheetItem \| string, index: number })` | \-
+close | `(context: { trigger: ActionSheetTriggerSource })` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/action-sheet/type.ts)。<br/>`type ActionSheetTriggerSource = 'overlay' \| 'command' \| 'select' `<br/>
+selected | `(context: {  selected: ActionSheetItem \| string, index: number })` | \-
 
 ### ActionSheet Slots
 

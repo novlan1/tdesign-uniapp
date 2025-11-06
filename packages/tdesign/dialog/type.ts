@@ -73,13 +73,17 @@ export interface TdDialogProps {
    */
   zIndex?: number;
   /**
+   * 点击多按钮中的其中一个时触发
+   */
+  onAction?: (context: { index: number }) => void;
+  /**
    * 如果“取消”按钮存在，则点击“取消”按钮时触发，同时触发关闭事件
    */
   onCancel?: (context: { e: MouseEvent }) => void;
   /**
    * 关闭事件，点击 取消按钮 或 点击蒙层 时触发
    */
-  onClose?: (trigger: DialogEventSource) => void;
+  onClose?: (context: { trigger: DialogEventSource }) => void;
   /**
    * 如果“确认”按钮存在，则点击“确认”按钮时触发
    */

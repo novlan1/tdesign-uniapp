@@ -74,11 +74,11 @@ export interface TdActionSheetProps {
   /**
    * 关闭时触发
    */
-  onClose?: (e: { trigger: ActionSheetTriggerSource }) => void;
+  onClose?: (context: { trigger: ActionSheetTriggerSource }) => void;
   /**
    * 选择菜单项时触发
    */
-  onSelected?: (e: { selected: ActionSheetItem | string; index: number }) => void;
+  onSelected?: (context: { selected: ActionSheetItem | string; index: number }) => void;
 }
 
 export interface ActionSheetItem {
