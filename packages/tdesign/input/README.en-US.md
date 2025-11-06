@@ -32,7 +32,7 @@ maxlength | Number | -1 | \- | N
 password | Boolean | false | `deprecated` | N
 placeholder | String | undefined | \- | N
 placeholder-class | String | input-placeholder | \- | N
-placeholder-style | String | - | required | Y
+placeholder-style | String | - | \- | N
 prefix-icon | String / Object | - | \- | N
 readonly | Boolean | undefined | \- | N
 safe-password-cert-path | String | - | \- | N

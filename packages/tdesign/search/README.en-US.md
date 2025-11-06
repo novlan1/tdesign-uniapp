@@ -25,7 +25,7 @@ maxcharacter | Number | - | The maximum number of characters that the user can e
 maxlength | Number | -1 | \- | N
 placeholder | String | '' | \- | N
 placeholder-class | String | input-placeholder | \- | N
-placeholder-style | String | - | required | Y
+placeholder-style | String | - | \- | N
 readonly | Boolean | undefined | \- | N
 result-list | Array | [] | Typescript：`Array<string>` | N
 right-icon | String | 'close-circle-filled' | `deprecated` | N

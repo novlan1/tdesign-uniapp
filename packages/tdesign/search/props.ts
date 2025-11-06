@@ -90,7 +90,6 @@ export default {
   placeholderStyle: {
     type: String,
     default: '',
-    required: true,
   },
   /** 只读状态 */
   readonly: {

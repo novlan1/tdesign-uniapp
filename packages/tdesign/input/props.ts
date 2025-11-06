@@ -118,7 +118,6 @@ export default {
   placeholderStyle: {
     type: String,
     default: '',
-    required: true,
   },
   /** 组件前置图标。值为字符串表示图标名称，值为 `Object` 类型，表示透传至 `icon` */
   prefixIcon: {

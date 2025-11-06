@@ -101,7 +101,7 @@ maxlength | Number | -1 | 用户最多可以输入的文本长度，一个中文
 password | Boolean | false | 已废弃。是否是密码类型（已废弃，请更为使用 type 指定输入框类型） | N
 placeholder | String | undefined | 占位符 | N
 placeholder-class | String | input-placeholder | 指定 placeholder 的样式类 | N
-placeholder-style | String | - | 必需。指定 placeholder 的样式 | Y
+placeholder-style | String | - | 指定 placeholder 的样式 | N
 prefix-icon | String / Object | - | 组件前置图标。值为字符串表示图标名称，值为 `Object` 类型，表示透传至 `icon` | N
 readonly | Boolean | undefined | 只读状态 | N
 safe-password-cert-path | String | - | 安全键盘加密公钥的路径，只支持包内路径 | N

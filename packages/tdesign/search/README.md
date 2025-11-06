@@ -63,7 +63,7 @@ maxcharacter | Number | - | 用户最多可以输入的字符个数，一个中�
 maxlength | Number | -1 | 用户最多可以输入的文本长度，一个中文等于一个计数长度。默认为 -1，不限制输入长度。`maxcharacter` 和 `maxlength` 二选一使用 | N
 placeholder | String | '' | 占位符 | N
 placeholder-class | String | input-placeholder | 指定 placeholder 的样式类 | N
-placeholder-style | String | - | 必需。指定 placeholder 的样式 | Y
+placeholder-style | String | - | 指定 placeholder 的样式 | N
 readonly | Boolean | undefined | 只读状态 | N
 result-list | Array | [] | 预览结果列表。TS 类型：`Array<string>` | N
 right-icon | String | 'close-circle-filled' | 已废弃。右侧图标 | N

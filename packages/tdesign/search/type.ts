@@ -98,7 +98,7 @@ export interface TdSearchProps {
    * 指定 placeholder 的样式
    * @default ''
    */
-  placeholderStyle: string;
+  placeholderStyle?: string;
   /**
    * 只读状态
    */

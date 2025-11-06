@@ -119,7 +119,7 @@ export interface TdInputProps {
    * 指定 placeholder 的样式
    * @default ''
    */
-  placeholderStyle: string;
+  placeholderStyle?: string;
   /**
    * 组件前置图标。值为字符串表示图标名称，值为 `Object` 类型，表示透传至 `icon`
    */
