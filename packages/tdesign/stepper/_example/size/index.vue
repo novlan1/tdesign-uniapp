@@ -8,7 +8,7 @@
     />
     <t-stepper
       default-value="3"
-      max="99"
+      :max="99"
       theme="filled"
     />
     <t-stepper

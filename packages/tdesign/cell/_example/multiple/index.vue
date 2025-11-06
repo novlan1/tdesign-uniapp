@@ -72,8 +72,15 @@
         <view
           class="avatar"
         >
-          <!-- #ifndef H5 -->
+          <!-- #ifdef MP-WEIXIN -->
           <open-data type="userAvatarUrl" />
+          <!-- #endif -->
+
+          <!-- #ifndef MP-WEIXIN -->
+          <TIcon
+            name="user"
+            size="36"
+          />
         <!-- #endif -->
         </view>
       </template>
@@ -93,12 +100,15 @@
 import tCell from 'tdesign-uniapp/cell/cell.vue';
 import tBadge from 'tdesign-uniapp/badge/badge.vue';
 import tSwitch from 'tdesign-uniapp/switch/switch.vue';
+import TIcon from 'tdesign-uniapp/icon/icon.vue';
+
 
 export default {
   components: {
     tCell,
     tBadge,
     tSwitch,
+    TIcon,
   },
   data() {
     return {};
@@ -113,5 +123,8 @@ export default {
     height: 96rpx;
     border-radius: 50%;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-self: center;
 }
 </style>

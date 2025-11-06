@@ -113,7 +113,7 @@ export default uniComponent({
       const { theme, rowCol } = this;
       const rowCols = [];
 
-      if (rowCol.length) {
+      if (rowCol &&  rowCol.length) {
         rowCols.push(...rowCol);
       } else {
         rowCols.push(...ThemeMap[theme || 'text']);
