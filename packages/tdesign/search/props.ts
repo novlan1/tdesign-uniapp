@@ -49,7 +49,6 @@ export default {
   cursor: {
     type: Number,
     default: -1,
-    required: true,
   },
   /** 搜索框聚焦时底部与键盘的距离 */
   cursorSpacing: {

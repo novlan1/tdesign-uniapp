@@ -49,7 +49,7 @@ export interface TdSearchProps {
    * 指定 focus 时的光标位置
    * @default -1
    */
-  cursor: number;
+  cursor?: number;
   /**
    * 搜索框聚焦时底部与键盘的距离
    * @default 0

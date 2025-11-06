@@ -59,7 +59,7 @@ export interface TdInputProps {
    * 指定 focus 时的光标位置
    * @default -1
    */
-  cursor: number;
+  cursor?: number;
   /**
    * 光标颜色。iOS 下的格式为十六进制颜色值 #000000，安卓下的只支持 default 和 green，Skyline 下无限制
    * @default #0052d9
