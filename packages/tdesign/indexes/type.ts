@@ -30,9 +30,9 @@ export interface TdIndexesProps {
   /**
    * 索引发生变更时触发事件
    */
-  onChange?: (index: string | number) => void;
+  onChange?: (context: { index: string | number }) => void;
   /**
    * 点击侧边栏时触发事件
    */
-  onSelect?: (index: string | number) => void;
+  onSelect?: (context: { index: string | number }) => void;
 }

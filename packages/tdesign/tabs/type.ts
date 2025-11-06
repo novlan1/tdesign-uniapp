@@ -61,15 +61,15 @@ export interface TdTabsProps {
   /**
    * 激活的选项卡发生变化时触发
    */
-  onChange?: (value: TabValue, label: string) => void;
+  onChange?: (context: { value: TabValue; label: string }) => void;
   /**
    * 点击选项卡时触发
    */
-  onClick?: (value: TabValue, label: string) => void;
+  onClick?: (context: { value: TabValue; label: string }) => void;
   /**
    * 页面滚动时触发
    */
-  onScroll?: (scrollTop: number, isFixed: boolean) => void;
+  onScroll?: (context: { scrollTop: number; isFixed: boolean }) => void;
 }
 
 export type TabAnimation = { duration: number } & Record<string, any>;

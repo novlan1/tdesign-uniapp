@@ -365,8 +365,8 @@ export default uniComponent({
       }
     },
 
-    onConfirm() {
-      this.$emit('confirm');
+    onConfirm(e) {
+      this.$emit('confirm', { e });
 
       if (this._onConfirm) {
         this._onConfirm({ trigger: 'confirm' });
@@ -374,10 +374,10 @@ export default uniComponent({
       }
     },
 
-    onCancel() {
+    onCancel(e) {
       const trigger = { trigger: 'cancel' };
 
-      this.$emit('cancel');
+      this.$emit('cancel', { e });
       this.$emit('close', trigger);
 
       if (this._onCancel) {
@@ -398,8 +398,8 @@ export default uniComponent({
       this.dataVisible = false;
     },
 
-    overlayClick() {
-      this.$emit('overlay-click');
+    overlayClick(e) {
+      this.$emit('overlay-click', { e });
 
       if (this.dataCloseOnOverlayClick) {
         const trigger = { trigger: 'overlay' };
@@ -416,14 +416,6 @@ export default uniComponent({
         this._onAction({ index });
         this.close();
       }
-    },
-
-    openValueCBHandle(e) {
-      this.$emit('open-type-event', e.detail);
-    },
-
-    openValueErrCBHandle(e) {
-      this.$emit('open-type-error-event', e.detail);
     },
   },
 });

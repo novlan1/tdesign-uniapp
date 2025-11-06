@@ -42,7 +42,7 @@ export default {
   },
   /** 是否使用了自定义导航栏 */
   usingCustomNavbar: Boolean,
-  /** 组件是否可见 */
+  /** 组件是否可见。支持语法糖 `v-model:visible` */
   visible: Boolean,
   /** 抽屉层级，样式默认为 11500 */
   zIndex: {
@@ -61,6 +61,11 @@ export default {
   },
   /** 如果蒙层存在，点击蒙层时触发 */
   onOverlayClick: {
+    type: Function,
+    default: () => ({}),
+  },
+  /** 更新可见性 */
+  onUpdateVisible: {
     type: Function,
     default: () => ({}),
   },

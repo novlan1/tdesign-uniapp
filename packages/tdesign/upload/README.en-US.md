@@ -22,7 +22,7 @@ max | Number | 0 | max count of files limit | N
 media-type | Array | ['image', 'video'] | Typescript：`Array<MediaType>` `type MediaType = 'image' \| 'video'`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts) | N
 preview | Boolean | true | \- | N
 remove-btn | Boolean | true | \- | N
-request-method | Function | - | \- | N
+request-method | Function | - | Typescript：`any` | N
 size-limit | Number / Object | - | files size limit。Typescript：`number \| SizeLimitObj` `interface SizeLimitObj { size: number; unit: SizeUnit ; message?: string }` `type SizeUnitArray = ['B', 'KB', 'MB', 'GB']` `type SizeUnit = SizeUnitArray[number]`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts) | N
 source | String | media | options: media/messageFile | N
 transition | Object | { backTransition: true, duration: 300, timingFunction: 'ease' } | Typescript：`Transition` `interface Transition { backTransition?: boolean, duration?: number, timingFunction?: string }`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts) | N
@@ -31,35 +31,20 @@ transition | Object | { backTransition: true, duration: 300, timingFunction: 'ea
 
 name | params | description
 -- | -- | --
-add | `(files: MediaContext)` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts)。<br/>`type MediaContext = VideoContext[] \| ImageContext[]`<br/><br/>`interface VideoContext { name?: string; type?: string; url?: string; duration?: number; size?: number; width?: number; height?: number; thumb: string; progress: number }`<br/><br/>`interface ImageContext { name: string; type: string; url: string;  size: number; width: number; height: number; progress: number  }`<br/>
-click | `(index: number; file: VideoContext \| ImageContext)` | \-
+add | `(context: { files: MediaContext })` | \-
+click | `(context: { index: number; file: VideoContext \| ImageContext })` | \-
 complete | \- | \-
-drop | `(files: MediaContext) ` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts)。<br/>`type MediaContext = VideoContext[] \| ImageContext[]; interface VideoContext { name?: string; type?: string; url?: string; duration?: number; size?: number; width?: number; height?: number; thumb: string; progress: number }; interface ImageContext { name: string; type: string; url: string;  size: number; width: number; height: number; progress: number}`<br/>
+drop | `(context: { files: MediaContext }) ` | \-
 fail | \- | \-
-remove | `(index: number; file: UploadFile)` | \-
-select-change | `(files: MediaContext[]; currentSelectedFiles: MediaContext[])` | \-
-success | `(files: MediaContext)` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts)。<br/>`type MediaContext = VideoContext[] \| ImageContext[]`<br/><br/>`interface VideoContext { name?: string; type?: string; url?: string; duration?: number; size?: number; width?: number; height?: number; thumb: string; progress: number }`<br/><br/>`interface ImageContext { name: string; type: string; url: string;  size: number; width: number; height: number; progress: number  }`<br/>
+remove | `(context: { index: number; file: UploadFile })` | \-
+select-change | `(context: { files: MediaContext[]; currentSelectedFiles: MediaContext[] })` | \-
+success | `(context: { files: MediaContext })` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts)。<br/>`type MediaContext = VideoContext[] \| ImageContext[]`<br/><br/>`interface VideoContext { name?: string; type?: string; url?: string; duration?: number; size?: number; width?: number; height?: number; thumb: string; progress: number }`<br/><br/>`interface ImageContext { name: string; type: string; url: string;  size: number; width: number; height: number; progress: number  }`<br/>
 
 ### Upload Slots
 
 name | Description
 -- | --
 add-content | \-
-
-### UploadFile
-
-name | type | default | description | required
--- | -- | -- | -- | --
-last-modified | Number | - | \- | N
-name | String | - | \- | N
-percent | Number | - | \- | N
-raw | Object | - | Typescript：`File` | N
-response | Object | - | Typescript：`{ [key: string]: any }` | N
-size | Number | - | \- | N
-status | String | - | Typescript：` 'success' \| 'fail' \| 'progress' \| 'waiting'` | N
-type | String | - | \- | N
-upload-time | String | - | upload time | N
-url | String | - | \- | N
 
 ### CSS Variables
 

@@ -83,7 +83,7 @@ variant | String | outline | 已废弃。形状类型，有描边类型和填充
 
 名称 | 参数 | 描述
 -- | -- | --
-change | `(value: number)` | 评分数改变时触发
+change | `(context: { value: number })` | 评分数改变时触发
 
 ### Rate External Classes
 

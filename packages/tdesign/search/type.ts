@@ -136,25 +136,25 @@ export interface TdSearchProps {
   /**
    * 点击右侧操作按钮文字时触发
    */
-  onActionClick?: ({}) => void;
+  onActionClick?: () => void;
   /**
    * 失去焦点时触发
    */
-  onBlur?: ({ value: string }) => void;
+  onBlur?: (context: { value: string }) => void;
   /**
    * 值发生变化时触发
    */
-  onChange?: ({ value: string }) => void;
+  onChange?: (context: { value: string }) => void;
   /**
    * 点击清除时触发
    */
-  onClear?: ({ value: string }) => void;
+  onClear?: (context: { value: string }) => void;
   /**
    * 聚焦时触发
    */
-  onFocus?: ({ value: string }) => void;
+  onFocus?: (context: { value: string }) => void;
   /**
    * 提交时触发
    */
-  onSubmit?: ({ value: string }) => void;
+  onSubmit?: (context: { value: string }) => void;
 }

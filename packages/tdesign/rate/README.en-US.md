@@ -26,7 +26,7 @@ variant | String | outline | options: outline/filled | N
 
 name | params | description
 -- | -- | --
-change | `(value: number)` | \-
+change | `(context: { value: number })` | \-
 
 ### Rate External Classes
 

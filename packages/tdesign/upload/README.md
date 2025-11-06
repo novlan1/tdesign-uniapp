@@ -75,7 +75,7 @@ max | Number | 0 | 用于控制文件上传数量，值为 0 则不限制 | N
 media-type | Array | ['image', 'video'] | 支持上传的文件类型，图片或视频。TS 类型：`Array<MediaType>` `type MediaType = 'image' \| 'video'`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts) | N
 preview | Boolean | true | 是否支持图片预览，文件没有预览 | N
 remove-btn | Boolean | true | 移除按钮 | N
-request-method | Function | - | 自定义上传方法 | N
+request-method | Function | - | 自定义上传方法。TS 类型：`any` | N
 size-limit | Number / Object | - | 图片文件大小限制，默认单位 KB。可选单位有：`'B' \| 'KB' \| 'MB' \| 'GB'`。示例一：`1000`。示例二：`{ size: 2, unit: 'MB', message: '图片大小不超过 {sizeLimit} MB' }`。TS 类型：`number \| SizeLimitObj` `interface SizeLimitObj { size: number; unit: SizeUnit ; message?: string }` `type SizeUnitArray = ['B', 'KB', 'MB', 'GB']` `type SizeUnit = SizeUnitArray[number]`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts) | N
 source | String | media | 来源。可选项：media/messageFile | N
 transition | Object | { backTransition: true, duration: 300, timingFunction: 'ease' } | 拖拽位置移动时的过渡参数,`duration`单位为ms。TS 类型：`Transition` `interface Transition { backTransition?: boolean, duration?: number, timingFunction?: string }`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts) | N
@@ -84,35 +84,20 @@ transition | Object | { backTransition: true, duration: 300, timingFunction: 'ea
 
 名称 | 参数 | 描述
 -- | -- | --
-add | `(files: MediaContext)` | 选择后触发，仅包含本次选择的照片；`url` 表示选定视频的临时文件路径 (本地路径)。`duration` 表示选定视频的时间长度。`size`选定视频的数据量大小。更多描述参考 wx.chooseMedia 小程序官网描述。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts)。<br/>`type MediaContext = VideoContext[] \| ImageContext[]`<br/><br/>`interface VideoContext { name?: string; type?: string; url?: string; duration?: number; size?: number; width?: number; height?: number; thumb: string; progress: number }`<br/><br/>`interface ImageContext { name: string; type: string; url: string;  size: number; width: number; height: number; progress: number  }`<br/>
-click | `(index: number; file: VideoContext \| ImageContext)` | 点击已选文件时触发；常用于重新上传
+add | `(context: { files: MediaContext })` | 选择后触发，仅包含本次选择的照片；`url` 表示选定视频的临时文件路径 (本地路径)。`duration` 表示选定视频的时间长度。`size`选定视频的数据量大小。更多描述参考 wx.chooseMedia 小程序官网描述
+click | `(context: { index: number; file: VideoContext \| ImageContext })` | 点击已选文件时触发；常用于重新上传
 complete | \- | 上传成功或失败后触发
-drop | `(files: MediaContext) ` | 拖拽结束后触发，包含所有上传的文件（拖拽后的文件顺序）；`url` 表示选定视频的临时文件路径 (本地路径)。`duration` 表示选定视频的时间长度。`size` 选定视频的数据量大小。更多描述参考 wx.chooseMedia 小程序官网描述。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts)。<br/>`type MediaContext = VideoContext[] \| ImageContext[]; interface VideoContext { name?: string; type?: string; url?: string; duration?: number; size?: number; width?: number; height?: number; thumb: string; progress: number }; interface ImageContext { name: string; type: string; url: string;  size: number; width: number; height: number; progress: number}`<br/>
+drop | `(context: { files: MediaContext }) ` | 拖拽结束后触发，包含所有上传的文件（拖拽后的文件顺序）；`url` 表示选定视频的临时文件路径 (本地路径)。`duration` 表示选定视频的时间长度。`size` 选定视频的数据量大小。更多描述参考 wx.chooseMedia 小程序官网描述
 fail | \- | 上传失败后触发
-remove | `(index: number; file: UploadFile)` | 移除文件时触发
-select-change | `(files: MediaContext[]; currentSelectedFiles: MediaContext[])` | 选择文件或图片之后，上传之前，触发该事件。<br />`files` 表示之前已经上传完成的文件列表。<br />`currentSelectedFiles` 表示本次上传选中的文件列表
-success | `(files: MediaContext)` | 上传成功后触发，包含所有上传的文件；`url` 表示选定视频的临时文件路径 (本地路径)。`duration` 表示选定视频的时间长度。`size`选定视频的数据量大小。更多描述参考 wx.chooseMedia 小程序官网描述。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts)。<br/>`type MediaContext = VideoContext[] \| ImageContext[]`<br/><br/>`interface VideoContext { name?: string; type?: string; url?: string; duration?: number; size?: number; width?: number; height?: number; thumb: string; progress: number }`<br/><br/>`interface ImageContext { name: string; type: string; url: string;  size: number; width: number; height: number; progress: number  }`<br/>
+remove | `(context: { index: number; file: UploadFile })` | 移除文件时触发
+select-change | `(context: { files: MediaContext[]; currentSelectedFiles: MediaContext[] })` | 选择文件或图片之后，上传之前，触发该事件。<br />`files` 表示之前已经上传完成的文件列表。<br />`currentSelectedFiles` 表示本次上传选中的文件列表
+success | `(context: { files: MediaContext })` | 上传成功后触发，包含所有上传的文件；`url` 表示选定视频的临时文件路径 (本地路径)。`duration` 表示选定视频的时间长度。`size`选定视频的数据量大小。更多描述参考 wx.chooseMedia 小程序官网描述。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts)。<br/>`type MediaContext = VideoContext[] \| ImageContext[]`<br/><br/>`interface VideoContext { name?: string; type?: string; url?: string; duration?: number; size?: number; width?: number; height?: number; thumb: string; progress: number }`<br/><br/>`interface ImageContext { name: string; type: string; url: string;  size: number; width: number; height: number; progress: number  }`<br/>
 
 ### Upload Slots
 
 名称 | 描述
 -- | --
 add-content | 自定义 `add-content` 显示内容
-
-### UploadFile
-
-名称 | 类型 | 默认值 | 描述 | 必传
--- | -- | -- | -- | --
-last-modified | Number | - | 上一次变更的时间 | N
-name | String | - | 文件名称 | N
-percent | Number | - | 下载进度 | N
-raw | Object | - | 原始文件对象。TS 类型：`File` | N
-response | Object | - | 上传接口返回的数据。`response.error` 存在时会判断此次上传失败，并显示错误文本信息；`response.url` 会作为文件上传成功后的地址，并使用该地址显示图片。TS 类型：`{ [key: string]: any }` | N
-size | Number | - | 文件大小 | N
-status | String | - | 文件上传状态：上传成功，上传失败，上传中，等待上传。TS 类型：` 'success' \| 'fail' \| 'progress' \| 'waiting'` | N
-type | String | - | 文件类型 | N
-upload-time | String | - | 上传时间 | N
-url | String | - | 文件上传成功后的下载/访问地址 | N
 
 ### CSS Variables
 

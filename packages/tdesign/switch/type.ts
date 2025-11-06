@@ -36,18 +36,16 @@ export interface TdSwitchProps<T = SwitchValue> {
   size?: 'small' | 'medium' | 'large';
   /**
    * 开关值
-   * @default null
    */
   value?: SwitchValue;
   /**
    * 开关值，非受控属性
-   * @default null
    */
   defaultValue?: SwitchValue;
   /**
    * 数据发生变化时触发
    */
-  onChange?: (value: SwitchValue, context: { e: MouseEvent }) => void;
+  onChange?: (context: { value: SwitchValue }) => void;
 }
 
 export type SwitchValue = string | number | boolean;

@@ -37,7 +37,7 @@ z-index | Number | 11000 | 遮罩层级 | N
 
 名称 | 参数 | 描述
 -- | -- | --
-click | `({ visible: boolean })` | 点击遮罩时触发
+click | `(context: { visible: boolean })` | 点击遮罩时触发
 
 ### Overlay Slots
 

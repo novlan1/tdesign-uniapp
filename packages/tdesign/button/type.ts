@@ -25,7 +25,7 @@ export interface TdButtonProps {
    * 自定义 dataset，可通过 event.currentTarget.dataset.custom 获取
    * @default {}
    */
-  customDataset?: string | number | boolean | object | array;
+  customDataset?: string | number | boolean | object | Array<string | number | boolean | object>;
   /**
    * 禁用状态。优先级：Button.disabled > Form.disabled
    */

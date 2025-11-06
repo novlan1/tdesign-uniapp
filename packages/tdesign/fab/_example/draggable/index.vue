@@ -8,8 +8,8 @@
       draggable
       :y-bounds="[0, 32]"
       @click="handleClick"
-      @dragstart="handleDragStart"
-      @dragend="handleDragEnd"
+      @drag-start="handleDragStart"
+      @drag-end="handleDragEnd"
     />
   </view>
 </template>

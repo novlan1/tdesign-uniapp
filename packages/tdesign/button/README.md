@@ -66,7 +66,7 @@ custom-style | Object | - | 自定义样式 | N
 app-parameter | String | - | 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效 | N
 block | Boolean | false | 是否为块级元素 | N
 content | String | - | 按钮内容 | N
-custom-dataset | String / Number / Boolean / Object / Array | {} | 自定义 dataset，可通过 event.currentTarget.dataset.custom 获取 | N
+custom-dataset | String / Number / Boolean / Object / Array | {} | 自定义 dataset，可通过 event.currentTarget.dataset.custom 获取。TS 类型：`string \| number \| boolean \| object \| Array<string \| number \| boolean \| object>` | N
 disabled | Boolean | undefined | 禁用状态。优先级：Button.disabled > Form.disabled | N
 ghost | Boolean | false | 是否为幽灵按钮（镂空按钮） | N
 hover-class | String | - | 指定按钮按下去的样式类，按钮不为加载或禁用状态时有效。当 `hover-class="none"` 时，没有点击态效果 | N

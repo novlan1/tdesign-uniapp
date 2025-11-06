@@ -75,7 +75,7 @@ custom-style | Object | - | CSS(Cascading Style Sheets) | N
 app-parameter | String | - | \- | N
 block | Boolean | false | make button to be a block-level element | N
 content | String | - | button's children elements | N
-custom-dataset | String / Number / Boolean / Object / Array | {} | \- | N
+custom-dataset | String / Number / Boolean / Object / Array | {} | Typescript：`string \| number \| boolean \| object \| Array<string \| number \| boolean \| object>` | N
 disabled | Boolean | undefined | disable the button, make it can not be clicked | N
 ghost | Boolean | false | make background-color to be transparent | N
 hover-class | String | - | \- | N

@@ -72,7 +72,7 @@ value | String / Number / Boolean | false | 单选按钮的值。TS 类型：`T`
 
 名称 | 参数 | 描述
 -- | -- | --
-change | `(checked: boolean)` | 值变化时触发
+change | `(context: { checked: boolean })` | 值变化时触发
 
 ### Radio Slots
 
@@ -116,7 +116,7 @@ default-value | String / Number / Boolean | - | 选中的值。非受控属性�
 
 名称 | 参数 | 描述
 -- | -- | --
-change | `(value: RadioValue, context: { e: Event })` | 选中值发生变化时触发
+change | `(context: { value: RadioValue })` | 选中值发生变化时触发
 
 ### RadioGroup Slots
 

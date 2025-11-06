@@ -83,7 +83,7 @@ export interface TdRadioProps<T = RadioValue> {
   /**
    * 值变化时触发
    */
-  onChange?: (checked: boolean) => void;
+  onChange?: (context: { checked: boolean }) => void;
 }
 
 export type RadioValue = string | number | boolean;

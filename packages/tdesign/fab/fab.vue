@@ -187,8 +187,8 @@ export default uniComponent({
     },
   },
   methods: {
-    onTplButtonTap(t) {
-      this.$emit('click', t);
+    onTplButtonTap(e) {
+      this.$emit('click', { e  });
     },
     onStart(t) {
       this.$emit('drag-start', t);

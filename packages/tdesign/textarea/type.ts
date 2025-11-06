@@ -141,27 +141,27 @@ export interface TdTextareaProps {
   /**
    * 失去焦点时触发
    */
-  onBlur?: (value: TextareaValue, cursor: number) => void;
+  onBlur?: (context: { value: TextareaValue; cursor: number }) => void;
   /**
    * 输入内容变化时触发
    */
-  onChange?: (value: TextareaValue, cursor: number) => void;
+  onChange?: (context: { value: TextareaValue; cursor: number }) => void;
   /**
    * 点击完成时触发
    */
-  onEnter?: (value: TextareaValue) => void;
+  onEnter?: (context: { value: TextareaValue }) => void;
   /**
    * 获得焦点时触发
    */
-  onFocus?: (value: TextareaValue) => void;
+  onFocus?: (context: { value: TextareaValue }) => void;
   /**
    * 键盘高度发生变化的时候触发此事件
    */
-  onKeyboardheightchange?: (height: number, duration: number) => void;
+  onKeyboardheightchange?: (context: { height: number; duration: number }) => void;
   /**
    * 行高发生变化时触发
    */
-  onLineChange?: (value: TextareaValue) => void;
+  onLineChange?: (context: { value: TextareaValue }) => void;
 }
 
 export type TextareaValue = string | number;

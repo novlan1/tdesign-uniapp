@@ -22,9 +22,10 @@ z-index | Number | 11500 | \- | N
 
 name | params | description
 -- | -- | --
-close | `(trigger: DrawerTriggerSource)` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/drawer/type.ts)。<br/>`type DrawerTriggerSource = 'overlay'`<br/>
+close | `(context: { trigger: DrawerTriggerSource })` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/drawer/type.ts)。<br/>`type DrawerTriggerSource = 'overlay'`<br/>
 item-click | `(context: { index: number; item: DrawerItem })` | \-
 overlay-click | \- | \-
+update-visible | `(context: { visible: boolean })` | \-
 
 ### Drawer Slots
 

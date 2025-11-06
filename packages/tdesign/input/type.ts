@@ -195,35 +195,35 @@ export interface TdInputProps {
   /**
    * 失去焦点时触发
    */
-  onBlur?: (value: InputValue) => void;
+  onBlur?: (context: { value: InputValue }) => void;
   /**
    * 输入框值发生变化时触发；cursor 为光标位置；
    */
-  onChange?: (value: InputValue, cursor: number, keyCode: number) => void;
+  onChange?: (context: { value: InputValue; cursor: number; keyCode: number }) => void;
   /**
    * 清空按钮点击时触发
    */
   onClear?: () => void;
   /**
-   * 点击事件。[详细类型定义](https://github.com/Tencent/tdesign-miniprogram/tree/develop/src/input/type.ts)。<br/>`type InputTrigger = 'suffix' | 'suffix-icon';`<br/>
+   * 点击事件。[详细类型定义](https://github.com/Tencent/tdesign-miniprogram/tree/develop/src/input/type.ts)。
    */
-  onClick?: (trigger: InputTrigger) => void;
+  onClick?: (context: { trigger: InputTrigger }) => void;
   /**
    * 回车键按下时触发
    */
-  onEnter?: (value: InputValue) => void;
+  onEnter?: (context: { value: InputValue }) => void;
   /**
    * 获得焦点时触发
    */
-  onFocus?: (value: InputValue) => void;
+  onFocus?: (context: { value: InputValue }) => void;
   /**
    * 键盘高度发生变化的时候触发此事件
    */
-  onKeyboardheightchange?: (height: number, duration: number) => void;
+  onKeyboardheightchange?: (context: { height: number; duration: number }) => void;
   /**
    * 用户昵称审核完毕后触发，仅在 type 为 "nickname" 时有效
    */
-  onNicknamereview?: (pass: boolean, timeout: boolean) => void;
+  onNicknamereview?: (context: { pass: boolean; timeout: boolean }) => void;
   /**
    * 字数超出限制时触发
    */
@@ -233,3 +233,5 @@ export interface TdInputProps {
 export type InputFormatType = (value: InputValue) => string;
 
 export type InputValue = string | number;
+
+export type InputTrigger = 'suffix' | 'suffix-icon';

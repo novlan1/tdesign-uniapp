@@ -4,14 +4,22 @@
  * 该文件为脚本自动生成文件，请勿随意修改。如需修改请联系 PMC
  * */
 
-import { OverlayProps } from '../overlay';
+import type { TdOverlayProps as OverlayProps } from '../overlay/type';
 
 export interface TdPopupProps {
+  /**
+   * 关闭按钮，值类型为 Boolean 时表示是否显示关闭按钮。也可以自定义关闭按钮
+   */
+  closeBtn?: boolean;
   /**
    * 点击遮罩层是否关闭
    * @default true
    */
   closeOnOverlayClick?: boolean;
+  /**
+   * 浮层里面的内容
+   */
+  content?: string;
   /**
    * 动画过渡时间
    * @default 240
@@ -58,7 +66,7 @@ export interface TdPopupProps {
   /**
    * 当浮层隐藏或显示时触发
    */
-  onVisibleChange?: (visible: boolean, trigger: PopupSource) => void;
+  onVisibleChange?: (context: { visible: boolean; trigger: PopupSource }) => void;
 }
 
 export type PopupSource = 'close-btn' | 'overlay';

@@ -23,10 +23,10 @@ default-value | String / Number | 0 | uncontrolled property | N
 
 name | params | description
 -- | -- | --
-blur | `({ type: string \| number })` | `v-model:blur` is supported
-change | `({ value: string \| number })` | `v-model:change` is supported
-focus | `({ value: string \| number }))` | \-
-overlimit | `({type: 'minus' \| 'plus'})` | \-
+blur | `(context: { type: string \| number })` | \-
+change | `(context: { value: string \| number })` | \-
+focus | `(context: { value: string \| number })` | \-
+overlimit | `(context: {type: 'minus' \| 'plus'})` | \-
 
 ### Stepper External Classes
 

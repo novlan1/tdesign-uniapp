@@ -23,9 +23,9 @@ default-value | String / Number | - | uncontrolled property。Typescript：`TabV
 
 name | params | description
 -- | -- | --
-change | `(value: TabValue, label: string)` | \-
-click | `(value: TabValue, label: string)` | \-
-scroll | `(scrollTop: number, isFixed: boolean)` | \-
+change | `(context: { value: TabValue; label: string })` | \-
+click | `(context: { value: TabValue; label: string })` | \-
+scroll | `(context: { scrollTop: number, isFixed: boolean })` | \-
 
 ### Tabs Slots
 

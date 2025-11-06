@@ -89,8 +89,8 @@ export interface TdCheckboxProps {
   /**
    * 值变化时触发。`context` 表示当前点击项内容
    */
-  onChange?: (
-    checked: boolean,
-    context: { value: boolean | number | string; label: boolean | number | string },
-  ) => void;
+  onChange?: (context: {
+    checked: boolean;
+    context: { value: boolean | number | string; label: boolean | number | string };
+  }) => void;
 }

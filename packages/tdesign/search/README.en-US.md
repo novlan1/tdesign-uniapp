@@ -39,12 +39,12 @@ value | String | '' | \- | N
 
 name | params | description
 -- | -- | --
-action-click | `({})` | \-
-blur | `({ value: string })` | \-
-change | `({ value: string })` | \-
-clear | `({ value: string })` | \-
-focus | `({ value: string })` | \-
-submit | `({ value: string })` | \-
+action-click | \- | \-
+blur | `(context: { value: string })` | \-
+change | `(context: { value: string })` | \-
+clear | `(context: { value: string })` | \-
+focus | `(context: { value: string })` | \-
+submit | `(context: { value: string })` | \-
 
 ### Search Slots
 

@@ -22,8 +22,8 @@ default-visible | Boolean | false | uncontrolled property | N
 
 name | params | description
 -- | -- | --
-change | `(current: number, source: '' \| 'autoplay' \| 'touch')` | \-
-click | `(trigger: NoticeBarTrigger)` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/notice-bar/type.ts)。<br/>`type NoticeBarTrigger = 'prefix-icon' \| 'content' \| 'operation' \| 'suffix-icon';`<br/>
+change | `(context: { current: number, source: '' \| 'autoplay' \| 'touch' })` | \-
+click | `(context: { trigger: NoticeBarTrigger })` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/notice-bar/type.ts)。<br/>`type NoticeBarTrigger = 'prefix-icon' \| 'content' \| 'operation' \| 'suffix-icon';`<br/>
 
 ### NoticeBar Slots
 

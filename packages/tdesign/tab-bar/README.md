@@ -66,7 +66,7 @@ default-value | String / Number / Array | - | 当前选中标签的索引。非�
 
 名称 | 参数 | 描述
 -- | -- | --
-change | `(value: string \| number)` | 选中标签切换时触发
+change | `(context: { value: string \| number })` | 选中标签切换时触发
 
 ### TabBar External Classes
 

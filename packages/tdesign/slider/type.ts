@@ -67,15 +67,15 @@ export interface TdSliderProps {
   /**
    * 滑块值变化时触发
    */
-  onChange?: (value: SliderValue) => void;
+  onChange?: (context: { value: SliderValue }) => void;
   /**
    * 结束拖动时触发
    */
-  onDragend?: (value: SliderValue, e: TouchEvent) => void;
+  onDragend?: (context: { value: SliderValue; e: TouchEvent }) => void;
   /**
    * 开始拖动时触发
    */
-  onDragstart?: (e: TouchEvent) => void;
+  onDragstart?: (context: { e: TouchEvent }) => void;
 }
 
 export type SliderValue = number | Array<number>;

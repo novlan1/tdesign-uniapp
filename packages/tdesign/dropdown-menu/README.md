@@ -86,9 +86,9 @@ default-value | String / Number / Array | undefined | 选中值。非受控属�
 
 名称 | 参数 | 描述
 -- | -- | --
-change | `(value: DropdownValue)` | 值改变时触发
+change | `(context: { value: DropdownValue })` | 值改变时触发
 close | \- | 关闭时触发
-confirm | `(value: DropdownValue)` | 点击确认时触发
+confirm | `(context: { value: DropdownValue })` | 点击确认时触发
 reset | \- | 点击重置时触发
 
 ### DropdownItem Slots

@@ -79,10 +79,10 @@ visible | Boolean | false | 是否显示日历；`usePopup` 为 true 时有效 |
 名称 | 参数 | 描述
 -- | -- | --
 change | `(context: { value: number \| number[] })` | 不显示 confirm-btn 时，完成选择时触发（暂不支持 type = multiple）
-close | `(trigger: CalendarTrigger)` | 关闭按钮时触发。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/calendar/type.ts)。<br/>`type CalendarTrigger = 'close-btn' \| 'confirm-btn' \| 'overlay' \| 'auto-close'`<br/>
+close | `(context: { trigger: CalendarTrigger })` | 关闭按钮时触发。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/calendar/type.ts)。<br/>`type CalendarTrigger = 'close-btn' \| 'confirm-btn' \| 'overlay' \| 'auto-close'`<br/>
 confirm | `(context: { value: number \| number[] })` | 点击确认按钮时触发
 panel-change | `(context: { year: number, month: number })` | 切换月或年时触发（switch-mode 不为 none 时有效）
-scroll | `({scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY})` | 滚动时触发
+scroll | `(context: {scrollLeft: number, scrollTop: number, scrollHeight: number, scrollWidth: number, deltaX: number, deltaY: number})` | 滚动时触发
 select | `(context: { value: number \| number[] })` | 点击日期时触发
 
 ### Calendar Slots

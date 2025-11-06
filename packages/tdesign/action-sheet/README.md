@@ -96,8 +96,8 @@ default-visible | Boolean | false | 显示与隐藏。非受控属性 | N
 名称 | 参数 | 描述
 -- | -- | --
 cancel | \- | 点击取消按钮时触发
-close | `(e: { trigger: ActionSheetTriggerSource })` | 关闭时触发。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/action-sheet/type.ts)。<br/>`type ActionSheetTriggerSource = 'overlay' \| 'command' \| 'select' `<br/>
-selected | `(e: {  selected: ActionSheetItem \| string, index: number })` | 选择菜单项时触发
+close | `(context: { trigger: ActionSheetTriggerSource })` | 关闭时触发。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/action-sheet/type.ts)。<br/>`type ActionSheetTriggerSource = 'overlay' \| 'command' \| 'select' `<br/>
+selected | `(context: {  selected: ActionSheetItem \| string, index: number })` | 选择菜单项时触发
 
 ### ActionSheet Slots
 

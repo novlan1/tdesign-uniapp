@@ -18,8 +18,8 @@ sticky-offset | Number | 0 | \- | N
 
 name | params | description
 -- | -- | --
-change | `(index: string \| number)` | \-
-select | `(index: string \| number)` | \-
+change | `(context: { index: string \| number })` | \-
+select | `(context: { index: string \| number })` | \-
 
 ### Indexes Slots
 

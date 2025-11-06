@@ -28,7 +28,7 @@ value | String / Number / Boolean | false | Typescript：`T` `type RadioValue = 
 
 name | params | description
 -- | -- | --
-change | `(checked: boolean)` | \-
+change | `(context: { checked: boolean })` | \-
 
 ### Radio Slots
 
@@ -72,7 +72,7 @@ default-value | String / Number / Boolean | - | uncontrolled property。Typescri
 
 name | params | description
 -- | -- | --
-change | `(value: RadioValue, context: { e: Event })` | \-
+change | `(context: { value: RadioValue })` | \-
 
 ### RadioGroup Slots
 

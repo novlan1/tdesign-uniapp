@@ -54,10 +54,10 @@ export interface TdCheckboxGroupProps<T = CheckboxGroupValue> {
   /**
    * 值变化时触发。`context` 表示当前点击项内容
    */
-  onChange?: (
-    value: CheckboxGroupValue,
-    context: { value: boolean | number | string; label: boolean | number | string },
-  ) => void;
+  onChange?: (context: {
+    value: CheckboxGroupValue;
+    context: { value: boolean | number | string; label: boolean | number | string };
+  }) => void;
 }
 
 export type CheckboxOption = string | number | CheckboxOptionObj;

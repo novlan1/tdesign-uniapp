@@ -132,9 +132,9 @@ default-value | String / Number | - | 激活的选项卡值。非受控属性。
 
 名称 | 参数 | 描述
 -- | -- | --
-change | `(value: TabValue, label: string)` | 激活的选项卡发生变化时触发
-click | `(value: TabValue, label: string)` | 点击选项卡时触发
-scroll | `(scrollTop: number, isFixed: boolean)` | 页面滚动时触发
+change | `(context: { value: TabValue; label: string })` | 激活的选项卡发生变化时触发
+click | `(context: { value: TabValue; label: string })` | 点击选项卡时触发
+scroll | `(context: { scrollTop: number, isFixed: boolean })` | 页面滚动时触发
 
 ### Tabs Slots
 

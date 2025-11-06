@@ -214,7 +214,7 @@ export default {
     type: Function,
     default: () => ({}),
   },
-  /** 点击事件。[详细类型定义](https://github.com/Tencent/tdesign-miniprogram/tree/develop/src/input/type.ts)。<br/>`type InputTrigger = 'suffix' | 'suffix-icon';`<br/> */
+  /** 点击事件。[详细类型定义](https://github.com/Tencent/tdesign-miniprogram/tree/develop/src/input/type.ts)。 */
   onClick: {
     type: Function,
     default: () => ({}),

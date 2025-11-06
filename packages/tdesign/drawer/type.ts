@@ -46,7 +46,7 @@ export interface TdDrawerProps {
    */
   usingCustomNavbar?: boolean;
   /**
-   * 组件是否可见
+   * 组件是否可见。支持语法糖 `v-model:visible`
    * @default false
    */
   visible?: boolean;
@@ -58,7 +58,7 @@ export interface TdDrawerProps {
   /**
    * 关闭时触发。
    */
-  onClose?: (trigger: DrawerTriggerSource) => void;
+  onClose?: (context: { trigger: DrawerTriggerSource }) => void;
   /**
    * 点击抽屉里的列表项
    */
@@ -67,6 +67,10 @@ export interface TdDrawerProps {
    * 如果蒙层存在，点击蒙层时触发
    */
   onOverlayClick?: () => void;
+  /**
+   * 更新可见性
+   */
+  onUpdateVisible?: (context: { visible: boolean }) => void;
 }
 
 export interface DrawerItem {

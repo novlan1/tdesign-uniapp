@@ -38,5 +38,5 @@ export interface TdOverlayProps {
   /**
    * 点击遮罩时触发
    */
-  onClick?: ({ visible: boolean }) => void;
+  onClick?: (context: { visible: boolean }) => void;
 }

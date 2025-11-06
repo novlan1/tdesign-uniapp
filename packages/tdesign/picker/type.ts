@@ -74,34 +74,34 @@ export interface TdPickerProps {
    * 点击取消按钮时触发
    * @default ''
    */
-  onCancel?: (context: { e: MouseEvent }) => void;
+  onCancel?: () => void;
   /**
    * 选中变化时候触发，即确认变化时触发
    * @default ''
    */
-  onChange?: (
-    value: Array<PickerValue>,
-    label: string,
-    columns: Array<{ column: number; index: number; disabled?: boolean }>,
-  ) => void;
+  onChange?: (context: {
+    value: Array<PickerValue>;
+    label: string;
+    columns: Array<{ column: number; index: number; disabled?: boolean }>;
+  }) => void;
   /**
    * 关闭时触发
    */
-  onClose?: (trigger: TriggerSource) => void;
+  onClose?: (context: { trigger: TriggerSource }) => void;
   /**
    * 点击确认按钮时触发
    * @default ''
    */
-  onConfirm?: (
-    value: Array<PickerValue>,
-    label: string,
-    columns: Array<{ column: number; index: number; disabled?: boolean }>,
-  ) => void;
+  onConfirm?: (context: {
+    value: Array<PickerValue>;
+    label: string;
+    columns: Array<{ column: number; index: number; disabled?: boolean }>;
+  }) => void;
   /**
    * 任何一列选中都会触发，不同的列参数不同。`column` 表示第几列变化，`index` 表示变化那一列的选中项下标
    * @default ''
    */
-  onPick?: (value: Array<PickerValue>, label: string, column: number, index: number) => void;
+  onPick?: (context: { value: Array<PickerValue>; label: string; column: number; index: number }) => void;
 }
 
 export type PickerValue = string | number;

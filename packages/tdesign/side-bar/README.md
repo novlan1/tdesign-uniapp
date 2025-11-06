@@ -45,8 +45,8 @@ default-value | String / Number | - | 选项值。非受控属性 | N
 
 名称 | 参数 | 描述
 -- | -- | --
-change | `(value: number \| string, label: string)` | 选项值发生变化时触发
-click | `(value: number \| string, label: string)` | 点击选项时触发
+change | `(context: { value: number \| string, label: string })` | 选项值发生变化时触发
+click | `(context: { value: number \| string; label: string })` | 点击选项时触发
 
 ### SideBar Slots
 

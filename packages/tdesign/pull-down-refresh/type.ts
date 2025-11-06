@@ -29,6 +29,7 @@ export interface TdPullDownRefreshProps {
   loadingBarHeight?: string | number;
   /**
    * 加载loading样式
+   * @default {}
    */
   loadingProps?: LoadingProps;
   /**
@@ -89,19 +90,19 @@ export interface TdPullDownRefreshProps {
   /**
    * 下拉或收起时触发，用户手势往下滑动触发下拉状态，手势松开触发收起状态
    */
-  onChange?: (value: boolean) => void;
+  onChange?: (context: { value: boolean }) => void;
   /**
    * 滑动结束事件
    */
-  onDragend?: (scrollTop: number, scrollLeft: number) => void;
+  onDragend?: (context: { scrollTop: number; scrollLeft: number }) => void;
   /**
    * 滑动事件
    */
-  onDragging?: (scrollTop: number, scrollLeft: number) => void;
+  onDragging?: (context: { scrollTop: number; scrollLeft: number }) => void;
   /**
    * 滑动开始事件
    */
-  onDragstart?: (scrollTop: number, scrollLeft: number) => void;
+  onDragstart?: (context: { scrollTop: number; scrollLeft: number }) => void;
   /**
    * 结束下拉时触发
    */

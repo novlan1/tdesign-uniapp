@@ -41,7 +41,7 @@ export interface TdTreeSelectProps<DataOption extends TreeOptionData = TreeOptio
   /**
    * 点击任何节点均会触发；level 代表当前点击的层级，0 代表最左侧，依次递进
    */
-  onChange?: (value: TreeSelectValue, level: TreeLevel) => void;
+  onChange?: (context: { value: TreeSelectValue; level: TreeLevel }) => void;
 }
 
 export type TreeSelectValue = string | number | Array<TreeSelectValue>;
