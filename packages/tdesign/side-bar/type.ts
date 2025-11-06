@@ -16,9 +16,9 @@ export interface TdSideBarProps {
   /**
    * 选项值发生变化时触发
    */
-  onChange?: (value: number | string, label: string) => void;
+  onChange?: (context: { value: number | string; label: string }) => void;
   /**
    * 点击选项时触发
    */
-  onClick?: (value: number | string, label: string) => void;
+  onClick?: (context: { value: number | string; label: string }) => void;
 }

@@ -14,8 +14,8 @@ default-value | String / Number | - | uncontrolled property | N
 
 name | params | description
 -- | -- | --
-change | `(value: number \| string, label: string)` | \-
-click | `(value: number \| string, label: string)` | \-
+change | `(context: { value: number \| string, label: string })` | \-
+click | `(context: { value: number \| string; label: string })` | \-
 
 ### SideBar Slots
 

@@ -77,7 +77,7 @@ theme | String | default | 步骤条风格。可选项：default/dot | N
 
 名称 | 参数 | 描述
 -- | -- | --
-change | `({current: string \| number, previous: string \| number})` | 当前步骤发生变化时触发
+change | `(context: {current: string \| number, previous: string \| number})` | 当前步骤发生变化时触发
 
 ### Steps Slots
 

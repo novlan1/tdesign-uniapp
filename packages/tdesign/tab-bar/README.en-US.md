@@ -20,7 +20,7 @@ default-value | String / Number / Array | - | uncontrolled property。Typescript
 
 name | params | description
 -- | -- | --
-change | `(value: string \| number)` | \-
+change | `(context: { value: string \| number })` | \-
 
 ### TabBar External Classes
 

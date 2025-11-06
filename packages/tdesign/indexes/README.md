@@ -47,8 +47,8 @@ sticky-offset | Number | 0 | 锚点吸顶时与顶部的距离	 | N
 
 名称 | 参数 | 描述
 -- | -- | --
-change | `(index: string \| number)` | 索引发生变更时触发事件
-select | `(index: string \| number)` | 点击侧边栏时触发事件
+change | `(context: { index: string \| number })` | 索引发生变更时触发事件
+select | `(context: { index: string \| number })` | 点击侧边栏时触发事件
 
 ### Indexes Slots
 

@@ -48,7 +48,7 @@ z-index | Number | 11500 | 抽屉层级，样式默认为 11500 | N
 
 名称 | 参数 | 描述
 -- | -- | --
-close | `(trigger: DrawerTriggerSource)` | 关闭时触发。。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/drawer/type.ts)。<br/>`type DrawerTriggerSource = 'overlay'`<br/>
+close | `(context: { trigger: DrawerTriggerSource })` | 关闭时触发。。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/drawer/type.ts)。<br/>`type DrawerTriggerSource = 'overlay'`<br/>
 item-click | `(context: { index: number; item: DrawerItem })` | 点击抽屉里的列表项
 overlay-click | \- | 如果蒙层存在，点击蒙层时触发
 

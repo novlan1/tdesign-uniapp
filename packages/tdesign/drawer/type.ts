@@ -58,7 +58,7 @@ export interface TdDrawerProps {
   /**
    * 关闭时触发。
    */
-  onClose?: (trigger: DrawerTriggerSource) => void;
+  onClose?: (context: { trigger: DrawerTriggerSource }) => void;
   /**
    * 点击抽屉里的列表项
    */

@@ -90,7 +90,6 @@ export default uniComponent({
     ...props,
   },
   emits: [
-    'update:visible',
     'close',
     'overlay-click',
     'item-click',
@@ -122,7 +121,6 @@ export default uniComponent({
       if (showOverlay) {
         this.$emit('overlay-click', { visible });
       }
-      this.$emit('update:visible', visible);
     },
 
     itemClick(detail) {

@@ -11,7 +11,7 @@ const CONFIG = {
 };
 
 const OTHER_EXPORTS = {
-  './common/style/theme/index.css': './common/style/theme/index.css',
+  './*': './*',
 };
 
 const DTS_TEMPLATE = `import type { TransformEventHandlers, ExtractNonOnProps } from '../common/common';
@@ -45,9 +45,9 @@ function changePkgExports(fileNames) {
     return {
       ...acc,
       [key]: {
-        import: key,
-        require: key,
         types: `./types/${item}.d.ts`,
+        import: key,
+        default: key,
       },
     };
   }, {

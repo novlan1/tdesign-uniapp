@@ -26,6 +26,47 @@ export type TreeOptionData<T = string | number> = {
 } & PlainObject;
 
 /**
+ * 移除 on 前缀并可选地去掉可选修饰符
+ * @param T - 原始类型
+ * @param MakeRequired - 是否将属性变为必需（默认 false）
+ */
+export type TransformEventHandlers<
+  T,
+  MakeRequired extends boolean = false
+> = MakeRequired extends true
+  ? {
+    [K in keyof T as K extends `on${infer Event}`
+      ? Uncapitalize<Event>
+      : never
+    ]-?: T[K]
+  }
+  : {
+    [K in keyof T as K extends `on${infer Event}`
+      ? Uncapitalize<Event>
+      : never
+    ]: T[K]
+  };
+
+
+type WrapWithContext<T extends (...args: any[]) => any> =
+  T extends (...args: infer P) => infer R
+    ? (context: { [K in keyof P]: P[K] }) => R
+    : never;
+
+
+export type WrapParamsWithContext<T> = {
+  [K in keyof T]: T[K] extends (...args: any[]) => any
+    ? WrapWithContext<T[K]>
+    : T[K];
+};
+
+
+// 提取非 on 开头的属性
+export type ExtractNonOnProps<T> = {
+  [K in keyof T as K extends `on${string}` ? never : K]: T[K]
+};
+
+/**
  * 通用全局类型
  * */
 export type SizeEnum = 'small' | 'medium' | 'large';
