@@ -78,7 +78,7 @@ const isSkyline = ref(false);
 
 const showTrySkyline = ref(false);
 // #ifdef MP-WEIXIN
-showTrySkyline.value = true;
+showTrySkyline.value = false;
 // #endif
 
 const trdPrivacy = ref<any>(null);

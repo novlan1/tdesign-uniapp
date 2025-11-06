@@ -27,6 +27,11 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'move',
+    'start',
+    'end',
+  ],
   data() {
     return {
       prefix,

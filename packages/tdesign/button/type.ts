@@ -70,6 +70,7 @@ export interface TdButtonProps {
   loading?: boolean;
   /**
    * 透传 Loading 组件全部属性
+   * @default {}
    */
   loadingProps?: LoadingProps;
   /**

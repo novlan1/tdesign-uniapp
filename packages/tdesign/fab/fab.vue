@@ -147,6 +147,11 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'move',
+    'start',
+    'end',
+  ],
   data() {
     return {
       prefix,
@@ -186,7 +191,7 @@ export default uniComponent({
       this.$emit('click', t);
     },
     onStart(t) {
-      this.$emit('dragstart', t);
+      this.$emit('drag-start', t);
     },
     onMove(e) {
       const {
@@ -205,7 +210,7 @@ export default uniComponent({
       this.moveStyle = `right: ${right}px; bottom: ${bottom}px;`;
     },
     onEnd(t) {
-      this.$emit('dragend', t);
+      this.$emit('drag-end', t);
     },
     computedSize() {
       if (!this.draggable) return;

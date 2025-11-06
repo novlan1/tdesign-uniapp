@@ -17,6 +17,7 @@ export default {
   /** 与 navigator 原生组件属性保持一致，具体使用参考：[微信开放文档](https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html)。使用时请将形如 `open-type` 风格的属性名改为 `openType` 风格 */
   navigatorProps: {
     type: Object,
+    default: () => ({}),
   },
   /** 前置图标 */
   prefixIcon: {

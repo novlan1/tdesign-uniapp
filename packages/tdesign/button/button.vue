@@ -60,7 +60,7 @@
       :t-class-indicator="classPrefix + '__loading--indicator ' + tClassLoading"
       :custom-style="loadingCustomStyle"
     />
-    <view :class="classPrefix + '__content ' + ((_icon && _icon.name || loading) ? classPrefix + '__content--has-icon' : '')">
+    <view :class="classPrefix + '__content ' + ((_icon && _icon.name || loading) & content ? classPrefix + '__content--has-icon' : '')">
       <slot name="content" />
       <block v-if="content">
         {{ content }}

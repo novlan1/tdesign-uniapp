@@ -137,6 +137,21 @@ export const wxComponent = function wxComponent() {
   };
 };
 
+function sortPropsType(type) {
+  if (!Array.isArray(type)) {
+    return type;
+  }
+  type.sort((a, b) => {
+    if (a === Boolean) {
+      return -1;
+    }
+    if (b === Boolean) {
+      return 1;
+    }
+    return 0;
+  });
+  return type;
+}
 
 function filterProps(props, controlledProps) {
   const newProps = {};
@@ -146,6 +161,8 @@ function filterProps(props, controlledProps) {
   const unControlledKeys = controlledKeys.map(key => getDefaultKey(key));
 
   Object.keys(props).forEach((key) => {
+    const curType = props[key].type || props[key];
+
     if (reg.test(key) && props[key].type === Function) {
       const str = key.replace(/^on/, '');
       const eventName = str.charAt(0).toLowerCase() + str.slice(1);
@@ -153,8 +170,7 @@ function filterProps(props, controlledProps) {
     } else if (controlledKeys.indexOf(key) > -1
        || unControlledKeys.indexOf(key) > -1
     ) {
-      const type = props[key].type || props[key];
-      const newType = Array.isArray(type) ? type : [type];
+      const newType = Array.isArray(curType) ? curType : [curType];
       newProps[key] = {
         type: [null, ...newType],
         default: null,
@@ -168,7 +184,10 @@ function filterProps(props, controlledProps) {
         default: getPropsDefault(props[key].type),
       };
     } else {
-      newProps[key] = props[key];
+      newProps[key] = {
+        ...(typeof props[key] === 'object' ? props[key] : {}),
+        type: sortPropsType(curType),
+      };
     }
   });
 

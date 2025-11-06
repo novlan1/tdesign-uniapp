@@ -10,7 +10,7 @@ custom-style | Object | - | CSS(Cascading Style Sheets) | N
 content | String | - | \- | N
 disabled | Boolean | false | make link to be disabled | N
 hover | Boolean | - | \- | N
-navigator-props | Object | - | \- | N
+navigator-props | Object | {} | \- | N
 prefix-icon | String / Object | - | \- | N
 size | String | medium | options: small/medium/large。Typescript：`SizeEnum`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/common/common.ts) | N
 status | String | normal | `deprecated`。options: normal/active/disabled | N
