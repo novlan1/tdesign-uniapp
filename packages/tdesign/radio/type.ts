@@ -71,6 +71,11 @@ export interface TdRadioProps<T = RadioValue> {
    */
   readonly?: boolean;
   /**
+   * -1 时代表独立，不再寻找 parent，用于头条小程序
+   * @default ''
+   */
+  relationKey?: string;
+  /**
    * 单选按钮的值
    * @default false
    */

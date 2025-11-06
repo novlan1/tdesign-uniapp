@@ -8,7 +8,7 @@ name | type | default | description | required
 -- | -- | -- | -- | --
 custom-style | Object | - | CSS(Cascading Style Sheets) | N
 alt | String | - | show it when url is not valid | N
-badge-props | Object | - | Typescript：`BadgeProps`，[Badge API Documents](./badge?tab=api)。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/avatar/type.ts) | N
+badge-props | Object | {} | Typescript：`BadgeProps`，[Badge API Documents](./badge?tab=api)。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/avatar/type.ts) | N
 bordered | Boolean | false | \- | N
 hide-on-load-failed | Boolean | false | hide image when loading image failed | N
 icon | String / Object | - | \- | N

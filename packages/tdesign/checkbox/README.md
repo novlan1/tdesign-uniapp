@@ -65,8 +65,8 @@ custom-style | Object | - | 自定义样式 | N
 block | Boolean | true | 是否为块级元素 | N
 borderless | Boolean | undefined | 是否开启无边框模式 | N
 check-all | Boolean | false | 用于标识是否为「全选选项」。单独使用无效，需在 CheckboxGroup 中使用 | N
-checked | Boolean | false | 是否选中。支持语法糖 `v-model:checked` | N
-default-checked | Boolean | false | 是否选中。非受控属性 | N
+checked | Boolean | - | 是否选中。支持语法糖 `v-model:checked` | N
+default-checked | Boolean | - | 是否选中。非受控属性 | N
 content | String | - | 多选框内容 | N
 content-disabled | Boolean | - | 是否禁用组件内容（content）触发选中 | N
 disabled | Boolean | undefined | 是否禁用组件。如果父组件存在 CheckboxGroup，默认值由 CheckboxGroup.disabled 控制。优先级：Checkbox.disabled > CheckboxGroup.disabled > Form.disabled | N
@@ -119,8 +119,8 @@ name | String | - | 统一设置内部复选框 HTML 属性 | N
 options | Array | [] | 以配置形式设置子元素。示例1：`['北京', '上海']` ，示例2: `[{ label: '全选', checkAll: true }, { label: '上海', value: 'shanghai' }]`。checkAll 值为 true 表示当前选项为「全选选项」。TS 类型：`Array<CheckboxOption>` `type CheckboxOption = string \| number \| CheckboxOptionObj` `interface CheckboxOptionObj { label?: string; value?: string \| number; disabled?: boolean; checkAll?: true }`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/checkbox-group/type.ts) | N
 readonly | Boolean | undefined | 只读状态 | N
 relation-key | String | - | -1 时代表独立，不再寻找 parent，用于头条小程序 | N
-value | Array | [] | 选中值。支持语法糖 `v-model:value`。TS 类型：`T` `type CheckboxGroupValue = Array<string \| number \| boolean>`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/checkbox-group/type.ts) | N
-default-value | Array | [] | 选中值。非受控属性。TS 类型：`T` `type CheckboxGroupValue = Array<string \| number \| boolean>`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/checkbox-group/type.ts) | N
+value | Array | - | 选中值。支持语法糖 `v-model:value`。TS 类型：`T` `type CheckboxGroupValue = Array<string \| number \| boolean>`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/checkbox-group/type.ts) | N
+default-value | Array | - | 选中值。非受控属性。TS 类型：`T` `type CheckboxGroupValue = Array<string \| number \| boolean>`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/checkbox-group/type.ts) | N
 
 ### CheckboxGroup Events
 

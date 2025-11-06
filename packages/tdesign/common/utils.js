@@ -264,6 +264,10 @@ export const toPascal = name => name
   .map(part => part.charAt(0).toUpperCase() + part.slice(1))
   .join('');
 
+export function hyphenate(str) {
+  const hyphenateRE = /\B([A-Z])/g;
+  return str.replace(hyphenateRE, '-$1').toLowerCase();
+}
 export const getCurrentPage = function () {
   const pages = getCurrentPages();
   return pages[pages.length - 1];

@@ -45,12 +45,10 @@ export interface TdCheckboxGroupProps<T = CheckboxGroupValue> {
   relationKey?: string;
   /**
    * 选中值
-   * @default []
    */
   value?: T;
   /**
    * 选中值，非受控属性
-   * @default []
    */
   defaultValue?: T;
   /**

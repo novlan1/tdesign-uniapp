@@ -7,21 +7,21 @@
     >
       <t-progress
         theme="circle"
-        percentage="80"
+        :percentage="80"
       />
       <t-progress
         theme="circle"
-        percentage="88"
+        :percentage="88"
         status="warning"
       />
       <t-progress
         theme="circle"
-        percentage="88"
+        :percentage="88"
         status="error"
       />
       <t-progress
         theme="circle"
-        percentage="88"
+        :percentage="88"
         status="success"
       />
     </t-demo>

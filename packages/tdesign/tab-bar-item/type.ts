@@ -9,6 +9,7 @@ import type { TdBadgeProps as BadgeProps } from '../badge/type';
 export interface TdTabBarItemProps {
   /**
    * 图标右上角提示信息
+   * @default {}
    */
   badgeProps?: BadgeProps;
   /**

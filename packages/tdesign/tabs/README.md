@@ -159,7 +159,7 @@ t-class-track | 滚动条样式类
 名称 | 类型 | 默认值 | 描述 | 必传
 -- | -- | -- | -- | --
 custom-style | Object | - | 自定义样式 | N
-badge-props | Object | - | 透传至 Badge 组件 | N
+badge-props | Object | {} | 透传至 Badge 组件 | N
 disabled | Boolean | false | 是否禁用当前选项卡 | N
 icon | String / Object | - | `1.0.0-rc.1`。图标，传对象则透传至 Icon | N
 label | String | - | 选项卡名称 | N

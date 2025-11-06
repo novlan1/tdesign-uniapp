@@ -10,7 +10,7 @@ import type { TdImageProps as ImageProps } from '../image/type';
 export interface TdGridItemProps {
   /**
    * 透传至 Badge 属性
-   * @default null
+   * @default {}
    */
   badgeProps?: BadgeProps;
   /**
@@ -27,6 +27,7 @@ export interface TdGridItemProps {
   image?: string;
   /**
    * 透传至 Image 组件
+   * @default {}
    */
   imageProps?: ImageProps;
   /**

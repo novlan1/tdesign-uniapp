@@ -64,13 +64,13 @@ display-multiple-items | Number | 1 | 同时显示的滑块数量 | N
 duration | Number | 300 | 滑动动画时长 | N
 easing-function | String | default | 指定 swiper 切换缓动动画类型。可选项：default/linear/easeInCubic/easeOutCubic/easeInOutCubic | N
 height | String / Number | 192 | 轮播的高度；默认单位 `px` | N
-image-props | Object | - | 透传至 Image 组件 | N
+image-props | Object | {} | 透传至 Image 组件 | N
 interval | Number | 5000 | 轮播间隔时间 | N
 list | Array | - | 图片列表。TS 类型：`string[] \| SwiperList[]` `interface SwiperList { value: string, ariaLabel: string }`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/swiper/type.ts) | N
 loop | Boolean | true | 是否循环播放 | N
 navigation | Boolean / Object | true | 导航器全部配置，true 的话使用默认配置。TS 类型：`SwiperNavProps \| boolean`，[SwiperNav API Documents](./swiper-nav?tab=api)。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/swiper/type.ts) | N
 next-margin | String / Number | 0 | 后边距，可用于露出后一项的一小部分。默认单位 `px` | N
-pagination-position | String | bottom | 页码信息展示位置。可选项：top-left/top/top-right/bottom-left/bottom/bottom-right | N
+pagination-position | String | bottom | 页码信息展示位置。可选项：top-left/top/top-right/bottom-left/bottom/bottom-right/left/right | N
 previous-margin | String / Number | 0 | 前边距，可用于露出前一项的一小部分。默认单位 `px` | N
 snap-to-edge | Boolean | false | 当 swiper-item 的个数大于等于 2，关闭 circular 并且开启 previous-margin 或 next-margin 的时候，可以指定这个边距是否应用到第一个、最后一个元素 | N
 

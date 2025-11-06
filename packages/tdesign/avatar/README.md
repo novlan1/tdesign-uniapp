@@ -58,7 +58,7 @@ import TAvatarGroup from 'tdesign-uniapp/avatar-group/avatar-group.vue';
 -- | -- | -- | -- | --
 custom-style | Object | - | 自定义样式 | N
 alt | String | - | 头像替换文本，仅当图片加载失败时有效 | N
-badge-props | Object | - | 头像右上角提示信息，继承 Badge 组件的全部特性。如：小红点，或者数字。TS 类型：`BadgeProps`，[Badge API Documents](./badge?tab=api)。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/avatar/type.ts) | N
+badge-props | Object | {} | 头像右上角提示信息，继承 Badge 组件的全部特性。如：小红点，或者数字。TS 类型：`BadgeProps`，[Badge API Documents](./badge?tab=api)。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/avatar/type.ts) | N
 bordered | Boolean | false | 已废弃。是否显示外边框 | N
 hide-on-load-failed | Boolean | false | 加载失败时隐藏图片 | N
 icon | String / Object | - | 图标。值为字符串表示图标名称，值为 `Object` 类型，表示透传至 `icon` | N

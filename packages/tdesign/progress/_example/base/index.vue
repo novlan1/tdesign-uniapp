@@ -4,7 +4,7 @@
       基础进度条
     </view>
     <view class="demo-wrapper">
-      <t-progress percentage="80" />
+      <t-progress :percentage="80" />
     </view>
 
     <view class="demo-desc">
@@ -13,7 +13,7 @@
     <view class="demo-wrapper">
       <t-progress
         theme="plump"
-        percentage="80"
+        :percentage="80"
       />
     </view>
 
@@ -26,7 +26,7 @@
     >
       <t-progress
         theme="circle"
-        percentage="30"
+        :percentage="30"
       />
     </view>
 
@@ -40,7 +40,7 @@
       <t-progress
         theme="circle"
         size="micro"
-        percentage="30"
+        :percentage="30"
         :label="false"
       />
     </view>

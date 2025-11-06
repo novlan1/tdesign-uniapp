@@ -108,6 +108,9 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'update:visible',
+  ],
   data() {
     return {
       prefix,

@@ -50,7 +50,7 @@ t-class-track | \-
 name | type | default | description | required
 -- | -- | -- | -- | --
 custom-style | Object | - | CSS(Cascading Style Sheets) | N
-badge-props | Object | - | \- | N
+badge-props | Object | {} | \- | N
 disabled | Boolean | false | \- | N
 icon | String / Object | - | \- | N
 label | String | - | \- | N

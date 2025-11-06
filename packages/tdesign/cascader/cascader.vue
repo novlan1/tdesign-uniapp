@@ -185,7 +185,7 @@ export default uniComponent({
     ...props,
   },
   emits: [
-    'update:value',
+    'update:visible',
   ],
   data() {
     return {

@@ -25,7 +25,7 @@
       >
         <view class="button-host">
           <t-button
-            size="large="
+            size="large"
             block
             variant="outline"
           >

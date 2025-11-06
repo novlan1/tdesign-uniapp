@@ -44,6 +44,7 @@ export interface TdSwiperProps {
   height?: string | number;
   /**
    * 透传至 Image 组件
+   * @default {}
    */
   imageProps?: object;
   /**
@@ -74,7 +75,7 @@ export interface TdSwiperProps {
    * 页码信息展示位置
    * @default bottom
    */
-  paginationPosition?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
+  paginationPosition?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right' | 'left' | 'right';
   /**
    * 前边距，可用于露出前一项的一小部分。默认单位 `px`
    * @default 0

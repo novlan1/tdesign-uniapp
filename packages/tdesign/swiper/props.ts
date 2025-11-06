@@ -52,6 +52,7 @@ export default {
   /** 透传至 Image 组件 */
   imageProps: {
     type: Object,
+    default: () => ({}),
   },
   /** 轮播间隔时间 */
   interval: {
@@ -83,7 +84,7 @@ export default {
     default: 'bottom' as TdSwiperProps['paginationPosition'],
     validator(val: TdSwiperProps['paginationPosition']): boolean {
       if (!val) return true;
-      return ['top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right'].includes(val);
+      return ['top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right', 'left', 'right'].includes(val);
     },
   },
   /** 前边距，可用于露出前一项的一小部分。默认单位 `px` */

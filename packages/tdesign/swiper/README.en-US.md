@@ -14,13 +14,13 @@ display-multiple-items | Number | 1 | \- | N
 duration | Number | 300 | \- | N
 easing-function | String | default | options: default/linear/easeInCubic/easeOutCubic/easeInOutCubic | N
 height | String / Number | 192 | \- | N
-image-props | Object | - | \- | N
+image-props | Object | {} | \- | N
 interval | Number | 5000 | \- | N
 list | Array | - | Typescript：`string[] \| SwiperList[]` `interface SwiperList { value: string, ariaLabel: string }`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/swiper/type.ts) | N
 loop | Boolean | true | \- | N
 navigation | Boolean / Object | true | Typescript：`SwiperNavProps \| boolean`，[SwiperNav API Documents](./swiper-nav?tab=api)。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/swiper/type.ts) | N
 next-margin | String / Number | 0 | \- | N
-pagination-position | String | bottom | options: top-left/top/top-right/bottom-left/bottom/bottom-right | N
+pagination-position | String | bottom | options: top-left/top/top-right/bottom-left/bottom/bottom-right/left/right | N
 previous-margin | String / Number | 0 | \- | N
 snap-to-edge | Boolean | false | \- | N
 

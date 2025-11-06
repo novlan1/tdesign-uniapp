@@ -9,7 +9,7 @@ export default {
   /** 透传至 Badge 属性 */
   badgeProps: {
     type: Object,
-    default: () => (null),
+    default: () => ({}),
   },
   /** 文本以外的更多描述，辅助信息。可以通过 Props 传入文本，也可以自定义标题节点 */
   description: {
@@ -26,6 +26,7 @@ export default {
   /** 透传至 Image 组件 */
   imageProps: {
     type: Object,
+    default: () => ({}),
   },
   /** 链接跳转类型 */
   jumpType: {

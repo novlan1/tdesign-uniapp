@@ -45,12 +45,10 @@ export default {
   /** 选中值 */
   value: {
     type: Array,
-    default: (): TdCheckboxGroupProps['value'] => [],
   },
   /** 选中值，非受控属性 */
   defaultValue: {
     type: Array,
-    default: (): TdCheckboxGroupProps['defaultValue'] => [],
   },
   /** 值变化时触发。`context` 表示当前点击项内容 */
   onChange: {

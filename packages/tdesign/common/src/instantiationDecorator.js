@@ -1,9 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { isPlainObject } from '../validator';
 import { canUseVirtualHost } from '../version';
-import { toCamel, toPascal } from '../utils';
+import { toCamel, toPascal, hyphenate } from '../utils';
 
 const getInnerControlledValue = key => `data${key.replace(/^(\w)/, (e, t) => t.toUpperCase())}`;
+const getDefaultKey = key =>  `default${key.replace(/^(\w)/, (e, t) => t.toUpperCase())}`;
 
 const ARIAL_PROPS = [
   { key: 'ariaHidden', type: Boolean },
@@ -14,12 +15,22 @@ const ARIAL_PROPS = [
   { key: 'ariaBusy', type: Boolean },
 ];
 
-export const COMMON_PROPS = {
+const getPropsDefault = (type) => {
+  if (type === Boolean) {
+    return false;
+  }
+  if (type === String) {
+    return '';
+  }
+  return undefined;
+};
+
+const COMMON_PROPS = {
   ...ARIAL_PROPS.reduce((acc, item) => ({
     ...acc,
     [item.key]: {
       type: item.type,
-      default: item.type === Boolean ? false : '',
+      default: getPropsDefault(item.type),
     },
   }), {}),
 
@@ -41,13 +52,6 @@ export const toComponent = function (options) {
       }
       options.properties[k] = opt;
     });
-
-
-    Object.keys(COMMON_PROPS).forEach((key) => {
-      options.properties[key] = {
-        ...COMMON_PROPS[key],
-      };
-    });
   }
 
   if (!options.methods) options.methods = {};
@@ -62,7 +66,7 @@ export const toComponent = function (options) {
       oldCreated.apply(this, args);
     }
     controlledProps.forEach(({ key }) => {
-      const defaultKey = `default${key.replace(/^(\w)/, (e, t) => t.toUpperCase())}`;
+      const defaultKey = getDefaultKey(key);
       const tDataKey = getInnerControlledValue(key);
       this[tDataKey] = this[key];
 
@@ -134,16 +138,35 @@ export const wxComponent = function wxComponent() {
 };
 
 
-function filterProps(props) {
+function filterProps(props, controlledProps) {
   const newProps = {};
   const emits = [];
   const reg = /^on[A-Z][a-z]/;
+  const controlledKeys = Object.values(controlledProps).map(item => item.key);
+  const unControlledKeys = controlledKeys.map(key => getDefaultKey(key));
 
   Object.keys(props).forEach((key) => {
     if (reg.test(key) && props[key].type === Function) {
       const str = key.replace(/^on/, '');
       const eventName = str.charAt(0).toLowerCase() + str.slice(1);
-      emits.push(toCamel(eventName));
+      emits.push(hyphenate(eventName));
+    } else if (controlledKeys.indexOf(key) > -1
+       || unControlledKeys.indexOf(key) > -1
+    ) {
+      const type = props[key].type || props[key];
+      const newType = Array.isArray(type) ? type : [type];
+      newProps[key] = {
+        type: [null, ...newType],
+        default: null,
+      };
+    } else if (
+      [Boolean, String].indexOf(props[key].type) > -1
+      && props[key].default === undefined
+    ) {
+      newProps[key] = {
+        ...props[key],
+        default: getPropsDefault(props[key].type),
+      };
     } else {
       newProps[key] = props[key];
     }
@@ -155,14 +178,19 @@ function filterProps(props) {
   };
 }
 
+const getEmitsByControlledProps = controlledProps => Object.values(controlledProps).map(item => `update:${item.key}`);
+
 export const uniComponent = function (info) {
-  const { newProps, emits } = filterProps(info.props || {});
+  const { newProps, emits } = filterProps(info.props || {}, info.controlledProps || {});
   info.props = {
     ...getExternalClasses(info),
     ...newProps,
+    ...COMMON_PROPS,
   };
   info.emits = Array.from(new Set([
     ...(info.emits || []),
+
+    ...(getEmitsByControlledProps(info.controlledProps || {})),
     ...emits,
   ]));
 

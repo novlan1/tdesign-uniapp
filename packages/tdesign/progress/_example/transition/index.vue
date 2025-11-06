@@ -8,7 +8,6 @@
     <view class="button-group">
       <t-button
         theme="primary"
-        variant="plain"
         size="small"
         @click="clickReduce"
       >

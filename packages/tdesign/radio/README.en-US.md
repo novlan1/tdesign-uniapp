@@ -21,6 +21,7 @@ max-label-row | Number | 3 | \- | N
 name | String | - | \- | N
 placement | String | - | options: left/right | N
 readonly | Boolean | undefined | \- | N
+relation-key | String | - | \- | N
 value | String / Number / Boolean | false | Typescript：`T` `type RadioValue = string \| number \| boolean`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/radio/type.ts) | N
 
 ### Radio Events
@@ -63,6 +64,7 @@ name | String | - | \- | N
 options | Array | - | Typescript：`Array<RadioOption>` `type RadioOption = string \| number \| RadioOptionObj` `interface RadioOptionObj { label?: string; value?: string \| number; readonly?: boolean; disabled?: boolean; allowUncheck?: boolean; }`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/radio-group/type.ts) | N
 placement | String | left | options: left/right | N
 readonly | Boolean | undefined | \- | N
+relation-key | String | - | \- | N
 value | String / Number / Boolean | - | `v-model:value` is supported。Typescript：`T` `type RadioValue = string \| number \| boolean`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/radio-group/type.ts) | N
 default-value | String / Number / Boolean | - | uncontrolled property。Typescript：`T` `type RadioValue = string \| number \| boolean`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/radio-group/type.ts) | N
 

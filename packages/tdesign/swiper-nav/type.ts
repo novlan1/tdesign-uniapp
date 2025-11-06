@@ -24,7 +24,7 @@ export interface TdSwiperNavProps {
    * 页码信息展示位置
    * @default bottom
    */
-  paginationPosition?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right';
+  paginationPosition?: 'top-left' | 'top' | 'top-right' | 'bottom-left' | 'bottom' | 'bottom-right' | 'left' | 'right';
   /**
    * 是否显示两侧的控制按钮
    * @default false

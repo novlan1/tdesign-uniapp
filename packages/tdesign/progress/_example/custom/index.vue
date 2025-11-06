@@ -1,13 +1,13 @@
 <template>
   <view>
     <t-progress
-      percentage="88"
+      :percentage="88"
       track-color="#EAC9FF"
       color="#CD04FF"
       t-class-label="external-class-label"
     />
     <t-progress
-      percentage="88"
+      :percentage="88"
       t-class-bar="external-class-bar"
     />
   </view>

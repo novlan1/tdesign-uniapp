@@ -9,6 +9,7 @@ import type { TdTabValue as TabValue } from '../tabs/type';
 export interface TdTabPanelProps {
   /**
    * 透传至 Badge 组件
+   * @default {}
    */
   badgeProps?: object;
   /**

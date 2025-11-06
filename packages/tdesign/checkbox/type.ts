@@ -21,12 +21,10 @@ export interface TdCheckboxProps {
   checkAll?: boolean;
   /**
    * 是否选中
-   * @default false
    */
   checked?: boolean;
   /**
    * 是否选中，非受控属性
-   * @default false
    */
   defaultChecked?: boolean;
   /**

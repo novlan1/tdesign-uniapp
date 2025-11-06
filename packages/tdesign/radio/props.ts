@@ -68,6 +68,11 @@ export default {
     type: Boolean,
     default: undefined,
   },
+  /** -1 时代表独立，不再寻找 parent，用于头条小程序 */
+  relationKey: {
+    type: String,
+    default: '',
+  },
   /** 单选按钮的值 */
   value: {
     type: [String, Number, Boolean],

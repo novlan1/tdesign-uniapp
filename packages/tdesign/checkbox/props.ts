@@ -19,10 +19,7 @@ export default {
   /** 用于标识是否为「全选选项」。单独使用无效，需在 CheckboxGroup 中使用 */
   checkAll: Boolean,
   /** 是否选中 */
-  checked: {
-    type: Boolean,
-    default: undefined,
-  },
+  checked: Boolean,
   /** 是否选中，非受控属性 */
   defaultChecked: Boolean,
   /** 多选框内容 */

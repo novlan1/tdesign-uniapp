@@ -31,7 +31,7 @@ export default {
     default: 'bottom' as TdSwiperNavProps['paginationPosition'],
     validator(val: TdSwiperNavProps['paginationPosition']): boolean {
       if (!val) return true;
-      return ['top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right'].includes(val);
+      return ['top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right', 'left', 'right'].includes(val);
     },
   },
   /** 是否显示两侧的控制按钮 */

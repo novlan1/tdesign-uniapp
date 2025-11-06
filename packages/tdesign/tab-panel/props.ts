@@ -8,6 +8,7 @@ export default {
   /** 透传至 Badge 组件 */
   badgeProps: {
     type: Object,
+    default: () => ({}),
   },
   /** 是否禁用当前选项卡 */
   disabled: Boolean,
