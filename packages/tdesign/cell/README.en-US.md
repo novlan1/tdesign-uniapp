@@ -28,7 +28,7 @@ url | String | - | \- | N
 
 name | params | description
 -- | -- | --
-click | `(context: { e: MouseEvent })` | \-
+click | `(e: MouseEvent)` | \-
 
 ### Cell Slots
 

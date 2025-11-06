@@ -19,7 +19,7 @@ default-value | Array | - | uncontrolled property。Typescript：`CollapseValue`
 
 name | params | description
 -- | -- | --
-change | `(value: CollapseValue, context: { e: MouseEvent })` | \-
+change | `(context: { value: CollapseValue, context: { e: MouseEvent }})` | \-
 
 ### Collapse Slots
 

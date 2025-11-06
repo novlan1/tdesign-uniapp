@@ -78,10 +78,10 @@ snap-to-edge | Boolean | false | 当 swiper-item 的个数大于等于 2，关�
 
 名称 | 参数 | 描述
 -- | -- | --
-animationfinish | `(current: number, source: SwiperChangeSource)` | 轮播切换时触发
-change | `(current: number, source: SwiperChangeSource)` | 轮播切换时触发。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/swiper/type.ts)。<br/>`type SwiperChangeSource = 'autoplay' \| 'touch' \| 'nav'`<br/>
-click | `(index: number)` | 点击轮播项时触发
-image-load | `(index: number)` | 图片加载时触发
+animationfinish | `(context: { current: number, source: SwiperChangeSource })` | 轮播切换时触发
+change | `(context: { current: number, source: SwiperChangeSource })` | 轮播切换时触发。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/swiper/type.ts)。<br/>`type SwiperChangeSource = 'autoplay' \| 'touch' \| 'nav'`<br/>
+click | `(context: { index: number })` | 点击轮播项时触发
+image-load | `(context: { index: number})` | 图片加载时触发
 
 ### Swiper Slots
 

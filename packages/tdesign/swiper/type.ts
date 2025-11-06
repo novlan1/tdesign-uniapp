@@ -89,19 +89,19 @@ export interface TdSwiperProps {
   /**
    * 轮播切换时触发
    */
-  onAnimationfinish?: (current: number, source: SwiperChangeSource) => void;
+  onAnimationfinish?: (context: { current: number; source: SwiperChangeSource }) => void;
   /**
    * 轮播切换时触发
    */
-  onChange?: (current: number, source: SwiperChangeSource) => void;
+  onChange?: (context: { current: number; source: SwiperChangeSource }) => void;
   /**
    * 点击轮播项时触发
    */
-  onClick?: (index: number) => void;
+  onClick?: (context: { index: number }) => void;
   /**
    * 图片加载时触发
    */
-  onImageLoad?: (index: number) => void;
+  onImageLoad?: (context: { index: number }) => void;
 }
 
 export interface SwiperNavigation {

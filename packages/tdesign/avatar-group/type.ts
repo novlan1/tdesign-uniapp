@@ -32,7 +32,7 @@ export interface TdAvatarGroupProps {
   /**
    * 点击头像折叠元素触发
    */
-  onCollapsedItemClick?: (context: { e: MouseEvent }) => void;
+  onCollapsedItemClick?: (e: MouseEvent) => void;
 }
 
 export type CascadingValue = 'left-up' | 'right-up';

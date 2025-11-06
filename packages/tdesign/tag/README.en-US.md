@@ -57,8 +57,8 @@ variant | String | dark | options: dark/light/outline/light-outline | N
 
 name | params | description
 -- | -- | --
-change | `(checked: boolean)` | \-
-click | `(context: { e: MouseEvent })` | \-
+change | `(context: { checked: boolean })` | \-
+click | \- | \-
 close | \- | \-
 
 ### CheckTag Slots

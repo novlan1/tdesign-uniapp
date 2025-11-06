@@ -59,7 +59,7 @@ url | String | - | 点击后跳转链接地址。如果值为空，则表示不�
 
 名称 | 参数 | 描述
 -- | -- | --
-click | `(context: { e: MouseEvent })` | 右侧内容
+click | `(e: MouseEvent)` | 右侧内容
 
 ### Cell Slots
 

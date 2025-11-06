@@ -21,7 +21,7 @@ size | String | - | size | N
 
 name | params | description
 -- | -- | --
-error | `(context: { e: Event })` | trigger on image load failed
+error | `(e: Event)` | trigger on image load failed
 
 ### Avatar Slots
 
@@ -55,7 +55,7 @@ size | String | - | size | N
 
 name | params | description
 -- | -- | --
-collapsed-item-click | `(context: { e: MouseEvent })` | \-
+collapsed-item-click | `(e: MouseEvent)` | \-
 
 ### AvatarGroup Slots
 

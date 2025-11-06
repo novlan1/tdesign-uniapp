@@ -160,13 +160,13 @@ export default uniComponent({
       // #endif
       this.isLoading = false;
       this.isFailed = false;
-      this.$emit('load', e);
+      this.$emit('load', { e });
     },
     onLoadError(e) {
       this.isLoading = false;
       this.isFailed = true;
 
-      this.$emit('error', e);
+      this.$emit('error', { e });
     },
     calcSize(width = this.width, height = this.height) {
       let innerStyle = '';
