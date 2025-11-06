@@ -77,12 +77,12 @@ value | String | '' | 值 | N
 
 名称 | 参数 | 描述
 -- | -- | --
-action-click | `({})` | 点击右侧操作按钮文字时触发
-blur | `({ value: string })` | 失去焦点时触发
-change | `({ value: string })` | 值发生变化时触发
-clear | `({ value: string })` | 点击清除时触发
-focus | `({ value: string })` | 聚焦时触发
-submit | `({ value: string })` | 提交时触发
+action-click | \- | 点击右侧操作按钮文字时触发
+blur | `(context: { value: string })` | 失去焦点时触发
+change | `(context: { value: string })` | 值发生变化时触发
+clear | `(context: { value: string })` | 点击清除时触发
+focus | `(context: { value: string })` | 聚焦时触发
+submit | `(context: { value: string })` | 提交时触发
 
 ### Search Slots
 

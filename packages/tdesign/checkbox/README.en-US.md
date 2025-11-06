@@ -30,7 +30,7 @@ value | String / Number / Boolean | - | value of checkbox。Typescript：`string
 
 name | params | description
 -- | -- | --
-change | `(checked: boolean, context: { value: boolean\|number\|string, label: boolean\|number\|string })` | \-
+change | `(context: { checked: boolean, context: { value: boolean\|number\|string, label: boolean\|number\|string }})` | \-
 
 ### Checkbox Slots
 
@@ -71,7 +71,7 @@ default-value | Array | - | uncontrolled property。Typescript：`T` `type Check
 
 name | params | description
 -- | -- | --
-change | `(value: CheckboxGroupValue, context: { value: boolean\|number\|string, label: boolean\|number\|string })` | \-
+change | `(context: { value: CheckboxGroupValue, context: { value: boolean\|number\|string, label: boolean\|number\|string }})` | \-
 
 ### CheckboxGroup Slots
 

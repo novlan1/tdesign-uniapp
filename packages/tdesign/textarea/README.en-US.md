@@ -40,12 +40,12 @@ default-value | String / Number | - | uncontrolled property。Typescript：`Text
 
 name | params | description
 -- | -- | --
-blur | `(value: TextareaValue, cursor: number)` | \-
-change | `(value: TextareaValue, cursor: number)` | \-
-enter | `(value: TextareaValue)` | \-
-focus | `(value: TextareaValue)` | \-
-keyboardheightchange | `(height: number, duration: number)` | \-
-line-change | `(value: TextareaValue)` | \-
+blur | `(context: { value: TextareaValue, cursor: number })` | \-
+change | `(context: { value: TextareaValue, cursor: number })` | \-
+enter | `(context: { value: TextareaValue })` | \-
+focus | `(context: { value: TextareaValue })` | \-
+keyboardheightchange | `(context: { height: number, duration: number })` | \-
+line-change | `(context: { value: TextareaValue })` | \-
 
 ### Textarea Slots
 

@@ -41,7 +41,7 @@ placement | String | right | 抽屉方向。可选项：left/right | N
 show-overlay | Boolean | true | 是否显示遮罩层 | N
 title | String | - | 抽屉的标题 | N
 using-custom-navbar | Boolean | false | 是否使用了自定义导航栏 | N
-visible | Boolean | false | 组件是否可见 | N
+visible | Boolean | false | 组件是否可见。支持语法糖 `v-model:visible` | N
 z-index | Number | 11500 | 抽屉层级，样式默认为 11500 | N
 
 ### Drawer Events
@@ -51,6 +51,7 @@ z-index | Number | 11500 | 抽屉层级，样式默认为 11500 | N
 close | `(context: { trigger: DrawerTriggerSource })` | 关闭时触发。。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/drawer/type.ts)。<br/>`type DrawerTriggerSource = 'overlay'`<br/>
 item-click | `(context: { index: number; item: DrawerItem })` | 点击抽屉里的列表项
 overlay-click | \- | 如果蒙层存在，点击蒙层时触发
+update-visible | `(context: { visible: boolean })` | 更新可见性
 
 ### Drawer Slots
 

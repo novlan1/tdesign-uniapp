@@ -94,12 +94,12 @@ default-value | String / Number | - | 文本框值。非受控属性。TS 类型
 
 名称 | 参数 | 描述
 -- | -- | --
-blur | `(value: TextareaValue, cursor: number)` | 失去焦点时触发
-change | `(value: TextareaValue, cursor: number)` | 输入内容变化时触发
-enter | `(value: TextareaValue)` | 点击完成时触发
-focus | `(value: TextareaValue)` | 获得焦点时触发
-keyboardheightchange | `(height: number, duration: number)` | 键盘高度发生变化的时候触发此事件
-line-change | `(value: TextareaValue)` | 行高发生变化时触发
+blur | `(context: { value: TextareaValue, cursor: number })` | 失去焦点时触发
+change | `(context: { value: TextareaValue, cursor: number })` | 输入内容变化时触发
+enter | `(context: { value: TextareaValue })` | 点击完成时触发
+focus | `(context: { value: TextareaValue })` | 获得焦点时触发
+keyboardheightchange | `(context: { height: number, duration: number })` | 键盘高度发生变化的时候触发此事件
+line-change | `(context: { value: TextareaValue })` | 行高发生变化时触发
 
 ### Textarea Slots
 

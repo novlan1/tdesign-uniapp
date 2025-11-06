@@ -125,14 +125,14 @@ default-value | String / Number | - | 输入框的值。非受控属性。TS 类
 
 名称 | 参数 | 描述
 -- | -- | --
-blur | `(value: InputValue)` | 失去焦点时触发
-change | `(value: InputValue, cursor: number, keyCode: number)` | 输入框值发生变化时触发；cursor 为光标位置；
+blur | `(context: { value: InputValue })` | 失去焦点时触发
+change | `(context: { value: InputValue, cursor: number, keyCode: number })` | 输入框值发生变化时触发；cursor 为光标位置；
 clear | \- | 清空按钮点击时触发
-click | `(trigger: InputTrigger)` | 点击事件。[详细类型定义](https://github.com/Tencent/tdesign-miniprogram/tree/develop/src/input/type.ts)。<br/>`type InputTrigger = 'suffix' \| 'suffix-icon';`<br/>
-enter | `(value: InputValue)` | 回车键按下时触发
-focus | `(value: InputValue)` | 获得焦点时触发
-keyboardheightchange | `(height: number, duration: number)` | 键盘高度发生变化的时候触发此事件
-nicknamereview | `(pass: boolean, timeout: boolean)` | 用户昵称审核完毕后触发，仅在 type 为 "nickname" 时有效
+click | `(context: { trigger: InputTrigger })` | 点击事件。[详细类型定义](https://github.com/Tencent/tdesign-miniprogram/tree/develop/src/input/type.ts)。。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/input/type.ts)。<br/>`type InputTrigger = 'suffix' \| 'suffix-icon'`<br/>
+enter | `(context: { value: InputValue })` | 回车键按下时触发
+focus | `(context: { value: InputValue })` | 获得焦点时触发
+keyboardheightchange | `(context: { height: number, duration: number })` | 键盘高度发生变化的时候触发此事件
+nicknamereview | `(context: { pass: boolean, timeout: boolean })` | 用户昵称审核完毕后触发，仅在 type 为 "nickname" 时有效
 validate | `(context: { error?: 'exceed-maximum' \| 'below-minimum' })` | 字数超出限制时触发
 
 ### Input Slots

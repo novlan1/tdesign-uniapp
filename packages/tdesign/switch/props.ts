@@ -40,12 +40,10 @@ export default {
   /** 开关值 */
   value: {
     type: [String, Number, Boolean],
-    default: () => (null) as TdSwitchProps['value'],
   },
   /** 开关值，非受控属性 */
   defaultValue: {
     type: [String, Number, Boolean],
-    default: () => (null) as TdSwitchProps['defaultValue'],
   },
   /** 数据发生变化时触发 */
   onChange: {

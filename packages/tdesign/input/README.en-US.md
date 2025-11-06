@@ -56,14 +56,14 @@ default-value | String / Number | - | input value。uncontrolled property。Type
 
 name | params | description
 -- | -- | --
-blur | `(value: InputValue)` | \-
-change | `(value: InputValue, cursor: number, keyCode: number)` | \-
+blur | `(context: { value: InputValue })` | \-
+change | `(context: { value: InputValue, cursor: number, keyCode: number })` | \-
 clear | \- | \-
-click | `(trigger: InputTrigger)` | \-
-enter | `(value: InputValue)` | \-
-focus | `(value: InputValue)` | \-
-keyboardheightchange | `(height: number, duration: number)` | \-
-nicknamereview | `(pass: boolean, timeout: boolean)` | \-
+click | `(context: { trigger: InputTrigger })` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/input/type.ts)。<br/>`type InputTrigger = 'suffix' \| 'suffix-icon'`<br/>
+enter | `(context: { value: InputValue })` | \-
+focus | `(context: { value: InputValue })` | \-
+keyboardheightchange | `(context: { height: number, duration: number })` | \-
+nicknamereview | `(context: { pass: boolean, timeout: boolean })` | \-
 validate | `(context: { error?: 'exceed-maximum' \| 'below-minimum' })` | trigger on text length being over max length or max character
 
 ### Input Slots
