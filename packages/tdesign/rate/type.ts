@@ -75,5 +75,5 @@ export interface TdRateProps {
   /**
    * 评分数改变时触发
    */
-  onChange?: (value: number) => void;
+  onChange?: (context: { value: number }) => void;
 }

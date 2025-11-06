@@ -25,6 +25,10 @@ export type TreeOptionData<T = string | number> = {
   content?: string;
 } & PlainObject;
 
+export type FormResetEvent = Event;
+
+export type FormSubmitEvent = Event;
+
 /**
  * 移除 on 前缀并可选地去掉可选修饰符
  * @param T - 原始类型
@@ -66,6 +70,32 @@ export type ExtractNonOnProps<T> = {
   [K in keyof T as K extends `on${string}` ? never : K]: T[K]
 };
 
+export interface IsEmailOptions {
+  allow_display_name?: boolean;
+  require_display_name?: boolean;
+  allow_utf8_local_part?: boolean;
+  require_tld?: boolean;
+  allow_ip_dot?: boolean;
+  domain_specific_validation?: boolean;
+  host_blacklist?: string[];
+  ignore_max_length?: boolean;
+}
+
+export interface IsURLOptions {
+  protocols?: string[];
+  require_tld?: boolean;
+  require_protocol?: boolean;
+  require_host?: boolean;
+  require_port?: boolean;
+  require_valid_protocol?: boolean;
+  allow_underscores?: boolean;
+  host_whitelist?: (string | RegExp)[];
+  host_blacklist?: (string | RegExp)[];
+  allow_trailing_dot?: boolean;
+  allow_protocol_relative_urls?: boolean;
+  disallow_auth?: boolean;
+  validate_length?: boolean;
+}
 /**
  * 通用全局类型
  * */

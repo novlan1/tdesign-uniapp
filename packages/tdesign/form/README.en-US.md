@@ -83,8 +83,8 @@ label | \-
 name | type | default | description | required
 -- | -- | -- | -- | --
 boolean | Boolean | - | \- | N
-date | Boolean / Object | - | Typescript：`boolean \| IsDateOptions` `interface IsDateOptions { format: string; strictMode: boolean; delimiters: string[] }`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/form-rule/type.ts) | N
-email | Boolean / Object | - | Typescript：`boolean \| IsEmailOptions` `import { IsEmailOptions } from 'validator/es/lib/isEmail'`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/form-rule/type.ts) | N
+date | Boolean / Object | - | Typescript：`boolean \| IsDateOptions` `interface IsDateOptions { format: string; strictMode: boolean; delimiters: string[] }`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/form/type.ts) | N
+email | Boolean / Object | - | Typescript：`boolean \| IsEmailOptions` `import type { IsEmailOptions } from '../common/common'`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/form/type.ts) | N
 enum | Array | - | Typescript：`Array<string>` | N
 idcard | Boolean | - | \- | N
 len | Number / Boolean | - | \- | N
@@ -97,8 +97,8 @@ required | Boolean | - | \- | N
 telnumber | Boolean | - | \- | N
 trigger | String | change | Typescript：`ValidateTriggerType` | N
 type | String | error | options: error/warning | N
-url | Boolean / Object | - | Typescript：`boolean \| IsURLOptions` `import { IsURLOptions } from 'validator/es/lib/isURL'`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/form-rule/type.ts) | N
-validator | Function | - | Typescript：`CustomValidator` `type CustomValidator = (val: ValueType) => CustomValidateResolveType \| Promise<CustomValidateResolveType>` `type CustomValidateResolveType = boolean \| CustomValidateObj` `interface CustomValidateObj { result: boolean; message: string; type?: 'error' \| 'warning' \| 'success' }` `type ValueType = any`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/form-rule/type.ts) | N
+url | Boolean / Object | - | Typescript：`boolean \| IsURLOptions` `import type { IsURLOptions } from '../common/common'`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/form/type.ts) | N
+validator | Function | - | Typescript：`CustomValidator` `type CustomValidator = (val: ValueType) => CustomValidateResolveType \| Promise<CustomValidateResolveType>` `type CustomValidateResolveType = boolean \| CustomValidateObj` `interface CustomValidateObj { result: boolean; message: string; type?: 'error' \| 'warning' \| 'success' }` `type ValueType = any`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/form/type.ts) | N
 whitespace | Boolean | - | \- | N
 
 ### FormErrorMessage
