@@ -58,13 +58,13 @@ export interface TdImageViewerProps {
   /**
    * 翻页时回调
    */
-  onChange?: (index: number) => void;
+  onChange?: (context: { index: number }) => void;
   /**
    * 点击操作按钮button或者overlay时触发
    */
-  onClose?: (trigger: 'overlay' | 'button', visible: Boolean, index: Number) => void;
+  onClose?: (context: { trigger: 'overlay' | 'button'; visible: Boolean; index: Number }) => void;
   /**
    * 点击删除操作按钮时触发
    */
-  onDelete?: (index: number) => void;
+  onDelete?: (context: { index: number }) => void;
 }

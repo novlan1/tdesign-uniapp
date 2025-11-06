@@ -56,7 +56,7 @@ default-value | Array | - | 展开的面板集合。非受控属性。TS 类型�
 
 名称 | 参数 | 描述
 -- | -- | --
-change | `(value: CollapseValue, context: { e: MouseEvent })` | 切换面板时触发，返回变化的值
+change | `(context: { value: CollapseValue, context: { e: MouseEvent }})` | 切换面板时触发，返回变化的值
 
 ### Collapse Slots
 

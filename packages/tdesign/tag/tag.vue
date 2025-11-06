@@ -144,12 +144,12 @@ export default uniComponent({
 
     handleClick(e) {
       if (this.disabled) return;
-      this.$emit('click', e);
+      this.$emit('click', { e });
     },
 
     handleClose(e) {
       if (this.disabled) return;
-      this.$emit('close', e);
+      this.$emit('close', { e });
     },
   },
 });

@@ -28,10 +28,10 @@ snap-to-edge | Boolean | false | \- | N
 
 name | params | description
 -- | -- | --
-animationfinish | `(current: number, source: SwiperChangeSource)` | 动画结束时会触发 animationfinish 事件
-change | `(current: number, source: SwiperChangeSource)` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/swiper/type.ts)。<br/>`type SwiperChangeSource = 'autoplay' \| 'touch' \| 'nav'`<br/>
-click | `(index: number)` | \-
-image-load | `(index: number)` | \-
+animationfinish | `(context: { current: number, source: SwiperChangeSource })` | 动画结束时会触发 animationfinish 事件
+change | `(context: { current: number, source: SwiperChangeSource })` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/swiper/type.ts)。<br/>`type SwiperChangeSource = 'autoplay' \| 'touch' \| 'nav'`<br/>
+click | `(context: { index: number })` | \-
+image-load | `(context: { index: number})` | \-
 
 ### Swiper Slots
 

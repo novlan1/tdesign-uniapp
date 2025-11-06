@@ -182,11 +182,11 @@ export default uniComponent({
     hide() {
       this.isShow = false;
     },
-    onLoadError(t) {
+    onLoadError(e) {
       if (this.hideOnLoadFailed) {
         this.isShow = false;
       }
-      this.$emit('error', t);
+      this.$emit('error', e);
     },
     setStyle(val = '') {
       this.innerStyle = val;

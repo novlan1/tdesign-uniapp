@@ -54,5 +54,5 @@ export interface TdAvatarProps {
   /**
    * 图片加载失败时触发
    */
-  onError?: (context: { e: Event }) => void;
+  onError?: (e: Event) => void;
 }

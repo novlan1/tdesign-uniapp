@@ -22,9 +22,9 @@ default-visible | Boolean | false | hide or show image viewer。uncontrolled pro
 
 name | params | description
 -- | -- | --
-change | `(index: number)` | \-
-close | `(trigger: 'overlay' \| 'button', visible: Boolean, index: Number)` | \-
-delete | `(index: number)` | \-
+change | `(context: { index: number })` | \-
+close | `(context: { trigger: 'overlay' \| 'button', visible: Boolean, index: Number })` | \-
+delete | `(context: { index: number })` | \-
 
 ### ImageViewer Slots
 

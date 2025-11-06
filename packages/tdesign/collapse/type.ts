@@ -40,7 +40,7 @@ export interface TdCollapseProps {
   /**
    * 切换面板时触发，返回变化的值
    */
-  onChange?: (value: CollapseValue, context: { e: MouseEvent }) => void;
+  onChange?: (context: { value: CollapseValue; context: { e: MouseEvent } }) => void;
 }
 
 export type CollapseValue = Array<string | number>;

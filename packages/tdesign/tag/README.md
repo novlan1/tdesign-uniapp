@@ -95,8 +95,8 @@ variant | String | dark | 标签风格变体。可选项：dark/light/outline/li
 
 名称 | 参数 | 描述
 -- | -- | --
-change | `(checked: boolean)` | 状态切换时触发
-click | `(context: { e: MouseEvent })` | 点击标签时触发
+change | `(context: { checked: boolean })` | 状态切换时触发
+click | \- | 点击标签时触发
 close | \- | 如果关闭按钮存在，点击关闭按钮时触发
 
 ### CheckTag Slots

@@ -71,7 +71,7 @@ size | String | - | 尺寸，示例值：small/medium/large/24px/38px 等。优�
 
 名称 | 参数 | 描述
 -- | -- | --
-error | `(context: { e: Event })` | 图片加载失败时触发
+error | `(e: Event)` | 图片加载失败时触发
 
 ### Avatar Slots
 
@@ -105,7 +105,7 @@ size | String | - | 尺寸，示例值：small/medium/large/24px/38px 等。优�
 
 名称 | 参数 | 描述
 -- | -- | --
-collapsed-item-click | `(context: { e: MouseEvent })` | 点击头像折叠元素触发
+collapsed-item-click | `(e: MouseEvent)` | 点击头像折叠元素触发
 
 ### AvatarGroup Slots
 

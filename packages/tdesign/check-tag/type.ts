@@ -51,11 +51,11 @@ export interface TdCheckTagProps {
   /**
    * 状态切换时触发
    */
-  onChange?: (checked: boolean) => void;
+  onChange?: (context: { checked: boolean }) => void;
   /**
    * 点击标签时触发
    */
-  onClick?: (context: { e: MouseEvent }) => void;
+  onClick?: () => void;
   /**
    * 如果关闭按钮存在，点击关闭按钮时触发
    */
