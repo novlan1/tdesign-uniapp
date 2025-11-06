@@ -6,17 +6,24 @@
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
 disabled | Boolean | - | \- | N
-left | Array / Slot | - | Typescript：`Array<SwipeActionItem>` | N
+left | Array | - | Typescript：`Array<SwipeActionItem>` | N
 opened | Boolean / Array | false | Typescript：`boolean \| Array<boolean>` | N
-right | Array / Slot | - | Typescript：`Array<SwipeActionItem>` `interface SwipeActionItem {text?: string; icon?: string \| object, className?: string; style?: string; onClick?: () => void; [key: string]: any }`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/swipe-cell/type.ts) | N
+right | Array | - | Typescript：`Array<SwipeActionItem>` `interface SwipeActionItem {text?: string; icon?: string \| object, className?: string; style?: string; onClick?: () => void; [key: string]: any }`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/swipe-cell/type.ts) | N
 
 ### SwipeCell Events
 
 name | params | description
 -- | -- | --
-click | `(action: SwipeActionItem, source: SwipeSource)` | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/swipe-cell/type.ts)。<br/>`type SwipeSource = 'left' \| 'right'`<br/>
+click | `(action: SwipeActionItem, source: SwipeSource)` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/swipe-cell/type.ts)。<br/>`type SwipeSource = 'left' \| 'right'`<br/>
 dragend | \- | \-
 dragstart | \- | \-
+
+### SwipeCell Slots
+
+name | Description
+-- | --
+\- | \-
+left | \-
+right | \-

@@ -6,10 +6,9 @@
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
 alpha | Number | 1 | \- | N
-content | String / Slot | - | [see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/common/common.ts) | N
+content | String | - | \- | N
 height | Number | - | \- | N
 is-repeat | Boolean | true | \- | N
 layout | String | rectangular | options: rectangular/hexagonal | N
@@ -24,6 +23,13 @@ width | Number | - | \- | N
 x | Number | - | \- | N
 y | Number | - | \- | N
 z-index | Number | - | \- | N
+
+### Watermark Slots
+
+name | Description
+-- | --
+\- | \-
+content | \-
 
 ### WatermarkText
 

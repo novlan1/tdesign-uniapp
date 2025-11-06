@@ -48,7 +48,7 @@ export default {
       let result = false;
       // #ifdef MP-WEIXIN
       if (this.notice) {
-        result = true;
+        result = false;
       }
       // #endif
       return result;

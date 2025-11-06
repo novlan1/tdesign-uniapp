@@ -2,7 +2,7 @@
   <view>
     <t-avatar-group
       cascading="right-up"
-      max="5"
+      :max="5"
       @collapsed-item-click="onClickCollapsedAvatar"
     >
       <t-avatar

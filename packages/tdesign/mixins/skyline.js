@@ -8,6 +8,5 @@ export default {
   },
   mounted() {
     this.skylineRender = getCurrentPage().renderer === 'skyline';
-    console.log('skylineRender', this.skylineRender);
   },
 };

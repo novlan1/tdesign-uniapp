@@ -6,10 +6,9 @@
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
-value | String / Number | - | \- | N
-default-value | String / Number | undefined | uncontrolled property | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
+value | String / Number | - | `v-model:value` is supported | N
+default-value | String / Number | - | uncontrolled property | N
 
 ### SideBar Events
 
@@ -18,18 +17,29 @@ name | params | description
 change | `(value: number \| string, label: string)` | \-
 click | `(value: number \| string, label: string)` | \-
 
+### SideBar Slots
+
+name | Description
+-- | --
+\- | \-
+
 
 ### SideBarItem Props
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
-badge-props | Object | - | Typescript：`BadgeProps`，[Badge API Documents](./badge?tab=api)。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/side-bar-item/type.ts) | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
+badge-props | Object | - | Typescript：`BadgeProps`，[Badge API Documents](./badge?tab=api)。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/side-bar-item/type.ts) | N
 disabled | Boolean | false | \- | N
 icon | String / Object | - | \- | N
 label | String | - | \- | N
 value | String / Number | - | \- | N
+
+### SideBarItem Slots
+
+name | Description
+-- | --
+\- | \-
 
 ### CSS Variables
 

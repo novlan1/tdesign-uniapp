@@ -6,8 +6,7 @@
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
 colors | Array | [] | `deprecated`。Typescript：`Array<string>` | N
 disabled | Boolean | undefined | \- | N
 disabled-color | Array | [] | `deprecated`。Typescript：`Array<string>` | N
@@ -18,9 +17,9 @@ min | Number | 0 | \- | N
 range | Boolean | false | \- | N
 show-extreme-value | Boolean | false | \- | N
 step | Number | 1 | \- | N
-theme | String | default | `0.30.0`。options: default/capsule | N
-value | Number / Array | 0 | Typescript：`SliderValue` `type SliderValue = number \| Array<number>`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/slider/type.ts) | N
-default-value | Number / Array | undefined | uncontrolled property。Typescript：`SliderValue` `type SliderValue = number \| Array<number>`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/slider/type.ts) | N
+theme | String | default | options: default/capsule | N
+value | Number / Array | 0 | `v-model:value` is supported。Typescript：`SliderValue` `type SliderValue = number \| Array<number>`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/slider/type.ts) | N
+default-value | Number / Array | 0 | uncontrolled property。Typescript：`SliderValue` `type SliderValue = number \| Array<number>`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/slider/type.ts) | N
 vertical | Boolean | false | \- | N
 
 ### Slider Events

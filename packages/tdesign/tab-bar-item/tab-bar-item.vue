@@ -86,7 +86,7 @@
       :class="classPrefix + '__spread'"
     >
       <view
-        v-for="(child, index) in subTabBar"
+        v-for="(child, index) in (subTabBar || [])"
         :key="index"
         :class="classPrefix + '__spread-item'"
         :hover-class="classPrefix + '__spread-item--active'"
@@ -142,7 +142,7 @@ export default uniComponent({
   watch: {
     subTabBar: {
       handler(value) {
-        this.hasChildren = value.length > 0;
+        this.hasChildren = value?.length > 0;
       },
       immediate: true,
     },
@@ -205,7 +205,7 @@ export default uniComponent({
       this.isSpread = false;
     },
     checkActive(value) {
-      const { currentName, subTabBar } = this;
+      const { currentName, subTabBar = [] } = this;
       const isChecked = subTabBar?.some(item => item.value === value) || currentName === value;
 
       this.isChecked = isChecked;

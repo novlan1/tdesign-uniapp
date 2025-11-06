@@ -6,30 +6,40 @@
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
-current | String / Number | - | `1.9.7` | N
-default-current | String / Number | undefined | `1.9.7`。uncontrolled property | N
-index-list | Array | - | `0.32.0`。Typescript：`Array<string \| number>` | N
-list | Array | [] | `deprecated`。Typescript：`ListItem[] ` `interface ListItem { title: string; index: string; children: { title: string; [key: string]: any} [] }`。[see more ts definition](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/components/indexes/type.ts) | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
+current | String / Number | - | `v-model:current` is supported | N
+default-current | String / Number | - | uncontrolled property | N
+index-list | Array | - | Typescript：`Array<string \| number>` | N
+list | Array | [] | `deprecated`。Typescript：`ListItem[] ` `interface ListItem { title: string;  index: string;  children: { title: string; [key: string]: any} [] }`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/indexes/type.ts) | N
 sticky | Boolean | true | Typescript：`Boolean` | N
-sticky-offset | Number | 0 | `1.0.0` | N
+sticky-offset | Number | 0 | \- | N
 
 ### Indexes Events
 
 name | params | description
 -- | -- | --
-change | `(index: string \| number)` | `0.34.0`
+change | `(index: string \| number)` | \-
 select | `(index: string \| number)` | \-
+
+### Indexes Slots
+
+name | Description
+-- | --
+\- | \-
 
 
 ### IndexesAnchor Props
 
 name | type | default | description | required
 -- | -- | -- | -- | --
-style | Object | - | CSS(Cascading Style Sheets) | N
-custom-style | Object | - | CSS(Cascading Style Sheets)，used to set style on virtual component | N
+custom-style | Object | - | CSS(Cascading Style Sheets) | N
 index | String / Number | - | \- | N
+
+### IndexesAnchor Slots
+
+name | Description
+-- | --
+\- | \-
 
 ### IndexesAnchor External Classes
 

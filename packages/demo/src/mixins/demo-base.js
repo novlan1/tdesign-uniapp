@@ -29,4 +29,15 @@ export default {
       return result;
     },
   },
+  mounted() {
+    // 检查分享功能是否可用
+    if (typeof wx.showShareMenu === 'function') {
+      wx.showShareMenu({
+        success: () => {
+        },
+        fail: () => {
+        },
+      });
+    }
+  },
 };

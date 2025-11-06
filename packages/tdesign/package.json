@@ -1,10 +1,171 @@
 {
   "name": "tdesign-uniapp",
   "id": "tdesign-uniapp",
-  "version": "0.4.2",
+  "version": "0.4.4-beta.1",
   "author": "novlan1",
   "title": "tdesign-uniapp",
   "description": "TDesign Component for uniapp",
+  "exports": {
+    "./action-sheet/action-sheet.vue": {
+      "types": "./types/action-sheet.d.ts"
+    },
+    "./avatar/avatar.vue": {
+      "types": "./types/avatar.d.ts"
+    },
+    "./avatar-group/avatar-group.vue": {
+      "types": "./types/avatar-group.d.ts"
+    },
+    "./back-top/back-top.vue": {
+      "types": "./types/back-top.d.ts"
+    },
+    "./badge/badge.vue": {
+      "types": "./types/badge.d.ts"
+    },
+    "./button/button.vue": {
+      "types": "./types/button.d.ts"
+    },
+    "./calendar/calendar.vue": {
+      "types": "./types/calendar.d.ts"
+    },
+    "./cascader/cascader.vue": {
+      "types": "./types/cascader.d.ts"
+    },
+    "./cell/cell.vue": {
+      "types": "./types/cell.d.ts"
+    },
+    "./cell-group/cell-group.vue": {
+      "types": "./types/cell-group.d.ts"
+    },
+    "./checkbox/checkbox.vue": {
+      "types": "./types/checkbox.d.ts"
+    },
+    "./checkbox-group/checkbox-group.vue": {
+      "types": "./types/checkbox-group.d.ts"
+    },
+    "./col/col.vue": {
+      "types": "./types/col.d.ts"
+    },
+    "./collapse/collapse.vue": {
+      "types": "./types/collapse.d.ts"
+    },
+    "./collapse-panel/collapse-panel.vue": {
+      "types": "./types/collapse-panel.d.ts"
+    },
+    "./color-picker/color-picker.vue": {
+      "types": "./types/color-picker.d.ts"
+    },
+    "./count-down/count-down.vue": {
+      "types": "./types/count-down.d.ts"
+    },
+    "./date-time-picker/date-time-picker.vue": {
+      "types": "./types/date-time-picker.d.ts"
+    },
+    "./dialog/dialog.vue": {
+      "types": "./types/dialog.d.ts"
+    },
+    "./divider/divider.vue": {
+      "types": "./types/divider.d.ts"
+    },
+    "./drawer/drawer.vue": {
+      "types": "./types/drawer.d.ts"
+    },
+    "./dropdown-menu/dropdown-menu.vue": {
+      "types": "./types/dropdown-menu.d.ts"
+    },
+    "./empty/empty.vue": {
+      "types": "./types/empty.d.ts"
+    },
+    "./fab/fab.vue": {
+      "types": "./types/fab.d.ts"
+    },
+    "./form/form.vue": {
+      "types": "./types/form.d.ts"
+    },
+    "./guide/guide.vue": {
+      "types": "./types/guide.d.ts"
+    },
+    "./icon/icon.vue": {
+      "types": "./types/icon.d.ts"
+    },
+    "./image/image.vue": {
+      "types": "./types/image.d.ts"
+    },
+    "./image-viewer/image-viewer.vue": {
+      "types": "./types/image-viewer.d.ts"
+    },
+    "./indexes/indexes.vue": {
+      "types": "./types/indexes.d.ts"
+    },
+    "./input/input.vue": {
+      "types": "./types/input.d.ts"
+    },
+    "./link/link.vue": {
+      "types": "./types/link.d.ts"
+    },
+    "./loading/loading.vue": {
+      "types": "./types/loading.d.ts"
+    },
+    "./navbar/navbar.vue": {
+      "types": "./types/navbar.d.ts"
+    },
+    "./notice-bar/notice-bar.vue": {
+      "types": "./types/notice-bar.d.ts"
+    },
+    "./overlay/overlay.vue": {
+      "types": "./types/overlay.d.ts"
+    },
+    "./picker/picker.vue": {
+      "types": "./types/picker.d.ts"
+    },
+    "./popup/popup.vue": {
+      "types": "./types/popup.d.ts"
+    },
+    "./pull-down-refresh/pull-down-refresh.vue": {
+      "types": "./types/pull-down-refresh.d.ts"
+    },
+    "./qrcode/qrcode.vue": {
+      "types": "./types/qrcode.d.ts"
+    },
+    "./row/row.vue": {
+      "types": "./types/row.d.ts"
+    },
+    "./side-bar/side-bar.vue": {
+      "types": "./types/side-bar.d.ts"
+    },
+    "./stepper/stepper.vue": {
+      "types": "./types/stepper.d.ts"
+    },
+    "./sticky/sticky.vue": {
+      "types": "./types/sticky.d.ts"
+    },
+    "./swipe-cell/swipe-cell.vue": {
+      "types": "./types/swipe-cell.d.ts"
+    },
+    "./swiper/swiper.vue": {
+      "types": "./types/swiper.d.ts"
+    },
+    "./tab-bar/tab-bar.vue": {
+      "types": "./types/tab-bar.d.ts"
+    },
+    "./tabs/tabs.vue": {
+      "types": "./types/tabs.d.ts"
+    },
+    "./tag/tag.vue": {
+      "types": "./types/tag.d.ts"
+    },
+    "./textarea/textarea.vue": {
+      "types": "./types/textarea.d.ts"
+    },
+    "./toast/toast.vue": {
+      "types": "./types/toast.d.ts"
+    },
+    "./upload/upload.vue": {
+      "types": "./types/upload.d.ts"
+    },
+    "./watermark/watermark.vue": {
+      "types": "./types/watermark.d.ts"
+    }
+  },
   "keywords": [
     "tdesign",
     "miniprogram",
@@ -50,7 +211,8 @@
     "build:quickapp-webview": "uni build -p quickapp-webview",
     "build:quickapp-webview-huawei": "uni build -p quickapp-webview-huawei",
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
-    "type-check": "vue-tsc --noEmit"
+    "type-check": "vue-tsc --noEmit",
+    "postinstall": "node ./script/postinstall"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.4.8",

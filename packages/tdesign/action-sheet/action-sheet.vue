@@ -192,6 +192,10 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'visible-change',
+    'update:visible',
+  ],
   data() {
     return {
       prefix,

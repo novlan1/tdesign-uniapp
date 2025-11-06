@@ -136,6 +136,9 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'visible-change',
+  ],
   data() {
     return {
       prefix,

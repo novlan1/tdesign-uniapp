@@ -1,7 +1,7 @@
 <template>
   <view>
     <t-avatar-group
-      max="5"
+      :max="5"
       collapse-avatar="+5"
     >
       <t-avatar

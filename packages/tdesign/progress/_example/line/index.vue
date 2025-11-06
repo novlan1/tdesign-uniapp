@@ -1,20 +1,20 @@
 <template>
   <view>
-    <t-progress percentage="80" />
+    <t-progress :percentage="80" />
     <t-progress
-      percentage="88"
+      :percentage="88"
       status="warning"
     />
     <t-progress
-      percentage="88"
+      :percentage="88"
       status="error"
     />
     <t-progress
-      percentage="88"
+      :percentage="88"
       status="success"
     />
     <t-progress
-      percentage="88"
+      :percentage="88"
       color=""
       status="active"
     />

@@ -25,7 +25,7 @@
       >
         <slot />
         <t-badge
-          v-if="image || icon"
+          v-if="badgeProps"
           :color="badgeProps.color || ''"
           :content="badgeProps.content || ''"
           :count="badgeProps.count || 0"
@@ -86,7 +86,11 @@
         <view
           :id="describedbyID"
           :class="_.cls(classPrefix + '__words', [layout])"
-          :aria-label="ariaLabel || (badgeProps.dot || badgeProps.count ? text + ',' + description + ',' + _.getBadgeAriaLabel({ ...badgeProps }) : '')"
+          :aria-label="ariaLabel
+            || (
+              (badgeProps && (badgeProps.dot || badgeProps.count))
+                ? text + ',' + description + ',' + _.getBadgeAriaLabel({ ...(badgeProps || {}) })
+                : '')"
         >
           <view
             v-if="text"

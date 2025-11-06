@@ -4,104 +4,81 @@
  * 该文件为脚本自动生成文件，请勿随意修改。如需修改请联系 PMC
  * */
 
+import type { TdPopupProps as PopupProps } from '../popup/type';
 
 export interface TdActionSheetProps {
   /**
    * 水平对齐方式
    * @default center
    */
-  align?: {
-    type: StringConstructor;
-    value?: 'center' | 'left';
-  };
+  align?: 'center' | 'left';
   /**
    * 设置取消按钮的文本
    * @default ''
    */
-  cancelText?: {
-    type: StringConstructor;
-    value?: string;
-  };
+  cancelText?: string;
   /**
    * 设置每页展示菜单的数量，仅当 type=grid 时有效
    * @default 8
    */
-  count?: {
-    type: NumberConstructor;
-    value?: number;
-  };
+  count?: number;
   /**
    * 动作面板描述文字
    * @default ''
    */
-  description?: {
-    type: StringConstructor;
-    value?: string;
-  };
+  description?: string;
   /**
    * 菜单项
+   * @default []
    */
-  items: {
-    type: ArrayConstructor;
-    value?: Array<string | ActionSheetItem>;
-    required?: boolean;
-  };
+  items?: Array<string | ActionSheetItem>;
   /**
    * 透传 Popup 组件全部属性
    * @default {}
    */
-  popupProps?: {
-    type: ObjectConstructor;
-    value?: any;
-  };
+  popupProps?: PopupProps;
   /**
    * 是否显示取消按钮
    * @default true
    */
-  showCancel?: {
-    type: BooleanConstructor;
-    value?: boolean;
-  };
+  showCancel?: boolean;
   /**
    * 是否显示遮罩层
    * @default true
    */
-  showOverlay?: {
-    type: BooleanConstructor;
-    value?: boolean;
-  };
+  showOverlay?: boolean;
   /**
    * 展示类型，列表和表格形式展示
    * @default list
    */
-  theme?: {
-    type: StringConstructor;
-    value?: 'list' | 'grid';
-  };
+  theme?: 'list' | 'grid';
   /**
    * 是否使用了自定义导航栏
    * @default false
    */
-  usingCustomNavbar?: {
-    type: BooleanConstructor;
-    value?: boolean;
-  };
+  usingCustomNavbar?: boolean;
   /**
    * 显示与隐藏
    * @default false
    */
-  visible?: {
-    type: BooleanConstructor;
-    value?: boolean;
-  };
+  visible?: boolean;
   /**
    * 显示与隐藏，非受控属性
    * @default false
    */
-  defaultVisible?: {
-    type: BooleanConstructor;
-    value?: boolean;
-  };
+  defaultVisible?: boolean;
+  /**
+   * 点击取消按钮时触发
+   */
+  onCancel?: () => void;
+  /**
+   * 关闭时触发
+   */
+  onClose?: (e: { trigger: ActionSheetTriggerSource }) => void;
+  /**
+   * 选择菜单项时触发
+   */
+  onSelected?: (e: { selected: ActionSheetItem | string; index: number }) => void;
 }
 
 export interface ActionSheetItem {
@@ -111,3 +88,5 @@ export interface ActionSheetItem {
   icon?: string;
   suffixIcon?: string;
 }
+
+export type ActionSheetTriggerSource = 'overlay' | 'command' | 'select';

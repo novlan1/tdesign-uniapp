@@ -9,74 +9,51 @@ export interface TdQRCodeProps {
    * 二维码背景颜色
    * @default ''
    */
-  bgColor?: {
-    type: StringConstructor;
-    value?: string;
-  };
+  bgColor?: string;
   /**
    * 是否有边框
    * @default false
    */
-  borderless?: {
-    type: BooleanConstructor;
-    value?: boolean;
-  };
+  borderless?: boolean;
   /**
    * 二维码颜色
    * @default ''
    */
-  color?: {
-    type: StringConstructor;
-    value?: string;
-  };
+  color?: string;
   /**
    * 二维码中图片的地址
    * @default ''
    */
-  icon?: {
-    type: StringConstructor;
-    value?: string;
-  };
+  icon?: string;
   /**
    * 二维码中图片的大小
    * @default 40
    */
-  iconSize?: {
-    type: null;
-    value?: number | { width: number; height: number };
-  };
+  iconSize?: number | { width: number; height: number };
   /**
    * 二维码纠错等级
    * @default M
    */
-  level?: {
-    type: StringConstructor;
-    value?: 'L' | 'M' | 'Q' | 'H';
-  };
+  level?: 'L' | 'M' | 'Q' | 'H';
   /**
    * 二维码大小
    * @default 160
    */
-  size?: {
-    type: NumberConstructor;
-    value?: number;
-  };
+  size?: number;
   /**
    * 二维码状态
    * @default active
    */
-  status?: {
-    type: StringConstructor;
-    value?: QRStatus;
-  };
+  status?: QRStatus;
   /**
    * 扫描后的文本
    * @default ''
    */
-  value?: {
-    type: StringConstructor;
-    value?: string;
-  };
+  value?: string;
+  /**
+   * 点击"点击刷新"的回调
+   */
+  onRefresh?: () => void;
 }
 
 export type QRStatus = 'active' | 'expired' | 'loading' | 'scanned';

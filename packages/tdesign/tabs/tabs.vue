@@ -6,7 +6,7 @@
     <t-sticky
       :t-class="_.cls(classPrefix + '__sticky', [placement])"
       :disabled="!sticky"
-      :z-index="stickyProps?.zIndex || '1'"
+      :z-index="stickyProps?.zIndex || 1"
       :offset-top="stickyProps?.offsetTop || 0"
       :container="stickyProps?.container"
       @scroll="onTouchScroll"
@@ -124,7 +124,7 @@
     >
       <view
         :class="classPrefix + '__content-inner ' + tClassContent"
-        :style="animate({ duration: animation.duration, currentIndex: currentIndex })"
+        :style="animate({ duration: animation && animation.duration, currentIndex: currentIndex })"
       >
         <slot />
       </view>
