@@ -29,10 +29,10 @@ visible | Boolean | false | \- | N
 name | params | description
 -- | -- | --
 change | `(context: { value: number \| number[] })` | \-
-close | `(trigger: CalendarTrigger)` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/calendar/type.ts)。<br/>`type CalendarTrigger = 'close-btn' \| 'confirm-btn' \| 'overlay' \| 'auto-close'`<br/>
+close | `(context: { trigger: CalendarTrigger })` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/calendar/type.ts)。<br/>`type CalendarTrigger = 'close-btn' \| 'confirm-btn' \| 'overlay' \| 'auto-close'`<br/>
 confirm | `(context: { value: number \| number[] })` | \-
 panel-change | `(context: { year: number, month: number })` | \-
-scroll | `({scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY})` | triggered when scrolling
+scroll | `(context: {scrollLeft: number, scrollTop: number, scrollHeight: number, scrollWidth: number, deltaX: number, deltaY: number})` | triggered when scrolling
 select | `(context: { value: number \| number[] })` | \-
 
 ### Calendar Slots

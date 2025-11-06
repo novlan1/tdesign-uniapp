@@ -103,19 +103,19 @@ export interface TdDateTimePickerProps {
   /**
    * 确认按钮点击时触发
    */
-  onChange?: (value: DateValue) => void;
+  onChange?: (context: { value: DateValue }) => void;
   /**
    * 关闭时触发
    */
-  onClose?: (trigger: TriggerSource) => void;
+  onClose?: (context: { trigger: TriggerSource }) => void;
   /**
    * 确认按钮点击时触发
    */
-  onConfirm?: (value: DateValue) => void;
+  onConfirm?: (context: { value: DateValue }) => void;
   /**
    * 选中值发生变化时触发
    */
-  onPick?: (value: DateValue) => void;
+  onPick?: (context: { value: DateValue }) => void;
 }
 
 export type DateTimePickerColumn = DateTimePickerColumnItem[];

@@ -76,10 +76,10 @@ visible | Boolean | false | 是否显示 | N
 名称 | 参数 | 描述
 -- | -- | --
 cancel | \- | 取消按钮点击时触发
-change | `(value: DateValue)` | 确认按钮点击时触发
-close | `(trigger: TriggerSource)` | 关闭时触发。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/date-time-picker/type.ts)。<br/>`type TriggerSource = 'overlay' \| 'cancel-btn' \| 'confirm-btn'`<br/>
-confirm | `(value: DateValue)` | 确认按钮点击时触发
-pick | `(value: DateValue)` | 选中值发生变化时触发
+change | `(context: { value: DateValue })` | 确认按钮点击时触发
+close | `(context: { trigger: TriggerSource })` | 关闭时触发。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/date-time-picker/type.ts)。<br/>`type TriggerSource = 'overlay' \| 'cancel-btn' \| 'confirm-btn'`<br/>
+confirm | `(context: { value: DateValue })` | 确认按钮点击时触发
+pick | `(context: { value: DateValue })` | 选中值发生变化时触发
 
 ### DateTimePicker Slots
 

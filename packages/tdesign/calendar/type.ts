@@ -86,7 +86,7 @@ export interface TdCalendarProps {
   /**
    * 关闭按钮时触发
    */
-  onClose?: (trigger: CalendarTrigger) => void;
+  onClose?: (context: { trigger: CalendarTrigger }) => void;
   /**
    * 点击确认按钮时触发
    */
@@ -98,7 +98,14 @@ export interface TdCalendarProps {
   /**
    * 滚动时触发
    */
-  onScroll?: ({ scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY }) => void;
+  onScroll?: (context: {
+    scrollLeft: number;
+    scrollTop: number;
+    scrollHeight: number;
+    scrollWidth: number;
+    deltaX: number;
+    deltaY: number;
+  }) => void;
   /**
    * 点击日期时触发
    */

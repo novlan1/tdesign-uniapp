@@ -32,10 +32,10 @@ visible | Boolean | false | \- | N
 name | params | description
 -- | -- | --
 cancel | \- | \-
-change | `(value: DateValue)` | \-
-close | `(trigger: TriggerSource)` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/date-time-picker/type.ts)。<br/>`type TriggerSource = 'overlay' \| 'cancel-btn' \| 'confirm-btn'`<br/>
-confirm | `(value: DateValue)` | \-
-pick | `(value: DateValue)` | \-
+change | `(context: { value: DateValue })` | \-
+close | `(context: { trigger: TriggerSource })` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/date-time-picker/type.ts)。<br/>`type TriggerSource = 'overlay' \| 'cancel-btn' \| 'confirm-btn'`<br/>
+confirm | `(context: { value: DateValue })` | \-
+pick | `(context: { value: DateValue })` | \-
 
 ### DateTimePicker Slots
 
