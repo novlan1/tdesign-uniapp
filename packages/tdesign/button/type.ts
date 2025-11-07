@@ -189,8 +189,4 @@ export interface TdButtonProps {
    * 原生按钮属性，在打开授权设置页后回调，open-type=openSetting时有效
    */
   onOpensetting?: () => void;
-  /**
-   * 点击按钮，当按钮不为加载或禁用状态时触发
-   */
-  onTap?: (event) => void;
 }

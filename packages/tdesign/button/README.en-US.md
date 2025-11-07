@@ -115,7 +115,6 @@ getrealtimephonenumber | \- | \-
 getuserinfo | \- | \-
 launchapp | \- | \-
 opensetting | \- | \-
-tap | `event` | \-
 
 ### Button Slots
 

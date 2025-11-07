@@ -127,7 +127,7 @@ export interface DateTimePickerColumnItem {
 
 export type DateTimePickerMode = TimeModeValues | Array<TimeModeValues>;
 
-export type TimeModeValues = 'year' | 'month' | 'date' | 'hour' | 'minute' | 'second';
+export type TimeModeValues = 'year' | 'month' | 'date' | 'hour' | 'minute' | 'second' | 'null';
 
 export type DateValue = string | number;
 

@@ -106,7 +106,6 @@ getrealtimephonenumber | \- | 原生按钮属性，手机号实时验证回调�
 getuserinfo | \- | 原生按钮属性，用户点击该按钮时，会返回获取到的用户信息，回调的detail数据与wx.getUserInfo返回的一致，open-type="getUserInfo"时有效
 launchapp | \- | 打开 APP 成功的回调，`open-type=launchApp` 时有效
 opensetting | \- | 原生按钮属性，在打开授权设置页后回调，open-type=openSetting时有效
-tap | `event` | 点击按钮，当按钮不为加载或禁用状态时触发
 
 ### Button Slots
 

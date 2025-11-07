@@ -148,8 +148,21 @@ export default uniComponent({
     },
 
     mode: {
-      handler(m) {
-        const fullModes = this.getFullModeArray(m);
+      handler(v, prev) {
+        // 解决 pick 事件触发两次问题
+        const checkEqual = () => {
+          if (!prev) return false;
+          let result = false;
+          try {
+            result = JSON.stringify(v) === JSON.stringify(prev);
+          } catch (e) {
+            return result;
+          }
+          return result;
+        };
+        if (checkEqual()) return;
+
+        const fullModes = this.getFullModeArray(v);
         this.fullModes = fullModes;
         this.updateColumns();
       },

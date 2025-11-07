@@ -204,9 +204,4 @@ export default {
     type: Function,
     default: () => ({}),
   },
-  /** 点击按钮，当按钮不为加载或禁用状态时触发 */
-  onTap: {
-    type: Function,
-    default: () => ({}),
-  },
 };
