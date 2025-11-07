@@ -16,7 +16,7 @@ filter | Function | - | Typescript：`(type: TimeModeValues, columns: DateTimePi
 format | String | 'YYYY-MM-DD HH:mm:ss' | \- | N
 formatter | Function | - | Typescript：`(option: DateTimePickerColumnItem, columnIndex: number) => DateTimePickerColumnItem` | N
 header | Boolean | true | \- | N
-mode | String / Array | 'date' | Typescript：`DateTimePickerMode` `type DateTimePickerMode = TimeModeValues \| Array<TimeModeValues> ` `type TimeModeValues = 'year' \| 'month' \| 'date' \| 'hour' \| 'minute' \| 'second'`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/date-time-picker/type.ts) | N
+mode | String / Array | 'date' | Typescript：`DateTimePickerMode` `type DateTimePickerMode = TimeModeValues \| Array<TimeModeValues> ` `type TimeModeValues = 'year' \| 'month' \| 'date' \| 'hour' \| 'minute' \| 'second' \| 'null'`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/date-time-picker/type.ts) | N
 popup-props | Object | {} | popup properties。Typescript：`PopupProps`，[Popup API Documents](./popup?tab=api)。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/date-time-picker/type.ts) | N
 show-week | Boolean | false | \- | N
 start | String / Number | - | \- | N
