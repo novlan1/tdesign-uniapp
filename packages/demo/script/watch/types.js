@@ -93,7 +93,7 @@ function genIndexContent(fileNames) {
 
 function getGlobalDTS(fileNames) {
   const content = Array.from(new Set(fileNames))
-    .map(item => `${toPascal(item)}: typeof import('tdesign-uniapp/${item}/${item}.vue').default;`);
+    .map(item => `T${toPascal(item)}: typeof import('tdesign-uniapp/${item}/${item}.vue').default;`);
 
   const result = GLOBAL_DTS_TEMPLATE.replace('{{CONTENT}}', content.join('\n    '));
   writeFileSync(CONFIG.globalDTSPath, result);
