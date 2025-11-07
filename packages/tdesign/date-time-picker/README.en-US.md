@@ -33,7 +33,7 @@ name | params | description
 -- | -- | --
 cancel | \- | \-
 change | `(context: { value: DateValue })` | \-
-close | `(context: { trigger: TriggerSource })` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/date-time-picker/type.ts)。<br/>`type TriggerSource = 'overlay' \| 'cancel-btn' \| 'confirm-btn'`<br/>
+close | `(context: { trigger: DateTimePickerTriggerSource })` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/date-time-picker/type.ts)。<br/>`type DateTimePickerTriggerSource = 'overlay' \| 'cancel-btn' \| 'confirm-btn'`<br/>
 confirm | `(context: { value: DateValue })` | \-
 pick | `(context: { value: DateValue })` | \-
 

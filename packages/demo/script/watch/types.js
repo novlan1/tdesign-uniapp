@@ -8,6 +8,9 @@ const { toPascal } = require('../utils/utils');
 const CONFIG = {
   pkgJsonPath: path.resolve(__dirname, '../../../tdesign/package.json'),
   dtsDir: path.resolve(__dirname, '../../../tdesign/types'),
+  indexPath: path.resolve(__dirname, '../../../tdesign/types/index.d.ts'),
+  globalDTSPath: path.resolve(__dirname, '../../../tdesign/global.d.ts'),
+  filterTypes: ['form-item'],
 };
 
 const OTHER_EXPORTS = {
@@ -23,6 +26,15 @@ declare const {{Component}}Component: import('vue').DefineComponent<{{Component}
 export default {{Component}}Component;
 `;
 
+const GLOBAL_DTS_TEMPLATE = `declare module 'vue' {
+  export interface GlobalComponents {
+    {{CONTENT}}
+  }
+}
+
+export {};
+`;
+
 
 function main() {
   const list = glob.sync('packages/tdesign/*/*.vue');
@@ -36,6 +48,8 @@ function main() {
 
   changePkgExports(fileNames);
   genDTS(fileNames);
+  genIndexContent(fileNames);
+  getGlobalDTS(fileNames);
 }
 
 
@@ -56,7 +70,7 @@ function changePkgExports(fileNames) {
 
   const pkgJson = require(CONFIG.pkgJsonPath);
   pkgJson.exports = exportsType;
-  writeFileSync(CONFIG.pkgJsonPath, pkgJson, true);
+  writeFileSync(CONFIG.pkgJsonPath, `${JSON.stringify(pkgJson, null, 2)}\n`);
 }
 
 
@@ -68,6 +82,21 @@ function genDTS(list) {
       .replaceAll('{{component}}', item);
     writeFileSync(fileName, content);
   });
+}
+
+function genIndexContent(fileNames) {
+  const content = Array.from(new Set(fileNames))
+    .filter(item => !CONFIG.filterTypes.includes(item))
+    .map(item => `export * from '../${item}/type';`);
+  writeFileSync(CONFIG.indexPath, `${content.join('\n')}\n`);
+}
+
+function getGlobalDTS(fileNames) {
+  const content = Array.from(new Set(fileNames))
+    .map(item => `${toPascal(item)}: typeof import('tdesign-uniapp/${item}/${item}.vue').default;`);
+
+  const result = GLOBAL_DTS_TEMPLATE.replace('{{CONTENT}}', content.join('\n    '));
+  writeFileSync(CONFIG.globalDTSPath, result);
 }
 
 

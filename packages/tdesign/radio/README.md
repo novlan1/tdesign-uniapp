@@ -109,8 +109,8 @@ options | Array | - | 单选组件按钮形式。RadioOption 数据类型为 str
 placement | String | left | 复选框和内容相对位置。优先级低于 Radio.placement。可选项：left/right | N
 readonly | Boolean | undefined | 只读状态 | N
 relation-key | String | - | -1 时代表独立，不再寻找 parent，用于头条小程序 | N
-value | String / Number / Boolean | - | 选中的值。支持语法糖 `v-model:value`。TS 类型：`T` `type RadioValue = string \| number \| boolean`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/radio-group/type.ts) | N
-default-value | String / Number / Boolean | - | 选中的值。非受控属性。TS 类型：`T` `type RadioValue = string \| number \| boolean`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/radio-group/type.ts) | N
+value | String / Number / Boolean | - | 选中的值。支持语法糖 `v-model:value`。TS 类型：`T`，[Radio API Documents](./radio?tab=api)。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/radio-group/type.ts) | N
+default-value | String / Number / Boolean | - | 选中的值。非受控属性。TS 类型：`T`，[Radio API Documents](./radio?tab=api)。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/radio-group/type.ts) | N
 
 ### RadioGroup Events
 

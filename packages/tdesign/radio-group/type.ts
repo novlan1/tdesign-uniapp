@@ -4,6 +4,7 @@
  * 该文件为脚本自动生成文件，请勿随意修改。如需修改请联系 PMC
  * */
 
+import type { RadioValue } from '../radio/type';
 import type { KeysType } from '../common/common';
 
 export interface TdRadioGroupProps<T = RadioValue> {
@@ -76,5 +77,3 @@ export interface RadioOptionObj {
   disabled?: boolean;
   allowUncheck?: boolean;
 }
-
-export type RadioValue = string | number | boolean;
