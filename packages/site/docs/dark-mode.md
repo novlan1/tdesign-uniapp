@@ -46,6 +46,12 @@ TDesign UniApp 基于 Design Token 变量和媒体查询 `prefers-color-scheme` 
 import 'tdesign-uniapp/common/style/theme/index.css';
 ```
 
+也可以引入 `rpx` 单位的 `less` 文件，该文件与 `tdesign-miniprogram` 完全一致。
+
+```js
+import 'tdesign-uniapp/common/style/theme/index.less';
+```
+
 ### 3. 深色模式适配
 
 现在，在页面级别的样式文件中，所有的 CSS Variable 都已可用。请替换你的样式文件中原有的颜色值，以实现深色模式适配。
