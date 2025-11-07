@@ -107,7 +107,7 @@ export interface TdDateTimePickerProps {
   /**
    * 关闭时触发
    */
-  onClose?: (context: { trigger: TriggerSource }) => void;
+  onClose?: (context: { trigger: DateTimePickerTriggerSource }) => void;
   /**
    * 确认按钮点击时触发
    */
@@ -131,4 +131,4 @@ export type TimeModeValues = 'year' | 'month' | 'date' | 'hour' | 'minute' | 'se
 
 export type DateValue = string | number;
 
-export type TriggerSource = 'overlay' | 'cancel-btn' | 'confirm-btn';
+export type DateTimePickerTriggerSource = 'overlay' | 'cancel-btn' | 'confirm-btn';

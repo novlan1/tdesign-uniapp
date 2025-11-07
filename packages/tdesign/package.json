@@ -1,10 +1,11 @@
 {
   "name": "tdesign-uniapp",
   "id": "tdesign-uniapp",
-  "version": "0.4.6-beta.3",
+  "version": "0.4.6-beta.4",
   "author": "novlan1",
   "title": "tdesign-uniapp",
   "description": "TDesign Component for uniapp",
+  "typings": "./types/index.d.ts",
   "exports": {
     "./*": "./*",
     "./action-sheet/action-sheet.vue": {

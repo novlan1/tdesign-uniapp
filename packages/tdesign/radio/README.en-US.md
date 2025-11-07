@@ -65,8 +65,8 @@ options | Array | - | Typescript：`Array<RadioOption>` `type RadioOption = stri
 placement | String | left | options: left/right | N
 readonly | Boolean | undefined | \- | N
 relation-key | String | - | \- | N
-value | String / Number / Boolean | - | `v-model:value` is supported。Typescript：`T` `type RadioValue = string \| number \| boolean`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/radio-group/type.ts) | N
-default-value | String / Number / Boolean | - | uncontrolled property。Typescript：`T` `type RadioValue = string \| number \| boolean`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/radio-group/type.ts) | N
+value | String / Number / Boolean | - | `v-model:value` is supported。Typescript：`T`，[Radio API Documents](./radio?tab=api)。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/radio-group/type.ts) | N
+default-value | String / Number / Boolean | - | uncontrolled property。Typescript：`T`，[Radio API Documents](./radio?tab=api)。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/radio-group/type.ts) | N
 
 ### RadioGroup Events
 
