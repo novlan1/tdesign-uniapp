@@ -144,6 +144,7 @@ export default uniComponent({
     'palette-bar-change',
     'close',
     'change',
+    'update:visible',
   ],
   data() {
     return {
