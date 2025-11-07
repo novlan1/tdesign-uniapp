@@ -60,7 +60,10 @@
       :t-class-indicator="classPrefix + '__loading--indicator ' + tClassLoading"
       :custom-style="loadingCustomStyle"
     />
-    <view :class="classPrefix + '__content ' + ((_icon && _icon.name || loading) & content ? classPrefix + '__content--has-icon' : '')">
+    <view
+      :class="classPrefix + '__content '
+        + ((_icon && _icon.name || loading) && content ? classPrefix + '__content--has-icon' : '')"
+    >
       <slot name="content" />
       <block v-if="content">
         {{ content }}
@@ -215,11 +218,20 @@ export default uniComponent({
 /* 适配 qq 小程序 */
 .t-button--outline {
   border-style: solid;
-  border-width: 2rpx;
+  border-width: 1px;
 }
 .t-button--ghost {
   border-style: solid;
-  border-width: 2rpx;
+  border-width: 1px;
+}
+/* #endif */
+
+/* #ifdef H5 || MP-WEIXIN */
+:deep(.t-button__loading) + .t-button__content:not(:empty) {
+  margin-left: 4px;
+}
+:deep(.t-button__icon) + .t-button__content:not(:empty) {
+  margin-left: 4px;
 }
 /* #endif */
 </style>

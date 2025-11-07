@@ -31,6 +31,7 @@ export default {
   },
   mounted() {
     // 检查分享功能是否可用
+    // #ifdef MP-WEIXIN
     if (typeof wx.showShareMenu === 'function') {
       wx.showShareMenu({
         success: () => {
@@ -39,5 +40,6 @@ export default {
         },
       });
     }
+    // #endif
   },
 };
