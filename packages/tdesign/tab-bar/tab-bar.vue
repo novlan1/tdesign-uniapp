@@ -105,4 +105,9 @@ export default uniComponent({
 </script>
 <style scoped>
 @import './tab-bar.css';
+/* #ifndef MP-WEIXIN */
+:deep(t-tab-bar-item) {
+  flex: 1;
+}
+/* #endif */
 </style>
