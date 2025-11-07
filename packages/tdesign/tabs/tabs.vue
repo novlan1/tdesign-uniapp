@@ -481,4 +481,14 @@ export default uniComponent({
 <style scoped>
 @import './tabs.css';
 
+/* #ifndef MP-WEIXIN */
+:deep(t-tab-panel) {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+/* #endif */
 </style>

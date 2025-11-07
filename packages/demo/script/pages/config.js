@@ -28,6 +28,9 @@ const DEFAULT_PAGES = [
   },
 ];
 
+const SHOW_SKYLINE_PAGES = false;
+
 module.exports = {
   DEFAULT_PAGES,
+  SHOW_SKYLINE_PAGES,
 };

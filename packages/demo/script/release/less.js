@@ -4,6 +4,13 @@ const less = require('less');
 const postcss = require('postcss');
 const rpxTransform = require('postcss-rpx-transform');
 
+const CONFIG = {
+  whiteList: [
+    path.resolve(process.cwd(), 'packages/tdesign/common/style/theme/index.less'),
+    path.resolve(process.cwd(), 'packages/tdesign/common/style/theme/raw/'),
+  ],
+};
+
 // 配置参数（通常 1rpx=0.5px，设计稿 750px 宽时）
 const options = {
   transformType: 'rpx',
@@ -14,6 +21,9 @@ const options = {
 // 处理流程
 async function processLess(inputFile, rawOutputFile, rawOutputFileInApp) {
   if (!inputFile.endsWith('.less')) return;
+  if (CONFIG.whiteList.find(item => inputFile.startsWith(item))) {
+    return;
+  }
 
   try {
     const lessCode = fs.readFileSync(inputFile, 'utf8');

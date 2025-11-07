@@ -258,7 +258,7 @@ export default uniComponent({
       };
     },
 
-    onImageLoadSuccess(e, { index }) {
+    onImageLoadSuccess({ e }, { index }) {
       const {
         detail: { width, height },
       } = e;

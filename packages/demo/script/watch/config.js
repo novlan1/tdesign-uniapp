@@ -15,8 +15,10 @@ const config = {
   demoPagesGlob: path.resolve(__dirname, '../../src/pages/**/*'),
   demoComponentsGlob: path.resolve(__dirname, '../../src/components/**/*'),
 
-  appPagesMoreDir: path.resolve(__dirname, '../../../tdesign-app/pages-more'),
   appDir: path.resolve(__dirname, '../../../tdesign-app'),
+  appPagesMoreDir: path.resolve(__dirname, '../../../tdesign-app/pages-more'),
+  appComponentsDir: path.resolve(__dirname, '../../../tdesign-app/components'),
+  appPagesDir: path.resolve(__dirname, '../../../tdesign-app/pages'),
 };
 
 

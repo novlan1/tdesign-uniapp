@@ -138,7 +138,9 @@ export default uniComponent({
         if (this.refreshStatus > 0) {
           this.refreshStatus = 3;
         }
-        this.barHeight = 0;
+        setTimeout(() => {
+          this.barHeight = 0;
+        }, unitConvert(this.successDuration));
       } else {
         this.doRefresh();
       }

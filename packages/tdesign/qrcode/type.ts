@@ -46,6 +46,11 @@ export interface TdQRCodeProps {
    */
   status?: QRStatus;
   /**
+   * 是否启用自定义渲染
+   * @default false
+   */
+  statusRender?: boolean;
+  /**
    * 扫描后的文本
    * @default ''
    */

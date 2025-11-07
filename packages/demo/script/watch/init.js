@@ -9,7 +9,12 @@ const { deleteFolder } = require('t-comm');
 async function main() {
   deleteFolder(config.targetDir);
   deleteFolder(config.rawTargetDir);
+  deleteFolder(config.rawTargetDirInApp);
   deleteFolder(config.demoDir);
+
+  deleteFolder(config.appComponentsDir);
+  deleteFolder(config.appPagesMoreDir);
+  deleteFolder(config.appPagesDir);
 
   const list = glob.sync(config.sourceGlob, {
     ignore: '**/node_modules/**/*',

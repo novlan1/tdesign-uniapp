@@ -17,6 +17,7 @@
       t-class="wrapper"
     />
     <t-loading
+      theme="custom"
       t-class="wrapper"
     >
       <template

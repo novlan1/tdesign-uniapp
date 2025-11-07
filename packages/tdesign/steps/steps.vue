@@ -112,4 +112,11 @@ export default uniComponent({
 </script>
 <style scoped>
 @import './steps.css';
+
+/* #ifndef MP-WEIXIN */
+/* 适配 qq 小程序等 */
+:deep(t-step-item) {
+  flex: 1;
+}
+/* #endif */
 </style>

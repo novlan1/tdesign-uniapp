@@ -260,4 +260,12 @@ export default uniComponent({
 </script>
 <style scoped>
 @import './picker.css';
+
+/* #ifndef MP-WEIXIN */
+/* 适配 qq 小程序等 */
+:deep(t-picker-item) {
+  z-index: 1;
+  flex: 1;
+}
+/* #endif */
 </style>

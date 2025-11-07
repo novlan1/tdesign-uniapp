@@ -16,7 +16,7 @@ icon | String / Array | - | Typescript：`string \| string[]` | N
 icon-prefix | String | undefined | \- | N
 placement | String | top | options: top / bottom / '' | N
 show-text | Boolean | false | \- | N
-size | String | 24px | \- | N
+size | String / Number | '24px' | \- | N
 texts | Array | [] | Typescript：`Array<string>` | N
 value | Number | 0 | `v-model:value` is supported | N
 default-value | Number | 0 | uncontrolled property | N

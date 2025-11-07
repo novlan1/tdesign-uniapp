@@ -15,8 +15,8 @@ const ARIAL_PROPS = [
   { key: 'ariaBusy', type: Boolean },
 ];
 
-const getPropsDefault = (type) => {
-  if (type === Boolean) {
+const getPropsDefault = (type, disableBoolean = false) => {
+  if (type === Boolean && !disableBoolean) {
     return false;
   }
   if (type === String) {
@@ -181,7 +181,7 @@ function filterProps(props, controlledProps) {
     ) {
       newProps[key] = {
         ...props[key],
-        default: getPropsDefault(props[key].type),
+        default: getPropsDefault(props[key].type, true),
       };
     } else {
       newProps[key] = {

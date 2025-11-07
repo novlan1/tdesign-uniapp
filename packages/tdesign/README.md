@@ -47,6 +47,12 @@ npm i tdesign-uniapp
 import 'tdesign-uniapp/common/style/theme/index.css';
 ```
 
+也可以引入 `rpx` 单位的 `less` 文件，该文件与 `tdesign-miniprogram` 完全一致。
+
+```js
+import 'tdesign-uniapp/common/style/theme/index.less';
+```
+
 2. 在文件中使用
 
 ```html

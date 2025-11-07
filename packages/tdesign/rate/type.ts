@@ -49,9 +49,9 @@ export interface TdRateProps {
   showText?: boolean;
   /**
    * 评分图标的大小
-   * @default 24px
+   * @default '24px'
    */
-  size?: string;
+  size?: string | number;
   /**
    * 评分等级对应的辅助文字。组件内置默认值为：['极差', '失望', '一般', '满意', '惊喜']。自定义值示例：['1分', '2分', '3分', '4分', '5分']
    * @default []

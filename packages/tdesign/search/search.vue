@@ -134,6 +134,9 @@ export default uniComponent({
   props: {
     ...props,
   },
+  emits: [
+    'selectresult',
+  ],
   data() {
     return {
       classPrefix: name,
