@@ -186,7 +186,7 @@ export default uniComponent({
       if (this.hideOnLoadFailed) {
         this.isShow = false;
       }
-      this.$emit('error', e);
+      this.$emit('error', e && e.e);
     },
     setStyle(val = '') {
       this.innerStyle = val;

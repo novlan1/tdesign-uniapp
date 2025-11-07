@@ -204,6 +204,7 @@ export default uniComponent({
       this.updateStyle();
       this.column = this[RELATION_MAP.GridItem].column;
     },
+    binderror() {},
     bindload() {},
     getImageSize(column) {
       if (column >= 5) return 'small';

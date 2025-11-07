@@ -4,7 +4,8 @@ const {
 const path = require('path');
 const pagesJson = path.resolve(__dirname, '../../src/pages.json');
 const { writeFileSync, readFileSync, hyphenate } = require('t-comm');
-const { DEFAULT_PAGES } = require('./config');
+const { DEFAULT_PAGES, SHOW_SKYLINE_PAGES } = require('./config');
+
 
 const {
   base,
@@ -44,14 +45,14 @@ function main() {
     display,
     ux,
   ];
-  const skylineList = [
+  const skylineList = SHOW_SKYLINE_PAGES ? [
     skylineChat,
     skylineBase,
     skylineNav,
     skylineForm,
     skylineDisplay,
     skylineUx,
-  ];
+  ] : [];
 
   const componentPages = getComponentPages(list, false);
   const skylinePages = getComponentPages(skylineList, true);

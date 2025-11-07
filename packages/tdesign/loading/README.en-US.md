@@ -19,7 +19,7 @@ progress | Number | - | \- | N
 reverse | Boolean | - | \- | N
 size | String | '20px' | \- | N
 text | String | - | \- | N
-theme | String | circular | options: circular/spinner/dots | N
+theme | String | circular | options: circular/spinner/dots/theme | N
 
 ### Loading Slots
 

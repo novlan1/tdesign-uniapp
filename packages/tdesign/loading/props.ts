@@ -20,7 +20,7 @@ export default {
   fullscreen: Boolean,
   /** 加载指示符，值为 true 显示默认指示符，值为 false 则不显示，也可以自定义指示符 */
   indicator: {
-    type: [Boolean, Function],
+    type: Boolean,
     default: true as TdLoadingProps['indicator'],
   },
   /** 是否继承父元素颜色 */
@@ -54,7 +54,7 @@ export default {
   },
   /** 加载提示文案 */
   text: {
-    type: [String, Function],
+    type: String,
   },
   /** 加载组件类型 */
   theme: {
@@ -62,7 +62,7 @@ export default {
     default: 'circular' as TdLoadingProps['theme'],
     validator(val: TdLoadingProps['theme']): boolean {
       if (!val) return true;
-      return ['circular', 'spinner', 'dots'].includes(val);
+      return ['circular', 'spinner', 'dots', 'theme'].includes(val);
     },
   },
 };
