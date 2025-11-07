@@ -51,6 +51,8 @@ export default {
       return ['active', 'expired', 'loading', 'scanned'].includes(val);
     },
   },
+  /** 是否启用自定义渲染 */
+  statusRender: Boolean,
   /** 扫描后的文本 */
   value: {
     type: String,

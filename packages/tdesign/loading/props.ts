@@ -62,7 +62,7 @@ export default {
     default: 'circular' as TdLoadingProps['theme'],
     validator(val: TdLoadingProps['theme']): boolean {
       if (!val) return true;
-      return ['circular', 'spinner', 'dots', 'theme'].includes(val);
+      return ['circular', 'spinner', 'dots', 'custom'].includes(val);
     },
   },
 };

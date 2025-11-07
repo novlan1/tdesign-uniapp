@@ -65,7 +65,7 @@
         >
           <t-icon
             :t-class="classPrefix + '__icon ' + classPrefix + '__icon--selected-half'"
-            :name="utils.getIconName(defaultValue, dataValue, index, icon)"
+            :name="utils.getIconName(defaultValue, dataValue, 0, icon)"
             :size="size"
             :custom-style="utils.getColor(color)"
           />

@@ -175,7 +175,6 @@
       <view class="button-group">
         <t-button
           theme="primary"
-          variant="light"
           type="submit"
           size="large"
           :style="!useVirtualHost ? 'flex: 1;display: flex;' : ''"

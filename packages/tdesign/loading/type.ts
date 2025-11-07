@@ -66,5 +66,5 @@ export interface TdLoadingProps {
    * 加载组件类型
    * @default circular
    */
-  theme?: 'circular' | 'spinner' | 'dots' | 'theme';
+  theme?: 'circular' | 'spinner' | 'dots' | 'custom';
 }
