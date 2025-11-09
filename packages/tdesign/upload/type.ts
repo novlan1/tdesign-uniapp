@@ -89,7 +89,7 @@ export interface TdUploadProps {
   source?: 'media' | 'messageFile';
   /**
    * 拖拽位置移动时的过渡参数,`duration`单位为ms
-   * @default { backTransition: true, duration: 300, timingFunction: 'ease' }
+   * @default `{backTransition: true, duration: 300, timingFunction: 'ease'}`
    */
   transition?: Transition;
   /**

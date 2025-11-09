@@ -91,7 +91,7 @@ export default {
   /** 拖拽位置移动时的过渡参数,`duration`单位为ms */
   transition: {
     type: Object,
-    default: { backTransition: true, duration: 300, timingFunction: 'ease' },
+    default: () => ({ backTransition: true, duration: 300, timingFunction: 'ease' }),
   },
   /** 选择后触发，仅包含本次选择的照片；`url` 表示选定视频的临时文件路径 (本地路径)。`duration` 表示选定视频的时间长度。`size`选定视频的数据量大小。更多描述参考 wx.chooseMedia 小程序官网描述 */
   onAdd: {

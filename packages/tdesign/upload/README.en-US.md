@@ -25,7 +25,7 @@ remove-btn | Boolean | true | \- | N
 request-method | Function | - | Typescript：`any` | N
 size-limit | Number / Object | - | files size limit。Typescript：`number \| SizeLimitObj` `interface SizeLimitObj { size: number; unit: SizeUnit ; message?: string }` `type SizeUnitArray = ['B', 'KB', 'MB', 'GB']` `type SizeUnit = SizeUnitArray[number]`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts) | N
 source | String | media | options: media/messageFile | N
-transition | Object | { backTransition: true, duration: 300, timingFunction: 'ease' } | Typescript：`Transition` `interface Transition { backTransition?: boolean, duration?: number, timingFunction?: string }`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts) | N
+transition | Object | `{backTransition: true, duration: 300, timingFunction: 'ease'}` | Typescript：`Transition` `interface Transition { backTransition?: boolean, duration?: number, timingFunction?: string }`。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/upload/type.ts) | N
 
 ### Upload Events
 
