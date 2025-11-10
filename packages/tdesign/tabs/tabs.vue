@@ -247,8 +247,8 @@ export default uniComponent({
         item.setId(`${this.tabID}_panel_${index}`);
       });
     },
-    onScroll(e) {
-      const { scrollLeft } = e;
+    onScroll(e = {}) {
+      const { scrollLeft } = e.detail || {};
       this.scrollLeft = scrollLeft;
     },
     updateTabs(cb) {
