@@ -1,8 +1,7 @@
 import {
   type RouteRecordRaw,
   createRouter,
-  // createWebHistory,
-  createWebHashHistory,
+  createWebHistory,
   type RouterOptions } from 'vue-router';
 import config from '../docs.config';
 import { sortDocs } from './utils';
@@ -32,11 +31,11 @@ function getDocsRoutes(docs: any[], type: string): RouteRecordRaw[] {
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/overview',
+    redirect: '/tdesign-uniapp/overview',
   },
   {
     path: '/:catchAll(.*)',
-    redirect: '/overview',
+    redirect: '/tdesign-uniapp/overview',
   },
   ...getDocsRoutes(docs, 'document'),
   ...getDocsRoutes(docs, 'component'),
@@ -46,8 +45,7 @@ const routes: Array<RouteRecordRaw> = [
 
 const routerConfig: RouterOptions = {
   routes,
-  // history: createWebHistory('/'),
-  history: createWebHashHistory(),
+  history: createWebHistory('/'),
 };
 
 const router = createRouter(routerConfig);
