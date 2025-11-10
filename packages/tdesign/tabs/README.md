@@ -12,7 +12,7 @@ isComponent: true
 
 ```js
 import TTabs from 'tdesign-uniapp/tabs/tabs.vue';
-import TTabsPanel from 'tdesign-uniapp/tabs-panel/tabs-panel.vue';
+import TTabsPanel from 'tdesign-uniapp/tab-panel/tab-panel.vue';
 ```
 
 ### 基础选项卡
