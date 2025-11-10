@@ -7,9 +7,31 @@
       @transitionend="onTransitionEnd"
     >
       <view
-        :data-prevention="preventScrollThrough || (overlayProps ? !!overlayProps.preventScrollThrough : false)"
+        v-if="innerPreventScrollThrough"
         :class="classPrefix + '__content ' + tClassContent"
-        @touchmove="parseEventDynamicCode($event, popup.onContentTouchMove)"
+        @touchmove.stop.prevent="noop"
+      >
+        <slot name="content" />
+        <slot />
+        <view
+          :class="classPrefix + '__close'"
+          @click="handleClose"
+        >
+          <t-icon
+            v-if="closeBtn"
+            name="close"
+            size="64rpx"
+          />
+          <slot
+            name="close-btn"
+            :class="classPrefix + '-slot'"
+          />
+        </view>
+      </view>
+
+      <view
+        v-else
+        :class="classPrefix + '__content ' + tClassContent"
       >
         <slot name="content" />
         <slot />
@@ -54,7 +76,6 @@ import { transitionMixins } from '../mixins/transition';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 import _ from '../common/utils.wxs';
 import popup from './computed.js';
-import { parseEventDynamicCode } from '../common/event/dynamic';
 
 delete props.visible;
 
@@ -90,8 +111,14 @@ export default uniComponent({
       _,
     };
   },
+  computed: {
+    innerPreventScrollThrough() {
+      const { preventScrollThrough, overlayProps } = this;
+      return preventScrollThrough || (overlayProps ? !!overlayProps.preventScrollThrough : false);
+    },
+  },
   methods: {
-    parseEventDynamicCode,
+    noop() {},
     handleOverlayClick() {
       const { closeOnOverlayClick } = this;
       if (closeOnOverlayClick) {

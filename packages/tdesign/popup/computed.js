@@ -6,13 +6,6 @@ function getPopupStyles(zIndex, distanceTop, placement) {
   return zIndexStyle;
 }
 
-function onContentTouchMove(e) {
-  if (e.target && e.target.dataset.prevention) {
-    return false;
-  }
-}
-
 export default {
   getPopupStyles,
-  onContentTouchMove,
 };
