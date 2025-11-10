@@ -42,10 +42,3 @@ jobs:
       - name: Deploy Mine Cloud
         run: node packages/demo/script/deploy/mine-doc.js ${{ secrets.HOST_NAME }} ${{ secrets.HOST_PWD }}
         shell: bash
-
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: docs
-          FOLDER: packages/site/dist

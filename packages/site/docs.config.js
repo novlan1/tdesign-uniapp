@@ -8,7 +8,7 @@ export const docs = [
         title: '快速开始',
         titleEn: 'Getting Started',
         name: 'getting-started',
-        path: '/getting-started',
+        path: '/tdesign-uniapp/getting-started',
         component: () => import('@docs/getting-started.md'),
         componentEn: () => import('@docs/getting-started.en-US.md'),
       },
@@ -16,7 +16,7 @@ export const docs = [
       //   title: '更新日志',
       //   titleEn: 'CHANGELOG',
       //   name: 'changelog',
-      //   path: '/changelog',
+      //   path: '/tdesign-uniapp/changelog',
       //   component: () => import('@/../CHANGELOG.md'),
       // },
       {
@@ -24,7 +24,7 @@ export const docs = [
         titleEn: 'Custom Style',
         name: 'custom-style',
         meta: { docType: 'explain' },
-        path: '/custom-style',
+        path: '/tdesign-uniapp/custom-style',
         component: () => import('@docs/custom-style.md'),
       },
       {
@@ -32,14 +32,14 @@ export const docs = [
         titleEn: 'Custom Theme',
         name: 'custom-theme',
         meta: { docType: 'explain' },
-        path: '/custom-theme',
+        path: '/tdesign-uniapp/custom-theme',
         component: () => import('@docs/custom-theme.md'),
       },
       {
         title: '组件概览',
         titleEn: 'Overview',
         name: 'overview',
-        path: '/overview',
+        path: '/tdesign-uniapp/overview',
         component: () => import('@docs/overview.md'),
         componentEn: () => import('@docs/overview.en-US.md'),
       },
@@ -55,7 +55,7 @@ export const docs = [
         titleEn: 'Dark Mode',
         name: 'dark-mode',
         meta: { docType: 'explain' },
-        path: '/dark-mode',
+        path: '/tdesign-uniapp/dark-mode',
         component: () => import('@docs/dark-mode.md'),
       },
     ],
@@ -70,7 +70,7 @@ export const docs = [
         titleEn: 'Button',
         name: 'button',
         meta: { docType: 'base' },
-        path: '/components/button',
+        path: '/tdesign-uniapp/components/button',
         component: () => import('@/button/README.md'),
         componentEn: () => import('@/button/README.en-US.md'),
       },
@@ -79,7 +79,7 @@ export const docs = [
         titleEn: 'Divider',
         name: 'divider',
         meta: { docType: 'data' },
-        path: '/components/divider',
+        path: '/tdesign-uniapp/components/divider',
         component: () => import('@/divider/README.md'),
       },
       {
@@ -87,7 +87,7 @@ export const docs = [
         titleEn: 'Fab',
         name: 'fab',
         meta: { docType: 'form' },
-        path: '/components/fab',
+        path: '/tdesign-uniapp/components/fab',
         component: () => import('@/fab/README.md'),
       },
       {
@@ -95,7 +95,7 @@ export const docs = [
         titleEn: 'Icon',
         name: 'icon',
         meta: { docType: 'base' },
-        path: '/components/icon',
+        path: '/tdesign-uniapp/components/icon',
         component: () => import('@/icon/README.md'),
       },
       {
@@ -103,7 +103,7 @@ export const docs = [
         titleEn: 'Layout',
         name: 'layout',
         meta: { docType: 'base' },
-        path: '/components/layout',
+        path: '/tdesign-uniapp/components/layout',
         component: () => import('@/col/README.md'),
       },
       {
@@ -111,7 +111,7 @@ export const docs = [
         titleEn: 'Link',
         name: 'link',
         meta: { docType: 'base' },
-        path: '/components/link',
+        path: '/tdesign-uniapp/components/link',
         component: () => import('@/link/README.md'),
       },
     ],
@@ -126,7 +126,7 @@ export const docs = [
         titleEn: 'BackTop',
         name: 'back-top',
         meta: { docType: 'navigation' },
-        path: '/components/back-top',
+        path: '/tdesign-uniapp/components/back-top',
         component: () => import('@/back-top/README.md'),
       },
       {
@@ -134,7 +134,7 @@ export const docs = [
         titleEn: 'Drawer',
         name: 'drawer',
         meta: { docType: 'navigation' },
-        path: '/components/drawer',
+        path: '/tdesign-uniapp/components/drawer',
         component: () => import('@/drawer/README.md'),
       },
       {
@@ -142,7 +142,7 @@ export const docs = [
         titleEn: 'Indexes',
         name: 'indexes',
         meta: { docType: 'navigation' },
-        path: '/components/indexes',
+        path: '/tdesign-uniapp/components/indexes',
         component: () => import('@/indexes/README.md'),
       },
       {
@@ -150,7 +150,7 @@ export const docs = [
         titleEn: 'Navbar',
         name: 'navbar',
         meta: { docType: 'navigation' },
-        path: '/components/navbar',
+        path: '/tdesign-uniapp/components/navbar',
         component: () => import('@/navbar/README.md'),
       },
       {
@@ -158,7 +158,7 @@ export const docs = [
         titleEn: 'SideBar',
         name: 'sidebar',
         meta: { docType: 'navigation' },
-        path: '/components/side-bar',
+        path: '/tdesign-uniapp/components/side-bar',
         component: () => import('@/side-bar/README.md'),
       },
       {
@@ -166,7 +166,7 @@ export const docs = [
         titleEn: 'Steps',
         name: 'steps',
         meta: { docType: 'navigation' },
-        path: '/components/steps',
+        path: '/tdesign-uniapp/components/steps',
         component: () => import('@/steps/README.md'),
       },
       {
@@ -174,7 +174,7 @@ export const docs = [
         titleEn: 'TabBar',
         name: 'tabbar',
         meta: { docType: 'navigation' },
-        path: '/components/tab-bar',
+        path: '/tdesign-uniapp/components/tab-bar',
         component: () => import('@/tab-bar/README.md'),
       },
       {
@@ -182,7 +182,7 @@ export const docs = [
         titleEn: 'Tabs',
         name: 'tabs',
         meta: { docType: 'navigation' },
-        path: '/components/tabs',
+        path: '/tdesign-uniapp/components/tabs',
         component: () => import('@/tabs/README.md'),
       },
     ],
@@ -197,7 +197,7 @@ export const docs = [
         titleEn: 'Calendar',
         name: 'calendar',
         meta: { docType: 'form' },
-        path: '/components/calendar',
+        path: '/tdesign-uniapp/components/calendar',
         component: () => import('@/calendar/README.md'),
       },
       {
@@ -205,7 +205,7 @@ export const docs = [
         titleEn: 'Cascader',
         name: 'cascader',
         meta: { docType: 'form' },
-        path: '/components/cascader',
+        path: '/tdesign-uniapp/components/cascader',
         component: () => import('@/cascader/README.md'),
       },
       {
@@ -213,7 +213,7 @@ export const docs = [
         titleEn: 'Checkbox',
         name: 'checkbox',
         meta: { docType: 'form' },
-        path: '/components/checkbox',
+        path: '/tdesign-uniapp/components/checkbox',
         component: () => import('@/checkbox/README.md'),
       },
       {
@@ -221,7 +221,7 @@ export const docs = [
         titleEn: 'ColorPicker',
         name: 'color-picker',
         meta: { docType: 'form' },
-        path: '/components/color-picker',
+        path: '/tdesign-uniapp/components/color-picker',
         component: () => import('@/color-picker/README.md'),
       },
       {
@@ -229,7 +229,7 @@ export const docs = [
         titleEn: 'DateTimePicker',
         name: 'dateTimePicker',
         meta: { docType: 'form' },
-        path: '/components/date-time-picker',
+        path: '/tdesign-uniapp/components/date-time-picker',
         component: () => import('@/date-time-picker/README.md'),
       },
       {
@@ -237,7 +237,7 @@ export const docs = [
         titleEn: 'Form',
         name: 'form',
         meta: { docType: 'form' },
-        path: '/components/form',
+        path: '/tdesign-uniapp/components/form',
         component: () => import('@/form/README.md'),
       },
       {
@@ -245,7 +245,7 @@ export const docs = [
         titleEn: 'Input',
         name: 'input',
         meta: { docType: 'form' },
-        path: '/components/input',
+        path: '/tdesign-uniapp/components/input',
         component: () => import('@/input/README.md'),
       },
       {
@@ -253,7 +253,7 @@ export const docs = [
         titleEn: 'Picker',
         name: 'picker',
         meta: { docType: 'form' },
-        path: '/components/picker',
+        path: '/tdesign-uniapp/components/picker',
         component: () => import('@/picker/README.md'),
       },
       {
@@ -261,7 +261,7 @@ export const docs = [
         titleEn: 'Radio',
         name: 'radio',
         meta: { docType: 'form' },
-        path: '/components/radio',
+        path: '/tdesign-uniapp/components/radio',
         component: () => import('@/radio/README.md'),
       },
       {
@@ -269,7 +269,7 @@ export const docs = [
         titleEn: 'Rate',
         name: 'rate',
         meta: { docType: 'form' },
-        path: '/components/rate',
+        path: '/tdesign-uniapp/components/rate',
         component: () => import('@/rate/README.md'),
       },
       {
@@ -277,7 +277,7 @@ export const docs = [
         titleEn: 'Search',
         name: 'search',
         meta: { docType: 'form' },
-        path: '/components/search',
+        path: '/tdesign-uniapp/components/search',
         component: () => import('@/search/README.md'),
       },
       {
@@ -285,7 +285,7 @@ export const docs = [
         titleEn: 'Slider',
         name: 'slider',
         meta: { docType: 'form' },
-        path: '/components/slider',
+        path: '/tdesign-uniapp/components/slider',
         component: () => import('@/slider/README.md'),
       },
       {
@@ -293,7 +293,7 @@ export const docs = [
         titleEn: 'Stepper',
         name: 'stepper',
         meta: { docType: 'form' },
-        path: '/components/stepper',
+        path: '/tdesign-uniapp/components/stepper',
         component: () => import('@/stepper/README.md'),
       },
       {
@@ -301,7 +301,7 @@ export const docs = [
         titleEn: 'Switch',
         name: 'switch',
         meta: { docType: 'form' },
-        path: '/components/switch',
+        path: '/tdesign-uniapp/components/switch',
         component: () => import('@/switch/README.md'),
       },
       {
@@ -309,7 +309,7 @@ export const docs = [
         titleEn: 'Textarea',
         name: 'textarea',
         meta: { docType: 'form' },
-        path: '/components/textarea',
+        path: '/tdesign-uniapp/components/textarea',
         component: () => import('@/textarea/README.md'),
       },
       {
@@ -317,7 +317,7 @@ export const docs = [
         titleEn: 'TreeSelect',
         name: 'treeSelect',
         meta: { docType: 'form' },
-        path: '/components/tree-select',
+        path: '/tdesign-uniapp/components/tree-select',
         component: () => import('@/tree-select/README.md'),
       },
       {
@@ -325,7 +325,7 @@ export const docs = [
         titleEn: 'Upload',
         name: 'upload',
         meta: { docType: 'form' },
-        path: '/components/upload',
+        path: '/tdesign-uniapp/components/upload',
         component: () => import('@/upload/README.md'),
       },
     ],
@@ -340,7 +340,7 @@ export const docs = [
         titleEn: 'Avatar',
         name: 'avatar',
         meta: { docType: 'data' },
-        path: '/components/avatar',
+        path: '/tdesign-uniapp/components/avatar',
         component: () => import('@/avatar/README.md'),
       },
       {
@@ -348,7 +348,7 @@ export const docs = [
         titleEn: 'Badge',
         name: 'badge',
         meta: { docType: 'data' },
-        path: '/components/badge',
+        path: '/tdesign-uniapp/components/badge',
         component: () => import('@/badge/README.md'),
       },
       {
@@ -356,7 +356,7 @@ export const docs = [
         titleEn: 'Cell',
         name: 'cell',
         meta: { docType: 'data' },
-        path: '/components/cell',
+        path: '/tdesign-uniapp/components/cell',
         component: () => import('@/cell/README.md'),
       },
       {
@@ -364,7 +364,7 @@ export const docs = [
         titleEn: 'Collapse',
         name: 'collapse',
         meta: { docType: 'data' },
-        path: '/components/collapse',
+        path: '/tdesign-uniapp/components/collapse',
         component: () => import('@/collapse/README.md'),
       },
       {
@@ -372,7 +372,7 @@ export const docs = [
         titleEn: 'CountDown',
         name: 'countdown',
         meta: { docType: 'data' },
-        path: '/components/count-down',
+        path: '/tdesign-uniapp/components/count-down',
         component: () => import('@/count-down/README.md'),
       },
       {
@@ -380,7 +380,7 @@ export const docs = [
         titleEn: 'Empty',
         name: 'empty',
         meta: { docType: 'data' },
-        path: '/components/empty',
+        path: '/tdesign-uniapp/components/empty',
         component: () => import('@/empty/README.md'),
       },
       {
@@ -388,7 +388,7 @@ export const docs = [
         titleEn: 'Footer',
         name: 'footer',
         meta: { docType: 'data' },
-        path: '/components/footer',
+        path: '/tdesign-uniapp/components/footer',
         component: () => import('@/footer/README.md'),
       },
       {
@@ -396,7 +396,7 @@ export const docs = [
         titleEn: 'Image',
         name: 'image',
         meta: { docType: 'data' },
-        path: '/components/image',
+        path: '/tdesign-uniapp/components/image',
         component: () => import('@/image/README.md'),
       },
       {
@@ -404,7 +404,7 @@ export const docs = [
         titleEn: 'Grid',
         name: 'grid',
         meta: { docType: 'data' },
-        path: '/components/grid',
+        path: '/tdesign-uniapp/components/grid',
         component: () => import('@/grid/README.md'),
       },
       {
@@ -412,7 +412,7 @@ export const docs = [
         titleEn: 'ImageViewer',
         name: 'image-viewer',
         meta: { docType: 'data' },
-        path: '/components/image-viewer',
+        path: '/tdesign-uniapp/components/image-viewer',
         component: () => import('@/image-viewer/README.md'),
       },
       {
@@ -420,7 +420,7 @@ export const docs = [
         titleEn: 'Progress',
         name: 'progress',
         meta: { docType: 'message' },
-        path: '/components/progress',
+        path: '/tdesign-uniapp/components/progress',
         component: () => import('@/progress/README.md'),
       },
       {
@@ -428,7 +428,7 @@ export const docs = [
         titleEn: 'QRCode',
         name: 'qrcode',
         meta: { docType: 'data' },
-        path: '/components/qrcode',
+        path: '/tdesign-uniapp/components/qrcode',
         component: () => import('@/qrcode/README.md'),
       },
       {
@@ -436,7 +436,7 @@ export const docs = [
         titleEn: 'Result',
         name: 'result',
         meta: { docType: 'data' },
-        path: '/components/result',
+        path: '/tdesign-uniapp/components/result',
         component: () => import('@/result/README.md'),
       },
       {
@@ -444,7 +444,7 @@ export const docs = [
         titleEn: 'Skeleton',
         name: 'skeleton',
         meta: { docType: 'data' },
-        path: '/components/skeleton',
+        path: '/tdesign-uniapp/components/skeleton',
         component: () => import('@/skeleton/README.md'),
       },
       {
@@ -452,7 +452,7 @@ export const docs = [
         titleEn: 'Sticky',
         name: 'sticky',
         meta: { docType: 'navigation' },
-        path: '/components/sticky',
+        path: '/tdesign-uniapp/components/sticky',
         component: () => import('@/sticky/README.md'),
       },
       {
@@ -460,7 +460,7 @@ export const docs = [
         titleEn: 'Swiper',
         name: 'swiper',
         meta: { docType: 'data' },
-        path: '/components/swiper',
+        path: '/tdesign-uniapp/components/swiper',
         component: () => import('@/swiper/README.md'),
       },
       {
@@ -468,7 +468,7 @@ export const docs = [
         titleEn: 'Tag',
         name: 'tag',
         meta: { docType: 'data' },
-        path: '/components/tag',
+        path: '/tdesign-uniapp/components/tag',
         component: () => import('@/tag/README.md'),
       },
       {
@@ -476,7 +476,7 @@ export const docs = [
         titleEn: 'Watermark',
         name: 'watermark',
         meta: { docType: 'data' },
-        path: '/components/watermark',
+        path: '/tdesign-uniapp/components/watermark',
         component: () => import('@/watermark/README.md'),
       },
     ],
@@ -491,7 +491,7 @@ export const docs = [
         titleEn: 'ActionSheet',
         name: 'actionsheet',
         meta: { docType: 'message' },
-        path: '/components/action-sheet',
+        path: '/tdesign-uniapp/components/action-sheet',
         component: () => import('@/action-sheet/README.md'),
       },
       {
@@ -499,7 +499,7 @@ export const docs = [
         titleEn: 'Dialog',
         name: 'dialog',
         meta: { docType: 'message' },
-        path: '/components/dialog',
+        path: '/tdesign-uniapp/components/dialog',
         component: () => import('@/dialog/README.md'),
       },
       {
@@ -507,7 +507,7 @@ export const docs = [
         titleEn: 'DropdownMenu',
         name: 'dropdown-menu',
         meta: { docType: 'navigation' },
-        path: '/components/dropdown-menu',
+        path: '/tdesign-uniapp/components/dropdown-menu',
         component: () => import('@/dropdown-menu/README.md'),
       },
       {
@@ -515,7 +515,7 @@ export const docs = [
         titleEn: 'Guide',
         name: 'guide',
         meta: { docType: 'navigation' },
-        path: '/components/guide',
+        path: '/tdesign-uniapp/components/guide',
         component: () => import('@/guide/README.md'),
       },
       {
@@ -523,7 +523,7 @@ export const docs = [
         titleEn: 'Loading',
         name: 'loading',
         meta: { docType: 'message' },
-        path: '/components/loading',
+        path: '/tdesign-uniapp/components/loading',
         component: () => import('@/loading/README.md'),
       },
       {
@@ -531,7 +531,7 @@ export const docs = [
         titleEn: 'Message',
         name: 'message',
         meta: { docType: 'message' },
-        path: '/components/message',
+        path: '/tdesign-uniapp/components/message',
         component: () => import('@/message/README.md'),
       },
       {
@@ -539,7 +539,7 @@ export const docs = [
         titleEn: 'NoticeBar',
         name: 'noticebar',
         meta: { docType: 'message' },
-        path: '/components/notice-bar',
+        path: '/tdesign-uniapp/components/notice-bar',
         component: () => import('@/notice-bar/README.md'),
       },
       {
@@ -547,7 +547,7 @@ export const docs = [
         titleEn: 'Overlay',
         name: 'overlay',
         meta: { docType: 'message' },
-        path: '/components/overlay',
+        path: '/tdesign-uniapp/components/overlay',
         component: () => import('@/overlay/README.md'),
       },
       {
@@ -555,7 +555,7 @@ export const docs = [
         titleEn: 'Popup',
         name: 'popup',
         meta: { docType: 'message' },
-        path: '/components/popup',
+        path: '/tdesign-uniapp/components/popup',
         component: () => import('@/popup/README.md'),
       },
       {
@@ -563,7 +563,7 @@ export const docs = [
         titleEn: 'PullDownRefresh',
         name: 'pullDownRefresh',
         meta: { docType: 'message' },
-        path: '/components/pull-down-refresh',
+        path: '/tdesign-uniapp/components/pull-down-refresh',
         component: () => import('@/pull-down-refresh/README.md'),
       },
       {
@@ -571,7 +571,7 @@ export const docs = [
         titleEn: 'SwipeCell',
         name: 'swipeCell',
         meta: { docType: 'message' },
-        path: '/components/swipe-cell',
+        path: '/tdesign-uniapp/components/swipe-cell',
         component: () => import('@/swipe-cell/README.md'),
       },
       {
@@ -579,7 +579,7 @@ export const docs = [
         titleEn: 'Toast',
         name: 'toast',
         meta: { docType: 'message' },
-        path: '/components/toast',
+        path: '/tdesign-uniapp/components/toast',
         component: () => import('@/toast/README.md'),
       },
     ],
