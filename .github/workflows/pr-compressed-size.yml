@@ -15,5 +15,5 @@ jobs:
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
           install-script: 'npm install --force'
-          build-script: 'npm run init && npm run release:prepare'
+          build-script: 'release:prepare'
           pattern: './npm_dist/**/*.{js,ts,vue,less,css}'
