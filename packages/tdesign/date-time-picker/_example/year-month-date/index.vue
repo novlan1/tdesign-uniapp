@@ -73,7 +73,7 @@ export default {
           const dateSuffixes = {
             1: 'st',
             // typos:disable
-            2: 'nd',
+            2: 'nd', // typos:ignore
             // typos:enable
             3: 'rd',
           };
