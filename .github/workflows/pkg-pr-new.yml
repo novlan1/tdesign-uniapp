@@ -19,10 +19,10 @@ jobs:
 
       - uses: ./.github/actions/install-dep
 
-      - run: pnpm run build
+      - run: npm run release:prepare 
 
       - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - run: pnpm dlx pkg-pr-new publish 'packages/tdesign' --compact
+      - run: cd npm_dist && pnpm dlx pkg-pr-new publish --compact
