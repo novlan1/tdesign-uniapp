@@ -1,6 +1,6 @@
 default.check-filename = true
 
-[default.extend-words]
+[extend-words]
 actived = "actived"
 colum = "colum"
 loosing = "loosing"
