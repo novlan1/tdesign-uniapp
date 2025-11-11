@@ -5,6 +5,8 @@ actived = "actived"
 colum = "colum"
 loosing = "loosing"
 nd = "and"
+destory = "destory"
+ded = "dead"
 
 [files]
 extend-exclude = [
