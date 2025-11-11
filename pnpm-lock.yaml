@@ -80,6 +80,9 @@ importers:
       miniprogram-api-typings:
         specifier: ^4.1.0
         version: 4.1.0
+      postcss-rpx-transform:
+        specifier: ^1.0.1
+        version: 1.0.1
       t-comm:
         specifier: ^2.0.26
         version: 2.0.26
