@@ -14,6 +14,6 @@ jobs:
       - uses: preactjs/compressed-size-action@v2
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
-          install-script: 'npm install -g pnpm@9'
-          build-script: 'pnpm install && npm run init && npm run release:prepare'
+          install-script: 'npm install --force'
+          build-script: 'npm run init && npm run release:prepare'
           pattern: './npm_dist/**/*.{js,ts,vue,less,css}'
