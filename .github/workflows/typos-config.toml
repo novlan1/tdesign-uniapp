@@ -4,9 +4,9 @@ default.check-filename = true
 actived = "actived"
 colum = "colum"
 loosing = "loosing"
-nd = "and"
+"nd" = "and"
 destory = "destory"
-ded = "dead"
+"ded" = "dead"
 
 [files]
 extend-exclude = [
