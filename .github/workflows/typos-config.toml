@@ -4,7 +4,7 @@ default.check-filename = true
 actived = "actived"
 colum = "colum"
 loosing = "loosing"
-nd = and
+nd = "and"
 
 [files]
 extend-exclude = [
