@@ -72,9 +72,7 @@ export default {
           const [dateValue, weekValue] = item.label.split(' ');
           const dateSuffixes = {
             1: 'st',
-            // typos:disable
-            2: 'nd', // typos:ignore
-            // typos:enable
+            2: 'nd',
             3: 'rd',
           };
           const weekMap = {
