@@ -107,7 +107,7 @@ export default defineComponent({
     },
     initThemeGenerator() {
       const generator = document.createElement('td-theme-generator');
-      generator.setAttribute('device', 'mobile');
+      generator.setAttribute('device', 'uniapp');
       document.body.appendChild(generator);
     },
     contentLoaded(callback) {

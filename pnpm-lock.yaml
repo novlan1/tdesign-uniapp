@@ -518,6 +518,9 @@ importers:
       tdesign-theme-generator:
         specifier: ^1.1.0
         version: 1.1.8
+      tdesign-uniapp-theme-generator:
+        specifier: ^1.0.0
+        version: 1.0.0
       tslib:
         specifier: ^2.3.1
         version: 2.8.1
@@ -9069,6 +9072,9 @@ packages:
   tdesign-uniapp-auto-import-resolver@0.1.3:
     resolution: {integrity: sha512-+ET7lbWUdFkrfMfaFWH36msC3q/bNyZ3IjOnlCYwQWDhA/1Vb7b/ymprhuW+3Rqy1Ybdt+TpgDNsxZATp1wyrg==}
 
+  tdesign-uniapp-theme-generator@1.0.0:
+    resolution: {integrity: sha512-Sb639/lfoUgRLtw80NlichN/obFh8MSubqDi/v54L3nBAaWPKQ92EP4i7i6akVK9DH66R89PC/Eh9k3CLwF6lg==}
+
   tdesign-vue@1.9.4-naruto:
     resolution: {integrity: sha512-o+K27STem9UWwimENVVVjVzW5HwTKuNLyH3jG06uMn5hJRwuXrFT3XEzaD/h8A/pjJ2cA5MIqJG4cFsK59ss8Q==}
     peerDependencies:
@@ -13677,7 +13683,7 @@ snapshots:
 
   '@vue/compiler-sfc@2.7.14':
     dependencies:
-      '@babel/parser': 7.28.0
+      '@babel/parser': 7.28.4
       postcss: 8.5.6
       source-map: 0.6.1
 
@@ -20867,6 +20873,16 @@ snapshots:
       - '@nuxt/kit'
       - supports-color
       - vue
+
+  tdesign-uniapp-theme-generator@1.0.0:
+    dependencies:
+      core-js: 3.45.0
+      cssbeautify: 0.3.1
+      lodash: 4.17.21
+      tdesign-icons-vue: 0.0.8(vue@2.7.14)
+      tdesign-vue: 1.9.4-naruto(vue@2.7.14)
+      tvision-color: 1.6.0
+      vue: 2.7.14
 
   tdesign-vue@1.9.4-naruto(vue@2.7.14):
     dependencies:
