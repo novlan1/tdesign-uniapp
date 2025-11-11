@@ -38,7 +38,7 @@
     "type-check": "vue-tsc --noEmit",
     "init": "node packages/demo/script/watch/init.js && node packages/demo/script/pages/index.js",
     "watch": "node packages/demo/script/watch/watch.js",
-    "prepare": "npm run init",
+    "prepare": "npm run init && npm run release:prepare",
     "release:prepare": "node packages/demo/script/release/prepare.js",
     "publish": "cd npm_dist && npm publish"
   },
