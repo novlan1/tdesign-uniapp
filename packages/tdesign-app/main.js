@@ -19,7 +19,7 @@ export function createApp() {
   app.config.globalProperties.$backgroundAudioData = {
     playing: false,
     playTime: 0,
-    formatedPlayTime: '00:00:00',
+    formattedPlayTime: '00:00:00',
   };
 
   app.mixin(DemoBaseMixin);
