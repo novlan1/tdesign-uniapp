@@ -1,0 +1,28 @@
+name: Publish_Any_Commit
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  build:
+    if: ${{ github.repository == 'novlan1/tdesign-uniapp' && !startsWith(github.head_ref, 'release/') }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: ./.github/actions/install-dep
+
+      - run: pnpm run build
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: pnpm dlx pkg-pr-new publish 'packages/tdesign' --compact

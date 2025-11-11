@@ -1,0 +1,18 @@
+name: Compressed Size
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  compressed-size:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: preactjs/compressed-size-action@v2
+        with:
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+          build-script: 'npm run init && npm run release:prepare'
+          pattern: './npm_dist/**/*.{js,ts,vue,less,css}'

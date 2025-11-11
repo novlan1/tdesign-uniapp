@@ -1,0 +1,22 @@
+name: 'Install Dependencies'
+
+on:
+  workflow_call:
+    inputs:
+      nodeVersion:
+        required: false
+        type: string
+        default: '20'
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.nodeVersion }}
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+
+    - run: pnpm install
+      shell: bash
