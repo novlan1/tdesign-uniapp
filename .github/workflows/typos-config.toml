@@ -4,6 +4,13 @@ default.check-filename = true
 actived = "actived"
 colum = "colum"
 loosing = "loosing"
+nd = and
 
 [files]
-extend-exclude = ["CHANGELOG*.md", "*.snap"]
+extend-exclude = [
+  "CHANGELOG*.md", 
+  "*.snap",
+  "packages/tdesign-app/common/uni.css",
+  "packages/tdesign-app/uni_modules/**/*",
+  "packages/tdesign/npm/**/*"
+]

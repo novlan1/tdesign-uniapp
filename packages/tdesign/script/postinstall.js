@@ -38,7 +38,7 @@ function main() {
   } else if (version.startsWith('3.')) {
     switchVersion(3);
   } else {
-    console.warn(`Vue version v${version} is not suppported.`);
+    console.warn(`Vue version v${version} is not supported.`);
   }
 }
 
