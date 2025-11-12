@@ -14,8 +14,12 @@ docClass: timeline
 - ci: 使用多种 CI @novlan1 ([#42](https://github.com/novlan1/tdesign-uniapp/pull/42))
 
 
-
 ## 🌈 0.5.2 `2025-11-10` 
 ### 🐞 Bug Fixes
 - `Popup`: 修复滚动穿透问题 @novlan1 ([#33](https://github.com/novlan1/tdesign-uniapp/pull/33))
-- `Tabs`: 修复 scroll-view 事件参数问题 @novlan1 ([#32](https://github.com/novlan1/tdesign-uniapp/pull/32))
+- `Tabs`: 修复 `scroll-view` 事件参数问题 @novlan1 ([#32](https://github.com/novlan1/tdesign-uniapp/pull/32))
+
+
+## 🌈 0.5.1 `2025-11-07` 
+### 🚀 Features
+- `PullDownRefresh`: 支持 `successDuration` 属性 @novlan1 ([#29](https://github.com/novlan1/tdesign-uniapp/pull/29))
