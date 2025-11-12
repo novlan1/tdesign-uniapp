@@ -1,0 +1,17 @@
+# 文件名建议统一为 preview-publish
+# 应用 preview.yml 的 demo
+name: PREVIEW_PUBLISH
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  # workflow_run:
+  #   workflows: ['MAIN_PULL_REQUEST']
+  #   types:
+  #     - completed
+
+jobs:
+  call-preview:
+    uses: ./.github/actions/preview
+    secrets:
+      TDESIGN_SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
