@@ -55,10 +55,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.PERSONAL_TOKEN }}
+          token: ${{ secrets.ACCESS_TOKEN }}
       - name: gh checkout pr
         env:
-          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: gh pr checkout ${{ github.event.issue.number }} --recurse-submodules
       - run: git submodule update --remote --merge
       - name: Commit Common
@@ -76,10 +76,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.PERSONAL_TOKEN }}
+          token: ${{ secrets.ACCESS_TOKEN }}
       - name: gh checkout pr
         env:
-          GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: gh pr checkout ${{ github.event.issue.number }} --recurse-submodules
       - uses: actions/setup-node@v4
         with:

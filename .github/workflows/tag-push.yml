@@ -48,7 +48,7 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
-          token: ${{ secrets.PERSONAL_TOKEN }}
+          token: ${{ secrets.ACCESS_TOKEN }}
           submodules: recursive
       - name: update official website
         run: |
