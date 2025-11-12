@@ -20,6 +20,21 @@ export const docs = [
         component: () => import('@/CHANGELOG.md'),
       },
       {
+        title: '组件概览',
+        titleEn: 'Overview',
+        name: 'overview',
+        path: '/tdesign-uniapp/overview',
+        component: () => import('@docs/overview.md'),
+        componentEn: () => import('@docs/overview.en-US.md'),
+      },
+    ],
+  },
+  {
+    title: '全局配置',
+    titleEn: 'Global Config',
+    type: 'document',
+    children: [
+       {
         title: '样式覆盖',
         titleEn: 'Custom Style',
         name: 'custom-style',
@@ -35,21 +50,6 @@ export const docs = [
         path: '/tdesign-uniapp/custom-theme',
         component: () => import('@docs/custom-theme.md'),
       },
-      {
-        title: '组件概览',
-        titleEn: 'Overview',
-        name: 'overview',
-        path: '/tdesign-uniapp/overview',
-        component: () => import('@docs/overview.md'),
-        componentEn: () => import('@docs/overview.en-US.md'),
-      },
-    ],
-  },
-  {
-    title: '全局配置',
-    titleEn: 'Global Config',
-    type: 'document',
-    children: [
       {
         title: '深色模式',
         titleEn: 'Dark Mode',
