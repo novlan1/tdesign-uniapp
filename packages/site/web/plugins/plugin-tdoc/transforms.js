@@ -5,7 +5,7 @@ import mdToVue from './md-to-vue';
 
 let demoCodesImports = {};
 
-export default {
+export default (mode) => ({
   before({ source, file }) {
     const resourceDir = path.dirname(file);
     const reg = file.match(/([\w-]+)\.?([\w-]+)?\.md/);
@@ -69,8 +69,9 @@ export default {
       source,
       demoCodesDefsStr,
       demoCodeInstallStr,
+      mode,
     });
 
     return sfc;
   },
-};
+});
