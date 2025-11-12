@@ -112,7 +112,7 @@ jobs:
       - name: comment
         uses: actions-cool/maintain-one-comment@v3
         with:
-          token: ${{ secrets.TDESIGN_BOT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           number: ${{needs.preview-context.outputs.pr_id}}
           body: ${{ steps.report.outputs.comment }}
           body-include: '<!-- AUTO_PREVIEW_HOOK -->'
