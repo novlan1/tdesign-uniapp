@@ -6,6 +6,15 @@ docClass: timeline
 ---
 
 
+## 🌈 0.5.3 `2025-11-12` 
+### 🐞 Bug Fixes
+- `Form`: 修复 `FormItem` 中 `padding` 错误问题 @novlan1
+### 🚧 Others
+- site: 使用 `history` 模式 @novlan1 ([#35](https://github.com/novlan1/tdesign-uniapp/pull/35))
+- ci: 使用多种 CI @novlan1 ([#42](https://github.com/novlan1/tdesign-uniapp/pull/42))
+
+
+
 ## 🌈 0.5.2 `2025-11-10` 
 ### 🐞 Bug Fixes
 - `Popup`: 修复滚动穿透问题 @novlan1 ([#33](https://github.com/novlan1/tdesign-uniapp/pull/33))
