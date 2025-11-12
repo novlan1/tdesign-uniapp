@@ -64,7 +64,6 @@ jobs:
           BODY: ${{ github.event.comment.body }}
         run: |
           txt=$(cat packages/tdesign/CHANGELOG.md)
-          chat_txt=$(cat packages/tdesign-chat/CHANGELOG.md)
           echo "${txt%%##*}$BODY${txt##*---}" > packages/tdesign/CHANGELOG.md
           git add .
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
