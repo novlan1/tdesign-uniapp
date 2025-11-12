@@ -12,13 +12,13 @@ export const docs = [
         component: () => import('@docs/getting-started.md'),
         componentEn: () => import('@docs/getting-started.en-US.md'),
       },
-      // {
-      //   title: '更新日志',
-      //   titleEn: 'CHANGELOG',
-      //   name: 'changelog',
-      //   path: '/tdesign-uniapp/changelog',
-      //   component: () => import('@/../CHANGELOG.md'),
-      // },
+      {
+        title: '更新日志',
+        titleEn: 'CHANGELOG',
+        name: 'changelog',
+        path: '/tdesign-uniapp/changelog',
+        component: () => import('@/CHANGELOG.md'),
+      },
       {
         title: '样式覆盖',
         titleEn: 'Custom Style',
