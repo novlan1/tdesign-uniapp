@@ -183,8 +183,13 @@ function customRender({ source, file, md }) {
     ).html;
   }
 
+  const prefixMap = {
+    preview: '/mobile',
+    development: 'http://localhost:11111/tdesign-uniapp/mobile',
+  }
+  
   // 移动端路由地址
-  const prefix = 'development' === process.env.NODE_ENV ? `http://localhost:11111/tdesign-uniapp/mobile` : `/tdesign-uniapp/mobile`;
+  const prefix = prefixMap[process.env.NODE_ENV] || `/tdesign-uniapp/mobile`;
   mdSegment.mobileUrl = `${prefix}#/pages-more/${componentName}/${componentName}`;
 
   // 设计指南内容 不展示 design Tab 则不解析
