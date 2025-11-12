@@ -18,7 +18,7 @@
     "site": "vite build",
     "build": "npm run site",
     "site:preview": "vite build --mode preview",
-    "postsite:preview": "cp _site/index.html _site/404.html"
+    "postsite:preview": "cp dist/index.html dist/404.html"
   },
   "engines": {
     "node": ">=12.0.0"
