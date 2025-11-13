@@ -1,10 +1,7 @@
 name: TAG_PUSH
 
-# on: create
-on:
- push:
-   branches:
-   - feature/docs-badge
+on: create
+
 
 jobs:
   TAG_PUSH:
@@ -12,7 +9,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    # if: github.event.ref_type == 'tag'
+    if: github.event.ref_type == 'tag'  
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/install-dep
