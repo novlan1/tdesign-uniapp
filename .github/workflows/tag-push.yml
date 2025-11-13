@@ -19,10 +19,10 @@ jobs:
       - run: pnpm run build:mp
         shell: bash
       - name: release miniprogram
-        uses: LeeJim/setup-miniprogram@main
+        uses: novlan1/setup-miniprogram@main
         with:
           project_type: miniProgram
-          action_type: upload
+          action_type: upload,preview
           project_path: ./packages/demo/dist/build/mp-weixin
           version: ${{ github.ref_name || '1.0.0' }}
           es6: true
