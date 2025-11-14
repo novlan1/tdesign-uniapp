@@ -6,6 +6,12 @@ docClass: timeline
 ---
 
 
+## 🌈 0.5.4 `2025-11-14` 
+### 🐞 Bug Fixes
+- `DropdownMenu`: 修复使用自带导航栏时的高度错误 @novlan1 ([#56](https://github.com/novlan1/tdesign-uniapp/pull/56))
+
+
+
 ## 🌈 0.5.3 `2025-11-12` 
 ### 🐞 Bug Fixes
 - `Form`: 修复 `FormItem` 中 `padding` 错误问题 @novlan1
