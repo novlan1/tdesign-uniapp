@@ -4,8 +4,14 @@
       :value="enable"
       :loading-texts="['下拉刷新', '松手刷新', '正在刷新', '刷新完成']"
       :using-custom-navbar="!isMPAlipay"
+      :success-duration="600"
       @refresh="onRefresh"
       @scroll="onScroll"
+      @dragstart="onDragstart"
+      @dragging="onDragging"
+      @dragend="onDragend"
+      @scrolltolower="onScrolltolower"
+      @timeout="onTimeout"
     >
       <!-- 包裹页面全部内容 -->
       <view class="demo">
@@ -127,6 +133,26 @@ export default {
     onScroll(e) {
       const { scrollTop } = e;
       this.scrollTop = scrollTop;
+    },
+
+    onDragstart(e) {
+      console.log('[onDragstart]', e);
+    },
+
+    onDragging(e) {
+      console.log('[onDragging]', e);
+    },
+
+    onDragend(e) {
+      console.log('[onDragend]', e);
+    },
+
+    onScrolltolower(e) {
+      console.log('[onScrolltolower]', e);
+    },
+
+    onTimeout(e) {
+      console.log('[onTimeout]', e);
     },
   },
 };

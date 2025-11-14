@@ -29,9 +29,9 @@ default-value | Boolean | false | uncontrolled property | N
 name | params | description
 -- | -- | --
 change | `(context: { value: boolean })` | \-
-dragend | `(context: { scrollTop: number, scrollLeft: number })` | \-
-dragging | `(context: { scrollTop: number, scrollLeft: number })` | \-
-dragstart | `(context: { scrollTop: number, scrollLeft: number })` | \-
+dragend | `(context: TouchEvent)` | \-
+dragging | `(context: TouchEvent)` | \-
+dragstart | `(context: TouchEvent)` | \-
 refresh | \- | \-
 scrolltolower | \- | \-
 timeout | \- | \-

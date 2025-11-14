@@ -94,15 +94,15 @@ export interface TdPullDownRefreshProps {
   /**
    * 滑动结束事件
    */
-  onDragend?: (context: { scrollTop: number; scrollLeft: number }) => void;
+  onDragend?: (context: TouchEvent) => void;
   /**
    * 滑动事件
    */
-  onDragging?: (context: { scrollTop: number; scrollLeft: number }) => void;
+  onDragging?: (context: TouchEvent) => void;
   /**
    * 滑动开始事件
    */
-  onDragstart?: (context: { scrollTop: number; scrollLeft: number }) => void;
+  onDragstart?: (context: TouchEvent) => void;
   /**
    * 结束下拉时触发
    */
