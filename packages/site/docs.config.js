@@ -27,6 +27,13 @@ export const docs = [
         component: () => import('@docs/overview.md'),
         componentEn: () => import('@docs/overview.en-US.md'),
       },
+      {
+        title: '常见问题',
+        titleEn: 'FAQ',
+        name: 'faq',
+        path: '/tdesign-uniapp/faq',
+        component: () => import('@docs/faq.md'),
+      },
     ],
   },
   {
@@ -34,7 +41,7 @@ export const docs = [
     titleEn: 'Global Config',
     type: 'document',
     children: [
-       {
+      {
         title: '样式覆盖',
         titleEn: 'Custom Style',
         name: 'custom-style',
