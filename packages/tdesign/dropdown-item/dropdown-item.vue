@@ -125,7 +125,7 @@ import tPopup from '../popup/popup';
 
 import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
-import { coalesce, getRect } from '../common/utils';
+import { coalesce, getRect, getWindowInfo } from '../common/utils';
 import props from './props';
 import menuProps from '../dropdown-menu/props';
 import _ from '../common/utils.wxs';
@@ -188,6 +188,8 @@ export default uniComponent({
 
       wrapperVisible: false,
       _,
+
+      windowTop: 0,
     };
   },
   computed: {
@@ -288,7 +290,8 @@ export default uniComponent({
     },
   },
   mounted() {
-
+    const {  windowTop } = getWindowInfo();
+    this.windowTop = windowTop || 0;
   },
   methods: {
     getStyles,
@@ -310,7 +313,7 @@ export default uniComponent({
 
     getParentBottom(cb) {
       getRect(this[RELATION_MAP.DropdownItem], `#${prefix}-bar`).then((rect) => {
-        this.top = rect.bottom;
+        this.top = rect.bottom + (this.windowTop || 0);
         this.maskHeight = rect.top;
 
         setTimeout(() => {
