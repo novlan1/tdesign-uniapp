@@ -65,8 +65,6 @@ uniapp 给的脚手架工程配置有问题，`src/env.d.ts` 文件的 `vue` 声
 
 <img src="https://mike-1255355338.cos.ap-guangzhou.myqcloud.com/article/2025/11/own_mike_Askm5PSWT8rMmh3G.png" width="600" />
 
-<<<<<<< Updated upstream
-这里有一个开箱即用的 uniapp Vue3 [脚手架项目](https://github.com/novlan1/tdesign-uniapp-demo-cli)，支持自动导入、类型提示等，你可以打开看看。
-=======
 另外，它这个脚手架太老了，自己的 `tsconfig.json` 还飘红，升级下 `@vue/tsconfig` 可解决。
->>>>>>> Stashed changes
+
+这里有一个开箱即用的 uniapp Vue3 [脚手架项目](https://github.com/novlan1/tdesign-uniapp-demo-cli)，支持自动导入、类型提示等，你可以打开看看。
