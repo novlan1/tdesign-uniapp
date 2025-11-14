@@ -11,6 +11,9 @@
       ],
       "tdesign-site/*": [
         "packages/demo/*"
+      ],
+      "tdesign-uniapp-chat/*": [
+        "packages/tdesign-uniapp-chat/*"
       ]
     },
     "lib": [

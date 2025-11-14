@@ -6,6 +6,28 @@ const { copy } = require('./core');
 const { deleteFolder } = require('t-comm');
 
 
+async function copyOneProject({
+  globMode,
+  sourceDir,
+}) {
+  const list = glob.sync(globMode, {
+    ignore: '**/node_modules/**/*',
+    nodir: true,
+  });
+
+  for (const item of list) {
+    const relativePath = path.relative(sourceDir, item);
+    await copy({
+      relativePath,
+      filePath: item,
+      config,
+    });
+  }
+
+  console.log(`[Wrote] done! Length is ${list.length}!`);
+}
+
+
 async function main() {
   deleteFolder(config.targetDir);
   deleteFolder(config.rawTargetDir);
@@ -16,20 +38,14 @@ async function main() {
   deleteFolder(config.appPagesMoreDir);
   deleteFolder(config.appPagesDir);
 
-  const list = glob.sync(config.sourceGlob, {
-    ignore: '**/node_modules/**/*',
-    nodir: true,
+  await copyOneProject({
+    globMode: config.sourceGlob,
+    sourceDir: config.sourceDir,
   });
-
-  for (const item of list) {
-    const relativePath = path.relative(config.sourceDir, item);
-    await copy({
-      relativePath,
-      filePath: item,
-      config,
-    });
-  }
-  console.log(`[Wrote] done! Length is ${list.length}!`);
+  await copyOneProject({
+    globMode: config.chatSourceGlob,
+    sourceDir: config.chatSourceDir,
+  });
 
   await copyDemoPagesToApp();
 }

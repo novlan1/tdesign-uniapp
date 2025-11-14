@@ -7,6 +7,9 @@ const rpxTransform = require('postcss-rpx-transform');
 const CONFIG = {
   whiteList: [
     path.resolve(process.cwd(), 'packages/tdesign/common/style/theme/index.less'),
+    path.resolve(process.cwd(), 'packages/tdesign/common/style/base.less'),
+    path.resolve(process.cwd(), 'packages/tdesign/common/style/_variables.less'),
+    path.resolve(process.cwd(), 'packages/tdesign/common/style/mixins/'),
     path.resolve(process.cwd(), 'packages/tdesign/common/style/theme/raw/'),
   ],
 };
@@ -26,7 +29,9 @@ async function processLess(inputFile, rawOutputFile, rawOutputFileInApp) {
   }
 
   try {
-    const lessCode = fs.readFileSync(inputFile, 'utf8');
+    let lessCode = fs.readFileSync(inputFile, 'utf8');
+
+    lessCode = lessCode.replace('@import \'tdesign-uniapp/common/style/base.less\'', '@import \'../common/style/base.less\'');
 
     const cssResult = await less.render(lessCode, {
       // 设置导入路径

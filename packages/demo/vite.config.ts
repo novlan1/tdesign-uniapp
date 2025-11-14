@@ -21,6 +21,8 @@ const baseAlias = {
   packages: path.resolve(__dirname, '../').replace(/\\/g, '/'),
   'tdesign-uniapp-raw': path.resolve(__dirname, './src/_tdesign-raw').replace(/\\/g, '/'),
   'tdesign-uniapp': path.resolve(__dirname, './src/_tdesign').replace(/\\/g, '/'),
+  // TODO:
+  'tdesign-uniapp-chat': path.resolve(__dirname, './src/_tdesign').replace(/\\/g, '/'),
 };
 const ENV_PREFIX = ['VITE_', 'VUE_APP'];
 const root: string = process.cwd();
