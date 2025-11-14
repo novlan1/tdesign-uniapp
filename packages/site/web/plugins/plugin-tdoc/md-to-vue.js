@@ -18,6 +18,17 @@ const DEFAULT_EN_TABS = [
   { tab: 'design', name: 'Guideline' },
 ];
 
+
+function getMobilePrefix(mode) {
+  if (mode === 'preview') {
+    return '/mobile';
+  }
+  if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:11111/tdesign-uniapp/mobile';
+  }
+  return '/tdesign-uniapp/mobile';
+}
+
 export default function mdToVue(options) {
   const mdSegment = customRender(options);
   const { demoCodesDefsStr, demoCodeInstallStr } = options;
@@ -127,10 +138,8 @@ export default function mdToVue(options) {
 }
 
 // 解析 markdown 内容
-function customRender({ source, file, md }) {
-  console.log('file: ', file)
+function customRender({ source, file, md, mode }) {
   const { content, data } = matter(source);
-  // console.log('data', data);
   const isEn = file.endsWith('en-US.md');
   // md top data
   const pageData = {
@@ -184,13 +193,12 @@ function customRender({ source, file, md }) {
   }
 
   // 移动端路由地址
-  const prefix = 'development' === process.env.NODE_ENV ? `http://localhost:11111/tdesign-uniapp/mobile` : `/tdesign-uniapp/mobile`;
+  const prefix = getMobilePrefix(mode);
   mdSegment.mobileUrl = `${prefix}#/pages-more/${componentName}/${componentName}`;
 
   // 设计指南内容 不展示 design Tab 则不解析
   if (pageData.isComponent && pageData.tdDocTabs.some((item) => item.tab === 'design')) {
     const designDocPath = path.resolve(__dirname, `../../../docs/design/${componentName}.md`);
-    console.log('designDocPath', designDocPath)
 
     if (fs.existsSync(designDocPath)) {
       const designMd = fs.readFileSync(designDocPath, 'utf-8');

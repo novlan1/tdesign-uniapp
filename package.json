@@ -35,6 +35,7 @@
     "build:mp-jd": "pnpm --filter=\"./packages/demo\" build:mp-jd",
     "build:mp-baidu": "pnpm --filter=\"./packages/demo\" build:mp-baidu",
     "build:mp": "npm run build:mp-weixin",
+    "preview": "pnpm --filter=\"./packages/site\" run site:preview && pnpm --filter=\"./packages/demo\" build:h5",
     "type-check": "vue-tsc --noEmit",
     "init": "node packages/demo/script/watch/init.js && node packages/demo/script/pages/index.js",
     "watch": "node packages/demo/script/watch/watch.js",

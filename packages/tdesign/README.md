@@ -15,6 +15,12 @@
   <a href="https://www.npmjs.com/package/tdesign-uniapp">
     <img src="https://img.shields.io/npm/dm/tdesign-uniapp" alt="Downloads">
   </a>
+  <a href="https://pkg.pr.new/~/novlan1/tdesign-uniapp">
+    <img src="https://pkg.pr.new/badge/novlan1/tdesign-uniapp?style=flat&color=000&logoSize=auto" alt="Downloads">
+  </a>
+  <a href="https://deepwiki.com/novlan1/tdesign-uniapp">
+    <img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki">
+  </a>
 </p>
 
 [TDesign](https://github.com/Tencent/tdesign) 适配 [uniapp](https://uniapp.dcloud.net.cn/) 的组件库。

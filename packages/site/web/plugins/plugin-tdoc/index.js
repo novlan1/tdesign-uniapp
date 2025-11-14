@@ -1,10 +1,10 @@
 import vue from '@vitejs/plugin-vue';
 import vitePluginTdoc from 'vite-plugin-tdoc';
 
-import transforms from './transforms';
+import getTransforms from './transforms';
 import renderDemo from './demo';
 
-export default () =>
+export default (mode) =>
   vitePluginTdoc({
     plugins: [
       vue({
@@ -17,7 +17,7 @@ export default () =>
         },
       }),
     ],
-    transforms, // 解析markdown 数据
+    transforms: getTransforms(mode), // 解析markdown 数据
     markdown: {
       anchor: {
         tabIndex: false,

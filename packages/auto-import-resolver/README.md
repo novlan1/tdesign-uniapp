@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Tencent/tdesign-vue-next/blob/develop/packages/auto-import-resolver/LICENSE">
+  <a href="https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/auto-import-resolver/LICENSE">
     <img src="https://img.shields.io/npm/l/tdesign-uniapp-auto-import-resolver.svg?sanitize=true" alt="License">
   </a>
   <a href="https://www.npmjs.com/package/tdesign-uniapp-auto-import-resolver">

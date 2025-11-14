@@ -84,7 +84,7 @@ export default ({ mode }) => {
       vueJsx({
         isCustomElement,
       }),
-      tdocPlugin(),
+      tdocPlugin(mode),
       // changelog2Json(),
       disableTreeShakingPlugin(['style/', 'toast/']),
     ],
