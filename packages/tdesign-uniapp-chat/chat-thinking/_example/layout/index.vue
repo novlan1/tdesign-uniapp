@@ -1,35 +1,35 @@
 <template>
   <view>
-    <block>
-      <view class="chat-example-desc">
-        block 样式
-      </view>
-      <view class="chat-example-block">
-        <t-chat-thinking
-          layout="block"
-          :content="content"
-          :status="status"
-          :animation="animation"
-        />
-      </view>
+    <view class="chat-example-desc">
+      block 样式
+    </view>
+    <view class="chat-example-block">
+      <t-chat-thinking
+        layout="block"
+        :content="content"
+        :status="status"
+        :animation="animation"
+      />
+    </view>
 
-      <view class="chat-example-desc">
-        border 样式
-      </view>
-      <view class="chat-example-block">
-        <t-chat-thinking
-          layout="border"
-          :content="content"
-          :status="status"
-          :animation="animation"
-        />
-      </view>
-    </block>
+    <view class="chat-example-desc">
+      border 样式
+    </view>
+    <view class="chat-example-block">
+      <t-chat-thinking
+        layout="border"
+        :content="content"
+        :status="status"
+        :animation="animation"
+      />
+    </view>
   </view>
 </template>
 
 <script>
 import tChatThinking from 'tdesign-uniapp-chat/chat-thinking/chat-thinking.vue';
+
+
 export default {
   components: {
     tChatThinking,

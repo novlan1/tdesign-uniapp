@@ -14,7 +14,7 @@
       />
       <t-demo
         title="01 组件类型"
-        desc="支持多种加载动效类型，包括gradient、moving、dots"
+        desc="支持多种加载动效类型，包括 gradient、moving、dots"
       >
         <baseDemo />
       </t-demo>

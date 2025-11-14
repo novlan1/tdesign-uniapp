@@ -12,3 +12,4 @@ miniprogram_npm/
 packages/tdesign/npm/
 
 *.html
+!.stylelintrc.js

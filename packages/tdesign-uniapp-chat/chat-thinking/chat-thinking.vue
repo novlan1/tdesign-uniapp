@@ -61,10 +61,6 @@ export default uniComponent({
 
   props: {
     ...props,
-    inChat: {
-      type: Boolean,
-      default: false,
-    },
   },
 
   data() {
@@ -94,6 +90,7 @@ export default uniComponent({
       this.localCollapsed = this.collapsed || false;
     };
     createdFn.call(this);
+
 
     // 调用新增的函数
     this.setContentStyle();

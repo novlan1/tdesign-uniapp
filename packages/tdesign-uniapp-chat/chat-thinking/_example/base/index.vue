@@ -32,105 +32,93 @@ export default {
       startTime: 0,
     };
   },
-  //   mounted() {
-  //     // 处理小程序 attached 生命周期
-  //     this.attached();
-  //   },
-  //   unmounted() {
-  //     if (this.typingTimer) {
-  //       clearTimeout(this.typingTimer);
-  //     }
-  //   },
+  mounted() {
+    // 处理小程序 attached 生命周期
+    this.attached();
+  },
+  unmounted() {
+    if (this.typingTimer) {
+      clearTimeout(this.typingTimer);
+    }
+  },
   created() {},
   methods: {
-    // attached() {
-    //   this.setData({
-    //     startTime: Date.now(),
-    //   });
-    //   this.startTyping();
-    // },
+    attached() {
+      this.startTime = Date.now();
 
-    // startTyping() {
-    //   const { fullText, typeSpeed } = this;
-    //   let currentIndex = 0;
-    //   const typeNextChar = () => {
-    //     if (currentIndex <= fullText.length) {
-    //       const currentText = fullText.substring(0, currentIndex);
-    //       // 检查是否已经完成打字
-    //       if (currentIndex === fullText.length) {
-    //         const endTime = Date.now();
-    //         const duration = Math.round((endTime - this.startTime) / 1000);
-    //         this.setData({
-    //           currentText,
-    //           content: {
-    //             text: currentText,
-    //             title: `已完成思考（耗时${duration}秒）`,
-    //           },
-    //           isTyping: false,
-    //           status: 'complete',
-    //         });
-    //         return; // 直接返回，不再继续执行
-    //       }
-    //       // 正常打字过程
-    //       this.setData({
-    //         currentText,
-    //         content: {
-    //           text: currentText,
-    //           title: '思考过程',
-    //         },
-    //         isTyping: currentIndex < fullText.length,
-    //       });
-    //       if (currentIndex < fullText.length) {
-    //         this.typingTimer = setTimeout(typeNextChar, typeSpeed);
-    //       }
-    //       currentIndex += 1;
-    //     }
-    //   };
-    //   typeNextChar();
-    // },
+      this.startTyping();
+    },
 
-    // replayTyping() {
-    //   if (this.typingTimer) {
-    //     clearTimeout(this.typingTimer);
-    //   }
-    //   this.setData({
-    //     currentText: '',
-    //     content: {
-    //       text: '',
-    //       title: '思考过程',
-    //     },
-    //     isTyping: true,
-    //     startTime: Date.now(),
-    //   });
-    //   this.startTyping();
-    // },
+    startTyping() {
+      const { fullText, typeSpeed } = this;
+      let currentIndex = 0;
+      const typeNextChar = () => {
+        if (currentIndex <= fullText.length) {
+          const currentText = fullText.substring(0, currentIndex);
+          // 检查是否已经完成打字
+          if (currentIndex === fullText.length) {
+            const endTime = Date.now();
+            const duration = Math.round((endTime - this.startTime) / 1000);
 
-    // onStop() {
-    //   console.log('停止思考');
-    //   this.setData({
-    //     thinking: false,
-    //   });
-    //   uni.showToast({
-    //     title: '已停止思考',
-    //     icon: 'success',
-    //   });
-    // },
+            this.currentText = currentText;
+            this.content = {
+              text: currentText,
+              title: `已完成思考（耗时${duration}秒）`,
+            };
+            this.isTyping = false;
+            this.status = 'complete';
+            return; // 直接返回，不再继续执行
+          }
+          // 正常打字过程
+          this.currentText = currentText;
+          this.content = {
+            text: currentText,
+            title: '思考过程',
+          };
+          this.isTyping = currentIndex < fullText.length;
+          if (currentIndex < fullText.length) {
+            this.typingTimer = setTimeout(typeNextChar, typeSpeed);
+          }
+          currentIndex += 1;
+        }
+      };
+      typeNextChar();
+    },
 
-    // toggleThinking() {
-    //   this.setData({
-    //     thinking: !this.thinking,
-    //   });
-    // },
+    replayTyping() {
+      if (this.typingTimer) {
+        clearTimeout(this.typingTimer);
+      }
+      this.currentText = '';
+      this.content = {
+        text: '',
+        title: '思考过程',
+      };
+      this.isTyping = true;
+      this.startTime = Date.now();
+      this.startTyping();
+    },
 
-    // resetThinking() {
-    //   this.setData({
-    //     thinking: true,
-    //   });
-    //   uni.showToast({
-    //     title: '已重置',
-    //     icon: 'success',
-    //   });
-    // },
+    onStop() {
+      console.log('停止思考');
+      this.thinking = false;
+      uni.showToast({
+        title: '已停止思考',
+        icon: 'success',
+      });
+    },
+
+    toggleThinking() {
+      this.thinking = !this.thinking;
+    },
+
+    resetThinking() {
+      this.thinking = true;
+      uni.showToast({
+        title: '已重置',
+        icon: 'success',
+      });
+    },
 
     handleExpandChange() {
       console.log('占位：函数 handleExpandChange 未声明');

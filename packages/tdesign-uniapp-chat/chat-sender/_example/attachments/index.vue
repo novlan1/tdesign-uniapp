@@ -1,296 +1,310 @@
 <template>
-    <view>
-        <view :class="'demo-attachments-container ' + (showUploadMenu ? 'show-upload-menu' : '')">
-            <view class="chat-sender-demo-wrapper">
-                <view class="chat-sender-height-limit">
-                    <view class="chat-sender-height-left-limit"></view>
-                    <view class="chat-sender-height-right-limit"></view>
-                </view>
-                <view class="chat-sender-placeholder">高度限制：最大高度为132px</view>
-                <view class="chat-sender-wrapper" :style="showUploadMenu ? 'bottom:32rpx;' : ''">
-                    <t-chat-sender
-                        :value="value"
-                        :loading="loading"
-                        :disabled="disabled"
-                        :placeholder="placeholder"
-                        :textareaProps="textareaProps"
-                        :fileList="fileList"
-                        :attachmentsProps="attachmentsProps"
-                        :renderPresets="renderPresets"
-                        :visible="visible"
-                        @send="onSend"
-                        @stop="onStop"
-                        @focus="onFocus"
-                        @blur="onBlur"
-                        @change="onChange"
-                        @uploadClick="onUploadClick"
-                        @fileClick="onFileClick"
-                        @fileDelete="onFileDelete"
-                        @fileChange="onFileChange"
-                        @fileAdd="onFileAdd"
-                        @fileSelect="onFileSelect"
-                        @updateVisible="onUpdateVisible"
-                        @keyboardheightchange="onKeyboardHeightChange"
-                    >
-                        <view slot="footer-prefix" class="demo-footer-prefix">
-                            <view :class="'deep-think-block ' + (deepThinkActive ? 'active' : '')" @tap="onDeepThinkTap">
-                                <t-icon name="system-sum" size="40rpx" />
-                                <text class="deep-think-text">深度思考</text>
-                            </view>
-                            <view :class="'net-search-block ' + (netSearchActive ? 'active' : '')" @tap="onNetSearchTap">
-                                <t-icon name="internet" size="40rpx" />
-                            </view>
-                        </view>
-                    </t-chat-sender>
-                </view>
-                <view v-if="!visible" class="demo-attachments-footer">内容由AI生成，仅供参考</view>
-            </view>
+  <view>
+    <view :class="'demo-attachments-container ' + (showUploadMenu ? 'show-upload-menu' : '')">
+      <view class="chat-sender-demo-wrapper">
+        <view class="chat-sender-height-limit">
+          <view class="chat-sender-height-left-limit" />
+          <view class="chat-sender-height-right-limit" />
         </view>
-        <t-toast id="t-toast" />
+        <view class="chat-sender-placeholder">
+          高度限制：最大高度为132px
+        </view>
+        <view
+          class="chat-sender-wrapper"
+          :style="showUploadMenu ? 'bottom:32rpx;' : ''"
+        >
+          <t-chat-sender
+            :value="value"
+            :loading="loading"
+            :disabled="disabled"
+            :placeholder="placeholder"
+            :textarea-props="textareaProps"
+            :file-list="fileList"
+            :attachments-props="attachmentsProps"
+            :render-presets="renderPresets"
+            :visible="visible"
+            @send="onSend"
+            @stop="onStop"
+            @focus="onFocus"
+            @blur="onBlur"
+            @change="onChange"
+            @uploadClick="onUploadClick"
+            @fileClick="onFileClick"
+            @fileDelete="onFileDelete"
+            @fileChange="onFileChange"
+            @fileAdd="onFileAdd"
+            @fileSelect="onFileSelect"
+            @updateVisible="onUpdateVisible"
+            @keyboardheightchange="onKeyboardHeightChange"
+          >
+            <template
+              #footer-prefix
+            >
+              <view
+                class="demo-footer-prefix"
+              >
+                <view
+                  :class="'deep-think-block ' + (deepThinkActive ? 'active' : '')"
+                  @tap="onDeepThinkTap"
+                >
+                  <t-icon
+                    name="system-sum"
+                    size="40rpx"
+                  />
+                  <text class="deep-think-text">
+                    深度思考
+                  </text>
+                </view>
+                <view
+                  :class="'net-search-block ' + (netSearchActive ? 'active' : '')"
+                  @tap="onNetSearchTap"
+                >
+                  <t-icon
+                    name="internet"
+                    size="40rpx"
+                  />
+                </view>
+              </view>
+            </template>
+          </t-chat-sender>
+        </view>
+        <view
+          v-if="!visible"
+          class="demo-attachments-footer"
+        >
+          内容由AI生成，仅供参考
+        </view>
+      </view>
     </view>
+    <t-toast id="t-toast" />
+  </view>
 </template>
 
 <script>
-import tNavbar from 'tdesign-uniapp/navbar/navbar';
-import tChatSender from 'tdesign-uniapp/chat-sender/chat-sender';
-import tToast from 'tdesign-uniapp/toast/toast';
+import tChatSender from 'tdesign-uniapp-chat/chat-sender/chat-sender.vue';
+import tToast from 'tdesign-uniapp/toast/toast.vue';
 import Toast from 'tdesign-uniapp/toast';
+import tIcon from 'tdesign-uniapp/icon/icon.vue';
+
 export default {
-    components: {
-        tNavbar,
-        tChatSender,
-        tToast
-    },
-    data() {
-        return {
-            value: '',
-            loading: false,
-            disabled: false,
-            fileList: [
-                {
-                    fileType: 'image',
-                    name: '图片1.png',
-                    url: 'https://tdesign.gtimg.com/site/square.png'
-                },
-                {
-                    fileType: 'pdf',
-                    name: '文档.pdf',
-                    url: 'https://example.com/document.pdf',
-                    size: 3072,
-                    status: 'pending'
-                }
-            ],
-            visible: true,
-            placeholder: '请输入消息...',
-            textareaProps: {
-                autosize: {
-                    maxHeight: 264,
-                    minHeight: 48 // 设置为0时，用自动计算height的高度
-                } // 默认为false
-            },
-            attachmentsProps: {
-                items: [
-                    {
-                        fileType: 'image',
-                        name: '图片1.png',
-                        url: 'https://tdesign.gtimg.com/site/square.png'
-                    },
-                    {
-                        fileType: 'pdf',
-                        name: '文档.pdf',
-                        url: 'https://example.com/document.pdf',
-                        size: 3072,
-                        status: 'pending'
-                    }
-                ],
-                removable: true,
-                imageViewer: true,
-                addable: false
-            },
-            renderPresets: [
-                {
-                    name: 'upload',
-                    presets: ['uploadCamera', 'uploadImage', 'uploadAttachment'],
-                    type: 'bottom',
-                    status: ''
-                },
-                {
-                    name: 'send',
-                    type: 'icon'
-                }
-            ],
-            deepThinkActive: false,
-            netSearchActive: false,
-            showUploadMenu: true
-        };
-    },
-    methods: {
-        // 发送消息
-        onSend(e) {
-            const { value } = e.detail;
-            console.log('发送消息:', value);
-            if (!value.trim()) {
-                uni.showToast({
-                    title: '请输入消息内容',
-                    icon: 'none'
-                });
-                return;
-            }
-
-            // 模拟发送状态
-            this.setData({
-                loading: true
-            });
-            setTimeout(() => {
-                if (this.loading) {
-                    this.setData({
-                        loading: false,
-                        value: '' // 清空输入框
-                    });
-                    uni.showToast({
-                        title: '发送成功',
-                        icon: 'success'
-                    });
-                }
-            }, 3000);
+  components: {
+    tChatSender,
+    tToast,
+    tIcon,
+  },
+  data() {
+    return {
+      value: '',
+      loading: false,
+      disabled: false,
+      fileList: [
+        {
+          fileType: 'image',
+          name: '图片1.png',
+          url: 'https://tdesign.gtimg.com/site/square.png',
         },
-
-        // 停止发送
-        onStop(e) {
-            const { value } = e.detail;
-            console.log('停止发送:', value);
-            this.setData({
-                loading: false
-            });
-            uni.showToast({
-                title: '已停止发送',
-                icon: 'none'
-            });
+        {
+          fileType: 'pdf',
+          name: '文档.pdf',
+          url: 'https://example.com/document.pdf',
+          size: 3072,
+          status: 'pending',
         },
-
-        // 输入框聚焦
-        onFocus(e) {
-            const { value, context } = e.detail;
-            console.log('输入框聚焦:', value, context);
+      ],
+      visible: true,
+      placeholder: '请输入消息...',
+      textareaProps: {
+        autosize: {
+          maxHeight: 264,
+          minHeight: 48, // 设置为0时，用自动计算height的高度
+        }, // 默认为false
+      },
+      attachmentsProps: {
+        items: [
+          {
+            fileType: 'image',
+            name: '图片1.png',
+            url: 'https://tdesign.gtimg.com/site/square.png',
+          },
+          {
+            fileType: 'pdf',
+            name: '文档.pdf',
+            url: 'https://example.com/document.pdf',
+            size: 3072,
+            status: 'pending',
+          },
+        ],
+        removable: true,
+        imageViewer: true,
+        addable: false,
+      },
+      renderPresets: [
+        {
+          name: 'upload',
+          presets: ['uploadCamera', 'uploadImage', 'uploadAttachment'],
+          type: 'bottom',
+          status: '',
         },
-
-        // 输入框失焦
-        onBlur(e) {
-            const { value, context } = e.detail;
-            console.log('输入框失焦:', value, context);
+        {
+          name: 'send',
+          type: 'icon',
         },
+      ],
+      deepThinkActive: false,
+      netSearchActive: false,
+      showUploadMenu: true,
+    };
+  },
+  methods: {
+    // 发送消息
+    onSend(e) {
+      const { value } = e;
+      console.log('发送消息:', value);
+      if (!value.trim()) {
+        uni.showToast({
+          title: '请输入消息内容',
+          icon: 'none',
+        });
+        return;
+      }
 
-        // 输入内容变化
-        onChange(e) {
-            const { value } = e.detail;
-            console.log('输入内容变化:', value);
-            this.setData({
-                value
-            });
-        },
+      // 模拟发送状态
+      this.loading = true;
 
-        // 点击上传按钮
-        onUploadClick() {
-            console.log('点击上传按钮');
-        },
+      setTimeout(() => {
+        if (this.loading) {
+          this.loading = false;
+          this.value = '';// 清空输入框
 
-        // 点击文件
-        onFileClick(e) {
-            const { file } = e.detail;
-            console.log('点击文件:', file);
-            uni.showToast({
-                title: `点击了文件: ${file.name}`,
-                icon: 'none'
-            });
-        },
-
-        // 删除文件
-        onFileDelete(e) {
-            const { file } = e.detail;
-            console.log('删除文件:', file);
-            uni.showToast({
-                title: '文件删除成功',
-                icon: 'success'
-            });
-        },
-
-        // 文件列表变化
-        onFileChange(e) {
-            const { files } = e.detail;
-            console.log('文件列表变化:', files);
-            this.setData({
-                attachmentsProps: {
-                    ...this.attachmentsProps,
-                    items: files
-                }
-            });
-            this.setData({
-                fileList: files
-            });
-        },
-
-        // 添加文件
-        onFileAdd() {
-            console.log('添加文件');
-        },
-
-        // 选择文件
-        onFileSelect(e) {
-            const { name, files } = e.detail;
-            console.log('选择文件:', name, files);
-            uni.showToast({
-                title: `选择了${files.length}个文件`,
-                icon: 'success'
-            });
-        },
-
-        // 上传面板显示状态变化
-        onUpdateVisible() {
-            Toast({
-                context: this,
-                selector: '#t-toast',
-                message: '暂不可操作'
-            });
-        },
-
-        // 键盘高度变化
-        onKeyboardHeightChange(e) {
-            console.log('键盘高度变化:', e.detail);
-        },
-
-        // 切换禁用状态
-        toggleDisabled() {
-            this.setData({
-                disabled: !this.disabled
-            });
-        },
-
-        // 切换加载状态
-        toggleLoading() {
-            this.setData({
-                loading: !this.loading
-            });
-        },
-
-        // 清空输入框
-        clearInput() {
-            this.setData({
-                value: ''
-            });
-        },
-
-        onDeepThinkTap() {
-            this.setData({
-                deepThinkActive: !this.deepThinkActive
-            });
-        },
-
-        onNetSearchTap() {
-            this.setData({
-                netSearchActive: !this.netSearchActive
-            });
+          uni.showToast({
+            title: '发送成功',
+            icon: 'success',
+          });
         }
-    }
+      }, 3000);
+    },
+
+    // 停止发送
+    onStop(e) {
+      const { value } = e;
+      console.log('停止发送:', value);
+      this.loading = false;
+
+      uni.showToast({
+        title: '已停止发送',
+        icon: 'none',
+      });
+    },
+
+    // 输入框聚焦
+    onFocus(e) {
+      const { value, context } = e;
+      console.log('输入框聚焦:', value, context);
+    },
+
+    // 输入框失焦
+    onBlur(e) {
+      const { value, context } = e;
+      console.log('输入框失焦:', value, context);
+    },
+
+    // 输入内容变化
+    onChange(e) {
+      const { value } = e;
+      console.log('输入内容变化:', value);
+
+      this.value = value;
+    },
+
+    // 点击上传按钮
+    onUploadClick() {
+      console.log('点击上传按钮');
+    },
+
+    // 点击文件
+    onFileClick(e) {
+      const { file } = e;
+      console.log('点击文件:', file);
+      uni.showToast({
+        title: `点击了文件: ${file.name}`,
+        icon: 'none',
+      });
+    },
+
+    // 删除文件
+    onFileDelete(e) {
+      const { file } = e;
+      console.log('删除文件:', file);
+      uni.showToast({
+        title: '文件删除成功',
+        icon: 'success',
+      });
+    },
+
+    // 文件列表变化
+    onFileChange(e) {
+      const { files } = e;
+      console.log('文件列表变化:', files);
+      this.attachmentsProps = {
+        ...this.attachmentsProps,
+        items: files,
+      };
+
+      this.fileList = files;
+    },
+
+    // 添加文件
+    onFileAdd() {
+      console.log('添加文件');
+    },
+
+    // 选择文件
+    onFileSelect(e) {
+      const { name, files } = e;
+      console.log('选择文件:', name, files);
+      uni.showToast({
+        title: `选择了${files.length}个文件`,
+        icon: 'success',
+      });
+    },
+
+    // 上传面板显示状态变化
+    onUpdateVisible() {
+      Toast({
+        context: this,
+        selector: '#t-toast',
+        message: '暂不可操作',
+      });
+    },
+
+    // 键盘高度变化
+    onKeyboardHeightChange(e) {
+      console.log('键盘高度变化:', e);
+    },
+
+    // 切换禁用状态
+    toggleDisabled() {
+      this.disabled = !this.disabled;
+    },
+
+    // 切换加载状态
+    toggleLoading() {
+      this.loading = !this.loading;
+    },
+
+    // 清空输入框
+    clearInput() {
+      this.value = '';
+    },
+
+    onDeepThinkTap() {
+      this.deepThinkActive = !this.deepThinkActive;
+    },
+
+    onNetSearchTap() {
+      this.netSearchActive = !this.netSearchActive;
+    },
+  },
 };
 </script>
 <style>
