@@ -40,33 +40,41 @@
   </view>
 </template>
 
-<script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
+<script>
+// 循环引用，未真正使用！
 import chatMarkdownNode from '../chat-markdown-node/chat-markdown-node';
-import { SuperComponent, wxComponent, ComponentsOptionsType } from '../../../../components/common/src/index';
-import config from '../../../../components/common/config';
+import { prefix } from 'tdesign-uniapp/common/config';
+import { uniComponent } from 'tdesign-uniapp/common/src/index';
 
-const { prefix } = config;
+
 const name = `${prefix}-chat-markdown-table`;
 
-@wxComponent()
-export default class ChatMarkdownTable extends SuperComponent {
-  options: ComponentsOptionsType = {
-    multipleSlots: true,
-  };
 
-  properties = {
+export default uniComponent({
+  name,
+  options: {
+    multipleSlots: true,
+    styleIsolation: 'shared',
+  },
+
+  components: {
+    chatMarkdownNode,
+  },
+
+  props: {
     node: {
       type: Object,
-      value: {},
+      default: () => ({}),
     },
-  };
+  },
 
-  data = {
-    classPrefix: name,
-  };
-}
+  data() {
+    return {
+      classPrefix: name,
+    };
+  },
+});
 </script>
-<style lang="less">
-@import './chat-markdown-table.less';
+<style scoped>
+@import './chat-markdown-table.css';
 </style>

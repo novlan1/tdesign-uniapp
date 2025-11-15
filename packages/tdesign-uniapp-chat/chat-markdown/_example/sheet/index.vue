@@ -1,33 +1,46 @@
 <template>
-    <view class="chat-example-block">
-        <t-chat-markdown :content="markdownContent" @click="handleLinkTap" />
-    </view>
+  <view class="chat-example-block">
+    <t-chat-markdown
+      :content="markdownContent"
+      @click="handleLinkTap"
+    />
+  </view>
 </template>
 
 <script>
-import tChatMarkdown from 'tdesign-uniapp/chat-markdown/chat-markdown.js';
-import markdownData from './mock.js';
-// 内置marked处理
+import tChatMarkdown from 'tdesign-uniapp-chat/chat-markdown/chat-markdown.vue';
+const markdownData = `
+| 左对齐     | 居中对齐 | 右对齐 | 内容 |
+| :--------- | :------: | -----: | ----- |
+| 单元格     |  单元格  | 单元格 | 单元格 |
+| 长文本示例| 长文本示例长文本示例长文本示例 |   $100 | 文本内容 |
+| 文本示例 | 文本内容 | $100 |  文本内容 |
+`;
+
 export default {
-    components: {
-        tChatMarkdown
+  components: {
+    tChatMarkdown,
+  },
+  data() {
+    return {
+      markdownContent: markdownData,
+    };
+  },
+  methods: {
+    handleLinkTap(e) {
+      // 打开链接
+      console.log('监听点击', e);
+      uni.navigateTo({
+        url: e.detail.node.href,
+      });
     },
-    data() {
-        return {
-            markdownContent: markdownData
-        };
-    },
-    methods: {
-        handleLinkTap(e) {
-            // 打开链接
-            console.log('监听点击', e);
-            uni.navigateTo({
-                url: e.detail.node.href
-            });
-        }
-    }
+  },
 };
 </script>
 <style>
-@import './index.css';
+.chat-example-block {
+    background-color: var(--td-bg-color-container);
+    padding: 32rpx;
+}
+
 </style>

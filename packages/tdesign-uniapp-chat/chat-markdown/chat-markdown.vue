@@ -1,76 +1,80 @@
 <template>
   <view
-    :class="'class ' + classPrefix + ' ' + classPrefix + '--normal'"
-    :style="_._style([style, customStyle])"
+    :class="classPrefix + ' ' + classPrefix + '--normal'"
+    :style="_._style([customStyle])"
   >
     <chat-markdown-node :nodes="nodes" />
   </view>
 </template>
-<script module="_" lang="wxs" src="@/../../components/common/utils.wxs"></script>
-<script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
-import chatMarkdownNode from './chat-markdown-node/chat-markdown-node';
-import { Lexer } from 'marked';
-import { SuperComponent, wxComponent, ComponentsOptionsType } from '../../../components/common/src/index';
-import config from 'tdesign-uniapp/common/config';
+<script>
+import chatMarkdownNode from '../chat-markdown-node/chat-markdown-node.vue';
+import { Lexer } from '../npm/marked';
+import { prefix } from 'tdesign-uniapp/common/config';
 import props from './props';
-import { TdChatMarkdownProps } from './type';
+import _ from 'tdesign-uniapp/common/utils.wxs';
+import { uniComponent } from 'tdesign-uniapp/common/src/index';
 
-const { prefix } = config;
+
 const name = `${prefix}-chat-markdown`;
 
-export interface ChatMarkdownProps extends TdChatMarkdownProps {}
+export default uniComponent({
+  name,
+  options: {
+    multipleSlots: true,
+    styleIsolation: 'shared',
+  },
 
-@wxComponent()
-export default class ChatMarkdown extends SuperComponent {
-    options: ComponentsOptionsType = {
-        multipleSlots: true
+  components: {
+    chatMarkdownNode,
+  },
+
+  props: {
+    ...props,
+  },
+
+  data() {
+    return {
+      classPrefix: name,
+      nodes: [], // 解析后的节点
+      name, // 用于子组件查询父组件时的标识符
+      _,
     };
+  },
 
-    properties = props;
+  watch: {
+    content: {
+      handler(markdown) {
+        this.parseMarkdown(markdown);
+      },
+      immediate: true,
+      deep: true,
+    },
+  },
 
-    data = {
-        classPrefix: name,
-        nodes: [], // 解析后的节点
-        name // 用于子组件查询父组件时的标识符
-    };
+  methods: {
+    // 解析markdown文本
+    parseMarkdown(markdown) {
+      try {
+        const lexer = new Lexer(this.options);
+        const tokens = lexer.lex(markdown);
 
-    observers = {
-        // 监听markdown文本变化，自动解析
-        content: function (markdown: string) {
-            this.parseMarkdown(markdown);
-        }
-    };
+        this.nodes = tokens;
+      } catch (error) {
+        console.error('Markdown parsing error:', error);
+        // 解析失败时，将原始文本作为普通文本显示
+        this.nodes = [
+          {
+            type: 'text',
+            raw: markdown,
+            text: markdown,
+          },
+        ];
+      }
+    },
+  },
 
-    methods = {
-        // 解析markdown文本
-        parseMarkdown(markdown: string) {
-            try {
-                const lexer = new Lexer(this.options);
-                const tokens = lexer.lex(markdown);
-
-                this.setData({ nodes: tokens });
-            } catch (error) {
-                console.error('Markdown parsing error:', error);
-                // 解析失败时，将原始文本作为普通文本显示
-                this.setData({
-                    nodes: [
-                        {
-                            type: 'text',
-                            raw: markdown,
-                            text: markdown
-                        }
-                    ]
-                });
-            }
-        }
-    };
-
-    lifetimes = {
-        attached() {}
-    };
-}
+});
 </script>
-<style lang="less">
-@import './chat-markdown.less';
+<style scoped>
+@import './chat-markdown.css';
 </style>

@@ -25,32 +25,34 @@
   </view>
 </template>
 
-<script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
-import { SuperComponent, wxComponent, ComponentsOptionsType } from '../../../../components/common/src/index';
-import config from '../../../../components/common/config';
+<script>
+import { uniComponent } from 'tdesign-uniapp/common/src/index';
+import { prefix } from 'tdesign-uniapp/common/config';
 
-const { prefix } = config;
 const name = `${prefix}-chat-markdown-code`;
 
-@wxComponent()
-export default class ChatMarkdownCode extends SuperComponent {
-  options: ComponentsOptionsType = {
+export default uniComponent({
+  name,
+  options: {
     multipleSlots: true,
-  };
+    styleIsolation: 'shared',
+  },
 
-  properties = {
+  props: {
     node: {
       type: Object,
-      value: () => ({}),
+      default: () => ({}),
     },
-  };
+  },
 
-  data = {
-    classPrefix: name,
-  };
-}
+  data() {
+    return {
+      classPrefix: name,
+    };
+  },
+});
+
 </script>
-<style lang="less">
-@import './chat-markdown-code.less';
+<style scoped>
+@import './chat-markdown-code.css';
 </style>
