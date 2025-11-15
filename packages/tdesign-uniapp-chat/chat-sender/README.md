@@ -76,9 +76,11 @@ file-add | \- | 添加附件时触发
 file-change | `(file:FileItem)` | 附件列表变化时触发
 file-click | `(file:FileItem)` | 点击附件时触发
 file-delete | `(file:FileItem)` | 删除附件时触发
-file-select | `(context: {files: FileList, name: UploadActionType})` | 选择文件（图片/微信文件）时触发
+file-select | `(context: {files: FileList, name: UploadActionType})` | 选择文件（图片/微信文件）时触发。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/chat-sender/type.ts)。<br/>`type UploadActionType = 'uploadAttachment' \| 'uploadImage'`<br/>
 focus | `(value:string, context: { e: FocusEvent }) ` | 输入框聚焦时触发
 keyboardheightchange | `(context: {height: number, duration: number})` | 选择文件（图片/微信文件）时触发
 send | `(value:string, context: { e: MouseEvent \| KeyboardEvent })` | 点击消息发送的回调方法
 stop | `(value:string, context: { e: MouseEvent })` | 点击消息终止的回调方法
+update-value | `(value: boolean)` | 输入框值发生变化时触发
+update-visible | `(value: boolean)` | 上传面板可见性发生变化时触发
 upload-click | \- | 【实验】点击上传按钮时触发

@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     handleAction(e) {
-      const { name, active, data } = e.detail;
+      const { name, active, data } = e;
       let message = '';
       switch (name) {
         case 'replay':

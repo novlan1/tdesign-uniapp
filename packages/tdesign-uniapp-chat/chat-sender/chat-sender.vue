@@ -177,6 +177,11 @@ export default uniComponent({
     ...props,
   },
 
+  emits: [
+    'update:visible',
+    'update:value',
+  ],
+
   data() {
     return {
       classPrefix: name,

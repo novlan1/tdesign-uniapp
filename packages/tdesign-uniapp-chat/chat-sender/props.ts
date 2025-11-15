@@ -100,6 +100,16 @@ export default {
     type: Function,
     default: () => ({}),
   },
+  /** 输入框值发生变化时触发 */
+  onUpdateValue: {
+    type: Function,
+    default: () => ({}),
+  },
+  /** 上传面板可见性发生变化时触发 */
+  onUpdateVisible: {
+    type: Function,
+    default: () => ({}),
+  },
   /** 【实验】点击上传按钮时触发 */
   onUploadClick: {
     type: Function,

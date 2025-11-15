@@ -106,6 +106,14 @@ export interface TdChatSenderProps {
    */
   onStop?: (value: string, context: { e: MouseEvent }) => void;
   /**
+   * 输入框值发生变化时触发
+   */
+  onUpdateValue?: (value: boolean) => void;
+  /**
+   * 上传面板可见性发生变化时触发
+   */
+  onUpdateVisible?: (value: boolean) => void;
+  /**
    * 【实验】点击上传按钮时触发
    */
   onUploadClick?: () => void;
@@ -125,3 +133,5 @@ export interface SendButton {
   name: 'send';
   type: 'icon' | 'text';
 }
+
+export type UploadActionType = 'uploadAttachment' | 'uploadImage';

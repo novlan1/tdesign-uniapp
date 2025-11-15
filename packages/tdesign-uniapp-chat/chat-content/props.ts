@@ -31,4 +31,9 @@ export default {
       return ['error', ''].includes(val);
     },
   },
+  /** 点击链接时触发 */
+  onClick: {
+    type: Function,
+    default: () => ({}),
+  },
 };

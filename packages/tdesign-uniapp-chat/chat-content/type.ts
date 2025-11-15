@@ -23,6 +23,10 @@ export interface TdChatContentProps {
    * 正文状态
    */
   status?: 'error' | '';
+  /**
+   * 点击链接时触发
+   */
+  onClick?: (context: { detail: { event; node }; currentTarget; target }) => void;
 }
 
 export interface TdChatContentType {

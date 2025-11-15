@@ -10,3 +10,9 @@ content | Object | - | required。Typescript: `TdChatContentType ` `interface Td
 markdown-props | Object | - | Typescript: `ChatMarkdownProps`，[ChatMarkdown API Documents](./chat-markdown?tab=api)。[see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign-uniapp-chat/chat-content/type.ts) | N
 role | String | - | required。options: user/assistant/system | Y
 status | String | - | options: error / '' | N
+
+### ChatContent Events
+
+name | params | description
+-- | -- | --
+click | `(context: {detail:{event, node}, currentTarget, target})` | \-

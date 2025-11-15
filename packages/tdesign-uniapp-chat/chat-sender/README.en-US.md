@@ -29,9 +29,11 @@ file-add | \- | \-
 file-change | `(file:FileItem)` | \-
 file-click | `(file:FileItem)` | \-
 file-delete | `(file:FileItem)` | \-
-file-select | `(context: {files: FileList, name: UploadActionType})` | \-
+file-select | `(context: {files: FileList, name: UploadActionType})` | [see more ts definition](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/chat-sender/type.ts)。<br/>`type UploadActionType = 'uploadAttachment' \| 'uploadImage'`<br/>
 focus | `(value:string, context: { e: FocusEvent }) ` | \-
 keyboardheightchange | `(context: {height: number, duration: number})` | \-
 send | `(value:string, context: { e: MouseEvent \| KeyboardEvent })` | \-
 stop | `(value:string, context: { e: MouseEvent })` | \-
+update-value | `(value: boolean)` | \-
+update-visible | `(value: boolean)` | \-
 upload-click | \- | \-
