@@ -1,7 +1,7 @@
 <template>
   <view
-    :class="'class ' + classPrefix"
-    :style="_._style([style, customStyle])"
+    :class="classPrefix"
+    :style="_._style([customStyle])"
   >
     <block v-if="status === 'error' || content.type === 'text'">
       <view :class="classPrefix + '__' + role + ' ' + classPrefix + '__' + status">
@@ -15,97 +15,105 @@
         <t-chat-markdown
           :content="textInfo"
           :options="markdownProps && markdownProps.options"
+          @click="onClick"
         />
       </view>
     </block>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/../../components/common/utils.wxs"></script>
-<script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
-import tChatMarkdown from 'tdesign-uniapp/chat-markdown/chat-markdown';
-import { SuperComponent, wxComponent, ComponentsOptionsType } from '../../../components/common/src/index';
-import config from 'tdesign-uniapp/common/config';
-import { TdChatContentProps } from './type';
+<script>
+import tChatMarkdown from '../chat-markdown/chat-markdown.vue';
+import { prefix } from 'tdesign-uniapp/common/config';
 import props from './props';
+import _ from 'tdesign-uniapp/common/utils.wxs';
+import { uniComponent } from 'tdesign-uniapp/common/src/index';
 
-const { prefix } = config;
 const name = `${prefix}-chat-content`;
 
-export interface ChatContentProps extends TdChatContentProps {}
 
-@wxComponent()
-export default class ChatContent extends SuperComponent {
-    options: ComponentsOptionsType = {
-        multipleSlots: true
+export default uniComponent({
+  name,
+  options: {
+    multipleSlots: true,
+    styleIsolation: 'shared',
+  },
+
+  components: {
+    tChatMarkdown,
+  },
+
+  props: {
+    ...props,
+  },
+
+  emits: [
+    'click',
+  ],
+
+  data() {
+    return {
+      classPrefix: name,
+      textInfo: '',
+      _,
     };
+  },
 
-    properties = props;
+  watch: {
+    content: {
+      handler() {
+        this.setTextInfo();
+      },
+      immediate: true,
+      deep: true,
+    },
+  },
 
-    data = {
-        classPrefix: name,
-        textInfo: ''
-    };
+  mounted() {
+    this.setTextInfo();
+  },
 
-    observers = {
-        content() {
-            this.setTextInfo();
+  methods: {
+    getEscapeReplacement(ch) {
+      const escapeReplacements = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        '\'': '&#39;',
+      };
+      return escapeReplacements[ch];
+    },
+    escape(html, encode = false) {
+      const escapeTest = /[&<>"']/;
+      const escapeReplace = new RegExp(escapeTest.source, 'g');
+      const escapeTestNoEncode = /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/;
+      const escapeReplaceNoEncode = new RegExp(escapeTestNoEncode.source, 'g');
+      if (encode) {
+        if (escapeTest.test(html)) {
+          return html.replace(escapeReplace, this.getEscapeReplacement);
         }
-    };
+      } else if (escapeTestNoEncode.test(html)) {
+        return html.replace(escapeReplaceNoEncode, this.getEscapeReplacement);
+      }
+      return html;
+    },
 
-    methods = {
-        getEscapeReplacement(ch: any) {
-            const escapeReplacements = {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#39;'
-            };
-            return escapeReplacements[ch];
-        },
-        escape(html: any, encode: any = false) {
-            const escapeTest = /[&<>"']/;
-            const escapeReplace = new RegExp(escapeTest.source, 'g');
-            const escapeTestNoEncode = /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/;
-            const escapeReplaceNoEncode = new RegExp(escapeTestNoEncode.source, 'g');
-            if (encode) {
-                if (escapeTest.test(html)) {
-                    return html.replace(escapeReplace, this.getEscapeReplacement);
-                }
-            } else if (escapeTestNoEncode.test(html)) {
-                return html.replace(escapeReplaceNoEncode, this.getEscapeReplacement);
-            }
-            return html;
-        },
+    setTextInfo() {
+      // error 状态下统一按纯文本处理，避免走 markdown 渲染
+      if (this.content.type === 'text' || this.status === 'error') {
+        this.textInfo = this.escape(this.content.data || '');
+      } else {
+        this.textInfo = this.content.data;
+      }
+    },
 
-        setTextInfo() {
-            // error 状态下统一按纯文本处理，避免走 markdown 渲染
-            if (this.content.type === 'text' || this.status === 'error') {
-                this.setData({
-                    textInfo: this.escape(this.content.data || '')
-                });
-            } else {
-                this.setData({
-                    textInfo: this.content.data
-                });
-            }
-        }
-    };
+    onClick(e) {
+      this.$emit('click', e);
+    },
+  },
+});
 
-    lifetimes = {
-        created() {
-            this.getEscapeReplacement = this.getEscapeReplacement.bind(this);
-            this.escape = this.escape.bind(this);
-        },
-        attached() {
-            this.setTextInfo();
-        },
-
-        detached() {}
-    };
-}
 </script>
-<style lang="less">
-@import './chat-content.less';
+<style scoped>
+@import './chat-content.css';
 </style>

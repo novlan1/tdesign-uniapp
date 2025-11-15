@@ -1,7 +1,7 @@
 <template>
   <view
-    :class="'class ' + chatItemClass"
-    :style="_._style([style, customStyle])"
+    :class="chatItemClass"
+    :style="_._style([customStyle])"
     @longpress="handleLongPress"
   >
     <view
@@ -82,113 +82,127 @@
     </view>
   </view>
 </template>
-<script module="_" lang="wxs" src="@/../../components/common/utils.wxs"></script>
-<script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
-import chatContent from 'tdesign-uniapp/chat-content/chat-content';
-import chatThinking from 'tdesign-uniapp/chat-thinking/chat-thinking';
-import chatLoading from 'tdesign-uniapp/chat-loading/chat-loading';
-import attachments from 'tdesign-uniapp/attachments/attachments';
-import { SuperComponent, wxComponent, ComponentsOptionsType } from '../../../components/common/src/index';
-import props from './props';
-import config from 'tdesign-uniapp/common/config';
+<script>
+import chatContent from '../chat-content/chat-content.vue';
+import chatThinking from '../chat-thinking/chat-thinking.vue';
+import chatLoading from '../chat-loading/chat-loading.vue';
+import attachments from '../attachments/attachments.vue';
 
-const { prefix } = config;
+import props from './props';
+import { prefix } from 'tdesign-uniapp/common/config';
+import _ from 'tdesign-uniapp/common/utils.wxs';
+import { uniComponent } from 'tdesign-uniapp/common/src/index';
+
+
 const name = `${prefix}-chat-message`;
 
-@wxComponent()
-export default class ChatMessage extends SuperComponent {
-    options: ComponentsOptionsType = {
-        multipleSlots: true
-    };
+export default uniComponent({
+  name,
+  options: {
+    multipleSlots: true,
+    styleIsolation: 'shared',
+  },
 
-    properties = props;
+  components: {
+    chatContent,
+    chatThinking,
+    chatLoading,
+    attachments,
+  },
 
-    data = {
-        classPrefix: name,
-        article: '',
-        showAvatar: null,
-        showName: null,
-        showDateTime: null,
-        contentClasses: [],
-        chatItemClass: []
-    };
+  props: {
+    ...props,
+  },
 
-    observers = {
-        avatar() {
-            this.setShowAvatar();
-        },
-        name() {
-            this.setShowName();
-        },
-        datetime() {
-            this.setShowDateTime();
-        },
-        classPrefix() {
-            this.setContentClasses();
-        },
-        'classPrefix, variant, placement, showDateTime'() {
-            this.setChatItemClass();
-        }
-    };
+  data() {
+    return {
+      classPrefix: name,
+      article: '',
+      showAvatar: null,
+      showName: null,
+      showDateTime: null,
+      contentClasses: [],
+      chatItemClass: [],
 
-    methods = {
-        handleLongPress(e: any) {
-            this.$emit('longpress', {
-                detail: {
-                    e,
-                    id: this.chatId
-                }
-            });
-        },
-        setShowAvatar() {
-            this.setData({
-                showAvatar: this?.avatar || ''
-            });
-        },
-        setShowName() {
-            this.setData({
-                showName: this?.name || ''
-            });
-        },
-        setShowDateTime() {
-            this.setData({
-                showDateTime: this?.datetime || ''
-            });
-        },
-        setContentClasses() {
-            this.setData({
-                contentClasses: [`${this.classPrefix}__content`]
-            });
-        },
-        setChatItemClass() {
-            const { classPrefix, showDateTime } = this;
-            const { variant, role, placement } = this;
-            const baseClass = [`${classPrefix}`, `${classPrefix}--${variant}`, role, placement];
-            if (showDateTime) {
-                baseClass.push(`${classPrefix}__header`);
-            }
-            this.setData({
-                chatItemClass: baseClass
-            });
-        }
+      _,
     };
+  },
 
-    lifetimes = {
-        created() {
-            this.handleLongPress = this.handleLongPress.bind(this);
-        },
-        attached() {
-            this.setShowAvatar();
-            this.setShowName();
-            this.setShowDateTime();
-            this.setContentClasses();
-            this.setChatItemClass();
-        },
-        detached() {}
-    };
-}
+  watch: {
+    avatar() {
+      this.setShowAvatar();
+    },
+    name() {
+      this.setShowName();
+    },
+    datetime() {
+      this.setShowDateTime();
+    },
+    classPrefix() {
+      this.setContentClasses();
+      this.setChatItemClass();
+    },
+    variant: {
+      handler() {
+        this.setChatItemClass();
+      },
+    },
+    placement: {
+      handler() {
+        this.setChatItemClass();
+      },
+    },
+    showDateTime: {
+      handler() {
+        this.setChatItemClass();
+      },
+    },
+  },
+
+  mounted() {
+    this.setShowAvatar();
+    this.setShowName();
+    this.setShowDateTime();
+    this.setContentClasses();
+    this.setChatItemClass();
+  },
+
+  methods: {
+    handleLongPress(e) {
+      this.$emit('longpress', {
+        e,
+        id: this.chatId,
+      });
+    },
+
+    setShowAvatar() {
+      this.showAvatar = this.avatar || '';
+    },
+
+    setShowName() {
+      this.showName =  this.name || '';
+    },
+
+    setShowDateTime() {
+      this.showDateTime = this.datetime || '';
+    },
+
+    setContentClasses() {
+      this.contentClasses = [`${this.classPrefix}__content`];
+    },
+
+    setChatItemClass() {
+      const { classPrefix, showDateTime } = this;
+      const { variant, role, placement } = this;
+      const baseClass = [`${classPrefix}`, `${classPrefix}--${variant}`, role, placement];
+      if (showDateTime) {
+        baseClass.push(`${classPrefix}__header`);
+      }
+      this.chatItemClass = baseClass;
+    },
+  },
+});
 </script>
-<style lang="less">
-@import './chat-message.less';
+<style scoped>
+@import './chat-message.css';
 </style>

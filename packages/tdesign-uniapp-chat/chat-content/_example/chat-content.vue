@@ -12,24 +12,23 @@
         notice="渲染框架支持情况：WebView"
       />
       <t-demo title="01 组件类型">
-        <base>
+        <baseDemo />
       </t-demo>
     </view>
   </view>
 </template>
 
-<script lang="ts">
-import zpMixins from '@/uni_modules/zp-mixins/index';
-import base from './base';
-export default zpMixins.extend({
+<script>
+import baseDemo from './base/index.vue';
+export default {
   components: {
-    base,
+    baseDemo,
   },
   data() {
     return {};
   },
   methods: {},
-});
+};
 </script>
 <style lang="less">
 @import './chat-content.less';

@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="classPrefix + ' ' + [inChat ? classPrefix + '--chatting' : '', getFileTypeClass(inChat, files)]"
+    :class="[classPrefix, inChat ? classPrefix + '--chatting' : '', getFileTypeClass(inChat, files)]"
     :style="_._style([customStyle])"
   >
     <view :class="classPrefix + '__left'">
