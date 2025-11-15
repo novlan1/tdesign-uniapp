@@ -19,7 +19,7 @@
         </view>
         <view :data-event-opts="[['tap', [['handleCollapse', ['$event']]]]]">
           <t-icon
-            :style="localCollapsed ? 'transform: rotate(180deg)' : ''"
+            :custom-style="localCollapsed ? 'transform: rotate(180deg)' : ''"
             :t-class="_.cls(classPrefix + '__icon', [['collapse', true]])"
             name="chevron-up"
             @click="handleCollapse"
