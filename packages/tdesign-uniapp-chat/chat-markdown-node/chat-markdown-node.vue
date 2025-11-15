@@ -259,20 +259,22 @@ export default uniComponent({
       if (this.careMarkdown) {
         return this.careMarkdown;
       }
-      console.log('this', this.name, this.$options.name);
-      this.careMarkdown = this.selectOwnerComponent();
-      this.careMarkdown.__data__.name !== name;
-      this.careMarkdown = this.careMarkdown.selectOwnerComponent();
+      this.careMarkdown = this.$parent;
+      while (this.careMarkdown && this.careMarkdown.name !== name) {
+        this.careMarkdown = this.careMarkdown.$parent;
+      }
+
       return this.careMarkdown;
     },
 
     handleClick(event, type, token) {
       // 通用点击事件
-      this.getCareMarkdown().$emit('click', {
-        detail: {
-          event,
-          node: token,
-        },
+      const target = this.getCareMarkdown();
+      if (!target) return;
+
+      target.$emit('click', {
+        event,
+        node: token,
       });
     },
   },

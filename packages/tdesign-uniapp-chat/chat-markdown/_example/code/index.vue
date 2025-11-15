@@ -32,7 +32,7 @@ export default {
       // 打开链接
       console.log('监听点击', e);
       uni.navigateTo({
-        url: e.detail.node.href,
+        url: e.node.href,
       });
     },
   },
