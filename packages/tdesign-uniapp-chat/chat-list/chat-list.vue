@@ -24,7 +24,7 @@
         *  b. slots t-chat-message
         * a 优先级更高
         */ -->
-      <block v-if="data.length > 0">
+      <block v-if="data && data.length > 0">
         <block
           v-for="(item, index) in data"
           :key="index"
@@ -35,7 +35,6 @@
             :name="item.name || ''"
             :datetime="item.datetime || ''"
             :content="item.content"
-            :role="item.role"
             :placement="layout === 'both' ? (item.role === 'user' ? 'right' : 'left') : 'left'"
             :animation="animation"
             :status="item.status || ''"
@@ -138,7 +137,7 @@ export default uniComponent({
     },
 
     resetFragments() {
-      const dataLen = this.data.length;
+      const dataLen = this.data && this.data.length;
       if (dataLen) {
         const { fragmentLen } = this;
         if (this.reverse) {
@@ -152,7 +151,7 @@ export default uniComponent({
     },
 
     addFragment(count = 4) {
-      const dataLen = this.data.length;
+      const dataLen = this.data && this.data.length;
       if (dataLen) {
         if (this.reverse) {
           this.endIndex = Math.min(dataLen - 1, this.endIndex + count);

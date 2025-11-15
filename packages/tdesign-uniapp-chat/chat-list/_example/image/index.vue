@@ -27,6 +27,7 @@
                   <t-chat-content
                     v-if="contentItem.type === 'text' || contentItem.type === 'markdown'"
                     :content="contentItem"
+                    :role="item.message.role"
                   />
                 </block>
               </view>
@@ -41,6 +42,7 @@
                   <t-chat-content
                     v-if="contentItem.type === 'text' || contentItem.type === 'markdown'"
                     :content="contentItem"
+                    :role="item.message.role"
                   />
 
                   <view
@@ -444,11 +446,11 @@ export default {
     right: 0;
 }
 
-.attachment-slide .t-attachments .t-attachments__files:first-child {
+:deep(.attachment-slide .t-attachments .t-attachments__files:first-child) {
     padding-left: 120rpx;
 }
 
-.attachment-slide .t-attachments .t-attachments__files:last-child {
+:deep(.attachment-slide .t-attachments .t-attachments__files:last-child) {
     padding-right: 32rpx;
 }
 </style>

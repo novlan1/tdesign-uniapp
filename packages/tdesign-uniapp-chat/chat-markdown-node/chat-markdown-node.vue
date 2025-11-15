@@ -7,7 +7,7 @@
 
     <block v-if="item.type === 'heading'">
       <view :class="classPrefix + '-h ' + classPrefix + '-h' + item.depth">
-        <t-chat-markdown-node :nodes="item.tokens" />
+        <TChatMarkdownNode :nodes="item.tokens" />
       </view>
     </block>
 
@@ -22,7 +22,7 @@
         >
           <view :class="classPrefix + '-list-item'">
             <block v-if="li.tokens && li.tokens.length">
-              <t-chat-markdown-node :nodes="li.tokens" />
+              <TChatMarkdownNode :nodes="li.tokens" />
             </block>
             <block v-else>
               {{ item.text }}
@@ -34,7 +34,7 @@
 
     <block v-else-if="item.type === 'paragraph'">
       <view :class="classPrefix + '-p'">
-        <t-chat-markdown-node :nodes="item.tokens" />
+        <TChatMarkdownNode :nodes="item.tokens" />
       </view>
     </block>
 
@@ -61,7 +61,7 @@
                   :class="tableName + '__th'"
                   :style="'text-align:' + item.align[j] || 'left' + ';'"
                 >
-                  <t-chat-markdown-node :nodes="th.tokens" />
+                  <TChatMarkdownNode :nodes="th.tokens" />
                 </view>
               </block>
             </view>
@@ -80,7 +80,7 @@
                     :class="tableName + '__td'"
                     :style="'text-align:' + item.align[l] || 'left' + ';'"
                   >
-                    <t-chat-markdown-node :nodes="cell.tokens" />
+                    <TChatMarkdownNode :nodes="cell.tokens" />
                   </view>
                 </block>
               </view>
@@ -91,14 +91,14 @@
 
       <!-- <chat-markdown-table :node="item">
         <template #default="{th}">
-          <t-chat-markdown-node :nodes="th.tokens" />
+          <TChatMarkdownNode :nodes="th.tokens" />
         </template>
       </chat-markdown-table> -->
     </block>
 
     <block v-else-if="item.type === 'blockquote'">
       <view :class="classPrefix + '-blockquote'">
-        <t-chat-markdown-node :nodes="item.tokens" />
+        <TChatMarkdownNode :nodes="item.tokens" />
       </view>
     </block>
 
@@ -117,7 +117,7 @@
         :data-raw="item.raw"
       >
         <block v-if="item.tokens && item.tokens.length">
-          <t-chat-markdown-node :nodes="item.tokens" />
+          <TChatMarkdownNode :nodes="item.tokens" />
         </block>
         <block v-else>
           {{ '' + item.raw + '' }}
@@ -128,7 +128,7 @@
     <block v-else-if="item.type === 'strong'">
       <view :class="classPrefix + '-strong ' + classPrefix + '-inline'">
         <block v-if="item.tokens && item.tokens.length">
-          <t-chat-markdown-node :nodes="item.tokens" />
+          <TChatMarkdownNode :nodes="item.tokens" />
         </block>
         <block v-else>
           {{ '' + item.text + '' }}
@@ -139,7 +139,7 @@
     <block v-else-if="item.type === 'em'">
       <view :class="classPrefix + '-em ' + classPrefix + '-inline'">
         <block v-if="item.tokens && item.tokens.length">
-          <t-chat-markdown-node :nodes="item.tokens" />
+          <TChatMarkdownNode :nodes="item.tokens" />
         </block>
         <block v-else>
           {{ '' + item.text + '' }}
@@ -150,7 +150,7 @@
     <block v-else-if="item.type === 'del'">
       <view :class="classPrefix + '-del ' + classPrefix + '-inline'">
         <block v-if="item.tokens && item.tokens.length">
-          <t-chat-markdown-node :nodes="item.tokens" />
+          <TChatMarkdownNode :nodes="item.tokens" />
         </block>
         <block v-else>
           {{ '' + item.text + '' }}
@@ -165,7 +165,7 @@
         @click.stop="linkClick"
       >
         <block v-if="item.tokens && item.tokens.length">
-          <t-chat-markdown-node :nodes="item.tokens" />
+          <TChatMarkdownNode :nodes="item.tokens" />
         </block>
       </view>
     </block>
@@ -215,7 +215,9 @@
 import chatMarkdownCode from '../chat-markdown-code/chat-markdown-code.vue';
 import { prefix } from 'tdesign-uniapp/common/config';
 import { uniComponent } from 'tdesign-uniapp/common/src/index';
-
+// #ifndef H5
+import { TChatMarkdownNode } from './chat-markdown-node.vue';
+// #endif
 
 const name = `${prefix}-chat-markdown`;
 const tableName = `${prefix}-chat-markdown-table`;
@@ -231,6 +233,9 @@ export default uniComponent({
   components: {
     // chatMarkdownTable,
     chatMarkdownCode,
+    // #ifndef H5
+    TChatMarkdownNode,
+    // #endif
   },
 
   props: {

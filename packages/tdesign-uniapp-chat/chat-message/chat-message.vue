@@ -57,14 +57,14 @@
                 v-if="item.type === 'thinking'"
                 :content="item.data"
                 :role="role"
-                :status="status"
+                :status="['complete', 'stop', 'error', 'pending'].indexOf(status) < 0 ? 'pending' : status"
               />
 
               <chat-content
                 v-else-if="item.type === 'text' || item.type === 'markdown'"
                 :content="item"
                 :role="role"
-                :status="status"
+                :status="status === 'error' ? 'error' : ''"
               />
             </block>
           </block>

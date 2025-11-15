@@ -1,7 +1,8 @@
 @import 'tdesign-uniapp/common/style/base.less';
 
 @chat-list: ~'@{prefix}-chat-list';
-@chat-content: ~'@{prefix}-chat-content';
+@chat-content-pure: ~'@{prefix}-chat-content';
+@chat-content: ~':deep(.@{chat-content-pure})';
 @chat-message: ~'@{prefix}-chat-message';
 @chat-thinking: ~'@{prefix}-chat-thinking';
 @attachments: ~'@{prefix}-attachments';
@@ -17,8 +18,8 @@
   }
 }
 
-.@{attachments} + .@{chat-content}:not(:empty),
-.@{chat-thinking} + .@{chat-content}:not(:empty){
+:deep(.@{attachments} + @{chat-content-pure}:not(:empty)),
+:deep(.@{chat-thinking} + @{chat-content-pure}:not(:empty)){
   margin-top: 24rpx;
 }
 
@@ -63,7 +64,7 @@
       padding-right: @spacer-2;
     }
 
-    .@{chat-content} {
+    @{chat-content} {
       max-width: 90%;
     }
   }
@@ -171,7 +172,7 @@
 
   // 气泡框样式：纯文本
   &--text {
-    .@{chat-content} {
+    @{chat-content} {
       &__user,
       &__assistant {
         color: @text-color-secondary;
@@ -181,52 +182,52 @@
 
   // 气泡框样式：基础
   &--base {
-    .@{chat-content} {
+    @{chat-content} {
       padding: @chat-message-content-padding;
       background-color: @bg-color-secondarycontainer;
       border-radius: 0 @radius-extraLarge @radius-extraLarge @radius-extraLarge;
     }
 
-    &.assistant .@{chat-content} {
+    &.assistant @{chat-content} {
       border-radius: 0 @radius-extraLarge @radius-extraLarge @radius-extraLarge;
       background-color: transparent;
       padding: 0;
     }
 
-    &.user .@{chat-content} {
+    &.user @{chat-content} {
       border-radius: 0 @radius-extraLarge @radius-extraLarge @radius-extraLarge;
     }
 
-    &.left .@{chat-content} {
+    &.left @{chat-content} {
       border-radius: 0 @radius-extraLarge @radius-extraLarge @radius-extraLarge;
     }
 
-    &.right .@{chat-content} {
+    &.right @{chat-content} {
       border-radius: @radius-extraLarge 0 @radius-extraLarge @radius-extraLarge;
     }
   }
 
   // 气泡框样式：线框
   &--outline {
-    .@{chat-content} {
+    @{chat-content} {
       padding: @chat-message-content-padding;
       border: 1rpx solid @component-border;
       border-radius: 0 @radius-extraLarge @radius-extraLarge @radius-extraLarge;
     }
 
-    &.assistant .@{chat-content} {
+    &.assistant @{chat-content} {
       border-radius: 0 @radius-extraLarge @radius-extraLarge @radius-extraLarge;
     }
 
-    &.user .@{chat-content} {
+    &.user @{chat-content} {
       border-radius: 0 @radius-extraLarge @radius-extraLarge @radius-extraLarge;
     }
 
-    &.left .@{chat-content} {
+    &.left @{chat-content} {
       border-radius: 0 @radius-extraLarge @radius-extraLarge @radius-extraLarge;
     }
 
-    &.right .@{chat-content} {
+    &.right @{chat-content} {
       border-radius: @radius-extraLarge 0 @radius-extraLarge @radius-extraLarge;
     }
   }
