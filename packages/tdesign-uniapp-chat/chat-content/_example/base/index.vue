@@ -1,19 +1,29 @@
 <template>
-    <view>
-        <view class="chat-example">
-            <view class="title">用户内容纯文本支持HTML转义</view>
-            <view class="chat-example-block">
-                <t-chat-content :content="userContent" role="user"></t-chat-content>
-            </view>
-        </view>
-
-        <view class="chat-example">
-            <view class="title">助手内容（Markdown）</view>
-            <view class="chat-example-block">
-                <t-chat-content :content="assistantContent" role="assistant"></t-chat-content>
-            </view>
-        </view>
+  <view>
+    <view class="chat-example">
+      <view class="title">
+        用户内容纯文本支持HTML转义
+      </view>
+      <view class="chat-example-block">
+        <t-chat-content
+          :content="userContent"
+          role="user"
+        />
+      </view>
     </view>
+
+    <view class="chat-example">
+      <view class="title">
+        助手内容（Markdown）
+      </view>
+      <view class="chat-example-block">
+        <t-chat-content
+          :content="assistantContent"
+          role="assistant"
+        />
+      </view>
+    </view>
+  </view>
 </template>
 
 <script>
@@ -27,23 +37,23 @@ import markdownData from './mock.js';
 // const tokens = lexer.lex(markdownData);
 
 export default {
-    components: {
-        tChatContent
-    },
-    data() {
-        return {
-            userContent: {
-                type: 'text',
-                data: '这是用户发送的普通文本内容'
-            },
-            assistantContent: {
-                type: 'markdown',
-                data: markdownData
-            }
-        };
-    },
-    methods: {},
-    created: function () {}
+  components: {
+    tChatContent,
+  },
+  data() {
+    return {
+      userContent: {
+        type: 'text',
+        data: '这是用户发送的普通文本内容',
+      },
+      assistantContent: {
+        type: 'markdown',
+        data: markdownData,
+      },
+    };
+  },
+  created() {},
+  methods: {},
 };
 </script>
 <style>

@@ -1,42 +1,86 @@
 <template>
-    <view :class="'class ' + chatItemClass" :style="_._style([style, customStyle])" @longpress="handleLongPress">
-        <view v-if="showAvatar" :class="classPrefix + '__avatar'">
-            <block v-if="avatar">
-                <image :src="avatar" :class="classPrefix + '__avatar-image'"></image>
-            </block>
-        </view>
-        <view :class="contentClasses">
-            <view v-if="showName || showDateTime" :class="classPrefix + '__base'">
-                <text v-if="showName" :class="classPrefix + '__name'">{{ name }}</text>
-                <text v-if="datetime" :class="classPrefix + '__time'">{{ datetime }}</text>
-            </view>
-            <block v-if="status === 'pending'">
-                <view style="width: 100%">
-                    <chat-loading :animation="animation"></chat-loading>
-                </view>
-            </block>
-            <block v-else>
-                <view :class="classPrefix + '__detail'">
-                    <!-- 属性传值优先级高于content插槽 -->
-                    <block v-if="content.length > 0">
-                        <block v-for="(item, index) in content" :key="index">
-                            <attachments v-if="item.type === 'attachment' && role === 'user'" :items="item.data" :removable="false" :inChat="true"></attachments>
-
-                            <chat-thinking v-if="item.type === 'thinking'" :content="item.data" :role="role" :status="status"></chat-thinking>
-
-                            <chat-content v-else-if="item.type === 'text' || item.type === 'markdown'" :content="item" :role="role" :status="status"></chat-content>
-                        </block>
-                    </block>
-                    <block v-else>
-                        <slot name="content" />
-                    </block>
-                </view>
-            </block>
-            <view v-if="role === 'assistant'" :class="classPrefix + '__actionbar'">
-                <slot name="actionbar"></slot>
-            </view>
-        </view>
+  <view
+    :class="'class ' + chatItemClass"
+    :style="_._style([style, customStyle])"
+    @longpress="handleLongPress"
+  >
+    <view
+      v-if="showAvatar"
+      :class="classPrefix + '__avatar'"
+    >
+      <block v-if="avatar">
+        <image
+          :src="avatar"
+          :class="classPrefix + '__avatar-image'"
+        />
+      </block>
     </view>
+    <view :class="contentClasses">
+      <view
+        v-if="showName || showDateTime"
+        :class="classPrefix + '__base'"
+      >
+        <text
+          v-if="showName"
+          :class="classPrefix + '__name'"
+        >
+          {{ name }}
+        </text>
+        <text
+          v-if="datetime"
+          :class="classPrefix + '__time'"
+        >
+          {{ datetime }}
+        </text>
+      </view>
+      <block v-if="status === 'pending'">
+        <view style="width: 100%">
+          <chat-loading :animation="animation" />
+        </view>
+      </block>
+      <block v-else>
+        <view :class="classPrefix + '__detail'">
+          <!-- 属性传值优先级高于content插槽 -->
+          <block v-if="content.length > 0">
+            <block
+              v-for="(item, index) in content"
+              :key="index"
+            >
+              <attachments
+                v-if="item.type === 'attachment' && role === 'user'"
+                :items="item.data"
+                :removable="false"
+                :in-chat="true"
+              />
+
+              <chat-thinking
+                v-if="item.type === 'thinking'"
+                :content="item.data"
+                :role="role"
+                :status="status"
+              />
+
+              <chat-content
+                v-else-if="item.type === 'text' || item.type === 'markdown'"
+                :content="item"
+                :role="role"
+                :status="status"
+              />
+            </block>
+          </block>
+          <block v-else>
+            <slot name="content" />
+          </block>
+        </view>
+      </block>
+      <view
+        v-if="role === 'assistant'"
+        :class="classPrefix + '__actionbar'"
+      >
+        <slot name="actionbar" />
+      </view>
+    </view>
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/../../components/common/utils.wxs"></script>
 <script lang="ts">

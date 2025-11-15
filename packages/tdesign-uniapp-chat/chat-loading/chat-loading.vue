@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="'class ' + [classPrefix]"
+    :class="classPrefix"
     :style="_._style([customStyle])"
   >
     <!-- 动态加载动画 -->

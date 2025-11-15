@@ -1,15 +1,28 @@
 <template>
-    <view :class="classPrefix">
-        <!-- 代码语言标签 -->
-        <view :class="classPrefix + '__header'" v-if="node.lang">
-            <text :class="classPrefix + '__lang'">{{ node.lang }}</text>
-        </view>
-
-        <!-- 代码内容区域 -->
-        <scroll-view :class="classPrefix + '__content'" :scroll-x="true">
-            <text :class="classPrefix + '__text'" :decode="true">{{ node.text }}</text>
-        </scroll-view>
+  <view :class="classPrefix">
+    <!-- 代码语言标签 -->
+    <view
+      v-if="node.lang"
+      :class="classPrefix + '__header'"
+    >
+      <text :class="classPrefix + '__lang'">
+        {{ node.lang }}
+      </text>
     </view>
+
+    <!-- 代码内容区域 -->
+    <scroll-view
+      :class="classPrefix + '__content'"
+      :scroll-x="true"
+    >
+      <text
+        :class="classPrefix + '__text'"
+        :decode="true"
+      >
+        {{ node.text }}
+      </text>
+    </scroll-view>
+  </view>
 </template>
 
 <script lang="ts">
@@ -22,20 +35,20 @@ const name = `${prefix}-chat-markdown-code`;
 
 @wxComponent()
 export default class ChatMarkdownCode extends SuperComponent {
-    options: ComponentsOptionsType = {
-        multipleSlots: true
-    };
+  options: ComponentsOptionsType = {
+    multipleSlots: true,
+  };
 
-    properties = {
-        node: {
-            type: Object,
-            value: () => ({})
-        }
-    };
+  properties = {
+    node: {
+      type: Object,
+      value: () => ({}),
+    },
+  };
 
-    data = {
-        classPrefix: name
-    };
+  data = {
+    classPrefix: name,
+  };
 }
 </script>
 <style lang="less">

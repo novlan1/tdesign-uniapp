@@ -4,90 +4,57 @@
  * 该文件为脚本自动生成文件，请勿随意修改。如需修改请联系 PMC
  * */
 
-import { ChatContentProps } from '../chat-content/index';
-import { FileItem } from '../attachments/index';
+import type { TdChatContentProps } from '../chat-content/type';
+import type { FileItem } from '../attachments/type';
 export interface TdChatMessageProps {
     /**
      * 动画效果
      * @default skeleton
      */
-    animation?: {
-        type: StringConstructor;
-        value?: 'skeleton' | 'moving' | 'gradient' | 'dots';
-    };
+    animation?: 'skeleton' | 'moving' | 'gradient' | 'dots';
     /**
      * 自定义的头像配置
      */
-    avatar?: {
-        type: StringConstructor;
-        value?: string;
-    };
+    avatar?: string;
     /**
      * 聊天内容组件的属性
      */
-    chatContentProps?: {
-        type: ObjectConstructor;
-        value?: ChatContentProps;
-    };
+    chatContentProps?: TdChatContentProps;
     /**
      * 聊天消息的唯一标识
      * @default ''
      */
-    chatId?: {
-        type: StringConstructor;
-        value?: string;
-    };
+    chatId?: string;
     /**
      * 消息内容，数组中的每一项为一个消息内容对象
      */
-    content?: {
-        type: ArrayConstructor;
-        value?: ChatMessageContent[];
-    };
+    content?: ChatMessageContent[];
     /**
      * 对话单元的时间配置
      */
-    datetime?: {
-        type: StringConstructor;
-        value?: string;
-    };
+    datetime?: string;
     /**
      * 自定义的昵称
      */
-    name?: {
-        type: StringConstructor;
-        value?: string;
-    };
+    name?: string;
     /**
      * 消息显示位置
      */
-    placement?: {
-        type: StringConstructor;
-        value?: 'left' | 'right';
-    };
+    placement?: 'left' | 'right';
     /**
      * 消息角色
      * @default user
      */
-    role?: {
-        type: StringConstructor;
-        value?: 'user' | 'assistant' | 'system';
-    };
+    role?: 'user' | 'assistant' | 'system';
     /**
      * 消息状态
      */
-    status?: {
-        type: StringConstructor;
-        value?: 'pending' | 'streaming' | 'complete' | 'stop' | 'error';
-    };
+    status?: 'pending' | 'streaming' | 'complete' | 'stop' | 'error';
     /**
      * 气泡框样式，支持基础、线框、文字三种类型
      * @default base
      */
-    variant?: {
-        type: StringConstructor;
-        value?: 'base' | 'outline' | 'text';
-    };
+    variant?: 'base' | 'outline' | 'text';
 }
 export type ChatMessageContent = TextContent | MarkdownContent | ThinkingContent | AttachmentContent;
 export type AttachmentContent = ChatBaseContent<'attachment', FileItem[]>;

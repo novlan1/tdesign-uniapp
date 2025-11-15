@@ -1,18 +1,24 @@
 <template>
-    <view :class="'class ' + classPrefix" :style="_._style([style, customStyle])">
-        <block v-if="status === 'error' || content.type === 'text'">
-            <view :class="classPrefix + '__' + role + ' ' + classPrefix + '__' + status">
-                <view class="_pre">
-                    <rich-text :nodes="textInfo" />
-                </view>
-            </view>
-        </block>
-        <block v-else>
-            <view :class="classPrefix + '__assistant'">
-                <t-chat-markdown :content="textInfo" :options="markdownProps && markdownProps.options"></t-chat-markdown>
-            </view>
-        </block>
-    </view>
+  <view
+    :class="'class ' + classPrefix"
+    :style="_._style([style, customStyle])"
+  >
+    <block v-if="status === 'error' || content.type === 'text'">
+      <view :class="classPrefix + '__' + role + ' ' + classPrefix + '__' + status">
+        <view class="_pre">
+          <rich-text :nodes="textInfo" />
+        </view>
+      </view>
+    </block>
+    <block v-else>
+      <view :class="classPrefix + '__assistant'">
+        <t-chat-markdown
+          :content="textInfo"
+          :options="markdownProps && markdownProps.options"
+        />
+      </view>
+    </block>
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/../../components/common/utils.wxs"></script>
 <script lang="ts">

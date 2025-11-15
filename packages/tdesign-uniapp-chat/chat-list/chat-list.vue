@@ -1,47 +1,53 @@
 <template>
-    <view :class="'class ' + classPrefix + ' ' + [classes]" :style="_._style([style, customStyle])">
-        <scroll-view
-            :class="_.cls(classPrefix + '__content', [['reverse', reverse]])"
-            :scroll-y="true"
-            :enable-flex="true"
-            :enhanced="true"
-            :scroll-with-animation="true"
-            :scroll-top="scrollViewTop"
-            data-ref="chatListRef"
-            @scroll="onScroll"
-            @scrolltoupper="handlerScrollToUpper"
-            @scrolltolower="handlerScrollToLower"
-        >
-            <block v-if="reverse">
-                <view class="placeholder"></view>
-            </block>
-            <!-- /**
+  <view
+    :class="'class ' + classPrefix + ' ' + [classes]"
+    :style="_._style([style, customStyle])"
+  >
+    <scroll-view
+      :class="_.cls(classPrefix + '__content', [['reverse', reverse]])"
+      :scroll-y="true"
+      :enable-flex="true"
+      :enhanced="true"
+      :scroll-with-animation="true"
+      :scroll-top="scrollViewTop"
+      data-ref="chatListRef"
+      @scroll="onScroll"
+      @scrolltoupper="handlerScrollToUpper"
+      @scrolltolower="handlerScrollToLower"
+    >
+      <block v-if="reverse">
+        <view class="placeholder" />
+      </block>
+      <!-- /**
         * 1. 两种方式获取要渲染的 list
         *  a. props 传 data
         *  b. slots t-chat-message
         * a 优先级更高
         */ -->
-            <block v-if="data.length > 0">
-                <block v-for="(item, index) in data" :key="index">
-                    <chat-message
-                        v-if="virtualList ? index >= startIndex && index <= endIndex : true"
-                        :avatar="item.avatar || ''"
-                        :name="item.name || ''"
-                        :datetime="item.datetime || ''"
-                        :content="item.content"
-                        :role="item.role"
-                        :placement="layout === 'both' ? (item.role === 'user' ? 'right' : 'left') : 'left'"
-                        :animation="animation"
-                        :status="item.status || ''"
-                    />
-                </block>
-            </block>
-            <slot v-else />
-        </scroll-view>
-        <view :class="classPrefix + '__footer'">
-            <slot name="footer" />
-        </view>
+      <block v-if="data.length > 0">
+        <block
+          v-for="(item, index) in data"
+          :key="index"
+        >
+          <chat-message
+            v-if="virtualList ? index >= startIndex && index <= endIndex : true"
+            :avatar="item.avatar || ''"
+            :name="item.name || ''"
+            :datetime="item.datetime || ''"
+            :content="item.content"
+            :role="item.role"
+            :placement="layout === 'both' ? (item.role === 'user' ? 'right' : 'left') : 'left'"
+            :animation="animation"
+            :status="item.status || ''"
+          />
+        </block>
+      </block>
+      <slot v-else />
+    </scroll-view>
+    <view :class="classPrefix + '__footer'">
+      <slot name="footer" />
     </view>
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/../../components/common/utils.wxs"></script>
 <script lang="ts">

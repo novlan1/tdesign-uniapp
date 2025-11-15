@@ -1,7 +1,7 @@
 <template>
   <view>
     <view
-      :class="'class ' + classPrefix"
+      :class="classPrefix"
       :style="_._style([customStyle, inputStyle])"
       @tap="handleOutsideClick"
     >

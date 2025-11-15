@@ -11,9 +11,10 @@
 </template>
 
 <script>
-import tChatActionbar from 'tdesign-uniapp/chat-actionbar/chat-actionbar';
-import tToast from 'tdesign-uniapp/toast/toast';
+import tChatActionbar from 'tdesign-uniapp-chat/chat-actionbar/chat-actionbar.vue';
+import tToast from 'tdesign-uniapp/toast/toast.vue';
 import Toast from 'tdesign-uniapp/toast';
+
 export default {
   components: {
     tChatActionbar,
@@ -60,5 +61,28 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.container {
+    padding: 32rpx;
+    background-color: var(--td-bg-color-container);
+}
+
+.layout-btn {
+    margin: 16rpx 0;
+    padding: 12rpx 24rpx;
+    background-color: #0052d9;
+    color: #fff;
+    border: none;
+    border-radius: 8rpx;
+    font-size: 28rpx;
+}
+
+.demo-text {
+    padding: 16rpx 0;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16rpx;
+}
 </style>

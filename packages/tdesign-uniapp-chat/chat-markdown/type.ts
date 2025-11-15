@@ -9,19 +9,12 @@ export interface TdChatMarkdownProps {
      * markdown 内容文本
      * @default ''
      */
-    content: {
-        type: StringConstructor;
-        value?: string;
-        required?: boolean;
-    };
+    content: string;
     /**
      * Markdown 解析器基础配置
      * @default { gfm: true, pedantic: false, breaks: true }
      */
-    options?: {
-        type: ObjectConstructor;
-        value?: TdChatContentMDOptions;
-    };
+    options?: TdChatContentMDOptions;
 }
 export interface TdChatContentMDOptions {
     gfm?: boolean;

@@ -4,16 +4,15 @@
  * 该文件为脚本自动生成文件，请勿随意修改。如需修改请联系 PMC
  * */
 
-import { TdChatMessageProps } from './type';
-const props: TdChatMessageProps = {
+const props = {
     /** 动画效果 */
     animation: {
         type: String,
-        value: 'skeleton'
+        default: 'skeleton'
     },
     /** 自定义的头像配置 */
     avatar: {
-        type: String
+        type: String,
     },
     /** 聊天内容组件的属性 */
     chatContentProps: {
@@ -22,7 +21,7 @@ const props: TdChatMessageProps = {
     /** 聊天消息的唯一标识 */
     chatId: {
         type: String,
-        value: ''
+        default: ''
     },
     /** 消息内容，数组中的每一项为一个消息内容对象 */
     content: {
@@ -43,7 +42,7 @@ const props: TdChatMessageProps = {
     /** 消息角色 */
     role: {
         type: String,
-        value: 'user'
+        default: 'user'
     },
     /** 消息状态 */
     status: {
@@ -52,7 +51,7 @@ const props: TdChatMessageProps = {
     /** 气泡框样式，支持基础、线框、文字三种类型 */
     variant: {
         type: String,
-        value: 'base'
+        default: 'base'
     }
 };
 export default props;

@@ -1,7 +1,10 @@
 <template>
-    <view :class="'class ' + classPrefix + ' ' + classPrefix + '--normal'" :style="_._style([style, customStyle])">
-        <chat-markdown-node :nodes="nodes"></chat-markdown-node>
-    </view>
+  <view
+    :class="'class ' + classPrefix + ' ' + classPrefix + '--normal'"
+    :style="_._style([style, customStyle])"
+  >
+    <chat-markdown-node :nodes="nodes" />
+  </view>
 </template>
 <script module="_" lang="wxs" src="@/../../components/common/utils.wxs"></script>
 <script lang="ts">

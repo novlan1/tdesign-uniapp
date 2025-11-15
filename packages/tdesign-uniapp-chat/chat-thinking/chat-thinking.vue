@@ -1,6 +1,6 @@
 <template>
   <view
-    :class="'class ' + classPrefix"
+    :class="classPrefix"
     :style="_._style([customStyle])"
   >
     <view :class="_.cls(classPrefix + '__inner', [layout])">
