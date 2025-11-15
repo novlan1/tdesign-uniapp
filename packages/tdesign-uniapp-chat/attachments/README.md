@@ -50,11 +50,10 @@ isComponent: true
 
 名称 | 类型 | 默认值 | 描述 | 必传
 -- | -- | -- | -- | --
-style | Object | - | 样式 | N
-custom-style | Object | - | 样式，一般用于开启虚拟化组件节点场景 | N
+custom-style | Object | - | 自定义样式 | N
 addable | Boolean | true | 【讨论中】是否显示添加按钮 | N
 image-viewer | Boolean | true | 是否启用图片预览功能 | N
-items | Array | [] | 必需。附件列表。TS 类型：`FileItem[]` `interface FileItem { fileType: 'image'\|'video'\|'audio'\|'pdf'\|'doc'\|'ppt'\|'txt'; name: string; url: string; size: number; status?: 'success'\|'fail'\|'pending'\|'error'; progress?: number; errorMessage?: string; fileIcon?: string; width?: number; height?: number; mode?: 'aspectFit' \| 'aspectFill' \| 'widthFix' \| 'heightFix' \| 'scaleToFill'}`。[详细类型定义](https://github.com/Tencent/tdesign-miniprogram/blob/develop/packages/pro-components/chat/attachments/type.ts) | Y
+items | Array | [] | 必需。附件列表。TS 类型：`FileItem[]` `interface FileItem { fileType: 'image'\|'video'\|'audio'\|'pdf'\|'doc'\|'ppt'\|'txt'; name: string; url: string; size: number; status?: 'success'\|'fail'\|'pending'\|'error'; progress?: number; errorMessage?: string; fileIcon?: string; width?: number; height?: number; mode?: 'aspectFit' \| 'aspectFill' \| 'widthFix' \| 'heightFix' \| 'scaleToFill'}`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign-uniapp-chat/attachments/type.ts) | Y
 removable | Boolean | true | 是否显示删除按钮 | N
 
 ### Attachments Events
