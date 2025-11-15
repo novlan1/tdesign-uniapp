@@ -15,5 +15,6 @@ extend-exclude = [
   "packages/tdesign-app/common/uni.css",
   "packages/tdesign-app/uni_modules/**/*",
   "packages/tdesign/npm/**/*",
+  "packages/tdesign-uniapp-chat/npm/**/*",
   "packages/tdesign-uniapp-chat/chat-list/_example/ec-canvas/echarts.js"
 ]
