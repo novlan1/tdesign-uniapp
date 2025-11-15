@@ -32,7 +32,8 @@
     "ebus",
     "uniapp",
     "qrcode",
-    "actionbar"
+    "actionbar",
+    "echarts"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always",

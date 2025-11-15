@@ -41,6 +41,9 @@ importers:
       dotenv:
         specifier: ^17.2.3
         version: 17.2.3
+      echarts:
+        specifier: ^6.0.0
+        version: 6.0.0
       eslint:
         specifier: 8.57.1
         version: 8.57.1
@@ -97,7 +100,7 @@ importers:
         version: 4.1.0
       postcss-less:
         specifier: ^6.0.0
-        version: 6.0.0(postcss@7.0.39)
+        version: 6.0.0(postcss@8.5.6)
       postcss-rpx-transform:
         specifier: ^1.0.1
         version: 1.0.1
@@ -112,13 +115,16 @@ importers:
         version: 39.0.1(stylelint@14.16.1)
       stylelint-less:
         specifier: ^3.0.1
-        version: 3.0.1(postcss@7.0.39)(stylelint@14.16.1)
+        version: 3.0.1(postcss@8.5.6)(stylelint@14.16.1)
       stylelint-scss:
         specifier: 6.10.0
         version: 6.10.0(stylelint@14.16.1)
       t-comm:
         specifier: ^2.0.26
         version: 2.0.26
+      tslib:
+        specifier: ^2.3.1
+        version: 2.8.1
       typescript:
         specifier: '5.1'
         version: 5.1.6
@@ -128,6 +134,9 @@ importers:
       vue-tsc:
         specifier: ^1.0.24
         version: 1.8.27(typescript@5.1.6)
+      zrender:
+        specifier: ^6.0.0
+        version: 6.0.0
 
   packages/auto-import-resolver:
     dependencies:
@@ -204,6 +213,9 @@ importers:
       dayjs:
         specifier: ^1.11.18
         version: 1.11.18
+      echarts:
+        specifier: ^6.0.0
+        version: 6.0.0
       t-comm:
         specifier: ^2.0.26
         version: 2.0.26
@@ -4806,6 +4818,9 @@ packages:
 
   ecc-jsbn@0.1.2:
     resolution: {integrity: sha512-eh9O+hwRHNbG4BLTjEl3nw044CkGm5X6LoaCf7LPp7UU8Qrt47JYNi6nPX8xjW97TKGKm1ouctg0QSpZe9qrnw==}
+
+  echarts@6.0.0:
+    resolution: {integrity: sha512-Tte/grDQRiETQP4xz3iZWSvoHrkCQtwqd6hs+mifXcjrCuo2iKWbajFObuLJVBlDIJlOzgQPd1hsaKt/3+OMkQ==}
 
   editorconfig@1.0.4:
     resolution: {integrity: sha512-L9Qe08KWTlqYMVvMcTIvMAdl1cDUubzRNYL+WfA4bLDMHe4nemKkpmYzkznE1FwLKu0EEmy6obgQKzMJrg4x9Q==}
@@ -9625,6 +9640,9 @@ packages:
   tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
 
+  tslib@2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
@@ -10410,6 +10428,9 @@ packages:
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  zrender@6.0.0:
+    resolution: {integrity: sha512-41dFXEEXuJpNecuUQq6JlbybmnHaqqpGlbH1yxnA5V9MMP4SbohSVZsJIwz+zdjQXSSlR1Vc34EgH1zxyTDvhg==}
 
   zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
@@ -13714,14 +13735,14 @@ snapshots:
     dependencies:
       '@babel/core': 7.28.0
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-less@6.0.0(postcss@7.0.39))(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-less@6.0.0(postcss@8.5.6))(postcss@8.5.6)
     transitivePeerDependencies:
       - supports-color
 
   '@stylelint/postcss-markdown@0.36.2(postcss-syntax@0.36.2)(postcss@7.0.39)':
     dependencies:
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-less@6.0.0(postcss@7.0.39))(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-less@6.0.0(postcss@8.5.6))(postcss@8.5.6)
       remark: 13.0.0
       unist-util-find-all-after: 3.0.2
     transitivePeerDependencies:
@@ -16466,6 +16487,11 @@ snapshots:
     dependencies:
       jsbn: 0.1.1
       safer-buffer: 2.1.2
+
+  echarts@6.0.0:
+    dependencies:
+      tslib: 2.3.0
+      zrender: 6.0.0
 
   editorconfig@1.0.4:
     dependencies:
@@ -20356,7 +20382,7 @@ snapshots:
     dependencies:
       htmlparser2: 3.10.1
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-less@6.0.0(postcss@7.0.39))(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-less@6.0.0(postcss@8.5.6))(postcss@8.5.6)
 
   postcss-import@14.1.0(postcss@8.5.6):
     dependencies:
@@ -20381,9 +20407,9 @@ snapshots:
     dependencies:
       postcss: 7.0.39
 
-  postcss-less@6.0.0(postcss@7.0.39):
+  postcss-less@6.0.0(postcss@8.5.6):
     dependencies:
-      postcss: 7.0.39
+      postcss: 8.5.6
 
   postcss-load-config@3.1.4(postcss@8.5.6):
     dependencies:
@@ -20712,11 +20738,11 @@ snapshots:
       postcss-value-parser: 4.2.0
       svgo: 2.8.0
 
-  postcss-syntax@0.36.2(postcss-less@6.0.0(postcss@7.0.39))(postcss@7.0.39):
+  postcss-syntax@0.36.2(postcss-less@6.0.0(postcss@8.5.6))(postcss@8.5.6):
     dependencies:
-      postcss: 7.0.39
+      postcss: 8.5.6
     optionalDependencies:
-      postcss-less: 6.0.0(postcss@7.0.39)
+      postcss-less: 6.0.0(postcss@8.5.6)
 
   postcss-unique-selectors@4.0.1:
     dependencies:
@@ -21836,9 +21862,9 @@ snapshots:
       stylelint: 14.16.1
       stylelint-config-recommended: 17.0.0(stylelint@14.16.1)
 
-  stylelint-less@3.0.1(postcss@7.0.39)(stylelint@14.16.1):
+  stylelint-less@3.0.1(postcss@8.5.6)(stylelint@14.16.1):
     dependencies:
-      postcss: 7.0.39
+      postcss: 8.5.6
       postcss-resolve-nested-selector: 0.1.6
       postcss-value-parser: 4.2.0
       stylelint: 14.16.1
@@ -21908,7 +21934,7 @@ snapshots:
       postcss-sass: 0.4.4
       postcss-scss: 2.1.1
       postcss-selector-parser: 6.1.2
-      postcss-syntax: 0.36.2(postcss-less@6.0.0(postcss@7.0.39))(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss-less@6.0.0(postcss@8.5.6))(postcss@8.5.6)
       postcss-value-parser: 4.2.0
       resolve-from: 5.0.0
       slash: 3.0.0
@@ -22419,6 +22445,8 @@ snapshots:
       - vue-tsc
 
   tslib@1.14.1: {}
+
+  tslib@2.3.0: {}
 
   tslib@2.8.1: {}
 
@@ -23385,5 +23413,9 @@ snapshots:
       fd-slicer: 1.1.0
 
   yocto-queue@0.1.0: {}
+
+  zrender@6.0.0:
+    dependencies:
+      tslib: 2.3.0
 
   zwitch@1.0.5: {}
