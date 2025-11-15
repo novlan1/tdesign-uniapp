@@ -42,7 +42,7 @@
             >
               <view
                 :class="'deep-think-block ' + (deepThinkActive ? 'active' : '')"
-                @tap="onDeepThinkTap"
+                @click.stop="onDeepThinkTap"
               >
                 <t-icon
                   name="system-sum"
@@ -54,7 +54,7 @@
               </view>
               <view
                 :class="'net-search-block ' + (netSearchActive ? 'active' : '')"
-                @tap="onNetSearchTap"
+                @click.stop="onNetSearchTap"
               >
                 <t-icon
                   name="internet"

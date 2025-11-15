@@ -83,20 +83,12 @@ export default uniComponent({
       _,
 
       dataValue: coalesce(this.value, this.defaultValue, ''),
-      // innerMaxLen: -1,
-      // rawValue: '',
     };
   },
   watch: {
     value(val) {
       this.updateValue(val);
     },
-
-    // count: 'updateInnerMaxLen',
-    // dataValue: 'updateInnerMaxLen',
-    // allowInputOverMax: 'updateInnerMaxLen',
-    // maxcharacter: 'updateInnerMaxLen',
-    // maxlength: 'updateInnerMaxLen',
   },
   mounted() {
     const { value, defaultValue } = this;

@@ -19,7 +19,7 @@
           :class="_.cls(classPrefix + '__item', [['active', item.isActive]])"
           :open-type="content ? 'share' : 'none'"
           :data-chat-id="chatId"
-          @tap="handleActionClick"
+          @click="handleActionClick"
         >
           <t-icon
             :name="item.isActive ? iconActiveMap[item.name] : iconMap[item.name]"
@@ -33,7 +33,7 @@
           v-else
           :data-name="item.name"
           :class="_.cls(classPrefix + '__item', [['active', item.isActive]])"
-          @tap="handleActionClick"
+          @click.stop="handleActionClick"
         >
           <t-icon
             :name="item.isActive ? iconActiveMap[item.name] : iconMap[item.name]"
@@ -171,26 +171,20 @@ export default uniComponent({
         this.pComment = isActive ? undefined : 'good';
 
         this.$emit('actions', {
-          detail: {
-            name,
-            active: !isActive,
-          },
+          name,
+          active: !isActive,
         });
       } else if (name === 'bad') {
         const isActive = this.pComment === 'bad';
         this.pComment = isActive ? undefined : 'bad';
 
         this.$emit('actions', {
-          detail: {
-            name,
-            active: !isActive,
-          },
+          name,
+          active: !isActive,
         });
       } else {
         this.$emit('actions', {
-          detail: {
-            name,
-          },
+          name,
         });
       }
     },
@@ -199,10 +193,8 @@ export default uniComponent({
       if (!this.content) return;
       const copyContent = this.copyMode === 'markdown' ? this.content : this.filterSpecialChars(this.content);
       this.$emit('actions', {
-        detail: {
-          name: 'copy',
-          data: copyContent,
-        },
+        name: 'copy',
+        data: copyContent,
       });
     },
 

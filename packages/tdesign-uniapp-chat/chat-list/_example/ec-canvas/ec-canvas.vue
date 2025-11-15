@@ -1,33 +1,35 @@
 <template>
-    <view>
-        <!-- 新的：接口对其了H5 -->
-        <canvas
-            v-if="isUseNewCanvas"
-            type="2d"
-            class="ec-canvas"
-            :canvas-id="canvasId"
-            @init="init"
-            @touchstart="parseEventDynamicCode($event, ec.disableTouch ? '' : 'touchStart')"
-            @touchmove="parseEventDynamicCode($event, ec.disableTouch ? '' : 'touchMove')"
-            @touchend="parseEventDynamicCode($event, ec.disableTouch ? '' : 'touchEnd')"
-        ></canvas>
-        <!-- 旧的 -->
-        <canvas
-            v-else
-            class="ec-canvas"
-            :canvas-id="canvasId"
-            @init="init"
-            @touchstart="parseEventDynamicCode($event, ec.disableTouch ? '' : 'touchStart')"
-            @touchmove="parseEventDynamicCode($event, ec.disableTouch ? '' : 'touchMove')"
-            @touchend="parseEventDynamicCode($event, ec.disableTouch ? '' : 'touchEnd')"
-        ></canvas>
-    </view>
+  <view>
+    <!-- 新的：接口对其了H5 -->
+    <canvas
+      v-if="isUseNewCanvas"
+      type="2d"
+      class="ec-canvas"
+      :canvas-id="canvasId"
+      @init="init"
+      @touchstart="parseEventDynamicCode($event, ec.disableTouch ? '' : 'touchStart')"
+      @touchmove="parseEventDynamicCode($event, ec.disableTouch ? '' : 'touchMove')"
+      @touchend="parseEventDynamicCode($event, ec.disableTouch ? '' : 'touchEnd')"
+    />
+    <!-- 旧的 -->
+    <canvas
+      v-else
+      class="ec-canvas"
+      :canvas-id="canvasId"
+      @init="init"
+      @touchstart="parseEventDynamicCode($event, ec.disableTouch ? '' : 'touchStart')"
+      @touchmove="parseEventDynamicCode($event, ec.disableTouch ? '' : 'touchMove')"
+      @touchend="parseEventDynamicCode($event, ec.disableTouch ? '' : 'touchEnd')"
+    />
+  </view>
 </template>
 
 <script>
 /* eslint-disable */
 import WxCanvas from './wx-canvas';
-import * as echarts from './echarts';
+import * as echarts from './echarts.js';
+
+console.log('echarts', echarts.registerPreprocessor)
 let ctx;
 function compareVersion(v1, v2) {
     v1 = v1.split('.');
@@ -77,7 +79,7 @@ export default {
         ready: function () {
             // Disable prograssive because drawImage doesn't support DOM as parameter
             // See https://developers.weixin.qq.com/miniprogram/dev/api/canvas/CanvasContext.drawImage.html
-            echarts.registerPreprocessor((option) => {
+            echarts.registerPreprocessor?.((option) => {
                 if (option && option.series) {
                     if (option.series.length > 0) {
                         option.series.forEach((series) => {
@@ -102,9 +104,8 @@ export default {
             const canUseNewCanvas = compareVersion(version, '2.9.0') >= 0;
             const forceUseOldCanvas = this.forceUseOldCanvas;
             const isUseNewCanvas = canUseNewCanvas && !forceUseOldCanvas;
-            this.setData({
-                isUseNewCanvas
-            });
+                this.isUseNewCanvas = isUseNewCanvas;
+                
             if (forceUseOldCanvas && canUseNewCanvas) {
                 console.warn('开发者强制使用旧canvas,建议关闭');
             }
@@ -310,5 +311,9 @@ function wrapTouch(event) {
 }
 </script>
 <style>
-@import './ec-canvas.css';
+.ec-canvas {
+    width: 100%;
+    height: 100%;
+}
+
 </style>

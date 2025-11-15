@@ -12,7 +12,7 @@
           <view
             :class="classPrefix + '__files'"
             :data-index="index"
-            @tap="onFileWrapTap"
+            @click.stop="onFileWrapTap"
           >
             <block v-if="item.fileType === 'image'">
               <view :class="'file-image ' + classPrefix + '__file ' + (removable ? classPrefix + '__file--removable' : '')">
@@ -85,32 +85,30 @@
                   <view :class="classPrefix + '__title'">
                     {{ item.name }}
                   </view>
-                  <block>
-                    <view
-                      v-if="item.status === 'pending'"
-                      :class="classPrefix + '__desc'"
-                    >
-                      上传中...{{ item.progress || 0 + '%' }}
-                    </view>
-                    <view
-                      v-else-if="item.status === 'fail'"
-                      :class="classPrefix + '__desc'"
-                    >
-                      上传失败
-                    </view>
-                    <view
-                      v-else-if="item.status === 'error'"
-                      :class="classPrefix + '__desc'"
-                    >
-                      {{ item.errorMessage }}
-                    </view>
-                    <view
-                      v-else
-                      :class="classPrefix + '__desc'"
-                    >
-                      {{ item.desc }}
-                    </view>
-                  </block>
+                  <view
+                    v-if="item.status === 'pending'"
+                    :class="classPrefix + '__desc'"
+                  >
+                    上传中...{{ item.progress || 0 + '%' }}
+                  </view>
+                  <view
+                    v-else-if="item.status === 'fail'"
+                    :class="classPrefix + '__desc'"
+                  >
+                    上传失败
+                  </view>
+                  <view
+                    v-else-if="item.status === 'error'"
+                    :class="classPrefix + '__desc'"
+                  >
+                    {{ item.errorMessage }}
+                  </view>
+                  <view
+                    v-else
+                    :class="classPrefix + '__desc'"
+                  >
+                    {{ item.desc }}
+                  </view>
                 </view>
                 <view
                   v-if="removable"

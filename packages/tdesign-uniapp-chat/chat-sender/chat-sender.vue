@@ -3,13 +3,13 @@
     <view
       :class="classPrefix"
       :style="_._style([customStyle, inputStyle])"
-      @tap="handleOutsideClick"
+      @click.stop="handleOutsideClick"
     >
       <view
         :class="classPrefix + '__header'"
-        :style="attachmentsProps.items && attachmentsProps.items.length > 0 ? 'margin-top:-8rpx;' : ''"
+        :style="attachmentsProps && attachmentsProps.items && attachmentsProps.items.length > 0 ? 'margin-top:-8rpx;' : ''"
       >
-        <block v-if="attachmentsProps.items && attachmentsProps.items.length > 0">
+        <block v-if="attachmentsProps && attachmentsProps.items && attachmentsProps.items.length > 0">
           <view :class="classPrefix + '__attachments'">
             <attachments
               :items="attachmentsProps.items"
@@ -39,16 +39,16 @@
             :disable-default-padding="false"
             cursor-spacing="30"
             maxlength="-1"
-            :value="value"
+            :value="innerValue"
             @change="textChange"
             @focus="focusFn"
             @blur="blurFn"
-            @tap="handlerClick"
+            @click="handlerClick"
             @input="textChange"
             @keyboardheightchange="onkeyboardheightchange"
             @confirm="handleSendClick"
           />
-          <view :class="classPrefix + '__textarea--placeholder ' + (focusFlag || value ? 'hide' : '')">
+          <view :class="classPrefix + '__textarea--placeholder ' + (focusFlag || innerValue ? 'hide' : '')">
             {{ placeholder }}
           </view>
         </view>
@@ -65,28 +65,27 @@
                   :key="index"
                 >
                   <view>
-                    <block v-if="item.name === 'upload'">
-                      <view :class="'plus-btn ' + (item.status === 'disabled' ? 'disabled' : '')">
-                        <block>
-                          <view
-                            class="btn-func"
-                            :data-status="item.status"
-                            @tap.stop.prevent="handleUploadClick"
-                          >
-                            <t-icon
-                              :name="visible ? 'close' : 'add'"
-                              size="40rpx"
-                            />
-                          </view>
-                        </block>
+                    <view
+                      v-if="item.name === 'upload'"
+                      :class="'plus-btn ' + (item.status === 'disabled' ? 'disabled' : '')"
+                    >
+                      <view
+                        class="btn-func"
+                        :data-status="item.status"
+                        @click.stop="handleUploadClick"
+                      >
+                        <t-icon
+                          :name="visible ? 'close' : 'add'"
+                          size="40rpx"
+                        />
                       </view>
-                    </block>
+                    </view>
 
                     <block v-if="item.name === 'send'">
                       <block v-if="item.type === 'text'">
                         <view
-                          :class="'send-btn-' + item.type + ' ' + (value || loading ? 'active' : 'disabled')"
-                          @tap="handleSendClick"
+                          :class="'send-btn-' + item.type + ' ' + (innerValue || loading ? 'active' : 'disabled')"
+                          @click.stop="handleSendClick"
                         >
                           {{ loading ? '停止' : '发送' }}
                         </view>
@@ -94,9 +93,9 @@
                       <block v-else>
                         <view
                           :class="
-                            'send-btn-icon send-btn-' + item.type + ' ' + (value || loading ? 'active' : 'disabled') + ' ' + (loading ? 'stop' : '')
+                            'send-btn-icon send-btn-' + item.type + ' ' + (innerValue || loading ? 'active' : 'disabled') + ' ' + (loading ? 'stop' : '')
                           "
-                          @tap="handleSendClick"
+                          @click.stop="handleSendClick"
                         >
                           <block v-if="!loading">
                             <t-icon
@@ -124,7 +123,7 @@
     <view
       v-if="visible"
       :class="classPrefix + '__upload'"
-      @tap.stop.prevent="handleUploadClick"
+      @click.stop="handleUploadClick"
     >
       <block
         v-for="(name, index) in uploadNames"
@@ -133,7 +132,7 @@
         <view
           :class="classPrefix + '__upload-item'"
           :data-name="name"
-          @tap="handleUploadEntryClick"
+          @click.stop="handleUploadEntryClick"
         >
           <view :class="classPrefix + '__upload-item__icon'">
             <t-icon
@@ -157,7 +156,7 @@ import props from './props';
 import { uniComponent } from 'tdesign-uniapp/common/src/index';
 import { textareaStyle } from './computed';
 import _ from 'tdesign-uniapp/common/utils.wxs';
-
+import { nextTick } from 'tdesign-uniapp/common/utils';
 
 const name = `${prefix}-chat-sender`;
 
@@ -211,10 +210,21 @@ export default uniComponent({
       uploadNames: [],
 
       _,
+
+      innerValue: this.value,
     };
   },
 
   watch: {
+    value: {
+      handler(v) {
+        this.innerValue = v;
+        nextTick().then(() => {
+          this.innerValue = v;
+        });
+      },
+      immediate: true,
+    },
     fileList: {
       handler(newVal) {
       // 添加空值检查
@@ -262,9 +272,9 @@ export default uniComponent({
     },
 
     sendClick(e) {
-      if (this.value && !this.disabled) {
+      if (this.innerValue && !this.disabled) {
         this.$emit('send', {
-          value: this.value,
+          value: this.innerValue,
           e,
         });
       }
@@ -274,7 +284,7 @@ export default uniComponent({
       this.$emit(
         'stop',
         {
-          value: this.value,
+          value: this.innerValue,
           e,
         },
         { bubbles: false },
@@ -307,11 +317,13 @@ export default uniComponent({
     },
 
     textChange(e) {
-      console.log('e', e);
-      // this.value = e.detail.value;
+      const { value } = e.detail;
+      this.innerValue = value;
       this.$emit('change', {
-        value: e.detail.value, context: e,
+        value,
+        context: e,
       });
+      this.$emit('update:value', value);
     },
 
     handleUploadClick(e) {

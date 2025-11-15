@@ -1,6 +1,6 @@
 <template>
   <view>
-    <t-toast id="t-toast" />
+    <t-toast ref="t-toast" />
     <view class="container">
       <t-chat-actionbar
         :content="content"

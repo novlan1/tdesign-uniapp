@@ -12,7 +12,8 @@ const props = {
     },
     /** 对话列表的数据 */
     data: {
-        type: Array
+        type: Array,
+        default: () => ([])
     },
     /** 对话布局形式，支持两侧对齐与左对齐。使用插槽自定义对话内容时不生效，得用`t-chat-message`的`placement`属性 */
     layout: {

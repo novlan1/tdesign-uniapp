@@ -41,7 +41,7 @@
       <block v-else>
         <view :class="classPrefix + '__detail'">
           <!-- 属性传值优先级高于content插槽 -->
-          <block v-if="content.length > 0">
+          <block v-if="content && content.length > 0">
             <block
               v-for="(item, index) in content"
               :key="index"
