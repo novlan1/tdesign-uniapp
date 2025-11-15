@@ -6,8 +6,8 @@
     >
       <t-chat>
         <block
-          v-for="(item, index) in chatList"
-          :key="index"
+          v-for="(item) in chatList"
+          :key="item.key"
         >
           <t-chat-message
             :avatar="item.avatar || ''"
@@ -54,8 +54,15 @@ import Toast from 'tdesign-uniapp/toast';
 import { getNavigationBarHeight } from '../utils';
 
 
+let uniqueId = 0;
+const getUniqueKey = () => {
+  uniqueId += 1;
+  return `key-${uniqueId}`;
+};
+
 const mockData = {
   avatar: 'https://tdesign.gtimg.com/site/chat-avatar.png',
+  key: getUniqueKey(),
   message: {
     role: 'assistant',
     content: [
@@ -110,6 +117,7 @@ export default {
       chatList: [
         {
           avatar: 'https://tdesign.gtimg.com/site/chat-avatar.png',
+          key: getUniqueKey(),
           message: {
             status: 'complete',
             role: 'assistant',
@@ -196,6 +204,7 @@ export default {
 
       // 创建用户消息对象
       const userMessage = {
+        key: getUniqueKey(),
         message: {
           role: 'user',
           content: [

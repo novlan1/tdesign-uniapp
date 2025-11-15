@@ -9,8 +9,8 @@
         @scroll="onScroll($event, { tagId: 'chatList' })"
       >
         <block
-          v-for="(item, index) in chatList"
-          :key="index"
+          v-for="(item) in chatList"
+          :key="item.key"
         >
           <t-chat-message
             :avatar="item.avatar || ''"
@@ -61,6 +61,12 @@ import Toast from 'tdesign-uniapp/toast';
 import { getNavigationBarHeight } from '../utils';
 
 
+let uniqueId = 0;
+const getUniqueKey = () => {
+  uniqueId += 1;
+  return `key-${uniqueId}`;
+};
+
 const mockData = `南极的自动提款机并没有一个特定的专属名称，但历史上确实有一台ATM机曾短暂存在于南极的**麦克默多站**（McMurdo Station）。这台ATM由美国**富兰克林国家银行**（Wells Fargo）于1998年安装，主要供驻扎在该站的科研人员使用。不过，由于南极的极端环境和极低的人口密度，这台ATM机并未长期运行，最终被移除。
 
 **背景补充：**
@@ -106,6 +112,7 @@ export default {
           avatar: 'https://tdesign.gtimg.com/site/chat-avatar.png',
           role: 'assistant',
           status: 'complete',
+          key: getUniqueKey(),
           content: [
             {
               type: 'text',
@@ -115,6 +122,7 @@ export default {
         },
         {
           role: 'user',
+          key: getUniqueKey(),
           content: [
             {
               type: 'text',
@@ -154,10 +162,6 @@ export default {
   created() {},
   methods: {
     attached() {
-      /**
-             * 计算内容区域高度
-             * 生成CSS calc表达式：calc(100vh - 96rpx - 导航高度 - 底部安全区域高度)
-             */
       try {
         // 获取当前的导航栏高度和安全区域高度
         const navigationBarHeight = getNavigationBarHeight() || 0;
@@ -197,6 +201,7 @@ export default {
       // 创建用户消息对象
       const userMessage = {
         role: 'user',
+        key: getUniqueKey(),
         content: [
           {
             type: 'text',
@@ -240,6 +245,7 @@ export default {
       // 请求中
       const assistantMessage = {
         role: 'assistant',
+        key: getUniqueKey(),
         content: [
           {
             type: 'markdown',

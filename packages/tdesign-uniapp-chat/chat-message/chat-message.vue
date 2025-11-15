@@ -5,7 +5,7 @@
     @longpress="handleLongPress"
   >
     <view
-      v-if="showAvatar"
+      v-if="avatar"
       :class="classPrefix + '__avatar'"
     >
       <block v-if="avatar">
@@ -17,11 +17,11 @@
     </view>
     <view :class="contentClasses">
       <view
-        v-if="showName || showDateTime"
+        v-if="name || datetime"
         :class="classPrefix + '__base'"
       >
         <text
-          v-if="showName"
+          v-if="name"
           :class="classPrefix + '__name'"
         >
           {{ name }}
@@ -118,9 +118,6 @@ export default uniComponent({
     return {
       classPrefix: name,
       article: '',
-      showAvatar: null,
-      showName: null,
-      showDateTime: null,
       contentClasses: [],
       chatItemClass: [],
 
@@ -129,15 +126,6 @@ export default uniComponent({
   },
 
   watch: {
-    avatar() {
-      this.setShowAvatar();
-    },
-    name() {
-      this.setShowName();
-    },
-    datetime() {
-      this.setShowDateTime();
-    },
     classPrefix() {
       this.setContentClasses();
       this.setChatItemClass();
@@ -152,17 +140,9 @@ export default uniComponent({
         this.setChatItemClass();
       },
     },
-    showDateTime: {
-      handler() {
-        this.setChatItemClass();
-      },
-    },
   },
 
   mounted() {
-    this.setShowAvatar();
-    this.setShowName();
-    this.setShowDateTime();
     this.setContentClasses();
     this.setChatItemClass();
   },
@@ -175,27 +155,15 @@ export default uniComponent({
       });
     },
 
-    setShowAvatar() {
-      this.showAvatar = this.avatar || '';
-    },
-
-    setShowName() {
-      this.showName =  this.name || '';
-    },
-
-    setShowDateTime() {
-      this.showDateTime = this.datetime || '';
-    },
-
     setContentClasses() {
       this.contentClasses = [`${this.classPrefix}__content`];
     },
 
     setChatItemClass() {
-      const { classPrefix, showDateTime } = this;
+      const { classPrefix, datetime } = this;
       const { variant, role, placement } = this;
       const baseClass = [`${classPrefix}`, `${classPrefix}--${variant}`, role, placement];
-      if (showDateTime) {
+      if (datetime) {
         baseClass.push(`${classPrefix}__header`);
       }
       this.chatItemClass = baseClass;

@@ -7,7 +7,7 @@
       <t-chat>
         <block
           v-for="(item, chatIndex) in chatList"
-          :key="chatIndex"
+          :key="item.key"
         >
           <t-chat-message
             :avatar="item.avatar || ''"
@@ -96,6 +96,11 @@ import tToast from 'tdesign-uniapp/toast/toast.vue';
 import Toast from 'tdesign-uniapp/toast';
 import { getNavigationBarHeight } from '../utils';
 
+let uniqueId = 0;
+const getUniqueKey = () => {
+  uniqueId += 1;
+  return `key-${uniqueId}`;
+};
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const fetchStream = async (str, options) => {
@@ -138,6 +143,7 @@ export default {
       chatList: [
         {
           avatar: 'https://tdesign.gtimg.com/site/chat-avatar.png',
+          key: getUniqueKey(),
           message: {
             role: 'assistant',
             content: [
@@ -200,10 +206,6 @@ export default {
   created() {},
   methods: {
     attached() {
-      /**
-             * 计算内容区域高度
-             * 生成CSS calc表达式：calc(100vh - 96rpx - 导航高度 - 底部安全区域高度)
-             */
       try {
         // 获取当前的导航栏高度和安全区域高度
         const navigationBarHeight = getNavigationBarHeight() || 0;
@@ -229,6 +231,7 @@ export default {
 
       // 创建用户消息对象
       const userMessage = {
+        key: getUniqueKey(),
         message: {
           role: 'user',
           content: [
@@ -291,6 +294,7 @@ export default {
       this.loading = true;
       const assistantMessage = {
         avatar: 'https://tdesign.gtimg.com/site/chat-avatar.png',
+        key: getUniqueKey(),
         message: {
           role: 'assistant',
           content: [

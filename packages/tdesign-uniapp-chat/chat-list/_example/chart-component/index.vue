@@ -1,5 +1,4 @@
 <template>
-  <!-- index.wxml -->
   <view
     v-if="ec"
     class="container"
@@ -13,7 +12,7 @@
 
 <script>
 import ecCanvas from '../ec-canvas/ec-canvas';
-import * as echarts from '../ec-canvas/echarts';
+import * as echarts from 'echarts';
 function onInitNormalLine(opt) {
   console.log('contentItem数据:', opt);
 

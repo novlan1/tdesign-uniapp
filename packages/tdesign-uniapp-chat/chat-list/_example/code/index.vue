@@ -7,7 +7,7 @@
       <t-chat>
         <block
           v-for="(item, chatIndex) in chatList"
-          :key="chatIndex"
+          :key="item.key"
         >
           <t-chat-message
             :avatar="item.avatar || ''"
@@ -74,6 +74,11 @@ import tToast from 'tdesign-uniapp/toast/toast.vue';
 import Toast from 'tdesign-uniapp/toast';
 import { getNavigationBarHeight } from '../utils';
 
+let uniqueId = 0;
+const getUniqueKey = () => {
+  uniqueId += 1;
+  return `key-${uniqueId}`;
+};
 
 const mockData1 = '```jsx\nimport { Form, Input, Button, Message } from \'tdesign-react\';\n\nconst LoginForm = () => {\n  const [loading, setLoading] = useState(false);\n\n  const onSubmit = async ({ validateResult }) => {\n    if (validateResult === true) {\n      setLoading(true);\n      try {\n        // 登录逻辑\n        Message.success(\'登录成功\');\n      } catch {\n        Message.error(\'登录失败\');\n      } finally {\n        setLoading(false);\n      }\n    }\n  };\n\n  return (\n    <Form onSubmit={onSubmit}>\n      <Form.FormItem name="username" label="用户名" rules={[{ required: true }]}>\n        <Input placeholder="请输入用户名" />\n      </Form.FormItem>\n\n      <Form.FormItem name="password" label="密码" rules={[{ required: true }]}>\n        <Input type="password" />\n      </Form.FormItem>\n\n      <Form.FormItem>\n        <Button theme="primary" type="submit" loading={loading} block>\n          登录\n        </Button>\n      </Form.FormItem>\n    </Form>\n  );\n};\n```\n\n';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -102,6 +107,7 @@ export default {
       chatList: [
         {
           avatar: 'https://tdesign.gtimg.com/site/chat-avatar.png',
+          key: getUniqueKey(),
           message: {
             role: 'assistant',
             content: [
@@ -181,6 +187,7 @@ export default {
 
       // 创建用户消息对象
       const userMessage = {
+        key: getUniqueKey(),
         message: {
           role: 'user',
           content: [
@@ -222,6 +229,7 @@ export default {
       });
       const assistantMessage = {
         avatar: 'https://tdesign.gtimg.com/site/chat-avatar.png',
+        key: getUniqueKey(),
         message: {
           role: 'assistant',
           content: [

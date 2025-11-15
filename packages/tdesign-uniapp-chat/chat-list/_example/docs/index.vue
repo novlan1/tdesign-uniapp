@@ -7,7 +7,7 @@
       <t-chat>
         <block
           v-for="(item, chatIndex) in chatList"
-          :key="chatIndex"
+          :key="item.key"
         >
           <t-chat-message
             :avatar="item.avatar || ''"
@@ -61,6 +61,12 @@ import tToast from 'tdesign-uniapp/toast/toast.vue';
 import Toast from 'tdesign-uniapp/toast';
 import { getNavigationBarHeight } from '../utils';
 
+let uniqueId = 0;
+const getUniqueKey = () => {
+  uniqueId += 1;
+  return `key-${uniqueId}`;
+};
+
 
 const mockData1 = '🌼宝子们，春天来啦，这些户外郊游打卡地你必须知道👏\n\n🌟郊野公园\n这里有大片的草地和各种花卉，随便一拍都是大片既视感📷。还能放风筝、野餐，享受惬意的春日时光。\n\n🌳植物园\n各种珍稀植物汇聚于此，仿佛置身于绿色的海洋。漫步其中，感受大自然的神奇与美丽。\n\n💧湖边湿地\n湖水清澈，周围生态环境优越。能看到很多候鸟和水生植物，是亲近自然的好去处。\n\n宝子们，赶紧收拾行囊，去这些地方打卡吧😜。\n\n#春天郊游 #打卡目的地 #户外之旅 #春日美景';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -95,6 +101,7 @@ export default {
       chatList: [
         {
           avatar: 'https://tdesign.gtimg.com/site/chat-avatar.png',
+          key: getUniqueKey(),
           message: {
             role: 'assistant',
             content: [
@@ -175,10 +182,6 @@ export default {
   created() {},
   methods: {
     attached() {
-      /**
-             * 计算内容区域高度
-             * 生成CSS calc表达式：calc(100vh - 96rpx - 导航高度 - 底部安全区域高度)
-             */
       try {
         // 获取当前的导航栏高度和安全区域高度
         const navigationBarHeight = getNavigationBarHeight() || 0;
@@ -224,6 +227,7 @@ export default {
       this.fileList = [];
 
       const userMessage = {
+        key: getUniqueKey(),
         message: {
           role: 'user',
           content,
@@ -277,6 +281,7 @@ export default {
       this.loading = true;
       const assistantMessage = {
         avatar: 'https://tdesign.gtimg.com/site/chat-avatar.png',
+        key: getUniqueKey(),
         message: {
           role: 'assistant',
           content: [
