@@ -121,5 +121,16 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.chat-example {
+    padding: 32rpx;
+    box-sizing: border-box;
+    background-color: var(--td-bg-color-container);
+}
+
+.chat-example-block {
+    display: inline-flex;
+    width: 336rpx;
+    margin-bottom: 26rpx;
+}
+
 </style>

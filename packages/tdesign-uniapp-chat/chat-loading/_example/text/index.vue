@@ -23,5 +23,8 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.chat-example {
+    background-color: var(--td-bg-color-container);
+    padding: 32rpx;
+}
 </style>

@@ -86,5 +86,11 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.chat-example {
+    background-color: var(--td-bg-color-container);
+    padding: 32rpx;
+    display: flex;
+    align-items: center;
+    gap: 48rpx;
+}
 </style>

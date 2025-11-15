@@ -77,5 +77,9 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.chat-example-block {
+    padding: 32rpx;
+    background-color: var(--td-bg-color-container);
+}
+
 </style>

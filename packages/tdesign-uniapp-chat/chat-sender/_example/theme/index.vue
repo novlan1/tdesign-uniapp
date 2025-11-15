@@ -103,5 +103,10 @@ export default {
 };
 </script>
 <style>
-@import './index.css';
+.button-example {
+    margin: 32rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
 </style>
