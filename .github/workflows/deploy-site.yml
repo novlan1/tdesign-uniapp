@@ -34,7 +34,7 @@ jobs:
         run: pnpm run build && echo '' > ./packages/site/dist/mobile/.nojekyll 
 
       - name: Build Chat
-        run: pnpm --filter="./packages/site-chat" build && echo '' > ./packages/site-chat/dist/mobile/.nojekyll 
+        run: pnpm --filter="./packages/site-chat" build
         
       - name: Install expect
         run: sudo apt-get update && sudo apt-get install -y expect
