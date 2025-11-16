@@ -4,11 +4,12 @@ const { execCommand } = require('t-comm');
 
 require('./local.env')();
 const args = process.argv.slice(2);
+const isChat = args[2] == 1;
 
 const DEPLOY_CONFIG = {
   publishBash: path.resolve(__dirname, './publish.sh'),
-  distDir: './packages/site/dist/',
-  hostTargetDir: '/usr/share/nginx/html/tdesign-uniapp/',
+  distDir: isChat ? './packages/site-chat/dist/' : './packages/site/dist/',
+  hostTargetDir: isChat ? '/usr/share/nginx/html/tdesign-uniapp-chat/' : '/usr/share/nginx/html/tdesign-uniapp/',
   hostName: args[0] || process.env.HOST_NAME,
   hostPwd: args[1] || process.env.HOST_PWD,
   HOST_PORT: 22,

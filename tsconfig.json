@@ -4,12 +4,16 @@
     "sourceMap": true,
     "baseUrl": ".",
     "ignoreDeprecations": "5.0",
+    "allowJs": true,
     "paths": {
       "tdesign-uniapp/*": [
         "packages/tdesign/*"
       ],
       "tdesign-site/*": [
         "packages/demo/*"
+      ],
+      "tdesign-uniapp-chat/*": [
+        "packages/tdesign-uniapp-chat/*"
       ]
     },
     "lib": [
@@ -30,5 +34,8 @@
     "packages/**/*.vue",
     "./*.ts",
     "./types/*.ts"
+  ],
+  "exclude": [
+    "packages/tdesign-app/uni_modules/uni-upgrade-center-app/**/*.ts"
   ]
 }

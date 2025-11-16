@@ -28,6 +28,33 @@
       "path": "pages-more/side-bar/custom/index"
     },
     {
+      "path": "pages-more/chat-list/chat-list"
+    },
+    {
+      "path": "pages-more/chat-message/chat-message"
+    },
+    {
+      "path": "pages-more/chat-sender/chat-sender"
+    },
+    {
+      "path": "pages-more/chat-markdown/chat-markdown"
+    },
+    {
+      "path": "pages-more/chat-content/chat-content"
+    },
+    {
+      "path": "pages-more/chat-thinking/chat-thinking"
+    },
+    {
+      "path": "pages-more/attachments/attachments"
+    },
+    {
+      "path": "pages-more/chat-actionbar/chat-actionbar"
+    },
+    {
+      "path": "pages-more/chat-loading/chat-loading"
+    },
+    {
       "path": "pages-more/button/button"
     },
     {
@@ -221,6 +248,42 @@
   "condition": {
     "current": 0,
     "list": [
+      {
+        "name": "chat-list",
+        "pathName": "pages-more/chat-list/chat-list"
+      },
+      {
+        "name": "chat-message",
+        "pathName": "pages-more/chat-message/chat-message"
+      },
+      {
+        "name": "chat-sender",
+        "pathName": "pages-more/chat-sender/chat-sender"
+      },
+      {
+        "name": "chat-markdown",
+        "pathName": "pages-more/chat-markdown/chat-markdown"
+      },
+      {
+        "name": "chat-content",
+        "pathName": "pages-more/chat-content/chat-content"
+      },
+      {
+        "name": "chat-thinking",
+        "pathName": "pages-more/chat-thinking/chat-thinking"
+      },
+      {
+        "name": "attachments",
+        "pathName": "pages-more/attachments/attachments"
+      },
+      {
+        "name": "chat-actionbar",
+        "pathName": "pages-more/chat-actionbar/chat-actionbar"
+      },
+      {
+        "name": "chat-loading",
+        "pathName": "pages-more/chat-loading/chat-loading"
+      },
       {
         "name": "button",
         "pathName": "pages-more/button/button"

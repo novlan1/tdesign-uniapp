@@ -67,6 +67,24 @@ export const docs = [
       },
     ],
   },
+  // {
+  //   title: '高阶组件',
+  //   titleEn: 'Pro',
+  //   type: 'component',
+  //   children: [
+  //     {
+  //       title: 'AI Chat 对话',
+  //       titleEn: 'Chat',
+  //       name: 'chat',
+  //       path: '/tdesign-uniapp-chat',
+  //       redirect: () => {
+  //         const isTDesignHost = window.location.host.includes('tdesign');
+  //         const baseUrl = isTDesignHost ? `//${window.location.host}` : 'https://uwayfly.com';
+  //         window.open(`${baseUrl}/tdesign-uniapp-chat`, '_blank');
+  //       },
+  //     },
+  //   ],
+  // },
   {
     title: '基础',
     titleEn: 'Base',
