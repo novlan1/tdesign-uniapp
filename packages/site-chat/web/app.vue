@@ -16,7 +16,7 @@
     </template>
     <td-doc-aside
       ref="tdDocAside"
-      title="Uni App"
+      title="Uni App Chat"
     >
       <!-- <td-select ref="tdSelect" :value="version" slot="extra"></td-select> -->
     </td-doc-aside>

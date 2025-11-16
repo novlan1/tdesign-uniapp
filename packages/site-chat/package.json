@@ -1,8 +1,8 @@
 {
-  "name": "tdesign-uniapp-site",
+  "name": "tdesign-uniapp-chat-site",
   "private": "true",
   "version": "0.0.1",
-  "description": "site of tdesign-uniapp",
+  "description": "site of tdesign-uniapp-chat",
   "author": "novlan1",
   "homepage": "https://uwayfly.com/tdesign-uniapp/",
   "bugs": {
