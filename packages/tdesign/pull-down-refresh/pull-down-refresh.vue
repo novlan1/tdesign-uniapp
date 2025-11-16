@@ -19,9 +19,6 @@
     @touchmove="onTouchMove"
     @touchend="onTouchEnd"
     @scroll="onScroll"
-    @dragstart="onDragStart"
-    @dragging="onDragging"
-    @dragend="onDragEnd"
     @scrolltoupper="onScrollToTop"
     @scrolltolower="onScrollToBottom"
   >
@@ -36,7 +33,7 @@
         aria-live="polite"
       >
         <t-loading
-          v-if="refreshStatus === 2"
+          v-if="refreshStatus === REFRESH_STATUS_MAP.LOADING"
           :delay="loadingProps.delay || 0"
           :duration="loadingProps.duration || 800"
           :indicator="loadingProps.indicator || true"
@@ -52,7 +49,7 @@
           :t-class="tClassLoading"
         />
         <view
-          v-else-if="refreshStatus >= 0"
+          v-else-if="refreshStatus > REFRESH_STATUS_MAP.INITIAL"
           :class="classPrefix + '__text ' + tClassText"
         >
           {{ dataLoadingTexts[refreshStatus] }}
@@ -75,6 +72,13 @@ import { ParentMixin, RELATION_MAP } from '../common/relation';
 
 const name = `${prefix}-pull-down-refresh`;
 const defaultLoadingTexts = ['下拉刷新', '松手刷新', '正在刷新', '刷新完成'];
+const REFRESH_STATUS_MAP = {
+  INITIAL: -1,
+  PULLING: 0,
+  LOSING: 1,
+  LOADING: 2,
+  SUCCESS: 3,
+};
 
 
 export default uniComponent({
@@ -114,7 +118,7 @@ export default uniComponent({
       distanceTop: 0,
       barHeight: 0,
       tipsHeight: 0,
-      refreshStatus: -1,
+      refreshStatus: REFRESH_STATUS_MAP.INITIAL,
       loosing: false,
       enableToRefresh: true,
       scrollTop: 0,
@@ -129,27 +133,41 @@ export default uniComponent({
       refreshStatusTimer: null,
 
       _,
+      REFRESH_STATUS_MAP,
     };
+  },
+  computed: {
+    touchEnable() {
+      return this.refreshStatus !== REFRESH_STATUS_MAP.LOADING
+        && this.refreshStatus !== REFRESH_STATUS_MAP.SUCCESS
+        && !this.disabled;
+    },
   },
   watch: {
     value(val) {
       if (!val) {
         clearTimeout(this.maxRefreshAnimateTimeFlag);
-        if (this.refreshStatus > 0) {
-          this.refreshStatus = 3;
+
+        if (this.refreshStatus > REFRESH_STATUS_MAP.PULLING) {
+          this.refreshStatus = REFRESH_STATUS_MAP.SUCCESS;
         }
-        setTimeout(() => {
+
+        clearTimeout(this.successTimer);
+
+        this.successTimer = setTimeout(() => {
           this.barHeight = 0;
+          this.refreshStatus = REFRESH_STATUS_MAP.INITIAL;
         }, unitConvert(this.successDuration));
       } else {
         this.doRefresh();
       }
     },
+
     barHeight(val) {
       this.resetTimer();
-      if (val === 0 && this.refreshStatus !== -1) {
+      if (val === 0 && this.refreshStatus !== REFRESH_STATUS_MAP.INITIAL) {
         this.refreshStatusTimer = setTimeout(() => {
-          this.refreshStatus = -1;
+          this.refreshStatus = REFRESH_STATUS_MAP.INITIAL;
         }, 240);
       }
 
@@ -226,8 +244,11 @@ export default uniComponent({
     },
 
     onTouchStart(e) {
-      if (this.isPulling || !this.enableToRefresh || this.disabled) return;
+      if (this.isPulling || !this.enableToRefresh || !this.touchEnable) return;
+
       const { touches } = e;
+      this.$emit('dragstart', e);
+
       if (touches.length !== 1) return;
       const { pageX, pageY } = touches[0];
 
@@ -237,7 +258,8 @@ export default uniComponent({
     },
 
     onTouchMove(e) {
-      if (!this.startPoint || this.disabled) return;
+      if (!this.startPoint || !this.touchEnable) return;
+
 
       const { touches } = e;
 
@@ -249,6 +271,7 @@ export default uniComponent({
       if (offset > 0) {
         this.setRefreshBarHeight(offset);
       }
+      this.$emit('dragging', e);
     },
 
     onTouchEnd(e) {
@@ -270,36 +293,20 @@ export default uniComponent({
       } else {
         this.barHeight = 0;
       }
-    },
 
-    onDragStart(e) {
-      const { scrollTop, scrollLeft } = e.detail;
-
-      this.$emit('dragstart', { scrollTop, scrollLeft });
-    },
-
-    onDragging(e) {
-      const { scrollTop, scrollLeft } = e.detail;
-
-      this.$emit('dragging', { scrollTop, scrollLeft });
-    },
-
-    onDragEnd(e) {
-      const { scrollTop, scrollLeft } = e.detail;
-
-      this.$emit('dragend', { scrollTop, scrollLeft });
+      this.$emit('dragend', e);
     },
 
     doRefresh() {
       if (this.disabled) return;
       this.barHeight = this._loadingBarHeight;
-      this.refreshStatus = 2;
+      this.refreshStatus = REFRESH_STATUS_MAP.LOADING;
       this.loosing = true;
 
       this.maxRefreshAnimateTimeFlag = setTimeout(() => {
         this.maxRefreshAnimateTimeFlag = null;
 
-        if (this.refreshStatus === 2) {
+        if (this.refreshStatus === REFRESH_STATUS_MAP.LOADING) {
           // 超时回调
           this.$emit('timeout');
           this._trigger('change', { value: false });
@@ -312,9 +319,9 @@ export default uniComponent({
       const data = { barHeight };
 
       if (barHeight >= this._loadingBarHeight) {
-        data.refreshStatus = 1;
+        data.refreshStatus = REFRESH_STATUS_MAP.LOSING;
       } else {
-        data.refreshStatus = 0;
+        data.refreshStatus = REFRESH_STATUS_MAP.PULLING;
       }
       return new Promise((resolve) => {
         Object.keys(data).forEach((key) => {
