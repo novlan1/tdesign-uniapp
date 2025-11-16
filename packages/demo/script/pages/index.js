@@ -38,7 +38,7 @@ const getComponentPages = (list,  isSkyline) => list.reduce((acc, item) => [
 
 function main() {
   const list = [
-    chat,
+    // chat,
     base,
     nav,
     form,
@@ -71,12 +71,34 @@ function main() {
       },
     })),
   ];
+  rawData.subPackages = [
+    ...chat.childArr.map((item) => {
+      const camelName = hyphenate(item.name);
+      return {
+        root: `pages-more/${camelName}`,
+        pages: [
+          {
+            path: camelName,
+          },
+        ],
+      };
+    }),
+  ];
   rawData.condition = {
     current: 0,
-    list: componentPages.map(item => ({
-      name: item.name,
-      pathName: item.path,
-    })),
+    list: [
+      ...componentPages.map(item => ({
+        name: item.name,
+        pathName: item.path,
+      })),
+      ...rawData.subPackages.reduce((acc, item) => [
+        ...acc,
+        ...item.pages.map(page => ({
+          name: page.path,
+          pathName: `${item.root}/${page.path}`,
+        })),
+      ], []),
+    ],
   };
   writeFileSync(pagesJson, `${JSON.stringify(rawData, null, 2)}\n`, false);
   console.log('[pages.json] Wrote!');
