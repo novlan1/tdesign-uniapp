@@ -36,12 +36,12 @@
                 <view
                   v-if="removable"
                   :class="classPrefix + '__remove'"
+                  @click.stop="onRemoveTap($event, { index })"
                 >
                   <t-icon
                     :data-index="index"
                     name="multiply"
                     size="16px"
-                    @click="onRemoveTap($event, { index })"
                   />
                 </view>
               </view>
@@ -113,12 +113,12 @@
                 <view
                   v-if="removable"
                   :class="classPrefix + '__remove'"
+                  @click.stop="onRemoveTap($event, { index })"
                 >
                   <t-icon
                     :data-index="index"
                     name="multiply"
                     size="16px"
-                    @click.stop.prevent="onRemoveTap($event, { index })"
                   />
                 </view>
               </view>
@@ -205,10 +205,8 @@ export default uniComponent({
         this.handleFileClick(item);
       }
     },
-    onRemoveTap(e) {
-      const { index } = e.currentTarget.dataset || {};
+    onRemoveTap(e, { index }) {
       const item = this.files?.[index];
-      if (typeof e?.stopPropagation === 'function') e.stopPropagation();
       if (item !== undefined) {
         this.handleRemove(item, index);
       }
