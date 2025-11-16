@@ -7,9 +7,16 @@ const { toPascal } = require('../utils/utils');
 
 const CONFIG = {
   pkgJsonPath: path.resolve(__dirname, '../../../tdesign/package.json'),
+  chatPkgJsonPath: path.resolve(__dirname, '../../../tdesign-uniapp-chat/package.json'),
+
   dtsDir: path.resolve(__dirname, '../../../tdesign/types'),
+  chatDtsDir: path.resolve(__dirname, '../../../tdesign-uniapp-chat/types'),
+
   indexPath: path.resolve(__dirname, '../../../tdesign/types/index.d.ts'),
+  chatIndexPath: path.resolve(__dirname, '../../../tdesign-uniapp-chat/types/index.d.ts'),
+
   globalDTSPath: path.resolve(__dirname, '../../../tdesign/global.d.ts'),
+  chatGlobalDTSPath: path.resolve(__dirname, '../../../tdesign-uniapp-chat/global.d.ts'),
   filterTypes: ['form-item'],
 };
 
@@ -17,7 +24,7 @@ const OTHER_EXPORTS = {
   './*': './*',
 };
 
-const DTS_TEMPLATE = `import type { TransformEventHandlers, ExtractNonOnProps } from '../common/common';
+const getDTSTemplate = isChat => `import type { TransformEventHandlers, ExtractNonOnProps } from '${isChat ? 'tdesign-uniapp' : '..'}/common/common';
 import type { Td{{Component}}Props } from '../{{component}}/type';
 
 export type {{Component}}Props = ExtractNonOnProps<Td{{Component}}Props>;
@@ -35,9 +42,15 @@ const GLOBAL_DTS_TEMPLATE = `declare module 'vue' {
 export {};
 `;
 
-
-function main() {
-  const list = glob.sync('packages/tdesign/*/*.vue');
+async function genOnProject({
+  pkgGlob,
+  pkgJsonPath,
+  dtsDir,
+  indexPath,
+  globalDTSPath,
+  isChat,
+}) {
+  const list = glob.sync(pkgGlob);
   const filtered = list.filter((item) => {
     const typeFile = path.resolve(item, '../type.ts');
     return fs.existsSync(typeFile);
@@ -46,14 +59,34 @@ function main() {
   const fileNames = filtered.map(item => item.split(path.sep)[item.split(path.sep).length - 2]);
   fileNames.sort();
 
-  changePkgExports(fileNames);
-  genDTS(fileNames);
-  genIndexContent(fileNames);
-  getGlobalDTS(fileNames);
+  changePkgExports(fileNames, pkgJsonPath);
+  genDTS({ list: fileNames, dtsDir, isChat });
+  genIndexContent(fileNames, indexPath);
+  getGlobalDTS(fileNames, globalDTSPath);
+}
+
+async function main() {
+  await genOnProject({
+    pkgGlob: 'packages/tdesign/*/*.vue',
+    pkgJsonPath: CONFIG.pkgJsonPath,
+    dtsDir: CONFIG.dtsDir,
+    indexPath: CONFIG.indexPath,
+    globalDTSPath: CONFIG.globalDTSPath,
+    isChat: false,
+  });
+
+  await genOnProject({
+    pkgGlob: 'packages/tdesign-uniapp-chat/*/*.vue',
+    pkgJsonPath: CONFIG.chatPkgJsonPath,
+    dtsDir: CONFIG.chatDtsDir,
+    indexPath: CONFIG.chatIndexPath,
+    globalDTSPath: CONFIG.chatGlobalDTSPath,
+    isChat: true,
+  });
 }
 
 
-function changePkgExports(fileNames) {
+function changePkgExports(fileNames, pkgJsonPath) {
   const exportsType = fileNames.reduce((acc, item) => {
     const key = `./${item}/${item}.vue`;
     return {
@@ -68,35 +101,35 @@ function changePkgExports(fileNames) {
     ...OTHER_EXPORTS,
   });
 
-  const pkgJson = require(CONFIG.pkgJsonPath);
+  const pkgJson = require(pkgJsonPath);
   pkgJson.exports = exportsType;
-  writeFileSync(CONFIG.pkgJsonPath, `${JSON.stringify(pkgJson, null, 2)}\n`);
+  writeFileSync(pkgJsonPath, `${JSON.stringify(pkgJson, null, 2)}\n`);
 }
 
 
-function genDTS(list) {
+function genDTS({ list, dtsDir, isChat }) {
   list.forEach((item) => {
-    const fileName = path.resolve(CONFIG.dtsDir, `${item}.d.ts`);
-    const content = DTS_TEMPLATE
+    const fileName = path.resolve(dtsDir, `${item}.d.ts`);
+    const content = getDTSTemplate(isChat)
       .replaceAll('{{Component}}', toPascal(item))
       .replaceAll('{{component}}', item);
     writeFileSync(fileName, content);
   });
 }
 
-function genIndexContent(fileNames) {
+function genIndexContent(fileNames, indexPath) {
   const content = Array.from(new Set(fileNames))
     .filter(item => !CONFIG.filterTypes.includes(item))
     .map(item => `export * from '../${item}/type';`);
-  writeFileSync(CONFIG.indexPath, `${content.join('\n')}\n`);
+  writeFileSync(indexPath, `${content.join('\n')}\n`);
 }
 
-function getGlobalDTS(fileNames) {
+function getGlobalDTS(fileNames, globalDTSPath) {
   const content = Array.from(new Set(fileNames))
     .map(item => `T${toPascal(item)}: typeof import('tdesign-uniapp/${item}/${item}.vue').default;`);
 
   const result = GLOBAL_DTS_TEMPLATE.replace('{{CONTENT}}', content.join('\n    '));
-  writeFileSync(CONFIG.globalDTSPath, result);
+  writeFileSync(globalDTSPath, result);
 }
 
 

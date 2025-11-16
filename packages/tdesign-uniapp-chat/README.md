@@ -12,8 +12,8 @@
   <a href="https://www.npmjs.com/package/tdesign-uniapp">
     <img src="https://img.shields.io/npm/v/tdesign-uniapp.svg?sanitize=true" alt="Version">
   </a>
-  <a href="https://www.npmjs.com/package/tdesign-uniapp">
-    <img src="https://img.shields.io/npm/dm/tdesign-uniapp" alt="Downloads">
+  <a href="https://www.npmjs.com/package/tdesign-uniapp-chat">
+    <img src="https://img.shields.io/npm/dm/tdesign-uniapp-chat" alt="Downloads">
   </a>
   <a href="https://pkg.pr.new/~/novlan1/tdesign-uniapp">
     <img src="https://pkg.pr.new/badge/novlan1/tdesign-uniapp?style=flat&color=000&logoSize=auto" alt="Downloads">
@@ -23,11 +23,11 @@
   </a>
 </p>
 
-[TDesign](https://github.com/Tencent/tdesign) 适配 [uniapp](https://uniapp.dcloud.net.cn/) 的组件库。
+[TDesign Chat](https://github.com/Tencent/tdesign) 适配 [uniapp](https://uniapp.dcloud.net.cn/) 的组件库。
 
 ## 文档
 
-[点此查看](https://uwayfly.com/tdesign-uniapp/)
+[点此查看](https://uwayfly.com/tdesign-uniapp-chat/)
 
 ## 预览
 
@@ -42,7 +42,7 @@
 ### NPM 方式
 
 ```bash
-npm i tdesign-uniapp
+npm i tdesign-uniapp-chat
 ```
 
 ### UNI_MODULES 方式
@@ -67,63 +67,27 @@ import 'tdesign-uniapp/common/style/theme/index.less';
 
 ```html
 <template>
-  <t-loading />
+  <t-chat-list />
 </template>
 
 <script lang="ts" setup>
-import TLoading from 'tdesign-uniapp/loading/loading.vue';
+import TChatList from 'tdesign-uniapp-chat/chat-list/chat-list.vue';
 </script>
 ```
 
 只提供按需导入方式，不支持全量导入（全量导入在小程序下有兼容性问题）。
 
-## 自动导入
-
-在 `pages.json` 配置 [easycom](https://uniapp.dcloud.net.cn/collocation/pages.html#easycom)，可实现自动导入。
-
-### CLI 模式
-
-使用 CLI 模式，即使用 `node_modules` 下的 `tdesign-uniapp` 时，配置如下。
-
-```json
-{
-  "easycom": {
-    "custom": {
-      "^t-(.*)": "tdesign-uniapp/$1/$1.vue"
-    }
-  }
-}
-```
-
-### UNI_MODULES 模式
-
-使用 `uni_modules` 下的 `tdesign-uniapp` 时，配置如下。
-
-```json
-{
-  "easycom": {
-    "custom": {
-      "^t-(.*)": "@/uni_modules/tdesign-uniapp/components/$1/$1.vue"
-    }
-  }
-}
-```
-
 ## 编辑器提示
 
 安装注册 TDesign 之后，在开发项目时，可以配合插件在VSCode等主流编辑器中达到提示组件名及API的效果。
 
-推荐安装 `Volar`，并在项目的 `tsconfig.json` 的 `includes` 属性中增加 `node_modules/tdesign-uniapp/global.d.ts`，即可实现该效果。
+推荐安装 `Volar`，并在项目的 `tsconfig.json` 的 `includes` 属性中增加 `node_modules/tdesign-uniapp-chat/global.d.ts`，即可实现该效果。
 
 ## 平台兼容性
 
 | 平台         | Vue2 | Vue3 | H5  | Android | iOS | App-nvue | 微信小程序 | QQ小程序 |
 | ------------ | ---- | ---- | --- | ------- | --- | -------- | ---------- | -------- |
-| **支持情况** | ✅    | ✅    | ✅   | ✅       | ✅   | ⚠️        | ✅          | ✅        |
-
-| 平台         | 支付宝小程序 | 抖音小程序 | 百度小程序 | 快手小程序 | 小红书小程序 | 京东小程序 |
-| ------------ | ------------ | ---------- | ---------- | ---------- | ------------ | ---------- |
-| **支持情况** | ✅            | ✅          | ✅          | ✅          | ✅            | ✅          |
+| **支持情况** | ✅    | ✅    | ✅   | ✅       | ✅   | ⚠️        | ✅          |  ⚠️        |
 
 ## 浏览器兼容性
 

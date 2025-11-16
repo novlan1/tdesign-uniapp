@@ -25,6 +25,7 @@ packages/demo/src/_tdesign-raw/
 packages/demo/src/pages-more/
 
 npm_dist/
+npm_dist_chat/
 
 packages/tdesign-app/uni_modules/tdesign-uniapp/
 
