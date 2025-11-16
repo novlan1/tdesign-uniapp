@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-deprecated-slot-attribute -->
 <template>
   <td-tooltip trigger-type="hover">
     <form
@@ -70,9 +71,7 @@
         </svg>
       </div>
     </form>
-    <template #content>
-      <span>在 Stackblitz 中打开</span>
-    </template>
+    <span slot="content">在 Stackblitz 中打开</span>
   </td-tooltip>
 </template>
 
