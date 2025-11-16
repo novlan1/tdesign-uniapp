@@ -1,19 +1,16 @@
+<!-- eslint-disable vue/no-deprecated-slot-attribute -->
 <template>
   <td-doc-layout>
-    <template #header>
-      <td-header
-        platform="mobile"
-        framework="uniapp"
-      >
-        <template
-          #search
-        >
-          <td-doc-search
-            ref="tdDocSearch"
-          />
-        </template>
-      </td-header>
-    </template>
+    <td-header
+      slot="header"
+      platform="mobile"
+      framework="uniapp"
+    >
+      <td-doc-search
+        slot="search"
+        ref="tdDocSearch"
+      />
+    </td-header>
     <td-doc-aside
       ref="tdDocAside"
       title="Uni App"
