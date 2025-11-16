@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-deprecated-slot-attribute -->
 <template>
   <td-doc-layout>
     <td-header
@@ -34,6 +35,7 @@ import { filterVersions, sortDocs } from './utils';
 const registryUrl =  'https://service-edbzjd6y-1257786608.hk.apigw.tencentcs.com/release/npm/versions/tdesign-mobile-vue';
 const currentVersion = packageJson.version.replace(/\./g, '_');
 
+// eslint-disable-next-line light/json-parse-try-catch
 const { docs, enDocs } = JSON.parse(JSON.stringify(siteConfig).replace(/component:.+/g, ''));
 
 const docsMap = {

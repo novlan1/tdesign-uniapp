@@ -28,12 +28,20 @@ async function main() {
   server.listen(port);
 
 
-  watch(config.sourceGlob, async (e) => {
+  watch(config.baseAndChatSourceGlob, async (e) => {
     const { event, history, base } = e || {};
 
     if (event !== 'unlink' && history?.[0]) {
       const filePath = history[0];
-      const relativePath = path.relative(base, filePath);
+      let relativePath = path.relative(base, filePath);
+      console.log('relativePath', relativePath);
+      if (relativePath.startsWith(`tdesign${path.sep}`) || relativePath.startsWith(`tdesign-uniapp-chat${path.sep}`)) {
+        relativePath = relativePath.split(path.sep).slice(1)
+          .join(path.sep);
+      }
+
+      console.log('base', base);
+      console.log('history', history);
 
       const { relativeTargetByCwd, relativeSourceByCwd } = await copy({
         relativePath,

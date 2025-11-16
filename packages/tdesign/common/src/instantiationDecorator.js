@@ -166,7 +166,7 @@ function filterProps(props, controlledProps) {
     if (reg.test(key) && props[key].type === Function) {
       const str = key.replace(/^on/, '');
       const eventName = str.charAt(0).toLowerCase() + str.slice(1);
-      emits.push(hyphenate(eventName));
+      emits.push(...[hyphenate(eventName), eventName]);
     } else if (controlledKeys.indexOf(key) > -1
        || unControlledKeys.indexOf(key) > -1
     ) {
