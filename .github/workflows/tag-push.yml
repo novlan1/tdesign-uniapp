@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: 20
 
-      - uses: TDesignOteam/flow-pilot-action@develop
+      - uses: novlan1/flow-pilot-action@feature/novlan1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           packages: 'tdesign-uniapp,tdesign-uniapp-chat'

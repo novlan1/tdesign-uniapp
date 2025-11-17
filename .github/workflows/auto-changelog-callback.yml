@@ -24,7 +24,7 @@ jobs:
         run: echo "id=$(cat pr-id.txt)" >> $GITHUB_OUTPUT
 
       - name: auto-changelog
-        uses: TDesignOteam/flow-pilot-action@develop
+        uses: novlan1/flow-pilot-action@feature/novlan1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           packages: 'tdesign-uniapp,tdesign-uniapp-chat'

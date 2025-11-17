@@ -33,7 +33,8 @@
     "uniapp",
     "qrcode",
     "actionbar",
-    "echarts"
+    "echarts",
+    "novlan1"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always",
