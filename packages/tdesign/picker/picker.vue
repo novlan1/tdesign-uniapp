@@ -2,7 +2,7 @@
   <view>
     <t-popup
       v-if="usePopup"
-      :visible="visible && dataVisible"
+      :visible="dataVisible"
       placement="bottom"
       :using-custom-navbar="usingCustomNavbar || popupProps?.usingCustomNavbar"
       :custom-navbar-height="coalesce(customNavbarHeight, popupProps?.usingCustomNavbar)"
@@ -138,6 +138,7 @@ export default uniComponent({
   },
   emits: [
     'visible-change',
+    'update:visible',
   ],
   data() {
     return {
@@ -247,11 +248,13 @@ export default uniComponent({
 
       this.close('overlay');
       this.$emit('visible-change', { visible });
+      this.$emit('update:visible', visible);
     },
 
     close(trigger) {
       if (this.autoClose) {
         this.dataVisible = false;
+        this.$emit('update:visible', false);
       }
       this.$emit('close', { trigger });
     },

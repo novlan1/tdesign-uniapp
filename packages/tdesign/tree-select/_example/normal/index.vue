@@ -135,6 +135,7 @@ export default {
   created() {},
   methods: {
     onChange(e) {
+      console.log('change: ', e);
       this.value = e.value;
     },
   },

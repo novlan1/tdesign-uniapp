@@ -20,7 +20,7 @@
     />
 
     <t-picker
-      :visible="cityVisible"
+      v-model:visible="cityVisible"
       :value="cityValue"
       data-key="city"
       title="选择城市"
@@ -56,7 +56,7 @@
     </t-picker>
 
     <t-picker
-      :visible="dateVisible"
+      v-model:visible="dateVisible"
       :value="dateValue"
       data-key="date"
       title="选择时间"

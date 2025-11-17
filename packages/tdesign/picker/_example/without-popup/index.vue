@@ -1,7 +1,7 @@
 <template>
   <view>
     <t-picker
-      :visible="cityVisible"
+      v-model:visible="cityVisible"
       :value="cityValue"
       :use-popup="false"
       data-key="city"

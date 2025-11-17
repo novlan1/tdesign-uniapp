@@ -46,7 +46,7 @@ auto-close | Boolean | true | 自动关闭；在确认、取消、点击遮罩�
 cancel-btn | String / Boolean | true | 取消按钮文字。TS 类型：`boolean \| string` | N
 confirm-btn | String / Boolean | true | 确定按钮文字。TS 类型：`boolean \| string` | N
 header | Boolean | true | 头部内容。值为 true 显示空白头部，值为 false 不显示任何内容 | N
-item-height | Number | 80 | PickerItem 的子项高度，单位 rpx | N
+item-height | Number | 40 | PickerItem 的子项高度，单位 `px` | N
 keys | Object | - | 用来定义 value / label / icon 在 `options` 中对应的字段别名。TS 类型：`KeysType`。[通用类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/common/common.ts) | N
 popup-props | Object | {} | 透传 Popup 组件全部属性。TS 类型：`PopupProps`，[Popup API Documents](./popup?tab=api)。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/picker/type.ts) | N
 title | String | '' | 标题 | N
@@ -54,7 +54,7 @@ use-popup | Boolean | true | 是否使用弹出层包裹 | N
 using-custom-navbar | Boolean | false | 是否使用了自定义导航栏 | N
 value | Array | - | 选中值。支持语法糖 `v-model:value`。TS 类型：`Array<PickerValue>` `type PickerValue = string \| number`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/picker/type.ts) | N
 default-value | Array | - | 选中值。非受控属性。TS 类型：`Array<PickerValue>` `type PickerValue = string \| number`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/picker/type.ts) | N
-visible | Boolean | false | 是否显示 | N
+visible | Boolean | false | 是否显示。支持语法糖 `v-model:visible` | N
 
 ### Picker Events
 
