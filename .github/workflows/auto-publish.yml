@@ -13,7 +13,7 @@ jobs:
           ref: main
           fetch-depth: 0
           submodules: recursive
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ACCESS_TOKEN }}
           
 
       - name: update official website
