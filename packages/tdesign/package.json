@@ -445,7 +445,8 @@
     "build:quickapp-webview-huawei": "uni build -p quickapp-webview-huawei",
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
     "type-check": "vue-tsc --noEmit",
-    "postinstall": "node ./script/postinstall"
+    "postinstall": "node ./script/postinstall",
+    "publish": "node ../demo/script/release/publish-tdesign-uniapp.js"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.4.8",
