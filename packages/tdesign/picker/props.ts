@@ -60,7 +60,7 @@ export default {
   defaultValue: {
     type: Array,
   },
-  /** 是否显示 */
+  /** 是否显示。支持语法糖 `v-model:visible` */
   visible: Boolean,
   /** 点击取消按钮时触发 */
   onCancel: {

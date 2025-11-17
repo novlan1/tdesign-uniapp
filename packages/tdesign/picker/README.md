@@ -54,7 +54,7 @@ use-popup | Boolean | true | 是否使用弹出层包裹 | N
 using-custom-navbar | Boolean | false | 是否使用了自定义导航栏 | N
 value | Array | - | 选中值。支持语法糖 `v-model:value`。TS 类型：`Array<PickerValue>` `type PickerValue = string \| number`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/picker/type.ts) | N
 default-value | Array | - | 选中值。非受控属性。TS 类型：`Array<PickerValue>` `type PickerValue = string \| number`。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/picker/type.ts) | N
-visible | Boolean | false | 是否显示 | N
+visible | Boolean | false | 是否显示。支持语法糖 `v-model:visible` | N
 
 ### Picker Events
 

@@ -9,7 +9,7 @@
     />
 
     <t-picker
-      :visible="areaVisible"
+      v-model:visible="areaVisible"
       :value="areaValue"
       title="选择地区"
       cancel-btn="取消"
