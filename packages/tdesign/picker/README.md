@@ -46,7 +46,7 @@ auto-close | Boolean | true | 自动关闭；在确认、取消、点击遮罩�
 cancel-btn | String / Boolean | true | 取消按钮文字。TS 类型：`boolean \| string` | N
 confirm-btn | String / Boolean | true | 确定按钮文字。TS 类型：`boolean \| string` | N
 header | Boolean | true | 头部内容。值为 true 显示空白头部，值为 false 不显示任何内容 | N
-item-height | Number | 40 | PickerItem 的子项高度，单位 `px` | N
+item-height | Number | 80 | PickerItem 的子项高度，单位 rpx | N
 keys | Object | - | 用来定义 value / label / icon 在 `options` 中对应的字段别名。TS 类型：`KeysType`。[通用类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/common/common.ts) | N
 popup-props | Object | {} | 透传 Popup 组件全部属性。TS 类型：`PopupProps`，[Popup API Documents](./popup?tab=api)。[详细类型定义](https://github.com/novlan1/tdesign-uniapp/blob/develop/packages/tdesign/picker/type.ts) | N
 title | String | '' | 标题 | N
