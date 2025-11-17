@@ -6,6 +6,16 @@ docClass: timeline
 ---
 
 
+## 🌈 0.5.5 `2025-11-17` 
+### 🚀 Features
+- `Picker`: 支持 `v-model:visible` 语法糖 @novlan1 ([#77](https://github.com/novlan1/tdesign-uniapp/pull/77))
+- `PullDownRefresh`: 修改 `dragstart/dragging/dragend` 事件参数为 `TouchEvent` @novlan1 ([#63](https://github.com/novlan1/tdesign-uniapp/pull/63))
+
+### 🐞 Bug Fixes
+- `Input`: 修复 `readonly` 时点击无效问题 @novlan1 ([#76](https://github.com/novlan1/tdesign-uniapp/pull/76))
+- `PullDownRefresh`: 修复加载中再次点击时触发的 `value` 变化问题 @novlan1 ([#63](https://github.com/novlan1/tdesign-uniapp/pull/63))
+
+
 ## 🌈 0.5.4 `2025-11-14` 
 ### 🐞 Bug Fixes
 - `DropdownMenu`: 修复使用自带导航栏时的高度错误 @novlan1 ([#56](https://github.com/novlan1/tdesign-uniapp/pull/56))
