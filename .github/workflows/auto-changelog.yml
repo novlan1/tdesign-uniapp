@@ -40,5 +40,5 @@ jobs:
       - name: auto-changelog
         uses: novlan1/flow-pilot-action@feature/novlan1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ACCESS_TOKEN }}
           packages: 'tdesign-uniapp,tdesign-uniapp-chat'
