@@ -1,7 +1,8 @@
 <template>
   <view
     :style="_._style([customStyle])"
-    :class="_.cls(classPrefix, [['border', !borderless]]) + ' ' + classPrefix + '--layout-' + layout + ' ' + tClass"
+    :class="_.cls(classPrefix, [['border', !borderless], ['readonly', readonly], ['disabled', disabled]])
+      + ' ' + classPrefix + '--layout-' + layout + ' ' + tClass"
     aria-describedby
   >
     <view :class="classPrefix + '__wrap--prefix'">
@@ -372,5 +373,16 @@ export default uniComponent({
 </script>
 <style scoped>
 @import './input.css';
-
+/* #ifdef H5 */
+.t-input--disabled {
+  :deep(input) {
+    pointer-events: none;
+  }
+}
+.t-input--readonly {
+  :deep(input) {
+    pointer-events: none;
+  }
+}
+/* #endif */
 </style>

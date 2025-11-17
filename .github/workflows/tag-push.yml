@@ -1,61 +1,37 @@
-name: TAG_PUSH
+name: auto-release
 
-on: create
+on:
+  pull_request_target:
+    types: [closed]
 
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
-  TAG_PUSH:
+  publish:
+    if: github.event.pull_request.merged && startsWith(github.head_ref, 'release/')
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-    if: github.event.ref_type == 'tag'  
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/install-dep
-      - run: pnpm run build:mp
-        shell: bash
-      - name: release miniprogram
-        uses: novlan1/setup-miniprogram@main
         with:
-          project_type: miniProgram
-          action_type: upload,preview
-          project_path: ./packages/demo/dist/build/mp-weixin
-          version: ${{ github.ref_name || '1.0.0' }}
-          es6: true
-          es7: true
-          minify: true
-        env:
-          MINI_APP_ID: ${{ secrets.WX_MP_APP_ID }}
-          MINI_APP_PRIVATE_KEY: ${{ secrets.WX_MP_PRIVATE_KEY }}
-
-      - run: sudo npm install -g npm@latest
-
-      - id: publish
-        name: publish NPM
-        run: cd npm_dist && npm publish
-        # uses: JS-DevTools/npm-publish@v4
-        # with:
-        #   package: packages/tdesign-miniprogram
-        #   tag: ${{ contains(github.ref_name, 'beta') && 'beta' || 'latest' }}
-      # - if: steps.publish.outputs.type != 'none'
-      #   run: |
-      #     echo "Version changed: ${{ steps.publish.outputs.old-version }} => ${{ steps.publish.outputs.version }}"
-  UPDATE_OFFICIAL_WEBSITE:
-    runs-on: ubuntu-latest
-    if: github.event.ref_type == 'tag'
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: main
-          fetch-depth: 0
-          token: ${{ secrets.ACCESS_TOKEN }}
           submodules: recursive
-      - name: update official website
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git status
-          git fetch origin
-          git merge origin/develop
-          git push origin main
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: pnpm install
+
+      - run: pnpm run init && pnpm run release:prepare
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: novlan1/flow-pilot-action@feature/novlan1
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          packages: 'tdesign-uniapp,tdesign-uniapp-chat'

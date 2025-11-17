@@ -18,7 +18,7 @@
     />
 
     <t-picker
-      :visible="cityVisible"
+      v-model:visible="cityVisible"
       :value="cityValue"
       data-key="city"
       :title="cityTitle"
@@ -33,7 +33,7 @@
     </t-picker>
 
     <t-picker
-      :visible="city2Visible"
+      v-model:visible="city2Visible"
       :value="city2Value"
       data-key="city2"
       :title="city2Title"

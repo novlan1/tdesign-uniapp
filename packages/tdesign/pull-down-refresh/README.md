@@ -52,9 +52,9 @@ default-value | Boolean | false | 组件状态，值为 `true` 表示下拉状�
 名称 | 参数 | 描述
 -- | -- | --
 change | `(context: { value: boolean })` | 下拉或收起时触发，用户手势往下滑动触发下拉状态，手势松开触发收起状态
-dragend | `(context: { scrollTop: number, scrollLeft: number })` | 滑动结束事件
-dragging | `(context: { scrollTop: number, scrollLeft: number })` | 滑动事件
-dragstart | `(context: { scrollTop: number, scrollLeft: number })` | 滑动开始事件
+dragend | `(context: TouchEvent)` | 滑动结束事件
+dragging | `(context: TouchEvent)` | 滑动事件
+dragstart | `(context: TouchEvent)` | 滑动开始事件
 refresh | \- | 结束下拉时触发
 scrolltolower | \- | 滚动到页面底部时触发
 timeout | \- | 刷新超时触发

@@ -22,7 +22,7 @@ npm i tdesign-uniapp-chat
 
 ### UNI_MODULES 方式
 
-已上传 [插件](https://ext.dcloud.net.cn/plugin?id=25431) 到 DCloud 插件市场，请打开插件详情页并点击`使用 HBuilderX 导入插件`。
+已上传 [插件](https://ext.dcloud.net.cn/plugin?name=tdesign-uniapp-chat) 到 DCloud 插件市场，请打开插件详情页并点击`使用 HBuilderX 导入插件`。
 
 ## 使用
 

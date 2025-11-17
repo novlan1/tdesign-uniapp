@@ -25,12 +25,12 @@
         >
           <hook-component :is-active="value === 1" />
         </t-tab-panel>
-        <t-tab-panel
+        <!-- <t-tab-panel
           label="自定义"
           :value="2"
         >
           <custom :is-active="value === 2" />
-        </t-tab-panel>
+        </t-tab-panel> -->
         <!-- 本次迭代先不上 -->
         <!-- <t-tab-panel label="代码助手" value="{{3}}">
       <codeDemo />
@@ -63,7 +63,7 @@ import tTabs from 'tdesign-uniapp/tabs/tabs.vue';
 import tTabPanel from 'tdesign-uniapp/tab-panel/tab-panel.vue';
 import baseDemo from './base/index.vue';
 import hookComponent from './hook-component/index.vue';
-import custom from './custom/index.vue';
+// import custom from './custom/index.vue';
 // // import codeDemo from './code';
 import docs from './docs/index.vue';
 import imageDemo from './image/index.vue';
@@ -75,7 +75,7 @@ export default {
     tTabPanel,
     baseDemo,
     hookComponent,
-    custom,
+    // custom,
     // // codeDemo,
     docs,
     imageDemo,

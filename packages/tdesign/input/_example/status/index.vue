@@ -14,12 +14,14 @@
       label="标签文字"
       value="不可编辑文字"
       disabled
+      @click="onClick"
     />
 
     <t-input
       label="标签文字"
       value="只读模式"
       readonly
+      @click="onClick"
     />
   </view>
 </template>
@@ -34,7 +36,11 @@ export default {
     return {};
   },
   created() {},
-  methods: {},
+  methods: {
+    onClick() {
+      console.log('click input');
+    },
+  },
 };
 </script>
 <style>

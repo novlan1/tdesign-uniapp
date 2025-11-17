@@ -66,7 +66,7 @@ export interface TdPickerProps {
    */
   defaultValue?: Array<PickerValue>;
   /**
-   * 是否显示
+   * 是否显示。支持语法糖 `v-model:visible`
    * @default false
    */
   visible?: boolean;
