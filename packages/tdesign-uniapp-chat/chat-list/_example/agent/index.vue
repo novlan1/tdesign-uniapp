@@ -53,7 +53,7 @@
                               v-if="taskItem.type === 'command'"
                               name="control-platform"
                               size="32rpx"
-                              class="step-icon"
+                              t-class="step-icon"
                             />
 
                             {{ taskItem.text }}
@@ -573,12 +573,12 @@ export default {
     color: var(--td-text-color-primary);
 }
 
-.step-icon {
+.chat-box :deep(.step-icon) {
     margin-right: 12rpx;
     margin-top: 6rpx;
 }
 
-.t-steps-item__circle--finish {
+.chat-box :deep(.t-steps-item__circle--finish) {
     background-color: transparent;
     color: var(--td-text-color-primary);
     border: 1px solid var(--td-text-color-primary);
@@ -586,15 +586,15 @@ export default {
     height: 16px;
 }
 
-.t-steps-item__circle--finish .t-icon {
+.chat-box :deep(.t-steps-item__circle--finish) .t-icon {
     font-size: 12px;
 }
 
-.t-steps-item__line--finish {
+.chat-box :deep(.t-steps-item__line--finish) {
     background-color: var(--td-component-border);
 }
 
-.t-steps-item__title--finish {
+.chat-box :deep(.t-steps-item__title--finish) {
     color: var(--td-text-color-primary);
     font-weight: 600;
 }
