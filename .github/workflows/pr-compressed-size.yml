@@ -20,4 +20,4 @@ jobs:
       - uses: preactjs/compressed-size-action@v2
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
-          pattern: './npm_dist/**/*.{js,ts,vue,less,css}'
+          pattern: './{npm_dist,npm_dist_chat}/**/*.{js,ts,vue,less,css}'

@@ -14,6 +14,7 @@ jobs:
     outputs:
       pr_id: ${{ steps.pr.outputs.id }}
       tdesign_uniapp_domain: ${{ steps.tdesign-uniapp-domain.outputs.tdesign_uniapp_domain }}
+      tdesign_uniapp_chat_domain: ${{ steps.tdesign-uniapp-domain.outputs.tdesign_uniapp_chat_domain }}
     steps:
       - name: Download pr id
         uses: dawidd6/action-download-artifact@v8
@@ -30,6 +31,10 @@ jobs:
         id: tdesign-uniapp-domain
         run: echo "tdesign_uniapp_domain=https://preview-pr-${{ steps.pr.outputs.id }}-tdesign-uniapp.surge.sh" >> $GITHUB_OUTPUT
 
+      - name: tdesign-uniapp-chat-domain
+        id: tdesign-uniapp-chat-domain
+        run: echo "tdesign_uniapp_chat_domain=https://preview-pr-${{ steps.pr.outputs.id }}-tdesign-uniapp-chat.surge.sh" >> $GITHUB_OUTPUT
+
   tdesign-uniapp:
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
@@ -43,12 +48,27 @@ jobs:
       - run: |
           export DEPLOY_DOMAIN=${{ needs.preview-context.outputs.tdesign_uniapp_domain }}
           npx surge --project ./ --domain $DEPLOY_DOMAIN --token ${{ secrets.TDESIGN_SURGE_TOKEN }}
+  tdesign-uniapp-chat:
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    needs: preview-context
+    steps:
+      - uses: dawidd6/action-download-artifact@v8
+        with:
+          workflow: ${{ github.event.workflow_run.workflow_id }}
+          run_id: ${{ github.event.workflow_run.id }}
+          name: tdesign-uniapp-chat-site
+      - run: |
+          export DEPLOY_DOMAIN=${{ needs.preview-context.outputs.tdesign_uniapp_chat_domain }}
+          npx surge --project ./ --domain $DEPLOY_DOMAIN --token ${{ secrets.TDESIGN_SURGE_TOKEN }}
+
 
   preview-comment:
     if: always()
     needs:
       - preview-context
       - tdesign-uniapp
+      - tdesign-uniapp-chat
     runs-on: ubuntu-latest
     steps:
       - name: jobs report
@@ -58,6 +78,7 @@ jobs:
           script: |
             const pr_id = ${{ needs.preview-context.outputs.pr_id }};
             const tdesign_uniapp_domain = "${{ needs.preview-context.outputs.tdesign_uniapp_domain }}";
+            const tdesign_uniapp_chat_domain = "${{ needs.preview-context.outputs.tdesign_uniapp_chat_domain }}";
 
             const { data: { jobs } } = await github.rest.actions.listJobsForWorkflowRun({
               owner: context.repo.owner,
@@ -68,6 +89,7 @@ jobs:
 
             const tdesign = {
               "tdesign-uniapp": { status: "", report_url: "" },
+              "tdesign-uniapp-chat": { status: "", report_url: "" },
             };
             const preview_success = `<img width="300" alt="完成" src="https://user-images.githubusercontent.com/15634204/150816437-9f5bb788-cd67-4cbc-9897-b82d74e9aa65.png" />`;
             const preview_failure = `<img width="300" alt="失败" src="https://user-images.githubusercontent.com/5378891/75333447-1e63a280-58c1-11ea-975d-235367fd1522.png" />`;
@@ -80,8 +102,10 @@ jobs:
                 if (job.conclusion === "success") {
                   tdesign[job.name].status = preview_success;
                   if (job.name === "tdesign-uniapp") {
-                    
                     tdesign[job.name].report_url = tdesign_uniapp_domain;
+                  }
+                  if (job.name === "tdesign-uniapp-chat") {
+                    tdesign[job.name].report_url = tdesign_uniapp_chat_domain;
                   }
                 }
               });
