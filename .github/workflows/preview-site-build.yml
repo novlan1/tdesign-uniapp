@@ -39,13 +39,6 @@ jobs:
   tdesign-uniapp-chat-site:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ github.event.number }} > pr-id.txt
-      - uses: actions/upload-artifact@v4
-        with:
-          name: pr-id
-          path: pr-id.txt
-          retention-days: 5
-
       - uses: actions/checkout@v4
         with:
           submodules: recursive
