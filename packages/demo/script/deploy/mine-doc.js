@@ -3,6 +3,7 @@ const path = require('path');
 const { execCommand } = require('t-comm');
 
 require('./local.env')();
+
 const args = process.argv.slice(2);
 const isChat = args[2] == 1;
 
