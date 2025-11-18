@@ -14,7 +14,7 @@ jobs:
     outputs:
       pr_id: ${{ steps.pr.outputs.id }}
       tdesign_uniapp_domain: ${{ steps.tdesign-uniapp-domain.outputs.tdesign_uniapp_domain }}
-      tdesign_uniapp_chat_domain: ${{ steps.tdesign-uniapp-domain.outputs.tdesign_uniapp_chat_domain }}
+      tdesign_uniapp_chat_domain: ${{ steps.tdesign-uniapp-chat-domain.outputs.tdesign_uniapp_chat_domain }}
     steps:
       - name: Download pr id
         uses: dawidd6/action-download-artifact@v8
@@ -119,11 +119,7 @@ jobs:
               ${Object.keys(tdesign)
                 .map((component) => {
                   const preview_text = `[${tdesign[component].status}](${tdesign[component].report_url})`;
-                  let package_name = component;
-                  if (component === "tdesign-uniapp-chat") {
-                    package_name = "@tdesign-uniapp/chat";
-                  }
-
+                  const package_name = component;
                   return `| ${package_name} | ${preview_text} | `;
                 })
                 .join("\n")}
