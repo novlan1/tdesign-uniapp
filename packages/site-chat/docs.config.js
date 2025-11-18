@@ -16,14 +16,14 @@ export const docs = [
         title: '更新日志',
         titleEn: 'CHANGELOG',
         name: 'changelog',
-        path: '/tdesign-uniapp/changelog',
+        path: '/tdesign-uniapp-chat/changelog',
         component: () => import('@/CHANGELOG.md'),
       },
       {
         title: '常见问题',
         titleEn: 'FAQ',
         name: 'faq',
-        path: '/tdesign-uniapp/faq',
+        path: '/tdesign-uniapp-chat/faq',
         component: () => import('@docs/faq.md'),
       },
       {
@@ -44,7 +44,7 @@ export const docs = [
         titleEn: 'Custom Style',
         name: 'custom-style',
         meta: { docType: 'explain' },
-        path: '/tdesign-uniapp/custom-style',
+        path: '/tdesign-uniapp-chat/custom-style',
         component: () => import('@docs/custom-style.md'),
       },
       {
@@ -52,7 +52,7 @@ export const docs = [
         titleEn: 'Custom Theme',
         name: 'custom-theme',
         meta: { docType: 'explain' },
-        path: '/tdesign-uniapp/custom-theme',
+        path: '/tdesign-uniapp-chat/custom-theme',
         component: () => import('@docs/custom-theme.md'),
       },
       {
@@ -60,7 +60,7 @@ export const docs = [
         titleEn: 'Dark Mode',
         name: 'dark-mode',
         meta: { docType: 'explain' },
-        path: '/tdesign-uniapp/dark-mode',
+        path: '/tdesign-uniapp-chat/dark-mode',
         component: () => import('@docs/dark-mode.md'),
       },
     ],
