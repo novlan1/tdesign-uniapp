@@ -5,7 +5,7 @@
       :id="id || classPrefix"
       :ref="id || classPrefix"
       :class="classPrefix + ' ' + tClass + ' ' + classPrefix + '--' + theme + ' ' + fadeClass"
-      :style="_._style([getMessageStyles(zIndex, offset, wrapTop), customStyle])"
+      :style="tools._style([getMessageStyles(zIndex, offset, wrapTop), customStyle])"
       :animation="showAnimation"
       aria-role="alert"
     >
@@ -50,7 +50,7 @@
       <t-link
         v-if="_link && _link.content"
         :t-class="classPrefix + '__link ' + tClassLink"
-        :custom-style="_._style([_link.style, _link.customStyle])"
+        :custom-style="tools._style([_link.style, _link.customStyle])"
         :disabled="_link.disabled || false"
         :hover="_link.hover || true"
         :theme="_link.theme || 'primary'"
@@ -95,7 +95,7 @@ import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import { getRect, unitConvert, calcIcon } from '../common/utils';
 import { isObject } from '../common/validator';
-import _ from '../common/utils.wxs';
+import tools from '../common/utils.wxs';
 import { getMessageStyles } from './computed.js';
 import { messageDefaultData } from '../message/config';
 
@@ -150,7 +150,7 @@ export default uniComponent({
       animation: [],
 
 
-      _,
+      tools,
     };
   },
   computed: {

@@ -1,7 +1,7 @@
 <template>
   <view
     :class="tClass + ' ' + classPrefix"
-    :style="_._style([customStyle])"
+    :style="tools._style([customStyle])"
     data-key="cell"
     :opened="dataOpened"
     :left-width="leftWidth"
@@ -111,7 +111,7 @@ import {
   onCloseChange,
   onOpenedChange,
 } from './computed';
-import _ from '../common/utils.wxs';
+import tools from '../common/utils.wxs';
 import { parseEventDynamicCode } from '../common/event/dynamic';
 
 let ARRAY = [];
@@ -163,7 +163,7 @@ export default uniComponent({
       classPrefix: name,
       skipMove: false,
       dataOpened: null,
-      _,
+      tools,
 
       leftWidth: 0,
       rightWidth: 0,

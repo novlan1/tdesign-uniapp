@@ -1,7 +1,7 @@
 <template>
   <view
     :id="classPrefix"
-    :style="_._style([customStyle])"
+    :style="tools._style([customStyle])"
     :class="classPrefix + ' ' + tClass"
   >
     <t-popup
@@ -15,13 +15,13 @@
       @visible-change="onPopupVisibleChange"
     >
       <view
-        :class="_.cls(classPrefix + '__content', [['grid', gridThemeItems.length]]) + ' ' + tClassContent"
+        :class="tools.cls(classPrefix + '__content', [['grid', gridThemeItems.length]]) + ' ' + tClassContent"
         tabindex="0"
       >
         <view
           v-if="dataDescription"
           tabindex="0"
-          :class="_.cls(classPrefix + '__description', [dataAlign])"
+          :class="tools.cls(classPrefix + '__description', [dataAlign])"
         >
           {{ dataDescription }}
         </view>
@@ -102,7 +102,7 @@
             <view
               :data-index="index"
               :style="item.color ? 'color: ' + item.color : ''"
-              :class="_.cls(classPrefix + '__list-item', [dataAlign, ['disabled', item.disabled]])"
+              :class="tools.cls(classPrefix + '__list-item', [dataAlign, ['disabled', item.disabled]])"
               :aria-role="ariaRole || 'button'"
               :aria-label="item.label || item"
               tabindex="0"
@@ -161,7 +161,7 @@ import { prefix } from '../common/config';
 import { actionSheetTheme } from './show';
 import props from './props';
 import useCustomNavbar from '../mixins/using-custom-navbar';
-import _ from '../common/utils.wxs';
+import tools from '../common/utils.wxs';
 import { getFunctionalMixin } from '../common/functional/mixin';
 
 
@@ -204,7 +204,7 @@ export default uniComponent({
       currentSwiperIndex: 0,
       defaultPopUpProps: {},
       defaultPopUpzIndex: 11500,
-      _,
+      tools,
 
       heightStyle: 'height: 228px;',
     };

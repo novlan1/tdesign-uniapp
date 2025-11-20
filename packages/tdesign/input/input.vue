@@ -1,7 +1,7 @@
 <template>
   <view
-    :style="_._style([customStyle])"
-    :class="_.cls(classPrefix, [['border', !borderless], ['readonly', readonly], ['disabled', disabled]])
+    :style="tools._style([customStyle])"
+    :class="tools.cls(classPrefix, [['border', !borderless], ['readonly', readonly], ['disabled', disabled]])
       + ' ' + classPrefix + '--layout-' + layout + ' ' + tClass"
     aria-describedby
   >
@@ -47,7 +47,7 @@
           :disabled="disabled || readonly"
           :placeholder="placeholder"
           :placeholder-style="placeholderStyle"
-          :placeholder-class="_.cls(classPrefix + '__placeholder', [['disabled', disabled]]) + ' ' + placeholderClass"
+          :placeholder-class="tools.cls(classPrefix + '__placeholder', [['disabled', disabled]]) + ' ' + placeholderClass"
           :value="dataValue"
           :password="type === 'password'"
           :type="type === 'password' ? 'text' : type"
@@ -149,7 +149,7 @@ import props from './props';
 import { getCharacterLength, calcIcon, coalesce, nextTick } from '../common/utils';
 import { isDef } from '../common/validator';
 import { getInputClass } from './computed.js';
-import _ from '../common/utils.wxs';
+import tools from '../common/utils.wxs';
 // import { getInnerMaxLen } from './utils';
 
 
@@ -195,7 +195,7 @@ export default uniComponent({
       classPrefix: name,
       classBasePrefix: prefix,
       showClearIcon: true,
-      _,
+      tools,
 
       dataValue: coalesce(this.value, this.defaultValue),
 

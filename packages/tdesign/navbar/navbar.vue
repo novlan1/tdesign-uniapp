@@ -1,7 +1,7 @@
 <template>
   <view
-    :class="_.cls(classPrefix, [['fixed', fixed]]) + ' ' + visibleClass + ' ' + tClass"
-    :style="_._style([boxStyle, customStyle])"
+    :class="tools.cls(classPrefix, [['fixed', fixed]]) + ' ' + visibleClass + ' ' + tClass"
+    :style="tools._style([boxStyle, customStyle])"
   >
     <view
       v-if="fixed"
@@ -45,7 +45,7 @@ import { uniComponent } from '../common/src/index';
 import { getRect, systemInfo } from '../common/utils';
 import { prefix } from '../common/config';
 import props from './props';
-import _ from '../common/utils.wxs';
+import tools from '../common/utils.wxs';
 
 
 const name = `${prefix}-navbar`;
@@ -99,7 +99,7 @@ export default uniComponent({
       _menuRect: null,
       _leftRect: null,
       _boxStyle: {},
-      _,
+      tools,
 
       visibleClass: '',
 

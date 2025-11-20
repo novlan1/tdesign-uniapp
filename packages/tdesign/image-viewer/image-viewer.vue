@@ -3,7 +3,7 @@
     v-if="dataVisible"
     :id="classPrefix"
     :class="classPrefix + ' ' + tClass"
-    :style="_._style([customStyle, '--td-image-viewer-top: ' + distanceTop + 'px'])"
+    :style="tools._style([customStyle, '--td-image-viewer-top: ' + distanceTop + 'px'])"
     :aria-modal="true"
     aria-role="dialog"
     aria-label="图片查看器"
@@ -112,7 +112,7 @@ import { uniComponent } from '../common/src/index';
 import { styles, calcIcon, systemInfo } from '../common/utils';
 import { prefix } from '../common/config';
 import props from './props';
-import _ from '../common/utils.wxs';
+import tools from '../common/utils.wxs';
 import { shouldLoadImage } from './computed.js';
 import useCustomNavbar from '../mixins/using-custom-navbar';
 
@@ -150,7 +150,7 @@ export default uniComponent({
       swiperStyle: {},
       imagesStyle: {},
       maskTop: 0,
-      _,
+      tools,
 
       _deleteBtn: null,
       _closeBtn: null,

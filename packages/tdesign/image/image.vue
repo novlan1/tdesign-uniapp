@@ -1,11 +1,11 @@
 <template>
   <view
-    :style="_._style([customStyle])"
+    :style="tools._style([customStyle])"
     :class="[tClass, classPrefix]"
   >
     <view
       v-if="isLoading"
-      :style="_._style([innerStyle])"
+      :style="tools._style([innerStyle])"
       :class="classPrefix + '__mask ' + classPrefix + '--loading ' + classPrefix + '--shape-' + shape"
       :aria-hidden="ariaHidden"
     >
@@ -31,7 +31,7 @@
     </view>
     <view
       v-else-if="isFailed"
-      :style="_._style([innerStyle])"
+      :style="tools._style([innerStyle])"
       :class="[
         classPrefix + '__mask ' + classPrefix + '--failed ' + classPrefix + '--shape-' + shape,
         tClassError
@@ -63,7 +63,7 @@
     <image
       v-if="!isFailed"
       :id="tId || 'image'"
-      :style="_._style([innerStyle])"
+      :style="tools._style([innerStyle])"
       :class="[
         classPrefix + '__img ' + classPrefix + '--shape-' + shape + ' ',
         (isLoading ? classPrefix + '--lazy' : '') + ' ',
@@ -89,7 +89,7 @@ import ImageProps from './props';
 import { prefix } from '../common/config';
 import { addUnit, getRect, appBaseInfo } from '../common/utils';
 import { compareVersion } from '../common/version';
-import _ from '../common/utils.wxs';
+import tools from '../common/utils.wxs';
 
 
 const name = `${prefix}-image`;
@@ -118,7 +118,7 @@ export default uniComponent({
       isFailed: false,
       innerStyle: '',
       classPrefix: name,
-      _,
+      tools,
       preSrc: '',
     };
   },

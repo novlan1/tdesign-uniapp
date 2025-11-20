@@ -1,7 +1,7 @@
 <template>
   <t-popup
     name="dialog"
-    :custom-style="_._style([customStyle])"
+    :custom-style="tools._style([customStyle])"
     :t-class="classPrefix + '__wrapper'"
     :visible="dataVisible"
     :show-overlay="dataShowOverlay"
@@ -24,7 +24,7 @@
           @click="onClose"
         >
           <template
-            v-if="_.isObject(dataCloseBtn)"
+            v-if="tools.isObject(dataCloseBtn)"
           >
             <t-icon
               :custom-style="dataCloseBtn.style || ''"
@@ -64,7 +64,7 @@
         <slot name="middle" />
         <view
           :class="
-            _.cls(classPrefix + '__footer', [
+            tools.cls(classPrefix + '__footer', [
               ['column', dataButtonLayout === 'vertical'],
               ['full', buttonVariant == 'text' && (!dataActions || dataActions.length == 0)]
             ])
@@ -228,7 +228,7 @@ import props from './props';
 import { toCamel, coalesce } from '../common/utils';
 import { isObject } from '../common/validator';
 import useCustomNavbar from '../mixins/using-custom-navbar';
-import _ from '../common/utils.wxs';
+import tools from '../common/utils.wxs';
 import { getActionClass } from './computed.js';
 import { getFunctionalMixin } from '../common/functional/mixin';
 import { canUseVirtualHost } from '../common/version';
@@ -262,7 +262,7 @@ export default uniComponent({
       prefix,
       classPrefix: name,
       buttonVariant: 'text',
-      _,
+      tools,
 
       _confirm: null,
       _cancel: null,
