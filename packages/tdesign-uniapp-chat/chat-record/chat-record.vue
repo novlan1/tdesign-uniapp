@@ -48,7 +48,6 @@
             <view class="ani-mask" />
             <view
               class="ani-main"
-              :data-device="device"
               :class="status === 'complete' ? 'ani-start' : 'ani-end'"
             />
           </view>
