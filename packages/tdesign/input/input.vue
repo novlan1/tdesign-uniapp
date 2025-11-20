@@ -187,6 +187,7 @@ export default uniComponent({
     'keyboardheightchange',
     'nicknamereview',
     'validate',
+    'update:value',
   ],
   data() {
     return {
@@ -311,14 +312,19 @@ export default uniComponent({
     onInput(e) {
       const { value, cursor, keyCode } = e.detail;
       this.updateValue(value);
-      this.$emit('change', { value: this.dataValue, cursor, keyCode });
+      this.emitChange({ value: this.dataValue, cursor, keyCode });
     },
 
     onChange(e) {
       if (this.type !== 'nickname') return;
       const { value } = e.detail;
       this.updateValue(value);
-      this.$emit('change', { value: this.dataValue });
+      this.emitChange({ value: this.dataValue });
+    },
+
+    emitChange(data) {
+      this.$emit('change', data);
+      this.$emit('update:value', data.value);
     },
 
     onFocus(e) {
