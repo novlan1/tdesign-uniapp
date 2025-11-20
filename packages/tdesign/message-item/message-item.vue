@@ -55,8 +55,8 @@
         :hover="_link.hover || true"
         :theme="_link.theme || 'primary'"
         :size="_link.size || 'medium'"
-        :prefix-icon="_link.prefixIcon || false"
-        :suffix-icon="_link.suffixIcon || false"
+        :prefix-icon="_link.prefixIcon || ''"
+        :suffix-icon="_link.suffixIcon || ''"
         :underline="_link.underline || false"
         :content="_link.content || ''"
         :navigator-props="_link.navigatorProps || null"
@@ -143,12 +143,16 @@ export default uniComponent({
   },
   props: {
   },
+  emits: [
+    'duration-end',
+    'close-btn-click',
+    'link-click',
+  ],
   data() {
     return {
       ...rawData,
       ...messageDefaultData,
       animation: [],
-
 
       tools,
     };
