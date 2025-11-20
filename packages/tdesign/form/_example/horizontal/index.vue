@@ -510,10 +510,22 @@ export default {
     submit() {
       const { form } = this.$refs;
       form.submit();
+
+      // form.validate({
+      //   fields: ['name', 'password', 'gender'],
+      //   trigger: 'blur',
+      // }).then((result) => {
+      //   console.log('[submit] result: ', result);
+      // });
     },
     reset() {
       const { form } = this.$refs;
       form.reset();
+
+      // form.reset({
+      //   resetType: 'initial',
+      //   fields: ['name', 'password', 'gender'],
+      // });
     },
     onInputChange(e, { field }) {
       this.formData[`${field}`] = e.value;

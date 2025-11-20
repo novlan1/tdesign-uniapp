@@ -102,6 +102,7 @@ export default uniComponent({
   emits: [
     'visible-change',
     'leaved',
+    'update:visible',
   ],
   data() {
     return {
@@ -123,11 +124,13 @@ export default uniComponent({
       const { closeOnOverlayClick } = this;
       if (closeOnOverlayClick) {
         this.$emit('visible-change', { visible: false, trigger: 'overlay' });
+        this.$emit('update:visible', false);
       }
     },
 
     handleClose() {
       this.$emit('visible-change', { visible: false, trigger: 'close-btn' });
+      this.$emit('update:visible', false);
     },
   },
 });
