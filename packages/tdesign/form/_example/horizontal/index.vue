@@ -19,13 +19,12 @@
         help="输入用户名"
       >
         <t-input
-          :value="formData.name"
+          v-model:value="formData.name"
           borderless
           align="right"
           placeholder="请输入用户名"
           data-field="name"
           style="flex: 1;"
-          @change="onInputChange($event, { field: 'name' })"
         />
       </t-form-item>
 
