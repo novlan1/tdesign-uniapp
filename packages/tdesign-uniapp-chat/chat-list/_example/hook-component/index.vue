@@ -174,11 +174,10 @@ export default {
   created() {},
   methods: {
     attached() {
-      console.log('-----attached----');
       /**
-             * 计算内容区域高度
-             * 生成CSS calc表达式：calc(100vh - 96rpx - 导航高度 - 底部安全区域高度)
-             */
+       * 计算内容区域高度
+       * 生成CSS calc表达式：calc(100vh - 96rpx - 导航高度 - 底部安全区域高度)
+       */
       try {
         // 获取当前的导航栏高度和安全区域高度
         const navigationBarHeight = getNavigationBarHeight() || 0;

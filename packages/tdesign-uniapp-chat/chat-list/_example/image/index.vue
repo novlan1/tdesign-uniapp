@@ -378,7 +378,7 @@ export default {
 
     handleAction(e) {
       const { name, active, data } = e;
-      console.log('----', name);
+      console.log('[handleAction]', name);
       let message = '';
       switch (name) {
         case 'replay':
