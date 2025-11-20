@@ -162,5 +162,6 @@ export const CHAT_COMPONENT_MAP: Record<string, string[]> = {
     'ChatAction',
     'ChatLoading',
     'ChatSender',
+    'ChatRecord',
   ],
 };

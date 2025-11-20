@@ -237,6 +237,14 @@
       ]
     },
     {
+      "root": "pages-more/chat-record",
+      "pages": [
+        {
+          "path": "chat-record"
+        }
+      ]
+    },
+    {
       "root": "pages-more/chat-markdown",
       "pages": [
         {
@@ -550,6 +558,10 @@
       {
         "name": "chat-sender",
         "pathName": "pages-more/chat-sender/chat-sender"
+      },
+      {
+        "name": "chat-record",
+        "pathName": "pages-more/chat-record/chat-record"
       },
       {
         "name": "chat-markdown",

@@ -1,21 +1,38 @@
 <template>
   <view :class="[classPrefix]">
     <view
-      :class="[classPrefix + '-hook']"
       v-if="recordAuthStatus"
+      :class="[classPrefix + '-hook']"
       @touchstart="startRecord"
       @touchend="stopRecord"
       @touchmove="touchmove"
       @touchcancel="touchcancel"
     >
-      <slot name="speechInput" v-if="$slots.speechInput"> </slot>
-      <view v-else>按住 说话</view>
+      <slot
+        v-if="$slots.speechInput"
+        name="speechInput"
+      />
+      <view v-else>
+        按住 说话
+      </view>
     </view>
-    <view :class="[classPrefix + '-hook']" v-else @click="openVoiceSetting">
-      <slot name="speechNoAuth" v-if="$slots.speechNoAuth"> </slot>
-      <view v-else>请授权麦克风权限</view>
+    <view
+      v-else
+      :class="[classPrefix + '-hook']"
+      @click="openVoiceSetting"
+    >
+      <slot
+        v-if="$slots.speechNoAuth"
+        name="speechNoAuth"
+      />
+      <view v-else>
+        请授权麦克风权限
+      </view>
     </view>
-    <view class="cover-ng-bar" :class="[classPrefix + '-audio-input', status, showMask ? 'show' : '']">
+    <view
+      class="cover-ng-bar"
+      :class="[classPrefix + '-audio-input', status, showMask ? 'show' : '']"
+    >
       <view :class="[classPrefix + '-audio-input__mask']" />
       <view :class="[classPrefix + '-audio-input__main']">
         <!-- 动画图标 -->
@@ -29,37 +46,60 @@
           <view class="ani-wrap">
             <view class="ani-inner" />
             <view class="ani-mask" />
-            <view class="ani-main" :data-device="device" :class="status === 'complete' ? 'ani-start' : 'ani-end'" />
+            <view
+              class="ani-main"
+              :data-device="device"
+              :class="status === 'complete' ? 'ani-start' : 'ani-end'"
+            />
           </view>
         </view>
 
         <!-- 内容区域 -->
         <view :class="[classPrefix + '-audio-input__con', status === 'cancel' ? 'disabled' : '']">
-          <view :class="[classPrefix + '-audio-input__con__inner']" v-if="status !== 'complete'">{{
-            status === 'unknow' ? '不好意思，未能识别您的语音' : '我在听，请说话'
-          }}</view>
+          <view
+            v-if="status !== 'complete'"
+            :class="[classPrefix + '-audio-input__con__inner']"
+          >
+            {{
+              status === 'unknow' ? '不好意思，未能识别您的语音' : '我在听，请说话'
+            }}
+          </view>
           <textarea
+            v-else
             :class="[classPrefix + '-audio-input__con__ta', bottomHeight === 0 ? 'txt-limit-9' : 'txt-limit-5']"
             maxlength="-1"
             auto-height
+            :value="translateResult"
             @focus="focusTextarea"
             @blur="blurTextarea"
-            :value="translateResult"
-            v-else
           />
         </view>
 
         <!-- 底部区域 -->
         <view :class="[classPrefix + '-audio-input__ft']">
-          <view :class="[classPrefix + '-audio-input__ft__tips']" v-if="status === 'cancel'">松开手指 即可取消</view>
-          <view :class="[classPrefix + '-audio-input__ft__tips']" v-else-if="status === 'unknow'"
-            >点击下方重新开始说话</view
+          <view
+            v-if="status === 'cancel'"
+            :class="[classPrefix + '-audio-input__ft__tips']"
           >
-          <view :class="[classPrefix + '-audio-input__ft__tips']" v-else-if="status === 'normal'"
-            >松手完成 上滑取消</view
+            松开手指 即可取消
+          </view>
+          <view
+            v-else-if="status === 'unknow'"
+            :class="[classPrefix + '-audio-input__ft__tips']"
           >
+            点击下方重新开始说话
+          </view>
+          <view
+            v-else-if="status === 'normal'"
+            :class="[classPrefix + '-audio-input__ft__tips']"
+          >
+            松手完成 上滑取消
+          </view>
 
-          <view :class="[classPrefix + '-audio-input__ft__tips__inner']" v-if="showRecordCountDown">
+          <view
+            v-if="showRecordCountDown"
+            :class="[classPrefix + '-audio-input__ft__tips__inner']"
+          >
             {{ recordCountDown }}秒后停止语音输入
           </view>
 
@@ -79,7 +119,10 @@
           </i>
 
           <!-- 操作按钮 -->
-          <view class="speak-close-btn" @click="handleCancelSend">
+          <view
+            class="speak-close-btn"
+            @click="handleCancelSend"
+          >
             <i class="close-icon" />
           </view>
           <view
@@ -90,7 +133,9 @@
             @touchcancel="touchcancel"
           >
             <i class="speak-icon" />
-            <view class="tips-txt">按住说话</view>
+            <view class="tips-txt">
+              按住说话
+            </view>
           </view>
 
           <!-- 发送控制 -->
@@ -101,10 +146,18 @@
               'margin-bottom': bottomHeight + 'px',
             }"
           >
-            <view :class="[classPrefix + '-audio-input__ft__btn']" class="btn-close" @click="handleCancelSend">
+            <view
+              :class="[classPrefix + '-audio-input__ft__btn']"
+              class="btn-close"
+              @click="handleCancelSend"
+            >
               <i class="close-icon" />
             </view>
-            <view :class="[classPrefix + '-audio-input__ft__btn']" class="btn-send" @click="handleSendVoiceMsg">
+            <view
+              :class="[classPrefix + '-audio-input__ft__btn']"
+              class="btn-send"
+              @click="handleSendVoiceMsg"
+            >
               发送
             </view>
           </view>
@@ -116,15 +169,24 @@
 </template>
 
 <script>
-const plugin = requirePlugin('WechatSI');
-const manager = plugin.getRecordRecognitionManager();
+import { prefix } from 'tdesign-uniapp/common/config';
+import { uniComponent } from 'tdesign-uniapp/common/src/index';
+
+const name = `${prefix}-chat-record`;
+
 let startRecordTimer = null; // 语音录制定时器-模拟长按
 let recordTimer = null;
-const name = `${prefix}-chat-record`;
-export default {
-  name: 'CareRecord',
-  props: {},
+
+// 使用微信小程序内置的录音管理器API
+let manager = null;
+if (typeof wx !== 'undefined' && wx.getRecorderManager) {
+  manager = wx.getRecorderManager();
+}
+
+export default uniComponent({
+  name: 'ChatRecord',
   components: {},
+  props: {},
   data() {
     return {
       classPrefix: name,
@@ -401,9 +463,9 @@ export default {
       this.bottomHeight = 0;
     },
   },
-};
+});
 </script>
 
-<style lang="less" scoped>
-@import './chat-record.less';
+<style>
+@import './chat-record.css';
 </style>
