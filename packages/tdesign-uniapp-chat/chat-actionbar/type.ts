@@ -39,7 +39,7 @@ export interface TdChatActionbarProps {
    * 【实验】操作栏位置
    * @default start
    */
-  placement?: 'start' | 'end' | 'space-around' | 'space-between';
+  placement?: 'start' | 'end' | 'space-around' | 'space-between' | 'longpress';
   /**
    * 点击点赞，点踩，复制，分享，重新生成按钮时触发发
    */

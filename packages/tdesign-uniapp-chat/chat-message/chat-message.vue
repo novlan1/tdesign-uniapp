@@ -149,7 +149,7 @@ export default uniComponent({
 
   methods: {
     handleLongPress(e) {
-      this.$emit('longpress', {
+      this.$emit('message-longpress', {
         e,
         id: this.chatId,
       });

@@ -3,16 +3,18 @@
     <view
       class="chat-box"
       :style="'height: ' + contentHeight + ';'"
+      @tap="hidePopover"
     >
       <t-chat
         id="chatList"
         @scroll="onScroll($event, { tagId: 'chatList' })"
       >
         <block
-          v-for="(item) in chatList"
+          v-for="(item, index) in chatList"
           :key="item.key"
         >
           <t-chat-message
+            :chat-id="index"
             :avatar="item.avatar || ''"
             :name="item.name || ''"
             :datetime="item.datetime || ''"
@@ -20,10 +22,12 @@
             :role="item.role"
             :placement="item.role === 'user' ? 'right' : 'left'"
             :status="item.status || ''"
+            @message-longpress="showPopover"
           >
             <template #actionbar>
               <t-chat-actionbar
-                v-if="chatIndex !== chatList.length - 1 && item.status === 'complete' && item.role === 'assistant'"
+                v-if="index !== chatList.length - 1 && item.status === 'complete' && item.role === 'assistant'"
+                :ref="'actionbar-' + index"
                 placement="end"
                 @actions="handleAction"
               />
@@ -44,6 +48,15 @@
           />
         </template>
       </t-chat>
+
+      <!-- 长按弹出操作栏 -->
+      <t-chat-actionbar
+        ref="popoverActionbar"
+        class="popover-actionbar"
+        placement="longpress"
+        @actions="handlePopoverAction"
+      />
+
       <!-- 内置虚拟列表优化性能仅在data属性中使用 -->
       <!-- <t-chat id="chatList" bindscroll="onScroll" data="{{chatList}}"></t-chat> -->
     </view>
@@ -150,6 +163,7 @@ export default {
       animation: 'dots',
 
       chatIndex: '',
+      activePopover: '', // 当前激活的弹出操作栏索引
     };
   },
   options: {
@@ -308,6 +322,53 @@ export default {
         message,
         theme: 'success',
       });
+    },
+
+    // 显示长按弹出操作栏
+    showPopover(e) {
+      const { e: event, id } = e;
+      const { popoverActionbar } = this.$refs;
+      const actionbarComponent = this.$refs[`actionbar-${id}`] || this.findActionbarComponent(id);
+
+      if (popoverActionbar) {
+        this.activePopover = id;
+
+        // 同步当前消息的评价状态
+        if (actionbarComponent && actionbarComponent.pComment !== undefined) {
+          popoverActionbar.setPComment(actionbarComponent.pComment);
+        }
+
+        // 显示弹出层，使用触摸位置
+        const x = event.detail?.x || event.touches?.[0]?.clientX || 0;
+        const y = event.detail?.y || event.touches?.[0]?.clientY || 0;
+        popoverActionbar.showPopover(`top:${y}px;left:${x}px`);
+      }
+    },
+
+    // 隐藏长按弹出操作栏
+    hidePopover() {
+      const { popoverActionbar } = this.$refs;
+      if (popoverActionbar) {
+        popoverActionbar.hidePopover();
+      }
+    },
+
+    // 处理弹出操作栏的事件
+    handlePopoverAction(e) {
+      const { name } = e;
+
+      // 先处理操作
+      this.handleAction(e);
+
+      // 如果是点赞或点踩操作，需要同步状态到原始操作栏
+      if (name === 'good' || name === 'bad') {
+        const actionbarComponent = this.$refs[`actionbar-${this.activePopover}`] || this.findActionbarComponent(this.activePopover);
+        const { popoverActionbar } = this.$refs;
+
+        if (actionbarComponent && popoverActionbar) {
+          actionbarComponent.setPComment(popoverActionbar.pComment);
+        }
+      }
     },
   },
 };

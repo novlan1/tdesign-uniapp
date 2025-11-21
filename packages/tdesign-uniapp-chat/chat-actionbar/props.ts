@@ -43,7 +43,7 @@ export default {
     default: 'start' as TdChatActionbarProps['placement'],
     validator(val: TdChatActionbarProps['placement']): boolean {
       if (!val) return true;
-      return ['start', 'end', 'space-around', 'space-between'].includes(val);
+      return ['start', 'end', 'space-around', 'space-between', 'longpress'].includes(val);
     },
   },
   /** 点击点赞，点踩，复制，分享，重新生成按钮时触发发 */
