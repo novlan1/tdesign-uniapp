@@ -43,6 +43,11 @@ export default {
     type: String,
     default: '',
   },
+  /** 输入框的类型 keyboard | speech */
+  senderType: {
+    type: String,
+    default: 'keyboard',
+  },
   /** 上传面板是否可见 */
   visible: Boolean,
   /** 输入框聚焦时触发 */

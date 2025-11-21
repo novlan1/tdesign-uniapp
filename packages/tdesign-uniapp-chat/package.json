@@ -48,6 +48,11 @@
       "import": "./chat-sender/chat-sender.vue",
       "default": "./chat-sender/chat-sender.vue"
     },
+    "./chat-record/chat-record.vue": {
+      "types": "./types/chat-record.d.ts",
+      "import": "./chat-record/chat-record.vue",
+      "default": "./chat-record/chat-record.vue"
+    },
     "./chat-thinking/chat-thinking.vue": {
       "types": "./types/chat-thinking.d.ts",
       "import": "./chat-thinking/chat-thinking.vue",

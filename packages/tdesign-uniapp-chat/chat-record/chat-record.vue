@@ -465,6 +465,6 @@ export default uniComponent({
 });
 </script>
 
-<style>
+<style scoped>
 @import './chat-record.css';
 </style>

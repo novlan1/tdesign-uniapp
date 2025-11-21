@@ -16,10 +16,7 @@
           :loading="loading"
           :placeholder="placeholder"
           :textarea-props="textareaProps"
-          :allow-speech="{
-            recording: showVoice,
-            iconVisible: false,
-          }"
+          :sender-type="'speech'"
           @send="onSend"
         >
           <template #speech>

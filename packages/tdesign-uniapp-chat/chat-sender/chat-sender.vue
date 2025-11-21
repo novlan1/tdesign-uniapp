@@ -27,32 +27,41 @@
       </view>
 
       <view :class="classPrefix + '__actions'">
-        <view :class="classPrefix + '__textarea'">
-          <slot name="input-prefix" />
-          <textarea
-            :class="classPrefix + '__textarea--control'"
-            :style="textareaStyle(textareaProps.autosize)"
-            :disabled="disabled"
-            :auto-height="!!textareaProps.autosize"
-            confirm-type="send"
-            :adjust-position="adjustPosition"
-            :disable-default-padding="false"
-            cursor-spacing="30"
-            maxlength="-1"
-            :value="innerValue"
-            @change="textChange"
-            @focus="focusFn"
-            @blur="blurFn"
-            @click="handlerClick"
-            @input="textChange"
-            @keyboardheightchange="onkeyboardheightchange"
-            @confirm="handleSendClick"
-          />
-          <view :class="classPrefix + '__textarea--placeholder ' + (focusFlag || innerValue ? 'hide' : '')">
-            {{ placeholder }}
+        <view
+          :class="classPrefix + '__textarea'"
+        >
+          <view
+            v-if="senderType === 'keyboard'"
+            :class="classPrefix + '__textarea-hook'"
+          >
+            <slot name="input-prefix" />
+            <textarea
+              :class="classPrefix + '__textarea--control'"
+              :style="textareaStyle(textareaProps.autosize)"
+              :disabled="disabled"
+              :auto-height="!!textareaProps.autosize"
+              confirm-type="send"
+              :adjust-position="adjustPosition"
+              :disable-default-padding="false"
+              cursor-spacing="30"
+              maxlength="-1"
+              :value="innerValue"
+              @change="textChange"
+              @focus="focusFn"
+              @blur="blurFn"
+              @click="handlerClick"
+              @input="textChange"
+              @keyboardheightchange="onkeyboardheightchange"
+              @confirm="handleSendClick"
+            />
+            <view :class="classPrefix + '__textarea--placeholder ' + (focusFlag || innerValue ? 'hide' : '')">
+              {{ placeholder }}
+            </view>
+          </view>
+          <view v-if="senderType === 'speech'">
+            <slot name="speech" />
           </view>
         </view>
-
         <view :class="classPrefix + '__footer'">
           <view :class="classPrefix + '__mode'">
             <slot name="footer-prefix" />
