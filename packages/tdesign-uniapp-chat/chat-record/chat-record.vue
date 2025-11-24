@@ -347,6 +347,7 @@ export default uniComponent({
      * @description 开始录音
      */
     async startRecord(e) {
+      console.error('开始露营====：', e);
       this.isStarted = true;
       await this.getVoiceAuthSetting();
       if (!this.recordAuthSetting) {

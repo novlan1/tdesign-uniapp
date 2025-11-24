@@ -2,8 +2,8 @@
 
 @chat-record: ~'@{prefix}-chat-record';
 
-.@{chat-record}-chat-record {
-  .@{chat-record}-chat-record-hook {
+.@{chat-record} {
+  .@{chat-record}-hook {
     width: 100%;
     padding: 24rpx 0;
     color: rgba(0, 0, 0, 0.9);
@@ -19,25 +19,25 @@
   }
 
   //语音输入
-  .@{chat-record}-chat-record-audio-input {
+  .@{chat-record}-audio-input {
     &.show {
-      .@{chat-record}-chat-record-audio-input__mask {
+      .@{chat-record}-audio-input__mask {
         opacity: 1;
         pointer-events: auto;
       }
 
-      .@{chat-record}-chat-record-audio-input__main {
+      .@{chat-record}-audio-input__main {
         opacity: 1;
         pointer-events: auto;
       }
     }
 
     &.unknow {
-      .@{chat-record}-chat-record-audio-input__ft__tips {
+      .@{chat-record}-audio-input__ft__tips {
         color: #126dff;
       }
 
-      .@{chat-record}-chat-record-audio-input__ft__tips__inner {
+      .@{chat-record}-audio-input__ft__tips__inner {
         display: none;
       }
 
@@ -55,15 +55,15 @@
     }
 
     &.cancel {
-      .@{chat-record}-chat-record-audio-input__ft__tips__inner {
+      .@{chat-record}-audio-input__ft__tips__inner {
         color: #ff5729;
       }
 
-      .@{chat-record}-chat-record-audio-input__ft__tips {
+      .@{chat-record}-audio-input__ft__tips {
         color: #ff5729;
       }
 
-      .@{chat-record}-chat-record-audio-input__ft__bg {
+      .@{chat-record}-audio-input__ft__bg {
         background: url(https://static.wecity.qq.com/webrebuildmysscard-mini/250702-aigc-audio/img-ctrl-bg-red.png) no-repeat center;
         background-size: cover;
       }
@@ -76,15 +76,15 @@
     }
 
     &.complete {
-      .@{chat-record}-chat-record-audio-input__ft__tips__inner {
+      .@{chat-record}-audio-input__ft__tips__inner {
         display: none;
       }
 
-      .@{chat-record}-chat-record-audio-input__ft__bg {
+      .@{chat-record}-audio-input__ft__bg {
         display: none;
       }
 
-      .@{chat-record}-chat-record-audio-input__ft__ct {
+      .@{chat-record}-audio-input__ft__ct {
         display: flex;
       }
 
@@ -92,7 +92,7 @@
         display: none;
       }
 
-      .@{chat-record}-chat-record-audio-inputt__ft__tips {
+      .@{chat-record}-audio-inputt__ft__tips {
         display: none;
       }
     }
@@ -300,11 +300,11 @@
       overflow-y: scroll;
 
       &.disabled {
-        .@{chat-record}-chat-record-audio-input__con__inner {
+        .@{chat-record}-audio-input__con__inner {
           color: rgba(0, 0, 0, 0.4);
         }
 
-        .@{chat-record}-chat-record-audio-input__con__ta {
+        .@{chat-record}-audio-input__con__ta {
           color: rgba(0, 0, 0, 0.4);
         }
       }
@@ -473,7 +473,7 @@
         align-items: center;
         justify-content: center;
 
-        &+.@{chat-record}-chat-record-audio-input__ft__btn {
+        &+.@{chat-record}-audio-input__ft__btn {
           margin-left: 24rpx;
         }
 
