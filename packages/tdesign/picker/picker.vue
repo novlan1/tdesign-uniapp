@@ -4,10 +4,10 @@
       v-if="usePopup"
       :visible="dataVisible"
       placement="bottom"
-      :using-custom-navbar="usingCustomNavbar || popupProps?.usingCustomNavbar"
-      :custom-navbar-height="coalesce(customNavbarHeight, popupProps?.usingCustomNavbar)"
-      :z-index="popupProps?.zIndex || defaultPopUpzIndex"
-      :overlay-props="popupProps?.overlayProps || defaultPopUpProps"
+      :using-custom-navbar="usingCustomNavbar || (popupProps && popupProps.usingCustomNavbar)"
+      :custom-navbar-height="coalesce(customNavbarHeight, popupProps && popupProps.usingCustomNavbar)"
+      :z-index="(popupProps && popupProps.zIndex) || defaultPopUpzIndex"
+      :overlay-props="(popupProps && popupProps.overlayProps) || defaultPopUpProps"
       @visible-change="onPopupChange"
     >
       <template #content>

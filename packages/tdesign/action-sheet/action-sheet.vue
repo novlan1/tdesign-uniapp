@@ -10,8 +10,8 @@
       :using-custom-navbar="dataUsingCustomNavbar"
       :custom-navbar-height="customNavbarHeight"
       :show-overlay="dataShowOverlay"
-      :z-index="dataPopupProps?.zIndex || defaultPopUpzIndex"
-      :overlay-props="dataPopupProps?.overlayProps || defaultPopUpProps"
+      :z-index="(dataPopupProps && dataPopupProps.zIndex) || defaultPopUpzIndex"
+      :overlay-props="(dataPopupProps && dataPopupProps.overlayProps) || defaultPopUpProps"
       @visible-change="onPopupVisibleChange"
     >
       <view

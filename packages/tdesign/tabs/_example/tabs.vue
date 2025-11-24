@@ -51,7 +51,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import BaseDemo from './base/index.vue';
 import scroll from './scroll/index.vue';

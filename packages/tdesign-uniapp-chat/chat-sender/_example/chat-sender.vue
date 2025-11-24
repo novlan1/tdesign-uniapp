@@ -30,7 +30,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 import baseDemo from './base/index.vue';
 import attachments from './attachments/index.vue';
 import contentCitation from './content-citation/index.vue';

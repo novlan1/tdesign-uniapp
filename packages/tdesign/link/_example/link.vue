@@ -53,7 +53,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import contentDemo from './content/index.vue';
 import underline from './underline/index.vue';

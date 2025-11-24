@@ -31,7 +31,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import left from './left/index.vue';
 import right from './right/index.vue';

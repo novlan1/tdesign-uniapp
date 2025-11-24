@@ -1,10 +1,8 @@
 const {
   components,
 } = require('../utils/components.js');
-const path = require('path');
-const pagesJson = path.resolve(__dirname, '../../src/pages.json');
 const { writeFileSync, readFileSync, hyphenate } = require('t-comm');
-const { DEFAULT_PAGES, SHOW_SKYLINE_PAGES } = require('./config');
+const { DEFAULT_PAGES, SHOW_SKYLINE_PAGES, CONFIG } = require('./config');
 
 
 const {
@@ -36,7 +34,7 @@ const getComponentPages = (list,  isSkyline) => list.reduce((acc, item) => [
     };
   });
 
-function main() {
+function parseData(rawData) {
   const list = [
     // chat,
     base,
@@ -45,6 +43,7 @@ function main() {
     display,
     ux,
   ];
+
   const skylineList = SHOW_SKYLINE_PAGES ? [
     skylineChat,
     skylineBase,
@@ -57,7 +56,6 @@ function main() {
   const componentPages = getComponentPages(list, false);
   const skylinePages = getComponentPages(skylineList, true);
 
-  const rawData = readFileSync(pagesJson, true);
   rawData.pages = [
     ...DEFAULT_PAGES,
     ...componentPages.map(item => ({
@@ -84,6 +82,7 @@ function main() {
       };
     }),
   ];
+
   rawData.condition = {
     current: 0,
     list: [
@@ -100,7 +99,22 @@ function main() {
       ], []),
     ],
   };
-  writeFileSync(pagesJson, `${JSON.stringify(rawData, null, 2)}\n`, false);
+}
+
+function main() {
+  const list = [
+    CONFIG.VUE3_CLI_PAGES_JSON,
+    CONFIG.VUE3_HX_PAGES_JSON,
+    CONFIG.VUE2_HX_PAGES_JSON,
+    CONFIG.VUE2_CLI_PAGES_JSON,
+  ];
+
+  for (const file of list) {
+    const rawData = readFileSync(file, true);
+    parseData(rawData);
+    writeFileSync(file, `${JSON.stringify(rawData, null, 2)}\n`, false);
+  }
+
   console.log('[pages.json] Wrote!');
 }
 

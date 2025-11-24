@@ -42,7 +42,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 import baseWatermark from './base/index.vue';
 import imageWatermark from './image/index.vue';
 import grayWatermark from './gray/index.vue';

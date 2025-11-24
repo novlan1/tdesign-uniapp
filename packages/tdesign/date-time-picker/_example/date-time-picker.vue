@@ -46,7 +46,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import yearMonthDate from './year-month-date/index.vue';
 import yearMonth from './year-month/index.vue';

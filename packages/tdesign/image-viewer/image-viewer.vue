@@ -21,7 +21,7 @@
       <view :class="classPrefix + '__content'">
         <swiper
           class="swiper"
-          :style="swiperStyle[currentSwiperIndex]?.style"
+          :style="swiperStyle[currentSwiperIndex] && swiperStyle[currentSwiperIndex].style"
           :autoplay="false"
           :current="currentSwiperIndex"
           tabindex="0"
@@ -36,7 +36,7 @@
             <t-image
               v-if="!lazy || shouldLoadImage(index, currentSwiperIndex, loadedImageIndexes)"
               t-class="t-image--external"
-              :custom-style="imagesStyle[index]?.style || ''"
+              :custom-style="(imagesStyle[index] && imagesStyle[index].style) || ''"
               mode="aspectFit"
               :src="item"
               :data-index="index"

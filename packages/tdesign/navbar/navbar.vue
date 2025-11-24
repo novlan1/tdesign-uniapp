@@ -206,8 +206,11 @@ export default uniComponent({
         bottom: BASE_MENU_RECT.top + BASE_MENU_RECT.height,
         left: BASE_MENU_RECT.right - BASE_MENU_RECT.width,
       };
-      if (uni.getMenuButtonBoundingClientRect) {
-        rect = uni.getMenuButtonBoundingClientRect();
+      if (uni.getMenuButtonBoundingClientRect
+         && typeof uni.getMenuButtonBoundingClientRect === 'function'
+         && typeof uni.getMenuButtonBoundingClientRect()  === 'object'
+      ) {
+        rect = uni.getMenuButtonBoundingClientRect() || {};
       }
 
       this._menuRect = rect;

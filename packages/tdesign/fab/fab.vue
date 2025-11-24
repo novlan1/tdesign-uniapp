@@ -66,7 +66,7 @@
     :class="[classPrefix, tClass]"
     :style="tools._style(['right: 16px; bottom: 32px;', customStyle])"
   >
-    <slot v-if="!buttonData?.content && !buttonData?.icon" />
+    <slot v-if="!buttonData || !buttonData.content && !buttonData.icon" />
     <t-button
       v-else
       :t-id="buttonData.tId"

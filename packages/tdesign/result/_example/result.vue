@@ -42,7 +42,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import tButton from 'tdesign-uniapp/button/button.vue';
 import theme from './theme/index.vue';

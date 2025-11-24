@@ -13,7 +13,9 @@
     aria-role="button"
     :aria-label="
       ariaLabel ||
-        (badgeProps?.dot || badgeProps?.count ? (active ? '已选中，' + label + tools.getBadgeAriaLabel({ ...badgeProps }) : label + tools.getBadgeAriaLabel({ ...badgeProps })) : '')
+        (badgeProps && (badgeProps.dot || badgeProps.count)
+          ? (active ? '已选中，' + label + tools.getBadgeAriaLabel({ ...badgeProps })
+            : label + tools.getBadgeAriaLabel({ ...badgeProps })) : '')
     "
     :aria-disabled="disabled"
     @click="handleClick"

@@ -27,7 +27,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 import baseDemo from './base/index.vue';
 import comment from './comment/index.vue';
 

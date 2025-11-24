@@ -34,7 +34,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import theme from './theme/index.vue';
 import size from './size/index.vue';

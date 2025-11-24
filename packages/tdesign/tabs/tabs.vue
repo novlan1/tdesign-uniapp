@@ -6,9 +6,9 @@
     <t-sticky
       :t-class="tools.cls(classPrefix + '__sticky', [placement])"
       :disabled="!sticky"
-      :z-index="stickyProps?.zIndex || 1"
-      :offset-top="stickyProps?.offsetTop || 0"
-      :container="stickyProps?.container"
+      :z-index="(stickyProps && stickyProps.zIndex) || 1"
+      :offset-top="(stickyProps && stickyProps.offsetTop) || 0"
+      :container="stickyProps && stickyProps.container"
       @scroll="onTouchScroll"
     >
       <view :class="tools.cls(classPrefix + '__wrapper', [theme])">

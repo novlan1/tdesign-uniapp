@@ -80,7 +80,7 @@
           @nicknamereview="onNickNameReview"
         >
         <view
-          v-if="_clearIcon && dataValue?.length && showClearIcon"
+          v-if="_clearIcon && dataValue && dataValue.length && showClearIcon"
           :class="classPrefix + '__wrap--clearable-icon'"
           @click="clearInput"
         >

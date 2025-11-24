@@ -50,7 +50,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import single from './single/index.vue';
 import multi from './multi/index.vue';

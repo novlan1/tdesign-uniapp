@@ -26,7 +26,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 import baseComp from './base/index.vue';
 import custom from './custom/index.vue';
 import iconImage from './iconImage/index.vue';

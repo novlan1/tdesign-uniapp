@@ -51,7 +51,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import textOnly from './text-only/index.vue';
 import iconOnly from './icon-only/index.vue';
@@ -76,7 +76,7 @@ export default {
     };
   },
   methods: {
-    onChange(event: any) {
+    onChange(event) {
       console.log(event);
     },
   },
