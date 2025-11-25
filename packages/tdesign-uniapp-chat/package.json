@@ -1,7 +1,7 @@
 {
   "name": "tdesign-uniapp-chat",
   "id": "tdesign-uniapp-chat",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "novlan1",
   "title": "tdesign-uniapp-chat",
   "description": "TDesign Chat Component for uniapp",
@@ -101,7 +101,7 @@
     "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
     "type-check": "vue-tsc --noEmit",
     "postinstall": "node ./script/postinstall",
-    "publish": "node ../demo/script/release/publish-tdesign-uniapp-chat.js"
+    "release": "node ../demo/script/release/publish-tdesign-uniapp-chat.js"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.4.8",
