@@ -82,7 +82,7 @@
         <view
           v-if="_clearIcon && dataValue && dataValue.length && showClearIcon"
           :class="classPrefix + '__wrap--clearable-icon'"
-          @click="clearInput"
+          @click.stop="clearInput"
         >
           <t-icon
             :custom-style="_clearIcon.style || ''"
