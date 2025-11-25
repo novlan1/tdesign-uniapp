@@ -71,7 +71,7 @@
               >
                 <t-icon
                   name="system-sum"
-                  size="40rpx"
+                  size="36rpx"
                 />
                 <text class="deep-think-text">
                   深度思考
@@ -83,7 +83,7 @@
               >
                 <t-icon
                   name="internet"
-                  size="40rpx"
+                  size="36rpx"
                 />
               </view>
             </view>
