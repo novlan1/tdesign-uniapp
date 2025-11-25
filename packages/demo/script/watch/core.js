@@ -17,10 +17,10 @@ async function copy({
   // action-sheet/_example/list/index.vue
   const isDemo = relativePath.split(path.sep)[1] === '_example';
   const isCommon = relativePath.split(path.sep)[0] === 'common';
-  if (!fs.existsSync(targetDir)) {
-    console.log(`[copy] NOT Exist: ${targetDir}`);
-    return;
-  }
+  // if (!fs.existsSync(targetDir)) {
+  //   console.log(`[copy] NOT Exist: ${targetDir}`);
+  //   return;
+  // }
 
   let targetPath = path.resolve(targetDir, relativePath);
 
