@@ -1,5 +1,6 @@
 packages:
   - 'packages/*'
+  - '!packages/tdesign-vue2-cli'
 
 catalog:
  

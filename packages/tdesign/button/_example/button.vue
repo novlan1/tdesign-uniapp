@@ -61,7 +61,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 import baseComp from './base/index.vue';
 import size from './size/index.vue';
 import iconBtn from './icon-btn/index.vue';

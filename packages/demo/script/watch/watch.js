@@ -3,6 +3,13 @@ const path = require('path');
 const { config } = require('./config');
 const { copy } = require('./core');
 const net = require('net');
+const {
+  getCopyExampleParams,
+  getCopyAppParams,
+  getCopyVue2HXParams,
+  getCopyVue2CliParams,
+} = require('./helper');
+
 const port = 12345; // 选择一个空闲端口
 
 
@@ -35,6 +42,7 @@ async function main() {
       const filePath = history[0];
       let relativePath = path.relative(base, filePath);
       console.log('relativePath', relativePath);
+      const isChat = relativePath.includes(`tdesign-uniapp-chat${path.sep}`);
       if (relativePath.startsWith(`tdesign${path.sep}`) || relativePath.startsWith(`tdesign-uniapp-chat${path.sep}`)) {
         relativePath = relativePath.split(path.sep).slice(1)
           .join(path.sep);
@@ -42,13 +50,47 @@ async function main() {
 
       console.log('base', base);
       console.log('history', history);
+      console.log('isChat', isChat);
 
-      const { relativeTargetByCwd, relativeSourceByCwd } = await copy({
+      const {
+        relativeTargetByCwd,
+        relativeSourceByCwd,
+      } = await copy({
         relativePath,
         filePath,
-        config,
+        config: getCopyExampleParams(isChat),
       });
       console.log(`[Wrote] done! \nFrom ${relativeSourceByCwd} to ${relativeTargetByCwd}`);
+
+      const {
+        relativeTargetByCwd: relativeTargetByCwdApp,
+        relativeSourceByCwd: relativeSourceByCwdApp,
+      } = await copy({
+        relativePath,
+        filePath,
+        config: getCopyAppParams(isChat),
+      });
+      console.log(`[Wrote] done! \nFrom ${relativeSourceByCwdApp} to ${relativeTargetByCwdApp}`);
+
+      const {
+        relativeTargetByCwd: relativeTargetByCwdVue2HX,
+        relativeSourceByCwd: relativeSourceByCwdVue2HX,
+      } = await copy({
+        relativePath,
+        filePath,
+        config: getCopyVue2HXParams(isChat),
+      });
+      console.log(`[Wrote] done! \nFrom ${relativeSourceByCwdVue2HX} to ${relativeTargetByCwdVue2HX}`);
+
+      const {
+        relativeTargetByCwd: relativeTargetByCwdVue2Cli,
+        relativeSourceByCwd: relativeSourceByCwdVue2Cli,
+      } = await copy({
+        relativePath,
+        filePath,
+        config: getCopyVue2CliParams(isChat),
+      });
+      console.log(`[Wrote] done! \nFrom ${relativeSourceByCwdVue2Cli} to ${relativeTargetByCwdVue2Cli}`);
     }
   });
 

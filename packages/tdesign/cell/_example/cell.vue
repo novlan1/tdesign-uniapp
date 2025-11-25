@@ -30,7 +30,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 import baseComp from './base/index.vue';
 import multiple from './multiple/index.vue';
 import theme from './theme/index.vue';

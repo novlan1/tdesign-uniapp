@@ -31,7 +31,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 import BaseComp from './base/index.vue';
 import DeleteDemo from './delete/index.vue';
 export default {

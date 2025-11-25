@@ -30,7 +30,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import tButton from 'tdesign-uniapp/button/button.vue';
 import tResult from 'tdesign-uniapp/result/result.vue';

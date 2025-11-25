@@ -39,7 +39,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import horizontal from './horizontal/index.vue';
 import vertical from './vertical/index.vue';

@@ -64,7 +64,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import BaseDemo from './base/index.vue';
 import labelDemo from './label/index.vue';

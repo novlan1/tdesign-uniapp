@@ -50,7 +50,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 // import tSkeleton from 'tdesign-uniapp/skeleton/skeleton.vue';
 import theme from './theme/index.vue';

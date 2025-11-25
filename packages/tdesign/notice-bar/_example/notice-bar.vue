@@ -52,7 +52,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 // import tNoticeBar from 'tdesign-uniapp/notice-bar/notice-bar.vue';
 import BaseDemo from './base/index.vue';
