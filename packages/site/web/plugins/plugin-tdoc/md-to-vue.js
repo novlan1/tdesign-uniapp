@@ -21,7 +21,7 @@ const DEFAULT_EN_TABS = [
 
 function getMobilePrefix(mode) {
   if (mode === 'preview') {
-    return '/mobile';
+    return 'https://uwayfly.com/tdesign-uniapp/mobile';
   }
   if (process.env.NODE_ENV === 'development') {
     return 'http://localhost:11111/tdesign-uniapp/mobile';

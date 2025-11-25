@@ -39,7 +39,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 import baseDemo from './base/index.vue';
 import list from './list/index.vue';
 import codeDemo from './code/index.vue';

@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "lib": [
+      "es2016",
+      "dom"
+    ]
+  }
+}

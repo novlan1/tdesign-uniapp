@@ -84,7 +84,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import single from './single/index.vue';
 import multiple from './multiple/index.vue';

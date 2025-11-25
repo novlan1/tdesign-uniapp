@@ -1,5 +1,7 @@
 import { appBaseInfo } from '../common/utils';
+// #ifdef VUE3
 import { ref, onBeforeMount } from 'vue';
+// #endif
 
 export const useTheme = () => {
   const theme = ref('light');

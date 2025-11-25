@@ -19,10 +19,8 @@ if (process.env.UNI_PLATFORM !== 'h5') {
 const baseAlias = {
   'tdesign-site': path.resolve(__dirname).replace(/\\/g, '/'),
   packages: path.resolve(__dirname, '../').replace(/\\/g, '/'),
-  'tdesign-uniapp-raw': path.resolve(__dirname, './src/_tdesign-raw').replace(/\\/g, '/'),
   'tdesign-uniapp': path.resolve(__dirname, './src/_tdesign').replace(/\\/g, '/'),
-  // TODO:
-  'tdesign-uniapp-chat': path.resolve(__dirname, './src/_tdesign').replace(/\\/g, '/'),
+  'tdesign-uniapp-chat': path.resolve(__dirname, './src/_tdesign-uniapp-chat').replace(/\\/g, '/'),
 };
 const ENV_PREFIX = ['VITE_', 'VUE_APP'];
 const root: string = process.cwd();

@@ -47,7 +47,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import list from './list/index.vue';
 import status from './status/index.vue';

@@ -7,7 +7,7 @@
         ' ' + classPrefix + '--' + (verifyStatus === 2 ? 'error' : verifyStatus === 1 ? 'success' : '') +
         ' ' + tClass
     "
-    :style="_._style([customStyle])"
+    :style="tools._style([customStyle])"
   >
     <view
       v-if="label"
@@ -77,7 +77,7 @@ import { validate, ValidateStatus } from './form-model';
 import TIcon from '../icon/icon.vue';
 import TButton from '../button/button.vue';
 import { ChildrenMixin, RELATION_MAP } from '../common/relation';
-import _ from '../common/utils.wxs';
+import tools from '../common/utils.wxs';
 import { isNumber } from '../common/validator';
 
 const name = `${prefix}-form-item`;
@@ -116,7 +116,7 @@ export default uniComponent({
       colon: false,
       // showErrorMessage: true,
 
-      _,
+      tools,
       dataRules: this.rules,
       dataLabelAlign: this.labelAlign,
       dataLabelWidth: this.labelWidth,
@@ -137,7 +137,7 @@ export default uniComponent({
         }
       }
 
-      return _._style(contentStyle);
+      return tools._style(contentStyle);
     },
   },
   watch: {

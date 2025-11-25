@@ -20,17 +20,31 @@ dist
 *.sln
 *.sw?
 
-packages/demo/src/_tdesign/
-packages/demo/src/_tdesign-raw/
+packages/demo/src/_tdesign*/
 packages/demo/src/pages-more/
 
 npm_dist/
 npm_dist_chat/
 
-packages/tdesign-app/uni_modules/tdesign-uniapp/
+packages/tdesign-app/uni_modules/tdesign-uniapp*/
 
 packages/tdesign-app/unpackage/
 packages/tdesign-app/pages-more/
 packages/tdesign-app/pages/
 packages/tdesign-app/components/
 packages/tdesign-app/tdesign-uniapp-raw/
+
+
+packages/hello-tdesign-vue2/uni_modules/tdesign-uniapp*/
+
+packages/hello-tdesign-vue2/unpackage/
+packages/hello-tdesign-vue2/pages-more/
+packages/hello-tdesign-vue2/pages/
+packages/hello-tdesign-vue2/components/
+packages/hello-tdesign-vue2/tdesign-uniapp-raw/
+
+
+packages/tdesign-vue2-cli/src/_tdesign*/
+packages/tdesign-vue2-cli/src/pages-more/
+packages/tdesign-vue2-cli/src/pages/
+packages/tdesign-vue2-cli/src/components/

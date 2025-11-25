@@ -58,7 +58,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import BaseDemo from './base/index.vue';
 import fraction from './fraction/index.vue';
