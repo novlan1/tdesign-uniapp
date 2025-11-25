@@ -3,6 +3,7 @@ const {
 } = require('../utils/components.js');
 const { writeFileSync, readFileSync, hyphenate } = require('t-comm');
 const { DEFAULT_PAGES, SHOW_SKYLINE_PAGES, CONFIG } = require('./config');
+const fs = require('fs');
 
 
 const {
@@ -110,6 +111,9 @@ function main() {
   ];
 
   for (const file of list) {
+    if (!fs.existsSync(file)) {
+      continue;
+    }
     const rawData = readFileSync(file, true);
     parseData(rawData);
     writeFileSync(file, `${JSON.stringify(rawData, null, 2)}\n`, false);
