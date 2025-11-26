@@ -75,6 +75,11 @@ export default uniComponent({
   props: {
     ...props,
   },
+
+  emits: [
+    'update:value',
+  ],
+
   data() {
     return {
       prefix,
@@ -145,8 +150,14 @@ export default uniComponent({
     onInput(event) {
       const { value, cursor } = event.detail;
       this.updateValue(value);
-      this.$emit('change', { value: this.dataValue, cursor });
+      this.emitChange({ value: this.dataValue, cursor });
     },
+
+    emitChange(data) {
+      this.$emit('change', data);
+      this.$emit('update:value', data.value);
+    },
+
     onFocus(event) {
       this.$emit('focus', {
         ...event.detail,
