@@ -1,7 +1,6 @@
 <template>
   <view>
     <t-form
-      id="form"
       ref="form"
       class="form"
       :data="formData"
@@ -151,13 +150,12 @@
         name="resume"
       >
         <t-textarea
-          :value="formData.resume"
+          v-model:value="formData.resume"
           t-class="textarea"
           indicator
           :maxlength="50"
           placeholder="请输入个人简介"
           style="flex: 1;"
-          @change="onTextareaChange"
         />
       </t-form-item>
 

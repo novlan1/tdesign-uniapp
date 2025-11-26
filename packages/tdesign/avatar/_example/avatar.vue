@@ -70,7 +70,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import imageAvatar from './image-avatar/index.vue';
 import characterAvatar from './character-avatar/index.vue';

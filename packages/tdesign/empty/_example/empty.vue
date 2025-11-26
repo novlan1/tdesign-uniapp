@@ -28,7 +28,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import BaseDemo from './base/index.vue';
 import imageEmpty from './imageEmpty/index.vue';

@@ -6,6 +6,16 @@ docClass: timeline
 ---
 
 
+## 🌈 0.5.6 `2025-11-25` 
+### 🚀 Features
+- `Popup`: 支持 `v-model:visible` @novlan1 ([#90](https://github.com/novlan1/tdesign-uniapp/pull/90))
+- `Form`: 支持 `validate` 方法传参 @novlan1 ([#90](https://github.com/novlan1/tdesign-uniapp/pull/90))
+- `Input`: 支持 `v-model:value` @novlan1 ([#89](https://github.com/novlan1/tdesign-uniapp/pull/89))
+
+### 🐞 Bug Fixes
+- `Form`: 修复深色模式背景错误问题 @novlan1 ([#91](https://github.com/novlan1/tdesign-uniapp/pull/91))
+
+
 ## 🌈 0.5.5 `2025-11-17` 
 ### 🚀 Features
 - `Picker`: 支持 `v-model:visible` 语法糖 @novlan1 ([#77](https://github.com/novlan1/tdesign-uniapp/pull/77))

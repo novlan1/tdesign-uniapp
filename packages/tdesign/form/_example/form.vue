@@ -52,7 +52,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import Horizontal from './horizontal/index.vue';
 import Vertical from './vertical/index.vue';

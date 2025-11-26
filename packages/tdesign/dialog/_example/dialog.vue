@@ -67,7 +67,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import BaseDemo from './base/index.vue';
 import confirm from './confirm/index.vue';

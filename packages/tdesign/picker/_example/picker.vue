@@ -32,7 +32,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 
 import BaseDemo from './base/index.vue';
 import withTitle from './with-title/index.vue';

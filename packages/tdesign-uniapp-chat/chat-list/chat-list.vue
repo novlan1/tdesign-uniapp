@@ -49,7 +49,7 @@
   </view>
 </template>
 <script>
-import chatMessage from '../chat-message/chat-message.vue';
+import ChatMessage from '../chat-message/chat-message.vue';
 import { prefix } from 'tdesign-uniapp/common/config';
 import props from './props';
 
@@ -68,7 +68,7 @@ export default uniComponent({
   },
 
   components: {
-    chatMessage,
+    ChatMessage,
   },
 
   props: {

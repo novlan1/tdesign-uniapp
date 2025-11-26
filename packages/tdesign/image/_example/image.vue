@@ -23,7 +23,7 @@
   </view>
 </template>
 
-<script lang="ts">
+<script>
 import baseComp from './base/index.vue';
 import status from './status/index.vue';
 export default {
