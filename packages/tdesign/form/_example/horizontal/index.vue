@@ -1,7 +1,6 @@
 <template>
   <view>
     <t-form
-      id="form"
       ref="form"
       class="form"
       :data="formData"
