@@ -1,7 +1,7 @@
 const path = require('path');
 
 const DIR_MAP = {
-  VUE2_CLI: 'tdesign-vue2-cli',
+  VUE2_CLI: 'tdesign-uniapp-vue2-cli-demo',
 };
 
 const config = {
