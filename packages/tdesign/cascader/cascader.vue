@@ -71,7 +71,6 @@
 
             <TTabs
               v-if="theme == 'tab'"
-              id="tabs"
               ref="tabs"
               :value="stepIndex"
               :space-evenly="false"
