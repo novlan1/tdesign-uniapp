@@ -6,6 +6,15 @@ docClass: timeline
 ---
 
 
+## 🌈 0.5.7 `2025-11-27` 
+### 🚀 Features
+- `Textarea`: 支持 `v-model:value` @novlan1 ([#102](https://github.com/novlan1/tdesign-uniapp/pull/102))
+- `Toast`: 函数式调用组件时，支持组件 Dom 预埋在页面下 @novlan1 ([#103](https://github.com/novlan1/tdesign-uniapp/pull/103))
+
+### 🐞 Bug Fixes
+- `Input`: 修复 `clear` 事件的意外冒泡问题 @novlan1 ([#100](https://github.com/novlan1/tdesign-uniapp/pull/100))
+- `Calendar`: 修复 `switchMode` 为 `year-month` 时的编译问题 @novlan1 ([#106](https://github.com/novlan1/tdesign-uniapp/pull/106))
+
 ## 🌈 0.5.6 `2025-11-25` 
 ### 🚀 Features
 - `Popup`: 支持 `v-model:visible` @novlan1 ([#90](https://github.com/novlan1/tdesign-uniapp/pull/90))

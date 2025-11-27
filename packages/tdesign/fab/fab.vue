@@ -1,7 +1,6 @@
 <template>
   <t-draggable
     v-if="draggable"
-    id="draggable"
     ref="draggable"
     :custom-style="tools._style(['right: 16px; bottom: 32px;', customStyle, moveStyle])"
     :direction="draggable === true ? 'all' : draggable"

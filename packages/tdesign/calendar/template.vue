@@ -31,7 +31,7 @@
         :switch-mode="switchMode"
         :title="getMonthTitle(
           currentMonth[0] && currentMonth[0].year,
-          realLocalText.months && currentMonth[0] && realLocalText.months[cur [0].month],
+          realLocalText.months && currentMonth[0] && realLocalText.months[currentMonth[0].month],
           realLocalText.monthTitle
         )"
         :pre-year-btn-disable="actionButtons.preYearBtnDisable"
