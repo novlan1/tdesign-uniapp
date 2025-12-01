@@ -5,6 +5,8 @@
       class="demo-navbar"
       title="Result Page"
       left-arrow
+      :delta="-1"
+      @go-back="onDemoGoBack"
     />
     <!-- #endif -->
     <view class="page">
