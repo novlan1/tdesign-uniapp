@@ -20,7 +20,13 @@
       >
         *
       </text>
-      <text>{{ label }}</text>
+      <slot
+        name="label"
+      >
+        <text>
+          {{ label }}
+        </text>
+      </slot>
       <text
         v-if="dataRequiredMark && requiredMarkPosition === 'right'"
         :class="classPrefix + '__label--required'"
@@ -41,7 +47,7 @@
       <view :class="classPrefix + '__controls-content ' + classPrefix + '__controls-content--' + dataContentAlign">
         <slot />
         <view
-          v-if="false"
+          v-if="arrow"
           :class="classPrefix + '__arrow'"
         >
           <t-icon
@@ -50,10 +56,19 @@
           />
         </view>
       </view>
+
+      <view
+        :class="classPrefix + '__help ' + classPrefix + '__help--' + dataContentAlign + tClassHelp"
+        :style="errorPosition"
+      >
+        <slot name="help">
+          {{ help }}
+        </slot>
+      </view>
+
       <view
         v-if="errorList.length > 0 && dataShowErrorMessage"
         :class="classPrefix + '__error ' + classPrefix + '__error--' + (errorList[0].type || 'error')"
-        :style="errorPosition"
       >
         {{ errorList[0].message }}
       </view>
@@ -64,6 +79,7 @@
         {{ successList[0].message }}
       </view>
     </view>
+
     <view :class="classPrefix + '__extra ' + tClassExtra">
       <slot name="extra" />
     </view>
@@ -123,6 +139,8 @@ export default uniComponent({
       dataRequiredMark: this.requiredMark,
       dataShowErrorMessage: this.showErrorMessage,
       dataContentAlign: this.contentAlign,
+
+      errorPosition: '',
     };
   },
   computed: {
@@ -182,7 +200,7 @@ export default uniComponent({
       this.requiredMarkPosition = target.requiredMarkPosition;
 
       setTimeout(() => {
-        this.errorPosition = this.dataLabelAlign !== 'top' && 'text-align: right;';
+        this.errorPosition = this.dataLabelAlign !== 'top' && `text-align: ${this.dataContentAlign}`;
       }, 33);
     },
     innerAfterUnlinked() {

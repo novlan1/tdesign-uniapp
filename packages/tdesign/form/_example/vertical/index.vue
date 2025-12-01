@@ -102,7 +102,7 @@
           @click="showCascader"
         />
         <t-cascader
-          :visible="visibleCascader"
+          v-model:visible="visibleCascader"
           :value="address"
           title="选择地址"
           :options="options"
