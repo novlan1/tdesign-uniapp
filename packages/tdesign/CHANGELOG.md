@@ -6,6 +6,14 @@ docClass: timeline
 ---
 
 
+## 🌈 0.5.8 `2025-12-01` 
+### 🚀 Features
+- `Form`: 新增 `contentAlign` 属性 @novlan1 ([#115](https://github.com/novlan1/tdesign-uniapp/pull/115))
+
+### 🐞 Bug Fixes
+- `SwipeCell`: 修复多个组件共存时的复位问题 @novlan1 ([#114](https://github.com/novlan1/tdesign-uniapp/pull/114))
+- `Form`: 修复 `help/label` 插槽不存在的问题 @novlan1 ([#115](https://github.com/novlan1/tdesign-uniapp/pull/115))
+
 ## 🌈 0.5.7 `2025-11-27` 
 ### 🚀 Features
 - `Textarea`: 支持 `v-model:value` @novlan1 ([#102](https://github.com/novlan1/tdesign-uniapp/pull/102))
