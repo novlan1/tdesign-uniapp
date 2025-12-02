@@ -195,6 +195,7 @@ export default uniComponent({
         this.$emit('actions', {
           name,
           active: !isActive,
+          chatId: this.chatId,
         });
       } else if (name === 'bad') {
         const isActive = this.pComment === 'bad';
@@ -203,11 +204,17 @@ export default uniComponent({
         this.$emit('actions', {
           name,
           active: !isActive,
+          chatId: this.chatId,
         });
       } else {
         this.$emit('actions', {
           name,
+          chatId: this.chatId,
         });
+      }
+
+      if (this.placement === 'longpress') {
+        this.hidePopover();
       }
     },
 
@@ -248,9 +255,10 @@ export default uniComponent({
       this.pComment = newVal || '';
     },
 
-    showPopover(str) {
-      const width = (this.actions.length * 128 + (this.actions.length - 1) * 8 + 16 * 2) / 2;
-      this.popoverPosition = `${str};margin-left:-${width}px`;
+    showPopover(pos) {
+      const lineNumber = Math.min(this.actions.length, 4);
+      const width = (lineNumber * 128 + (lineNumber - 1) * 8 + 16 * 2) / 2;
+      this.popoverPosition = `top:${pos.y}px;left:${pos.x}px;margin-left:-${width}rpx`;
     },
 
     hidePopover() {

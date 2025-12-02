@@ -46,4 +46,4 @@ placement | String | start | 【实验】操作栏位置。可选项：start/end
 
 名称 | 参数 | 描述
 -- | -- | --
-actions | `(context: {name: string, active: boolean})` | 点击点赞，点踩，复制，分享，重新生成按钮时触发发
+actions | `(context: {name: string, active: boolean, chatId: string})` | 点击点赞，点踩，复制，分享，重新生成按钮时触发发

@@ -1,9 +1,8 @@
 <template>
-  <view>
+  <view @click="hidePopover">
     <view
       class="chat-box"
       :style="'height: ' + contentHeight + ';'"
-      @tap="hidePopover"
     >
       <t-chat
         id="chatList"
@@ -11,10 +10,10 @@
       >
         <block
           v-for="(item, index) in chatList"
-          :key="item.key"
+          :key="item.chatId"
         >
-          <t-chat-message
-            :chat-id="index"
+          <TChatMessage
+            :chat-id="item.chatId"
             :avatar="item.avatar || ''"
             :name="item.name || ''"
             :datetime="item.datetime || ''"
@@ -25,14 +24,17 @@
             @message-longpress="showPopover"
           >
             <template #actionbar>
-              <t-chat-actionbar
+              <TChatActionbar
                 v-if="index !== chatList.length - 1 && item.status === 'complete' && item.role === 'assistant'"
-                :ref="'actionbar-' + index"
+                :ref="`actionbar-${item.chatId}`"
+                :chat-id="`actionbar-${item.chatId}`"
+                :comment="item.comment"
                 placement="end"
                 @actions="handleAction"
               />
             </template>
-          </t-chat-message>
+            </t-chat-message>
+          </tchatmessage>
         </block>
 
         <template #footer>
@@ -50,9 +52,10 @@
       </t-chat>
 
       <!-- 长按弹出操作栏 -->
-      <t-chat-actionbar
+      <TChatActionbar
         ref="popoverActionbar"
         class="popover-actionbar"
+        :comment="activePopoverComment"
         placement="longpress"
         @actions="handlePopoverAction"
       />
@@ -125,7 +128,8 @@ export default {
           avatar: 'https://tdesign.gtimg.com/site/chat-avatar.png',
           role: 'assistant',
           status: 'complete',
-          key: getUniqueKey(),
+          chatId: getUniqueKey(),
+          comment: '',
           content: [
             {
               type: 'text',
@@ -135,7 +139,8 @@ export default {
         },
         {
           role: 'user',
-          key: getUniqueKey(),
+          chatId: getUniqueKey(),
+          comment: '',
           content: [
             {
               type: 'text',
@@ -163,7 +168,8 @@ export default {
       animation: 'dots',
 
       chatIndex: '',
-      activePopover: '', // 当前激活的弹出操作栏索引
+      activePopoverId: '', // 当前打开悬浮actionbar的chatId
+      activePopoverComment: '', // 当前打开悬浮actionbar的comment
     };
   },
   options: {
@@ -215,7 +221,7 @@ export default {
       // 创建用户消息对象
       const userMessage = {
         role: 'user',
-        key: getUniqueKey(),
+        chatId: getUniqueKey(),
         content: [
           {
             type: 'text',
@@ -259,7 +265,8 @@ export default {
       // 请求中
       const assistantMessage = {
         role: 'assistant',
-        key: getUniqueKey(),
+        chatId: getUniqueKey(),
+        comment: '',
         content: [
           {
             type: 'markdown',
@@ -294,7 +301,7 @@ export default {
     },
 
     handleAction(e) {
-      const { name, active, data } = e;
+      const { name, active, data, chatId } = e;
       let message = '';
       switch (name) {
         case 'replay':
@@ -322,26 +329,32 @@ export default {
         message,
         theme: 'success',
       });
+
+      if (name === 'good' || name === 'bad') {
+        this.chatList.forEach((item) => {
+          if (item.chatId === chatId) {
+            item.comment = active ? name : '';
+          }
+        });
+      }
     },
 
     // 显示长按弹出操作栏
     showPopover(e) {
-      const { e: event, id } = e;
+      const { id, longPressPosition } = e;
       const { popoverActionbar } = this.$refs;
-      const actionbarComponent = this.$refs[`actionbar-${id}`] || this.findActionbarComponent(id);
 
       if (popoverActionbar) {
-        this.activePopover = id;
+        this.activePopoverId = id;
+        let comment = '';
+        this.chatList.forEach((item) => {
+          if (item.chatId === id) {
+            comment = item.comment;
+          }
+        });
+        this.activePopoverComment = comment;
 
-        // 同步当前消息的评价状态
-        if (actionbarComponent && actionbarComponent.pComment !== undefined) {
-          popoverActionbar.setPComment(actionbarComponent.pComment);
-        }
-
-        // 显示弹出层，使用触摸位置
-        const x = event.detail?.x || event.touches?.[0]?.clientX || 0;
-        const y = event.detail?.y || event.touches?.[0]?.clientY || 0;
-        popoverActionbar.showPopover(`top:${y}px;left:${x}px`);
+        popoverActionbar.showPopover(longPressPosition);
       }
     },
 
@@ -355,20 +368,9 @@ export default {
 
     // 处理弹出操作栏的事件
     handlePopoverAction(e) {
-      const { name } = e;
-
-      // 先处理操作
+      console.log('meow?', e);
+      e.chatId = this.activePopoverId;
       this.handleAction(e);
-
-      // 如果是点赞或点踩操作，需要同步状态到原始操作栏
-      if (name === 'good' || name === 'bad') {
-        const actionbarComponent = this.$refs[`actionbar-${this.activePopover}`] || this.findActionbarComponent(this.activePopover);
-        const { popoverActionbar } = this.$refs;
-
-        if (actionbarComponent && popoverActionbar) {
-          actionbarComponent.setPComment(popoverActionbar.pComment);
-        }
-      }
     },
   },
 };
