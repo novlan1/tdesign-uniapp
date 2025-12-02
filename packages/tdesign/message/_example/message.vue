@@ -4,6 +4,8 @@
     <t-navbar
       title="Message"
       left-arrow
+      :delta="-1"
+      @go-back="onDemoGoBack"
     />
     <!-- #endif -->
     <view class="demo message-example">

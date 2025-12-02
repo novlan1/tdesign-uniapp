@@ -5,6 +5,8 @@
       class="demo-navbar"
       title="Footer"
       left-arrow
+      :delta="-1"
+      @go-back="onDemoGoBack"
     />
     <!-- #endif -->
     <t-demo-header

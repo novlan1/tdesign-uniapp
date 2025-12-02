@@ -4,6 +4,8 @@
     <t-navbar
       title="Badge"
       left-arrow
+      :delta="-1"
+      @go-back="onDemoGoBack"
     />
     <!-- #endif -->
     <t-demo-header

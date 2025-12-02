@@ -4,6 +4,8 @@
     <t-navbar
       title="Input"
       left-arrow
+      :delta="-1"
+      @go-back="onDemoGoBack"
     />
     <!-- #endif -->
     <view class="input-example">

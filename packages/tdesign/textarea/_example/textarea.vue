@@ -4,6 +4,8 @@
     <t-navbar
       title="Textarea"
       left-arrow
+      :delta="-1"
+      @go-back="onDemoGoBack"
     />
     <!-- #endif -->
     <scroll-view
