@@ -33,8 +33,7 @@
                 @actions="handleAction"
               />
             </template>
-            </t-chat-message>
-          </tchatmessage>
+          </TChatMessage>
         </block>
 
         <template #footer>
