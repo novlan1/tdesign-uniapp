@@ -52,8 +52,9 @@
       <TChatActionbar
         ref="popoverActionbar"
         class="popover-actionbar"
-        :comment="activePopoverComment"
         placement="longpress"
+        :comment="activePopoverComment"
+        :long-press-position="longPressPosition"
         @actions="handlePopoverAction"
       />
       <!-- 内置虚拟列表优化性能仅在data属性中使用 -->
@@ -166,6 +167,7 @@ export default {
       chatIndex: '',
       activePopoverId: '', // 当前打开悬浮actionbar的chatId
       activePopoverComment: '', // 当前打开悬浮actionbar的comment
+      longPressPosition: null, // 长按位置对象
     };
   },
   options: {
@@ -338,33 +340,33 @@ export default {
     // 显示长按弹出操作栏
     showPopover(e) {
       const { id, longPressPosition } = e;
-      const { popoverActionbar } = this.$refs;
 
-      if (popoverActionbar) {
-        this.activePopoverId = id;
-        let comment = '';
-        this.chatList.forEach((item) => {
-          if (item.chatId === id) {
-            comment = item.comment;
-          }
-        });
-        this.activePopoverComment = comment;
+      let comment = '';
+      let role = '';
+      this.chatList.forEach((item) => {
+        if (item.chatId === id) {
+          comment = item.comment;
+          role = item.role;
+        }
+      });
 
-        popoverActionbar.showPopover(longPressPosition);
+      // 仅当 role 为 user 时才显示 popover
+      if (role !== 'user') {
+        return;
       }
+
+      this.activePopoverId = id;
+      this.activePopoverComment = comment;
+      this.longPressPosition = longPressPosition;
     },
 
     // 隐藏长按弹出操作栏
     hidePopover() {
-      const { popoverActionbar } = this.$refs;
-      if (popoverActionbar) {
-        popoverActionbar.hidePopover();
-      }
+      this.longPressPosition = null;
     },
 
     // 处理弹出操作栏的事件
     handlePopoverAction(e) {
-      console.log('meow?', e);
       e.chatId = this.activePopoverId;
       this.handleAction(e);
     },

@@ -134,6 +134,15 @@ export default uniComponent({
       immediate: true,
       deep: true,
     },
+    longPressPosition(newVal) {
+      if (this.placement === 'longpress') {
+        if (newVal) {
+          this.showPopover(newVal);
+        } else {
+          this.hidePopover();
+        }
+      }
+    },
   },
 
   mounted() {
