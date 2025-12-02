@@ -19,4 +19,4 @@ placement | String | start | options: start/end/space-around/space-between | N
 
 name | params | description
 -- | -- | --
-actions | `(context: {name: string, active: boolean})` | \-
+actions | `(context: {name: string, active: boolean, chatId: string})` | \-

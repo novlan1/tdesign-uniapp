@@ -152,6 +152,10 @@ export default uniComponent({
       this.$emit('message-longpress', {
         e,
         id: this.chatId,
+        longPressPosition: {
+          x: e.detail.x,
+          y: e.detail.y,
+        },
       });
     },
 

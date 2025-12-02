@@ -10,7 +10,7 @@
 // 长按弹出层样式
 @chat-actionbar-popover-background: rgba(0, 0, 0, 0.9);
 @chat-actionbar-popover-radius: 6rpx;
-@chat-actionbar-popover-padding: 40rpx 16rpx;
+@chat-actionbar-popover-padding: 4rpx 16rpx;
 @chat-actionbar-popover-padding-tri-width: 24rpx;
 @chat-actionbar-popover-padding-tri-height: 10rpx;
 @chat-actionbar-popover-item-color: @font-white-1;
@@ -36,6 +36,7 @@
     color: @font-white-1;
     background-color: @chat-actionbar-popover-background;
     border-radius: @chat-actionbar-popover-radius;
+    max-width: 544rpx;
 
     // 顶部三角形
     &::before {
@@ -58,6 +59,10 @@
     .@{chat-actionbar}__inner {
       background-color: unset;
       border: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4rpx;
+
 
       &--column {
         gap: 8rpx;
@@ -68,10 +73,16 @@
       color: #fff;
       background-color: unset;
       padding: 0;
+      margin: 0;
       font-size: 28rpx;
       line-height: 42rpx;
       width: 128rpx;
-      text-align: center;
+      height: 156rpx;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8rpx;
     }
   }
 
