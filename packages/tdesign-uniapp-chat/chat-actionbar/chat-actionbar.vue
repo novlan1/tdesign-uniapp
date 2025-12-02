@@ -1,10 +1,10 @@
 <template>
   <view
-    :class="[classPrefix, placement === 'longpress' ? classPrefix + '__inner--popover' : '']"
-    :style="_._style([customStyle])"
+    :class="[classPrefix, placement === 'longpress' ? classPrefix + '--popover' : '', computedPlacement, popoverPosition ? 'popover-visible' : '']"
+    :style="_._style([customStyle, popoverPosition])"
   >
     <view :class="classPrefix + '__inner ' + classPrefix + '__inner--column'">
-      <view :class="classPrefix + '__item ' + classPrefix + '__left'">
+      <view :class="getPrefixClasses()">
         <slot name="prefix" />
       </view>
       <block
@@ -16,7 +16,7 @@
         <button
           v-if="item.name === 'share'"
           :data-name="item.name"
-          :class="_.cls(classPrefix + '__item', [['active', item.isActive]])"
+          :class="_.cls(placement === 'longpress' ? classPrefix + '__item--popover' : classPrefix + '__item', [['active', item.isActive]])"
           :open-type="content ? 'share' : 'none'"
           :data-chat-id="chatId"
           @click="handleActionClick"
@@ -25,6 +25,12 @@
             :name="item.isActive ? iconActiveMap[item.name] : iconMap[item.name]"
             size="40rpx"
           />
+          <view
+            v-if="placement === 'longpress'"
+            :class="classPrefix + '__item__text'"
+          >
+            {{ item.name }}
+          </view>
         </button>
 
         <!-- 其他按钮使用 view 标签 -->
@@ -32,13 +38,19 @@
         <view
           v-else
           :data-name="item.name"
-          :class="_.cls(classPrefix + '__item', [['active', item.isActive]])"
+          :class="_.cls(placement === 'longpress' ? classPrefix + '__item--popover' : classPrefix + '__item', [['active', item.isActive]])"
           @click.stop="handleActionClick"
         >
           <t-icon
             :name="item.isActive ? iconActiveMap[item.name] : iconMap[item.name]"
             size="40rpx"
           />
+          <view
+            v-if="placement === 'longpress'"
+            :class="classPrefix + '__item__text'"
+          >
+            {{ item.name }}
+          </view>
         </view>
       </block>
     </view>
@@ -75,6 +87,7 @@ export default uniComponent({
       actions: [],
       classPrefix: name,
       pComment: '',
+      computedPlacement: '',
       iconMap: {
         good: 'thumb-up',
         bad: 'thumb-down',
@@ -86,6 +99,7 @@ export default uniComponent({
         good: 'thumb-up-filled',
         bad: 'thumb-down-filled',
       },
+      popoverPosition: '',
 
       _,
     };
@@ -94,7 +108,7 @@ export default uniComponent({
   watch: {
     comment: {
       handler(newVal) {
-        this.pComment = newVal || '';
+        this.setPComment(newVal);
       },
       immediate: true,
       deep: true,
@@ -113,11 +127,19 @@ export default uniComponent({
       immediate: true,
       deep: true,
     },
+    placement: {
+      handler() {
+        this.setComputedPlacement();
+      },
+      immediate: true,
+      deep: true,
+    },
   },
 
   mounted() {
-    this.pComment = this.comment || '';
+    this.setPComment(this.comment);
     this.setActions();
+    this.setComputedPlacement();
   },
 
   methods: {
@@ -216,6 +238,42 @@ export default uniComponent({
         });
       }
       this.actions = baseActions;
+    },
+
+    setComputedPlacement() {
+      this.computedPlacement = this.placement || 'start';
+    },
+
+    setPComment(newVal) {
+      this.pComment = newVal || '';
+    },
+
+    showPopover(str) {
+      const width = (this.actions.length * 128 + (this.actions.length - 1) * 8 + 16 * 2) / 2;
+      this.popoverPosition = `${str};margin-left:-${width}px`;
+    },
+
+    hidePopover() {
+      this.popoverPosition = '';
+    },
+
+    getPrefixClasses() {
+      const baseClasses = [];
+
+      baseClasses.push(`${this.classPrefix}__left`);
+      if (this.placement === 'longpress') {
+        baseClasses.push(`${this.classPrefix}__item--popover`);
+      } else {
+        baseClasses.push(`${this.classPrefix}__item`);
+      }
+
+      // 检查 prefix 插槽是否有内容
+      const hasPrefixContent = this.$slots.prefix && this.$slots.prefix.length > 0;
+      if (!hasPrefixContent) {
+        baseClasses.push('empty');
+      }
+
+      return baseClasses.join(' ');
     },
   },
 });
