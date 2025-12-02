@@ -1,7 +1,6 @@
 <template>
   <view>
     <t-form
-      id="form"
       ref="form"
       class="form"
       :data="formData"
@@ -18,10 +17,12 @@
         name="name"
         help="输入用户名"
       >
+        <template #label>
+          用户名
+        </template>
         <t-input
           v-model:value="formData.name"
           borderless
-          align="right"
           placeholder="请输入用户名"
           data-field="name"
           style="flex: 1;"
@@ -36,7 +37,6 @@
           :value="formData.password"
           borderless
           type="password"
-          align="right"
           :clearable="false"
           placeholder="请输入密码"
           data-field="password"
@@ -111,7 +111,7 @@
         />
 
         <t-cascader
-          :visible="visibleCascader"
+          v-model:visible="visibleCascader"
           :value="address"
           title="选择地址"
           :options="options"
@@ -151,13 +151,12 @@
         name="resume"
       >
         <t-textarea
-          :value="formData.resume"
+          v-model:value="formData.resume"
           t-class="textarea"
           indicator
           :maxlength="50"
           placeholder="请输入个人简介"
           style="flex: 1;"
-          @change="onTextareaChange"
         />
       </t-form-item>
 

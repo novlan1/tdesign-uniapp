@@ -1,7 +1,7 @@
 <template>
   <view
     :class="classPrefix + ' ' + tClass"
-    :style="_._style([customStyle])"
+    :style="tools._style([customStyle])"
   >
     <slot />
     <t-checkbox
@@ -37,7 +37,7 @@ import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import { coalesce } from '../common/utils';
 import props from './props';
-import _ from '../common/utils.wxs';
+import tools from '../common/utils.wxs';
 import { ParentMixin, RELATION_MAP } from '../common/relation';
 
 
@@ -70,7 +70,7 @@ export default uniComponent({
       prefix,
       classPrefix: name,
       checkboxOptions: [],
-      _,
+      tools,
 
       dataValue: coalesce(this.value, this.defaultValue),
     };
@@ -211,7 +211,7 @@ export default uniComponent({
       this.checkboxOptions = checkboxOptions;
     },
 
-    handleInnerChildChange(_, { item, checked }) {
+    handleInnerChildChange(tools, { item, checked }) {
       const rect = {};
 
       if (item.checkAll) {

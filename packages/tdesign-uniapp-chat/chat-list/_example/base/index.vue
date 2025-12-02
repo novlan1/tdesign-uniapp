@@ -4,7 +4,7 @@
       class="chat-box"
       :style="'height: ' + contentHeight + ';'"
     >
-      <t-chat
+      <TChatList
         id="chatList"
         @scroll="onScroll($event, { tagId: 'chatList' })"
       >
@@ -12,7 +12,7 @@
           v-for="(item, index) in chatList"
           :key="item.chatId"
         >
-          <t-chat-message
+          <TChatMessage
             :chat-id="item.chatId"
             :avatar="item.avatar || ''"
             :name="item.name || ''"
@@ -24,20 +24,19 @@
             @message-longpress="showPopover"
           >
             <template #actionbar>
-              <t-chat-actionbar
+              <TChatActionbar
                 v-if="index !== chatList.length - 1 && item.status === 'complete' && item.role === 'assistant'"
                 :ref="`actionbar-${item.chatId}`"
                 :chat-id="`actionbar-${item.chatId}`"
                 :comment="item.comment"
-                placement="end"
                 @actions="handleAction"
               />
             </template>
-          </t-chat-message>
+          </TChatMessage>
         </block>
 
         <template #footer>
-          <t-chat-sender
+          <TChatSender
             v-model:value="value"
             :loading="loading"
             :disabled="disabled"
@@ -48,8 +47,7 @@
             @focus="onFocus"
           />
         </template>
-      </t-chat>
-
+      </TChatList>
       <!-- 长按弹出操作栏 -->
       <TChatActionbar
         ref="popoverActionbar"
@@ -58,20 +56,19 @@
         placement="longpress"
         @actions="handlePopoverAction"
       />
-
       <!-- 内置虚拟列表优化性能仅在data属性中使用 -->
-      <!-- <t-chat id="chatList" bindscroll="onScroll" data="{{chatList}}"></t-chat> -->
+      <!-- <TChatList id="chatList" bindscroll="onScroll" data="{{chatList}}"></TChatList> -->
     </view>
-    <t-toast ref="t-toast" />
+    <TToast ref="t-toast" />
   </view>
 </template>
 
 <script>
-import tChatMessage from 'tdesign-uniapp-chat/chat-message/chat-message.vue';
-import tChat from 'tdesign-uniapp-chat/chat-list/chat-list.vue';
-import tChatSender from 'tdesign-uniapp-chat/chat-sender/chat-sender.vue';
-import tChatActionbar from 'tdesign-uniapp-chat/chat-actionbar/chat-actionbar.vue';
-import tToast from 'tdesign-uniapp/toast/toast.vue';
+import TChatMessage from 'tdesign-uniapp-chat/chat-message/chat-message.vue';
+import TChatList from 'tdesign-uniapp-chat/chat-list/chat-list.vue';
+import TChatSender from 'tdesign-uniapp-chat/chat-sender/chat-sender.vue';
+import TChatActionbar from 'tdesign-uniapp-chat/chat-actionbar/chat-actionbar.vue';
+import TToast from 'tdesign-uniapp/toast/toast.vue';
 import Toast from 'tdesign-uniapp/toast';
 import { getNavigationBarHeight } from '../utils';
 
@@ -107,11 +104,11 @@ const fetchStream = async (str, options) => {
 
 export default {
   components: {
-    tChatMessage,
-    tChat,
-    tChatSender,
-    tChatActionbar,
-    tToast,
+    TChatMessage,
+    TChatList,
+    TChatSender,
+    TChatActionbar,
+    TToast,
   },
   data() {
     return {

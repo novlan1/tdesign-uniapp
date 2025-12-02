@@ -1,6 +1,6 @@
 <template>
   <view
-    :style="_._style([customStyle])"
+    :style="tools._style([customStyle])"
     :class="classPrefix + ' ' + tClass"
     aria-role="radiogroup"
   >
@@ -39,7 +39,7 @@ import { prefix } from '../common/config';
 import { coalesce } from '../common/utils';
 import { uniComponent } from '../common/src/index';
 import props from './props';
-import _ from '../common/utils.wxs';
+import tools from '../common/utils.wxs';
 import { ParentMixin, RELATION_MAP } from '../common/relation';
 
 
@@ -72,7 +72,7 @@ export default uniComponent({
       prefix,
       classPrefix: name,
       radioOptions: [],
-      _,
+      tools,
 
       dataValue: coalesce(this.value, this.defaultValue),
     };
@@ -144,7 +144,7 @@ export default uniComponent({
       this._trigger('change', { value });
     },
 
-    handleRadioChange(_, { value, index, allowUncheck, checked }) {
+    handleRadioChange(tools, { value, index, allowUncheck, checked }) {
       this._trigger('change', checked === false && allowUncheck ? { value: null, index } : { value, index });
     },
 

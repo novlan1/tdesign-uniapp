@@ -4,43 +4,49 @@ const { processLess } = require('../release/less');
 
 
 async function copy({
-  relativePath, filePath, config,
+  relativePath,
+  filePath,
+
+  config: {
+    targetDir,
+    rawTargetDir,
+    demoDir,
+  },
 }) {
+  // action-sheet/action-sheet.vue
+  // action-sheet/_example/list/index.vue
   const isDemo = relativePath.split(path.sep)[1] === '_example';
   const isCommon = relativePath.split(path.sep)[0] === 'common';
-  let targetPath = path.resolve(config.targetDir, relativePath);
-  let targetPathInApp = path.resolve(config.appDir, 'uni_modules/tdesign-uniapp/components', relativePath);
-  const rawTargetPath = path.resolve(config.rawTargetDir, relativePath);
-  const rawTargetPathInApp = path.resolve(config.rawTargetDirInApp, relativePath);
+  // if (!fs.existsSync(targetDir)) {
+  //   console.log(`[copy] NOT Exist: ${targetDir}`);
+  //   return;
+  // }
 
-  if (isCommon) {
-    fs.mkdirSync(path.dirname(rawTargetPath), { recursive: true });
-    fs.mkdirSync(path.dirname(rawTargetPathInApp), { recursive: true });
-    fs.copyFileSync(filePath, rawTargetPath);
-    fs.copyFileSync(filePath, rawTargetPathInApp);
+  let targetPath = path.resolve(targetDir, relativePath);
+
+  if (rawTargetDir) {
+    const rawTargetPath = path.resolve(rawTargetDir, relativePath);
+
+    if (isCommon) {
+      fs.mkdirSync(path.dirname(rawTargetPath), { recursive: true });
+      fs.copyFileSync(filePath, rawTargetPath);
+    }
   }
 
 
   if (isDemo) {
-    targetPath = path.resolve(config.demoDir, relativePath.replace(`${path.sep}_example`, ''));
-    targetPathInApp = path.resolve(config.appPagesMoreDir, relativePath.replace(`${path.sep}_example`, ''));
+    targetPath = path.resolve(demoDir, relativePath.replace(`${path.sep}_example`, ''));
   }
 
   fs.mkdirSync(path.dirname(targetPath), { recursive: true });
-  if (targetPathInApp) {
-    fs.mkdirSync(path.dirname(targetPathInApp), { recursive: true });
-  }
 
   let lessResult = false;
   if (!filePath.includes('_example')) {
-    lessResult = await processLess(filePath, targetPath, targetPathInApp);
+    lessResult = await processLess(filePath, targetPath);
   }
 
   if (!lessResult) {
     fs.copyFileSync(filePath, targetPath);
-    if (targetPathInApp) {
-      fs.copyFileSync(filePath, targetPathInApp);
-    }
   }
 
   return {

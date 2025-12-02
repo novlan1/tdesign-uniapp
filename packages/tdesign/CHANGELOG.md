@@ -6,6 +6,33 @@ docClass: timeline
 ---
 
 
+## 🌈 0.5.8 `2025-12-01` 
+### 🚀 Features
+- `Form`: 新增 `contentAlign` 属性 @novlan1 ([#115](https://github.com/novlan1/tdesign-uniapp/pull/115))
+
+### 🐞 Bug Fixes
+- `SwipeCell`: 修复多个组件共存时的复位问题 @novlan1 ([#114](https://github.com/novlan1/tdesign-uniapp/pull/114))
+- `Form`: 修复 `help/label` 插槽不存在的问题 @novlan1 ([#115](https://github.com/novlan1/tdesign-uniapp/pull/115))
+
+## 🌈 0.5.7 `2025-11-27` 
+### 🚀 Features
+- `Textarea`: 支持 `v-model:value` @novlan1 ([#102](https://github.com/novlan1/tdesign-uniapp/pull/102))
+- `Toast`: 函数式调用组件时，支持组件 Dom 预埋在页面下 @novlan1 ([#103](https://github.com/novlan1/tdesign-uniapp/pull/103))
+
+### 🐞 Bug Fixes
+- `Input`: 修复 `clear` 事件的意外冒泡问题 @novlan1 ([#100](https://github.com/novlan1/tdesign-uniapp/pull/100))
+- `Calendar`: 修复 `switchMode` 为 `year-month` 时的编译问题 @novlan1 ([#106](https://github.com/novlan1/tdesign-uniapp/pull/106))
+
+## 🌈 0.5.6 `2025-11-25` 
+### 🚀 Features
+- `Popup`: 支持 `v-model:visible` @novlan1 ([#90](https://github.com/novlan1/tdesign-uniapp/pull/90))
+- `Form`: 支持 `validate` 方法传参 @novlan1 ([#90](https://github.com/novlan1/tdesign-uniapp/pull/90))
+- `Input`: 支持 `v-model:value` @novlan1 ([#89](https://github.com/novlan1/tdesign-uniapp/pull/89))
+
+### 🐞 Bug Fixes
+- `Form`: 修复深色模式背景错误问题 @novlan1 ([#91](https://github.com/novlan1/tdesign-uniapp/pull/91))
+
+
 ## 🌈 0.5.5 `2025-11-17` 
 ### 🚀 Features
 - `Picker`: 支持 `v-model:visible` 语法糖 @novlan1 ([#77](https://github.com/novlan1/tdesign-uniapp/pull/77))

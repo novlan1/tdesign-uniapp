@@ -2,8 +2,8 @@
   <view>
     <view
       v-if="realVisible"
-      :style="_._style([popup.getPopupStyles(zIndex, distanceTop, placement), customStyle])"
-      :class="_.cls(classPrefix, [placement]) + ' ' + transitionClass + ' ' + tClass"
+      :style="tools._style([popup.getPopupStyles(zIndex, distanceTop, placement), customStyle])"
+      :class="tools.cls(classPrefix, [placement]) + ' ' + transitionClass + ' ' + tClass"
       @transitionend="onTransitionEnd"
     >
       <view
@@ -74,7 +74,7 @@ import { prefix } from '../common/config';
 import props from './props';
 import { transitionMixins } from '../mixins/transition';
 import useCustomNavbar from '../mixins/using-custom-navbar';
-import _ from '../common/utils.wxs';
+import tools from '../common/utils.wxs';
 import popup from './computed.js';
 
 delete props.visible;
@@ -109,7 +109,7 @@ export default uniComponent({
       prefix,
       classPrefix: name,
       popup,
-      _,
+      tools,
     };
   },
   computed: {

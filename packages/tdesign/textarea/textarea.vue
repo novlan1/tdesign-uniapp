@@ -1,6 +1,6 @@
 <template>
   <view
-    :style="_._style([customStyle])"
+    :style="tools._style([customStyle])"
     :class="classPrefix + ' ' + (bordered ? classPrefix + '--border' : '') + ' ' + tClass"
   >
     <view :class="classPrefix + '__label ' + tClassLabel">
@@ -54,7 +54,7 @@ import { uniComponent } from '../common/src/index';
 import { prefix } from '../common/config';
 import props from './props';
 import { getCharacterLength, coalesce, nextTick } from '../common/utils';
-import _ from '../common/utils.wxs';
+import tools from '../common/utils.wxs';
 import { textareaStyle } from './computed.js';
 // import { getInnerMaxLen } from '../input/utils';
 
@@ -75,12 +75,17 @@ export default uniComponent({
   props: {
     ...props,
   },
+
+  emits: [
+    'update:value',
+  ],
+
   data() {
     return {
       prefix,
       classPrefix: name,
       count: 0,
-      _,
+      tools,
 
       dataValue: coalesce(this.value, this.defaultValue, ''),
     };
@@ -145,8 +150,14 @@ export default uniComponent({
     onInput(event) {
       const { value, cursor } = event.detail;
       this.updateValue(value);
-      this.$emit('change', { value: this.dataValue, cursor });
+      this.emitChange({ value: this.dataValue, cursor });
     },
+
+    emitChange(data) {
+      this.$emit('change', data);
+      this.$emit('update:value', data.value);
+    },
+
     onFocus(event) {
       this.$emit('focus', {
         ...event.detail,
