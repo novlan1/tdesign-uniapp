@@ -27,6 +27,24 @@
         placement="right"
       />
     </view>
+    <view class="chat-example-block">
+      <TChatMessage
+        :content="message.content"
+        :role="message.role"
+        datetime="16:38"
+      >
+        <template
+          #name
+        >
+          <view
+            class="name-block"
+          >
+            <image src="https://tdesign.gtimg.com/site/chat-avatar.png" />
+            <view>Canxuan</view>
+          </view>
+        </template>
+      </TChatMessage>
+    </view>
   </view>
 </template>
 
@@ -67,4 +85,15 @@ export default {
     padding: 32rpx 32rpx 0 32rpx;
 }
 
+.name-block {
+  display: flex;
+  align-items: center;
+  margin-right: 16rpx;
+}
+
+.name-block image {
+  margin-right: 16rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
 </style>

@@ -5,9 +5,10 @@
     @longpress="handleLongPress"
   >
     <view
-      v-if="avatar"
+      v-if="$slots.avatar || avatar"
       :class="classPrefix + '__avatar'"
     >
+      <slot name="avatar" />
       <block v-if="avatar">
         <image
           :src="avatar"
@@ -17,9 +18,10 @@
     </view>
     <view :class="contentClasses">
       <view
-        v-if="name || datetime"
+        v-if="$slots.name || name || datetime"
         :class="classPrefix + '__base'"
       >
+        <slot name="name" />
         <text
           v-if="name"
           :class="classPrefix + '__name'"
