@@ -12,7 +12,7 @@
           v-for="(item, index) in chatList"
           :key="item.chatId"
         >
-          <TChatMessage
+          <t-chat-message
             :chat-id="item.chatId"
             :avatar="item.avatar || ''"
             :name="item.name || ''"
@@ -24,7 +24,7 @@
             @message-longpress="showPopover"
           >
             <template #actionbar>
-              <TChatActionbar
+              <t-chat-actionbar
                 v-if="index !== chatList.length - 1 && item.status === 'complete' && item.role === 'assistant'"
                 :ref="`actionbar-${item.chatId}`"
                 :chat-id="`actionbar-${item.chatId}`"
@@ -33,7 +33,7 @@
                 @actions="handleAction"
               />
             </template>
-          </TChatMessage>
+          </t-chat-message>
         </block>
 
         <template #footer>
