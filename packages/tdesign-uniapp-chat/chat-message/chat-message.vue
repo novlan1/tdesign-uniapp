@@ -4,10 +4,7 @@
     :style="_._style([customStyle])"
     @longpress="handleLongPress"
   >
-    <view
-      v-if="$slots.avatar || avatar"
-      :class="classPrefix + '__avatar'"
-    >
+    <view :class="classPrefix + '__avatar'">
       <slot name="avatar" />
       <block v-if="avatar">
         <image
@@ -17,10 +14,7 @@
       </block>
     </view>
     <view :class="contentClasses">
-      <view
-        v-if="$slots.name || name || datetime"
-        :class="classPrefix + '__base'"
-      >
+      <view :class="classPrefix + '__base'">
         <slot name="name" />
         <text
           v-if="name"
