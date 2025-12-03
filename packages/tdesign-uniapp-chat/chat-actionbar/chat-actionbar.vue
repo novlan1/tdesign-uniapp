@@ -284,12 +284,6 @@ export default uniComponent({
         baseClasses.push(`${this.classPrefix}__item`);
       }
 
-      // 检查 prefix 插槽是否有内容
-      const hasPrefixContent = this.$slots.prefix && this.$slots.prefix.length > 0;
-      if (!hasPrefixContent) {
-        baseClasses.push('empty');
-      }
-
       return baseClasses.join(' ');
     },
   },
