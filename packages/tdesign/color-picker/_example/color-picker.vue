@@ -5,6 +5,8 @@
       class="demo-navbar"
       title="ColorPicker"
       left-arrow
+      :delta="-1"
+      @go-back="onDemoGoBack"
     />
     <!-- #endif -->
 

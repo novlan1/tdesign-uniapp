@@ -63,14 +63,18 @@ import { list as dataList, skylineList } from './data/index';
 import PullDownList from '../../components/pull-down-list/index.vue';
 import TrdPrivacy from '../../components/trd-privacy/index.vue';
 
+const SHARE_INFO = {
+  title: 'TDesign UI',
+  path: '/pages/home/home',
+};
 
 export default {
   name: 'Home',
   onShareAppMessage() {
-    return {
-      title: 'TDesign UI',
-      path: '/pages/home/home',
-    };
+    return SHARE_INFO;
+  },
+  onShareTimeline() {
+    return SHARE_INFO;
   },
   components: {
     TFooter,

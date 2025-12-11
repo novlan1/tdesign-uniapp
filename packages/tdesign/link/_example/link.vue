@@ -5,6 +5,8 @@
       title="Link"
       left-arrow
       :capsule="false"
+      :delta="-1"
+      @go-back="onDemoGoBack"
     />
     <!-- #endif -->
     <scroll-view

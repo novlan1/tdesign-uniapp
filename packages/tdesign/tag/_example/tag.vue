@@ -5,6 +5,8 @@
       class="demo-navbar"
       title="Tag"
       left-arrow
+      :delta="-1"
+      @go-back="onDemoGoBack"
     />
     <!-- #endif -->
     <view>

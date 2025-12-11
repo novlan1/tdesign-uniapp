@@ -5,6 +5,8 @@
       class="demo-navbar"
       title="Dialog"
       left-arrow
+      :delta="-1"
+      @go-back="onDemoGoBack"
     />
     <!-- #endif -->
     <view class="demo">
@@ -76,6 +78,8 @@ import withImage from './with-image/index.vue';
 import commandDemo from './command/index.vue';
 import status from './status/index.vue';
 import buttonDemo from './button/index.vue';
+
+
 export default {
   components: {
     BaseDemo,

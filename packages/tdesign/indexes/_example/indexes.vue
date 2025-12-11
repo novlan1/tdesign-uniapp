@@ -5,6 +5,8 @@
       class="demo-navbar"
       title="Indexes"
       left-arrow
+      ta="-1"
+      @go-back="onDemoGoBack"
     />
     <!-- #endif -->
     <view class="indexes">

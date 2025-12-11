@@ -234,14 +234,11 @@ export default uniComponent({
     value: {
       handler(v) {
         this.dataValue = v;
+        nextTick().then(() => {
+          this.dataValue = v;
+        });
       },
     },
-
-    // count: 'updateInnerMaxLen',
-    // dataValue: 'updateInnerMaxLen',
-    // allowInputOverMax: 'updateInnerMaxLen',
-    // maxcharacter: 'updateInnerMaxLen',
-    // maxlength: 'updateInnerMaxLen',
   },
   mounted() {
     const { value, defaultValue } = this;

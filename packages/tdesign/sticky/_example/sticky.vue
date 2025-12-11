@@ -5,6 +5,8 @@
       <t-navbar
         title="Sticky"
         left-arrow
+        :delta="-1"
+        @go-back="onDemoGoBack"
       />
     <!-- #endif -->
     </view>

@@ -4,6 +4,8 @@
     <t-navbar
       title="Picker"
       left-arrow
+      :delta="-1"
+      @go-back="onDemoGoBack"
     />
     <!-- #endif -->
     <view class="area-picker-demo">
