@@ -6,6 +6,11 @@ docClass: timeline
 ---
 
 
+## 🌈 0.5.9 `2025-12-11` 
+### 🐞 Bug Fixes
+- `Input`: 修复数据回显问题 @novlan1 ([#121](https://github.com/novlan1/tdesign-uniapp/pull/121))
+
+
 ## 🌈 0.5.8 `2025-12-01` 
 ### 🚀 Features
 - `Form`: 新增 `contentAlign` 属性 @novlan1 ([#115](https://github.com/novlan1/tdesign-uniapp/pull/115))
