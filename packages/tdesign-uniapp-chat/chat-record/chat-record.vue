@@ -31,136 +31,130 @@
     </view>
     <view
       class="cover-ng-bar"
-      :class="[classPrefix + '-audio-input', status, showMask ? 'show' : '']"
+      :class="[classPrefix + '-audio-input', showMask ? 'show' : '']"
     >
-      <view :class="[classPrefix + '-audio-input__mask']" />
-      <view :class="[classPrefix + '-audio-input__main']">
-        <!-- 动画图标 -->
-        <view :class="[classPrefix + '-audio-input-ani']">
-          <view class="ani-cir diff-start">
-            <view class="ani-cir-1" />
-            <view class="ani-cir-2" />
-            <view class="ani-cir-3" />
-            <view class="ani-cir-4" />
-          </view>
-          <view class="ani-wrap">
-            <view class="ani-inner" />
-            <view class="ani-mask" />
-            <view
-              class="ani-main"
-              :class="status === 'complete' ? 'ani-start' : 'ani-end'"
-            />
-          </view>
-        </view>
+      <!-- 遮罩层 -->
+      <view :class="[classPrefix + '-audio-input__mask']" @click="handleCancelSend" />
 
-        <!-- 内容区域 -->
-        <view :class="[classPrefix + '-audio-input__con', status === 'cancel' ? 'disabled' : '']">
-          <view
-            v-if="status !== 'complete'"
-            :class="[classPrefix + '-audio-input__con__inner']"
-          >
-            {{
-              status === 'unknow' ? '不好意思，未能识别您的语音' : '我在听，请说话'
-            }}
+      <view :class="[classPrefix + '-audio-input__main']">
+        <!-- 动画图标/气泡区域 -->
+        <view 
+          v-if="processStatus === 'recording' || processStatus === 'confirm'" 
+          :class="[classPrefix + '-audio-input-ani', 'fade-in']"
+        >
+          <!-- 气泡内容 -->
+          <view class="bubble-container" :class="[bubbleStatusClass]">
+             <!-- 1. 录音中：音量条 (只在正常状态显示) -->
+             <view v-if="processStatus === 'recording' && interactStatus === 'normal'" class="audio-wave">
+                <view class="wave-item" v-for="i in 13" :key="i"></view>
+             </view>
+             <!-- 2. 取消状态：红色气泡，省略号 -->
+             <view v-else-if="interactStatus === 'release_cancel'" class="cancel-icon" />
+             <!-- 3. 转文字状态或确认状态：可编辑输入框 -->
+             <view v-else-if="interactStatus === 'release_convert' || processStatus === 'confirm'" class="convert-content">
+                <textarea 
+                  v-model="translateResult"
+                  class="editable-textarea"
+                  :maxlength="-1"
+                />
+                <!-- 省略号仅在未释放时显示 -->
+                <view v-if="interactStatus === 'release_convert'" class="convert-dots" />
+             </view>
           </view>
-          <textarea
-            v-else
-            :class="[classPrefix + '-audio-input__con__ta', bottomHeight === 0 ? 'txt-limit-9' : 'txt-limit-5']"
-            maxlength="-1"
-            auto-height
-            :value="translateResult"
-            @focus="focusTextarea"
-            @blur="blurTextarea"
-          />
         </view>
 
         <!-- 底部区域 -->
-        <view :class="[classPrefix + '-audio-input__ft']">
-          <view
-            v-if="status === 'cancel'"
-            :class="[classPrefix + '-audio-input__ft__tips']"
-          >
-            松开手指 即可取消
-          </view>
-          <view
-            v-else-if="status === 'unknow'"
-            :class="[classPrefix + '-audio-input__ft__tips']"
-          >
-            点击下方重新开始说话
-          </view>
-          <view
-            v-else-if="status === 'normal'"
-            :class="[classPrefix + '-audio-input__ft__tips']"
-          >
-            松手完成 上滑取消
+        <view 
+          v-if="processStatus === 'recording' || processStatus === 'confirm'" 
+          :class="[classPrefix + '-audio-input__ft', processStatus, interactStatus, 'fade-in']"
+        >
+          
+          <!-- 状态提示文案 -->
+          <view class="tips-text">
+            <template v-if="processStatus === 'recording'">
+              <text v-if="interactStatus !== 'normal'">Audio</text>
+              <text v-else>Release to send</text>
+            </template>
+            <template v-else-if="processStatus === 'processing'">
+              Processing...
+            </template>
+            <!-- confirm 状态不显示提示文案 -->
           </view>
 
-          <view
-            v-if="showRecordCountDown"
-            :class="[classPrefix + '-audio-input__ft__tips__inner']"
-          >
-            {{ recordCountDown }}秒后停止语音输入
-          </view>
-
-          <!-- 加载动画 -->
-          <i class="audio-loading-icon">
-            <i class="audio-loading-dot dot-1" />
-            <i class="audio-loading-dot dot-1" />
-            <i class="audio-loading-dot dot-2" />
-            <i class="audio-loading-dot dot-2" />
-            <i class="audio-loading-dot dot-3" />
-            <i class="audio-loading-dot dot-2" />
-            <i class="audio-loading-dot dot-3" />
-            <i class="audio-loading-dot dot-2" />
-            <i class="audio-loading-dot dot-1" />
-            <i class="audio-loading-dot dot-1" />
-            <i class="audio-loading-dot dot-1" />
-          </i>
-
-          <!-- 操作按钮 -->
-          <view
-            class="speak-close-btn"
-            @click="handleCancelSend"
-          >
-            <i class="close-icon" />
-          </view>
-          <view
-            class="speak-btn"
-            @touchstart="startRecord"
-            @touchend="stopRecord"
-            @touchmove="touchmove"
-            @touchcancel="touchcancel"
-          >
-            <i class="speak-icon" />
-            <view class="tips-txt">
-              按住说话
-            </view>
-          </view>
-
-          <!-- 发送控制 -->
-          <view
-            class="keyboard-cover"
-            :class="[classPrefix + '-audio-input__ft__ct']"
-            :style="{
-              'margin-bottom': bottomHeight + 'px',
-            }"
-          >
-            <view
-              :class="[classPrefix + '-audio-input__ft__btn']"
-              class="btn-close"
+          <!-- 状态4：松手后的确认按钮区域 (Send / Cancel) -->
+          <view v-if="processStatus === 'confirm'" class="confirm-actions">
+            <view 
+              class="action-btn btn-cancel" 
+              :class="{ active: activeBtnCancel }"
               @click="handleCancelSend"
+              @touchstart="activeBtnCancel = true"
+              @touchend="activeBtnCancel = false"
+              @touchcancel="activeBtnCancel = false"
             >
-              <i class="close-icon" />
+              <view class="icon-wrapper">
+                <t-icon name="rollback" size="48rpx" color="#FFFFFF" />
+              </view>
+              <text class="btn-text">Cancel</text>
             </view>
-            <view
-              :class="[classPrefix + '-audio-input__ft__btn']"
-              class="btn-send"
+            <view 
+              class="action-btn btn-send" 
+              :class="{ active: activeBtnSend }"
               @click="handleSendVoiceMsg"
+              @touchstart="activeBtnSend = true"
+              @touchend="activeBtnSend = false"
+              @touchcancel="activeBtnSend = false"
             >
-              发送
+              <text>Send</text>
             </view>
           </view>
-          <view :class="[classPrefix + '-audio-input__ft__bg']" />
+
+          <!-- 底部大圆背景和异形按钮 (仅在录音/处理阶段显示) -->
+          <template v-else>
+            <!-- 大圆背景 -->
+            <view :class="[classPrefix + '-audio-input__ft__bg']" />
+            
+            <!-- 左侧按钮 -->
+            <view 
+              class="shape-btn left-btn" 
+              :class="{ active: interactStatus === 'release_cancel' }"
+            >
+              <view
+                v-if="interactStatus === 'release_cancel'"
+                class="btn-hint"
+                :key="'cancel-' + (interactStatus === 'release_cancel')"
+              >
+                <text class="word word-1">Release</text>
+                <text class="word word-2">to cancel</text>
+              </view>
+            
+              <view class="btn-label">
+                <text class="word">Cancel</text>
+              </view>
+            </view>
+
+            <!-- 右侧按钮 -->
+            <view 
+              class="shape-btn right-btn" 
+              :class="{ active: interactStatus === 'release_convert' }"
+            >
+              <view
+                v-if="interactStatus === 'release_convert'"
+                class="btn-hint"
+                :key="'convert-' + (interactStatus === 'release_convert')"
+              >
+                <text class="word word-1">Release</text>
+                <text class="word word-2">to edit</text>
+                <text class="word word-3">text</text>
+              </view>
+            
+              <view class="btn-label">
+                <text class="word word-1">Convert</text>
+                <text class="word word-2">to Text</text>
+              </view>
+            </view>
+
+          </template>
+
         </view>
       </view>
     </view>
@@ -170,297 +164,288 @@
 <script>
 import { prefix } from 'tdesign-uniapp/common/config';
 import { uniComponent } from 'tdesign-uniapp/common/src/index';
+import tIcon from 'tdesign-uniapp/icon/icon.vue';
 
 const name = `${prefix}-chat-record`;
 
-let startRecordTimer = null; // 语音录制定时器-模拟长按
-let recordTimer = null;
-
-// 使用微信小程序内置的录音管理器API
+// 录音管理器实例
 let manager = null;
-if (typeof wx !== 'undefined' && wx.getRecorderManager) {
-  manager = wx.getRecorderManager();
-}
+
+// 注释掉录音 API，避免调试卡死
+// if (typeof wx !== 'undefined' && wx.getRecorderManager) {
+//   manager = wx.getRecorderManager();
+// }
+
+// 交互阈值配置
+const MOVE_THRESHOLD = 40; // px，手势识别阈值
 
 export default uniComponent({
   name: 'ChatRecord',
-  components: {},
-  props: {},
+  
+  components: {
+    tIcon,
+  },
+  
+  props: {
+    // 是否自动发送（用于扩展）
+    autoSend: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  
   data() {
     return {
       classPrefix: name,
-      showMask: false, // 是否展示语音输入操作面板
-      touchStatus: 'bottom', // 语音输入 - 当前手指状态 top：取消， bottom：正常
-      startTime: 0, // 开始录音时间
-      recordCountDown: -1, // 语音输入倒计时
-      translateResult: '', // 语音转文字结果
+      
+      // UI 状态
+      showMask: false,
+      activeBtnCancel: false,
+      activeBtnSend: false,
+      
+      // 流程状态
+      processStatus: 'idle', // idle | recording | processing | confirm
+      interactStatus: 'normal', // normal | release_cancel | release_convert
+      
+      // 录音数据
       voiceInfo: {
         voicePath: '',
         duration: 0,
-      }, // 语音消息信息（voicePath：语音文件本地路径；mediaTime：语音消息时长）
-      recordStatus: '', // 录音状态 start 开始录音， stop 结束录音
-      recordAuthSetting: false, // 是否已授权语音输入
-      recordAuthStatus: true, // 是否展示拒绝授权文案
-      isStarted: false, // 是否点击了 // 解决点击结束太快，授权信息还没拿到的情况
-      bottomHeight: 0, // 底部高度
-      autoSendHeight: true, // 是否自动抬升发送按钮高度
+      },
+      
+      // 转文字结果
+      translateResult: '',
+      
+      // 手势追踪
+      startTouch: { x: 0, y: 0 },
+      
+      // 权限状态
+      recordAuthStatus: true,
     };
   },
+  
   computed: {
-    translateSuccess() {
-      return this.translateResult !== '-1' && this.translateResult;
-    },
-    showRecordCountDown() {
-      return this.recordCountDown >= 0;
-    },
-    status() {
-      if (this.recordStatus === 'start' && this.touchStatus === 'top') return 'cancel';
-      if (this.recordStatus === 'stop' && !this.translateSuccess) return 'unknow';
-      if (this.recordStatus === 'stop' && this.translateSuccess) return 'complete';
-      return 'normal';
+    // 气泡样式类名
+    bubbleStatusClass() {
+      if (this.interactStatus === 'release_cancel') return 'bubble-red';
+      if (this.interactStatus === 'release_convert' || 
+          this.processStatus === 'processing' || 
+          this.processStatus === 'confirm') {
+        return 'bubble-wide';
+      }
+      return 'bubble-blue';
     },
   },
-  onShow() {},
+  
   mounted() {
-    manager.onStop = (res) => {
-      const { tempFilePath, result: translateResult, duration } = res;
-      this.voiceInfo.voicePath = tempFilePath;
-      this.voiceInfo.duration = Math.floor(duration / 1000) || 1;
-      if (this.touchStatus === 'top') {
-        // 结束时，手指在取消发送区域
-        // 重置状态
-        this.showMask = false;
-        this.translateResult = '';
-        this.recordStatus = '';
-        this.touchStatus = '';
-        return;
-      }
-      if (!translateResult || !translateResult.length) {
-        // 未识别到文字，用-1区分
-        // 未识别到文字，用-1区分
-        // 重置状态
-        this.recordStatus = 'stop';
-        this.touchStatus = '';
-        this.translateResult = '-1';
-        return;
-      }
-      // 识别到文字，发送语音消息
-      // 重置状态
-      this.recordStatus = 'stop';
-      this.touchStatus = '';
-      this.translateResult = translateResult;
-    };
-    manager.onStart = () => {
-      // 开始录音
-      this.recordStatus = 'start';
-    };
-    manager.onError = () => {
-      this.recordStatus = 'stop';
-      this.touchStatus = '';
-      this.translateResult = '-1';
-    };
+    this.initRecordManager();
   },
+  
   methods: {
-    getWindowHeight() {
-      return wx.getWindowInfo().windowHeight;
+    // ==================== 初始化 ====================
+    
+    /**
+     * 初始化录音管理器
+     */
+    initRecordManager() {
+      if (!manager) return;
+      
+      manager.onStart = () => {
+        this.processStatus = 'recording';
+      };
+      
+      manager.onStop = (res) => {
+        const { tempFilePath, duration } = res;
+        this.voiceInfo.voicePath = tempFilePath;
+        this.voiceInfo.duration = Math.floor(duration / 1000) || 1;
+        
+        // TODO: 调用语音识别 API
+        this.handleRecordFinish();
+      };
+      
+      manager.onError = (err) => {
+        console.error('[ChatRecord] 录音错误:', err);
+        this.resetState();
+        this.$emit('error', err);
+      };
     },
+    
+    // ==================== 权限管理 ====================
+    
+    /**
+     * 检查录音权限
+     */
+    async getVoiceAuthSetting() {
+      return Promise.resolve(true);
+    },
+    
+    /**
+     * 申请录音权限
+     */
+    async applyAuth() {
+      return Promise.resolve(true);
+    },
+    
+    /**
+     * 打开系统设置页面
+     */
     openVoiceSetting() {
-      wx.showModal({
-        title: '提示',
-        content: '即将跳转到小程序设置页',
-        success: (res) => {
-          if (res.confirm) {
-            wx.openSetting({
-              success: (res) => {
-                this.recordAuthSetting = !!res.authSetting['scope.record'];
-                this.recordAuthStatus = true;
-                this.$nextTick(() => {
-                  this.$forceUpdate();
-                });
-              },
-            });
-          }
-        },
-      });
+      // TODO: 引导用户打开设置
     },
-    getVoiceAuthSetting() {
-      return new Promise((resolve, reject) => {
-        wx.getSetting({
-          success: (res) => {
-            const authSettings = Object.keys(res.authSetting);
-            // 是否已经授权了
-            this.recordAuthSetting = authSettings.includes('scope.record');
-            // 当前授权状态
-            this.recordAuthStatus = !!res.authSetting['scope.record'];
-            resolve(this.recordAuthSetting);
-          },
-          fail: () => {
-            reject(false);
-          },
-        });
-      });
-    },
-    applyAuth() {
-      return new Promise((resolve, reject) => {
-        wx.authorize({
-          scope: 'scope.record',
-          success: () => {
-            this.recordAuthSetting = true;
-            this.recordAuthStatus = true;
-            resolve(true);
-          },
-          fail: () => {
-            this.recordAuthSetting = false;
-            this.recordAuthStatus = false;
-            reject(false);
-          },
-        });
-      });
-    },
+    
+    // ==================== 录音控制 ====================
+    
     /**
-     * @description 修改语音转文字结果
-     * @params value 输入框文本值
-     */
-    onTranslateResultChange(value) {
-      this.translateResult = value;
-    },
-    /**
-     * @description 直接发送语音消息
-     */
-    handleSendVoiceMsg() {
-      this.sendVoiceMsg(this.translateResult);
-      this.showMask = false;
-      this.translateResult = '';
-    },
-    /**
-     * @description 取消发送语音
-     */
-    handleCancelSend() {
-      this.showMask = false;
-      this.translateResult = '';
-      this.recordStatus = '';
-      this.recordCountDown = -1;
-      this.startTime = 0;
-      this.touchStatus = '';
-    },
-    /**
-     * @description 开始录音
+     * 开始录音
      */
     async startRecord(e) {
-      console.error('开始露营====：', e);
-      this.isStarted = true;
-      await this.getVoiceAuthSetting();
-      if (!this.recordAuthSetting) {
-        await this.applyAuth();
-        return;
+      // 记录起始触摸点
+      if (e && e.changedTouches && e.changedTouches[0]) {
+        const { clientX, clientY } = e.changedTouches[0];
+        this.startTouch = { x: clientX, y: clientY };
       }
-      e.preventDefault();
-      if (!this.isStarted) {
-        // 解决点击结束太快，授权信息还没拿到的情况
-        return;
-      }
-      this.touchStatus = 'bottom';
-      // 记录开始录音时间
-      this.startTime = new Date().getTime();
-      // 500ms后开始录音，模拟长按效果，避免误操作
-      startRecordTimer = setTimeout(() => {
-        if (startRecordTimer) {
-          this.showMask = true;
-          manager.start({
-            duration: 30000,
-            lang: 'zh_CN',
-          });
-          // 最大支持30s连续录音，25s时开始倒计时
-          recordTimer = setInterval(() => {
-            if (new Date().getTime() - this.startTime > 50000) {
-              if (this.recordCountDown === -1) this.recordCountDown = 10;
-              else this.recordCountDown -= 1;
-            }
-            if (new Date().getTime() - this.startTime > 60000) {
-              this.stopRecord();
-            }
-          }, 1000);
-        }
-      }, 500);
+      
+      // 重置状态
+      this.showMask = true;
+      this.processStatus = 'recording';
+      this.interactStatus = 'normal';
+      this.translateResult = '';
+      
+      // 触发开始事件
+      this.$emit('start');
+      
+      // 开始录音（注释掉，使用模拟）
+      console.log('[ChatRecord] 模拟录音开始');
+      // if (manager) {
+      //   manager.start({ duration: 60000 });
+      // }
     },
+    
     /**
-     * @description 结束录音
-     */
-    stopRecord() {
-      // 清除定时器
-      // 快速点击时，变量值可能未更新取到上一次的值，加setTimeout确保取到最新的值
-      this.isStarted = false;
-      setTimeout(() => {
-        recordTimer = clearInterval(recordTimer);
-        startRecordTimer = clearTimeout(startRecordTimer);
-        this.recordCountDown = -1;
-        // 松开的时候，判断有没有授权
-        if (!this.recordAuthStatus) {
-          this.showMask = false;
-          this.startTime = 0;
-          return;
-        }
-        // 根据startTime判断是否已经自动触发停止录音接口，避免二次调用；
-        if (this.startTime === 0) {
-          return;
-        }
-        // 根据当前时间 减去 startTime判断录音时间是否大于500ms，避免录音时间过短
-        if (this.startTime > 0 && new Date().getTime() - this.startTime > 500) {
-          // 语音消息时长
-          manager.stop();
-          this.voiceInfo.duration = Math.floor((new Date().getTime() - this.startTime) / 1000) || 1;
-          this.startTime = 0;
-        } else {
-          this.showMask = false;
-          this.startTime = 0;
-          wx.showToast({
-            icon: 'error',
-            title: '说话时间太短',
-          });
-        }
-      }, 0);
-    },
-    /**
-     * @description 录音过程中手指移动事件
+     * 手势移动处理
      */
     touchmove(e) {
-      // 根据clientX clientY坐标值判断目前手指所处区域，触发不同的交互（发送、取消发送 或 转文字）
-      const bottomHeight = 150;
-      const { changedTouches } = e;
-      const { clientY } = changedTouches[0];
-      const { windowHeight } = wx.getWindowInfo();
-      if (clientY > windowHeight - bottomHeight) {
-        this.touchStatus = 'bottom';
+      if (this.processStatus !== 'recording') return;
+      
+      const { clientX, clientY } = e.changedTouches[0];
+      const deltaX = clientX - this.startTouch.x;
+      const deltaY = clientY - this.startTouch.y;
+      
+      // 判断手势方向
+      if (deltaY < -MOVE_THRESHOLD) {
+        // 向上滑动
+        if (deltaX < -MOVE_THRESHOLD) {
+          this.interactStatus = 'release_cancel'; // 左上：取消
+        } else if (deltaX > MOVE_THRESHOLD) {
+          this.interactStatus = 'release_convert'; // 右上：转文字
+        } else {
+          this.interactStatus = 'normal'; // 正上：无操作
+        }
       } else {
-        this.touchStatus = 'top';
+        this.interactStatus = 'normal';
       }
     },
+    
     /**
-     * @description 录音过程中被系统事件打断，结束录音
+     * 停止录音
+     */
+    stopRecord() {
+      if (this.processStatus !== 'recording') return;
+      
+      if (this.interactStatus === 'release_cancel') {
+        // 取消录音
+        this.cancelRecord();
+      } else if (this.interactStatus === 'release_convert') {
+        // 转文字
+        this.convertToText();
+      } else {
+        // 直接发送语音
+        this.sendVoice();
+      }
+    },
+    
+    /**
+     * 触摸取消
      */
     touchcancel() {
-      manager.stop();
-      recordTimer = clearInterval(recordTimer);
-      startRecordTimer = clearTimeout(startRecordTimer);
-      this.showMask = false;
-      this.isStarted = false;
-      this.recordCountDown = -1;
+      this.cancelRecord();
     },
+    
+    // ==================== 业务逻辑 ====================
+    
     /**
-     * @description 发送语音消息，可以重写此方法
-     * @param {String} voiceMsg 语音消息 String
+     * 取消录音
      */
-    sendVoiceMsg(voiceMsg) {
-      this.$emit('recognize', voiceMsg);
+    cancelRecord() {
+      console.log('[ChatRecord] 取消录音');
+      // if (manager) manager.stop();
+      this.$emit('cancel');
+      this.resetState();
     },
-
-    focusTextarea(e) {
-      if (this.autoSendHeight) {
-        this.bottomHeight = e.detail.height;
-      }
+    
+    /**
+     * 转换为文字
+     */
+    convertToText() {
+      console.log('[ChatRecord] 转换为文字');
+      this.processStatus = 'confirm';
+      this.interactStatus = 'normal';
+      
+      // TODO: 调用语音识别 API
+      // this.translateResult = '识别结果';
     },
-    blurTextarea() {
-      this.bottomHeight = 0;
+    
+    /**
+     * 直接发送语音
+     */
+    sendVoice() {
+      console.log('[ChatRecord] 发送语音');
+      this.$emit('send', {
+        voicePath: this.voiceInfo.voicePath,
+        duration: this.voiceInfo.duration,
+      });
+      this.resetState();
+    },
+    
+    /**
+     * 录音完成处理
+     */
+    handleRecordFinish() {
+      // 模拟识别延迟
+      setTimeout(() => {
+        this.processStatus = 'confirm';
+      }, 500);
+    },
+    
+    /**
+     * 发送转文字结果
+     */
+    handleSendVoiceMsg() {
+      this.$emit('recognize', this.translateResult);
+      this.resetState();
+    },
+    
+    /**
+     * 取消发送
+     */
+    handleCancelSend() {
+      this.$emit('cancel');
+      this.resetState();
+    },
+    
+    // ==================== 状态管理 ====================
+    
+    /**
+     * 重置所有状态
+     */
+    resetState() {
+      this.showMask = false;
+      this.processStatus = 'idle';
+      this.interactStatus = 'normal';
+      this.translateResult = '';
+      this.voiceInfo = { voicePath: '', duration: 0 };
+      this.activeBtnCancel = false;
+      this.activeBtnSend = false;
     },
   },
 });
