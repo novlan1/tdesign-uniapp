@@ -199,6 +199,9 @@
       "path": "pages-more/overlay/overlay"
     },
     {
+      "path": "pages-more/popover/popover"
+    },
+    {
       "path": "pages-more/popup/popup"
     },
     {
@@ -522,6 +525,10 @@
       {
         "name": "overlay",
         "pathName": "pages-more/overlay/overlay"
+      },
+      {
+        "name": "popover",
+        "pathName": "pages-more/popover/popover"
       },
       {
         "name": "popup",
