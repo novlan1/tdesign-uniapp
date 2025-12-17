@@ -18,18 +18,19 @@ export interface TdPopoverProps {
    * 浮层出现位置
    * @default top
    */
-  placement?: 'top'
-      | 'left'
-      | 'right'
-      | 'bottom'
-      | 'top-left'
-      | 'top-right'
-      | 'bottom-left'
-      | 'bottom-right'
-      | 'left-top'
-      | 'left-bottom'
-      | 'right-top'
-      | 'right-bottom';
+  placement?:
+    | 'top'
+    | 'left'
+    | 'right'
+    | 'bottom'
+    | 'top-left'
+    | 'top-right'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'left-top'
+    | 'left-bottom'
+    | 'right-top'
+    | 'right-bottom';
   /**
    * 是否显示浮层箭头
    * @default true
@@ -48,4 +49,8 @@ export interface TdPopoverProps {
    * 是否显示气泡确认框，非受控属性
    */
   defaultVisible?: boolean;
+  /**
+   * 确认框显示或隐藏时触发
+   */
+  onVisibleChange?: (visible: boolean) => void;
 }
