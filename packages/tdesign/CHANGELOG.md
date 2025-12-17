@@ -6,6 +6,10 @@ docClass: timeline
 ---
 
 
+## 🌈 0.6.0 `2025-12-17` 
+### 🚀 Features
+- `Popover`: 新增组件 @novlan1 ([#126](https://github.com/novlan1/tdesign-uniapp/pull/126))
+
 ## 🌈 0.5.9 `2025-12-11` 
 ### 🐞 Bug Fixes
 - `Input`: 修复数据回显问题 @novlan1 ([#121](https://github.com/novlan1/tdesign-uniapp/pull/121))
