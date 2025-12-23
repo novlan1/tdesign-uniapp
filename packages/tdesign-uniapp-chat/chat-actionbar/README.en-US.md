@@ -14,7 +14,7 @@ content | String | - | \- | N
 copy-mode | String | markdown | options: markdown/text | N
 disabled | Boolean | false | \- | N
 long-press-position | Object | - | type: `{pageX: number; pageY: number; clientX: number; clientY: number; x: number; y: number}` | N
-placement | String | start | options: start/end/space-around/space-between | N
+placement | String | start | options: start/end/space-around/space-between/longpress | N
 
 ### ChatActionbar Events
 
