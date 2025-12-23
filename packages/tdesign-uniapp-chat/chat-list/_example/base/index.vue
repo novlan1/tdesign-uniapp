@@ -1,5 +1,5 @@
 <template>
-  <view @click="hidePopover">
+  <view>
     <view
       class="chat-box"
       :style="'height: ' + contentHeight + ';'"
@@ -53,7 +53,6 @@
         ref="popoverActionbar"
         class="popover-actionbar"
         placement="longpress"
-        :comment="activePopoverComment"
         :long-press-position="longPressPosition"
         @actions="handlePopoverAction"
       />
@@ -72,7 +71,6 @@ import TChatActionbar from 'tdesign-uniapp-chat/chat-actionbar/chat-actionbar.vu
 import TToast from 'tdesign-uniapp/toast/toast.vue';
 import Toast from 'tdesign-uniapp/toast';
 import { getNavigationBarHeight } from '../utils';
-
 
 let uniqueId = 0;
 const getUniqueKey = () => {
@@ -166,7 +164,6 @@ export default {
 
       chatIndex: '',
       activePopoverId: '', // 当前打开悬浮actionbar的chatId
-      activePopoverComment: '', // 当前打开悬浮actionbar的comment
       longPressPosition: null, // 长按位置对象
     };
   },
@@ -341,11 +338,9 @@ export default {
     showPopover(e) {
       const { id, longPressPosition } = e;
 
-      let comment = '';
       let role = '';
       this.chatList.forEach((item) => {
         if (item.chatId === id) {
-          comment = item.comment;
           role = item.role;
         }
       });
@@ -356,13 +351,7 @@ export default {
       }
 
       this.activePopoverId = id;
-      this.activePopoverComment = comment;
       this.longPressPosition = longPressPosition;
-    },
-
-    // 隐藏长按弹出操作栏
-    hidePopover() {
-      this.longPressPosition = null;
     },
 
     // 处理弹出操作栏的事件
