@@ -6,7 +6,12 @@
       class="custom-navbar"
       left-arrow
       title="标题文字"
-    />
+      @right-click="handleRightClick"
+    >
+      <template #right>
+        <div>右侧内容</div>
+      </template>
+    </t-navbar>
   </view>
 </template>
 
@@ -20,7 +25,11 @@ export default {
     return {};
   },
   created() {},
-  methods: {},
+  methods: {
+    handleRightClick() {
+      console.log('right click');
+    },
+  },
 };
 </script>
 <style>

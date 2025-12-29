@@ -36,6 +36,13 @@
           {{ showTitle }}
         </text>
       </view>
+
+      <view
+        :class="classPrefix + '__right'"
+        @click="onClickRight"
+      >
+        <slot name="right" />
+      </view>
     </view>
   </view>
 </template>
@@ -86,6 +93,7 @@ export default uniComponent({
     'complete',
     'success',
     'go-back',
+    'right-click',
   ],
   data() {
     return {
@@ -271,6 +279,10 @@ export default uniComponent({
           },
         });
       }
+    },
+
+    onClickRight() {
+      this.$emit('right-click');
     },
   },
 });
