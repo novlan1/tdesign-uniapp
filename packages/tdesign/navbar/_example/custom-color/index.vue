@@ -3,7 +3,7 @@
     <t-navbar
       t-class-placeholder="t-navbar-placeholder"
       t-class-content="t-navbar-content"
-      class="custom-navbar"
+      t-class="custom-navbar"
       left-arrow
       title="标题文字"
       @right-click="handleRightClick"
@@ -17,7 +17,12 @@
 
 <script>
 import tNavbar from 'tdesign-uniapp/navbar/navbar.vue';
+
+
 export default {
+  options: {
+    styleIsolation: 'shared',
+  },
   components: {
     tNavbar,
   },
