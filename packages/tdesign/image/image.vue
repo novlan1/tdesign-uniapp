@@ -78,6 +78,7 @@
       :aria-label="ariaLabel"
       @load="onLoaded"
       @error="onLoadError"
+      @click.stop="onClick"
     />
   </view>
 </template>
@@ -111,6 +112,9 @@ export default uniComponent({
   props: {
     ...ImageProps,
   },
+  emits: [
+    'click',
+  ],
   data() {
     return {
       prefix,
@@ -191,6 +195,9 @@ export default uniComponent({
           errMsg: '图片链接为空',
         });
       }
+    },
+    onClick(e) {
+      this.$emit('click', e);
     },
   },
 });

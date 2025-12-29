@@ -164,6 +164,7 @@ export default uniComponent({
       tools,
 
       innerValue: coalesce(this.value, this.defaultValue),
+      treeOptions: [],
     };
   },
   computed: {
