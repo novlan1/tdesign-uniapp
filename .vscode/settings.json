@@ -112,5 +112,7 @@
       ]
     }
   },
-  "terminal.integrated.defaultProfile.linux": "supercode-sh"
+  "terminal.integrated.defaultProfile.linux": "supercode-sh",
+  "KUAI.selectEnv": "",
+  "KUAI.selectProject": ""
 }

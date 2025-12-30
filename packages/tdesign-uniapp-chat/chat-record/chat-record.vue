@@ -48,7 +48,7 @@
             <view class="ani-mask" />
             <view
               class="ani-main"
-              :class="status === 'complete' ? 'ani-start' : 'ani-end'"
+              :class="status === 'recording' ? 'ani-start' : 'ani-end'"
             />
           </view>
         </view>
@@ -56,7 +56,7 @@
         <!-- 内容区域 -->
         <view :class="[classPrefix + '-audio-input__con', status === 'cancel' ? 'disabled' : '']">
           <view
-            v-if="status !== 'complete'"
+            v-if="status !== 'recording' && !translateSuccess && touchStatus !== 'top'"
             :class="[classPrefix + '-audio-input__con__inner']"
           >
             {{
@@ -176,11 +176,9 @@ const name = `${prefix}-chat-record`;
 let startRecordTimer = null; // 语音录制定时器-模拟长按
 let recordTimer = null;
 
-// 使用微信小程序内置的录音管理器API
-let manager = null;
-if (typeof wx !== 'undefined' && wx.getRecorderManager) {
-  manager = wx.getRecorderManager();
-}
+// eslint-disable-next-line no-undef
+const plugin = requirePlugin('WechatSI');
+const manager = plugin.getRecordRecognitionManager();
 
 export default uniComponent({
   name: 'ChatRecord',
@@ -204,6 +202,7 @@ export default uniComponent({
       isStarted: false, // 是否点击了 // 解决点击结束太快，授权信息还没拿到的情况
       bottomHeight: 0, // 底部高度
       autoSendHeight: true, // 是否自动抬升发送按钮高度
+      windowHeight: 0, // 窗口高度，用于手指滑动判断
     };
   },
   computed: {
@@ -214,66 +213,114 @@ export default uniComponent({
       return this.recordCountDown >= 0;
     },
     status() {
-      if (this.recordStatus === 'start' && this.touchStatus === 'top') return 'cancel';
+      // 只要检查到用户上滑，但是还没松开手指的时候就转换为cancel状态
+      if (this.touchStatus === 'top') return 'cancel';
+      // 正在录音中的状态
+      if (this.recordStatus === 'recording') return 'recording';
+      if (this.recordStatus === 'thinking') return 'thinking';
       if (this.recordStatus === 'stop' && !this.translateSuccess) return 'unknow';
       if (this.recordStatus === 'stop' && this.translateSuccess) return 'complete';
+      if (this.recordStatus === 'error') return 'error';
       return 'normal';
     },
   },
-  onShow() {},
   mounted() {
-    manager.onStop = (res) => {
-      const { tempFilePath, result: translateResult, duration } = res;
-      this.voiceInfo.voicePath = tempFilePath;
-      this.voiceInfo.duration = Math.floor(duration / 1000) || 1;
-      if (this.touchStatus === 'top') {
-        // 结束时，手指在取消发送区域
-        // 重置状态
-        this.showMask = false;
-        this.translateResult = '';
-        this.recordStatus = '';
-        this.touchStatus = '';
-        return;
-      }
-      if (!translateResult || !translateResult.length) {
-        // 未识别到文字，用-1区分
-        // 未识别到文字，用-1区分
-        // 重置状态
-        this.recordStatus = 'stop';
-        this.touchStatus = '';
-        this.translateResult = '-1';
-        return;
-      }
-      // 识别到文字，发送语音消息
-      // 重置状态
-      this.recordStatus = 'stop';
-      this.touchStatus = '';
-      this.translateResult = translateResult;
-    };
-    manager.onStart = () => {
-      // 开始录音
-      this.recordStatus = 'start';
-    };
-    manager.onError = () => {
-      this.recordStatus = 'stop';
-      this.touchStatus = '';
-      this.translateResult = '-1';
-    };
+    // 初始化录音管理器
+    this.initRecorderManager();
+    // 获取窗口高度
+    this.getWindowHeight();
+  },
+  beforeDestroy() {
+    if (recordTimer) {
+      clearInterval(recordTimer);
+      recordTimer = null;
+    }
+    if (startRecordTimer) {
+      clearTimeout(startRecordTimer);
+      startRecordTimer = null;
+    }
+    if (manager) {
+      manager.stop();
+    }
   },
   methods: {
+    /**
+     * @description 初始化同声传译插件
+     */
+    initRecorderManager() {
+      manager.onStop = (res) => {
+        console.log('onStop record file path', res);
+        console.log('result', res.result);
+        const { tempFilePath, duration } = res;
+        this.voiceInfo.voicePath = tempFilePath;
+        this.voiceInfo.duration = Math.floor(duration / 1000) || 1;
+
+        if (this.touchStatus === 'top') {
+          // 结束时，手指在取消发送区域
+          console.log('取消发送');
+          this.resetRecordState();
+          return;
+        }
+
+        this.recordStatus = 'stop';
+        this.touchStatus = '';
+      };
+
+      manager.onStart = (res) => {
+        console.log('onStart成功开始录音识别', res);
+        this.recordStatus = 'thinking';
+      };
+
+      manager.onRecognize = (res) => {
+        console.log('onRecognize识别中:', res.result);
+        if (res.result && !res.end) {
+          this.recordStatus = 'recording';
+          this.translateResult = res.result;
+        }
+      };
+
+      manager.onError = (res) => {
+        console.error('录音错误', res.msg);
+        this.recordStatus = 'error';
+        this.touchStatus = '';
+        this.translateResult = '-1';
+        uni.showToast({
+          icon: 'none',
+          title: '录音失败，请重试',
+        });
+      };
+    },
+    /**
+     * @description 重置录音状态
+     */
+    resetRecordState() {
+      this.showMask = false;
+      this.translateResult = '';
+      this.recordStatus = '';
+      this.touchStatus = '';
+      this.recordCountDown = -1;
+      this.startTime = 0;
+    },
+    /**
+     * @description 获取窗口高度
+     */
     getWindowHeight() {
-      return wx.getWindowInfo().windowHeight;
+      uni.getSystemInfo({
+        success: (res) => {
+          this.windowHeight = res.windowHeight;
+        },
+      });
     },
     openVoiceSetting() {
-      wx.showModal({
+      uni.showModal({
         title: '提示',
-        content: '即将跳转到小程序设置页',
+        content: '即将跳转到设置页',
         success: (res) => {
           if (res.confirm) {
-            wx.openSetting({
+            uni.openSetting({
               success: (res) => {
                 this.recordAuthSetting = !!res.authSetting['scope.record'];
-                this.recordAuthStatus = true;
+                this.recordAuthStatus = !!res.authSetting['scope.record'];
                 this.$nextTick(() => {
                   this.$forceUpdate();
                 });
@@ -285,7 +332,7 @@ export default uniComponent({
     },
     getVoiceAuthSetting() {
       return new Promise((resolve, reject) => {
-        wx.getSetting({
+        uni.getSetting({
           success: (res) => {
             const authSettings = Object.keys(res.authSetting);
             // 是否已经授权了
@@ -302,7 +349,7 @@ export default uniComponent({
     },
     applyAuth() {
       return new Promise((resolve, reject) => {
-        wx.authorize({
+        uni.authorize({
           scope: 'scope.record',
           success: () => {
             this.recordAuthSetting = true;
@@ -328,123 +375,206 @@ export default uniComponent({
      * @description 直接发送语音消息
      */
     handleSendVoiceMsg() {
-      this.sendVoiceMsg(this.translateResult);
-      this.showMask = false;
-      this.translateResult = '';
+      if (this.translateResult && this.translateResult !== '-1') {
+        this.sendVoiceMsg(this.translateResult);
+      }
+      this.resetRecordState();
     },
     /**
      * @description 取消发送语音
      */
     handleCancelSend() {
-      this.showMask = false;
-      this.translateResult = '';
-      this.recordStatus = '';
-      this.recordCountDown = -1;
-      this.startTime = 0;
-      this.touchStatus = '';
+      this.resetRecordState();
     },
     /**
      * @description 开始录音
      */
     async startRecord(e) {
-      console.error('开始露营====：', e);
+      console.log('开始录音触发', e);
+
+      // 防止重复触发
+      if (this.isStarted) {
+        console.log('已经在录音中，忽略');
+        return;
+      }
+
       this.isStarted = true;
-      await this.getVoiceAuthSetting();
-      if (!this.recordAuthSetting) {
-        await this.applyAuth();
+
+      // 检查授权
+      try {
+        await this.getVoiceAuthSetting();
+        if (!this.recordAuthSetting) {
+          await this.applyAuth();
+          this.isStarted = false;
+          return;
+        }
+      } catch (error) {
+        console.error('授权检查失败', error);
+        this.isStarted = false;
         return;
       }
-      e.preventDefault();
-      if (!this.isStarted) {
-        // 解决点击结束太快，授权信息还没拿到的情况
-        return;
+
+      // 阻止默认行为
+      if (e && e.preventDefault) {
+        e.preventDefault();
       }
+
       this.touchStatus = 'bottom';
       // 记录开始录音时间
       this.startTime = new Date().getTime();
+
       // 500ms后开始录音，模拟长按效果，避免误操作
       startRecordTimer = setTimeout(() => {
-        if (startRecordTimer) {
-          this.showMask = true;
-          manager.start({
-            duration: 30000,
-            lang: 'zh_CN',
-          });
-          // 最大支持30s连续录音，25s时开始倒计时
-          recordTimer = setInterval(() => {
-            if (new Date().getTime() - this.startTime > 50000) {
-              if (this.recordCountDown === -1) this.recordCountDown = 10;
-              else this.recordCountDown -= 1;
-            }
-            if (new Date().getTime() - this.startTime > 60000) {
-              this.stopRecord();
-            }
-          }, 1000);
+        if (!this.isStarted) {
+          console.log('录音已取消');
+          return;
         }
+
+        console.log('开始录音');
+        this.showMask = true;
+
+        // 确保录音管理器已初始化
+        if (!manager) {
+          this.initRecorderManager();
+        }
+
+        manager.start({ duration: 30000, lang: 'zh_CN' });
+
+        // 最大支持60s连续录音，50s时开始倒计时
+        recordTimer = setInterval(() => {
+          const recordTime = new Date().getTime() - this.startTime;
+          if (recordTime > 50000) {
+            if (this.recordCountDown === -1) {
+              this.recordCountDown = 10;
+            } else {
+              this.recordCountDown -= 1;
+            }
+          }
+          if (recordTime > 60000) {
+            console.log('录音超时，自动停止');
+            this.stopRecord();
+          }
+        }, 1000);
       }, 500);
     },
     /**
      * @description 结束录音
      */
     stopRecord() {
-      // 清除定时器
-      // 快速点击时，变量值可能未更新取到上一次的值，加setTimeout确保取到最新的值
+      console.log('结束录音触发', {
+        isStarted: this.isStarted,
+        startTime: this.startTime,
+        touchStatus: this.touchStatus,
+      });
+
+      // 标记录音结束
       this.isStarted = false;
-      setTimeout(() => {
-        recordTimer = clearInterval(recordTimer);
-        startRecordTimer = clearTimeout(startRecordTimer);
-        this.recordCountDown = -1;
-        // 松开的时候，判断有没有授权
-        if (!this.recordAuthStatus) {
-          this.showMask = false;
-          this.startTime = 0;
-          return;
-        }
-        // 根据startTime判断是否已经自动触发停止录音接口，避免二次调用；
-        if (this.startTime === 0) {
-          return;
-        }
-        // 根据当前时间 减去 startTime判断录音时间是否大于500ms，避免录音时间过短
-        if (this.startTime > 0 && new Date().getTime() - this.startTime > 500) {
-          // 语音消息时长
+
+      // 清除定时器
+      if (recordTimer) {
+        clearInterval(recordTimer);
+        recordTimer = null;
+      }
+      if (startRecordTimer) {
+        clearTimeout(startRecordTimer);
+        startRecordTimer = null;
+      }
+
+      this.recordCountDown = -1;
+
+      // 松开的时候，判断有没有授权
+      if (!this.recordAuthStatus) {
+        console.log('未授权，取消录音');
+        this.showMask = false;
+        this.startTime = 0;
+        return;
+      }
+
+      // 根据startTime判断是否已经自动触发停止录音接口，避免二次调用
+      if (this.startTime === 0) {
+        console.log('startTime为0，已停止过');
+        return;
+      }
+
+      const recordTime = new Date().getTime() - this.startTime;
+      console.log('录音时长', recordTime);
+
+      // 根据当前时间 减去 startTime判断录音时间是否大于500ms，避免录音时间过短
+      if (recordTime > 500) {
+        // 语音消息时长
+        console.log('停止录音');
+        this.voiceInfo.duration = Math.floor(recordTime / 1000) || 1;
+        this.startTime = 0;
+
+        if (manager) {
           manager.stop();
-          this.voiceInfo.duration = Math.floor((new Date().getTime() - this.startTime) / 1000) || 1;
-          this.startTime = 0;
-        } else {
-          this.showMask = false;
-          this.startTime = 0;
-          wx.showToast({
-            icon: 'error',
-            title: '说话时间太短',
-          });
         }
-      }, 0);
+      } else {
+        console.log('录音时间太短');
+        this.showMask = false;
+        this.startTime = 0;
+        uni.showToast({
+          icon: 'none',
+          title: '说话时间太短',
+        });
+      }
     },
     /**
      * @description 录音过程中手指移动事件
      */
     touchmove(e) {
-      // 根据clientX clientY坐标值判断目前手指所处区域，触发不同的交互（发送、取消发送 或 转文字）
+      // 只有在录音中才处理滑动
+      if (!this.isStarted || !this.showMask) {
+        return;
+      }
+
+      // 根据clientY坐标值判断目前手指所处区域，触发不同的交互（发送、取消发送）
       const bottomHeight = 150;
       const { changedTouches } = e;
+      if (!changedTouches || !changedTouches[0]) {
+        return;
+      }
+
       const { clientY } = changedTouches[0];
-      const { windowHeight } = wx.getWindowInfo();
-      if (clientY > windowHeight - bottomHeight) {
+      const oldStatus = this.touchStatus;
+
+      // 使用缓存的窗口高度
+      if (clientY > this.windowHeight - bottomHeight) {
         this.touchStatus = 'bottom';
       } else {
         this.touchStatus = 'top';
+      }
+
+      // 状态变化时打印日志
+      if (oldStatus !== this.touchStatus) {
+        console.log('手指位置变化', {
+          clientY,
+          windowHeight: this.windowHeight,
+          touchStatus: this.touchStatus,
+        });
       }
     },
     /**
      * @description 录音过程中被系统事件打断，结束录音
      */
     touchcancel() {
-      manager.stop();
-      recordTimer = clearInterval(recordTimer);
-      startRecordTimer = clearTimeout(startRecordTimer);
-      this.showMask = false;
+      console.log('录音被打断');
+
+      if (manager) {
+        manager.stop();
+      }
+
+      if (recordTimer) {
+        clearInterval(recordTimer);
+        recordTimer = null;
+      }
+      if (startRecordTimer) {
+        clearTimeout(startRecordTimer);
+        startRecordTimer = null;
+      }
+
+      this.resetRecordState();
       this.isStarted = false;
-      this.recordCountDown = -1;
     },
     /**
      * @description 发送语音消息，可以重写此方法
