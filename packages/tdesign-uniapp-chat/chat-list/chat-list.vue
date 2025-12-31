@@ -168,7 +168,7 @@ export default uniComponent({
 <style scoped>
 @import './chat-list.css';
 
-/* #ifdef H5 */
+/* #ifdef H5 || APP-PLUS */
 .t-chat-list__content :deep(.uni-scroll-view-content) {
   display: flex;;
   flex-direction: column;
