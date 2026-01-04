@@ -222,7 +222,7 @@
 import chatMarkdownCode from '../chat-markdown-code/chat-markdown-code.vue';
 import { prefix } from 'tdesign-uniapp/common/config';
 import { uniComponent } from 'tdesign-uniapp/common/src/index';
-// #ifndef H5
+// #ifdef MP
 import { TChatMarkdownNode } from './chat-markdown-node.vue';
 // #endif
 
@@ -240,7 +240,7 @@ export default uniComponent({
   components: {
     // chatMarkdownTable,
     chatMarkdownCode,
-    // #ifndef H5
+    // #ifdef MP
     TChatMarkdownNode,
     // #endif
   },

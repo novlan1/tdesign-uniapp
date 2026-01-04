@@ -76,9 +76,9 @@
       :show-menu-by-longpress="showMenuByLongpress"
       :aria-hidden="ariaHidden || isLoading || isFailed"
       :aria-label="ariaLabel"
+      @click="onClick"
       @load="onLoaded"
       @error="onLoadError"
-      @click.stop="onClick"
     />
   </view>
 </template>
