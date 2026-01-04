@@ -76,7 +76,7 @@
       :show-menu-by-longpress="showMenuByLongpress"
       :aria-hidden="ariaHidden || isLoading || isFailed"
       :aria-label="ariaLabel"
-      @click.="onClick"
+      @click="onClick"
       @load="onLoaded"
       @error="onLoadError"
     />
