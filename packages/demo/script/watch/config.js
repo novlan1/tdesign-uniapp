@@ -20,16 +20,16 @@ const config = {
   sourceDir: path.resolve(__dirname, '../../../tdesign'),
   chatSourceDir: path.resolve(__dirname, '../../../tdesign-uniapp-chat'),
 
-  sourceGlob: path.resolve(__dirname, '../../../tdesign/**/*'),
-  chatSourceGlob: path.resolve(__dirname, '../../../tdesign-uniapp-chat/**/*'),
-  baseAndChatSourceGlob: path.resolve(__dirname, '../../../{tdesign,tdesign-uniapp-chat}/**/*'),
+  sourceGlob: path.resolve(__dirname, '../../../tdesign/**/*').replace(/\\/g, '/'),
+  chatSourceGlob: path.resolve(__dirname, '../../../tdesign-uniapp-chat/**/*').replace(/\\/g, '/'),
+  baseAndChatSourceGlob: path.resolve(__dirname, '../../../{tdesign,tdesign-uniapp-chat}/**/*').replace(/\\/g, '/'),
 
   demoDir: path.resolve(__dirname, '../../src/pages-more'),
 
   demoRealDir: path.resolve(__dirname, '../../'),
 
-  demoPagesGlob: path.resolve(__dirname, '../../src/pages/**/*'),
-  demoComponentsGlob: path.resolve(__dirname, '../../src/components/**/*'),
+  demoPagesGlob: path.resolve(__dirname, '../../src/pages/**/*').replace(/\\/g, '/'),
+  demoComponentsGlob: path.resolve(__dirname, '../../src/components/**/*').replace(/\\/g, '/'),
 
   appDir: path.resolve(__dirname, '../../../tdesign-app'),
   appPagesMoreDir: path.resolve(__dirname, '../../../tdesign-app/pages-more'),
