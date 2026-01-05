@@ -58,6 +58,13 @@ export default uniComponent({
   externalClasses: [
     `${prefix}-class`,
   ],
+
+  inject: {
+    [RELATION_MAP.FormKey]: {
+      default: null,
+    },
+  },
+
   mixins: [ParentMixin(RELATION_MAP.Checkbox)],
   components: {
     tCheckbox,
@@ -184,6 +191,15 @@ export default uniComponent({
 
       if (trigger !== 'init') {
         this._trigger('change', { value: newValue, context: item });
+
+        this.onChange(newValue);
+      }
+    },
+
+    onChange(value) {
+      if (this[RELATION_MAP.FormKey]
+        && this[RELATION_MAP.FormKey].onValueChange) {
+        this[RELATION_MAP.FormKey].onValueChange(value);
       }
     },
 
