@@ -57,6 +57,7 @@ import { getCharacterLength, coalesce, nextTick } from '../common/utils';
 import tools from '../common/utils.wxs';
 import { textareaStyle } from './computed.js';
 // import { getInnerMaxLen } from '../input/utils';
+import { RELATION_MAP } from '../common/relation/parent-map.js';
 
 
 const name = `${prefix}-textarea`;
@@ -72,6 +73,11 @@ export default uniComponent({
     `${prefix}-class-label`,
     `${prefix}-class-indicator`,
   ],
+  inject: {
+    [RELATION_MAP.FormKey]: {
+      default: null,
+    },
+  },
   props: {
     ...props,
   },
@@ -93,6 +99,11 @@ export default uniComponent({
   watch: {
     value(val) {
       this.updateValue(val);
+
+      if (this[RELATION_MAP.FormKey]
+        && this[RELATION_MAP.FormKey].onValueChange) {
+        this[RELATION_MAP.FormKey].onValueChange(val);
+      }
     },
   },
   mounted() {
@@ -167,6 +178,11 @@ export default uniComponent({
       this.$emit('blur', {
         ...event.detail,
       });
+
+      if (this[RELATION_MAP.FormKey]
+        && this[RELATION_MAP.FormKey].onBlur) {
+        this[RELATION_MAP.FormKey].onBlur(event.detail.value);
+      }
     },
     onConfirm(event) {
       this.$emit('enter', {

@@ -110,6 +110,11 @@ export default uniComponent({
     `${prefix}-class-help`,
     `${prefix}-class-extra`,
   ],
+  provide() {
+    return {
+      [RELATION_MAP.FormKey]: this,
+    };
+  },
   mixins: [ChildrenMixin(RELATION_MAP.FormItem)],
   components: {
     TIcon,
@@ -272,7 +277,9 @@ export default uniComponent({
       }
 
       // 根据触发方式过滤规则
-      const filteredRules = trigger === 'all' ? rules : rules.filter(rule => (rule.trigger || 'change') === trigger);
+      const filteredRules = trigger === 'all'
+        ? rules
+        : rules.filter(rule => (rule.trigger || 'change') === trigger);
 
       if (filteredRules.length === 0) {
         return { [this.name]: true };
@@ -295,7 +302,7 @@ export default uniComponent({
 
     // 纯净验证（不显示错误信息）
     async validateOnly(trigger) {
-      return this.validate(trigger, false);
+      return this.validate(this.getFormData(), trigger, false);
     },
 
     // 分析验证结果
@@ -372,14 +379,14 @@ export default uniComponent({
         this.form.updateFormData(name, value);
 
         // 触发change验证
-        this.validate('change');
+        this.validate(this.getFormData(), 'change', true);
       }
     },
 
     // 处理失焦事件
     onBlur() {
       // 触发blur验证
-      this.validate('blur');
+      this.validate(this.getFormData(), 'blur', true);
     },
   },
 });
