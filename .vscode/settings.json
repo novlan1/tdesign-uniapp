@@ -85,34 +85,5 @@
   "vue.format.script.initialIndent": true,
   "vue.format.style.initialIndent": true,
   "vue.format.template.initialIndent": true,
-  "vue.format.wrapAttributes": "auto",
-  "terminal.integrated.profiles.linux": {
-    "bash": {
-      "path": "bash",
-      "icon": "terminal-bash"
-    },
-    "zsh": {
-      "path": "zsh"
-    },
-    "fish": {
-      "path": "fish"
-    },
-    "tmux": {
-      "path": "tmux",
-      "icon": "terminal-tmux"
-    },
-    "pwsh": {
-      "path": "pwsh",
-      "icon": "terminal-powershell"
-    },
-    "supercode-sh": {
-      "path": "/bin/zsh",
-      "args": [
-        "-l"
-      ]
-    }
-  },
-  "terminal.integrated.defaultProfile.linux": "supercode-sh",
-  "KUAI.selectEnv": "",
-  "KUAI.selectProject": ""
+  "vue.format.wrapAttributes": "auto"
 }
