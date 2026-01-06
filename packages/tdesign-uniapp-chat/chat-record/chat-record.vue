@@ -248,31 +248,32 @@ export default uniComponent({
      * @description 初始化同声传译插件
      */
     initRecorderManager() {
+      // 使用箭头函数确保 this 指向组件实例
       manager.onStop = (res) => {
         console.log('onStop record file path', res);
         console.log('result', res.result);
         const { tempFilePath, duration } = res;
-        this.voiceInfo.voicePath = tempFilePath;
-        this.voiceInfo.duration = Math.floor(duration / 1000) || 1;
 
+        // 如果是取消状态，不保存录音信息
         if (this.touchStatus === 'top') {
-          // 结束时，手指在取消发送区域
-          console.log('取消发送');
+          console.log('用户取消发送，不保存录音');
           this.resetRecordState();
           return;
         }
 
+        this.voiceInfo.voicePath = tempFilePath;
+        this.voiceInfo.duration = Math.floor(duration / 1000) || 1;
         this.recordStatus = 'stop';
         this.touchStatus = '';
       };
 
       manager.onStart = (res) => {
-        console.log('onStart成功开始录音识别', res);
+        console.log('onStart 成功开始录音识别', res);
         this.recordStatus = 'thinking';
       };
 
       manager.onRecognize = (res) => {
-        console.log('onRecognize识别中:', res.result);
+        console.log('onRecognize 识别中:', res.result);
         if (res.result && !res.end) {
           this.recordStatus = 'recording';
           this.translateResult = res.result;
@@ -280,13 +281,16 @@ export default uniComponent({
       };
 
       manager.onError = (res) => {
-        console.error('录音错误', res.msg);
+        console.error('录音错误:', res.msg);
         this.recordStatus = 'error';
         this.touchStatus = '';
         this.translateResult = '-1';
+
+        // 给用户友好的错误提示
         uni.showToast({
           icon: 'none',
-          title: '录音失败，请重试',
+          title: res.msg || '录音识别失败，请重试',
+          duration: 2000,
         });
       };
     },
@@ -499,6 +503,22 @@ export default uniComponent({
       const recordTime = new Date().getTime() - this.startTime;
       console.log('录音时长', recordTime);
 
+      // 如果手指上滑到取消区域，取消发送
+      if (this.touchStatus === 'top') {
+        console.log('用户取消发送');
+        if (manager) {
+          manager.stop();
+        }
+        this.resetRecordState();
+        this.startTime = 0;
+        uni.showToast({
+          icon: 'none',
+          title: '已取消发送',
+          duration: 1500,
+        });
+        return;
+      }
+
       // 根据当前时间 减去 startTime判断录音时间是否大于500ms，避免录音时间过短
       if (recordTime > 500) {
         // 语音消息时长
@@ -513,6 +533,9 @@ export default uniComponent({
         console.log('录音时间太短');
         this.showMask = false;
         this.startTime = 0;
+        if (manager) {
+          manager.stop();
+        }
         uni.showToast({
           icon: 'none',
           title: '说话时间太短',
@@ -523,7 +546,7 @@ export default uniComponent({
      * @description 录音过程中手指移动事件
      */
     touchmove(e) {
-      // 只有在录音中才处理滑动
+      // 只有在录音开始后才处理滑动
       if (!this.isStarted || !this.showMask) {
         return;
       }

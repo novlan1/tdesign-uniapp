@@ -2,13 +2,13 @@
   <view class="demo-base-container">
     <!-- 聊天发送器组件 -->
     <view class="chat-sender-demo-wrapper">
-      <view class="chat-sender-height-limit">
+      <!-- <view class="chat-sender-height-limit">
         <view class="chat-sender-height-left-limit" />
         <view class="chat-sender-height-right-limit" />
       </view>
       <view class="chat-sender-placeholder">
         高度限制：最大高度为132px
-      </view>
+      </view> -->
       <view class="chat-sender-wrapper">
         <t-chat-sender
           v-model="query"
@@ -115,16 +115,13 @@ export default {
 </script>
 <style>
 .demo-base-container {
-    padding: 56rpx 0 0 0;
     background-color: var(--td-bg-color-container);
-    height: 488rpx;
+    height: 360rpx;
     position: relative;
 }
 
 /* 聊天发送器包装器 */
 .chat-sender-demo-wrapper {
-    margin-bottom: 32rpx;
-    /* border: 2rpx solid #e5e5e5; */
     border-radius: 8rpx;
     overflow: hidden;
 }
