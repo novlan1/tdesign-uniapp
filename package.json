@@ -95,8 +95,5 @@
     "*.{ts,js,vue}": [
       "eslint --fix"
     ]
-  },
-  "volta": {
-    "node": "20.18.1"
   }
 }
