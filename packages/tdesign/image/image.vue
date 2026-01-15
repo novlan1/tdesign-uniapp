@@ -76,6 +76,7 @@
       :show-menu-by-longpress="showMenuByLongpress"
       :aria-hidden="ariaHidden || isLoading || isFailed"
       :aria-label="ariaLabel"
+      @click="onClick"
       @load="onLoaded"
       @error="onLoadError"
     />
@@ -111,6 +112,9 @@ export default uniComponent({
   props: {
     ...ImageProps,
   },
+  emits: [
+    'click',
+  ],
   data() {
     return {
       prefix,
@@ -191,6 +195,9 @@ export default uniComponent({
           errMsg: '图片链接为空',
         });
       }
+    },
+    onClick(e) {
+      this.$emit('click', e);
     },
   },
 });

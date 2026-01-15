@@ -150,7 +150,7 @@ import { getCharacterLength, calcIcon, coalesce, nextTick } from '../common/util
 import { isDef } from '../common/validator';
 import { getInputClass } from './computed.js';
 import tools from '../common/utils.wxs';
-// import { getInnerMaxLen } from './utils';
+import { RELATION_MAP } from '../common/relation/parent-map.js';
 
 
 const name = `${prefix}-input`;
@@ -160,6 +160,11 @@ export default uniComponent({
   name,
   options: {
     styleIsolation: 'shared',
+  },
+  inject: {
+    [RELATION_MAP.FormKey]: {
+      default: null,
+    },
   },
   externalClasses: [
     `${prefix}-class`,
@@ -236,6 +241,11 @@ export default uniComponent({
         this.dataValue = v;
         nextTick().then(() => {
           this.dataValue = v;
+
+          if (this[RELATION_MAP.FormKey]
+            && this[RELATION_MAP.FormKey].onValueChange) {
+            this[RELATION_MAP.FormKey].onValueChange(v);
+          }
         });
       },
     },
@@ -331,6 +341,11 @@ export default uniComponent({
 
     onBlur(e) {
       this.updateClearIconVisible();
+
+      if (this[RELATION_MAP.FormKey]
+        && this[RELATION_MAP.FormKey].onBlur) {
+        this[RELATION_MAP.FormKey].onBlur(this.dataValue);
+      }
 
       // 失焦时处理 format
       if (typeof this.format === 'function') {

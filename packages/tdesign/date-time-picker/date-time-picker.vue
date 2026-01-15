@@ -56,8 +56,6 @@ import tools from '../common/utils.wxs';
 import dayjs from '../npm/dayjs/esm/index.js';
 import localeData from '../npm/dayjs/esm/plugin/localeData';
 
-// const dayjs = require('dayjs');
-// const localeData = require('dayjs/plugin/localeData');
 /**
  * dayjs LocaleData 插件
  * https://dayjs.fenxianglu.cn/category/plugin.html#localedata
@@ -65,7 +63,6 @@ import localeData from '../npm/dayjs/esm/plugin/localeData';
 dayjs.extend(localeData);
 dayjs.locale('zh-cn');
 
-// const defaultLocale = dayjsLocaleMap.default.key;
 const defaultLocale = dayjsLocaleMap[dayjs.locale()]?.key || dayjsLocaleMap.default?.key;
 
 
@@ -123,6 +120,8 @@ export default uniComponent({
       tools,
 
       dataValue: coalesce(this.value, this.defaultValue),
+
+      date: null,
     };
   },
   watch: {
@@ -170,7 +169,8 @@ export default uniComponent({
     },
   },
   created() {
-    this.date = null;
+    // created 时机并不准，uniapp 自己 mock 的
+    // this.date = null;
   },
   mounted() {
 

@@ -1,4 +1,17 @@
+import { goBackOrGoHome } from 'tdesign-uniapp/common/route';
+
+const SHARE_INFO = {
+  title: 'TDesign UI',
+};
+
+
 export default {
+  onShareAppMessage() {
+    return SHARE_INFO;
+  },
+  onShareTimeline() {
+    return SHARE_INFO;
+  },
   computed: {
     gCustomNavbarHeight() {
       let result = 0;
@@ -27,6 +40,24 @@ export default {
       result = true;
       // #endif
       return result;
+    },
+  },
+  mounted() {
+    // 检查分享功能是否可用
+    // #ifdef MP-WEIXIN
+    if (typeof wx.showShareMenu === 'function') {
+      wx.showShareMenu({
+        success: () => {
+        },
+        fail: () => {
+        },
+      });
+    }
+    // #endif
+  },
+  methods: {
+    onDemoGoBack() {
+      goBackOrGoHome();
     },
   },
 };

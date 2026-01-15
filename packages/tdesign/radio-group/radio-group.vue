@@ -60,6 +60,11 @@ export default uniComponent({
   externalClasses: [
     `${prefix}-class`,
   ],
+  inject: {
+    [RELATION_MAP.FormKey]: {
+      default: null,
+    },
+  },
   mixins: [ParentMixin(RELATION_MAP.Radio)],
   components: {
     tRadio,
@@ -142,10 +147,19 @@ export default uniComponent({
 
     updateValue(value) {
       this._trigger('change', { value });
+
+      this.onChange(value);
     },
 
     handleRadioChange(tools, { value, index, allowUncheck, checked }) {
       this._trigger('change', checked === false && allowUncheck ? { value: null, index } : { value, index });
+    },
+
+    onChange(value) {
+      if (this[RELATION_MAP.FormKey]
+        && this[RELATION_MAP.FormKey].onValueChange) {
+        this[RELATION_MAP.FormKey].onValueChange(value);
+      }
     },
 
     // 支持自定义options

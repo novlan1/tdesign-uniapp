@@ -6,6 +6,22 @@ docClass: timeline
 ---
 
 
+## 🌈 0.6.3 `2026-01-05` 
+### 🚀 Features
+- `Form`: 支持 `change` 类型 `trigger` @novlan1 ([#143](https://github.com/novlan1/tdesign-uniapp/pull/143))
+- `Image`: 点击事件不禁用冒泡 @novlan1 ([#142](https://github.com/novlan1/tdesign-uniapp/pull/142))
+
+## 🌈 0.6.2 `2025-12-30` 
+### 🐞 Bug Fixes
+- `DateTimePicker`: 修复滚动日期时其他列向上跳动问题 @novlan1 ([#138](https://github.com/novlan1/tdesign-uniapp/pull/138))
+
+## 🌈 0.6.1 `2025-12-29` 
+### 🚀 Features
+- `Navbar`: 增加 `right` 插槽 @novlan1 ([#136](https://github.com/novlan1/tdesign-uniapp/pull/136))
+
+### 🐞 Bug Fixes
+- `Upload`: 修复小程序下图片点击事件不触发问题 @novlan1 ([#136](https://github.com/novlan1/tdesign-uniapp/pull/136))
+
 ## 🌈 0.6.0 `2025-12-17` 
 ### 🚀 Features
 - `Popover`: 新增组件 @novlan1 ([#126](https://github.com/novlan1/tdesign-uniapp/pull/126))
