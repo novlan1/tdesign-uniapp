@@ -10,12 +10,14 @@
           :key="item.key"
         >
           <TChatMessage
+            :chat-id="item.key"
             :class="item.message.role"
             :avatar="item.avatar || ''"
             :name="item.name || ''"
             :datetime="item.datetime || ''"
             :role="item.message.role || 'assistant'"
             :placement="item.message.role === 'user' ? 'right' : 'left'"
+            @message-longpress="showPopover"
           >
             <template #content>
               <block
@@ -59,6 +61,14 @@
           />
         </template>
       </TChatList>
+      <!-- 长按弹出操作栏 -->
+      <TChatActionbar
+        ref="popoverActionbar"
+        class="popover-actionbar"
+        placement="longpress"
+        :long-press-position="longPressPosition"
+        @actions="handlePopoverAction"
+      />
     </view>
     <TToast ref="t-toast" />
   </view>
@@ -154,6 +164,8 @@ export default {
       contentItem: {
         type: '',
       },
+      activePopoverId: '', // 当前打开悬浮actionbar的chatId
+      longPressPosition: null, // 长按位置对象
     };
   },
   options: {
@@ -373,6 +385,32 @@ export default {
         message,
         theme: 'success',
       });
+    },
+
+    // 显示长按弹出操作栏
+    showPopover(e) {
+      const { id, longPressPosition } = e;
+
+      let role = '';
+      this.chatList.forEach((item) => {
+        if (item.key === id) {
+          role = item.message.role;
+        }
+      });
+
+      // 仅当 role 为 user 时才显示 popover
+      if (role !== 'user') {
+        return;
+      }
+
+      this.activePopoverId = id;
+      this.longPressPosition = longPressPosition;
+    },
+
+    // 处理弹出操作栏的事件
+    handlePopoverAction(e) {
+      e.chatId = this.activePopoverId;
+      this.handleAction(e);
     },
   },
 };
