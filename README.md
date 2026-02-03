@@ -2,9 +2,10 @@
 > 
 > 🚧 NPM 包分别更名为 [@tdesign/uniapp](https://www.npmjs.com/package/@tdesign/uniapp/) 和 [@tdesign/uniapp-chat](https://www.npmjs.com/package/@tdesign/uniapp-chat/)。
 >
-> 
+>
+---
 
-<p align="center" style="margin-top: 30px;">
+<p align="center">
   <a href="https://tdesign.tencent.com/" target="_blank">
     <img alt="TDesign Logo" width="200" src="https://tdesign.gtimg.com/site/TDesign.png">
   </a>
