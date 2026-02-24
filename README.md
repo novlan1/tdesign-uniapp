@@ -1,6 +1,6 @@
-> 🚀 TDesign Uniapp 和 TDesign Uniapp Chat 已合入 [tdesign-miniprogram](https://github.com/Tencent/tdesign-miniprogram/) 大仓，本仓库不再维护。
+> 🚀 TDesign Uniapp 和 TDesign Uniapp Chat 已合入 [tdesign-miniprogram](https://github.com/Tencent/tdesign-miniprogram/tree/develop/packages) 大仓，本仓库不再维护。
 > 
-> 🚧 NPM 包分别更名为 [@tdesign/uniapp](https://www.npmjs.com/package/@tdesign/uniapp/) 和 [@tdesign/uniapp-chat](https://www.npmjs.com/package/@tdesign/uniapp-chat/)。
+> 🚧 NPM 包名有变更，[tdesign-uniapp](https://www.npmjs.com/package/tdesign-uniapp/) 更新为 [@tdesign/uniapp](https://www.npmjs.com/package/@tdesign/uniapp/)，[tdesign-uniapp-chat](https://www.npmjs.com/package/tdesign-uniapp-chat/) 更新为 [@tdesign/uniapp-chat](https://www.npmjs.com/package/@tdesign/uniapp-chat/)。
 >
 >
 ---
